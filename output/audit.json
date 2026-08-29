@@ -1,0 +1,19 @@
+{
+  "starting_universe": 5527,
+  "price_eligible": 5354,
+  "investable_before_marketcap": 3188,
+  "fundamentals_requested": 3188,
+  "market_cap_missing": 7,
+  "all_lens_missing": 6,
+  "fully_scored": 3066,
+  "semifinalists": 93,
+  "quant_finalists": 20,
+  "yahoo_rate_cap_per_minute": 100,
+  "three_lenses": [
+    "leadership_momentum",
+    "beaten_down_reversal",
+    "fresh_catalyst_acceleration"
+  ],
+  "FINAL_LABEL_ALLOWED": false,
+  "note": "Top candidates require fresh earnings/guidance, revisions, catalyst, downside, and binary-risk verification before FINAL ranking."
+}
