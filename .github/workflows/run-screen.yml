@@ -3,6 +3,11 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '30 13 * * 1-5'
+  push:
+    branches: [main]
+    paths:
+      - 'rocket_screen.py'
+      - '.github/workflows/run-screen.yml'
 jobs:
   screen:
     runs-on: ubuntu-latest
