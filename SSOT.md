@@ -138,6 +138,29 @@ Immediately before an intended purchase, refresh only execution-sensitive inform
 
 If nothing material has changed, preserve the Crown Jewel decision rather than changing methodology because another ticker suddenly appears exciting. If a material change has occurred, document it and reassess the Top 3 under the same Crown Jewel framework.
 
+## Mandatory downside protection — disaster stop
+Every Rocket position must have downside protection. The strategy may never intentionally hold a concentrated Rocket position with unlimited downside simply because the upside thesis remains attractive.
+
+The standard initial **hard disaster stop is approximately 10% below the actual purchase price**. Its purpose is catastrophe protection: to prevent an ordinary ~$300 experimental position from being allowed to deteriorate into a 30%, 40%, 50% or larger loss while waiting for the thesis to recover.
+
+The 10% level is a maximum price-based loss tolerance under normal continuous trading, not a prediction that the stock will decline 10% and not a requirement to wait for a 10% loss before selling.
+
+### Volatility check before setting the stop
+Before purchase, calculate recent realized volatility and typical daily/intraday range for the selected Crown Jewel and inspect nearby technical support. Confirm that the disaster stop is not sitting inside ordinary price noise. If the stock's normal volatility makes a 10% stop structurally inappropriate, document that conflict before purchase and reassess the trade rather than silently removing downside protection.
+
+### Thesis-break exit
+A position may and should be reassessed or sold BEFORE the disaster stop if the reason for owning it materially breaks—for example a guidance cut, unexpected financing/dilution, accounting issue, material adverse regulatory/company event, catalyst failure, or other development that invalidates the Crown Jewel thesis.
+
+### Profit protection
+The initial disaster stop is not left permanently at its original level after a successful move. As the stock advances, protection should move upward based on the locked profit-protection/30-day exit rules. A winning position should not be deliberately allowed to become a major loss merely because its original disaster stop was lower.
+
+Never move the disaster stop downward simply to avoid realizing a loss.
+
+### Stop-order limitation
+A stop order does not guarantee the stop price. Overnight gaps, halts, extreme volatility or thin liquidity can cause execution materially below the trigger. Therefore the ~10% disaster stop limits intended risk under normal trading conditions but cannot guarantee a maximum 10% realized loss.
+
+For the experiment, record the actual entry price, initial disaster-stop price, any later stop changes, exit price and realized return so downside protection can be evaluated alongside stock-selection performance.
+
 ## Auditability
 Every full run must save:
 - starting universe
@@ -150,5 +173,6 @@ Every full run must save:
 - finalist verification evidence
 - Top 3 Crown Jewel component scores and weighted ranking
 - final selected Crown Jewel and reference price/target used for the experiment
+- actual entry price, initial disaster-stop level, stop changes and realized exit/return for the measured position
 
 The audit must explicitly state `FINAL_LABEL_ALLOWED: false` until the separate current-verification stage has been completed for the full candidate set and the final comparison has been documented.
