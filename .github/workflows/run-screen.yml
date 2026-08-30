@@ -1,3 +1,4 @@
+# Fresh full rerun requested 2026-08-29 — no shortcuts
 name: Full 30-Day Rocket Screen
 on:
   workflow_dispatch:
