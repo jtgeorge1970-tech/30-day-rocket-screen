@@ -27,7 +27,8 @@ A market-wide quantitative score is not a FINAL recommendation.
 7. Narrow to approximately 100 semifinalists and then approximately 20-30 quantitative candidates.
 8. Perform deeper current research only on the narrowed candidate set: latest earnings, guidance, estimate revisions, beat/raise execution, identified catalysts, financing/dilution, binary/regulatory risk, downside, valuation/runway, and current technical condition.
 9. Narrow to a small finalist group and compare directly.
-10. Only after current verification may #1/#2/#3 be labeled FINAL.
+10. Apply the Crown Jewel finalist analysis defined below.
+11. Only after current verification and Crown Jewel analysis may #1/#2/#3 be labeled FINAL.
 
 ## Three quantitative lenses
 ### 1. Leadership / Momentum
@@ -106,6 +107,37 @@ For EACH quantitative candidate considered for FINAL ranking, complete the full 
 
 Every surviving candidate must have its verification status recorded. A candidate with an unfinished checklist cannot be used to justify a FINAL ranking.
 
+## Crown Jewel finalist analysis — mandatory final layer
+After the full universe screen, full candidate deep dive, and selection of the final Top 3, perform one last equal, apples-to-apples Crown Jewel analysis before selecting the stock for the ~30-day experiment.
+
+This layer does NOT replace or shortcut any earlier screening or verification stage. A stock can reach Crown Jewel consideration only by surviving the complete process above.
+
+Crown Jewel weighting:
+- **Catalyst / Story — 50%**
+- **Full Screen Technical + Fundamental Evidence — 30%**
+- **Chart / Price Setup — 20%**
+
+### Catalyst / Story — 50%
+Judge the strength, freshness, credibility, timing and potential magnitude of the reason investors could materially reprice the stock during the NEXT ~30 days. Review earnings/guidance acceleration, product or technology developments, acquisitions/contracts, investor events, estimate revisions, industry changes and other company-specific developments. Prefer catalysts that are fresh, understandable, supported by operating evidence and capable of attracting incremental capital. Do not manufacture a catalyst from technical movement alone. Binary clinical/regulatory dependence remains subject to the hard-risk rules.
+
+### Full Screen Technical + Fundamental Evidence — 30%
+Carry forward the verified evidence from the complete Rocket Screen and deep dive, including growth/operating acceleration, beat/raise execution, revisions, relative strength, sector/industry support, valuation/upside runway, balance-sheet quality, dilution/financing risk, liquidity, downside and data confidence. This component must use the full prior work rather than a new superficial score.
+
+### Chart / Price Setup — 20%
+Inspect multiple useful time horizons, including long-term context and recent price/volume behavior. Evaluate support/resistance, historical trading ranges, breakout/reversal structure, drawdown recovery, volume confirmation, extension, recent consolidation/pullback, and realistic room to the +10% objective. The chart provides context and timing; it must not override deteriorating fundamentals or a negative catalyst.
+
+### Crown Jewel decision rule
+Calculate the weighted Crown Jewel score for all Top 3 finalists using the same evidence standard. The highest score becomes the preferred single-stock candidate for the ~$300 30-day experiment, subject to a final execution check immediately before purchase.
+
+The purpose is to identify the stock with the strongest probability-weighted combination of a reason to move, evidence supporting the move, and a price setup capable of delivering it. The objective remains approximately +10% in ~30 days; the methodology should not simply select the stock with the most speculative maximum upside.
+
+If investing a larger amount where diversification is desired, the Top 3 or broader finalist basket may be considered separately. That portfolio concept must not change the measurement of the single-stock experiment unless the user explicitly changes the experiment.
+
+## Pre-purchase execution check
+Immediately before an intended purchase, refresh only execution-sensitive information for the Crown Jewel: current/premarket price and gap, material overnight/company news, market conditions, and any thesis-changing development. Do not automatically rerun the entire market-wide universe merely because a new trading day has begun.
+
+If nothing material has changed, preserve the Crown Jewel decision rather than changing methodology because another ticker suddenly appears exciting. If a material change has occurred, document it and reassess the Top 3 under the same Crown Jewel framework.
+
 ## Auditability
 Every full run must save:
 - starting universe
@@ -115,5 +147,8 @@ Every full run must save:
 - semifinalists
 - quantitative candidates requiring current verification
 - audit JSON containing row counts, lens names, data-confidence thresholds and freshness settings
+- finalist verification evidence
+- Top 3 Crown Jewel component scores and weighted ranking
+- final selected Crown Jewel and reference price/target used for the experiment
 
 The audit must explicitly state `FINAL_LABEL_ALLOWED: false` until the separate current-verification stage has been completed for the full candidate set and the final comparison has been documented.
