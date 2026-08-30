@@ -1,4 +1,4 @@
-# Fresh full rerun requested 2026-08-29 — no shortcuts
+# Full fresh rerun — no shortcuts, no fundamentals cache reuse
 name: Full 30-Day Rocket Screen
 on:
   workflow_dispatch:
@@ -22,6 +22,8 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt
+      - name: Force fresh fundamentals for full run
+        run: rm -f output/fundamentals_checkpoint.csv
       - name: Run complete market-wide three-lens screen
         run: python rocket_screen.py
       - name: Save auditable results
