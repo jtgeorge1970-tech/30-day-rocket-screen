@@ -1,12 +1,12 @@
 {
   "starting_universe": 5527,
   "price_eligible": 5355,
-  "investable_before_marketcap": 3175,
-  "fundamentals_requested": 3175,
-  "fundamentals_cache_reused_fresh": 0,
-  "fundamentals_fresh_downloaded": 3175,
+  "investable_before_marketcap": 3176,
+  "fundamentals_requested": 3176,
+  "fundamentals_cache_reused_fresh": 3175,
+  "fundamentals_fresh_downloaded": 1,
   "fundamentals_cache_ttl_hours": 18,
-  "market_cap_missing": 7,
+  "market_cap_missing": 8,
   "all_lens_missing": 0,
   "scoreable": 3063,
   "confidence_threshold": 0.55,
@@ -17,7 +17,7 @@
   "spy_benchmark": {
     "spy_ret_20": 0.029878245068770015,
     "spy_ret_60": 0.022661242991683928,
-    "spy_ret_120": 0.14031061245344678
+    "spy_ret_120": 0.14031071561134567
   },
   "three_lenses": [
     "leadership_momentum",
