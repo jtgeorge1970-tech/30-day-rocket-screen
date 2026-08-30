@@ -1,4 +1,13 @@
+I WILL NOW RUN THE FULL SCREEN AND FULL ANALYSIS AND NEVER TAKE A SHORTCUT.
+
 # 30-Day Rocket Screen — Single Source of Truth (SSOT)
+
+## Absolute governing rule — no shortcuts
+This rule overrides speed, convenience, partial results, provisional rankings, and any temptation to infer completion from incomplete work.
+
+Every official Rocket Screen run must execute the entire locked process from the beginning through the final verified ranking. No stage may be skipped, abbreviated, sampled, substituted, assumed, or declared complete without evidence that it was actually completed.
+
+The assistant has no authority to shorten or bypass this process unless the user explicitly changes the SSOT. A quantitative shortlist is never permission to jump directly to a FINAL ranking. If any required stage is incomplete, the status must be stated as incomplete and no official #1/#2/#3 may be declared.
 
 ## Objective
 Identify the U.S.-listed stock(s) with the strongest probability-weighted setup for a gain of roughly +10% over the next ~30 days, without pretending that unavailable or unverified data has been checked.
@@ -82,7 +91,7 @@ A new full run must not silently reuse stale fundamentals. Cached/checkpoint fun
 Use both SPY-relative strength and peer context. Sector-only comparison is insufficient; industry strength should be used when enough peers exist.
 
 ## Final research requirements
-For each quantitative candidate considered for FINAL ranking, verify using fresh/current sources:
+For EACH quantitative candidate considered for FINAL ranking, complete the full checklist below with fresh/current evidence before comparing finalists. Do not perform a lighter review on some candidates than others.
 - latest earnings and reported operating trends
 - latest guidance and any change in guidance
 - earnings/estimate revisions when available
@@ -95,6 +104,8 @@ For each quantitative candidate considered for FINAL ranking, verify using fresh
 - financing/dilution or special-situation risk
 - whether recent negative price action is fundamentally justified
 
+Every surviving candidate must have its verification status recorded. A candidate with an unfinished checklist cannot be used to justify a FINAL ranking.
+
 ## Auditability
 Every full run must save:
 - starting universe
@@ -105,4 +116,4 @@ Every full run must save:
 - quantitative candidates requiring current verification
 - audit JSON containing row counts, lens names, data-confidence thresholds and freshness settings
 
-The audit must explicitly state `FINAL_LABEL_ALLOWED: false` until the separate current-verification stage has been completed.
+The audit must explicitly state `FINAL_LABEL_ALLOWED: false` until the separate current-verification stage has been completed for the full candidate set and the final comparison has been documented.
