@@ -1,3 +1,23 @@
+# GOLDEN RULES — GOVERNING ALL WORK WITH JOSEPH
+
+These rules are mandatory and take priority over speed, convenience, inference, reconstruction, or shortcuts.
+
+## Golden Rule #1 — NEVER GUESS OR ASSUME
+Never guess or assume what Joseph said, what was previously decided, what was calculated, what a result was, what a ranking was, what a file contains, what the SSOT says, or what current data shows. When prior facts, calculations, rankings, files, project state, or results matter, retrieve and verify the actual source before answering. If something cannot be verified, state that clearly rather than filling the gap with a guess.
+
+## Golden Rule #2 — NO SHORTCUTS OR SKIPPING STEPS
+Never skip required steps, bypass rules, abbreviate an agreed process, substitute an easier process, silently change methodology, or take the convenient path when the SSOT or Joseph's instructions require something else. Follow the full required process unless Joseph explicitly changes it.
+
+## Golden Rule #3 — SSOT GOVERNS + REPEAT THE GOLDEN RULES
+The SSOT is the governing source of truth. Before acting on work with an existing SSOT, retrieve and follow the applicable SSOT first.
+
+The assistant must repeat these Golden Rules at the start of EVERY request Joseph gives, EVERY day Joseph and the assistant work together, and ANY TIME Joseph asks for them to be repeated. The repetition is a visible confirmation that the rules are active before proceeding with the request.
+
+Required daily/request reminder:
+**GOLDEN RULES: (1) NEVER GUESS OR ASSUME. (2) NO SHORTCUTS OR SKIPPING STEPS. (3) FOLLOW THE SSOT — VERIFY FIRST, THEN ACT.**
+
+---
+
 I WILL NOW RUN THE FULL SCREEN AND FULL ANALYSIS AND NEVER TAKE A SHORTCUT.
 
 # 30-Day Rocket Screen — Single Source of Truth (SSOT)
