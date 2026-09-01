@@ -332,7 +332,6 @@ BBLG,Bone Biologics Corp - Common Stock,N,N
 BBNX,"Beta Bionics, Inc. - Common Stock",N,N
 BBOT,"BridgeBio Oncology Therapeutics, Inc. - Common Stock",N,N
 BBSI,"Barrett Business Services, Inc. - Common Stock",N,N
-BCAB,"BioAtla, Inc. - Common Stock",N,N
 BCAL,California BanCorp - Common Stock,N,N
 BCAX,Bicara Therapeutics Inc. - Common Stock,N,N
 BCBP,"BCB Bancorp, Inc. (NJ) - Common Stock",N,N
@@ -1176,6 +1175,7 @@ GIPR,Generation Income Properties Inc. - Common stock,N,N
 GITS,"Global Interactive Technologies, Inc. Common Stock - Common Stock",N,N
 GIW,GigCapital8 Corp. - Class A Ordinary Shares,N,N
 GIX,GigCapital9 Corp. - Class A Ordinary Share,N,N
+GIXI,Gix Internet Ltd. - Ordinary Shares,N,N
 GLAD,Gladstone Capital Corporation - Closed End Fund,N,N
 GLBE,Global-E Online Ltd. - ordinary shares,N,N
 GLBS,Globus Maritime Limited - Common Stock,N,N
@@ -1720,7 +1720,7 @@ MATW,Matthews International Corporation - Class A Common Stock,N,N
 MAYS,"J. W. Mays, Inc. - Common Stock",N,N
 MAZE,"Maze Therapeutics, Inc. - Common Stock",N,N
 MB,MasterBeef Group - Ordinary Shares,N,N
-MBAI,Check-Cap Ltd. - Ordinary Share,N,N
+MBAI,MBody AI Ltd. - Ordinary Share,N,N
 MBBC,"Marathon Bancorp, Inc. - Common Stock",N,N
 MBIN,Merchants Bancorp - Common Stock,N,N
 MBIO,"Mustang Bio, Inc. - Common Stock",N,N
@@ -2073,6 +2073,7 @@ ONEG,OneConstruction Group Limited - Ordinary Shares,N,N
 ONEW,OneWater Marine Inc. - Class A Common Stock,N,N
 ONFO,Onfolio Holdings Inc. - Common Stock,N,N
 ONMD,OneMedNet Corp - Class A Common Stock,N,N
+OPAD,Offerpad Solutions Inc.  - Class A Common Stock,N,N
 OPAL,OPAL Fuels Inc. - Class A Common Stock,N,N
 OPBK,OP Bancorp - Common Stock,N,N
 OPCH,"Option Care Health, Inc. - Common Stock",N,N
@@ -2531,6 +2532,7 @@ SFWL,Shengfeng Development Limited - Class A Ordinary Shares,N,N
 SGA,"Saga Communications, Inc. - Class A Common Stock",N,N
 SGC,"Superior Group of Companies, Inc. - Common Stock",N,N
 SGHT,"Sight Sciences, Inc. - Common Stock",N,N
+SGLD,Scorpio Gold Corporation - Common Stock,N,N
 SGLY,Singularity Future Technology Ltd. - Common Stock,N,N
 SGML,Sigma Lithium Corporation - common shares,N,N
 SGMT,Sagimet Biosciences Inc. - Series A Common Stock,N,N
@@ -2694,7 +2696,7 @@ SVC,Service Properties Trust - Common Shares of Beneficial Interest,N,N
 SVCC,Stellar V Capital Corp. - Class A Ordinary Shares,N,N
 SVCO,"Silvaco Group, Inc. - Common Stock",N,N
 SVRA,"Savara, Inc. - Common Stock",N,N
-SVRN,OceanPal Inc. - Common Stock,N,N
+SVRN,"SVRN, Inc. - Common Stock",N,N
 SWAG,"Stran & Company, Inc. - Common Stock",N,N
 SWBI,"Smith & Wesson Brands, Inc. - Common Stock",N,N
 SWIM,"Latham Group, Inc. - Common Stock",N,N
@@ -2798,6 +2800,7 @@ TPGXL,TPG Inc. - 6.950% Fixed-Rate Junior Subordinated Notes due 2064,N,N
 TPST,"Tempest Therapeutics, Inc. - Common Stock",N,N
 TRAW,"Traws Pharma, Inc. - Common Stock",N,N
 TRAX,"First Tracks Biotherapeutics, Inc. - Ordinary Shares",N,N
+TRBG,TurboGen Ltd. - Ordinary Shares,N,N
 TRDA,"Entrada Therapeutics, Inc. - Common Stock",N,N
 TREE,"LendingTree, Inc. - Common Stock",N,N
 TREO,Tactical Resources Corp. - Common Shares,N,N
@@ -3275,7 +3278,6 @@ ARCO,Arcos Dorados Holdings Inc. Class A Shares,N,N
 ARDC,"Ares Dynamic Credit Allocation Fund, Inc. Common Shares",N,N
 ARDT,"Ardent Health, Inc. Common Stock",N,N
 ARE,"Alexandria Real Estate Equities, Inc. Common Stock",N,N
-AREN,"The Arena Group Holdings, Inc. Common Stock",N,N
 ARES,Ares Management Corporation Class A Common Stock,N,N
 ARI,"Apollo Commercial Real Estate Finance, Inc",N,N
 ARIS,Aris Mining Corporation Common Shares,N,N
@@ -4749,7 +4751,6 @@ ONON,On Holding AG Class A Ordinary Shares,N,N
 ONT,"Onterris, Inc. Common Stock",N,N
 ONTO,Onto Innovation Inc. Common Stock,N,N
 OOMA,"Ooma, Inc. Common Stock",N,N
-OPAD,Offerpad Solutions Inc. Class A Common Stock,N,N
 OPFI,OppFi Inc. Class A Common Stock,N,N
 OPHC,"OptimumBank Holdings, Inc. Common Stock",N,N
 OPLN,"OPENLANE, Inc. Common Stock",N,N
@@ -4776,6 +4777,7 @@ OWLT,"Owlet, Inc. Class A Common Stock",N,N
 OXM,"Oxford Industries, Inc. Common Stock",N,N
 OXY,Occidental Petroleum Corporation Common Stock,N,N
 P,"Everpure, Inc. Class A common stock",N,N
+PAAI,"Paradium.AI, Inc. Common Stock",N,N
 PAAS,Pan American Silver Corp. Common Stock,N,N
 PAC,"Grupo Aeroportuario Del Pacifico, S.A. B. de C.V. Grupo Aeroportuario Del Pacifico, S.A. de C.V. (each representing 10 Series B shares)",N,N
 PACK,Ranpak Holdings Corp Class A Common Stock,N,N
@@ -5521,7 +5523,7 @@ ZETA,Zeta Global Holdings Corp. Class A Common Stock,N,N
 ZGN,Ermenegildo Zegna N.V. Ordinary Shares,N,N
 ZIM,ZIM Integrated Shipping Services Ltd. Ordinary Shares,N,N
 ZIP,"ZipRecruiter, Inc. Class A Common Stock",N,N
-ZONE,CleanCore Solutions Inc. Class B Common Stock,N,N
+ZONE,Zone Frontier Inc. Class B Common Stock,N,N
 ZTR,Virtus Total Return Fund Inc.,N,N
 ZTS,Zoetis Inc. Class A Common Stock,N,N
 ZVIA,Zevia PBC Class A Common Stock,N,N
