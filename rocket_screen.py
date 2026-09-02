@@ -1,14 +1,15 @@
-"""30-Day Rocket Screen — auditable market-wide quantitative funnel.
+"""Quality Loser Reversal Engine V2.
 
-This engine deliberately separates scalable quantitative screening from current
-company-specific verification. A stock cannot be labeled FINAL solely from this
-output. See SSOT.md.
+Market-wide candidate and entry engine. It starts with recent losers, rejects
+investability failures, and requires evidence of a formed bottom. It never
+claims a current catalyst, intact thesis, or BUY from quantitative data alone.
 """
 from __future__ import annotations
 
 import io
 import json
 import math
+import os
 import random
 import time
 from datetime import datetime, timezone
@@ -21,39 +22,31 @@ import yfinance as yf
 
 OUT = Path("output")
 OUT.mkdir(exist_ok=True)
-UA = {"User-Agent": "Mozilla/5.0 rocket-screen research"}
-
-LENSES = (
-    "leadership_momentum",
-    "beaten_down_reversal",
-    "acceleration_emerging_momentum",
-)
+UA = {"User-Agent": "Mozilla/5.0 quality-loser-reversal research"}
 
 YAHOO_RATE_CAP_PER_MINUTE = 100
 YAHOO_MIN_INTERVAL = 60.0 / YAHOO_RATE_CAP_PER_MINUTE
 YAHOO_PRICE_BATCH_SIZE = 10
 MAX_PRICE_REQUEST_FAILURE_RATE = 0.01
 FUNDAMENTALS_CACHE_TTL_HOURS = 18
-MIN_DATA_CONFIDENCE = 0.55
-SEMIFINALISTS_PER_LENS = 40
-QUANT_CANDIDATES = 25
+MIN_PRICE = 3.0
+MIN_DOLLAR_VOLUME = 2_000_000
+MIN_MARKET_CAP = 200_000_000
+MIN_HEADROOM = 0.15
+MAX_SUPPORT_DISTANCE = 0.08
+MAX_DISTANCE_FROM_60D_LOW = 0.12
+MIN_FUNDAMENTAL_COVERAGE = 0.60
+MIN_STABILITY_SESSIONS = 2
+VERIFICATION_MAX_AGE_HOURS = 24
 _next_yahoo_call = 0.0
 
 
 def yahoo_pace(request_units=1):
-    """Reserve Yahoo capacity for every ticker represented by a call.
-
-    A multi-ticker ``yf.download`` call still causes Yahoo work for every
-    ticker. Treating a 20-ticker batch as one request defeated the 100/minute
-    cap and could produce silent rate-limit gaps.
-    """
     global _next_yahoo_call
     wait = _next_yahoo_call - time.monotonic()
     if wait > 0:
         time.sleep(wait)
-    _next_yahoo_call = time.monotonic() + (
-        YAHOO_MIN_INTERVAL * max(1, int(request_units))
-    )
+    _next_yahoo_call = time.monotonic() + YAHOO_MIN_INTERVAL * max(1, int(request_units))
 
 
 def retry_yahoo(fn, label, attempts=6, request_units=1, validator=None):
@@ -70,21 +63,14 @@ def retry_yahoo(fn, label, attempts=6, request_units=1, validator=None):
             if attempt == attempts - 1:
                 break
             delay = min(60, 3 * (2**attempt)) + random.uniform(0, 2)
-            print(
-                f"Yahoo retry {attempt + 1}/{attempts - 1} for {label}: "
-                f"{exc}; sleeping {delay:.1f}s",
-                flush=True,
-            )
+            print(f"Yahoo retry {attempt + 1}/{attempts - 1} for {label}: {exc}; sleeping {delay:.1f}s", flush=True)
             time.sleep(delay)
     print(f"Yahoo failed after retries for {label}: {last}", flush=True)
     return None
 
 
 def valid_price_download(data):
-    if data is None or data.empty or "Close" not in data.columns:
-        return False
-    close = data["Close"]
-    return bool(close.notna().to_numpy().any())
+    return data is not None and not data.empty and "Close" in data.columns and bool(data["Close"].notna().to_numpy().any())
 
 
 def universe():
@@ -97,34 +83,12 @@ def universe():
         response = requests.get(url, headers=UA, timeout=30)
         response.raise_for_status()
         frames.append(pd.read_csv(io.StringIO(response.text), sep="|"))
-
     a, b = frames
-    a = a.rename(
-        columns={
-            "Symbol": "ticker",
-            "Security Name": "name",
-            "ETF": "etf",
-            "Test Issue": "test",
-        }
-    )
-    b = b.rename(
-        columns={
-            "ACT Symbol": "ticker",
-            "Security Name": "name",
-            "ETF": "etf",
-            "Test Issue": "test",
-        }
-    )
-    x = pd.concat(
-        [a[["ticker", "name", "etf", "test"]], b[["ticker", "name", "etf", "test"]]],
-        ignore_index=True,
-    )
+    a = a.rename(columns={"Symbol": "ticker", "Security Name": "name", "ETF": "etf", "Test Issue": "test"})
+    b = b.rename(columns={"ACT Symbol": "ticker", "Security Name": "name", "ETF": "etf", "Test Issue": "test"})
+    x = pd.concat([a[["ticker", "name", "etf", "test"]], b[["ticker", "name", "etf", "test"]]], ignore_index=True)
     x = x[(x.etf == "N") & (x.test == "N")].dropna(subset=["ticker"])
     x = x[~x.ticker.str.contains(r"[.$]", regex=True)]
-
-    # Obvious non-common-stock / shell-like structures only. Final special-risk
-    # review is intentionally deferred until the candidate set is small enough
-    # to investigate correctly.
     bad = r"Warrant|Right| Unit|Preferred|Depositary Shares|Acquisition Corp|SPAC"
     x = x[~x.name.str.contains(bad, case=False, na=False, regex=True)]
     return x.drop_duplicates("ticker").reset_index(drop=True)
@@ -134,21 +98,9 @@ def pct_rank(series):
     return pd.to_numeric(series, errors="coerce").rank(pct=True) * 100
 
 
-def inverse_pct_rank(series):
-    numeric = pd.to_numeric(series, errors="coerce")
-    positive = numeric.where(numeric > 0)
-    ranked = pct_rank(positive)
-    return 100 - ranked
-
-
 def weighted_available_score(factors):
-    """Weighted row score using only observed factors; never invent missing evidence.
-
-    factors is an ordered iterable of (series, weight). Returns (score, coverage),
-    where coverage is the fraction of intended weight backed by actual data.
-    """
-    numerator = None
-    denominator = None
+    """Renormalize around observed evidence; never invent a neutral value."""
+    numerator = denominator = None
     total_weight = sum(weight for _, weight in factors)
     for series, weight in factors:
         numeric = pd.to_numeric(series, errors="coerce")
@@ -157,9 +109,7 @@ def weighted_available_score(factors):
         weight_available = available * weight
         numerator = contribution if numerator is None else numerator + contribution
         denominator = weight_available if denominator is None else denominator + weight_available
-    score = numerator / denominator.replace(0, np.nan)
-    coverage = denominator / total_weight
-    return score, coverage
+    return numerator / denominator.replace(0, np.nan), denominator / total_weight
 
 
 def load_fresh_checkpoint(checkpoint):
@@ -169,139 +119,172 @@ def load_fresh_checkpoint(checkpoint):
         frame = pd.read_csv(checkpoint)
     except Exception:
         return {}
-    if "ticker" not in frame.columns or "retrieved_at" not in frame.columns:
+    if not {"ticker", "retrieved_at"}.issubset(frame.columns):
         return {}
-
     now = datetime.now(timezone.utc)
     fresh = {}
     for row in frame.to_dict("records"):
-        stamp = row.get("retrieved_at")
         try:
-            dt = datetime.fromisoformat(str(stamp).replace("Z", "+00:00"))
+            dt = datetime.fromisoformat(str(row["retrieved_at"]).replace("Z", "+00:00"))
             if dt.tzinfo is None:
                 dt = dt.replace(tzinfo=timezone.utc)
-            age_hours = (now - dt.astimezone(timezone.utc)).total_seconds() / 3600
+            age = (now - dt.astimezone(timezone.utc)).total_seconds() / 3600
         except Exception:
             continue
-        if 0 <= age_hours <= FUNDAMENTALS_CACHE_TTL_HOURS:
+        if 0 <= age <= FUNDAMENTALS_CACHE_TTL_HOURS:
             fresh[row["ticker"]] = row
     return fresh
 
 
-def fundamentals(tickers):
-    cols = [
-        "ticker",
-        "retrieved_at",
-        "market_cap",
-        "avg_volume",
-        "revenue_growth",
-        "earnings_growth",
-        "earnings_q_growth",
-        "forward_pe",
-        "target_upside",
-        "recommendation",
-        "sector",
-        "industry",
-    ]
-    rows = []
-    checkpoint = OUT / "fundamentals_checkpoint.csv"
-    fresh_cache = load_fresh_checkpoint(checkpoint)
-    reused = 0
-    downloaded = 0
+FUNDAMENTAL_COLUMNS = [
+    "ticker", "retrieved_at", "market_cap", "avg_volume", "revenue_growth",
+    "earnings_growth", "earnings_q_growth", "forward_pe", "target_upside",
+    "recommendation", "sector", "industry", "total_cash", "total_debt",
+    "operating_cashflow", "free_cashflow", "current_ratio", "debt_to_equity",
+]
 
+
+def fundamentals(tickers):
+    rows, checkpoint = [], OUT / "fundamentals_checkpoint.csv"
+    fresh_cache = load_fresh_checkpoint(checkpoint)
+    reused = downloaded = 0
     for i, ticker in enumerate(tickers, 1):
         if ticker in fresh_cache:
             rows.append(fresh_cache[ticker])
             reused += 1
             continue
-
-        info = retry_yahoo(
-            lambda: yf.Ticker(ticker).info,
-            f"fundamentals {ticker}",
-            validator=lambda value: isinstance(value, dict) and bool(value),
-        )
-        row = {
-            "ticker": ticker,
-            "retrieved_at": datetime.now(timezone.utc).isoformat(),
-        }
+        info = retry_yahoo(lambda: yf.Ticker(ticker).info, f"fundamentals {ticker}", validator=lambda v: isinstance(v, dict) and bool(v))
+        row = {"ticker": ticker, "retrieved_at": datetime.now(timezone.utc).isoformat()}
         downloaded += 1
         if info:
-            current_price = info.get("currentPrice")
-            target_price = info.get("targetMeanPrice")
+            cp, tp = info.get("currentPrice"), info.get("targetMeanPrice")
             row.update(
-                market_cap=info.get("marketCap"),
-                avg_volume=info.get("averageVolume"),
-                revenue_growth=info.get("revenueGrowth"),
-                earnings_growth=info.get("earningsGrowth"),
-                earnings_q_growth=info.get("earningsQuarterlyGrowth"),
-                forward_pe=info.get("forwardPE"),
-                target_upside=(target_price / current_price - 1)
-                if target_price and current_price
-                else np.nan,
-                recommendation=info.get("recommendationMean"),
-                sector=info.get("sector"),
-                industry=info.get("industry"),
+                market_cap=info.get("marketCap"), avg_volume=info.get("averageVolume"),
+                revenue_growth=info.get("revenueGrowth"), earnings_growth=info.get("earningsGrowth"),
+                earnings_q_growth=info.get("earningsQuarterlyGrowth"), forward_pe=info.get("forwardPE"),
+                target_upside=(tp / cp - 1) if tp and cp else np.nan,
+                recommendation=info.get("recommendationMean"), sector=info.get("sector"), industry=info.get("industry"),
+                total_cash=info.get("totalCash"), total_debt=info.get("totalDebt"),
+                operating_cashflow=info.get("operatingCashflow"), free_cashflow=info.get("freeCashflow"),
+                current_ratio=info.get("currentRatio"), debt_to_equity=info.get("debtToEquity"),
             )
         rows.append(row)
-
         if i % 25 == 0:
-            pd.DataFrame(rows).reindex(columns=cols).to_csv(checkpoint, index=False)
+            pd.DataFrame(rows).reindex(columns=FUNDAMENTAL_COLUMNS).to_csv(checkpoint, index=False)
             print(f"Fundamentals progress: {i}/{len(tickers)}", flush=True)
-
-    frame = pd.DataFrame(rows).reindex(columns=cols)
+    frame = pd.DataFrame(rows).reindex(columns=FUNDAMENTAL_COLUMNS)
     frame.to_csv(checkpoint, index=False)
     return frame, reused, downloaded
 
 
+def _field(data, field, ticker, batch):
+    obj = data[field]
+    if isinstance(obj, pd.Series):
+        if len(batch) != 1:
+            raise ValueError("single-series response for multi-ticker batch")
+        return obj
+    if isinstance(obj.columns, pd.MultiIndex):
+        return obj[ticker]
+    if ticker in obj.columns:
+        return obj[ticker]
+    if len(batch) == 1:
+        return obj.iloc[:, 0]
+    raise KeyError(f"{field}/{ticker}")
+
+
+def _rsi(close, period=14):
+    delta = close.diff()
+    gain = delta.clip(lower=0).tail(period).mean()
+    loss = -delta.clip(upper=0).tail(period).mean()
+    return 100.0 if loss == 0 else 100 - 100 / (1 + gain / loss)
+
+
+def _nearest_resistance(close, high, price):
+    older = high.iloc[:-5].tail(247)
+    local = older[(older.shift(1) < older) & (older.shift(-1) < older)]
+    overhead = local[local >= price * 1.02]
+    resistance = overhead.min() if len(overhead) else high.tail(252).max()
+    return float(resistance), float(resistance / price - 1)
+
+
+def technical_snapshot(frame):
+    """Calculate one session's non-compensable setup gates."""
+    frame = frame.dropna(subset=["Close", "High", "Low", "Volume"])
+    if len(frame) < 253:
+        return None
+    c, h, low, v = frame.Close, frame.High, frame.Low, frame.Volume
+    price = float(c.iloc[-1])
+    returns = c.pct_change()
+    tr = pd.concat([(h-low), (h-c.shift()).abs(), (low-c.shift()).abs()], axis=1).max(axis=1)
+    atr_pct = float(tr.tail(14).mean() / price)
+    resistance, headroom = _nearest_resistance(c, h, price)
+    structural_support = float(low.tail(10).min())
+    support_distance = price / structural_support - 1
+    recent_60_low = float(low.tail(60).min())
+    days_since_60_low = int(len(low.tail(60)) - 1 - np.argmin(low.tail(60).to_numpy()))
+    prior5_low = float(low.iloc[-10:-5].min())
+    current5_low = float(low.tail(5).min())
+    higher_low = current5_low > prior5_low * 1.002
+    prior_high_reclaim = price > float(h.iloc[-2])
+    ma10_reclaim = price > float(c.tail(10).mean())
+    down_volume = v.where(returns < 0)
+    selling_volume_fades = bool(float(down_volume.tail(3).mean()) <= float(down_volume.tail(20).mean()) * 0.80) if down_volume.tail(20).notna().sum() >= 4 else False
+    close_location = float((price - low.iloc[-1]) / max(h.iloc[-1] - low.iloc[-1], 1e-9))
+    rejection_candle = close_location >= 0.65
+    no_fresh_low = days_since_60_low >= 2
+    confirmation_count = sum([higher_low, prior_high_reclaim or ma10_reclaim, selling_volume_fades, rejection_candle, no_fresh_low])
+    bottom_confirmed = bool(no_fresh_low and higher_low and (prior_high_reclaim or ma10_reclaim) and confirmation_count >= 4)
+    drawdown_52 = price / c.tail(252).max() - 1
+    recent_shock = bool(returns.tail(20).min() <= -0.06 or (c / c.shift(5) - 1).tail(30).min() <= -0.12)
+    loser_event = bool(recent_shock and drawdown_52 <= -0.15)
+    near_bottom = bool(price / recent_60_low - 1 <= MAX_DISTANCE_FROM_60D_LOW)
+    stop_price = price * 0.90
+    stop_below_support = stop_price < structural_support
+    stop_outside_noise = 0.10 >= 2.25 * atr_pct
+    support_close_enough = support_distance <= MAX_SUPPORT_DISTANCE
+    stop_geometry_pass = bool(stop_below_support and stop_outside_noise and support_close_enough)
+    headroom_pass = bool(headroom >= MIN_HEADROOM)
+    setup_pass = bool(loser_event and near_bottom and bottom_confirmed and headroom_pass and stop_geometry_pass)
+    return {
+        "price": price, "ret_1": price / c.iloc[-2] - 1, "ret_3": price / c.iloc[-4] - 1,
+        "ret_5": price / c.iloc[-6] - 1, "ret_20": price / c.iloc[-21] - 1,
+        "ret_60": price / c.iloc[-61] - 1, "ret_120": price / c.iloc[-121] - 1,
+        "drawdown_52": drawdown_52, "off_low_52": price / c.tail(252).min() - 1,
+        "worst_day_20": returns.tail(20).min(), "worst_5day_30": (c / c.shift(5) - 1).tail(30).min(),
+        "ma10_pct": price / c.tail(10).mean() - 1, "ma20_pct": price / c.tail(20).mean() - 1,
+        "ma50_pct": price / c.tail(50).mean() - 1, "ma200_pct": price / c.tail(200).mean() - 1,
+        "rsi14": _rsi(c), "atr14_pct": atr_pct, "vol_ratio_5_60": v.tail(5).mean() / (v.tail(60).mean() + 1e-9),
+        "dollar_volume": (c.tail(20) * v.tail(20)).mean(), "volatility": returns.tail(60).std() * math.sqrt(252),
+        "recent_60_low": recent_60_low, "days_since_60_low": days_since_60_low,
+        "structural_support": structural_support, "support_distance": support_distance,
+        "nearest_resistance": resistance, "headroom": headroom, "close_location": close_location,
+        "higher_low": higher_low, "reclaim": prior_high_reclaim or ma10_reclaim,
+        "selling_volume_fades": selling_volume_fades, "rejection_candle": rejection_candle,
+        "no_fresh_low": no_fresh_low, "bottom_confirmation_count": confirmation_count,
+        "recent_shock": recent_shock, "loser_event": loser_event, "near_bottom": near_bottom, "bottom_confirmed": bottom_confirmed,
+        "headroom_pass": headroom_pass, "stop_price_10pct": stop_price,
+        "stop_below_support": stop_below_support, "stop_outside_noise": stop_outside_noise,
+        "support_close_enough": support_close_enough, "stop_geometry_pass": stop_geometry_pass,
+        "technical_setup_pass": setup_pass,
+    }
+
+
 def price_rows_from_download(data, batch):
     rows = []
-    try:
-        close = data["Close"]
-        volume = data["Volume"]
-    except Exception as exc:
-        print(f"Price batch schema failure: {batch}: {exc}", flush=True)
-        return rows
-
     for ticker in batch:
         try:
-            if isinstance(close, pd.Series):
-                if len(batch) != 1:
-                    raise ValueError("single-series response for a multi-ticker batch")
-                c = close.dropna()
-                v = volume.reindex(c.index)
-            elif isinstance(close.columns, pd.MultiIndex):
-                c = close[ticker].dropna()
-                v = volume[ticker].reindex(c.index)
-            elif ticker in close.columns:
-                c = close[ticker].dropna()
-                v = volume[ticker].reindex(c.index)
-            elif len(batch) == 1 and "Close" in data.columns:
-                c = data["Close"].dropna()
-                v = data["Volume"].reindex(c.index)
-            else:
+            frame = pd.DataFrame({field: _field(data, field, ticker, batch) for field in ["Close", "High", "Low", "Volume"]}).dropna()
+            current = technical_snapshot(frame)
+            if current is None:
                 continue
-            if len(c) < 130:
-                continue
-            price = c.iloc[-1]
-            high_52 = c.tail(252).max()
-            low_52 = c.tail(252).min()
-            rows.append(
-                dict(
-                    ticker=ticker,
-                    price=price,
-                    ret_5=price / c.iloc[-6] - 1,
-                    ret_20=price / c.iloc[-21] - 1,
-                    ret_60=price / c.iloc[-61] - 1,
-                    ret_120=price / c.iloc[-121] - 1,
-                    drawdown_52=price / high_52 - 1,
-                    off_low_52=price / low_52 - 1,
-                    ma20=price / c.tail(20).mean() - 1,
-                    ma50=price / c.tail(50).mean() - 1,
-                    vol_ratio=v.tail(10).mean() / (v.tail(60).mean() + 1e-9),
-                    dollar_volume=(c.tail(20) * v.tail(20)).mean(),
-                    volatility=c.pct_change().tail(60).std() * math.sqrt(252),
-                )
-            )
+            historical_passes = []
+            for offset in (0, 1, 2):
+                snap = technical_snapshot(frame.iloc[:len(frame)-offset] if offset else frame)
+                historical_passes.append(bool(snap and snap["technical_setup_pass"]))
+            current["ticker"] = ticker
+            current["setup_pass_sessions_3"] = sum(historical_passes)
+            current["stability_pass"] = sum(historical_passes) >= MIN_STABILITY_SESSIONS
+            rows.append(current)
         except Exception as exc:
             print(f"Price metric skip {ticker}: {exc}", flush=True)
     return rows
@@ -309,341 +292,177 @@ def price_rows_from_download(data, batch):
 
 def download_prices(batch, label):
     return retry_yahoo(
-        lambda: yf.download(
-            batch,
-            period="1y",
-            interval="1d",
-            group_by="column",
-            auto_adjust=True,
-            threads=False,
-            progress=False,
-            timeout=30,
-        ),
-        label,
-        request_units=len(batch),
-        validator=valid_price_download,
+        lambda: yf.download(batch, period="2y", interval="1d", group_by="column", auto_adjust=True, threads=False, progress=False, timeout=30),
+        label, request_units=len(batch), validator=valid_price_download,
     )
 
 
 def prices(tickers):
-    rows = []
-    request_failures = []
-    batch_size = YAHOO_PRICE_BATCH_SIZE
-    for start in range(0, len(tickers), batch_size):
-        batch = tickers[start : start + batch_size]
-        data = download_prices(batch, f"prices batch {start // batch_size + 1}")
+    rows, failures = [], []
+    for start in range(0, len(tickers), YAHOO_PRICE_BATCH_SIZE):
+        batch = tickers[start:start + YAHOO_PRICE_BATCH_SIZE]
+        data = download_prices(batch, f"prices batch {start // YAHOO_PRICE_BATCH_SIZE + 1}")
         if data is not None:
             rows.extend(price_rows_from_download(data, batch))
         else:
-            print(
-                f"Batch failed after retries; isolating tickers one by one: {batch}",
-                flush=True,
-            )
             for ticker in batch:
                 single = download_prices([ticker], f"price fallback {ticker}")
                 if single is None:
-                    request_failures.append(ticker)
+                    failures.append(ticker)
                 else:
                     rows.extend(price_rows_from_download(single, [ticker]))
-
-        if (start // batch_size + 1) % 10 == 0:
-            print(
-                f"Price progress: {min(start + batch_size, len(tickers))}/{len(tickers)}",
-                flush=True,
-            )
-    return pd.DataFrame(rows), request_failures
+        if (start // YAHOO_PRICE_BATCH_SIZE + 1) % 10 == 0:
+            print(f"Price progress: {min(start + YAHOO_PRICE_BATCH_SIZE, len(tickers))}/{len(tickers)}", flush=True)
+    return pd.DataFrame(rows), failures
 
 
-def benchmark_metrics():
-    data = retry_yahoo(
-        lambda: yf.download(
-            "SPY",
-            period="1y",
-            interval="1d",
-            auto_adjust=True,
-            threads=False,
-            progress=False,
-            timeout=30,
-        ),
-        "SPY benchmark",
-        validator=valid_price_download,
+def automated_quality(frame):
+    """Automated triage only; an intact business still requires fresh review."""
+    revenue = pd.to_numeric(frame.revenue_growth, errors="coerce")
+    cash = pd.to_numeric(frame.total_cash, errors="coerce")
+    debt = pd.to_numeric(frame.total_debt, errors="coerce")
+    ocf = pd.to_numeric(frame.operating_cashflow, errors="coerce")
+    current = pd.to_numeric(frame.current_ratio, errors="coerce")
+    frame["revenue_not_collapsing"] = revenue.isna() | (revenue >= -0.15)
+    frame["liquidity_evidence_pass"] = current.isna() | (current >= 0.75)
+    frame["cash_debt_evidence_pass"] = cash.isna() | debt.isna() | (cash >= debt * 0.20) | (ocf > 0)
+    frame["fundamental_coverage"] = frame[["revenue_growth", "total_cash", "total_debt", "operating_cashflow", "current_ratio"]].notna().mean(axis=1)
+    frame["automated_quality_pass"] = (
+        frame[["revenue_not_collapsing", "liquidity_evidence_pass", "cash_debt_evidence_pass"]].all(axis=1)
+        & (frame.fundamental_coverage >= MIN_FUNDAMENTAL_COVERAGE)
     )
-    if data is None or data.empty:
-        raise RuntimeError("SPY benchmark unavailable; refusing incomplete relative-strength screen")
-    close = data["Close"]
-    if isinstance(close, pd.DataFrame):
-        close = close.iloc[:, 0]
-    close = close.dropna()
-    if len(close) < 121:
-        raise RuntimeError("SPY benchmark history insufficient")
-    price = close.iloc[-1]
-    return {
-        "spy_ret_20": price / close.iloc[-21] - 1,
-        "spy_ret_60": price / close.iloc[-61] - 1,
-        "spy_ret_120": price / close.iloc[-121] - 1,
-    }
+    return frame
 
 
-def score(df, benchmark):
-    # Peer and benchmark relative strength.
-    sector_median = df.groupby("sector")["ret_60"].transform("median")
-    industry_median = df.groupby("industry")["ret_60"].transform("median")
-    df["sector_rs_60"] = df.ret_60 - sector_median
-    df["industry_rs_60"] = df.ret_60 - industry_median
-    df["spy_rs_20"] = df.ret_20 - benchmark["spy_ret_20"]
-    df["spy_rs_60"] = df.ret_60 - benchmark["spy_ret_60"]
-    df["spy_rs_120"] = df.ret_120 - benchmark["spy_ret_120"]
-
-    # Fundamental ranks. Missing values remain missing; no arbitrary filler scores.
-    rev_growth = pct_rank(df.revenue_growth)
-    earn_growth = pct_rank(df.earnings_growth)
-    earn_q_growth = pct_rank(df.earnings_q_growth)
-    growth_accel_raw = pd.to_numeric(df.earnings_q_growth, errors="coerce") - pd.to_numeric(
-        df.earnings_growth, errors="coerce"
+def rank_candidates(frame):
+    frame = frame.copy()
+    frame["loss_severity_score"] = pct_rank(-frame.worst_day_20) * .35 + pct_rank(-frame.worst_5day_30) * .35 + pct_rank(-frame.drawdown_52) * .30
+    frame["bottom_quality_score"] = (
+        frame.bottom_confirmation_count / 5 * 35 + pct_rank(frame.close_location) * .15
+        + pct_rank(-frame.support_distance) * .20 + pct_rank(frame.headroom.clip(upper=.50)) * .20
+        + pct_rank(-frame.atr14_pct) * .10
     )
-    growth_accel = pct_rank(growth_accel_raw)
-    valuation = inverse_pct_rank(df.forward_pe)
-    target = pct_rank(df.target_upside)
-    recommendation = 100 - pct_rank(df.recommendation)
-    liquidity = pct_rank(df.dollar_volume)
-
-    # 1) Leadership / Momentum
-    df["leadership_momentum"], df["leadership_coverage"] = weighted_available_score(
-        [
-            (pct_rank(df.ret_60), 0.14),
-            (pct_rank(df.ret_20), 0.08),
-            (pct_rank(df.spy_rs_60), 0.10),
-            (pct_rank(df.sector_rs_60), 0.08),
-            (pct_rank(df.industry_rs_60), 0.07),
-            (rev_growth, 0.11),
-            (earn_growth, 0.10),
-            (earn_q_growth, 0.07),
-            (pct_rank(df.vol_ratio), 0.06),
-            (target, 0.04),
-            (recommendation, 0.03),
-            (valuation, 0.04),
-            (liquidity, 0.08),
-        ]
+    frame["business_quality_score"], frame["business_score_coverage"] = weighted_available_score(
+        [(pct_rank(frame.revenue_growth), .35), (pct_rank(frame.operating_cashflow), .20),
+         (pct_rank(frame.current_ratio), .15), (pct_rank(frame.dollar_volume), .20),
+         (frame.fundamental_coverage * 100, .10)]
     )
+    frame["quality_loser_score"] = (frame.loss_severity_score * .20 + frame.bottom_quality_score * .50 + frame.business_quality_score * .30).clip(0, 100)
+    return frame.sort_values("quality_loser_score", ascending=False)
 
-    # 2) Beaten-Down / Reversal: being down alone is not enough; reversal and
-    # fundamental confirmation carry more weight than drawdown itself.
-    drawdown_rank = pct_rank(-df.drawdown_52)
-    reversal_rank = pct_rank((df.ret_5 + df.ret_20 + df.ma20) / 3)
-    df["beaten_down_reversal"], df["reversal_coverage"] = weighted_available_score(
-        [
-            (drawdown_rank, 0.15),
-            (reversal_rank, 0.18),
-            (pct_rank(df.vol_ratio), 0.08),
-            (pct_rank(df.spy_rs_20), 0.08),
-            (pct_rank(df.sector_rs_60), 0.06),
-            (pct_rank(df.industry_rs_60), 0.05),
-            (rev_growth, 0.10),
-            (earn_growth, 0.10),
-            (earn_q_growth, 0.07),
-            (target, 0.04),
-            (valuation, 0.03),
-            (liquidity, 0.06),
-        ]
-    )
 
-    # 3) Acceleration / Emerging Momentum. This detects the fingerprints of an
-    # emerging move; it deliberately does NOT claim that a catalyst was found.
-    return_accel = pct_rank(df.ret_20 - df.ret_60 / 3)
-    df["acceleration_emerging_momentum"], df["acceleration_coverage"] = weighted_available_score(
-        [
-            (return_accel, 0.16),
-            (pct_rank(df.vol_ratio), 0.10),
-            (pct_rank(df.spy_rs_20), 0.09),
-            (pct_rank(df.spy_rs_60), 0.07),
-            (pct_rank(df.sector_rs_60), 0.06),
-            (pct_rank(df.industry_rs_60), 0.05),
-            (rev_growth, 0.10),
-            (earn_growth, 0.08),
-            (earn_q_growth, 0.09),
-            (growth_accel, 0.06),
-            (target, 0.04),
-            (valuation, 0.03),
-            (liquidity, 0.07),
-        ]
-    )
+VERIFICATION_FIELDS = [
+    "ticker", "verified_at", "reviewer", "selloff_reason", "selloff_not_thesis_break",
+    "business_intact", "balance_sheet_pass", "no_material_dilution", "future_catalyst_pass",
+    "catalyst_date", "catalyst_description", "nonbinary_risk_pass", "multitimeframe_chart_pass",
+    "market_regime_pass", "source_urls", "final_status",
+]
 
-    # Explicit evidence coverage. Price/volume factors are already mandatory by
-    # construction; this measures how much secondary evidence backs the score.
-    secondary_cols = [
-        "revenue_growth",
-        "earnings_growth",
-        "earnings_q_growth",
-        "forward_pe",
-        "target_upside",
-        "recommendation",
-        "sector",
-        "industry",
-    ]
-    secondary_coverage = df[secondary_cols].notna().mean(axis=1)
-    lens_coverage = df[
-        ["leadership_coverage", "reversal_coverage", "acceleration_coverage"]
-    ].max(axis=1)
-    df["data_confidence"] = (0.65 * lens_coverage + 0.35 * secondary_coverage).clip(0, 1)
 
-    lens_values = df[list(LENSES)].apply(pd.to_numeric, errors="coerce")
-    all_na = lens_values.isna().all(axis=1)
-    df["best_lens"] = lens_values.max(axis=1, skipna=True)
-    df["lens_winner"] = pd.Series(pd.NA, index=df.index, dtype="object")
-    if (~all_na).any():
-        df.loc[~all_na, "lens_winner"] = lens_values.loc[~all_na].idxmax(axis=1, skipna=True)
-    df["lens_data_missing"] = all_na
+def verification_template(tickers):
+    return pd.DataFrame([{"ticker": t, **{c: "NOT_RESEARCHED" for c in VERIFICATION_FIELDS[1:]}} for t in tickers], columns=VERIFICATION_FIELDS)
 
-    # Risk is quantitative triage, not the final downside thesis.
-    extension = pct_rank(pd.to_numeric(df.ma20, errors="coerce").clip(lower=0))
-    df["risk_score"], _ = weighted_available_score(
-        [
-            (pct_rank(df.volatility), 0.30),
-            (100 - pct_rank(df.ret_20), 0.20),
-            (100 - liquidity, 0.20),
-            (extension, 0.15),
-            (pct_rank(-df.drawdown_52), 0.15),
-        ]
-    )
 
-    mean_lens = lens_values.mean(axis=1, skipna=True)
-    confidence_component = df.data_confidence * 100
-    df["final_quant_score"] = (
-        df.best_lens * 0.75
-        + mean_lens * 0.18
-        + confidence_component * 0.07
-        - np.maximum(df.risk_score - 70, 0) * 0.25
-    ).clip(0, 100)
-    df.loc[all_na, "final_quant_score"] = np.nan
+def load_current_verification(tickers):
+    path = Path("current_verification.csv")
+    if not path.exists():
+        return verification_template(tickers), set()
+    try:
+        verified = pd.read_csv(path).reindex(columns=VERIFICATION_FIELDS)
+    except Exception:
+        return verification_template(tickers), set()
+    valid = set()
+    required_pass = ["selloff_not_thesis_break", "business_intact", "balance_sheet_pass", "no_material_dilution", "future_catalyst_pass", "nonbinary_risk_pass", "multitimeframe_chart_pass", "market_regime_pass"]
+    now = datetime.now(timezone.utc)
+    for _, row in verified.iterrows():
+        try:
+            stamp = datetime.fromisoformat(str(row.verified_at).replace("Z", "+00:00"))
+            if stamp.tzinfo is None:
+                stamp = stamp.replace(tzinfo=timezone.utc)
+            fresh = 0 <= (now - stamp.astimezone(timezone.utc)).total_seconds() / 3600 <= VERIFICATION_MAX_AGE_HOURS
+        except Exception:
+            fresh = False
+        if fresh and all(str(row.get(c, "")).upper() == "PASS" for c in required_pass) and str(row.final_status).upper() == "APPROVED":
+            valid.add(row.ticker)
+    merged = verification_template(tickers).set_index("ticker")
+    supplied = verified[verified.ticker.isin(tickers)].drop_duplicates("ticker", keep="last").set_index("ticker")
+    merged.update(supplied)
+    return merged.reset_index(), valid
 
-    # Flags only. These are not substitutes for current company-specific review.
-    industry = df.industry.fillna("")
-    name = df.name.fillna("")
-    df["biotech_review"] = df.sector.eq("Healthcare") & industry.str.contains(
-        r"Biotech|Biotechnology", case=False, regex=True
-    )
-    df["crypto_proxy_review"] = industry.str.contains(
-        r"Crypto|Blockchain", case=False, regex=True
-    ) | name.str.contains(r"Bitcoin|Crypto|Blockchain", case=False, regex=True)
-    df["special_risk_review"] = df.biotech_review | df.crypto_proxy_review
 
-    return df
+def active_positions_audit(scored):
+    path = Path(os.environ.get("ROCKET_ACTIVE_POSITIONS_FILE", "private/active_positions.csv"))
+    template = Path("active_positions.template.csv")
+    positions = pd.read_csv(path) if path.exists() else pd.read_csv(template)
+    audit = positions.merge(scored, on="ticker", how="left", suffixes=("_position", ""))
+    audit["present_in_full_scored_universe"] = audit.price.notna() if "price" in audit else False
+    audit["position_action"] = "MANAGE_BY_POSITION_SSOT; NOT AN AUTOMATIC SELL/BUY SIGNAL"
+    return audit
 
 
 def main():
+    run_at = datetime.now(timezone.utc).isoformat()
     u = universe()
     u.to_csv(OUT / "01_starting_universe.csv", index=False)
     print(f"Starting universe: {len(u)}", flush=True)
-
-    p, price_request_failures = prices(u.ticker.tolist())
-    p.to_csv(OUT / "02_price_metrics.csv", index=False)
-    pd.DataFrame({"ticker": price_request_failures}).to_csv(
-        OUT / "02_price_request_failures.csv", index=False
-    )
-    failure_rate = len(price_request_failures) / max(len(u), 1)
+    p, failures = prices(u.ticker.tolist())
+    p.to_csv(OUT / "02_price_and_pattern_metrics.csv", index=False)
+    pd.DataFrame({"ticker": failures}).to_csv(OUT / "02_price_request_failures.csv", index=False)
+    failure_rate = len(failures) / max(len(u), 1)
     if failure_rate > MAX_PRICE_REQUEST_FAILURE_RATE:
-        raise RuntimeError(
-            f"Price request failure rate {failure_rate:.2%} exceeds "
-            f"{MAX_PRICE_REQUEST_FAILURE_RATE:.2%}; refusing incomplete screen"
-        )
-    if p.empty or not {"ticker", "price", "dollar_volume"}.issubset(p.columns):
-        raise RuntimeError("Price stage produced insufficient schema; refusing incomplete screen")
-
+        raise RuntimeError(f"Price request failure rate {failure_rate:.2%} exceeds {MAX_PRICE_REQUEST_FAILURE_RATE:.2%}")
+    if p.empty:
+        raise RuntimeError("Price stage empty; refusing incomplete screen")
     investable = u.merge(p, on="ticker", how="inner")
-    investable = investable[
-        (investable.price >= 3) & (investable.dollar_volume >= 2_000_000)
-    ]
+    investable = investable[(investable.price >= MIN_PRICE) & (investable.dollar_volume >= MIN_DOLLAR_VOLUME)]
     investable.to_csv(OUT / "03_investable.csv", index=False)
+    f, reused, downloaded = fundamentals(investable.ticker.tolist())
+    all_data = investable.merge(f, on="ticker", how="left")
+    missing_mc = int(all_data.market_cap.isna().sum())
+    all_data = all_data[all_data.market_cap.fillna(0) >= MIN_MARKET_CAP]
+    all_data = automated_quality(all_data)
+    scored = rank_candidates(all_data)
+    scored.to_csv(OUT / "04_all_quality_loser_scored.csv", index=False)
 
-    benchmark = benchmark_metrics()
-    f, cache_reused, fresh_downloaded = fundamentals(investable.ticker.tolist())
-    e = investable.merge(f, on="ticker", how="left")
-    if "market_cap" not in e.columns:
-        raise RuntimeError("market_cap unavailable; refusing incomplete screen")
+    loser_pool = scored[scored.loser_event & scored.near_bottom & scored.automated_quality_pass].copy()
+    loser_pool.to_csv(OUT / "05_quality_loser_pool.csv", index=False)
+    bottom_confirmed = loser_pool[loser_pool.bottom_confirmed].copy()
+    bottom_confirmed.to_csv(OUT / "06_bottom_confirmed.csv", index=False)
+    entry_geometry = bottom_confirmed[bottom_confirmed.headroom_pass & bottom_confirmed.stop_geometry_pass & bottom_confirmed.stability_pass].copy()
+    entry_geometry.to_csv(OUT / "07_entry_geometry_pass.csv", index=False)
 
-    missing_mc = int(e.market_cap.isna().sum())
-    print(
-        f"Fundamentals coverage: {len(e) - missing_mc}/{len(e)} market caps",
-        flush=True,
-    )
-    e = e[e.market_cap.fillna(0) >= 200_000_000]
-    if e.empty:
-        raise RuntimeError("No eligible securities after investability filters")
-
-    s = score(e, benchmark)
-    missing_lens = int(s.lens_data_missing.sum())
-    print(f"All-lens missing rows safely excluded: {missing_lens}", flush=True)
-    s = s.sort_values("final_quant_score", ascending=False, na_position="last")
-    s.to_csv(OUT / "04_all_scored.csv", index=False)
-
-    scoreable = s[s.final_quant_score.notna()].copy()
-    if scoreable.empty:
-        raise RuntimeError("No securities have scoreable three-lens data")
-
-    confidence_eligible = scoreable[
-        scoreable.data_confidence >= MIN_DATA_CONFIDENCE
-    ].copy()
-    if confidence_eligible.empty:
-        raise RuntimeError("No securities passed the explicit data-confidence gate")
-
-    semis = (
-        pd.concat(
-            [confidence_eligible.nlargest(SEMIFINALISTS_PER_LENS, lens) for lens in LENSES]
-        )
-        .drop_duplicates("ticker")
-        .sort_values("final_quant_score", ascending=False)
-    )
-    semis.to_csv(OUT / "05_semifinalists.csv", index=False)
-
-    candidates = semis.head(QUANT_CANDIDATES).copy()
-    candidates["current_verification_required"] = True
-    candidates["catalyst_status"] = "NOT_YET_RESEARCHED"
-    candidates["estimate_revision_status"] = "NOT_YET_RESEARCHED"
-    candidates["guidance_status"] = "NOT_YET_RESEARCHED"
-    candidates["dilution_financing_status"] = "NOT_YET_RESEARCHED"
-    candidates["binary_risk_status"] = "NOT_YET_RESEARCHED"
-    candidates.to_csv(
-        OUT / "06_quant_candidates_REQUIRES_CURRENT_VERIFICATION.csv", index=False
-    )
+    research = entry_geometry.head(25).copy()
+    verification, valid = load_current_verification(research.ticker.tolist())
+    verification.to_csv(OUT / "08_CURRENT_VERIFICATION_REQUIRED.csv", index=False)
+    research["current_verification_pass"] = research.ticker.isin(valid)
+    research["engine_status"] = np.where(research.current_verification_pass, "ENTRY_READY", "REQUIRES_CURRENT_VERIFICATION")
+    research.to_csv(OUT / "08_research_candidates.csv", index=False)
+    entry_ready = research[research.current_verification_pass].copy()
+    entry_ready.to_csv(OUT / "09_ENTRY_READY.csv", index=False)
+    holdings = active_positions_audit(scored)
+    holdings.to_csv(OUT / "10_active_positions_audit.csv", index=False)
 
     audit = {
-        "starting_universe": len(u),
-        "price_eligible": len(p),
-        "price_request_failures": len(price_request_failures),
-        "price_request_failure_rate": failure_rate,
-        "investable_before_marketcap": len(investable),
-        "fundamentals_requested": len(f),
-        "fundamentals_cache_reused_fresh": cache_reused,
-        "fundamentals_fresh_downloaded": fresh_downloaded,
-        "fundamentals_cache_ttl_hours": FUNDAMENTALS_CACHE_TTL_HOURS,
-        "market_cap_missing": missing_mc,
-        "all_lens_missing": missing_lens,
-        "scoreable": len(scoreable),
-        "confidence_threshold": MIN_DATA_CONFIDENCE,
-        "confidence_eligible": len(confidence_eligible),
-        "semifinalists": len(semis),
-        "quant_candidates": len(candidates),
-        "yahoo_rate_cap_per_minute": YAHOO_RATE_CAP_PER_MINUTE,
-        "yahoo_price_batch_size": YAHOO_PRICE_BATCH_SIZE,
-        "spy_benchmark": benchmark,
-        "three_lenses": list(LENSES),
-        "market_wide_catalyst_claimed": False,
-        "estimate_revisions_claimed_market_wide": False,
-        "FINAL_LABEL_ALLOWED": False,
-        "note": (
-            "Quant candidates require fresh current verification of earnings, guidance, "
-            "estimate revisions, beat/raise execution, catalyst if any, technical condition, "
-            "valuation/runway, downside, financing/dilution and special/binary risk before FINAL ranking."
-        ),
+        "engine": "Quality Loser Reversal V2", "run_at_utc": run_at, "ruleset": "QUALITY_LOSER_SSOT.md",
+        "starting_universe": len(u), "price_eligible": len(p), "investable_before_marketcap": len(investable),
+        "market_cap_eligible": len(scored), "quality_loser_pool": len(loser_pool), "bottom_confirmed": len(bottom_confirmed),
+        "entry_geometry_and_stability_pass": len(entry_geometry), "research_candidates": len(research), "entry_ready": len(entry_ready),
+        "price_request_failures": len(failures), "price_request_failure_rate": failure_rate,
+        "fundamentals_cache_reused_fresh": reused, "fundamentals_fresh_downloaded": downloaded, "market_cap_missing": missing_mc,
+        "thresholds": {"min_price": MIN_PRICE, "min_dollar_volume": MIN_DOLLAR_VOLUME, "min_market_cap": MIN_MARKET_CAP,
+            "min_headroom": MIN_HEADROOM, "max_support_distance": MAX_SUPPORT_DISTANCE,
+            "max_distance_from_60d_low": MAX_DISTANCE_FROM_60D_LOW,
+            "min_fundamental_coverage": MIN_FUNDAMENTAL_COVERAGE,
+            "min_setup_pass_sessions_of_last_3": MIN_STABILITY_SESSIONS, "verification_max_age_hours": VERIFICATION_MAX_AGE_HOURS},
+        "hard_gates": ["loser_event", "near_bottom", "automated_quality", "bottom_confirmed", "headroom", "stop_geometry", "stability", "current_manual_verification"],
+        "current_catalyst_claimed_market_wide": False, "chart_claimed_from_single_timeframe": False,
+        "FINAL_LABEL_ALLOWED": bool(len(entry_ready)),
+        "note": "ENTRY_READY requires a <=24-hour verification row with every manual gate PASS. Empty ENTRY_READY means cash/no new purchase, not permission to relax a gate.",
     }
-    (OUT / "audit.json").write_text(json.dumps(audit, indent=2))
+    (OUT / "audit_quality_loser.json").write_text(json.dumps(audit, indent=2))
     print(json.dumps(audit, indent=2), flush=True)
-    print(
-        candidates[
-            ["ticker", "lens_winner", "data_confidence", "final_quant_score", "special_risk_review"]
-        ].to_string(index=False),
-        flush=True,
-    )
+    columns = ["ticker", "quality_loser_score", "price", "worst_day_20", "drawdown_52", "headroom", "setup_pass_sessions_3", "engine_status"]
+    print(research[columns].to_string(index=False) if len(research) else "No research candidates passed all quantitative gates.", flush=True)
 
 
 if __name__ == "__main__":
