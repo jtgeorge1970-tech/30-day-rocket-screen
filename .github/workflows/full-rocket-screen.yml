@@ -1,0 +1,27 @@
+name: Full Rocket Screen
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  full-screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run full 5,000+ stock screen
+        run: python rocket_screen.py
+      - name: Upload complete audit output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rocket-screen-2026-09-02
+          path: output/
+          if-no-files-found: error
+          retention-days: 30
