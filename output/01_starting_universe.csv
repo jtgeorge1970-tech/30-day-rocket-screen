@@ -703,7 +703,6 @@ CRML,Critical Metals Corp. - Ordinary Shares,N,N
 CRMT,"America's Car-Mart, Inc. - Common Stock",N,N
 CRNC,Cerence Inc. - Common Stock,N,N
 CRNT,Ceragon Networks Ltd. - Ordinary Shares,N,N
-CRNX,"Crinetics Pharmaceuticals, Inc. - Common Stock",N,N
 CRON,Cronos Group Inc. - Common Share,N,N
 CROX,"Crocs, Inc. - Common Stock",N,N
 CRSP,CRISPR Therapeutics AG - Common Shares,N,N
@@ -1899,7 +1898,6 @@ NCNO,"nCino, Inc. - Common Stock",N,N
 NCO,Southern Cross Acquisition I Corp. - Ordinary Shares,N,N
 NCPL,Netcapital Inc. - Common Stock,N,N
 NCRA,"Nocera, Inc. - common stock",N,N
-NCSM,"NCS Multistage Holdings, Inc. - Common Stock",N,N
 NCT,Intercont (Cayman) Limited - Class A Ordinary shares,N,N
 NCTY,The9 Limited - American Depository Shares,N,N
 NDAQ,"Nasdaq, Inc. - Common Stock",N,N
@@ -3085,6 +3083,7 @@ YARW,"Yarrow Bioscience, Inc. - Common Stock",N,N
 YDDL,One and One Green Technologies. INC - Class A Ordinary Shares,N,N
 YDES,YD Bio Limited - Ordinary Shares,N,N
 YDKG,Yueda Digital Holding - Class A Ordinary Share,N,N
+YFOR,YYForce Inc. - Class A Ordinary Shares,N,N
 YHC,LQR House Inc. - Common Stock,N,N
 YHGJ,Yunhong Green CTI Ltd. - Common Stock,N,N
 YHNA,YHN Acquisition I Limited - Ordinary Shares,N,N
@@ -3098,7 +3097,6 @@ YSXT,"YSX Tech. Co., Ltd  - Class A Ordinary Shares",N,N
 YTRA,"Yatra Online, Inc. - Ordinary Shares",N,N
 YXT,YXT.COM GROUP HOLDING LIMITED - American Depository Shares,N,N
 YYAI,AiRWA Inc. - Common Stock,N,N
-YYGH,YY Group Holding Limited - Class A Ordinary Shares,N,N
 Z,"Zillow Group, Inc. - Class C Capital Stock",N,N
 ZBAO,Zhibao Technology Inc. - Class A Ordinary Shares,N,N
 ZBIO,"Zenas BioPharma, Inc. - Common Stock",N,N
@@ -3120,7 +3118,6 @@ ZOOZ,ZOOZ Strategy Ltd. - Ordinary Shares,N,N
 ZS,"Zscaler, Inc. - Common Stock",N,N
 ZSQR,Z Squared Inc. - Common Stock,N,N
 ZSTK,ZeroStack Corp. - Common Stock,N,N
-ZTEK,Zentek Ltd. - common stock,N,N
 ZTG,Zenta Group Company Limited - Class A Ordinary Shares,N,N
 ZUMZ,Zumiez Inc. - Common Stock,N,N
 ZURA,Zura Bio Limited - Class A Ordinary shares,N,N
@@ -4179,7 +4176,6 @@ HLI,"Houlihan Lokey, Inc. Class A Common Stock",N,N
 HLIO,"Helios Technologies, Inc. Common Stock",N,N
 HLLY,Holley Inc. Common Stock,N,N
 HLT,Hilton Worldwide Holdings Inc. Common Stock ,N,N
-HLX,"Helix Energy Solutions Group, Inc. Common Stock",N,N
 HMC,"Honda Motor Company, Ltd. Common Stock",N,N
 HMN,Horace Mann Educators Corporation Common Stock,N,N
 HMY,Harmony Gold Mining Company Limited,N,N
@@ -4187,6 +4183,7 @@ HNGE,"Hinge Health, Inc. Class A Common Stock",N,N
 HNI,HNI Corporation Common Stock,N,N
 HOG,"Harley-Davidson, Inc. Common Stock",N,N
 HOMB,"Home BancShares, Inc. Common Stock",N,N
+HOS,"Hornbeck Offshore Services, Inc. Common Stock",N,N
 HOV,"Hovnanian Enterprises, Inc. Class A Common Stock",N,N
 HP,"Helmerich & Payne, Inc. Common Stock",N,N
 HPE,Hewlett Packard Enterprise Company Common Stock,N,N
