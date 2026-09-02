@@ -31,27 +31,40 @@ LENSES = (
 
 YAHOO_RATE_CAP_PER_MINUTE = 100
 YAHOO_MIN_INTERVAL = 60.0 / YAHOO_RATE_CAP_PER_MINUTE
+YAHOO_PRICE_BATCH_SIZE = 10
+MAX_PRICE_REQUEST_FAILURE_RATE = 0.01
 FUNDAMENTALS_CACHE_TTL_HOURS = 18
 MIN_DATA_CONFIDENCE = 0.55
 SEMIFINALISTS_PER_LENS = 40
 QUANT_CANDIDATES = 25
-_last_yahoo_call = 0.0
+_next_yahoo_call = 0.0
 
 
-def yahoo_pace():
-    global _last_yahoo_call
-    wait = YAHOO_MIN_INTERVAL - (time.monotonic() - _last_yahoo_call)
+def yahoo_pace(request_units=1):
+    """Reserve Yahoo capacity for every ticker represented by a call.
+
+    A multi-ticker ``yf.download`` call still causes Yahoo work for every
+    ticker. Treating a 20-ticker batch as one request defeated the 100/minute
+    cap and could produce silent rate-limit gaps.
+    """
+    global _next_yahoo_call
+    wait = _next_yahoo_call - time.monotonic()
     if wait > 0:
         time.sleep(wait)
-    _last_yahoo_call = time.monotonic()
+    _next_yahoo_call = time.monotonic() + (
+        YAHOO_MIN_INTERVAL * max(1, int(request_units))
+    )
 
 
-def retry_yahoo(fn, label, attempts=6):
+def retry_yahoo(fn, label, attempts=6, request_units=1, validator=None):
     last = None
     for attempt in range(attempts):
-        yahoo_pace()
+        yahoo_pace(request_units=request_units)
         try:
-            return fn()
+            result = fn()
+            if validator is not None and not validator(result):
+                raise RuntimeError("Yahoo returned an empty or unusable response")
+            return result
         except Exception as exc:
             last = exc
             if attempt == attempts - 1:
@@ -65,6 +78,13 @@ def retry_yahoo(fn, label, attempts=6):
             time.sleep(delay)
     print(f"Yahoo failed after retries for {label}: {last}", flush=True)
     return None
+
+
+def valid_price_download(data):
+    if data is None or data.empty or "Close" not in data.columns:
+        return False
+    close = data["Close"]
+    return bool(close.notna().to_numpy().any())
 
 
 def universe():
@@ -195,7 +215,11 @@ def fundamentals(tickers):
             reused += 1
             continue
 
-        info = retry_yahoo(lambda: yf.Ticker(ticker).info, f"fundamentals {ticker}")
+        info = retry_yahoo(
+            lambda: yf.Ticker(ticker).info,
+            f"fundamentals {ticker}",
+            validator=lambda value: isinstance(value, dict) and bool(value),
+        )
         row = {
             "ticker": ticker,
             "retrieved_at": datetime.now(timezone.utc).isoformat(),
@@ -229,74 +253,105 @@ def fundamentals(tickers):
     return frame, reused, downloaded
 
 
+def price_rows_from_download(data, batch):
+    rows = []
+    try:
+        close = data["Close"]
+        volume = data["Volume"]
+    except Exception as exc:
+        print(f"Price batch schema failure: {batch}: {exc}", flush=True)
+        return rows
+
+    for ticker in batch:
+        try:
+            if isinstance(close, pd.Series):
+                if len(batch) != 1:
+                    raise ValueError("single-series response for a multi-ticker batch")
+                c = close.dropna()
+                v = volume.reindex(c.index)
+            elif isinstance(close.columns, pd.MultiIndex):
+                c = close[ticker].dropna()
+                v = volume[ticker].reindex(c.index)
+            elif ticker in close.columns:
+                c = close[ticker].dropna()
+                v = volume[ticker].reindex(c.index)
+            elif len(batch) == 1 and "Close" in data.columns:
+                c = data["Close"].dropna()
+                v = data["Volume"].reindex(c.index)
+            else:
+                continue
+            if len(c) < 130:
+                continue
+            price = c.iloc[-1]
+            high_52 = c.tail(252).max()
+            low_52 = c.tail(252).min()
+            rows.append(
+                dict(
+                    ticker=ticker,
+                    price=price,
+                    ret_5=price / c.iloc[-6] - 1,
+                    ret_20=price / c.iloc[-21] - 1,
+                    ret_60=price / c.iloc[-61] - 1,
+                    ret_120=price / c.iloc[-121] - 1,
+                    drawdown_52=price / high_52 - 1,
+                    off_low_52=price / low_52 - 1,
+                    ma20=price / c.tail(20).mean() - 1,
+                    ma50=price / c.tail(50).mean() - 1,
+                    vol_ratio=v.tail(10).mean() / (v.tail(60).mean() + 1e-9),
+                    dollar_volume=(c.tail(20) * v.tail(20)).mean(),
+                    volatility=c.pct_change().tail(60).std() * math.sqrt(252),
+                )
+            )
+        except Exception as exc:
+            print(f"Price metric skip {ticker}: {exc}", flush=True)
+    return rows
+
+
+def download_prices(batch, label):
+    return retry_yahoo(
+        lambda: yf.download(
+            batch,
+            period="1y",
+            interval="1d",
+            group_by="column",
+            auto_adjust=True,
+            threads=False,
+            progress=False,
+            timeout=30,
+        ),
+        label,
+        request_units=len(batch),
+        validator=valid_price_download,
+    )
+
+
 def prices(tickers):
     rows = []
-    batch_size = 20
+    request_failures = []
+    batch_size = YAHOO_PRICE_BATCH_SIZE
     for start in range(0, len(tickers), batch_size):
         batch = tickers[start : start + batch_size]
-        data = retry_yahoo(
-            lambda: yf.download(
-                batch,
-                period="1y",
-                interval="1d",
-                group_by="column",
-                auto_adjust=True,
-                threads=False,
-                progress=False,
-                timeout=30,
-            ),
-            f"prices batch {start // batch_size + 1}",
-        )
-        if data is None or data.empty:
-            print(f"Skipping failed price batch after retries: {batch}", flush=True)
-            continue
-
-        try:
-            close = data["Close"] if isinstance(data.columns, pd.MultiIndex) else data[["Close"]]
-            volume = data["Volume"] if isinstance(data.columns, pd.MultiIndex) else data[["Volume"]]
-        except Exception as exc:
-            print(f"Price batch schema failure: {batch}: {exc}", flush=True)
-            continue
-
-        for ticker in batch:
-            try:
-                if isinstance(close, pd.Series):
-                    c = close.dropna()
-                    v = volume.reindex(c.index)
+        data = download_prices(batch, f"prices batch {start // batch_size + 1}")
+        if data is not None:
+            rows.extend(price_rows_from_download(data, batch))
+        else:
+            print(
+                f"Batch failed after retries; isolating tickers one by one: {batch}",
+                flush=True,
+            )
+            for ticker in batch:
+                single = download_prices([ticker], f"price fallback {ticker}")
+                if single is None:
+                    request_failures.append(ticker)
                 else:
-                    c = close[ticker].dropna()
-                    v = volume[ticker].reindex(c.index)
-                if len(c) < 130:
-                    continue
-                price = c.iloc[-1]
-                high_52 = c.tail(252).max()
-                low_52 = c.tail(252).min()
-                rows.append(
-                    dict(
-                        ticker=ticker,
-                        price=price,
-                        ret_5=price / c.iloc[-6] - 1,
-                        ret_20=price / c.iloc[-21] - 1,
-                        ret_60=price / c.iloc[-61] - 1,
-                        ret_120=price / c.iloc[-121] - 1,
-                        drawdown_52=price / high_52 - 1,
-                        off_low_52=price / low_52 - 1,
-                        ma20=price / c.tail(20).mean() - 1,
-                        ma50=price / c.tail(50).mean() - 1,
-                        vol_ratio=v.tail(10).mean() / (v.tail(60).mean() + 1e-9),
-                        dollar_volume=(c.tail(20) * v.tail(20)).mean(),
-                        volatility=c.pct_change().tail(60).std() * math.sqrt(252),
-                    )
-                )
-            except Exception as exc:
-                print(f"Price metric skip {ticker}: {exc}", flush=True)
+                    rows.extend(price_rows_from_download(single, [ticker]))
 
         if (start // batch_size + 1) % 10 == 0:
             print(
                 f"Price progress: {min(start + batch_size, len(tickers))}/{len(tickers)}",
                 flush=True,
             )
-    return pd.DataFrame(rows)
+    return pd.DataFrame(rows), request_failures
 
 
 def benchmark_metrics():
@@ -311,6 +366,7 @@ def benchmark_metrics():
             timeout=30,
         ),
         "SPY benchmark",
+        validator=valid_price_download,
     )
     if data is None or data.empty:
         raise RuntimeError("SPY benchmark unavailable; refusing incomplete relative-strength screen")
@@ -479,8 +535,17 @@ def main():
     u.to_csv(OUT / "01_starting_universe.csv", index=False)
     print(f"Starting universe: {len(u)}", flush=True)
 
-    p = prices(u.ticker.tolist())
+    p, price_request_failures = prices(u.ticker.tolist())
     p.to_csv(OUT / "02_price_metrics.csv", index=False)
+    pd.DataFrame({"ticker": price_request_failures}).to_csv(
+        OUT / "02_price_request_failures.csv", index=False
+    )
+    failure_rate = len(price_request_failures) / max(len(u), 1)
+    if failure_rate > MAX_PRICE_REQUEST_FAILURE_RATE:
+        raise RuntimeError(
+            f"Price request failure rate {failure_rate:.2%} exceeds "
+            f"{MAX_PRICE_REQUEST_FAILURE_RATE:.2%}; refusing incomplete screen"
+        )
     if p.empty or not {"ticker", "price", "dollar_volume"}.issubset(p.columns):
         raise RuntimeError("Price stage produced insufficient schema; refusing incomplete screen")
 
@@ -544,6 +609,8 @@ def main():
     audit = {
         "starting_universe": len(u),
         "price_eligible": len(p),
+        "price_request_failures": len(price_request_failures),
+        "price_request_failure_rate": failure_rate,
         "investable_before_marketcap": len(investable),
         "fundamentals_requested": len(f),
         "fundamentals_cache_reused_fresh": cache_reused,
@@ -557,6 +624,7 @@ def main():
         "semifinalists": len(semis),
         "quant_candidates": len(candidates),
         "yahoo_rate_cap_per_minute": YAHOO_RATE_CAP_PER_MINUTE,
+        "yahoo_price_batch_size": YAHOO_PRICE_BATCH_SIZE,
         "spy_benchmark": benchmark,
         "three_lenses": list(LENSES),
         "market_wide_catalyst_claimed": False,
