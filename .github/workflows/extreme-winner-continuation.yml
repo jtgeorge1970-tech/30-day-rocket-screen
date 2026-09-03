@@ -1,0 +1,54 @@
+name: Engine 3 Extreme-Winner Continuation
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex/extreme-winner-continuation
+    paths:
+      - 'engine3/**'
+      - '.github/workflows/extreme-winner-continuation.yml'
+
+jobs:
+  test-and-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run Engine 3 unit tests
+        working-directory: engine3
+        run: python -m unittest discover -s tests -v
+      - name: Run full 5,000+ listed-universe Engine 3 screen
+        working-directory: engine3
+        run: python extreme_winner_engine.py
+      - name: Validate every live-screen invariant
+        working-directory: engine3
+        run: python validate_engine.py
+      - name: Run strict 30-session extreme-winner cohort study
+        working-directory: engine3
+        run: python winner_continuation_study.py
+      - name: Validate every cohort-study invariant
+        working-directory: engine3
+        run: python validate_study.py
+      - name: Upload Engine 3 live-screen audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine3-extreme-winner-screen
+          path: engine3/output/
+          if-no-files-found: warn
+      - name: Upload Engine 3 cohort audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine3-winner-cohort-study
+          path: engine3/study_output/
+          if-no-files-found: warn
