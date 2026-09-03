@@ -103,6 +103,35 @@ Each Top 3 stock must receive a sourced review no more than 24 hours old:
 One failed or unresolved manual gate is a veto. `ENTRY_READY` is allowed only
 when every gate is `PASS` and `final_status` is `APPROVED`.
 
+## Standardized finalist visual packet — mandatory
+
+Every Top 3-5 finalist must receive a current multi-timeframe visual review
+before promotion to `WATCH` or `ENTRY_READY`. This is a confirmation layer and
+does not replace the automated gates or sourced current verification.
+
+Review, when available:
+
+- 1-day, 5-day, 1-month, 1-year and 5-year charts;
+- current last price, bid, ask, spread and volume, with regular-session and
+  extended-hours data clearly separated;
+- candlestick/OHLC, volume and VWAP views, preferred over line charts for
+  opening-range, reclaim, retest and higher-low confirmation;
+- current earnings history, key financial statistics, ownership and analyst
+  consensus as supporting evidence only.
+
+Record support/resistance, gap retention, higher highs/lows, reclaim or failed
+reclaim, close location, volume confirmation, extension, volatility,
+liquidity/spread and remaining practical upside. Analyst ratings and attractive
+charts cannot override a failed catalyst, business, supply/dilution, liquidity,
+volatility, market-regime, downside or entry-geometry gate. If required visual
+or intraday evidence is unavailable, the gate is `UNRESOLVED`, never assumed
+to pass.
+
+Retrieve the packet automatically when reliable data is available. Request
+standardized screenshots only for the small finalist group when necessary;
+never request them for the full universe. Preserve the reviewed packet or its
+extracted observations in the audit record.
+
 ## Entry and exit research
 
 - Historical measurement entry is the next session's open after the event.
