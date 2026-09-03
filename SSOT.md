@@ -93,6 +93,23 @@ Catalyst/Story judges strength, freshness, credibility, timing and potential nex
 
 Calculate all Top 3 under the same evidence standard. Highest Crown Jewel score becomes the preferred single-stock candidate for the ~$300 30-day experiment, subject to the Market Regime Gate and final execution check. Larger diversified allocations may separately use Top 3/broader finalists but do not change the measured single-stock experiment unless explicitly changed.
 
+## Standardized finalist visual verification — mandatory for Engines 1, 2 and 3
+After a stock survives the quantitative and current-research funnel into the final Top 3-5, inspect a standardized current visual packet before it may be promoted to `WATCH`, `ENTRY_READY`, or a final purchase decision. This is a confirmation layer only; it never replaces the full-universe screen, current-source research, or any mandatory gate.
+
+The packet must include, when available:
+
+- 1-day, 5-day, 1-month, 1-year and 5-year price charts;
+- current regular-session or clearly labeled extended-hours last price, bid, ask, spread and volume;
+- candlestick/OHLC, volume and VWAP views when available, preferred over line charts for entry confirmation;
+- current earnings history and the latest earnings surprise;
+- current key financial statistics, ownership and analyst consensus as supporting evidence only.
+
+For each finalist, explicitly record what the visual evidence shows about support and resistance, gap retention, higher highs/lows, reclaim or failed reclaim, closing strength, volume confirmation, extension, volatility, liquidity/spread and practical room to the +10% objective. Separate regular-session evidence from premarket/after-hours quotes. A stale, crossed, wide or extended-hours quote may not be treated as an executable entry.
+
+Charts and analyst ratings cannot override a failed catalyst, business-quality, financing/dilution, liquidity, volatility, market-regime, downside or entry-geometry gate. A visually attractive pattern is not a buy signal by itself. If required visual or intraday evidence is unavailable, mark that gate `UNRESOLVED`; never assume it passed.
+
+Retrieve this packet automatically when reliable data is available. Request standardized screenshots only for the small finalist group when the required views cannot be retrieved reliably. Do not request screenshots for the full universe or manufacture a daily finalist. Preserve the reviewed packet or extracted observations in the run audit so the final decision can be reproduced.
+
 ## Market Regime Gate — mandatory before new capital
 Stock selection and market exposure are separate decisions. A strong individual Rocket is not sufficient reason to deploy new long capital when the broad market is entering a materially hostile regime.
 
