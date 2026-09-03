@@ -21,3 +21,14 @@ Actual holdings are private runtime input and must not be committed. Copy
 `active_positions.template.csv` to `private/active_positions.csv`, or set
 `ROCKET_ACTIVE_POSITIONS_FILE` to a private path. When supplied, every holding
 is included in the mandatory output audit regardless of candidate rank.
+
+The separate strict 30-session cohort study is governed by
+`FINGERPRINT_STUDY_SSOT.md` and runs with:
+
+```bash
+python loser_cohort_study.py
+python validate_cohort_study.py
+```
+
+It measures major-loss events and their subsequent paths. It never creates a
+buy recommendation, and zero current research candidates is a valid result.
