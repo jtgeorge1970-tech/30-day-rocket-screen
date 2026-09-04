@@ -65,3 +65,36 @@ Market-close snapshot from Alpaca/IEX:
 - Engine 3 baseline Top 5 close snapshot: CRM 264.42, HALO 110.735, SPT 11.365, IMXI 14.45, NESR 34.50. The locked engine artifact still has CRM/HALO/SPT as Top 3 requiring verification and zero ENTRY_READY names.
 
 Day 1 is therefore recorded as an engine-validation day, not as a fabricated five-qualified-stock result.
+
+
+## LOCKED FIVE-STOCK WATCHLIST — DO NOT SUBSTITUTE
+Effective for the current five-business-day validation:
+- Engine 1 / Original Rocket: PGEN
+- Engine 2 / Quality-Loser Reversal: BWXT, CRSR
+- Engine 3 / Extreme-Winner Continuation: HALO, CRM
+
+These five names are the validation cohort. Do not replace them with raw-pool, intermediate, Top-5, or newly appearing engine names during this five-day watch. Do not ask the user to recover these names again. A stock can leave this cohort only by a documented FAIL under the locked logic below or by an explicit user-approved SSOT change.
+
+## LOCKED FIVE-DAY PASS/FAIL LOGIC
+
+### PGEN — Engine 1 / Original Rocket
+PASS/CONTINUE when the thesis remains intact, relative strength and price structure remain healthy, catalyst/story remains credible, no new material dilution/binary/company risk appears, and practical room to the +10% objective remains.
+FAIL when there is material thesis/catalyst deterioration, meaningful technical breakdown, new material dilution/financing/binary risk, or the setup becomes so extended/damaged that realistic +10% runway or acceptable downside geometry is lost.
+
+### BWXT and CRSR — Engine 2 / Quality-Loser Reversal
+Purpose of the watch: prove the bottom/reversal is real rather than a one-day bounce.
+PASS/CONTINUE when support holds, stabilization persists, higher-low/reclaim behavior remains constructive, there is no fresh structural breakdown, adequate resistance headroom remains, volatility/stop geometry remains acceptable, and business/catalyst gates remain intact. Sideways consolidation or a modest rise can pass; the stock does not need to rocket during the watch.
+FAIL when a fresh low or material support break invalidates the bottom, a reclaim fails materially, the reversal structure rolls over, resistance headroom becomes inadequate, volatility makes stop geometry unacceptable, or a business/catalyst/supply gate fails.
+
+### HALO and CRM — Engine 3 / Extreme-Winner Continuation
+Purpose of the watch: prove the explosive move can retain gains and continue rather than round-trip.
+PASS/CONTINUE when the event/breakout move is substantially retained, short-term trend/support remains intact, consolidation is healthy, demand/price-volume behavior remains constructive, extension/volatility remains acceptable, and practical upside runway remains.
+FAIL when the stock materially gives back/round-trips the event move, breaks the post-event structure or key short-term support/trend, shows failed continuation with adverse price/volume behavior, becomes excessively extended/volatile for acceptable downside geometry, or catalyst/fundamental/supply risk materially deteriorates.
+
+### Universal interpretation rule
+An ordinary red day is NOT an automatic FAIL. A green day is NOT an automatic PASS. Status is determined by the applicable engine's structural, fundamental, catalyst, liquidity/volatility and entry-geometry gates. Every FAIL must name the exact violated gate and supporting evidence. If evidence is insufficient, status must be UNVERIFIED/UNRESOLVED — never guessed.
+
+## Reporting format for each validation day
+Report exactly:
+Ticker | Engine | Prior status | Current status (PASS/FAIL/UNVERIFIED) | Exact reason | Evidence/source verified.
+Preserve the result daily so Day 1 through Day 5 persistence can be audited.
