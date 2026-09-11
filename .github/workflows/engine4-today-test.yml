@@ -34,37 +34,59 @@ jobs:
           python engine4_pipeline.py final --date "$TODAY"
           echo '=== TIMELINE ==='
           cat output/engine4/timeline.txt
+          echo '=== HONEST FUNNEL COUNTS ==='
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          pre=json.loads(Path('output/engine4/prescreen_report.json').read_text())
+          deep=json.loads(Path('output/engine4/deep_ranked.json').read_text())
+          top=json.loads(Path('output/engine4/top25_frozen.json').read_text())
+          print('baseline_eligible', pre['baseline_eligible'])
+          print('trustworthy_observed', pre['trustworthy_observed'])
+          print('natural_broad_qualified', pre['broad_qualified'])
+          print('strict_activity_count', pre['strict_activity_count'])
+          print('retained_by_top100_cap', pre['retained_by_cap'])
+          print('selected_for_deep_top60_cap', deep['selected_for_deep'])
+          print('actually_analyzed', deep['analyzed_count'])
+          print('score70_count', deep['score70_count'])
+          print('b_grade_count', deep['b_grade_count'])
+          print('strict_a_grade_count', deep['a_grade_count'])
+          print('frozen_final_scan_count', top['actual_count'])
+          PY
           echo '=== TOP 10 FINALISTS ==='
           python - <<'PY'
           import json
           from pathlib import Path
           p=json.loads(Path('output/engine4/top25_frozen.json').read_text())
-          print('actual_count', p['actual_count'])
-          print('strict_a_grade_count', p['a_grade_count'])
           for row in p['candidates'][:10]:
               print(f"#{row['rank']} {row['ticker']} | score={row.get('score')} | grade={row.get('premarket_grade')} | failures={row.get('premarket_failures','')}")
           PY
           echo '=== FINAL RESULT ==='
           cat output/engine4/final_alert.txt
-      - name: Verify all stages and reporting artifacts
+      - name: Verify all stages and honest reporting artifacts
         shell: bash
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          pre=json.loads(Path('output/engine4/prescreen_survivors.json').read_text())
+          pre=json.loads(Path('output/engine4/prescreen_report.json').read_text())
           deep=json.loads(Path('output/engine4/deep_ranked.json').read_text())
           top=json.loads(Path('output/engine4/top25_frozen.json').read_text())
           final=json.loads(Path('output/engine4/final_signal.json').read_text())
           tl=json.loads(Path('output/engine4/timeline.json').read_text())
-          assert pre['survivor_count'] > 0
-          assert deep['analyzed_count'] > 0
+          assert pre['broad_qualified'] > 0
+          assert pre['retained_by_cap'] <= pre['broad_qualified']
+          assert pre['retained_by_cap'] <= pre['broad_pool_cap']
+          assert deep['selected_for_deep'] <= deep['deep_pool_cap']
+          assert deep['analyzed_count'] <= deep['selected_for_deep']
+          assert deep['score70_count'] <= deep['analyzed_count']
           assert 0 < top['actual_count'] <= 25
+          assert top['actual_count'] <= top['refresh_analyzed_count']
           assert len(top['candidates'][:10]) > 0
           assert final['status'] in {'BUY','NO_TRADE'}
           stages=[e['stage'] for e in tl['events']]
           required=['PRE-SCREEN','DEEP 100-POINT ANALYSIS','09:18 REFRESH + RANKING','TOP-25 FREEZE','FINAL 09:45 LIVE CONFIRMATION']
           for s in required:
               assert s in stages, s
-          print('ENGINE4_TODAY_FULL_CYCLE_TEST_PASS')
+          print('ENGINE4_TODAY_HONEST_FULL_CYCLE_TEST_PASS')
           PY
