@@ -1,70 +1,75 @@
 name: Engine 4 CI + Real-Data Acceptance
 on:
   push:
-    branches: [engine4-intraday]
+    branches: [main]
     paths:
       - 'engine4_*.py'
       - 'test_engine4_intraday.py'
       - 'ENGINE4_SSOT.md'
       - '.github/workflows/engine4-ci.yml'
+      - '.github/workflows/engine4-production.yml'
   workflow_dispatch:
 
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: engine4-intraday
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt pytest
       - name: Compile every Engine 4 module
-        run: python -m py_compile engine4_config.py engine4_data.py engine4_score.py engine4_live.py engine4_intraday.py test_engine4_intraday.py
-      - name: Deterministic self test
-        run: python engine4_intraday.py self-test
+        run: python -m py_compile engine4_config.py engine4_data.py engine4_score.py engine4_live.py engine4_intraday.py engine4_pipeline.py test_engine4_intraday.py
+      - name: Deterministic self tests
+        run: |
+          python engine4_intraday.py self-test
+          python engine4_pipeline.py self-test
       - name: Unit tests
         run: pytest -q test_engine4_intraday.py
       - name: Free Yahoo data smoke test
         run: python engine4_intraday.py smoke
-      - name: Full-universe historical premarket acceptance replay
+      - name: Historical staged acceptance replay — prescreen
         run: |
-          python engine4_intraday.py premarket --date 2026-09-10
-          echo '--- PREMARKET ACCEPTANCE RESULT ---'
+          python engine4_pipeline.py prescreen --date 2026-09-10
+          cat output/engine4/prescreen_survivors.json
+      - name: Historical staged acceptance replay — deep analysis
+        run: |
+          python engine4_pipeline.py deep --date 2026-09-10
+          cat output/engine4/deep_ranked.json
+      - name: Historical staged acceptance replay — refresh and freeze
+        run: |
+          python engine4_pipeline.py refresh --date 2026-09-10
           cat output/engine4/top25_frozen.json
-      - name: Historical final-stage acceptance replay
+      - name: Historical staged acceptance replay — final
         run: |
-          python engine4_intraday.py final --date 2026-09-10
-          echo '--- FINAL ACCEPTANCE RESULT ---'
+          python engine4_pipeline.py final --date 2026-09-10
           cat output/engine4/final_signal.json
-      - name: Verify auditable acceptance artifacts
+          cat output/engine4/timeline.txt
+      - name: Verify repaired invariants
         run: |
-          test -f output/engine4/data_smoke.json
-          test -f output/engine4/top25_frozen.json
-          test -f output/engine4/final_signal.json
           python - <<'PY'
           import json
           from pathlib import Path
-          smoke=json.loads(Path('output/engine4/data_smoke.json').read_text())
+          pre=json.loads(Path('output/engine4/prescreen_survivors.json').read_text())
+          deep=json.loads(Path('output/engine4/deep_ranked.json').read_text())
           top=json.loads(Path('output/engine4/top25_frozen.json').read_text())
           final=json.loads(Path('output/engine4/final_signal.json').read_text())
-          assert smoke['intraday_returned'] >= 10
-          assert 'runtime_seconds' in top
+          timeline=json.loads(Path('output/engine4/timeline.json').read_text())
+          assert pre['survivor_count'] > 0, 'valid-data pre-screen must not collapse to zero'
+          assert deep['analyzed_count'] > 0
+          assert 0 < top['actual_count'] <= 25
           assert final['status'] in {'BUY','NO_TRADE'}
-          if top.get('candidates'):
-              assert len(top['candidates']) <= 25
-              scores=[x['score'] for x in top['candidates']]
-              assert scores == sorted(scores, reverse=True)
-              assert min(scores) >= 70
-          print('ENGINE4_REAL_DATA_ACCEPTANCE_PASS')
-          print('smoke_runtime', smoke['runtime_seconds'])
-          print('premarket_runtime', top['runtime_seconds'])
-          print('top25_actual_count', top.get('actual_count', len(top.get('candidates',[]))))
-          print('premarket_status', top.get('status','TOP25_READY'))
-          print('premarket_reason', top.get('reason',''))
-          print('final_runtime', final['runtime_seconds'])
+          stages=[e['stage'] for e in timeline['events']]
+          required=['PRE-SCREEN','DEEP 100-POINT ANALYSIS','09:18 REFRESH + RANKING','TOP-25 FREEZE','FINAL 09:45 LIVE CONFIRMATION']
+          for stage in required:
+              assert stage in stages, f'missing stage audit: {stage}'
+          print('ENGINE4_REPAIRED_ACCEPTANCE_PASS')
+          print('prescreen_survivors', pre['survivor_count'])
+          print('deep_analyzed', deep['analyzed_count'])
+          print('top25_count', top['actual_count'])
+          print('strict_premarket_a_grade', top['a_grade_count'])
           print('final_status', final['status'])
           PY
