@@ -1,0 +1,70 @@
+name: Engine 4 Today Full-Cycle Test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/engine4-today-test.yml'
+  workflow_dispatch:
+
+jobs:
+  today-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run complete Engine 4 test using today's ET market date
+        shell: bash
+        run: |
+          set -euo pipefail
+          TODAY=$(TZ=America/New_York date +%F)
+          echo "TODAY_ET=${TODAY}"
+          echo '=== STAGE 1 PRE-SCREEN ==='
+          python engine4_pipeline.py prescreen --date "$TODAY"
+          echo '=== STAGE 2 DEEP 100-POINT ANALYSIS ==='
+          python engine4_pipeline.py deep --date "$TODAY"
+          echo '=== STAGE 3 09:18 REFRESH + RANK + FREEZE ==='
+          python engine4_pipeline.py refresh --date "$TODAY"
+          echo '=== STAGE 4 FINAL LIVE CONFIRMATION ==='
+          python engine4_pipeline.py final --date "$TODAY"
+          echo '=== TIMELINE ==='
+          cat output/engine4/timeline.txt
+          echo '=== TOP 10 FINALISTS ==='
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('output/engine4/top25_frozen.json').read_text())
+          print('actual_count', p['actual_count'])
+          print('strict_a_grade_count', p['a_grade_count'])
+          for row in p['candidates'][:10]:
+              print(f"#{row['rank']} {row['ticker']} | score={row.get('score')} | grade={row.get('premarket_grade')} | failures={row.get('premarket_failures','')}")
+          PY
+          echo '=== FINAL RESULT ==='
+          cat output/engine4/final_alert.txt
+      - name: Verify all stages and reporting artifacts
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          pre=json.loads(Path('output/engine4/prescreen_survivors.json').read_text())
+          deep=json.loads(Path('output/engine4/deep_ranked.json').read_text())
+          top=json.loads(Path('output/engine4/top25_frozen.json').read_text())
+          final=json.loads(Path('output/engine4/final_signal.json').read_text())
+          tl=json.loads(Path('output/engine4/timeline.json').read_text())
+          assert pre['survivor_count'] > 0
+          assert deep['analyzed_count'] > 0
+          assert 0 < top['actual_count'] <= 25
+          assert len(top['candidates'][:10]) > 0
+          assert final['status'] in {'BUY','NO_TRADE'}
+          stages=[e['stage'] for e in tl['events']]
+          required=['PRE-SCREEN','DEEP 100-POINT ANALYSIS','09:18 REFRESH + RANKING','TOP-25 FREEZE','FINAL 09:45 LIVE CONFIRMATION']
+          for s in required:
+              assert s in stages, s
+          print('ENGINE4_TODAY_FULL_CYCLE_TEST_PASS')
+          PY
