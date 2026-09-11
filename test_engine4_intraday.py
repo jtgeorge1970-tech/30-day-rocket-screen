@@ -56,7 +56,7 @@ def test_no_catalyst_cannot_receive_perfect_score():
 
 def make_opening_frame():
     idx = pd.date_range("2026-09-10 09:30", periods=15, freq="1min", tz="America/New_York")
-    close = [10.00,10.10,10.20,10.25,10.30,10.27,10.25,10.26,10.28,10.29,10.31,10.33,10.35,10.38,10.40]
+    close = [10.00,10.04,10.08,10.12,10.16,10.14,10.13,10.14,10.15,10.16,10.17,10.18,10.19,10.20,10.21]
     high = [x + 0.03 for x in close]
     low = [x - 0.03 for x in close]
     volume = [1000,950,900,850,800,500,450,420,400,380,450,500,650,800,1000]
@@ -68,13 +68,13 @@ def test_vwap_math():
     assert math.isclose(live.vwap(frame), 10.0, rel_tol=1e-9)
 
 
-def test_live_structure_builds_defined_stop_and_rr(monkeypatch):
-    monkeypatch.setattr(live, "quote_spread", lambda ticker: (10.39, 10.40, 0.0962))
+def test_live_full_a_plus_path_passes(monkeypatch):
+    monkeypatch.setattr(live, "quote_spread", lambda ticker: (10.20, 10.21, 0.0979))
     frame = make_opening_frame()
     row = pd.Series({"sector":"Technology","resistance_price":11.50})
     market = {
-        "SPY_ret":0.10,"QQQ_ret":0.15,"XLK_ret":0.10,
-        "SPY_last5_ret":0.05,"QQQ_last5_ret":0.05,
+        "SPY_ret":0.05,"QQQ_ret":0.08,"XLK_ret":0.05,
+        "SPY_last5_ret":0.02,"QQQ_last5_ret":0.03,
     }
     metrics = live.opening_structure("TEST", frame, row, market, pd.Timestamp("2026-09-10").date())
     assert metrics["data_ok"]
@@ -82,6 +82,9 @@ def test_live_structure_builds_defined_stop_and_rr(monkeypatch):
     assert metrics["initial_stop"] < metrics["entry_trigger"]
     assert metrics["reward_risk"] >= 2.0
     assert metrics["relative_strength_market_pct"] > 0
+    assert metrics["relative_strength_sector_pct"] > 0
+    assert metrics["failures"] == []
+    assert metrics["pass"] is True
 
 
 def test_live_fails_wide_spread(monkeypatch):
@@ -89,11 +92,24 @@ def test_live_fails_wide_spread(monkeypatch):
     frame = make_opening_frame()
     row = pd.Series({"sector":"Technology","resistance_price":11.50})
     market = {
-        "SPY_ret":0.10,"QQQ_ret":0.15,"XLK_ret":0.10,
-        "SPY_last5_ret":0.05,"QQQ_last5_ret":0.05,
+        "SPY_ret":0.05,"QQQ_ret":0.08,"XLK_ret":0.05,
+        "SPY_last5_ret":0.02,"QQQ_last5_ret":0.03,
     }
     metrics = live.opening_structure("TEST", frame, row, market, pd.Timestamp("2026-09-10").date())
     assert "spread" in metrics["failures"]
+    assert not metrics["pass"]
+
+
+def test_live_fails_hard_market_reversal(monkeypatch):
+    monkeypatch.setattr(live, "quote_spread", lambda ticker: (10.20, 10.21, 0.0979))
+    frame = make_opening_frame()
+    row = pd.Series({"sector":"Technology","resistance_price":11.50})
+    market = {
+        "SPY_ret":-0.80,"QQQ_ret":-0.90,"XLK_ret":-0.75,
+        "SPY_last5_ret":-0.20,"QQQ_last5_ret":-0.25,
+    }
+    metrics = live.opening_structure("TEST", frame, row, market, pd.Timestamp("2026-09-10").date())
+    assert "broad_market_hard_reversal" in metrics["failures"]
     assert not metrics["pass"]
 
 
