@@ -148,8 +148,9 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
         message = (
             f"BUY {symbol} NOW\n"
             f"Live price: ${metrics['current_live_price']:.2f}\n"
-            f"Entry/trigger: ${metrics['entry_trigger']:.2f}\n"
-            f"Maximum allowed buy price: ${metrics['max_allowed_buy_price']:.2f}\n"
+            f"Breakout trigger: ${metrics['entry_trigger']:.2f}\n"
+            f"ORDER: BUY LIMIT — do not pay above ${metrics['max_allowed_buy_price']:.2f}\n"
+            "Why this order: the breakout is already confirmed, so a limit order now prevents excess chase/slippage.\n"
             f"Initial stop: ${metrics['initial_stop']:.2f}\n"
             f"First management level: ${metrics['first_target']:.2f}\n"
             "Trailing stop: activate only after +1R and a confirmed higher low forms above entry; then trail just below the newest confirmed higher-low/VWAP support and never loosen the stop.\n"
@@ -160,6 +161,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             "reason": "live_trigger_confirmed",
             "ticker": symbol,
             "message": message,
+            "order_instruction": "BUY_LIMIT_NOW",
             "live_price": metrics["current_live_price"],
             "entry_trigger": metrics["entry_trigger"],
             "max_allowed_buy_price": metrics["max_allowed_buy_price"],
@@ -174,16 +176,19 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
         _, row, metrics = watches[0]
         symbol = str(row.ticker)
         message = (
-            f"WATCH {symbol} — BUY ONLY ABOVE ${metrics['entry_trigger']:.2f}\n"
+            f"WATCH {symbol} — DO NOT BUY YET\n"
             f"Current live price: ${metrics['current_live_price']:.2f}\n"
-            f"Maximum allowed buy price after trigger: ${metrics['max_allowed_buy_price']:.2f}\n"
-            "Status: setup remains valid, but breakout trigger has NOT been reached. Do not buy yet."
+            f"Breakout trigger: ${metrics['entry_trigger']:.2f}\n"
+            f"IF STAGING AN ORDER: BUY STOP-LIMIT — stop ${metrics['entry_trigger']:.2f}, limit ${metrics['max_allowed_buy_price']:.2f}\n"
+            "DO NOT use a plain BUY LIMIT at the trigger while price is below it — that could fill early before the breakout confirms.\n"
+            "Status: setup remains valid, but breakout trigger has NOT been reached."
         )
         return write_final({
             "status": "WATCH",
             "reason": "trigger_not_reached",
             "ticker": symbol,
             "message": message,
+            "order_instruction": "BUY_STOP_LIMIT_IF_STAGING",
             "live_price": metrics["current_live_price"],
             "entry_trigger": metrics["entry_trigger"],
             "max_allowed_buy_price": metrics["max_allowed_buy_price"],
@@ -197,7 +202,8 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             "status": "NO_TRADE",
             "reason": "entry_missed",
             "ticker": str(row.ticker),
-            "message": "NO TRADE — entry missed / breakout failed.",
+            "message": "NO TRADE — entry missed / breakout failed. DO NOT PLACE AN ORDER.",
+            "order_instruction": "NO_ORDER",
             "live_price": metrics.get("current_live_price"),
             "entry_trigger": metrics.get("entry_trigger"),
             "runtime_seconds": round(time.monotonic() - started, 3),
@@ -206,6 +212,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
     return write_final({
         "status": "NO_TRADE",
         "reason": "no_a_plus",
-        "message": "NO TRADE — no A+ setup.",
+        "message": "NO TRADE — no A+ setup. DO NOT PLACE AN ORDER.",
+        "order_instruction": "NO_ORDER",
         "runtime_seconds": round(time.monotonic() - started, 3),
     })
