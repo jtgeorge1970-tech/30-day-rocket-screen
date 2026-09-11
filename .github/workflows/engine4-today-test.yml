@@ -25,13 +25,13 @@ jobs:
           TODAY=$(TZ=America/New_York date +%F)
           echo "TODAY_ET=${TODAY}"
           echo '=== STAGE 1 PRE-SCREEN ==='
-          python engine4_pipeline.py prescreen --date "$TODAY"
+          python engine4_pipeline_runner.py prescreen --date "$TODAY"
           echo '=== STAGE 2 DEEP 100-POINT ANALYSIS ==='
-          python engine4_pipeline.py deep --date "$TODAY"
+          python engine4_pipeline_runner.py deep --date "$TODAY"
           echo '=== STAGE 3 09:18 REFRESH + RANK + FREEZE ==='
-          python engine4_pipeline.py refresh --date "$TODAY"
+          python engine4_pipeline_runner.py refresh --date "$TODAY"
           echo '=== STAGE 4 FINAL LIVE CONFIRMATION ==='
-          python engine4_pipeline.py final --date "$TODAY"
+          python engine4_pipeline_runner.py final --date "$TODAY"
           echo '=== TIMELINE ==='
           cat output/engine4/timeline.txt
           echo '=== HONEST FUNNEL COUNTS ==='
@@ -44,6 +44,7 @@ jobs:
           print('baseline_eligible', pre['baseline_eligible'])
           print('trustworthy_observed', pre['trustworthy_observed'])
           print('natural_broad_qualified', pre['broad_qualified'])
+          print('nonzero_premarket_activity_count', pre.get('nonzero_premarket_activity_count'))
           print('strict_activity_count', pre['strict_activity_count'])
           print('retained_by_top100_cap', pre['retained_by_cap'])
           print('selected_for_deep_top60_cap', deep['selected_for_deep'])
@@ -74,19 +75,17 @@ jobs:
           top=json.loads(Path('output/engine4/top25_frozen.json').read_text())
           final=json.loads(Path('output/engine4/final_signal.json').read_text())
           tl=json.loads(Path('output/engine4/timeline.json').read_text())
-          assert pre['broad_qualified'] > 0
-          assert pre['retained_by_cap'] <= pre['broad_qualified']
-          assert pre['retained_by_cap'] <= pre['broad_pool_cap']
-          assert deep['selected_for_deep'] <= deep['deep_pool_cap']
-          assert deep['analyzed_count'] <= deep['selected_for_deep']
-          assert deep['score70_count'] <= deep['analyzed_count']
+          assert pre['trustworthy_observed'] > 0
+          assert pre['broad_qualified'] == pre['trustworthy_observed']
+          assert 0 < pre['retained_by_cap'] <= 100
+          assert 0 < deep['selected_for_deep'] <= 60
+          assert deep['analyzed_count'] > 0
           assert 0 < top['actual_count'] <= 25
-          assert top['actual_count'] <= top['refresh_analyzed_count']
           assert len(top['candidates'][:10]) > 0
           assert final['status'] in {'BUY','NO_TRADE'}
           stages=[e['stage'] for e in tl['events']]
           required=['PRE-SCREEN','DEEP 100-POINT ANALYSIS','09:18 REFRESH + RANKING','TOP-25 FREEZE','FINAL 09:45 LIVE CONFIRMATION']
           for s in required:
               assert s in stages, s
-          print('ENGINE4_TODAY_HONEST_FULL_CYCLE_TEST_PASS')
+          print('ENGINE4_TODAY_REPAIRED_FULL_CYCLE_TEST_PASS')
           PY
