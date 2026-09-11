@@ -1,49 +1,109 @@
-import json
+import math
 from pathlib import Path
-import pandas as pd
-import numpy as np
 
+import numpy as np
+import pandas as pd
+
+import engine4_config as cfg
 import engine4_intraday as e4
+import engine4_live as live
+import engine4_score as score
 
 
 def test_locked_constants():
-    assert e4.TOP_N == 25
-    assert e4.MIN_PRICE == 5.0
-    assert e4.MIN_MARKET_CAP == 300_000_000
-    assert e4.MIN_RR == 2.0
-    assert sum(e4.WEIGHTS.values()) == 100.0
+    assert cfg.TOP_N == 25
+    assert cfg.MIN_PRICE == 5.0
+    assert cfg.MIN_MARKET_CAP == 300_000_000.0
+    assert cfg.MIN_REWARD_RISK == 2.0
+    assert cfg.MIN_SCORE == 70.0
+    assert cfg.MAX_SPREAD_PCT == 0.60
+    assert sum(cfg.WEIGHTS.values()) == 100.0
 
 
-def test_math_helpers():
-    assert round(e4.pct(105, 100), 6) == 5.0
-    assert np.isnan(e4.pct(1, 0))
-    assert e4.clamp(-1) == 0.0
-    assert e4.clamp(2) == 1.0
+def test_premarket_score_strong_candidate():
+    row = {
+        "catalyst_quality": 1.0,
+        "premarket_rvol": 5.0,
+        "gap_pct": 6.0,
+        "avg_daily_dollar_volume": 1_000_000_000.0,
+        "resistance_room_pct": 8.0,
+        "atr_pct": 5.0,
+        "market_relative_strength_pct": 3.0,
+        "sector_relative_strength_pct": 3.0,
+        "spread_pct": 0.05,
+    }
+    total, components = score.score_candidate(row)
+    assert total > 90
+    assert abs(sum(components.values()) - total) < 0.01
+    assert set(components) == set(cfg.WEIGHTS)
+
+
+def test_no_catalyst_cannot_receive_perfect_score():
+    row = {
+        "catalyst_quality": 0.0,
+        "premarket_rvol": 6.0,
+        "gap_pct": 6.0,
+        "avg_daily_dollar_volume": 2_000_000_000.0,
+        "resistance_room_pct": 10.0,
+        "atr_pct": 6.0,
+        "market_relative_strength_pct": 4.0,
+        "sector_relative_strength_pct": 4.0,
+        "spread_pct": 0.02,
+    }
+    total, _ = score.score_candidate(row)
+    assert total <= 75.0
+
+
+def make_opening_frame():
+    idx = pd.date_range("2026-09-10 09:30", periods=15, freq="1min", tz="America/New_York")
+    close = [10.00,10.10,10.20,10.25,10.30,10.27,10.25,10.26,10.28,10.29,10.31,10.33,10.35,10.38,10.40]
+    high = [x + 0.03 for x in close]
+    low = [x - 0.03 for x in close]
+    volume = [1000,950,900,850,800,500,450,420,400,380,450,500,650,800,1000]
+    return pd.DataFrame({"Open":close,"High":high,"Low":low,"Close":close,"Volume":volume}, index=idx)
+
+
+def test_vwap_math():
+    frame = pd.DataFrame({"High":[10,11],"Low":[9,10],"Close":[9.5,10.5],"Volume":[100,100]})
+    assert math.isclose(live.vwap(frame), 10.0, rel_tol=1e-9)
+
+
+def test_live_structure_builds_defined_stop_and_rr(monkeypatch):
+    monkeypatch.setattr(live, "quote_spread", lambda ticker: (10.39, 10.40, 0.0962))
+    frame = make_opening_frame()
+    row = pd.Series({"sector":"Technology","resistance_price":11.50})
+    market = {
+        "SPY_ret":0.10,"QQQ_ret":0.15,"XLK_ret":0.10,
+        "SPY_last5_ret":0.05,"QQQ_last5_ret":0.05,
+    }
+    metrics = live.opening_structure("TEST", frame, row, market, pd.Timestamp("2026-09-10").date())
+    assert metrics["data_ok"]
+    assert metrics["entry_trigger"] > 0
+    assert metrics["initial_stop"] < metrics["entry_trigger"]
+    assert metrics["reward_risk"] >= 2.0
+    assert metrics["relative_strength_market_pct"] > 0
+
+
+def test_live_fails_wide_spread(monkeypatch):
+    monkeypatch.setattr(live, "quote_spread", lambda ticker: (10.00, 10.20, 1.98))
+    frame = make_opening_frame()
+    row = pd.Series({"sector":"Technology","resistance_price":11.50})
+    market = {
+        "SPY_ret":0.10,"QQQ_ret":0.15,"XLK_ret":0.10,
+        "SPY_last5_ret":0.05,"QQQ_last5_ret":0.05,
+    }
+    metrics = live.opening_structure("TEST", frame, row, market, pd.Timestamp("2026-09-10").date())
+    assert "spread" in metrics["failures"]
+    assert not metrics["pass"]
 
 
 def test_final_fail_closed_without_top25(tmp_path, monkeypatch):
     monkeypatch.setattr(e4, "OUT", tmp_path)
-    result = e4.final_scan()
-    assert result["action"] == "NO_TRADE"
+    result = e4.final_stage()
+    assert result["status"] == "NO_TRADE"
     assert "Top 25 unavailable" in result["message"]
+    assert (tmp_path / "final_alert.txt").exists()
 
 
-def test_score_balance_rule_formula():
-    # Sanity-check the intended score is a 100-point framework.
-    assert e4.WEIGHTS == {
-        "catalyst": 25.0,
-        "premarket_rvol": 20.0,
-        "gap_quality": 15.0,
-        "liquidity": 15.0,
-        "resistance_room": 10.0,
-        "atr": 5.0,
-        "relative_strength": 5.0,
-        "execution": 5.0,
-    }
-
-
-if __name__ == "__main__":
-    test_locked_constants()
-    test_math_helpers()
+def test_self_test():
     e4.self_test()
-    print("ENGINE4_TESTS_PASS")
