@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/engine4-today-test.yml'
       - 'engine4_pipeline_runner.py'
+      - 'engine4_pipeline_runner_guarded.py'
+      - 'engine4_final_guard.py'
       - 'engine4_free_providers.py'
       - 'engine4_score.py'
       - 'ENGINE4_SSOT.md'
@@ -23,7 +25,7 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - name: Verify free-provider health first
-        run: python engine4_pipeline_runner.py provider-smoke
+        run: python engine4_pipeline_runner_guarded.py provider-smoke
       - name: Run complete Engine 4 test using today's ET market date
         shell: bash
         run: |
@@ -31,13 +33,13 @@ jobs:
           TODAY=$(TZ=America/New_York date +%F)
           echo "TODAY_ET=${TODAY}"
           echo '=== STAGE 1 PRE-SCREEN ==='
-          python engine4_pipeline_runner.py prescreen --date "$TODAY"
+          python engine4_pipeline_runner_guarded.py prescreen --date "$TODAY"
           echo '=== STAGE 2 DEEP 100-POINT ANALYSIS ==='
-          python engine4_pipeline_runner.py deep --date "$TODAY"
+          python engine4_pipeline_runner_guarded.py deep --date "$TODAY"
           echo '=== STAGE 3 09:18 REFRESH + RANK + FREEZE ==='
-          python engine4_pipeline_runner.py refresh --date "$TODAY"
+          python engine4_pipeline_runner_guarded.py refresh --date "$TODAY"
           echo '=== STAGE 4 FINAL LIVE CONFIRMATION ==='
-          python engine4_pipeline_runner.py final --date "$TODAY"
+          python engine4_pipeline_runner_guarded.py final --date "$TODAY"
           echo '=== TIMELINE ==='
           cat output/engine4/timeline.txt
           echo '=== HONEST FUNNEL COUNTS ==='
@@ -71,7 +73,7 @@ jobs:
           PY
           echo '=== FINAL RESULT ==='
           cat output/engine4/final_alert.txt
-      - name: Verify all stages and repaired providers
+      - name: Verify all stages, providers, and live trigger guard
         shell: bash
         run: |
           python - <<'PY'
@@ -82,6 +84,7 @@ jobs:
           top=json.loads(Path('output/engine4/top25_frozen.json').read_text())
           final=json.loads(Path('output/engine4/final_signal.json').read_text())
           tl=json.loads(Path('output/engine4/timeline.json').read_text())
+          audit=json.loads(Path('output/engine4/final_live_audit.json').read_text())
           assert pre['trustworthy_observed'] > 0
           assert pre['broad_qualified'] == pre['trustworthy_observed']
           assert pre['nasdaq_premarket_enriched'] > 0, pre
@@ -100,12 +103,29 @@ jobs:
           assert all(r.get('catalyst_source') == 'Google News RSS' for r in rows)
           assert 0 < top['actual_count'] <= 25
           assert len(top['candidates'][:10]) > 0
-          assert final['status'] in {'BUY','NO_TRADE'}
+          assert final['status'] in {'BUY','WATCH','NO_TRADE'}
+          if final['status'] == 'BUY':
+              assert final['live_price'] >= final['entry_trigger'], final
+              assert final['live_price'] <= final['max_allowed_buy_price'], final
+              assert final.get('reason') == 'live_trigger_confirmed', final
+          elif final['status'] == 'WATCH':
+              assert final['live_price'] < final['entry_trigger'], final
+              assert final.get('reason') == 'trigger_not_reached', final
+          elif final.get('reason') == 'entry_missed':
+              assert final.get('message') == 'NO TRADE — entry missed / breakout failed.', final
+          for r in audit['candidates']:
+              if r.get('pass') is True and 'current_live_price' in r:
+                  assert r['current_live_price'] >= r['entry_trigger']
+                  assert r['current_live_price'] <= r['max_allowed_buy_price']
           stages=[e['stage'] for e in tl['events']]
           required=['PRE-SCREEN','DEEP 100-POINT ANALYSIS','09:18 REFRESH + RANKING','TOP-25 FREEZE','FINAL 09:45 LIVE CONFIRMATION']
           for s in required:
               assert s in stages, s
-          print('ENGINE4_PROVIDER_REPAIR_FULL_CYCLE_PASS')
+          print('ENGINE4_LIVE_TRIGGER_GUARD_FULL_CYCLE_PASS')
+          print('final_status', final['status'])
+          print('final_reason', final.get('reason'))
+          print('final_live_price', final.get('live_price'))
+          print('final_trigger', final.get('entry_trigger'))
           print('finite_spreads',finite_spreads,'of',len(rows))
           print('real_pm_vol',real_pm_vol,'of',len(rows))
           print('volume_intensity',intensity,'of',len(rows))
