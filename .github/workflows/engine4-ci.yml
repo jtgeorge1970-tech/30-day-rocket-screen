@@ -1,0 +1,30 @@
+name: Engine 4 CI
+on:
+  push:
+    branches: [engine4-intraday]
+    paths:
+      - 'engine4_intraday.py'
+      - 'test_engine4_intraday.py'
+      - 'ENGINE4_SSOT.md'
+      - '.github/workflows/engine4-ci.yml'
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: engine4-intraday
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt pytest
+      - name: Compile
+        run: python -m py_compile engine4_intraday.py test_engine4_intraday.py
+      - name: Self test
+        run: python engine4_intraday.py self-test
+      - name: Unit tests
+        run: pytest -q test_engine4_intraday.py
