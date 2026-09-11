@@ -34,7 +34,7 @@ jobs:
       - name: Historical staged acceptance replay — prescreen
         run: |
           python engine4_pipeline.py prescreen --date 2026-09-10
-          cat output/engine4/prescreen_survivors.json
+          cat output/engine4/prescreen_report.json
       - name: Historical staged acceptance replay — deep analysis
         run: |
           python engine4_pipeline.py deep --date 2026-09-10
@@ -48,28 +48,48 @@ jobs:
           python engine4_pipeline.py final --date 2026-09-10
           cat output/engine4/final_signal.json
           cat output/engine4/timeline.txt
-      - name: Verify repaired invariants
+      - name: Verify honest funnel accounting and invariants
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
-          pre=json.loads(Path('output/engine4/prescreen_survivors.json').read_text())
+          pre=json.loads(Path('output/engine4/prescreen_report.json').read_text())
           deep=json.loads(Path('output/engine4/deep_ranked.json').read_text())
           top=json.loads(Path('output/engine4/top25_frozen.json').read_text())
           final=json.loads(Path('output/engine4/final_signal.json').read_text())
           timeline=json.loads(Path('output/engine4/timeline.json').read_text())
-          assert pre['survivor_count'] > 0, 'valid-data pre-screen must not collapse to zero'
-          assert deep['analyzed_count'] > 0
+
+          assert pre['broad_qualified'] > 0
+          assert 0 < pre['retained_by_cap'] <= pre['broad_pool_cap']
+          assert pre['retained_by_cap'] <= pre['broad_qualified']
+          assert deep['selected_for_deep'] <= deep['deep_pool_cap']
+          assert deep['analyzed_count'] <= deep['selected_for_deep']
+          assert deep['score70_count'] <= deep['analyzed_count']
+          assert deep['a_grade_count'] <= deep['analyzed_count']
+          assert top['retained_by_cap'] <= top['broad_qualified']
+          assert top['refresh_analyzed_count'] <= top['selected_for_deep']
           assert 0 < top['actual_count'] <= 25
+          assert top['actual_count'] <= top['refresh_analyzed_count']
           assert final['status'] in {'BUY','NO_TRADE'}
+
           stages=[e['stage'] for e in timeline['events']]
           required=['PRE-SCREEN','DEEP 100-POINT ANALYSIS','09:18 REFRESH + RANKING','TOP-25 FREEZE','FINAL 09:45 LIVE CONFIRMATION']
           for stage in required:
               assert stage in stages, f'missing stage audit: {stage}'
-          print('ENGINE4_REPAIRED_ACCEPTANCE_PASS')
-          print('prescreen_survivors', pre['survivor_count'])
-          print('deep_analyzed', deep['analyzed_count'])
-          print('top25_count', top['actual_count'])
-          print('strict_premarket_a_grade', top['a_grade_count'])
+
+          text=Path('output/engine4/timeline.txt').read_text()
+          assert 'broad_qualified=' in text
+          assert 'retained_by_cap=' in text
+          assert 'selected_for_deep=' in text
+          assert 'score70_count=' in text
+
+          print('ENGINE4_HONEST_FUNNEL_ACCEPTANCE_PASS')
+          print('natural_broad_qualified', pre['broad_qualified'])
+          print('retained_by_top100_cap', pre['retained_by_cap'])
+          print('selected_for_deep_cap', deep['selected_for_deep'])
+          print('actually_analyzed', deep['analyzed_count'])
+          print('score70_count', deep['score70_count'])
+          print('strict_a_grade_count', deep['a_grade_count'])
+          print('final_scan_count', top['actual_count'])
           print('final_status', final['status'])
           PY
