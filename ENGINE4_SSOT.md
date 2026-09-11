@@ -1,4 +1,4 @@
-# Engine 4 — Intraday Perfect Setup SSOT v4.5
+# Engine 4 — Intraday Perfect Setup SSOT v4.6
 Locked for live trial: 2026-09-14
 
 ## Golden Rules
@@ -12,7 +12,7 @@ Engine 4 must never describe a configured ranking cap as though it were a natura
 
 The following quantities must always be labeled separately:
 - NATURAL QUALIFICATION COUNT = how many names actually met the defined criteria before a cap was applied.
-- NONZERO PREMARKET ACTIVITY COUNT = how many naturally qualified names also had non-zero premarket dollar volume reported by the data source.
+- NONZERO PREMARKET ACTIVITY COUNT = how many enriched names had actual non-zero Nasdaq premarket share volume.
 - RETAINED BY CAP = how many names were deliberately kept because the engine is configured to carry only the strongest N forward.
 - SELECTED FOR DEEP ANALYSIS = how many names were deliberately chosen for the 100-point analysis because of the configured deep-analysis cap.
 - ACTUALLY ANALYZED = how many selected names had enough trustworthy data to complete scoring.
@@ -27,8 +27,27 @@ Engine 4 is a separate long-only intraday/day-trading engine. Engines 1–3 rema
 
 A valid day may end in NO TRADE, but a healthy engine should normally produce a broad naturally-qualified population and then rank the strongest names forward. Zero naturally-qualified names with otherwise healthy price data must be investigated and cannot be casually reported as a normal trading conclusion.
 
-## Free-data rule
-Use the existing Rocket free-data stack first. Production code uses Yahoo Finance/yfinance and the existing Rocket baseline outputs. Alpaca free may be used as an independent live cross-check in ChatGPT, but Engine 4 must not require a paid data subscription. No paid source may be added without explicit user approval after a documented gap is proven.
+## Locked free-data architecture
+No paid source is required for Engine 4. Production uses the following verified no-cost sources:
+
+- Yahoo Finance / yfinance: batched broad price bars, historical bars, daily ATR/resistance inputs, SPY/QQQ/sector price context.
+- Nasdaq public quote endpoint: current bid/ask spread.
+- Nasdaq public extended-trading endpoint: actual current premarket consolidated price and premarket share volume.
+- Google News RSS: recent catalyst headlines.
+- Existing Rocket baseline outputs: investability, market cap, sector, average daily dollar volume.
+
+Alpaca free IEX may still be used as an independent ChatGPT cross-check, but Engine 4 production must not depend on a paid service.
+
+### Prohibited Yahoo dependencies
+Yahoo Ticker.info and Yahoo Ticker.news are prohibited in the production Engine 4 decision path because live testing produced repeated HTTP 401/429 failures. Yahoo extended-hours 1-minute volume is also prohibited as the source of premarket share volume because live testing showed valid prices with zero extended-hours volume.
+
+## Provider health rule
+Before the pre-screen, 09:18 refresh, and 09:45 final stage, Engine 4 must verify:
+- Nasdaq premarket endpoint returns a valid premarket price and share volume for a liquid reference symbol.
+- Nasdaq quote endpoint returns a valid bid/ask spread.
+- Google News RSS is reachable.
+
+A systemic provider outage is DATA/PIPELINE FAILURE, not a normal NO TRADE day. During deep analysis, if valid Nasdaq spreads are available for fewer than half of analyzed names, fail closed as a provider-health failure.
 
 ## Ordered daily schedule — Eastern Time
 The production workflow wakes early, then executes these stages in order. It may never run the final stage before the earlier stages complete.
@@ -57,38 +76,55 @@ Engine 4 must not rebuild or alter Engines 1–3.
 ## Stage 1 — Broad pre-screen
 The broad pre-screen exists to FIND candidates, not eliminate the day before analysis begins.
 
-For every baseline-eligible stock with trustworthy current premarket observations, calculate premarket gap, premarket volume, premarket dollar volume and activity score.
-
 ### Locked natural broad-qualification rule
-Natural broad qualification is deliberately permissive and restores the same broad criterion used before the reporting-integrity repair:
+Natural broad qualification is deliberately permissive:
 - baseline investability already passed
 - trustworthy current premarket price observation exists
 - price is valid and >= $5
 - valid prior-close reference exists
 
-A stock does NOT need non-zero Yahoo-reported premarket volume to count as naturally broad-qualified. Yahoo can return valid extended-hours prices while reporting zero volume in the 1-minute bars. Treating zero reported volume as an automatic disqualifier is a data-source regression and is prohibited.
+A stock does NOT need non-zero Yahoo-reported premarket volume to count as naturally broad-qualified. Yahoo is not used as the authoritative premarket-volume source.
 
 The NATURAL BROAD QUALIFICATION COUNT is measured and reported before any cap is applied.
 
+### Nasdaq premarket-volume enrichment
+After the broad price universe is formed, rank a generous preliminary enrichment pool using positive gap and liquidity. Enrich up to 400 names with Nasdaq's public extended-trading endpoint. For each successfully enriched name, capture:
+- consolidated premarket price
+- actual premarket share volume
+- premarket dollar volume
+- premarket high/low when available
+
+Then compute:
+
+`PREMARKET VOLUME INTENSITY % = Nasdaq premarket shares / estimated average daily shares × 100`
+
+where estimated average daily shares = average daily dollar volume / current premarket price.
+
+This is an auditable current-session activity measure. It is NOT mislabeled as historical RVOL.
+
 Separately report:
-- NONZERO PREMARKET ACTIVITY COUNT = naturally qualified names with premarket dollar volume > 0
+- NASDAQ PREMARKET ENRICHED count
+- NONZERO PREMARKET ACTIVITY COUNT
 - STRICT ACTIVITY COUNT = gap >= 0.50%, gap <= 25%, and premarket dollar volume >= $500,000
 
-Those volume/activity measures are quality and ranking signals. They are not all-or-nothing early kill switches.
+Those activity measures are ranking/quality signals, not all-or-nothing natural-qualification gates.
 
-### Locked ranking behavior
-Preserve the prior broad ranking behavior:
-1. Prefer positive movers with non-zero premarket volume.
-2. If none exist, prefer names with any non-zero premarket volume.
-3. If the data source reports zero premarket volume across the observed set, rank the trustworthy observed set rather than manufacturing a false zero-candidate day.
-4. Sort by strict-activity flag, activity score, then premarket dollar volume.
-5. Retain no more than the configured Top-100 candidate cap.
+### Locked broad ranking behavior
+Within the Nasdaq-enriched pool, sort by:
+1. strict-activity flag
+2. premarket-volume intensity
+3. objective activity score
+4. premarket dollar volume
+5. positive price gap
+
+Retain no more than the configured Top-100 candidate cap.
 
 Required output after completion:
 - actual start/completion times ET
 - baseline-eligible stock count
-- number with trustworthy observations
+- number with trustworthy price observations
 - NATURAL broad-qualified count
+- Nasdaq premarket enriched count
 - NONZERO premarket activity count
 - strict-activity count
 - RETAINED BY TOP-100 CAP count
@@ -101,7 +137,7 @@ Select up to the highest-ranked 60 retained candidates for the locked 100-point 
 
 Locked weights:
 - Catalyst quality: 25
-- Relative premarket volume: 20
+- Relative premarket volume/activity: 20
 - Premarket price/gap quality: 15
 - Liquidity/dollar volume: 15
 - Room to resistance: 10
@@ -111,11 +147,27 @@ Locked weights:
 
 Total: 100 points.
 
-Reference A-grade premarket gates remain visible and auditable:
-- identifiable positive catalyst/reason from recent news
-- premarket relative volume >= 1.5x recent premarket baseline
+### Premarket-volume scoring hierarchy
+Preferred metric, when a trustworthy historical premarket-volume baseline exists:
+- true premarket RVOL = current premarket shares / median recent comparable premarket shares
+
+Fallback metric, when historical premarket RVOL is unavailable:
+- Nasdaq premarket-volume intensity % defined above
+
+The audit output must identify which metric was used for every candidate. The fallback may never be labeled “RVOL.”
+
+For the 20-point activity component:
+- if true RVOL exists, retain the locked RVOL scoring curve
+- otherwise use premarket-volume intensity, with 10% of estimated ADV receiving the full 20 points and lower values scaling proportionally
+
+Reference strict premarket A-grade volume gate:
+- true RVOL >= 1.5x when a trustworthy historical premarket baseline exists, OR
+- Nasdaq premarket-volume intensity >= 2.0% of estimated ADV when historical premarket RVOL is unavailable
+
+Other reference A-grade gates:
+- identifiable positive catalyst/reason from recent Google News RSS headlines
 - ATR >= 1.5% of price
-- live bid/ask spread <= 0.60%
+- Nasdaq live bid/ask spread <= 0.60%
 - positive room to resistance
 - score >= 70/100
 
@@ -128,11 +180,17 @@ Required output after completion:
 - B-grade count
 - STRICT A-GRADE count
 - ranked leaders and scores
-- each ticker’s failures retained in audit output
+- each ticker's failure reasons
+- premarket-volume metric source
+- catalyst source
+- spread source
 
 ## Stage 3 — 09:18 refresh, rerank, Top-25 freeze
-At 09:18 ET, refresh the broad universe with the latest premarket data and repeat the honest funnel accounting:
+At 09:18 ET, refresh the broad universe with the latest price data and repeat the Nasdaq premarket-volume enrichment and honest funnel accounting.
+
+Report:
 - naturally broad-qualified count
+- Nasdaq premarket enriched count
 - nonzero premarket activity count
 - retained-by-Top-100-cap count
 - selected-for-deep count
@@ -146,19 +204,12 @@ Sort by:
 1. strict premarket A-grade status
 2. total 100-point score
 3. count of quality gates passed
-4. relative premarket volume
+4. premarket-volume intensity / true RVOL strength
 5. premarket dollar volume
 
 Do not insert random names. Do not silently convert a ranking limit into a “survivor” count.
 
 Internal/audit output must retain the complete frozen Top-25 with score and grade per name. User-facing reports show only the ranked Top 10 finalists to prove the final-scan arena formed without redundant clutter. The full Top-25 remains preserved in the production artifact.
-
-Required user-facing output:
-- actual refresh start/freeze completion times ET
-- honest funnel counts listed above
-- frozen count explicitly labeled as cap-driven ranking output
-- ranked Top 10 finalists only
-- score/grade for each displayed finalist
 
 ## Stage 4 — 09:45 final A+ live gates
 Analyze only the frozen shortlist. Every BUY must pass the live mandatory setup logic:
@@ -170,9 +221,9 @@ Analyze only the frozen shortlist. Every BUY must pass the live mandatory setup 
 - price attacking the opening-range high / breakout level
 - pullback volume contracts
 - breakout volume expands by at least 1.20x versus the immediate pullback baseline
-- refreshed live spread <= 0.60%
+- refreshed Nasdaq live spread <= 0.60%
 - not extended more than 1.50% above VWAP
-- entry is not more than 0.50% beyond breakout trigger
+- entry is not more than 0.50% beyond the breakout trigger
 - obvious technical stop from VWAP/recent higher-low structure
 - at least 2.0:1 reward/risk before known resistance / management level
 - reject if SPY and QQQ both suffer a hard adverse opening reversal <= -0.60% with negative recent momentum
@@ -198,10 +249,11 @@ The daily result must be understandable without opening code and must clearly di
 `08:55:02 ET — PRE-SCREEN STARTED`
 `09:03:41 ET — PRE-SCREEN COMPLETED`
 `Baseline eligible: 1,870`
-`Trustworthy observations: 1,842`
+`Trustworthy price observations: 1,842`
 `Naturally broad-qualified: 1,842`
-`Nonzero premarket activity: 74`
-`Strict-activity names: 18`
+`Nasdaq premarket enriched: 392`
+`Nonzero premarket activity: 387`
+`Strict-activity names: 74`
 `Retained by Top-100 cap: 100`
 `09:05:00 ET — DEEP 100-POINT ANALYSIS STARTED`
 `Selected for deep analysis by Top-60 cap: 60`
@@ -217,8 +269,10 @@ The daily result must be understandable without opening code and must clearly di
 
 All numbers and times above are illustrative only. Production must display actual measured values.
 
-## Regression note — 2026-09-11
-During the reporting-integrity repair, the code was accidentally tightened from “trustworthy premarket price observation” to “trustworthy price plus non-zero Yahoo-reported premarket dollar volume.” That was NOT the same criterion and caused a false zero-candidate failure in a same-day test. This regression is prohibited going forward. The restored rule above is authoritative.
+## Regression notes — 2026-09-11
+1. A reporting-integrity repair accidentally tightened natural qualification from “trustworthy premarket price observation” to “trustworthy price plus non-zero Yahoo premarket volume,” causing a false zero-candidate failure. That change was reverted.
+2. Same-day diagnostics proved Yahoo extended-hours bars could return valid premarket prices while volume remained zero. Nasdaq's public extended-trading endpoint returned real premarket share volume for CRCL, NVDA and ORCL and is now the locked premarket-volume source.
+3. Same-day diagnostics proved Yahoo Ticker.info / Ticker.news generated repeated 401/429 errors. Nasdaq quote data returned valid real-time bid/ask and Google News RSS returned current headlines. Those are now the locked production sources for spread and catalyst data.
 
 ## Final output
 If no ticker passes every final live mandatory gate:
@@ -245,3 +299,4 @@ If one or more names pass, rank the full-pass names and send only the strongest 
 - Production alert is generated from Engine 4 output artifacts; ChatGPT relays it.
 - Any report that conflates a configured cap with a natural pass count is considered a reporting failure and must be corrected before the result is accepted.
 - Any code change that alters a screening criterion must be explicitly identified and approved in the SSOT; reporting-only fixes may not silently tighten or loosen trading criteria.
+- A systemic free-provider outage must never be disguised as weak market conditions.
