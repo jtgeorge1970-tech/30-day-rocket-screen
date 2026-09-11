@@ -3,19 +3,18 @@ name: Engine 4 Intraday Production
 on:
   workflow_dispatch:
   schedule:
-    # America/New_York is UTC-4 in EDT and UTC-5 in EST.
-    # Wake at both UTC equivalents. The shell checks actual ET and ignores the wrong seasonal wake.
-    - cron: '55 12 * * 1-5'   # 08:55 EDT
-    - cron: '55 13 * * 1-5'   # 08:55 EST / 09:55 EDT ignored
-    - cron: '18 13 * * 1-5'   # 09:18 EDT refresh/rerank
-    - cron: '18 14 * * 1-5'   # 09:18 EST / 10:18 EDT ignored
-    - cron: '45 13 * * 1-5'   # 09:45 EDT final
-    - cron: '45 14 * * 1-5'   # 09:45 EST / 10:45 EDT ignored
+    # Wake well before the first stage. The ET guard ignores the wrong seasonal duplicate.
+    - cron: '35 12 * * 1-5'   # 08:35 EDT
+    - cron: '35 13 * * 1-5'   # 08:35 EST / 09:35 EDT duplicate is ignored
+
+concurrency:
+  group: engine4-production
+  cancel-in-progress: false
 
 jobs:
   engine4:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 90
     permissions:
       contents: write
     steps:
@@ -25,34 +24,73 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt
-      - name: Run exact ET Engine 4 stage
+
+      - name: Verify correct ET wake
         shell: bash
         run: |
           H=$(TZ=America/New_York date +%H)
           M=$(TZ=America/New_York date +%M)
           T=$((10#$H * 60 + 10#$M))
-          echo "Engine 4 wake at ${H}:${M} ET"
-          if [ "$T" -ge 530 ] && [ "$T" -le 547 ]; then
-            echo '08:55 ET initial full premarket screen'
-            python engine4_intraday.py premarket
-          elif [ "$T" -ge 555 ] && [ "$T" -le 565 ]; then
-            echo '09:18 ET mandatory full-universe refresh/rerank/freeze'
-            python engine4_intraday.py premarket
-          elif [ "$T" -ge 583 ] && [ "$T" -le 593 ]; then
-            echo '09:45 ET final live A+ scan on frozen shortlist'
-            python engine4_intraday.py final
-          else
-            echo 'Seasonal duplicate/late wake outside approved ET windows — ignored.'
+          echo "Engine 4 production runner woke at ${H}:${M} ET"
+          # Valid early wake window: 08:20 through 09:10 ET. This tolerates GitHub cron delay.
+          if [ "$T" -lt 500 ] || [ "$T" -gt 550 ]; then
+            echo 'Wrong seasonal duplicate or unusably late wake — exiting without running Engine 4.'
+            exit 78
           fi
-      - name: Save Engine 4 audit/output only
+
+      - name: Run ordered Engine 4 cycle
+        shell: bash
         run: |
-          git config user.name 'engine4-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add output/engine4/ || true
-          if git diff --cached --quiet; then
-            echo 'No Engine 4 output changes to commit.'
-            exit 0
-          fi
-          git commit -m 'Engine 4 scheduled output'
-          git pull --rebase origin main
-          git push origin HEAD:main
+          set -euo pipefail
+
+          wait_until_et() {
+            TARGET="$1"
+            while true; do
+              H=$(TZ=America/New_York date +%H)
+              M=$(TZ=America/New_York date +%M)
+              NOW=$((10#$H * 60 + 10#$M))
+              if [ "$NOW" -ge "$TARGET" ]; then
+                break
+              fi
+              sleep 15
+            done
+          }
+
+          save_stage() {
+            LABEL="$1"
+            git config user.name 'engine4-bot'
+            git config user.email 'actions@users.noreply.github.com'
+            git add output/engine4/ || true
+            if git diff --cached --quiet; then
+              echo "No Engine 4 output changes for ${LABEL}."
+              return
+            fi
+            git commit -m "Engine 4 ${LABEL}"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          }
+
+          echo '=== STAGE 1: 08:55 ET BROAD PRE-SCREEN ==='
+          wait_until_et 535
+          python engine4_pipeline.py prescreen
+          save_stage '08:55 pre-screen complete'
+
+          echo '=== STAGE 2: 09:05 ET DEEP 100-POINT ANALYSIS ==='
+          wait_until_et 545
+          python engine4_pipeline.py deep
+          save_stage '09:05 deep analysis complete'
+
+          echo '=== STAGE 3: 09:18 ET REFRESH + RANK + FREEZE ==='
+          wait_until_et 558
+          python engine4_pipeline.py refresh
+          save_stage '09:18 refresh and Top-25 freeze'
+
+          echo '=== STAGE 4: 09:45 ET FINAL LIVE CONFIRMATION ==='
+          wait_until_et 585
+          python engine4_pipeline.py final
+          save_stage '09:45 final live result'
+
+          echo '=== ENGINE 4 ORDERED CYCLE COMPLETE ==='
+          cat output/engine4/timeline.txt
+          echo '--- FINAL ALERT ---'
+          cat output/engine4/final_alert.txt
