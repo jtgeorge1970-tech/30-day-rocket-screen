@@ -1,4 +1,4 @@
-# Engine 4 — Intraday Perfect Setup SSOT v4.6
+# Engine 4 — Intraday Perfect Setup SSOT v4.7
 Locked for live trial: 2026-09-14
 
 ## Golden Rules
@@ -60,7 +60,7 @@ The production workflow wakes early, then executes these stages in order. It may
 - 09:30 ET — market opens.
 - 09:30–09:45 ET — opening structure forms.
 - 09:45 ET — FINAL LIVE CONFIRMATION starts on the frozen shortlist only.
-- Target by ~09:48 ET — BUY NOW or NO TRADE result completes.
+- Target by ~09:48 ET — BUY NOW, WATCH, or NO TRADE result completes.
 
 Every stage must record its actual Eastern start/completion timestamp. Displayed times are actual execution times, not invented schedule labels.
 
@@ -223,15 +223,66 @@ Analyze only the frozen shortlist. Every BUY must pass the live mandatory setup 
 - breakout volume expands by at least 1.20x versus the immediate pullback baseline
 - refreshed Nasdaq live spread <= 0.60%
 - not extended more than 1.50% above VWAP
-- entry is not more than 0.50% beyond the breakout trigger
 - obvious technical stop from VWAP/recent higher-low structure
 - at least 2.0:1 reward/risk before known resistance / management level
 - reject if SPY and QQQ both suffer a hard adverse opening reversal <= -0.60% with negative recent momentum
 
 The 09:45 live gate is intentionally the strictest stage. Premarket near-misses may enter the arena because a stock can improve materially after the opening bell; it still receives no BUY unless the live setup fully qualifies.
 
+## Locked buy-signal state machine
+The words BUY NOW are reserved for an immediately actionable live entry. A qualifying setup and an actionable entry are not the same thing.
+
+Every finalist must be placed into exactly one of these live states at the moment the alert is generated:
+
+1. **BUY NOW**
+   - every final A+ gate passes
+   - a fresh current price/quote is available at alert time
+   - current price is at or above the breakout trigger
+   - current price is no more than 0.50% above the breakout trigger
+   - the breakout remains structurally valid and has not failed back below the trigger
+   - reward/risk remains >= 2.0:1 using the actual live entry price
+
+   User-facing output:
+   `BUY [TICKER] NOW`
+   `Current price: $...`
+   `Entry/trigger: $...`
+   `Initial stop: $...`
+   `First management level: $...`
+   `Trailing stop: ...`
+   `Reason: ...`
+
+2. **WATCH — trigger not reached**
+   - setup quality is otherwise acceptable
+   - current live price remains below the breakout trigger
+   - the stock has not already broken out and failed
+
+   User-facing output:
+   `WATCH [TICKER] — BUY ONLY ABOVE $X.XX`
+   `Current price: $...`
+
+   WATCH is not a buy recommendation and must never be shortened to BUY NOW.
+
+3. **NO TRADE — entry missed / breakout failed**
+   - the breakout trigger was reached earlier, but current live price has fallen back below it, OR
+   - price is already more than 0.50% beyond the allowed chase band, OR
+   - the live structure/R:R no longer satisfies the A+ entry rules
+
+   User-facing output:
+   `NO TRADE — entry missed / breakout failed.`
+
+4. **NO TRADE — no A+ setup**
+   - no finalist passes the complete live A+ setup requirements.
+
+### Mandatory live-price validation
+Immediately before any `BUY [TICKER] NOW` alert is written, Engine 4 must fetch a fresh current price/quote and record its timestamp in the audit artifact. Historical opening bars, an earlier intraday high, or the fact that the trigger was touched at some earlier time may never substitute for this final live-price check.
+
+A lower price than the breakout trigger is NOT automatically a better entry. Engine 4 is a breakout/momentum setup: the trigger is evidence of confirmed strength. If current price is below an already-triggered breakout level, the original setup may have failed and must not be relabeled as a bargain entry.
+
 ## Entry / stop / management
 - Entry trigger: opening-range high + 0.05% confirmation buffer.
+- BUY NOW is valid only when the fresh current price is at/above the trigger and no more than 0.50% beyond it.
+- If current price is below an untriggered level: WATCH only.
+- If current price is below a trigger that was already reached and then lost: NO TRADE — entry missed / breakout failed.
 - Initial stop: just below strongest nearby VWAP/recent higher-low support.
 - First management level: no lower than 2R; target logic may use the nearer of a 2.5R objective and identified overhead resistance only when at least 2R remains available.
 - Do not chase beyond the allowed 0.50% breakout band.
@@ -265,7 +316,7 @@ The daily result must be understandable without opening code and must clearly di
 `Final-scan Top 10: 1. TICKER score/grade ... through 10. TICKER score/grade`
 `09:45:00 ET — FINAL LIVE CONFIRMATION STARTED`
 `09:47:26 ET — FINAL LIVE CONFIRMATION COMPLETED`
-`RESULT: BUY ...` or `RESULT: NO TRADE — no A+ setup.`
+`RESULT: BUY ...`, `RESULT: WATCH ...`, or `RESULT: NO TRADE ...`
 
 All numbers and times above are illustrative only. Production must display actual measured values.
 
@@ -273,17 +324,23 @@ All numbers and times above are illustrative only. Production must display actua
 1. A reporting-integrity repair accidentally tightened natural qualification from “trustworthy premarket price observation” to “trustworthy price plus non-zero Yahoo premarket volume,” causing a false zero-candidate failure. That change was reverted.
 2. Same-day diagnostics proved Yahoo extended-hours bars could return valid premarket prices while volume remained zero. Nasdaq's public extended-trading endpoint returned real premarket share volume for CRCL, NVDA and ORCL and is now the locked premarket-volume source.
 3. Same-day diagnostics proved Yahoo Ticker.info / Ticker.news generated repeated 401/429 errors. Nasdaq quote data returned valid real-time bid/ask and Google News RSS returned current headlines. Those are now the locked production sources for spread and catalyst data.
+4. A same-day test generated `BUY AAOI NOW` with a breakout trigger of $108.48 even though an independent live cross-check showed AAOI trading near $105.75–$106 at alert time. The failure was caused by treating an earlier qualifying breakout condition as though it were still an actionable live entry. SSOT v4.7 therefore locks the live-price state machine above: BUY NOW requires fresh price confirmation at the trigger, below-trigger names are WATCH only if the trigger has not fired, and failed/reversed breakouts are NO TRADE.
 
 ## Final output
 If no ticker passes every final live mandatory gate:
 `NO TRADE — no A+ setup.`
 
-If the only otherwise-valid opportunity has already run beyond a safe entry:
-`NO TRADE — entry missed.`
+If a setup is valid but the breakout trigger has not yet been reached:
+`WATCH [TICKER] — BUY ONLY ABOVE $X.XX`
+`Current price: $...`
 
-If one or more names pass, rank the full-pass names and send only the strongest one:
+If the trigger was reached earlier but the live price has fallen back below it, or the entry is otherwise stale/failed:
+`NO TRADE — entry missed / breakout failed.`
+
+If one or more names pass every final gate AND the fresh live-price validation, rank the full-pass names and send only the strongest one:
 
 `BUY [TICKER] NOW`
+`Current price: $...`
 `Entry/trigger: $...`
 `Initial stop: $...`
 `First management level: $...`
@@ -293,7 +350,10 @@ If one or more names pass, rank the full-pass names and send only the strongest 
 ## Fail-safe rules
 - Missing or stale required data => DATA FAILURE or NO TRADE as appropriate; never fabricated values.
 - Missing frozen Top-25 => final stage must not pretend a normal full-cycle NO TRADE occurred.
-- Stale/extended entry => NO TRADE.
+- BUY NOW requires a fresh current-price/quote timestamp recorded immediately before alert generation.
+- An earlier touch of the breakout trigger does not authorize a later BUY NOW if current price has fallen below the trigger.
+- Below-trigger price before any valid breakout => WATCH, not BUY.
+- Failed/reversed breakout or stale/extended entry => NO TRADE.
 - Production stages must execute in order.
 - Engine 4 is intraday only and must not silently become an overnight hold.
 - Production alert is generated from Engine 4 output artifacts; ChatGPT relays it.
