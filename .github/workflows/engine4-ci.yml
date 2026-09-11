@@ -1,9 +1,9 @@
-name: Engine 4 CI
+name: Engine 4 CI + Real-Data Acceptance
 on:
   push:
     branches: [engine4-intraday]
     paths:
-      - 'engine4_intraday.py'
+      - 'engine4_*.py'
       - 'test_engine4_intraday.py'
       - 'ENGINE4_SSOT.md'
       - '.github/workflows/engine4-ci.yml'
@@ -12,7 +12,7 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
         with:
@@ -22,9 +22,34 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt pytest
-      - name: Compile
-        run: python -m py_compile engine4_intraday.py test_engine4_intraday.py
-      - name: Self test
+      - name: Compile every Engine 4 module
+        run: python -m py_compile engine4_config.py engine4_data.py engine4_score.py engine4_live.py engine4_intraday.py test_engine4_intraday.py
+      - name: Deterministic self test
         run: python engine4_intraday.py self-test
       - name: Unit tests
         run: pytest -q test_engine4_intraday.py
+      - name: Free Yahoo data smoke test
+        run: python engine4_intraday.py smoke
+      - name: Full-universe historical premarket acceptance replay
+        run: python engine4_intraday.py premarket --date 2026-09-10
+      - name: Historical final-stage acceptance replay
+        run: python engine4_intraday.py final --date 2026-09-10
+      - name: Verify auditable acceptance artifacts
+        run: |
+          test -f output/engine4/data_smoke.json
+          test -f output/engine4/top25_frozen.json
+          test -f output/engine4/final_signal.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          smoke=json.loads(Path('output/engine4/data_smoke.json').read_text())
+          top=json.loads(Path('output/engine4/top25_frozen.json').read_text())
+          final=json.loads(Path('output/engine4/final_signal.json').read_text())
+          assert smoke['intraday_returned'] >= 10
+          assert 'runtime_seconds' in top
+          assert final['status'] in {'BUY','NO_TRADE'}
+          print('ENGINE4_REAL_DATA_ACCEPTANCE_PASS')
+          print('smoke_runtime', smoke['runtime_seconds'])
+          print('premarket_runtime', top['runtime_seconds'])
+          print('final_runtime', final['runtime_seconds'])
+          PY
