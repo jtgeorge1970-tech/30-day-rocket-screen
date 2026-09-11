@@ -1,4 +1,4 @@
-# Engine 4 — Intraday Perfect Setup SSOT v4.3
+# Engine 4 — Intraday Perfect Setup SSOT v4.4
 Locked for live trial: 2026-09-14
 
 ## Golden Rules
@@ -7,10 +7,24 @@ Locked for live trial: 2026-09-14
 3. Follow this SSOT exactly.
 4. Verify before reporting completion.
 
+## Non-negotiable reporting integrity rule
+Engine 4 must never describe a configured ranking cap as though it were a naturally occurring survivor count.
+
+The following quantities must always be labeled separately:
+- NATURAL QUALIFICATION COUNT = how many names actually met the defined criteria before a cap was applied.
+- RETAINED BY CAP = how many names were deliberately kept because the engine is configured to carry only the strongest N forward.
+- SELECTED FOR DEEP ANALYSIS = how many names were deliberately chosen for the 100-point analysis because of the configured deep-analysis cap.
+- ACTUALLY ANALYZED = how many selected names had enough trustworthy data to complete scoring.
+- SCORE >=70 COUNT = how many actually reached the 70-point reference threshold.
+- STRICT A-GRADE COUNT = how many met every strict premarket A-grade gate.
+- FROZEN FINAL-SCAN COUNT = how many ranked names were frozen for the 09:45 live scan.
+
+Rounded values such as 100, 60 or 25 are expected when they are configured caps. They must be explicitly labeled as caps and never presented as organic pass/fail results.
+
 ## Purpose
 Engine 4 is a separate long-only intraday/day-trading engine. Engines 1–3 remain untouched. Engine 4 must search broadly enough to surface real opportunities, then become progressively stricter. The early pre-screen is NOT allowed to behave like the final A+ trade gate.
 
-A valid day may end in NO TRADE, but a healthy engine should normally have stocks survive the broad pre-screen and advance into deeper analysis. Zero broad survivors is treated as a data/pipeline failure unless the underlying investable universe itself is unavailable.
+A valid day may end in NO TRADE, but a healthy engine should normally produce a broad naturally-qualified population and then rank the strongest names forward. Zero naturally-qualified names with otherwise healthy data must be investigated and cannot be casually reported as a normal trading conclusion.
 
 ## Free-data rule
 Use the existing Rocket free-data stack first. Production code uses Yahoo Finance/yfinance and the existing Rocket baseline outputs. Alpaca free may be used as an independent live cross-check in ChatGPT, but Engine 4 must not require a paid data subscription. No paid source may be added without explicit user approval after a documented gap is proven.
@@ -19,8 +33,8 @@ Use the existing Rocket free-data stack first. Production code uses Yahoo Financ
 The production workflow wakes early, then executes these stages in order. It may never run the final stage before the earlier stages complete.
 
 - 08:55 ET — BROAD PRE-SCREEN starts.
-- Target by ~09:05 ET — PRE-SCREEN completes and publishes the full survivor list.
-- 09:05 ET — DEEP 100-POINT ANALYSIS starts on the strongest pre-screen survivors.
+- Target by ~09:05 ET — PRE-SCREEN completes and publishes true qualification counts plus the retained candidate pool.
+- 09:05 ET — DEEP 100-POINT ANALYSIS starts on the highest-ranked retained candidates.
 - 09:18 ET — mandatory fresh full-universe REFRESH + RERANK starts.
 - Target by ~09:25 ET — TOP-25 FREEZE completes and publishes the ranked frozen shortlist internally.
 - 09:30 ET — market opens.
@@ -31,7 +45,7 @@ The production workflow wakes early, then executes these stages in order. It may
 Every stage must record its actual Eastern start/completion timestamp. Displayed times are actual execution times, not invented schedule labels.
 
 ## Starting universe
-Reuse the prior Rocket daily investable universe and fundamentals cache, sourced from the official listed-symbol universe and Yahoo Finance. Baseline investability gates remain:
+Reuse the prior Rocket daily investable universe and fundamentals cache. Baseline investability gates remain:
 - price >= $5
 - market cap >= $300M
 - average daily dollar volume >= $20M
@@ -42,20 +56,34 @@ Engine 4 must not rebuild or alter Engines 1–3.
 ## Stage 1 — Broad pre-screen
 The broad pre-screen exists to FIND candidates, not eliminate the day before analysis begins.
 
-For every baseline-eligible stock with trustworthy current premarket observations, calculate premarket gap, premarket volume, premarket dollar volume and activity score. The former activity thresholds — gap >= 0.50% and premarket dollar volume >= $500,000 — remain useful quality flags, but they are no longer all-or-nothing kill switches.
+For every baseline-eligible stock with trustworthy current premarket observations, calculate premarket gap, premarket volume, premarket dollar volume and activity score.
 
-Rank objective premarket activity and retain up to 100 names. Positive premarket movers with real dollar volume rank first. If strict activity names are sparse, retain the strongest valid observed names rather than returning a false zero.
+Natural broad qualification is deliberately permissive:
+- baseline investability already passed
+- trustworthy current premarket price exists
+- non-zero premarket dollar volume exists
+
+This NATURAL BROAD QUALIFICATION COUNT is measured and reported before any cap is applied.
+
+The former stronger activity thresholds — gap >= 0.50%, gap <= 25%, and premarket dollar volume >= $500,000 — remain a STRICT ACTIVITY QUALITY FLAG and are separately counted. They are not an all-or-nothing early kill switch.
+
+After natural qualification, rank by strict activity flag, objective activity score and premarket dollar volume, then retain no more than the configured Top-100 candidate cap.
 
 Required output after completion:
-- actual start and completion times ET
+- actual start/completion times ET
 - baseline-eligible stock count
-- number with trustworthy premarket observations
-- survivor count
-- complete survivor ticker list
-- number that met the former strict activity thresholds
+- number with trustworthy observations
+- NATURAL broad-qualified count
+- strict-activity count
+- RETAINED BY TOP-100 CAP count
+- retained ticker list
+
+Never use the word “survived” for a Top-100 cap as though exactly 100 independently passed a threshold.
 
 ## Stage 2 — Deep 100-point analysis
-Analyze up to the strongest 60 pre-screen survivors with the locked 100-point model:
+Select up to the highest-ranked 60 retained candidates for the locked 100-point model. The number 60 is a configured workload/ranking cap, not an organic survivor count.
+
+Locked weights:
 - Catalyst quality: 25
 - Relative premarket volume: 20
 - Premarket price/gap quality: 15
@@ -75,17 +103,27 @@ Reference A-grade premarket gates remain visible and auditable:
 - positive room to resistance
 - score >= 70/100
 
-IMPORTANT: these premarket A-grade gates now classify/rank quality; they do not automatically erase every near-miss before the 09:45 opening test. Promotional-looking moves remain rejected by the catalyst logic. Missing/stale data must be marked, never fabricated.
+These gates classify/rank quality; they do not automatically erase every near-miss before the 09:45 opening test. Promotional-looking moves remain rejected by catalyst logic. Missing/stale data must be marked, never fabricated.
 
 Required output after completion:
-- actual start/completion times ET
-- number analyzed
-- number meeting every strict premarket A-grade gate
+- SELECTED FOR DEEP ANALYSIS count, explicitly labeled as cap-driven
+- ACTUALLY ANALYZED count
+- SCORE >=70 count
+- B-grade count
+- STRICT A-GRADE count
 - ranked leaders and scores
-- each ticker’s grade/failures retained in audit output
+- each ticker’s failures retained in audit output
 
 ## Stage 3 — 09:18 refresh, rerank, Top-25 freeze
-At 09:18 ET, refresh the broad universe with the latest premarket data, rescore and rerank. Freeze up to the best 25 trustworthy ranked names. The Top-25 is an arena for the live opening test; it is not itself a BUY list.
+At 09:18 ET, refresh the broad universe with the latest premarket data and repeat the honest funnel accounting:
+- naturally broad-qualified count
+- retained-by-Top-100-cap count
+- selected-for-deep count
+- actually analyzed count
+- score >=70 count
+- strict A-grade count
+
+Then freeze up to the best 25 trustworthy ranked names. Top-25 is a configured final-scan arena cap, not a claim that exactly 25 stocks passed an independent threshold.
 
 Sort by:
 1. strict premarket A-grade status
@@ -94,16 +132,16 @@ Sort by:
 4. relative premarket volume
 5. premarket dollar volume
 
-Do not insert random names. Do not silently return zero because a soft ranking threshold was too restrictive. Zero frozen names is a data/pipeline failure if trustworthy scored names exist.
+Do not insert random names. Do not silently convert a ranking limit into a “survivor” count.
 
-Internal/audit output must retain the complete frozen Top-25 with score and grade per name. User-facing reports do NOT need to repeat all 25 names. To prove the stage completed without redundant clutter, show only the ranked Top 10 finalists that advanced to the final-scan arena, including ticker, score/grade, and concise reason/strength. The full Top-25 remains preserved in the production artifact for verification when needed.
+Internal/audit output must retain the complete frozen Top-25 with score and grade per name. User-facing reports show only the ranked Top 10 finalists to prove the final-scan arena formed without redundant clutter. The full Top-25 remains preserved in the production artifact.
 
 Required user-facing output:
-- actual refresh start and freeze completion times ET
-- count of frozen candidates
+- actual refresh start/freeze completion times ET
+- honest funnel counts listed above
+- frozen count explicitly labeled as cap-driven ranking output
 - ranked Top 10 finalists only
 - score/grade for each displayed finalist
-- count of strict premarket A-grade names
 
 ## Stage 4 — 09:45 final A+ live gates
 Analyze only the frozen shortlist. Every BUY must pass the live mandatory setup logic:
@@ -117,12 +155,12 @@ Analyze only the frozen shortlist. Every BUY must pass the live mandatory setup 
 - breakout volume expands by at least 1.20x versus the immediate pullback baseline
 - refreshed live spread <= 0.60%
 - not extended more than 1.50% above VWAP
-- entry is not more than 0.50% beyond the breakout trigger
+- entry is not more than 0.50% beyond breakout trigger
 - obvious technical stop from VWAP/recent higher-low structure
 - at least 2.0:1 reward/risk before known resistance / management level
 - reject if SPY and QQQ both suffer a hard adverse opening reversal <= -0.60% with negative recent momentum
 
-The 09:45 live gate is intentionally the strictest stage. Premarket near-misses are allowed into the arena because a stock can improve materially after the opening bell; it still receives no BUY unless the live setup fully qualifies.
+The 09:45 live gate is intentionally the strictest stage. Premarket near-misses may enter the arena because a stock can improve materially after the opening bell; it still receives no BUY unless the live setup fully qualifies.
 
 ## Entry / stop / management
 - Entry trigger: opening-range high + 0.05% confirmation buffer.
@@ -138,13 +176,20 @@ A trailing stop may activate only after:
 Then trail just below the newest confirmed higher-low / VWAP support and never loosen the stop.
 
 ## Required user-facing timeline
-The daily result must be understandable without opening code. It must read in chronological order similar to:
+The daily result must be understandable without opening code and must clearly distinguish natural counts from configured caps. Example format only:
 
 `08:55:02 ET — PRE-SCREEN STARTED`
-`09:03:41 ET — PRE-SCREEN COMPLETED — 100 survivors`
-`Survivors: ...`
+`09:03:41 ET — PRE-SCREEN COMPLETED`
+`Baseline eligible: 1,870`
+`Trustworthy observations: 1,842`
+`Naturally broad-qualified: 1,126`
+`Strict-activity names: 74`
+`Retained by Top-100 cap: 100`
 `09:05:00 ET — DEEP 100-POINT ANALYSIS STARTED`
-`09:16:12 ET — DEEP ANALYSIS COMPLETED — 60 analyzed / X strict A-grade`
+`Selected for deep analysis by Top-60 cap: 60`
+`Actually analyzed: 57`
+`Score >=70: 9`
+`Strict A-grade: 3`
 `09:18:00 ET — REFRESH + RANKING STARTED`
 `09:23:47 ET — TOP-25 FROZEN`
 `Final-scan Top 10: 1. TICKER score/grade ... through 10. TICKER score/grade`
@@ -152,7 +197,7 @@ The daily result must be understandable without opening code. It must read in ch
 `09:47:26 ET — FINAL LIVE CONFIRMATION COMPLETED`
 `RESULT: BUY ...` or `RESULT: NO TRADE — no A+ setup.`
 
-Times above are examples only; production must display actual ET timestamps.
+All numbers and times above are illustrative only. Production must display actual measured values.
 
 ## Final output
 If no ticker passes every final live mandatory gate:
@@ -177,3 +222,4 @@ If one or more names pass, rank the full-pass names and send only the strongest 
 - Production stages must execute in order.
 - Engine 4 is intraday only and must not silently become an overnight hold.
 - Production alert is generated from Engine 4 output artifacts; ChatGPT relays it.
+- Any report that conflates a configured cap with a natural pass count is considered a reporting failure and must be corrected before the result is accepted.
