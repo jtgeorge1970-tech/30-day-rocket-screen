@@ -3,9 +3,8 @@ name: Engine 4 Intraday Production
 on:
   workflow_dispatch:
   schedule:
-    # Wake well before the first stage. The ET guard ignores the wrong seasonal duplicate.
-    - cron: '35 12 * * 1-5'   # 08:35 EDT
-    - cron: '35 13 * * 1-5'   # 08:35 EST / 09:35 EDT duplicate is ignored
+    - cron: '35 12 * * 1-5'
+    - cron: '35 13 * * 1-5'
 
 concurrency:
   group: engine4-production
@@ -32,7 +31,6 @@ jobs:
           M=$(TZ=America/New_York date +%M)
           T=$((10#$H * 60 + 10#$M))
           echo "Engine 4 production runner woke at ${H}:${M} ET"
-          # Valid early wake window: 08:20 through 09:10 ET. This tolerates GitHub cron delay.
           if [ "$T" -lt 500 ] || [ "$T" -gt 550 ]; then
             echo 'Wrong seasonal duplicate or unusably late wake — exiting without running Engine 4.'
             exit 78
@@ -72,22 +70,22 @@ jobs:
 
           echo '=== STAGE 1: 08:55 ET BROAD PRE-SCREEN ==='
           wait_until_et 535
-          python engine4_pipeline.py prescreen
+          python engine4_pipeline_runner.py prescreen
           save_stage '08:55 pre-screen complete'
 
           echo '=== STAGE 2: 09:05 ET DEEP 100-POINT ANALYSIS ==='
           wait_until_et 545
-          python engine4_pipeline.py deep
+          python engine4_pipeline_runner.py deep
           save_stage '09:05 deep analysis complete'
 
           echo '=== STAGE 3: 09:18 ET REFRESH + RANK + FREEZE ==='
           wait_until_et 558
-          python engine4_pipeline.py refresh
+          python engine4_pipeline_runner.py refresh
           save_stage '09:18 refresh and Top-25 freeze'
 
           echo '=== STAGE 4: 09:45 ET FINAL LIVE CONFIRMATION ==='
           wait_until_et 585
-          python engine4_pipeline.py final
+          python engine4_pipeline_runner.py final
           save_stage '09:45 final live result'
 
           echo '=== ENGINE 4 ORDERED CYCLE COMPLETE ==='
