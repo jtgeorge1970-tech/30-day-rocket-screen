@@ -1,0 +1,58 @@
+name: Engine 4 Intraday Production
+
+on:
+  workflow_dispatch:
+  schedule:
+    # America/New_York is UTC-4 in EDT and UTC-5 in EST.
+    # Wake at both UTC equivalents. The shell checks actual ET and ignores the wrong seasonal wake.
+    - cron: '55 12 * * 1-5'   # 08:55 EDT
+    - cron: '55 13 * * 1-5'   # 08:55 EST / 09:55 EDT ignored
+    - cron: '18 13 * * 1-5'   # 09:18 EDT refresh/rerank
+    - cron: '18 14 * * 1-5'   # 09:18 EST / 10:18 EDT ignored
+    - cron: '45 13 * * 1-5'   # 09:45 EDT final
+    - cron: '45 14 * * 1-5'   # 09:45 EST / 10:45 EDT ignored
+
+jobs:
+  engine4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run exact ET Engine 4 stage
+        shell: bash
+        run: |
+          H=$(TZ=America/New_York date +%H)
+          M=$(TZ=America/New_York date +%M)
+          T=$((10#$H * 60 + 10#$M))
+          echo "Engine 4 wake at ${H}:${M} ET"
+          if [ "$T" -ge 530 ] && [ "$T" -le 547 ]; then
+            echo '08:55 ET initial full premarket screen'
+            python engine4_intraday.py premarket
+          elif [ "$T" -ge 555 ] && [ "$T" -le 565 ]; then
+            echo '09:18 ET mandatory full-universe refresh/rerank/freeze'
+            python engine4_intraday.py premarket
+          elif [ "$T" -ge 583 ] && [ "$T" -le 593 ]; then
+            echo '09:45 ET final live A+ scan on frozen shortlist'
+            python engine4_intraday.py final
+          else
+            echo 'Seasonal duplicate/late wake outside approved ET windows — ignored.'
+          fi
+      - name: Save Engine 4 audit/output only
+        run: |
+          git config user.name 'engine4-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add output/engine4/ || true
+          if git diff --cached --quiet; then
+            echo 'No Engine 4 output changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Engine 4 scheduled output'
+          git pull --rebase origin main
+          git push origin HEAD:main
