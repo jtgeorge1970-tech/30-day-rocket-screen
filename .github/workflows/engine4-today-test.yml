@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/engine4-today-test.yml'
+      - 'engine4_pipeline_runner.py'
+      - 'engine4_free_providers.py'
+      - 'engine4_score.py'
+      - 'ENGINE4_SSOT.md'
   workflow_dispatch:
 
 jobs:
@@ -18,6 +22,8 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt
+      - name: Verify free-provider health first
+        run: python engine4_pipeline_runner.py provider-smoke
       - name: Run complete Engine 4 test using today's ET market date
         shell: bash
         run: |
@@ -44,6 +50,7 @@ jobs:
           print('baseline_eligible', pre['baseline_eligible'])
           print('trustworthy_observed', pre['trustworthy_observed'])
           print('natural_broad_qualified', pre['broad_qualified'])
+          print('nasdaq_premarket_enriched', pre.get('nasdaq_premarket_enriched'))
           print('nonzero_premarket_activity_count', pre.get('nonzero_premarket_activity_count'))
           print('strict_activity_count', pre['strict_activity_count'])
           print('retained_by_top100_cap', pre['retained_by_cap'])
@@ -60,15 +67,15 @@ jobs:
           from pathlib import Path
           p=json.loads(Path('output/engine4/top25_frozen.json').read_text())
           for row in p['candidates'][:10]:
-              print(f"#{row['rank']} {row['ticker']} | score={row.get('score')} | grade={row.get('premarket_grade')} | failures={row.get('premarket_failures','')}")
+              print(f"#{row['rank']} {row['ticker']} | score={row.get('score')} | grade={row.get('premarket_grade')} | pmVol={row.get('premarket_volume')} | intensity={row.get('premarket_volume_intensity_pct')}% | spread={row.get('spread_pct')}% | failures={row.get('premarket_failures','')}")
           PY
           echo '=== FINAL RESULT ==='
           cat output/engine4/final_alert.txt
-      - name: Verify all stages and honest reporting artifacts
+      - name: Verify all stages and repaired providers
         shell: bash
         run: |
           python - <<'PY'
-          import json
+          import json, math
           from pathlib import Path
           pre=json.loads(Path('output/engine4/prescreen_report.json').read_text())
           deep=json.loads(Path('output/engine4/deep_ranked.json').read_text())
@@ -77,9 +84,20 @@ jobs:
           tl=json.loads(Path('output/engine4/timeline.json').read_text())
           assert pre['trustworthy_observed'] > 0
           assert pre['broad_qualified'] == pre['trustworthy_observed']
+          assert pre['nasdaq_premarket_enriched'] > 0, pre
+          assert pre['nonzero_premarket_activity_count'] > 0, pre
           assert 0 < pre['retained_by_cap'] <= 100
           assert 0 < deep['selected_for_deep'] <= 60
           assert deep['analyzed_count'] > 0
+          rows=deep['ranked']
+          finite_spreads=sum(1 for r in rows if isinstance(r.get('spread_pct'),(int,float)) and math.isfinite(r['spread_pct']))
+          real_pm_vol=sum(1 for r in rows if isinstance(r.get('premarket_volume'),(int,float)) and r['premarket_volume']>0)
+          intensity=sum(1 for r in rows if isinstance(r.get('premarket_volume_intensity_pct'),(int,float)) and math.isfinite(r['premarket_volume_intensity_pct']))
+          assert finite_spreads >= max(5, len(rows)//2), (finite_spreads,len(rows))
+          assert real_pm_vol >= max(5, len(rows)//2), (real_pm_vol,len(rows))
+          assert intensity >= max(5, len(rows)//2), (intensity,len(rows))
+          assert all(r.get('spread_source') == 'Nasdaq quote' for r in rows if r.get('spread_pct') is not None)
+          assert all(r.get('catalyst_source') == 'Google News RSS' for r in rows)
           assert 0 < top['actual_count'] <= 25
           assert len(top['candidates'][:10]) > 0
           assert final['status'] in {'BUY','NO_TRADE'}
@@ -87,5 +105,8 @@ jobs:
           required=['PRE-SCREEN','DEEP 100-POINT ANALYSIS','09:18 REFRESH + RANKING','TOP-25 FREEZE','FINAL 09:45 LIVE CONFIRMATION']
           for s in required:
               assert s in stages, s
-          print('ENGINE4_TODAY_REPAIRED_FULL_CYCLE_TEST_PASS')
+          print('ENGINE4_PROVIDER_REPAIR_FULL_CYCLE_PASS')
+          print('finite_spreads',finite_spreads,'of',len(rows))
+          print('real_pm_vol',real_pm_vol,'of',len(rows))
+          print('volume_intensity',intensity,'of',len(rows))
           PY
