@@ -1,4 +1,4 @@
-# Engine 4 — Intraday Perfect Setup SSOT v4.8
+# Engine 4 — Intraday Perfect Setup SSOT v4.9
 Locked for live trial: 2026-09-14
 
 ## Golden Rules
@@ -230,7 +230,7 @@ Analyze only the frozen shortlist. Every BUY must pass the live mandatory setup 
 The 09:45 live gate is intentionally the strictest stage. Premarket near-misses may enter the arena because a stock can improve materially after the opening bell; it still receives no BUY unless the live setup fully qualifies.
 
 ## Locked plain-English buy-signal state machine
-The user-facing signal must use plain English. Do not lead with broker order-type jargon such as STOP-LIMIT or LIMIT. Engine 4 may use technical order logic internally, but the user should see only whether to BUY NOW, WAIT, or NOT BUY, plus the exact valid price range.
+The user-facing signal must use plain English. Do not lead with broker order-type jargon such as STOP-LIMIT or LIMIT. Engine 4 may use technical order logic internally, but the user should see only whether to BUY NOW, WAIT, or NOT BUY, plus the exact valid price range and exact downside/profit-protection instructions.
 
 The words BUY NOW are reserved for an immediately actionable live entry. A qualifying setup and an actionable entry are not the same thing.
 
@@ -246,13 +246,11 @@ Every finalist must be placed into exactly one of these live states at the momen
 
    Mandatory user-facing format:
    `BUY [TICKER] NOW`
-   `BUY RANGE: $X.XX to $Y.YY`
-   `Current price: $...`
+   `BUY BETWEEN $X.XX AND $Y.YY`
+   `AFTER PURCHASE, ENTER SELL STOP AT $S.SS`
+   `IF PRICE RISES TO $T.TT, MOVE SELL STOP TO $P.PP`
    `DO NOT BUY ABOVE $Y.YY`
-   `Initial stop: $...`
-   `First management level: $...`
-   `Trailing stop: ...`
-   `Reason: ...`
+   `Current price: $...`
 
 2. **WAIT — breakout trigger not reached**
    - setup quality is otherwise acceptable
@@ -262,7 +260,9 @@ Every finalist must be placed into exactly one of these live states at the momen
    Mandatory user-facing format:
    `WAIT — DO NOT BUY [TICKER] YET`
    `BUY ONLY IF PRICE REACHES $X.XX`
-   `VALID BUY RANGE IF TRIGGERED: $X.XX to $Y.YY`
+   `VALID BUY RANGE: $X.XX TO $Y.YY`
+   `IF BOUGHT, ENTER SELL STOP AT $S.SS`
+   `IF PRICE THEN RISES TO $T.TT, MOVE SELL STOP TO $P.PP`
    `Current price: $...`
    `DO NOT BUY BELOW $X.XX`
    `DO NOT BUY ABOVE $Y.YY`
@@ -293,16 +293,25 @@ A lower price than the breakout trigger is NOT automatically a better entry. Eng
 - BUY NOW is valid only when the fresh current price is at/above the trigger and no more than 0.50% beyond it.
 - If current price is below an untriggered level: WAIT only.
 - If current price is below a trigger that was already reached and then lost: NO TRADE — entry missed / breakout failed.
-- Initial stop: just below strongest nearby VWAP/recent higher-low support.
+- Initial sell stop: just below strongest nearby VWAP/recent higher-low support.
 - First management level: no lower than 2R; target logic may use the nearer of a 2.5R objective and identified overhead resistance only when at least 2R remains available.
 - Do not chase beyond the allowed 0.50% breakout band.
 
-## Runner / trailing stop
-A trailing stop may activate only after:
-1. price reaches at least +1R, and
-2. a confirmed higher low forms above entry.
+### Locked deterministic profit-protection stop
+The second stop must be fully calculable before purchase so the complete trade plan can be shown in the original signal.
 
-Then trail just below the newest confirmed higher-low / VWAP support and never loosen the stop.
+Definitions:
+- `REFERENCE ENTRY = breakout trigger`
+- `R = REFERENCE ENTRY - INITIAL SELL STOP`
+- `PRECALCULATED PROFIT STOP = REFERENCE ENTRY + 0.50 × R`
+
+When price reaches the first management level shown in the signal, the instruction is:
+`MOVE SELL STOP TO $P.PP`
+where `$P.PP` is the precalculated profit stop above.
+
+This rule intentionally replaces the prior subjective requirement to wait for a later confirmed higher low before moving the stop. The user must not be required to interpret chart structure after entry in order to know the next stop price.
+
+The profit stop may only move upward; it may never be loosened below a previously active stop.
 
 ## Required user-facing timeline
 The daily result must be understandable without opening code and must clearly distinguish natural counts from configured caps. Example format only:
@@ -335,7 +344,8 @@ All numbers and times above are illustrative only. Production must display actua
 2. Same-day diagnostics proved Yahoo extended-hours bars could return valid premarket prices while volume remained zero. Nasdaq's public extended-trading endpoint returned real premarket share volume for CRCL, NVDA and ORCL and is now the locked premarket-volume source.
 3. Same-day diagnostics proved Yahoo Ticker.info / Ticker.news generated repeated 401/429 errors. Nasdaq quote data returned valid real-time bid/ask and Google News RSS returned current headlines. Those are now the locked production sources for spread and catalyst data.
 4. A same-day test generated `BUY AAOI NOW` with a breakout trigger of $108.48 even though an independent live cross-check showed AAOI trading near $105.75–$106 at alert time. The failure was caused by treating an earlier qualifying breakout condition as though it were still an actionable live entry. SSOT v4.7 locked the live-price guard.
-5. SSOT v4.8 locks simplified user-facing wording. The signal must communicate the action in plain English: `BUY NOW`, `WAIT — DO NOT BUY YET`, or `NO TRADE — DO NOT BUY`, with exact valid buy range boundaries. Broker order-type jargon must not be the headline instruction.
+5. SSOT v4.8 locked simplified user-facing wording. The signal must communicate the action in plain English: `BUY NOW`, `WAIT — DO NOT BUY YET`, or `NO TRADE — DO NOT BUY`, with exact valid buy range boundaries. Broker order-type jargon must not be the headline instruction.
+6. SSOT v4.9 locks the complete pre-calculated risk-management plan. Every BUY/WAIT signal must include the initial sell stop, first management level, and the exact profit-protection stop calculated at +0.50R from the breakout trigger once that management level is reached.
 
 ## Final output
 If no ticker passes every final live mandatory gate:
@@ -344,7 +354,9 @@ If no ticker passes every final live mandatory gate:
 If a setup is valid but the breakout trigger has not yet been reached:
 `WAIT — DO NOT BUY [TICKER] YET`
 `BUY ONLY IF PRICE REACHES $X.XX`
-`VALID BUY RANGE IF TRIGGERED: $X.XX to $Y.YY`
+`VALID BUY RANGE: $X.XX TO $Y.YY`
+`IF BOUGHT, ENTER SELL STOP AT $S.SS`
+`IF PRICE THEN RISES TO $T.TT, MOVE SELL STOP TO $P.PP`
 `Current price: $...`
 `DO NOT BUY BELOW $X.XX`
 `DO NOT BUY ABOVE $Y.YY`
@@ -355,13 +367,11 @@ If the trigger was reached earlier but the live price has fallen back below it, 
 If one or more names pass every final gate AND the fresh live-price validation, rank the full-pass names and send only the strongest one:
 
 `BUY [TICKER] NOW`
-`BUY RANGE: $X.XX to $Y.YY`
-`Current price: $...`
+`BUY BETWEEN $X.XX AND $Y.YY`
+`AFTER PURCHASE, ENTER SELL STOP AT $S.SS`
+`IF PRICE RISES TO $T.TT, MOVE SELL STOP TO $P.PP`
 `DO NOT BUY ABOVE $Y.YY`
-`Initial stop: $...`
-`First management level: $...`
-`Trailing stop: ...`
-`Reason: ...`
+`Current price: $...`
 
 ## Fail-safe rules
 - Missing or stale required data => DATA FAILURE or NO TRADE as appropriate; never fabricated values.
