@@ -14,6 +14,9 @@ from engine4_intraday import OUT, serializable, write_final
 from engine4_live import live_quality, market_context, opening_structure
 
 
+PROFIT_LOCK_R = 0.50
+
+
 def _current_mid(symbol: str) -> tuple[float, float, float, float]:
     bid, ask, spread = engine4_live.quote_spread(symbol)
     if not (math.isfinite(bid) and math.isfinite(ask) and bid > 0 and ask >= bid):
@@ -34,14 +37,21 @@ def _trigger_seen(frame: pd.DataFrame, date_et, trigger: float) -> bool:
     return bool(not highs.empty and float(highs.max()) >= trigger)
 
 
-def guarded_final_stage(date_override: str | None = None) -> dict:
-    """Final Engine 4 stage with a mandatory current-price trigger guard.
+def _precalculated_profit_stop(trigger: float, initial_stop: float) -> float:
+    """Lock +0.50R once the first management level is reached.
 
-    BUY NOW is impossible unless the fresh bid/ask midpoint is at/above the trigger
-    and no more than the locked chase allowance above it. A stock below an untriggered
-    breakout becomes WATCH. A stock that already touched the trigger and then fell
-    back below it, or is now beyond the chase band, becomes entry missed.
+    R is defined from the breakout trigger to the initial technical stop. Using the
+    trigger rather than an unknown future fill keeps the number deterministic and
+    allows the complete management plan to be printed before purchase.
     """
+    if not (math.isfinite(trigger) and math.isfinite(initial_stop) and trigger > initial_stop):
+        return math.nan
+    risk_per_share = trigger - initial_stop
+    return trigger + PROFIT_LOCK_R * risk_per_share
+
+
+def guarded_final_stage(date_override: str | None = None) -> dict:
+    """Final Engine 4 stage with a mandatory current-price trigger guard."""
     started = time.monotonic()
     reference = now_et() if date_override is None else datetime.fromisoformat(date_override + "T09:45:00").replace(tzinfo=ET)
     date_et = reference.date()
@@ -62,7 +72,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
         return write_final({
             "status": "NO_TRADE",
             "reason": "empty_top25",
-            "message": "NO TRADE — no A+ setup.",
+            "message": "NO TRADE — no A+ setup. DO NOT BUY.",
             "runtime_seconds": round(time.monotonic() - started, 3),
         })
 
@@ -96,7 +106,9 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
 
         current, bid, ask, spread = _current_mid(symbol)
         trigger = float(metrics.get("entry_trigger", math.nan))
+        initial_stop = float(metrics.get("initial_stop", math.nan))
         max_allowed = trigger * (1.0 + MAX_BREAKOUT_CHASE_PCT / 100.0) if math.isfinite(trigger) else math.nan
+        profit_protection_stop = _precalculated_profit_stop(trigger, initial_stop)
         seen = _trigger_seen(frame, date_et, trigger)
         metrics.update({
             "current_live_price": current,
@@ -104,6 +116,8 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             "current_ask": ask,
             "current_spread_pct": spread,
             "max_allowed_buy_price": max_allowed,
+            "precalculated_profit_stop": profit_protection_stop,
+            "profit_lock_r": PROFIT_LOCK_R,
             "trigger_seen_today": seen,
         })
 
@@ -145,13 +159,12 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
         symbol = str(row.ticker)
         message = (
             f"BUY {symbol} NOW\n"
-            f"BUY RANGE: ${metrics['entry_trigger']:.2f} to ${metrics['max_allowed_buy_price']:.2f}\n"
-            f"Current price: ${metrics['current_live_price']:.2f}\n"
+            f"BUY BETWEEN ${metrics['entry_trigger']:.2f} AND ${metrics['max_allowed_buy_price']:.2f}\n"
+            f"AFTER PURCHASE, ENTER SELL STOP AT ${metrics['initial_stop']:.2f}\n"
+            f"IF PRICE RISES TO ${metrics['first_target']:.2f}, MOVE SELL STOP TO ${metrics['precalculated_profit_stop']:.2f}\n"
             f"DO NOT BUY ABOVE ${metrics['max_allowed_buy_price']:.2f}\n"
-            f"Initial stop: ${metrics['initial_stop']:.2f}\n"
-            f"First management level: ${metrics['first_target']:.2f}\n"
-            "Trailing stop: activate only after +1R and a confirmed higher low forms above entry; then trail just below the newest confirmed higher-low/VWAP support and never loosen the stop.\n"
-            f"Reason: full A+ gates passed AND fresh live price is inside the valid buy range; R:R {metrics['reward_risk']:.2f}:1."
+            f"Current price: ${metrics['current_live_price']:.2f}\n"
+            f"Reason: full A+ gates passed and fresh live price is inside the valid buy range; R:R {metrics['reward_risk']:.2f}:1."
         )
         return write_final({
             "status": "BUY",
@@ -164,6 +177,8 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             "max_allowed_buy_price": metrics["max_allowed_buy_price"],
             "initial_stop": metrics["initial_stop"],
             "first_target": metrics["first_target"],
+            "precalculated_profit_stop": metrics["precalculated_profit_stop"],
+            "profit_lock_r": PROFIT_LOCK_R,
             "reward_risk": metrics["reward_risk"],
             "runtime_seconds": round(time.monotonic() - started, 3),
         })
@@ -175,11 +190,12 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
         message = (
             f"WAIT — DO NOT BUY {symbol} YET\n"
             f"BUY ONLY IF PRICE REACHES ${metrics['entry_trigger']:.2f}\n"
-            f"VALID BUY RANGE IF TRIGGERED: ${metrics['entry_trigger']:.2f} to ${metrics['max_allowed_buy_price']:.2f}\n"
+            f"VALID BUY RANGE: ${metrics['entry_trigger']:.2f} TO ${metrics['max_allowed_buy_price']:.2f}\n"
+            f"IF BOUGHT, ENTER SELL STOP AT ${metrics['initial_stop']:.2f}\n"
+            f"IF PRICE THEN RISES TO ${metrics['first_target']:.2f}, MOVE SELL STOP TO ${metrics['precalculated_profit_stop']:.2f}\n"
             f"Current price: ${metrics['current_live_price']:.2f}\n"
             f"DO NOT BUY BELOW ${metrics['entry_trigger']:.2f}\n"
-            f"DO NOT BUY ABOVE ${metrics['max_allowed_buy_price']:.2f}\n"
-            "Status: setup remains valid, but the breakout has not confirmed yet."
+            f"DO NOT BUY ABOVE ${metrics['max_allowed_buy_price']:.2f}"
         )
         return write_final({
             "status": "WATCH",
@@ -190,6 +206,10 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             "live_price": metrics["current_live_price"],
             "entry_trigger": metrics["entry_trigger"],
             "max_allowed_buy_price": metrics["max_allowed_buy_price"],
+            "initial_stop": metrics["initial_stop"],
+            "first_target": metrics["first_target"],
+            "precalculated_profit_stop": metrics["precalculated_profit_stop"],
+            "profit_lock_r": PROFIT_LOCK_R,
             "runtime_seconds": round(time.monotonic() - started, 3),
         })
 
