@@ -78,8 +78,6 @@ def repaired_build_broad_pool(date_et, cutoff: str, max_symbols: int | None = No
             "premarket_volume": pm_volume,
             "premarket_dollar_volume": pm_dollar,
             "gap_pct": gap,
-            # Restored criterion: a trustworthy observed premarket price is broad-qualified.
-            # Premarket volume is reported separately and affects ranking/strict quality only.
             "broad_qualifier": True,
             "nonzero_premarket_activity": bool(pm_dollar > 0),
             "strict_activity_pass": bool(gap >= 0.50 and gap <= 25.0 and pm_dollar >= 500_000),
@@ -104,9 +102,6 @@ def repaired_build_broad_pool(date_et, cutoff: str, max_symbols: int | None = No
     meta["nonzero_premarket_activity_count"] = int(observed.nonzero_premarket_activity.sum())
     meta["strict_activity_count"] = int(observed.strict_activity_pass.sum())
 
-    # Preserve the old ranking behavior exactly: positive names with non-zero volume first;
-    # if Yahoo has no non-zero volume observations, rank the trustworthy observed set rather
-    # than converting a data-field limitation into a false zero-candidate day.
     positive = observed[(observed.gap_pct > 0) & (observed.premarket_dollar_volume > 0)].copy()
     if positive.empty:
         positive = observed[observed.premarket_dollar_volume > 0].copy()
@@ -122,8 +117,6 @@ def repaired_build_broad_pool(date_et, cutoff: str, max_symbols: int | None = No
 
 
 def main() -> None:
-    # Patch only the regressed function. All scoring, deep analysis, refresh/freeze,
-    # and final live gates remain the locked Engine 4 implementation.
     core.build_broad_pool = repaired_build_broad_pool
 
     parser = argparse.ArgumentParser()
@@ -150,7 +143,6 @@ def main() -> None:
     elif args.command == "final":
         core.final_with_timeline(args.date)
     else:
-        broad, meta = repaired_build_broad_pool
         core.self_test()
         assert callable(repaired_build_broad_pool)
         print("ENGINE4_RUNNER_REPAIR_SELF_TEST_PASS")
