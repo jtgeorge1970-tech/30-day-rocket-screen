@@ -47,7 +47,6 @@ def _num(value) -> float:
 
 
 def _get_json(url: str, attempts: int = 2, timeout: float = 6.0) -> dict | None:
-    last = None
     for attempt in range(attempts):
         try:
             r = _session().get(url, timeout=timeout)
@@ -55,18 +54,17 @@ def _get_json(url: str, attempts: int = 2, timeout: float = 6.0) -> dict | None:
                 payload = r.json()
                 if isinstance(payload, dict) and payload.get("data") is not None:
                     return payload
-            last = RuntimeError(f"HTTP {r.status_code}")
-        except Exception as exc:
-            last = exc
+        except Exception:
+            pass
         if attempt < attempts - 1:
-            time.sleep(0.25 * (attempt + 1) + random.uniform(0.0, 0.2))
+            time.sleep(0.20 * (attempt + 1) + random.uniform(0.0, 0.15))
     return None
 
 
-def nasdaq_premarket_snapshot(ticker: str) -> dict:
+def nasdaq_premarket_snapshot(ticker: str, *, attempts: int = 2, timeout: float = 6.0) -> dict:
     ticker = ticker.upper()
     url = f"https://api.nasdaq.com/api/quote/{ticker}/extended-trading?assetclass=stocks&markettype=pre"
-    payload = _get_json(url)
+    payload = _get_json(url, attempts=attempts, timeout=timeout)
     out = {
         "ticker": ticker,
         "ok": False,
@@ -91,7 +89,7 @@ def nasdaq_premarket_snapshot(ticker: str) -> dict:
         high = _num(row.get("highPrice"))
         low = _num(row.get("lowPrice"))
         out.update(
-            ok=bool(math.isfinite(price) and price > 0),
+            ok=bool(math.isfinite(price) and price > 0 and math.isfinite(volume) and volume >= 0),
             premarket_volume=volume,
             premarket_price=price,
             premarket_high=high,
@@ -102,13 +100,22 @@ def nasdaq_premarket_snapshot(ticker: str) -> dict:
     return out
 
 
-def nasdaq_premarket_many(tickers: Iterable[str], max_workers: int = 12) -> Dict[str, dict]:
+def nasdaq_premarket_many(tickers: Iterable[str], max_workers: int = 24) -> Dict[str, dict]:
+    """Fast bulk enrichment.
+
+    Bulk calls use one 4-second attempt per symbol. A few misses are acceptable because the
+    enrichment pool is intentionally much larger than the final Top-100. Provider health is
+    checked separately with retries before the stage begins.
+    """
     symbols = list(dict.fromkeys(str(t).upper() for t in tickers if str(t).strip()))
     results: Dict[str, dict] = {}
     if not symbols:
         return results
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
-        futs = {pool.submit(nasdaq_premarket_snapshot, t): t for t in symbols}
+        futs = {
+            pool.submit(nasdaq_premarket_snapshot, t, attempts=1, timeout=4.0): t
+            for t in symbols
+        }
         for fut in as_completed(futs):
             ticker = futs[fut]
             try:
@@ -121,7 +128,7 @@ def nasdaq_premarket_many(tickers: Iterable[str], max_workers: int = 12) -> Dict
 def nasdaq_quote_spread(ticker: str) -> Tuple[float, float, float]:
     ticker = ticker.upper()
     url = f"https://api.nasdaq.com/api/quote/{ticker}/info?assetclass=stocks"
-    payload = _get_json(url)
+    payload = _get_json(url, attempts=2, timeout=5.0)
     if not payload:
         return math.nan, math.nan, math.nan
     try:
@@ -141,7 +148,7 @@ def _google_news_items(query: str, limit: int = 12) -> list[tuple[str, datetime 
     q = quote_plus(query)
     url = f"https://news.google.com/rss/search?q={q}&hl=en-US&gl=US&ceid=US:en"
     try:
-        r = _session().get(url, headers={"User-Agent": NASDAQ_HEADERS["User-Agent"]}, timeout=6)
+        r = _session().get(url, headers={"User-Agent": NASDAQ_HEADERS["User-Agent"]}, timeout=5)
         if r.status_code != 200:
             return []
         root = ET.fromstring(r.content)
@@ -211,7 +218,7 @@ def google_news_catalyst(
 
 
 def provider_smoke() -> dict:
-    pm = nasdaq_premarket_snapshot("NVDA")
+    pm = nasdaq_premarket_snapshot("NVDA", attempts=2, timeout=6.0)
     bid, ask, spread = nasdaq_quote_spread("NVDA")
     news = _google_news_items('"NVDA" stock when:2d', limit=3)
     return {
