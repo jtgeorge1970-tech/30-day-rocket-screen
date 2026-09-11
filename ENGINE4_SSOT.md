@@ -1,4 +1,4 @@
-# Engine 4 — Intraday Perfect Setup SSOT v4.2
+# Engine 4 — Intraday Perfect Setup SSOT v4.3
 Locked for live trial: 2026-09-14
 
 ## Golden Rules
@@ -22,7 +22,7 @@ The production workflow wakes early, then executes these stages in order. It may
 - Target by ~09:05 ET — PRE-SCREEN completes and publishes the full survivor list.
 - 09:05 ET — DEEP 100-POINT ANALYSIS starts on the strongest pre-screen survivors.
 - 09:18 ET — mandatory fresh full-universe REFRESH + RERANK starts.
-- Target by ~09:25 ET — TOP-25 FREEZE completes and publishes the ranked frozen shortlist.
+- Target by ~09:25 ET — TOP-25 FREEZE completes and publishes the ranked frozen shortlist internally.
 - 09:30 ET — market opens.
 - 09:30–09:45 ET — opening structure forms.
 - 09:45 ET — FINAL LIVE CONFIRMATION starts on the frozen shortlist only.
@@ -96,10 +96,13 @@ Sort by:
 
 Do not insert random names. Do not silently return zero because a soft ranking threshold was too restrictive. Zero frozen names is a data/pipeline failure if trustworthy scored names exist.
 
-Required output:
+Internal/audit output must retain the complete frozen Top-25 with score and grade per name. User-facing reports do NOT need to repeat all 25 names. To prove the stage completed without redundant clutter, show only the ranked Top 10 finalists that advanced to the final-scan arena, including ticker, score/grade, and concise reason/strength. The full Top-25 remains preserved in the production artifact for verification when needed.
+
+Required user-facing output:
 - actual refresh start and freeze completion times ET
-- full ranked frozen list
-- score/grade per name
+- count of frozen candidates
+- ranked Top 10 finalists only
+- score/grade for each displayed finalist
 - count of strict premarket A-grade names
 
 ## Stage 4 — 09:45 final A+ live gates
@@ -144,7 +147,7 @@ The daily result must be understandable without opening code. It must read in ch
 `09:16:12 ET — DEEP ANALYSIS COMPLETED — 60 analyzed / X strict A-grade`
 `09:18:00 ET — REFRESH + RANKING STARTED`
 `09:23:47 ET — TOP-25 FROZEN`
-`Top 25: ...`
+`Final-scan Top 10: 1. TICKER score/grade ... through 10. TICKER score/grade`
 `09:45:00 ET — FINAL LIVE CONFIRMATION STARTED`
 `09:47:26 ET — FINAL LIVE CONFIRMATION COMPLETED`
 `RESULT: BUY ...` or `RESULT: NO TRADE — no A+ setup.`
