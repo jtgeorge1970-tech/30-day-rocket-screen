@@ -25,9 +25,36 @@ def score_gap(gap_pct: float) -> float:
     return max(0.0, 12.0 * (25.0 - gap_pct) / 10.0)
 
 
+def score_premarket_volume(row: dict) -> float:
+    """Score the locked 20-point premarket-volume component.
+
+    Preferred path is true premarket RVOL when a valid historical premarket baseline exists.
+    Yahoo does not reliably provide extended-hours volume, so Engine 4 now has a verified
+    no-cost fallback: Nasdaq premarket share volume divided by estimated average daily shares.
+    A 10% premarket-volume/ADV intensity earns the full 20 points; lower values scale linearly.
+    This fallback is explicit in audit output and never masquerades as true historical RVOL.
+    """
+    rvol = row.get("premarket_rvol", math.nan)
+    try:
+        rvol = float(rvol)
+    except Exception:
+        rvol = math.nan
+    if math.isfinite(rvol):
+        return 20.0 * clamp((rvol - 1.0) / 4.0)
+
+    intensity = row.get("premarket_volume_intensity_pct", math.nan)
+    try:
+        intensity = float(intensity)
+    except Exception:
+        intensity = math.nan
+    if math.isfinite(intensity) and intensity >= 0:
+        return 20.0 * clamp(intensity / 10.0)
+    return 0.0
+
+
 def score_candidate(row: dict) -> Tuple[float, Dict[str, float]]:
     catalyst = 25.0 * clamp(row["catalyst_quality"])
-    rvol = 20.0 * clamp((row["premarket_rvol"] - 1.0) / 4.0) if math.isfinite(row["premarket_rvol"]) else 0.0
+    premarket_volume = score_premarket_volume(row)
     gap = score_gap(row["gap_pct"])
     liquidity = 15.0 * clamp((math.log10(max(row["avg_daily_dollar_volume"], 1.0)) - 7.3) / (9.0 - 7.3))
     room = 10.0 * clamp(row["resistance_room_pct"] / 8.0)
@@ -39,7 +66,7 @@ def score_candidate(row: dict) -> Tuple[float, Dict[str, float]]:
 
     components = {
         "catalyst_quality": round(catalyst, 3),
-        "relative_premarket_volume": round(rvol, 3),
+        "relative_premarket_volume": round(premarket_volume, 3),
         "gap_quality": round(gap, 3),
         "liquidity_dollar_volume": round(liquidity, 3),
         "room_to_resistance": round(room, 3),
