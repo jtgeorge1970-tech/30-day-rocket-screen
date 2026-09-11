@@ -1,0 +1,39 @@
+name: Engine 4 Intraday Production
+
+on:
+  workflow_dispatch:
+  schedule:
+    # America/New_York is UTC-4 in EDT and UTC-5 in EST.
+    # Wake at both UTC equivalents; engine4_intraday.py runs only inside the correct ET window.
+    - cron: '55 12 * * 1-5'   # 08:55 EDT
+    - cron: '55 13 * * 1-5'   # 08:55 EST (09:55 EDT wake is ignored)
+    - cron: '45 13 * * 1-5'   # 09:45 EDT
+    - cron: '45 14 * * 1-5'   # 09:45 EST (10:45 EDT wake is ignored)
+
+jobs:
+  engine4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run exact ET Engine 4 stage
+        run: python engine4_intraday.py scheduled
+      - name: Save Engine 4 audit/output only
+        run: |
+          git config user.name 'engine4-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add output/engine4/ || true
+          if git diff --cached --quiet; then
+            echo 'No Engine 4 output changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Engine 4 scheduled output'
+          git pull --rebase origin main
+          git push origin HEAD:main
