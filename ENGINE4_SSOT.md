@@ -1,4 +1,4 @@
-# Engine 4 — Intraday Perfect Setup SSOT v4.4
+# Engine 4 — Intraday Perfect Setup SSOT v4.5
 Locked for live trial: 2026-09-14
 
 ## Golden Rules
@@ -12,6 +12,7 @@ Engine 4 must never describe a configured ranking cap as though it were a natura
 
 The following quantities must always be labeled separately:
 - NATURAL QUALIFICATION COUNT = how many names actually met the defined criteria before a cap was applied.
+- NONZERO PREMARKET ACTIVITY COUNT = how many naturally qualified names also had non-zero premarket dollar volume reported by the data source.
 - RETAINED BY CAP = how many names were deliberately kept because the engine is configured to carry only the strongest N forward.
 - SELECTED FOR DEEP ANALYSIS = how many names were deliberately chosen for the 100-point analysis because of the configured deep-analysis cap.
 - ACTUALLY ANALYZED = how many selected names had enough trustworthy data to complete scoring.
@@ -24,7 +25,7 @@ Rounded values such as 100, 60 or 25 are expected when they are configured caps.
 ## Purpose
 Engine 4 is a separate long-only intraday/day-trading engine. Engines 1–3 remain untouched. Engine 4 must search broadly enough to surface real opportunities, then become progressively stricter. The early pre-screen is NOT allowed to behave like the final A+ trade gate.
 
-A valid day may end in NO TRADE, but a healthy engine should normally produce a broad naturally-qualified population and then rank the strongest names forward. Zero naturally-qualified names with otherwise healthy data must be investigated and cannot be casually reported as a normal trading conclusion.
+A valid day may end in NO TRADE, but a healthy engine should normally produce a broad naturally-qualified population and then rank the strongest names forward. Zero naturally-qualified names with otherwise healthy price data must be investigated and cannot be casually reported as a normal trading conclusion.
 
 ## Free-data rule
 Use the existing Rocket free-data stack first. Production code uses Yahoo Finance/yfinance and the existing Rocket baseline outputs. Alpaca free may be used as an independent live cross-check in ChatGPT, but Engine 4 must not require a paid data subscription. No paid source may be added without explicit user approval after a documented gap is proven.
@@ -58,22 +59,37 @@ The broad pre-screen exists to FIND candidates, not eliminate the day before ana
 
 For every baseline-eligible stock with trustworthy current premarket observations, calculate premarket gap, premarket volume, premarket dollar volume and activity score.
 
-Natural broad qualification is deliberately permissive:
+### Locked natural broad-qualification rule
+Natural broad qualification is deliberately permissive and restores the same broad criterion used before the reporting-integrity repair:
 - baseline investability already passed
-- trustworthy current premarket price exists
-- non-zero premarket dollar volume exists
+- trustworthy current premarket price observation exists
+- price is valid and >= $5
+- valid prior-close reference exists
 
-This NATURAL BROAD QUALIFICATION COUNT is measured and reported before any cap is applied.
+A stock does NOT need non-zero Yahoo-reported premarket volume to count as naturally broad-qualified. Yahoo can return valid extended-hours prices while reporting zero volume in the 1-minute bars. Treating zero reported volume as an automatic disqualifier is a data-source regression and is prohibited.
 
-The former stronger activity thresholds — gap >= 0.50%, gap <= 25%, and premarket dollar volume >= $500,000 — remain a STRICT ACTIVITY QUALITY FLAG and are separately counted. They are not an all-or-nothing early kill switch.
+The NATURAL BROAD QUALIFICATION COUNT is measured and reported before any cap is applied.
 
-After natural qualification, rank by strict activity flag, objective activity score and premarket dollar volume, then retain no more than the configured Top-100 candidate cap.
+Separately report:
+- NONZERO PREMARKET ACTIVITY COUNT = naturally qualified names with premarket dollar volume > 0
+- STRICT ACTIVITY COUNT = gap >= 0.50%, gap <= 25%, and premarket dollar volume >= $500,000
+
+Those volume/activity measures are quality and ranking signals. They are not all-or-nothing early kill switches.
+
+### Locked ranking behavior
+Preserve the prior broad ranking behavior:
+1. Prefer positive movers with non-zero premarket volume.
+2. If none exist, prefer names with any non-zero premarket volume.
+3. If the data source reports zero premarket volume across the observed set, rank the trustworthy observed set rather than manufacturing a false zero-candidate day.
+4. Sort by strict-activity flag, activity score, then premarket dollar volume.
+5. Retain no more than the configured Top-100 candidate cap.
 
 Required output after completion:
 - actual start/completion times ET
 - baseline-eligible stock count
 - number with trustworthy observations
 - NATURAL broad-qualified count
+- NONZERO premarket activity count
 - strict-activity count
 - RETAINED BY TOP-100 CAP count
 - retained ticker list
@@ -117,6 +133,7 @@ Required output after completion:
 ## Stage 3 — 09:18 refresh, rerank, Top-25 freeze
 At 09:18 ET, refresh the broad universe with the latest premarket data and repeat the honest funnel accounting:
 - naturally broad-qualified count
+- nonzero premarket activity count
 - retained-by-Top-100-cap count
 - selected-for-deep count
 - actually analyzed count
@@ -182,8 +199,9 @@ The daily result must be understandable without opening code and must clearly di
 `09:03:41 ET — PRE-SCREEN COMPLETED`
 `Baseline eligible: 1,870`
 `Trustworthy observations: 1,842`
-`Naturally broad-qualified: 1,126`
-`Strict-activity names: 74`
+`Naturally broad-qualified: 1,842`
+`Nonzero premarket activity: 74`
+`Strict-activity names: 18`
 `Retained by Top-100 cap: 100`
 `09:05:00 ET — DEEP 100-POINT ANALYSIS STARTED`
 `Selected for deep analysis by Top-60 cap: 60`
@@ -198,6 +216,9 @@ The daily result must be understandable without opening code and must clearly di
 `RESULT: BUY ...` or `RESULT: NO TRADE — no A+ setup.`
 
 All numbers and times above are illustrative only. Production must display actual measured values.
+
+## Regression note — 2026-09-11
+During the reporting-integrity repair, the code was accidentally tightened from “trustworthy premarket price observation” to “trustworthy price plus non-zero Yahoo-reported premarket dollar volume.” That was NOT the same criterion and caused a false zero-candidate failure in a same-day test. This regression is prohibited going forward. The restored rule above is authoritative.
 
 ## Final output
 If no ticker passes every final live mandatory gate:
@@ -223,3 +244,4 @@ If one or more names pass, rank the full-pass names and send only the strongest 
 - Engine 4 is intraday only and must not silently become an overnight hold.
 - Production alert is generated from Engine 4 output artifacts; ChatGPT relays it.
 - Any report that conflates a configured cap with a natural pass count is considered a reporting failure and must be corrected before the result is accepted.
+- Any code change that alters a screening criterion must be explicitly identified and approved in the SSOT; reporting-only fixes may not silently tighten or loosen trading criteria.
