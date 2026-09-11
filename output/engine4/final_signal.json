@@ -1,0 +1,7 @@
+{
+  "status": "NO_TRADE",
+  "reason": "missing_top25",
+  "message": "NO TRADE \u2014 premarket Top 25 unavailable.",
+  "runtime_seconds": 0.0,
+  "generated_at_utc": "2026-09-11T13:49:25.854520+00:00"
+}
