@@ -31,9 +31,15 @@ jobs:
       - name: Free Yahoo data smoke test
         run: python engine4_intraday.py smoke
       - name: Full-universe historical premarket acceptance replay
-        run: python engine4_intraday.py premarket --date 2026-09-10
+        run: |
+          python engine4_intraday.py premarket --date 2026-09-10
+          echo '--- PREMARKET ACCEPTANCE RESULT ---'
+          cat output/engine4/top25_frozen.json
       - name: Historical final-stage acceptance replay
-        run: python engine4_intraday.py final --date 2026-09-10
+        run: |
+          python engine4_intraday.py final --date 2026-09-10
+          echo '--- FINAL ACCEPTANCE RESULT ---'
+          cat output/engine4/final_signal.json
       - name: Verify auditable acceptance artifacts
         run: |
           test -f output/engine4/data_smoke.json
@@ -48,8 +54,17 @@ jobs:
           assert smoke['intraday_returned'] >= 10
           assert 'runtime_seconds' in top
           assert final['status'] in {'BUY','NO_TRADE'}
+          if top.get('candidates'):
+              assert len(top['candidates']) <= 25
+              scores=[x['score'] for x in top['candidates']]
+              assert scores == sorted(scores, reverse=True)
+              assert min(scores) >= 70
           print('ENGINE4_REAL_DATA_ACCEPTANCE_PASS')
           print('smoke_runtime', smoke['runtime_seconds'])
           print('premarket_runtime', top['runtime_seconds'])
+          print('top25_actual_count', top.get('actual_count', len(top.get('candidates',[]))))
+          print('premarket_status', top.get('status','TOP25_READY'))
+          print('premarket_reason', top.get('reason',''))
           print('final_runtime', final['runtime_seconds'])
+          print('final_status', final['status'])
           PY
