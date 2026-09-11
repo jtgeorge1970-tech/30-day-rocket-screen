@@ -44,9 +44,9 @@ TIMELINE = OUT / "timeline.json"
 
 
 def _ser(v):
-    if isinstance(v, (np.floating,)):
+    if isinstance(v, np.floating):
         v = float(v)
-    if isinstance(v, (np.integer,)):
+    if isinstance(v, np.integer):
         v = int(v)
     if isinstance(v, float) and not math.isfinite(v):
         return None
@@ -70,14 +70,41 @@ def _load_timeline() -> dict:
     return {"market_date_et": str(now_et().date()), "events": []}
 
 
+def _write_timeline_text(payload: dict) -> None:
+    lines = [f"ENGINE 4 DAILY TIMELINE — {payload.get('market_date_et', '')}"]
+    for e in payload.get("events", []):
+        try:
+            stamp = datetime.fromisoformat(e["time_et"]).strftime("%I:%M:%S %p ET")
+        except Exception:
+            stamp = e.get("time_et", "")
+        lines.append(f"{stamp} — {e.get('stage')} — {e.get('status')}")
+        lines.append(f"  {e.get('summary', '')}")
+        if e.get("tickers"):
+            lines.append("  Stocks: " + ", ".join(e["tickers"]))
+        if e.get("details"):
+            d = e["details"]
+            ordered = [
+                "baseline_eligible",
+                "trustworthy_observed",
+                "broad_qualified",
+                "strict_activity_count",
+                "retained_by_cap",
+                "selected_for_deep",
+                "analyzed_count",
+                "score70_count",
+                "b_grade_count",
+                "a_grade_count",
+                "runtime_seconds",
+            ]
+            shown = [f"{k}={d[k]}" for k in ordered if k in d]
+            if shown:
+                lines.append("  Counts: " + " | ".join(shown))
+    (OUT / "timeline.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def log_event(stage: str, status: str, summary: str, tickers: list[str] | None = None, details: dict | None = None) -> None:
     payload = _load_timeline()
-    event = {
-        "time_et": _now_iso(),
-        "stage": stage,
-        "status": status,
-        "summary": summary,
-    }
+    event = {"time_et": _now_iso(), "stage": stage, "status": status, "summary": summary}
     if tickers is not None:
         event["tickers"] = tickers
     if details:
@@ -89,23 +116,10 @@ def log_event(stage: str, status: str, summary: str, tickers: list[str] | None =
     print(f"{event['time_et']} | {stage} | {status} | {summary}", flush=True)
 
 
-def _write_timeline_text(payload: dict) -> None:
-    lines = [f"ENGINE 4 DAILY TIMELINE — {payload.get('market_date_et','')}"]
-    for e in payload.get("events", []):
-        try:
-            stamp = datetime.fromisoformat(e["time_et"]).strftime("%I:%M:%S %p ET")
-        except Exception:
-            stamp = e.get("time_et", "")
-        lines.append(f"{stamp} — {e.get('stage')} — {e.get('status')}")
-        lines.append(f"  {e.get('summary','')}")
-        if e.get("tickers"):
-            lines.append("  Stocks: " + ", ".join(e["tickers"]))
-    (OUT / "timeline.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-
 def reset_timeline(date_et) -> None:
-    TIMELINE.write_text(json.dumps({"market_date_et": str(date_et), "events": []}, indent=2), encoding="utf-8")
-    _write_timeline_text({"market_date_et": str(date_et), "events": []})
+    payload = {"market_date_et": str(date_et), "events": []}
+    TIMELINE.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    _write_timeline_text(payload)
 
 
 def eligible_baseline() -> pd.DataFrame:
@@ -126,7 +140,7 @@ def _reference(date_override: str | None, hhmm: str) -> datetime:
     return datetime.fromisoformat(f"{date_override}T{hhmm}:00").replace(tzinfo=ET)
 
 
-def build_broad_pool(date_et, cutoff: str, max_symbols: int | None = None) -> tuple[pd.DataFrame, int, int]:
+def build_broad_pool(date_et, cutoff: str, max_symbols: int | None = None) -> tuple[pd.DataFrame, dict]:
     base = eligible_baseline()
     if max_symbols:
         base = base.head(max_symbols).copy()
@@ -134,6 +148,7 @@ def build_broad_pool(date_et, cutoff: str, max_symbols: int | None = None) -> tu
     frames = download_intraday(symbols, period="1d", interval="1m", prepost=True, date_et=date_et, lookback_days=1)
     indexed = base.set_index("ticker")
     rows = []
+
     for symbol in symbols:
         frame = frames.get(symbol)
         if frame is None or frame.empty:
@@ -166,26 +181,39 @@ def build_broad_pool(date_et, cutoff: str, max_symbols: int | None = None) -> tu
             "premarket_volume": pm_volume,
             "premarket_dollar_volume": pm_dollar,
             "gap_pct": gap,
+            "broad_qualifier": bool(pm_dollar > 0),
             "strict_activity_pass": bool(gap >= 0.50 and gap <= 25.0 and pm_dollar >= 500_000),
             "activity_score": preliminary_activity_score(gap, max(pm_dollar, 1.0), daily_dollar),
         })
-    observed = pd.DataFrame(rows)
-    if observed.empty:
-        return observed, len(base), len(frames)
 
-    # The pre-screen is intentionally broad. It ranks liquid, investable names with
-    # trustworthy premarket observations instead of using the former hard gap/volume
-    # gates as an all-or-nothing kill switch. Negative/flat names naturally rank lower.
-    positive = observed[(observed.gap_pct > 0) & (observed.premarket_dollar_volume > 0)].copy()
-    if positive.empty:
-        positive = observed[observed.premarket_dollar_volume > 0].copy()
-    if positive.empty:
-        positive = observed.copy()
-    broad = positive.sort_values(
+    observed = pd.DataFrame(rows)
+    meta = {
+        "baseline_eligible": len(base),
+        "symbols_with_intraday_data": len(frames),
+        "trustworthy_observed": len(observed),
+        "broad_qualified": 0,
+        "strict_activity_count": 0,
+        "retained_by_cap": 0,
+        "broad_pool_cap": BROAD_POOL_SIZE,
+    }
+    if observed.empty:
+        return observed, meta
+
+    # Natural broad qualification is intentionally permissive: a baseline-eligible
+    # stock with a trustworthy premarket price and non-zero premarket dollar volume.
+    # This count is reported BEFORE any configured ranking cap is applied.
+    qualified = observed[observed.broad_qualifier].copy()
+    meta["broad_qualified"] = len(qualified)
+    meta["strict_activity_count"] = int(qualified.strict_activity_pass.sum()) if not qualified.empty else 0
+    if qualified.empty:
+        return qualified, meta
+
+    broad = qualified.sort_values(
         ["strict_activity_pass", "activity_score", "premarket_dollar_volume"],
         ascending=False,
     ).head(BROAD_POOL_SIZE).reset_index(drop=True)
-    return broad, len(base), len(frames)
+    meta["retained_by_cap"] = len(broad)
+    return broad, meta
 
 
 def prescreen_stage(date_override: str | None = None, max_symbols: int | None = None) -> pd.DataFrame:
@@ -195,42 +223,46 @@ def prescreen_stage(date_override: str | None = None, max_symbols: int | None = 
         reset_timeline(date_et)
     log_event("PRE-SCREEN", "STARTED", "Broad liquid U.S. universe scan started.")
     started = time.monotonic()
-    broad, baseline_count, data_count = build_broad_pool(date_et, "09:05", max_symbols)
+    broad, meta = build_broad_pool(date_et, "09:05", max_symbols)
+    runtime = round(time.monotonic() - started, 3)
+
     if broad.empty:
         log_event(
             "PRE-SCREEN",
             "DATA FAILURE",
-            "No trustworthy premarket observations were returned; this is a data failure, not a valid zero-stock screen.",
-            details={"baseline_eligible": baseline_count, "symbols_with_intraday_data": data_count},
+            "No stocks met the permissive broad qualification because no trustworthy non-zero premarket activity was available.",
+            details={**meta, "runtime_seconds": runtime},
         )
-        raise RuntimeError("Engine 4 pre-screen data failure: zero trustworthy observations")
-    broad.to_csv(OUT / "prescreen_survivors.csv", index=False)
+        raise RuntimeError("Engine 4 pre-screen data failure: zero broad-qualified names")
+
+    broad.to_csv(OUT / "prescreen_retained.csv", index=False)
     payload = {
         "target_date_et": str(date_et),
         "generated_at_et": _now_iso(),
-        "baseline_eligible": baseline_count,
-        "symbols_with_intraday_data": data_count,
-        "survivor_count": len(broad),
-        "runtime_seconds": round(time.monotonic() - started, 3),
-        "survivors": _records(broad),
+        **meta,
+        "runtime_seconds": runtime,
+        "retained_candidates": _records(broad),
     }
-    (OUT / "prescreen_survivors.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    (OUT / "prescreen_report.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
     log_event(
         "PRE-SCREEN",
         "COMPLETED",
-        f"{len(broad)} stocks survived the broad pre-screen from {baseline_count} baseline-eligible stocks.",
+        f"{meta['broad_qualified']} stocks naturally met the broad qualification; the strongest {meta['retained_by_cap']} were retained by the configured Top-{BROAD_POOL_SIZE} cap.",
         tickers=broad.ticker.astype(str).tolist(),
-        details={"runtime_seconds": payload["runtime_seconds"], "strict_activity_names": int(broad.strict_activity_pass.sum())},
+        details={**meta, "runtime_seconds": runtime},
     )
     return broad
 
 
 def _score_pool(broad: pd.DataFrame, date_et, reference: datetime, cutoff: str) -> pd.DataFrame:
-    deep_symbols = broad.ticker.astype(str).head(DEEP_POOL_SIZE).tolist()
+    selected = broad.head(DEEP_POOL_SIZE).copy()
+    deep_symbols = selected.ticker.astype(str).tolist()
     history = download_intraday(deep_symbols, period="7d", interval="1m", prepost=True, date_et=date_et, lookback_days=7)
     daily = download_daily_metrics(deep_symbols, asof_date=date_et)
-    benchmark_symbols = ["SPY", "QQQ"] + sorted({SECTOR_ETF[s] for s in broad.sector if s in SECTOR_ETF})
+    benchmark_symbols = ["SPY", "QQQ"] + sorted({SECTOR_ETF[s] for s in selected.sector if s in SECTOR_ETF})
     benchmarks = download_intraday(benchmark_symbols, period="1d", interval="1m", prepost=True, date_et=date_et, lookback_days=1)
+
     benchmark_returns = {}
     for symbol, frame in benchmarks.items():
         pm = slice_window(frame, date_et, "04:00", cutoff)
@@ -240,12 +272,13 @@ def _score_pool(broad: pd.DataFrame, date_et, reference: datetime, cutoff: str) 
         close = pd.to_numeric(pm["Close"], errors="coerce").dropna()
         if not close.empty:
             benchmark_returns[symbol] = (float(close.iloc[-1]) / prev - 1.0) * 100.0
+
     market_return = np.nanmean([benchmark_returns.get("SPY", np.nan), benchmark_returns.get("QQQ", np.nan)])
     if not math.isfinite(market_return):
         market_return = 0.0
 
     enriched = []
-    for row in broad.head(DEEP_POOL_SIZE).to_dict("records"):
+    for row in selected.to_dict("records"):
         symbol = row["ticker"]
         hist = history.get(symbol)
         if hist is None or hist.empty:
@@ -263,6 +296,7 @@ def _score_pool(broad: pd.DataFrame, date_et, reference: datetime, cutoff: str) 
         sector_return = benchmark_returns.get(sector_etf, market_return)
         catalyst, headline, age_hours = catalyst_for(symbol, reference)
         bid, ask, spread = quote_spread(symbol)
+
         row.update({
             "premarket_rvol": float(rvol),
             "atr_pct": float(atr_pct),
@@ -281,6 +315,7 @@ def _score_pool(broad: pd.DataFrame, date_et, reference: datetime, cutoff: str) 
         row["score"] = score
         for key, value in components.items():
             row[f"pts_{key}"] = value
+
         gate_map = {
             "catalyst": catalyst > 0,
             "rvol": math.isfinite(rvol) and rvol >= MIN_PREMARKET_RVOL,
@@ -298,42 +333,62 @@ def _score_pool(broad: pd.DataFrame, date_et, reference: datetime, cutoff: str) 
     ranked = pd.DataFrame(enriched)
     if ranked.empty:
         return ranked
-    ranked = ranked.sort_values(
+    return ranked.sort_values(
         ["premarket_a_grade", "score", "premarket_gate_count", "premarket_rvol", "premarket_dollar_volume"],
         ascending=False,
         na_position="last",
     ).reset_index(drop=True)
-    return ranked
 
 
 def deep_stage(date_override: str | None = None) -> pd.DataFrame:
     reference = _reference(date_override, "09:05")
     date_et = reference.date()
-    log_event("DEEP 100-POINT ANALYSIS", "STARTED", "Detailed catalyst, RVOL, ATR, liquidity, resistance, relative-strength and spread scoring started.")
+    log_event("DEEP 100-POINT ANALYSIS", "STARTED", "Detailed 100-point analysis started on the highest-ranked retained pre-screen candidates.")
     started = time.monotonic()
-    path = OUT / "prescreen_survivors.csv"
+    path = OUT / "prescreen_retained.csv"
     if not path.exists() or path.stat().st_size < 5:
-        raise RuntimeError("Pre-screen survivors missing; refusing to skip stages")
+        raise RuntimeError("Pre-screen retained candidates missing; refusing to skip stages")
+
     broad = pd.read_csv(path)
+    selected_count = min(DEEP_POOL_SIZE, len(broad))
     ranked = _score_pool(broad, date_et, reference, "09:05")
     if ranked.empty:
-        log_event("DEEP 100-POINT ANALYSIS", "DATA FAILURE", "No names had enough trustworthy deep-analysis data.")
+        log_event("DEEP 100-POINT ANALYSIS", "DATA FAILURE", "No selected candidates had enough trustworthy data to complete the deep analysis.")
         raise RuntimeError("Engine 4 deep-analysis data failure")
+
+    runtime = round(time.monotonic() - started, 3)
+    score70_count = int((ranked.score >= MIN_SCORE).sum())
+    a_grade_count = int(ranked.premarket_a_grade.sum())
+    b_grade_count = int((ranked.premarket_grade == "B").sum())
     ranked.to_csv(OUT / "deep_ranked.csv", index=False)
-    (OUT / "deep_ranked.json").write_text(json.dumps({
+    payload = {
         "target_date_et": str(date_et),
         "generated_at_et": _now_iso(),
+        "selected_for_deep": selected_count,
+        "deep_pool_cap": DEEP_POOL_SIZE,
         "analyzed_count": len(ranked),
-        "runtime_seconds": round(time.monotonic() - started, 3),
+        "score70_count": score70_count,
+        "b_grade_count": b_grade_count,
+        "a_grade_count": a_grade_count,
+        "runtime_seconds": runtime,
         "ranked": _records(ranked),
-    }, indent=2), encoding="utf-8")
+    }
+    (OUT / "deep_ranked.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
     leaders = ranked.head(10).ticker.astype(str).tolist()
+
     log_event(
         "DEEP 100-POINT ANALYSIS",
         "COMPLETED",
-        f"{len(ranked)} stocks completed the 100-point analysis; {int(ranked.premarket_a_grade.sum())} met every former A-grade premarket gate. Near-misses remain ranked for the 09:45 live test instead of being discarded early.",
+        f"Top {selected_count} were selected for deep analysis by the configured cap; {len(ranked)} actually completed scoring. Of those, {score70_count} scored >=70 and {a_grade_count} met every strict premarket A-grade gate.",
         tickers=leaders,
-        details={"runtime_seconds": round(time.monotonic() - started, 3)},
+        details={
+            "selected_for_deep": selected_count,
+            "analyzed_count": len(ranked),
+            "score70_count": score70_count,
+            "b_grade_count": b_grade_count,
+            "a_grade_count": a_grade_count,
+            "runtime_seconds": runtime,
+        },
     )
     return ranked
 
@@ -343,10 +398,12 @@ def refresh_and_freeze(date_override: str | None = None, max_symbols: int | None
     date_et = reference.date()
     log_event("09:18 REFRESH + RANKING", "STARTED", "Mandatory fresh full-universe premarket refresh/rerank started.")
     started = time.monotonic()
-    broad, baseline_count, data_count = build_broad_pool(date_et, "09:18", max_symbols)
+
+    broad, meta = build_broad_pool(date_et, "09:18", max_symbols)
     if broad.empty:
-        log_event("09:18 REFRESH + RANKING", "DATA FAILURE", "Refresh returned zero trustworthy premarket observations; refusing to call this a valid zero-stock result.")
+        log_event("09:18 REFRESH + RANKING", "DATA FAILURE", "Refresh produced zero naturally broad-qualified names.", details=meta)
         raise RuntimeError("Engine 4 refresh data failure")
+
     ranked_all = _score_pool(broad, date_et, reference, "09:18")
     if ranked_all.empty:
         log_event("09:18 REFRESH + RANKING", "DATA FAILURE", "Refresh produced no trustworthy scored names.")
@@ -358,29 +415,40 @@ def refresh_and_freeze(date_override: str | None = None, max_symbols: int | None
     runtime = round(time.monotonic() - started, 3)
     top["runtime_seconds"] = runtime
     top.to_csv(OUT / "top25_frozen.csv", index=False)
+
     payload = {
         "target_date_et": str(date_et),
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "generated_at_et": _now_iso(),
+        **meta,
+        "selected_for_deep": min(DEEP_POOL_SIZE, len(broad)),
+        "refresh_analyzed_count": len(ranked_all),
+        "score70_count": int((ranked_all.score >= MIN_SCORE).sum()),
         "requested_top_n": TOP_N,
         "actual_count": len(top),
         "a_grade_count": int(top.premarket_a_grade.sum()),
-        "baseline_eligible": baseline_count,
-        "symbols_with_intraday_data": data_count,
         "runtime_seconds": runtime,
         "candidates": _records(top),
     }
     (OUT / "top25_frozen.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
     (OUT / "premarket_status.txt").write_text(
-        f"TOP 25 FROZEN — {len(top)} ranked candidates; {payload['a_grade_count']} strict premarket A-grade. Runtime {runtime:.1f}s\n",
+        f"REFRESH: {meta['broad_qualified']} naturally broad-qualified; {meta['retained_by_cap']} retained by Top-{BROAD_POOL_SIZE} cap; {len(ranked_all)} completed refreshed deep scoring; Top {len(top)} frozen; {payload['a_grade_count']} strict A-grade. Runtime {runtime:.1f}s\n",
         encoding="utf-8",
     )
+
     log_event(
         "TOP-25 FREEZE",
         "COMPLETED",
-        f"Top {len(top)} ranked candidates frozen for the 09:45 live confirmation. {payload['a_grade_count']} are strict premarket A-grade; the rest are high-ranked watch candidates that must prove themselves live.",
+        f"Refresh found {meta['broad_qualified']} naturally broad-qualified names; {meta['retained_by_cap']} were retained by cap, {len(ranked_all)} completed refreshed deep scoring, and the best {len(top)} were frozen for the 09:45 live confirmation.",
         tickers=top.ticker.astype(str).tolist(),
-        details={"runtime_seconds": runtime},
+        details={
+            **meta,
+            "selected_for_deep": min(DEEP_POOL_SIZE, len(broad)),
+            "analyzed_count": len(ranked_all),
+            "score70_count": int((ranked_all.score >= MIN_SCORE).sum()),
+            "a_grade_count": int(top.premarket_a_grade.sum()),
+            "runtime_seconds": runtime,
+        },
     )
     return top
 
@@ -394,7 +462,11 @@ def final_with_timeline(date_override: str | None = None) -> dict:
         "COMPLETED",
         result.get("message", "Final stage completed."),
         tickers=[result["ticker"]] if result.get("ticker") else [],
-        details={"runtime_seconds": round(time.monotonic() - started, 3), "status": result.get("status"), "reason": result.get("reason")},
+        details={
+            "runtime_seconds": round(time.monotonic() - started, 3),
+            "status": result.get("status"),
+            "reason": result.get("reason"),
+        },
     )
     return result
 
@@ -403,6 +475,8 @@ def self_test() -> None:
     assert TOP_N == 25
     assert BROAD_POOL_SIZE >= TOP_N
     assert DEEP_POOL_SIZE >= TOP_N
+    assert BROAD_POOL_SIZE == 100
+    assert DEEP_POOL_SIZE == 60
     print("ENGINE4_PIPELINE_SELF_TEST_PASS")
 
 
