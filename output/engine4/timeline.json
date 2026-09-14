@@ -215,7 +215,27 @@
         "a_grade_count": 9,
         "runtime_seconds": 362.535
       }
+    },
+    {
+      "time_et": "2026-09-14T09:45:12.896929-04:00",
+      "stage": "FINAL 09:45 LIVE CONFIRMATION",
+      "status": "STARTED",
+      "summary": "Opening-range/VWAP/volume/relative-strength confirmation started on the frozen shortlist only."
+    },
+    {
+      "time_et": "2026-09-14T09:46:08.992349-04:00",
+      "stage": "FINAL 09:45 LIVE CONFIRMATION",
+      "status": "COMPLETED",
+      "summary": "WAIT \u2014 DO NOT BUY PANW YET\nBUY ONLY IF PRICE REACHES $350.53\nVALID BUY RANGE: $350.53 TO $352.28\nIF BOUGHT, ENTER SELL STOP AT $344.85\nIF PRICE THEN RISES TO $364.71, MOVE SELL STOP TO $353.36\nCurrent price: $349.99\nDO NOT BUY BELOW $350.53\nDO NOT BUY ABOVE $352.28",
+      "tickers": [
+        "PANW"
+      ],
+      "details": {
+        "runtime_seconds": 56.095,
+        "status": "WATCH",
+        "reason": "trigger_not_reached"
+      }
     }
   ],
-  "last_updated_et": "2026-09-14T09:24:21.478440-04:00"
+  "last_updated_et": "2026-09-14T09:46:08.992349-04:00"
 }
