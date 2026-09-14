@@ -127,7 +127,39 @@
         "broad_pool_cap": 100,
         "runtime_seconds": 229.161
       }
+    },
+    {
+      "time_et": "2026-09-14T09:05:08.397794-04:00",
+      "stage": "DEEP 100-POINT ANALYSIS",
+      "status": "STARTED",
+      "summary": "Detailed 100-point analysis started on the highest-ranked retained pre-screen candidates."
+    },
+    {
+      "time_et": "2026-09-14T09:07:42.656124-04:00",
+      "stage": "DEEP 100-POINT ANALYSIS",
+      "status": "COMPLETED",
+      "summary": "Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 8 scored >=70 and 6 met every strict premarket A-grade gate.",
+      "tickers": [
+        "OXY",
+        "DFTX",
+        "RBLX",
+        "PLTR",
+        "CRWD",
+        "UBER",
+        "SRRK",
+        "RUM",
+        "IBM",
+        "SHOP"
+      ],
+      "details": {
+        "selected_for_deep": 60,
+        "analyzed_count": 60,
+        "score70_count": 8,
+        "b_grade_count": 13,
+        "a_grade_count": 6,
+        "runtime_seconds": 154.248
+      }
     }
   ],
-  "last_updated_et": "2026-09-14T08:59:05.889164-04:00"
+  "last_updated_et": "2026-09-14T09:07:42.656124-04:00"
 }
