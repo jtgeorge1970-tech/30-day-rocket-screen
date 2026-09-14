@@ -159,7 +159,63 @@
         "a_grade_count": 6,
         "runtime_seconds": 154.248
       }
+    },
+    {
+      "time_et": "2026-09-14T09:18:18.935148-04:00",
+      "stage": "09:18 REFRESH + RANKING",
+      "status": "STARTED",
+      "summary": "Mandatory fresh full-universe premarket refresh/rerank started."
+    },
+    {
+      "time_et": "2026-09-14T09:24:21.478440-04:00",
+      "stage": "TOP-25 FREEZE",
+      "status": "COMPLETED",
+      "summary": "Refresh found 1547 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, and the best 25 were frozen for the 09:45 live confirmation.",
+      "tickers": [
+        "OXY",
+        "PLTR",
+        "CRWD",
+        "RBLX",
+        "RUM",
+        "BWIN",
+        "UBER",
+        "IBM",
+        "SHOP",
+        "DFTX",
+        "SRRK",
+        "FIG",
+        "SYRE",
+        "ZS",
+        "SAP",
+        "PANW",
+        "NFLX",
+        "CAPR",
+        "DELL",
+        "COIN",
+        "AZN",
+        "NAT",
+        "SPSC",
+        "ADBE",
+        "GOOGL"
+      ],
+      "details": {
+        "baseline_eligible": 1870,
+        "symbols_with_intraday_data": 1870,
+        "trustworthy_observed": 1547,
+        "broad_qualified": 1547,
+        "nasdaq_enrichment_cap": 400,
+        "nasdaq_premarket_enriched": 380,
+        "nonzero_premarket_activity_count": 380,
+        "strict_activity_count": 162,
+        "retained_by_cap": 100,
+        "broad_pool_cap": 100,
+        "selected_for_deep": 60,
+        "analyzed_count": 60,
+        "score70_count": 12,
+        "a_grade_count": 9,
+        "runtime_seconds": 362.535
+      }
     }
   ],
-  "last_updated_et": "2026-09-14T09:07:42.656124-04:00"
+  "last_updated_et": "2026-09-14T09:24:21.478440-04:00"
 }

@@ -11,3 +11,9 @@ ENGINE 4 DAILY TIMELINE — 2026-09-14
   Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 8 scored >=70 and 6 met every strict premarket A-grade gate.
   Stocks: OXY, DFTX, RBLX, PLTR, CRWD, UBER, SRRK, RUM, IBM, SHOP
   Counts: selected_for_deep=60 | analyzed_count=60 | score70_count=8 | b_grade_count=13 | a_grade_count=6 | runtime_seconds=154.248
+09:18:18 AM ET — 09:18 REFRESH + RANKING — STARTED
+  Mandatory fresh full-universe premarket refresh/rerank started.
+09:24:21 AM ET — TOP-25 FREEZE — COMPLETED
+  Refresh found 1547 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, and the best 25 were frozen for the 09:45 live confirmation.
+  Stocks: OXY, PLTR, CRWD, RBLX, RUM, BWIN, UBER, IBM, SHOP, DFTX, SRRK, FIG, SYRE, ZS, SAP, PANW, NFLX, CAPR, DELL, COIN, AZN, NAT, SPSC, ADBE, GOOGL
+  Counts: baseline_eligible=1870 | trustworthy_observed=1547 | broad_qualified=1547 | strict_activity_count=162 | retained_by_cap=100 | selected_for_deep=60 | analyzed_count=60 | score70_count=12 | a_grade_count=9 | runtime_seconds=362.535
