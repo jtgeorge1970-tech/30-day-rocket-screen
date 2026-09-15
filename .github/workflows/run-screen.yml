@@ -1,9 +1,9 @@
-# Full fresh rerun — no shortcuts, no fundamentals cache reuse
+# Full fresh rerun — manual/maintenance workflow only.
+# IMPORTANT: This workflow must NOT run on a market-day schedule. Engine 4 production
+# owns the ordered intraday cycle in engine4-production.yml.
 name: Full 30-Day Rocket Screen
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '30 13 * * 1-5'
   push:
     branches: [main]
     paths:
