@@ -17,3 +17,16 @@ ENGINE 4 DAILY TIMELINE — 2026-09-15
   Refresh found 1425 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, and the best 25 were frozen for the 09:45 live confirmation.
   Stocks: VERA, RKLB, FPS, ETSY, ASML, LITE, COHR, STM, BE, CRWV, TTMI, AU, KTOS, TENB, SNAP, INTC, WOLF, WAY, CRDO, MU, TER, GEV, AMAT, SNDK, TSEM
   Counts: baseline_eligible=1870 | trustworthy_observed=1425 | broad_qualified=1425 | strict_activity_count=102 | retained_by_cap=100 | selected_for_deep=60 | analyzed_count=60 | score70_count=3 | a_grade_count=2 | runtime_seconds=312.222
+09:45:19 AM ET — FINAL 09:45 LIVE CONFIRMATION — STARTED
+  Opening-range/VWAP/volume/relative-strength confirmation started on the frozen shortlist only.
+09:46:14 AM ET — FINAL 09:45 LIVE CONFIRMATION — COMPLETED
+  WAIT — DO NOT BUY CRDO YET
+BUY ONLY IF PRICE REACHES $154.78
+VALID BUY RANGE: $154.78 TO $155.55
+IF BOUGHT, ENTER SELL STOP AT $151.99
+IF PRICE THEN RISES TO $161.73, MOVE SELL STOP TO $156.17
+Current price: $153.84
+DO NOT BUY BELOW $154.78
+DO NOT BUY ABOVE $155.55
+  Stocks: CRDO
+  Counts: runtime_seconds=55.024

@@ -215,7 +215,27 @@
         "a_grade_count": 2,
         "runtime_seconds": 312.222
       }
+    },
+    {
+      "time_et": "2026-09-15T09:45:19.829691-04:00",
+      "stage": "FINAL 09:45 LIVE CONFIRMATION",
+      "status": "STARTED",
+      "summary": "Opening-range/VWAP/volume/relative-strength confirmation started on the frozen shortlist only."
+    },
+    {
+      "time_et": "2026-09-15T09:46:14.854027-04:00",
+      "stage": "FINAL 09:45 LIVE CONFIRMATION",
+      "status": "COMPLETED",
+      "summary": "WAIT \u2014 DO NOT BUY CRDO YET\nBUY ONLY IF PRICE REACHES $154.78\nVALID BUY RANGE: $154.78 TO $155.55\nIF BOUGHT, ENTER SELL STOP AT $151.99\nIF PRICE THEN RISES TO $161.73, MOVE SELL STOP TO $156.17\nCurrent price: $153.84\nDO NOT BUY BELOW $154.78\nDO NOT BUY ABOVE $155.55",
+      "tickers": [
+        "CRDO"
+      ],
+      "details": {
+        "runtime_seconds": 55.024,
+        "status": "WATCH",
+        "reason": "trigger_not_reached"
+      }
     }
   ],
-  "last_updated_et": "2026-09-15T09:23:25.155636-04:00"
+  "last_updated_et": "2026-09-15T09:46:14.854027-04:00"
 }
