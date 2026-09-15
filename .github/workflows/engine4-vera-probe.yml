@@ -18,7 +18,7 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt
-      - name: Run VERA 2026-09-15 recovery scan
+      - name: Replay VERA 2026-09-15 recovery scans
         shell: bash
         run: |
           set -euo pipefail
@@ -27,25 +27,48 @@ jobs:
             echo 'Probe date has passed; no action.'
             exit 0
           fi
-          mkdir -p output/engine4
-          cat > output/engine4/recovery_watch.json <<'JSON'
-          {
-            "target_date_et":"2026-09-15",
-            "max_tradable_price":100.0,
-            "requested_count":5,
-            "actual_count":1,
-            "candidates":[{"ticker":"VERA","rank":1,"score":70.0,"premarket_grade":"A","sector":"Healthcare","primary_failures":["below_vwap","no_higher_low_or_tight_base","not_attacking_breakout"]}]
-          }
-          JSON
-          echo '{"status":"NO_TRADE","reason":"primary_failed_recovery_watch_active"}' > output/engine4/final_signal.json
-          python engine4_recovery.py scan-once --date 2026-09-15
-          echo '--- RECOVERY SIGNAL ---'
-          cat output/engine4/recovery_signal.json
-          echo '--- VERA AUDIT ---'
           python - <<'PY'
-          import json
-          from pathlib import Path
-          a=json.loads(Path('output/engine4/recovery_audit.json').read_text())['candidates'][0]
-          for k in ['ticker','state','current_price','session_high','session_low','flush_pct','bars_since_low','higher_low','base_high','base_low','base_range_pct','green_bars_last4','volume_expansion_ratio','entry_trigger','max_allowed_buy_price','initial_stop','failures']:
-              print(k, a.get(k))
+          from datetime import date
+          import math
+          import pandas as pd
+          import engine4_recovery as r
+          from engine4_data import download_intraday
+          from engine4_config import ET
+
+          d=date(2026,9,15)
+          frames=download_intraday(['VERA'], period='1d', interval='1m', prepost=False, date_et=d, lookback_days=0)
+          frame=frames['VERA']
+          same=frame[frame.index.date==d]
+          if same.empty:
+              raise SystemExit('VERA frame missing')
+
+          armed=[]
+          print('--- 5-MINUTE RECOVERY REPLAY ---')
+          for ts in pd.date_range('2026-09-15 09:50','2026-09-15 11:30',freq='5min',tz='America/New_York'):
+              cut=same[same.index<=ts]
+              if cut.empty:
+                  continue
+              px=float(pd.to_numeric(cut['Close'],errors='coerce').dropna().iloc[-1])
+              old_mid=r._current_mid
+              r._current_mid=lambda symbol, px=px: (px, px-0.01, px+0.01, 0.06)
+              try:
+                  m=r.recovery_metrics('VERA', cut, d)
+              finally:
+                  r._current_mid=old_mid
+              print(ts.strftime('%H:%M'), 'px', round(px,3), 'state', m.get('state'), 'trigger', round(m.get('entry_trigger'),3) if isinstance(m.get('entry_trigger'),(int,float)) and math.isfinite(m.get('entry_trigger')) else None, 'fail', m.get('failures'))
+              if m.get('state') in {'ARM','BUY'}:
+                  armed.append((ts,m))
+          print('ARM_OR_BUY_COUNT', len(armed))
+          if armed:
+              ts,m=armed[0]
+              print('EARLIEST_ACTIONABLE_TIME_ET', ts.isoformat())
+              print('EARLIEST_STATE', m['state'])
+              print('EARLIEST_PRICE', m['current_price'])
+              print('ENTRY_TRIGGER', m['entry_trigger'])
+              print('MAX_BUY', m['max_allowed_buy_price'])
+              print('INITIAL_STOP', m['initial_stop'])
+              print('FIRST_TARGET', m['first_target'])
+              print('PROFIT_STOP', m['precalculated_profit_stop'])
+          else:
+              print('NO_ACTIONABLE_RECOVERY_SIGNAL')
           PY
