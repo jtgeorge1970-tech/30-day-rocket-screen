@@ -3,8 +3,8 @@ name: Engine 4 Intraday Production
 on:
   workflow_dispatch:
   schedule:
-    - cron: '35 12 * * 1-5'
-    - cron: '35 13 * * 1-5'
+    - cron: '35 8 * * 1-5'
+      timezone: 'America/New_York'
 
 concurrency:
   group: engine4-production
@@ -31,8 +31,8 @@ jobs:
           M=$(TZ=America/New_York date +%M)
           T=$((10#$H * 60 + 10#$M))
           echo "Engine 4 production runner woke at ${H}:${M} ET"
-          if [ "$T" -lt 500 ] || [ "$T" -gt 550 ]; then
-            echo 'Wrong seasonal duplicate or unusably late wake — exiting without running Engine 4.'
+          if [ "$T" -lt 515 ] || [ "$T" -gt 545 ]; then
+            echo 'ENGINE 4 DATA/PIPELINE FAILURE — production runner woke outside the usable 08:35-09:05 ET window.'
             exit 78
           fi
 
@@ -54,6 +54,18 @@ jobs:
             done
           }
 
+          fail_if_late() {
+            DEADLINE="$1"
+            LABEL="$2"
+            H=$(TZ=America/New_York date +%H)
+            M=$(TZ=America/New_York date +%M)
+            NOW=$((10#$H * 60 + 10#$M))
+            if [ "$NOW" -gt "$DEADLINE" ]; then
+              echo "ENGINE 4 DATA/PIPELINE FAILURE — ${LABEL} missed its production deadline."
+              exit 79
+            fi
+          }
+
           save_stage() {
             LABEL="$1"
             git config user.name 'engine4-bot'
@@ -70,21 +82,25 @@ jobs:
 
           echo '=== STAGE 1: 08:55 ET BROAD PRE-SCREEN ==='
           wait_until_et 535
+          fail_if_late 540 '08:55 pre-screen start'
           python engine4_pipeline_runner_guarded.py prescreen
           save_stage '08:55 pre-screen complete'
 
           echo '=== STAGE 2: 09:05 ET DEEP 100-POINT ANALYSIS ==='
           wait_until_et 545
+          fail_if_late 550 '09:05 deep-analysis start'
           python engine4_pipeline_runner_guarded.py deep
           save_stage '09:05 deep analysis complete'
 
           echo '=== STAGE 3: 09:18 ET REFRESH + RANK + FREEZE ==='
           wait_until_et 558
+          fail_if_late 565 '09:18 refresh/freeze start'
           python engine4_pipeline_runner_guarded.py refresh
           save_stage '09:18 refresh and Top-25 freeze'
 
           echo '=== STAGE 4: 09:45 ET FINAL LIVE CONFIRMATION ==='
           wait_until_et 585
+          fail_if_late 588 '09:45 final live confirmation start'
           python engine4_pipeline_runner_guarded.py final
           save_stage '09:45 final live result'
 
