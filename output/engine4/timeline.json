@@ -159,7 +159,63 @@
         "a_grade_count": 2,
         "runtime_seconds": 151.024
       }
+    },
+    {
+      "time_et": "2026-09-15T09:18:12.925821-04:00",
+      "stage": "09:18 REFRESH + RANKING",
+      "status": "STARTED",
+      "summary": "Mandatory fresh full-universe premarket refresh/rerank started."
+    },
+    {
+      "time_et": "2026-09-15T09:23:25.155636-04:00",
+      "stage": "TOP-25 FREEZE",
+      "status": "COMPLETED",
+      "summary": "Refresh found 1425 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, and the best 25 were frozen for the 09:45 live confirmation.",
+      "tickers": [
+        "VERA",
+        "RKLB",
+        "FPS",
+        "ETSY",
+        "ASML",
+        "LITE",
+        "COHR",
+        "STM",
+        "BE",
+        "CRWV",
+        "TTMI",
+        "AU",
+        "KTOS",
+        "TENB",
+        "SNAP",
+        "INTC",
+        "WOLF",
+        "WAY",
+        "CRDO",
+        "MU",
+        "TER",
+        "GEV",
+        "AMAT",
+        "SNDK",
+        "TSEM"
+      ],
+      "details": {
+        "baseline_eligible": 1870,
+        "symbols_with_intraday_data": 1870,
+        "trustworthy_observed": 1425,
+        "broad_qualified": 1425,
+        "nasdaq_enrichment_cap": 400,
+        "nasdaq_premarket_enriched": 363,
+        "nonzero_premarket_activity_count": 363,
+        "strict_activity_count": 102,
+        "retained_by_cap": 100,
+        "broad_pool_cap": 100,
+        "selected_for_deep": 60,
+        "analyzed_count": 60,
+        "score70_count": 3,
+        "a_grade_count": 2,
+        "runtime_seconds": 312.222
+      }
     }
   ],
-  "last_updated_et": "2026-09-15T09:07:35.893208-04:00"
+  "last_updated_et": "2026-09-15T09:23:25.155636-04:00"
 }

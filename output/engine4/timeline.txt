@@ -11,3 +11,9 @@ ENGINE 4 DAILY TIMELINE — 2026-09-15
   Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 3 scored >=70 and 2 met every strict premarket A-grade gate.
   Stocks: FPS, RKLB, VERA, ASML, BE, COHR, LITE, ETSY, STM, TTMI
   Counts: selected_for_deep=60 | analyzed_count=60 | score70_count=3 | b_grade_count=7 | a_grade_count=2 | runtime_seconds=151.024
+09:18:12 AM ET — 09:18 REFRESH + RANKING — STARTED
+  Mandatory fresh full-universe premarket refresh/rerank started.
+09:23:25 AM ET — TOP-25 FREEZE — COMPLETED
+  Refresh found 1425 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, and the best 25 were frozen for the 09:45 live confirmation.
+  Stocks: VERA, RKLB, FPS, ETSY, ASML, LITE, COHR, STM, BE, CRWV, TTMI, AU, KTOS, TENB, SNAP, INTC, WOLF, WAY, CRDO, MU, TER, GEV, AMAT, SNDK, TSEM
+  Counts: baseline_eligible=1870 | trustworthy_observed=1425 | broad_qualified=1425 | strict_activity_count=102 | retained_by_cap=100 | selected_for_deep=60 | analyzed_count=60 | score70_count=3 | a_grade_count=2 | runtime_seconds=312.222
