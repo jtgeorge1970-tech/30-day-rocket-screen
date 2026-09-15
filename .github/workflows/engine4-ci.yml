@@ -22,12 +22,18 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt pytest
       - name: Compile every Engine 4 module
-        run: python -m py_compile engine4_config.py engine4_data.py engine4_free_providers.py engine4_score.py engine4_live.py engine4_intraday.py engine4_pipeline.py engine4_pipeline_runner.py test_engine4_intraday.py
+        run: >-
+          python -m py_compile
+          engine4_config.py engine4_data.py engine4_free_providers.py engine4_score.py
+          engine4_live.py engine4_intraday.py engine4_pipeline.py engine4_pipeline_runner.py
+          engine4_final_guard.py engine4_pipeline_runner_guarded.py engine4_recovery.py
+          test_engine4_intraday.py
       - name: Deterministic self tests
         run: |
           python engine4_intraday.py self-test
           python engine4_pipeline.py self-test
           python engine4_pipeline_runner.py self-test
+          python engine4_recovery.py self-test
       - name: Unit tests
         run: pytest -q test_engine4_intraday.py
       - name: Verified free-provider smoke test
