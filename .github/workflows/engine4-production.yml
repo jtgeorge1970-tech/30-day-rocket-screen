@@ -13,7 +13,7 @@ concurrency:
 jobs:
   engine4:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 190
     permissions:
       contents: write
     steps:
@@ -104,7 +104,16 @@ jobs:
           python engine4_pipeline_runner_guarded.py final
           save_stage '09:45 final live result'
 
+          echo '=== STAGE 5: POST-OPEN HOOK-SET / RECOVERY WATCH ==='
+          # Only the small recovery-watch list is polled. If a valid base forms,
+          # the module exits immediately with a BUY or a broker-side stop-limit
+          # instruction. Otherwise it closes the watch at 11:30 ET.
+          python engine4_recovery.py monitor --interval-seconds 300
+          save_stage 'post-open recovery result'
+
           echo '=== ENGINE 4 ORDERED CYCLE COMPLETE ==='
           cat output/engine4/timeline.txt
-          echo '--- FINAL ALERT ---'
+          echo '--- PRIMARY FINAL ALERT ---'
           cat output/engine4/final_alert.txt
+          echo '--- RECOVERY ALERT ---'
+          cat output/engine4/recovery_alert.txt
