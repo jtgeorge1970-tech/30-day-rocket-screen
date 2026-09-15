@@ -38,12 +38,6 @@ def _trigger_seen(frame: pd.DataFrame, date_et, trigger: float) -> bool:
 
 
 def _precalculated_profit_stop(trigger: float, initial_stop: float) -> float:
-    """Lock +0.50R once the first management level is reached.
-
-    R is defined from the breakout trigger to the initial technical stop. Using the
-    trigger rather than an unknown future fill keeps the number deterministic and
-    allows the complete management plan to be printed before purchase.
-    """
     if not (math.isfinite(trigger) and math.isfinite(initial_stop) and trigger > initial_stop):
         return math.nan
     risk_per_share = trigger - initial_stop
@@ -51,16 +45,17 @@ def _precalculated_profit_stop(trigger: float, initial_stop: float) -> float:
 
 
 def guarded_final_stage(date_override: str | None = None) -> dict:
-    """Final Engine 4 stage with a mandatory current-price trigger guard."""
+    """Final Engine 4 stage: frozen Top-25 only, with actionable live entry output."""
     started = time.monotonic()
     reference = now_et() if date_override is None else datetime.fromisoformat(date_override + "T09:45:00").replace(tzinfo=ET)
     date_et = reference.date()
     frozen_path = OUT / "top25_frozen.csv"
     if not frozen_path.exists() or frozen_path.stat().st_size < 5:
         return write_final({
-            "status": "NO_TRADE",
+            "status": "PIPELINE_FAILURE",
             "reason": "missing_top25",
-            "message": "NO TRADE — premarket Top 25 unavailable.",
+            "message": "ENGINE 4 DATA/PIPELINE FAILURE — frozen Top 25 unavailable.",
+            "order_instruction": "NO_ORDER",
             "runtime_seconds": round(time.monotonic() - started, 3),
         })
 
@@ -70,9 +65,10 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
         top = pd.DataFrame()
     if top.empty or "ticker" not in top.columns:
         return write_final({
-            "status": "NO_TRADE",
+            "status": "PIPELINE_FAILURE",
             "reason": "empty_top25",
-            "message": "NO TRADE — no A+ setup. DO NOT BUY.",
+            "message": "ENGINE 4 DATA/PIPELINE FAILURE — frozen Top 25 is empty or invalid.",
+            "order_instruction": "NO_ORDER",
             "runtime_seconds": round(time.monotonic() - started, 3),
         })
 
@@ -95,8 +91,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             continue
 
         metrics = opening_structure(symbol, frame, row, market, date_et)
-        failures = list(metrics.get("failures", []))
-        failures = [f for f in failures if f != "entry_missed"]
+        failures = [f for f in list(metrics.get("failures", [])) if f != "entry_missed"]
         metrics["failures_before_current_price_guard"] = list(failures)
 
         if failures:
@@ -171,7 +166,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             "reason": "live_trigger_confirmed",
             "ticker": symbol,
             "message": message,
-            "order_instruction": "BUY_WITHIN_RANGE_NOW",
+            "order_instruction": "BUY_NOW",
             "live_price": metrics["current_live_price"],
             "entry_trigger": metrics["entry_trigger"],
             "max_allowed_buy_price": metrics["max_allowed_buy_price"],
@@ -188,22 +183,24 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
         _, row, metrics = watches[0]
         symbol = str(row.ticker)
         message = (
-            f"WAIT — DO NOT BUY {symbol} YET\n"
-            f"BUY ONLY IF PRICE REACHES ${metrics['entry_trigger']:.2f}\n"
-            f"VALID BUY RANGE: ${metrics['entry_trigger']:.2f} TO ${metrics['max_allowed_buy_price']:.2f}\n"
-            f"IF BOUGHT, ENTER SELL STOP AT ${metrics['initial_stop']:.2f}\n"
+            f"ARM ORDER NOW — {symbol}\n"
+            f"BUY STOP: ${metrics['entry_trigger']:.2f}\n"
+            f"BUY LIMIT: ${metrics['max_allowed_buy_price']:.2f}\n"
+            f"TIME IN FORCE: DAY\n"
+            f"CURRENT PRICE: ${metrics['current_live_price']:.2f}\n"
+            f"IF FILLED, ENTER GTC SELL STOP AT ${metrics['initial_stop']:.2f}\n"
             f"IF PRICE THEN RISES TO ${metrics['first_target']:.2f}, MOVE SELL STOP TO ${metrics['precalculated_profit_stop']:.2f}\n"
-            f"Current price: ${metrics['current_live_price']:.2f}\n"
-            f"DO NOT BUY BELOW ${metrics['entry_trigger']:.2f}\n"
-            f"DO NOT BUY ABOVE ${metrics['max_allowed_buy_price']:.2f}"
+            f"DO NOT CHASE ABOVE ${metrics['max_allowed_buy_price']:.2f}"
         )
         return write_final({
-            "status": "WATCH",
+            "status": "ARM",
             "reason": "trigger_not_reached",
             "ticker": symbol,
             "message": message,
-            "order_instruction": "WAIT_FOR_TRIGGER",
+            "order_instruction": "ARM_STOP_LIMIT_DAY",
             "live_price": metrics["current_live_price"],
+            "stop_price": metrics["entry_trigger"],
+            "limit_price": metrics["max_allowed_buy_price"],
             "entry_trigger": metrics["entry_trigger"],
             "max_allowed_buy_price": metrics["max_allowed_buy_price"],
             "initial_stop": metrics["initial_stop"],
