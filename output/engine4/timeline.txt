@@ -5,3 +5,9 @@ ENGINE 4 DAILY TIMELINE — 2026-09-15
   1384 stocks naturally met the broad qualification; the strongest 100 were retained by the configured Top-100 cap.
   Stocks: VERA, FPS, ASML, SNAP, WTM, WAY, RKLB, MT, FRO, BE, NVDA, COHR, INTC, LITE, AMD, MU, AXTI, CRDO, NXPI, KTOS, GLW, AEHR, TENB, STM, TSEM, GEV, CRWV, DELL, AAOI, NVMI, SNDK, MRVL, TSM, NBIS, O, TER, WOLF, LLY, VRT, QRVO, STX, MXL, BB, TTMI, SBSW, CIEN, DHT, LRCX, LEU, ETSY, AMAT, IOVA, ON, AUR, PODD, DAVE, UMAC, ARWR, WDC, ALM, SNX, CLS, WFC, KLAC, CAT, ECHO, RMBS, ETN, FLEX, ANET, NTR, MTSI, STLD, PNR, CCJ, C, FN, FIX, ULTA, MPWR, MCHP, SMTC, LHX, LINE, AXSM, MNST, STLA, BELFB, TNL, MDLZ, SII, AVGO, AU, REGN, AG, ALAB, SGML, ERAS, IREN, ICHR
   Counts: baseline_eligible=1870 | trustworthy_observed=1384 | broad_qualified=1384 | strict_activity_count=83 | retained_by_cap=100 | runtime_seconds=185.658
+09:05:04 AM ET — DEEP 100-POINT ANALYSIS — STARTED
+  Detailed 100-point analysis started on the highest-ranked retained pre-screen candidates.
+09:07:35 AM ET — DEEP 100-POINT ANALYSIS — COMPLETED
+  Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 3 scored >=70 and 2 met every strict premarket A-grade gate.
+  Stocks: FPS, RKLB, VERA, ASML, BE, COHR, LITE, ETSY, STM, TTMI
+  Counts: selected_for_deep=60 | analyzed_count=60 | score70_count=3 | b_grade_count=7 | a_grade_count=2 | runtime_seconds=151.024

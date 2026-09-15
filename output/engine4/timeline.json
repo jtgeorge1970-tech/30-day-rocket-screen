@@ -127,7 +127,39 @@
         "broad_pool_cap": 100,
         "runtime_seconds": 185.658
       }
+    },
+    {
+      "time_et": "2026-09-15T09:05:04.858472-04:00",
+      "stage": "DEEP 100-POINT ANALYSIS",
+      "status": "STARTED",
+      "summary": "Detailed 100-point analysis started on the highest-ranked retained pre-screen candidates."
+    },
+    {
+      "time_et": "2026-09-15T09:07:35.893208-04:00",
+      "stage": "DEEP 100-POINT ANALYSIS",
+      "status": "COMPLETED",
+      "summary": "Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 3 scored >=70 and 2 met every strict premarket A-grade gate.",
+      "tickers": [
+        "FPS",
+        "RKLB",
+        "VERA",
+        "ASML",
+        "BE",
+        "COHR",
+        "LITE",
+        "ETSY",
+        "STM",
+        "TTMI"
+      ],
+      "details": {
+        "selected_for_deep": 60,
+        "analyzed_count": 60,
+        "score70_count": 3,
+        "b_grade_count": 7,
+        "a_grade_count": 2,
+        "runtime_seconds": 151.024
+      }
     }
   ],
-  "last_updated_et": "2026-09-15T08:58:17.272914-04:00"
+  "last_updated_et": "2026-09-15T09:07:35.893208-04:00"
 }
