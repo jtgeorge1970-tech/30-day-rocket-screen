@@ -1,0 +1,51 @@
+name: Engine 4 VERA Recovery Probe
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/engine4-vera-probe.yml'
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Run VERA 2026-09-15 recovery scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          TODAY_ET=$(TZ=America/New_York date +%F)
+          if [ "$TODAY_ET" != "2026-09-15" ]; then
+            echo 'Probe date has passed; no action.'
+            exit 0
+          fi
+          mkdir -p output/engine4
+          cat > output/engine4/recovery_watch.json <<'JSON'
+          {
+            "target_date_et":"2026-09-15",
+            "max_tradable_price":100.0,
+            "requested_count":5,
+            "actual_count":1,
+            "candidates":[{"ticker":"VERA","rank":1,"score":70.0,"premarket_grade":"A","sector":"Healthcare","primary_failures":["below_vwap","no_higher_low_or_tight_base","not_attacking_breakout"]}]
+          }
+          JSON
+          echo '{"status":"NO_TRADE","reason":"primary_failed_recovery_watch_active"}' > output/engine4/final_signal.json
+          python engine4_recovery.py scan-once --date 2026-09-15
+          echo '--- RECOVERY SIGNAL ---'
+          cat output/engine4/recovery_signal.json
+          echo '--- VERA AUDIT ---'
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          a=json.loads(Path('output/engine4/recovery_audit.json').read_text())['candidates'][0]
+          for k in ['ticker','state','current_price','session_high','session_low','flush_pct','bars_since_low','higher_low','base_high','base_low','base_range_pct','green_bars_last4','volume_expansion_ratio','entry_trigger','max_allowed_buy_price','initial_stop','failures']:
+              print(k, a.get(k))
+          PY
