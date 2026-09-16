@@ -4,9 +4,8 @@ on:
     branches: [main]
     paths:
       - 'engine4_*.py'
-      - 'test_engine4_intraday.py'
-      - 'ENGINE4_SSOT.md'
-      - 'ENGINE4_SSOT_V5_ADDENDUM.md'
+      - 'test_engine4_*.py'
+      - 'ENGINE4_SSOT*.md'
       - '.github/workflows/engine4-ci.yml'
       - '.github/workflows/engine4-production.yml'
   workflow_dispatch:
@@ -27,8 +26,9 @@ jobs:
           python -m py_compile
           engine4_config.py engine4_data.py engine4_free_providers.py engine4_score.py
           engine4_live.py engine4_intraday.py engine4_pipeline.py engine4_pipeline_runner.py
-          engine4_final_guard.py engine4_pipeline_runner_guarded.py engine4_recovery.py
-          test_engine4_intraday.py
+          engine4_final_guard.py engine4_pipeline_runner_guarded.py engine4_recovery.py engine4_notify.py
+          test_engine4_intraday.py test_engine4_catalyst_identity.py
+          test_engine4_recovery_safety.py test_engine4_resilience.py
       - name: Deterministic self tests
         run: |
           python engine4_intraday.py self-test
@@ -36,7 +36,7 @@ jobs:
           python engine4_pipeline_runner.py self-test
           python engine4_recovery.py self-test
       - name: Unit tests
-        run: pytest -q test_engine4_intraday.py
+        run: pytest -q test_engine4_*.py
       - name: Verified free-provider smoke test
         run: python engine4_pipeline_runner.py provider-smoke
       - name: Same-day VERA hook-set acceptance probe
