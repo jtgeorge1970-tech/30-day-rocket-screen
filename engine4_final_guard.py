@@ -66,6 +66,8 @@ def _write_recovery_watch(date_et, candidates: list[tuple[float, pd.Series, dict
             "last_0945": serializable(metrics.get("last")),
             "vwap_0945": serializable(metrics.get("vwap")),
             "opening_range_high": serializable(metrics.get("opening_range_high")),
+            "previous_close": serializable(row.get("previous_close")),
+            "resistance_price": serializable(row.get("resistance_price")),
             "primary_failures": list(metrics.get("failures", [])),
         })
     (OUT / "recovery_watch.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")

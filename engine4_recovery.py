@@ -28,13 +28,16 @@ from engine4_config import (
     RECOVERY_HIGHER_LOW_BUFFER_PCT,
     RECOVERY_MAX_BASE_RANGE_PCT,
     RECOVERY_MAX_CHASE_PCT,
+    RECOVERY_MAX_EXTENSION_PCT,
     RECOVERY_MIN_BARS_SINCE_LOW,
     RECOVERY_MIN_FLUSH_PCT,
     RECOVERY_MIN_GREEN_BARS,
     RECOVERY_MIN_VOLUME_EXPANSION,
     RECOVERY_SCAN_INTERVAL_SECONDS,
     RECOVERY_STOP_BUFFER_PCT,
+    RECOVERY_TARGET_R,
     RECOVERY_TRIGGER_BUFFER_PCT,
+    MIN_REWARD_RISK,
 )
 from engine4_data import download_intraday, now_et
 from engine4_intraday import OUT, serializable
@@ -65,7 +68,13 @@ def _precalculated_profit_stop(trigger: float, stop: float) -> float:
     return trigger + PROFIT_LOCK_R * (trigger - stop)
 
 
-def recovery_metrics(symbol: str, frame: pd.DataFrame, date_et) -> dict:
+def recovery_metrics(
+    symbol: str,
+    frame: pd.DataFrame,
+    date_et,
+    previous_close: float = math.nan,
+    resistance_price: float = math.nan,
+) -> dict:
     if frame is None or frame.empty:
         return {"ticker": symbol, "data_ok": False, "failures": ["missing_live_data"]}
 
@@ -129,16 +138,45 @@ def recovery_metrics(symbol: str, frame: pd.DataFrame, date_et) -> dict:
         else math.nan
     )
 
-    # The trigger sits just above the most recent base high. A broker stop-limit can
-    # be staged before the breakout, which is the key difference from merely polling
-    # after the move has already happened.
-    trigger = base_high * (1.0 + RECOVERY_TRIGGER_BUFFER_PCT / 100.0) if math.isfinite(base_high) else math.nan
-    max_allowed = trigger * (1.0 + RECOVERY_MAX_CHASE_PCT / 100.0) if math.isfinite(trigger) else math.nan
+    # A recovery entry must clear both the recent base and the existing session high.
+    # The old base-only trigger could buy directly into the session-high resistance,
+    # as happened in the verified FPS September 16 dry run.
+    breakout_level = max(base_high, session_high) if math.isfinite(base_high) else session_high
+    trigger = breakout_level * (1.0 + RECOVERY_TRIGGER_BUFFER_PCT / 100.0) if math.isfinite(breakout_level) else math.nan
+    raw_max_allowed = trigger * (1.0 + RECOVERY_MAX_CHASE_PCT / 100.0) if math.isfinite(trigger) else math.nan
     stop = recent_low * (1.0 - RECOVERY_STOP_BUFFER_PCT / 100.0) if math.isfinite(recent_low) else math.nan
     if math.isfinite(stop) and math.isfinite(trigger) and stop >= trigger:
         stop = session_low * (1.0 - RECOVERY_STOP_BUFFER_PCT / 100.0)
     risk = trigger - stop if math.isfinite(trigger) and math.isfinite(stop) else math.nan
-    first_target = trigger + 2.5 * risk if math.isfinite(risk) and risk > 0 else math.nan
+    formula_target = trigger + RECOVERY_TARGET_R * risk if math.isfinite(risk) and risk > 0 else math.nan
+    if math.isfinite(resistance_price) and resistance_price > trigger:
+        first_target = min(formula_target, resistance_price)
+    else:
+        first_target = formula_target
+
+    # The maximum permitted fill must still preserve the locked 2R minimum. Shrink
+    # the chase band when necessary; if even the trigger lacks 2R, fail closed.
+    rr_max_fill_price = (
+        (first_target + MIN_REWARD_RISK * stop) / (1.0 + MIN_REWARD_RISK)
+        if math.isfinite(first_target) and math.isfinite(stop)
+        else math.nan
+    )
+    max_allowed = min(raw_max_allowed, rr_max_fill_price) if math.isfinite(rr_max_fill_price) else math.nan
+    reward_risk_at_trigger = (
+        (first_target - trigger) / (trigger - stop)
+        if math.isfinite(first_target) and math.isfinite(trigger) and math.isfinite(stop) and trigger > stop
+        else math.nan
+    )
+    reward_risk_at_max_fill = (
+        (first_target - max_allowed) / (max_allowed - stop)
+        if math.isfinite(first_target) and math.isfinite(max_allowed) and math.isfinite(stop) and max_allowed > stop
+        else math.nan
+    )
+    extension_at_trigger_pct = (
+        (trigger / previous_close - 1.0) * 100.0
+        if math.isfinite(previous_close) and previous_close > 0 and math.isfinite(trigger)
+        else math.nan
+    )
     profit_stop = _precalculated_profit_stop(trigger, stop)
 
     current_vwap = engine4_live.vwap(regular)
@@ -167,6 +205,16 @@ def recovery_metrics(symbol: str, frame: pd.DataFrame, date_et) -> dict:
         failures.append("price_above_trade_cap")
     if math.isfinite(current) and current < session_low:
         failures.append("new_structural_low")
+    if not math.isfinite(previous_close) or previous_close <= 0:
+        failures.append("missing_previous_close_for_extension")
+    elif not math.isfinite(extension_at_trigger_pct) or extension_at_trigger_pct > RECOVERY_MAX_EXTENSION_PCT:
+        failures.append("recovery_entry_excessively_extended")
+    if not math.isfinite(reward_risk_at_trigger) or reward_risk_at_trigger < MIN_REWARD_RISK:
+        failures.append("insufficient_reward_risk_before_resistance")
+    if not math.isfinite(reward_risk_at_max_fill) or reward_risk_at_max_fill + 1e-9 < MIN_REWARD_RISK:
+        failures.append("insufficient_reward_risk_at_max_fill")
+    if not math.isfinite(max_allowed) or max_allowed < trigger:
+        failures.append("no_safe_chase_band")
 
     setup_ready = len(failures) == 0
     if setup_ready and current < trigger:
@@ -196,14 +244,23 @@ def recovery_metrics(symbol: str, frame: pd.DataFrame, date_et) -> dict:
         "base_high": base_high,
         "base_low": base_low,
         "base_range_pct": base_range_pct,
+        "breakout_level": breakout_level,
+        "session_high_clearance_required": True,
         "green_bars_last4": green_bars,
         "volume_expansion_ratio": volume_expansion,
         "recovery_from_low_pct": recovery_from_low_pct,
         "vwap": current_vwap,
         "entry_trigger": trigger,
+        "raw_max_allowed_buy_price": raw_max_allowed,
         "max_allowed_buy_price": max_allowed,
         "initial_stop": stop,
         "first_target": first_target,
+        "reward_risk_at_trigger": reward_risk_at_trigger,
+        "reward_risk_at_max_fill": reward_risk_at_max_fill,
+        "previous_close": previous_close,
+        "extension_at_trigger_pct": extension_at_trigger_pct,
+        "max_extension_pct": RECOVERY_MAX_EXTENSION_PCT,
+        "resistance_price": resistance_price,
         "precalculated_profit_stop": profit_stop,
         "failures": failures,
     }
@@ -253,7 +310,23 @@ def scan_once(date_override: str | None = None) -> dict:
     ready = []
     for candidate in candidates:
         symbol = str(candidate.get("ticker"))
-        metrics = recovery_metrics(symbol, frames.get(symbol), date_et)
+        previous_close = candidate.get("previous_close", math.nan)
+        resistance_price = candidate.get("resistance_price", math.nan)
+        try:
+            previous_close = float(previous_close)
+        except (TypeError, ValueError):
+            previous_close = math.nan
+        try:
+            resistance_price = float(resistance_price)
+        except (TypeError, ValueError):
+            resistance_price = math.nan
+        metrics = recovery_metrics(
+            symbol,
+            frames.get(symbol),
+            date_et,
+            previous_close=previous_close,
+            resistance_price=resistance_price,
+        )
         metrics["premarket_rank"] = candidate.get("rank")
         metrics["premarket_score"] = candidate.get("score")
         metrics["primary_failures"] = candidate.get("primary_failures", [])
@@ -343,6 +416,8 @@ def self_test() -> None:
     assert RECOVERY_MIN_FLUSH_PCT > 0
     assert RECOVERY_MIN_BARS_SINCE_LOW >= 5
     assert RECOVERY_SCAN_INTERVAL_SECONDS >= 60
+    assert RECOVERY_MAX_EXTENSION_PCT > 0
+    assert RECOVERY_TARGET_R >= MIN_REWARD_RISK
     print("ENGINE4_RECOVERY_SELF_TEST_PASS")
 
 
