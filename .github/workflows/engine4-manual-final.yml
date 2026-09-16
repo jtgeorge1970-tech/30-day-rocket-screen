@@ -1,0 +1,54 @@
+name: Engine 4 Manual Final Recovery
+
+on:
+  push:
+    paths:
+      - '.github/workflows/engine4-manual-final.yml'
+
+concurrency:
+  group: engine4-manual-final
+  cancel-in-progress: false
+
+jobs:
+  final-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Run current final confirmation
+        run: python engine4_pipeline_runner_guarded.py final
+
+      - name: Publish final result
+        shell: bash
+        run: |
+          git config user.name 'engine4-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add output/engine4/ || true
+          if ! git diff --cached --quiet; then
+            git commit -m 'Engine 4 manual final live result'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Run recovery watch
+        run: python engine4_recovery.py monitor --interval-seconds 300
+
+      - name: Publish recovery result
+        shell: bash
+        run: |
+          git config user.name 'engine4-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add output/engine4/ || true
+          if ! git diff --cached --quiet; then
+            git commit -m 'Engine 4 manual recovery result'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
