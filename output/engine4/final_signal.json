@@ -1,16 +1,9 @@
 {
-  "status": "WATCH",
-  "reason": "trigger_not_reached",
-  "ticker": "CRDO",
-  "message": "WAIT \u2014 DO NOT BUY CRDO YET\nBUY ONLY IF PRICE REACHES $154.78\nVALID BUY RANGE: $154.78 TO $155.55\nIF BOUGHT, ENTER SELL STOP AT $151.99\nIF PRICE THEN RISES TO $161.73, MOVE SELL STOP TO $156.17\nCurrent price: $153.84\nDO NOT BUY BELOW $154.78\nDO NOT BUY ABOVE $155.55",
-  "order_instruction": "WAIT_FOR_TRIGGER",
-  "live_price": 153.84,
-  "entry_trigger": 154.7773469467163,
-  "max_allowed_buy_price": 155.55123368144987,
-  "initial_stop": 151.99477125561086,
-  "first_target": 161.73378617447992,
-  "precalculated_profit_stop": 156.16863479226902,
-  "profit_lock_r": 0.5,
-  "runtime_seconds": 55.023,
-  "generated_at_utc": "2026-09-15T13:46:14.853216+00:00"
+  "status": "NO_TRADE",
+  "reason": "no_a_plus_recovery_watch_active",
+  "message": "NO PRIMARY TRADE \u2014 no A+ setup. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.",
+  "order_instruction": "NO_ORDER",
+  "max_tradable_price": 100.0,
+  "runtime_seconds": 53.3,
+  "generated_at_utc": "2026-09-16T13:54:28.870972+00:00"
 }

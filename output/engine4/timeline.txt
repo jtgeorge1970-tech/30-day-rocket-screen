@@ -17,3 +17,8 @@ ENGINE 4 DAILY TIMELINE — 2026-09-16
   Refresh found 1397 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, and the best 25 were frozen for the 09:45 live confirmation.
   Stocks: STX, INTC, GEV, FPS, COHR, OKLO, LITE, GFS, ASML, STM, CRML, IREN, TRMD, B, CRWV, AAOI, ARIS, NBIS, AMKR, MXL, AU, VRT, GLW, BE, MRVL
   Counts: baseline_eligible=1870 | trustworthy_observed=1397 | broad_qualified=1397 | strict_activity_count=146 | retained_by_cap=100 | selected_for_deep=60 | analyzed_count=60 | score70_count=1 | a_grade_count=1 | runtime_seconds=331.193
+09:53:35 AM ET — FINAL 09:45 LIVE CONFIRMATION — STARTED
+  Opening-range/VWAP/volume/relative-strength confirmation started on the frozen shortlist only.
+09:54:28 AM ET — FINAL 09:45 LIVE CONFIRMATION — COMPLETED
+  NO PRIMARY TRADE — no A+ setup. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.
+  Counts: runtime_seconds=53.301

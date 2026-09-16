@@ -1,0 +1,86 @@
+{
+  "target_date_et": "2026-09-16",
+  "generated_at_utc": "2026-09-16T13:54:28.869617+00:00",
+  "max_tradable_price": 100.0,
+  "requested_count": 5,
+  "actual_count": 5,
+  "candidates": [
+    {
+      "ticker": "FPS",
+      "rank": 4,
+      "score": 67.078,
+      "premarket_grade": "B",
+      "sector": "Industrials",
+      "quality_at_0945": 63.72035421394561,
+      "last_0945": 34.07500076293945,
+      "vwap_0945": 33.86607137596574,
+      "opening_range_high": 34.4900016784668,
+      "primary_failures": [
+        "not_attacking_breakout"
+      ]
+    },
+    {
+      "ticker": "TRMD",
+      "rank": 13,
+      "score": 56.863,
+      "premarket_grade": "WATCH",
+      "sector": "Energy",
+      "quality_at_0945": 48.87732966911481,
+      "last_0945": 36.441001892089844,
+      "vwap_0945": 35.958823908795296,
+      "opening_range_high": 36.470001220703125,
+      "primary_failures": [
+        "breakout_volume_not_expanding"
+      ]
+    },
+    {
+      "ticker": "GFS",
+      "rank": 8,
+      "score": 63.683,
+      "premarket_grade": "B",
+      "sector": "Technology",
+      "quality_at_0945": 48.58123368318691,
+      "last_0945": 43.7599983215332,
+      "vwap_0945": 43.9026305994455,
+      "opening_range_high": 44.15999984741211,
+      "primary_failures": [
+        "below_vwap",
+        "not_attacking_breakout"
+      ]
+    },
+    {
+      "ticker": "MXL",
+      "rank": 20,
+      "score": 54.538,
+      "premarket_grade": "WATCH",
+      "sector": "Technology",
+      "quality_at_0945": 47.328800526440986,
+      "last_0945": 69.32499694824219,
+      "vwap_0945": 69.40002232218347,
+      "opening_range_high": 70.97000122070312,
+      "primary_failures": [
+        "below_vwap",
+        "not_attacking_breakout",
+        "breakout_volume_not_expanding"
+      ]
+    },
+    {
+      "ticker": "OKLO",
+      "rank": 6,
+      "score": 64.188,
+      "premarket_grade": "B",
+      "sector": "Utilities",
+      "quality_at_0945": 46.39245443644724,
+      "last_0945": 36.099998474121094,
+      "vwap_0945": 36.24333766245607,
+      "opening_range_high": 36.57500076293945,
+      "primary_failures": [
+        "relative_strength_market",
+        "relative_strength_sector",
+        "below_vwap",
+        "no_higher_low_or_tight_base",
+        "not_attacking_breakout"
+      ]
+    }
+  ]
+}

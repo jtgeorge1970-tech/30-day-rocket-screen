@@ -215,7 +215,25 @@
         "a_grade_count": 1,
         "runtime_seconds": 331.193
       }
+    },
+    {
+      "time_et": "2026-09-16T09:53:35.570467-04:00",
+      "stage": "FINAL 09:45 LIVE CONFIRMATION",
+      "status": "STARTED",
+      "summary": "Opening-range/VWAP/volume/relative-strength confirmation started on the frozen shortlist only."
+    },
+    {
+      "time_et": "2026-09-16T09:54:28.871780-04:00",
+      "stage": "FINAL 09:45 LIVE CONFIRMATION",
+      "status": "COMPLETED",
+      "summary": "NO PRIMARY TRADE \u2014 no A+ setup. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.",
+      "tickers": [],
+      "details": {
+        "runtime_seconds": 53.301,
+        "status": "NO_TRADE",
+        "reason": "no_a_plus_recovery_watch_active"
+      }
     }
   ],
-  "last_updated_et": "2026-09-16T09:23:46.044741-04:00"
+  "last_updated_et": "2026-09-16T09:54:28.871780-04:00"
 }
