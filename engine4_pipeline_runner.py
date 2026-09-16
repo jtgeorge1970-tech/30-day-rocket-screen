@@ -323,9 +323,9 @@ def install_repairs() -> None:
     # to engine4_live, so patching engine4_live.quote_spread repairs refreshed final spreads too.
 
 
-def assert_provider_health() -> dict:
+def assert_provider_health(required: list[str] | None = None) -> dict:
     health = provider_smoke()
-    required = ["nasdaq_premarket_ok", "nasdaq_quote_ok", "google_news_ok"]
+    required = required or ["nasdaq_premarket_ok", "nasdaq_quote_ok", "google_news_ok"]
     failed = [k for k in required if not health.get(k)]
     if failed:
         raise RuntimeError(f"Engine 4 free-provider health check failed: {failed}; details={health}")
@@ -361,7 +361,10 @@ def main() -> None:
         assert_provider_health()
         core.refresh_and_freeze(args.date, args.max_symbols)
     elif args.command == "final":
-        assert_provider_health()
+        # The catalyst/news snapshot is frozen during the 09:18 refresh. Final live
+        # confirmation must not fail because Google News is temporarily unavailable;
+        # it needs only the live Nasdaq quote/spread provider.
+        assert_provider_health(["nasdaq_quote_ok"])
         core.final_with_timeline(args.date)
     elif args.command == "provider-smoke":
         assert_provider_health()
