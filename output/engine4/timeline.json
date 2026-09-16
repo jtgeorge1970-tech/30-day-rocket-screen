@@ -159,7 +159,63 @@
         "a_grade_count": 0,
         "runtime_seconds": 143.684
       }
+    },
+    {
+      "time_et": "2026-09-16T09:18:14.842963-04:00",
+      "stage": "09:18 REFRESH + RANKING",
+      "status": "STARTED",
+      "summary": "Mandatory fresh full-universe premarket refresh/rerank started."
+    },
+    {
+      "time_et": "2026-09-16T09:23:46.044741-04:00",
+      "stage": "TOP-25 FREEZE",
+      "status": "COMPLETED",
+      "summary": "Refresh found 1397 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, and the best 25 were frozen for the 09:45 live confirmation.",
+      "tickers": [
+        "STX",
+        "INTC",
+        "GEV",
+        "FPS",
+        "COHR",
+        "OKLO",
+        "LITE",
+        "GFS",
+        "ASML",
+        "STM",
+        "CRML",
+        "IREN",
+        "TRMD",
+        "B",
+        "CRWV",
+        "AAOI",
+        "ARIS",
+        "NBIS",
+        "AMKR",
+        "MXL",
+        "AU",
+        "VRT",
+        "GLW",
+        "BE",
+        "MRVL"
+      ],
+      "details": {
+        "baseline_eligible": 1870,
+        "symbols_with_intraday_data": 1870,
+        "trustworthy_observed": 1397,
+        "broad_qualified": 1397,
+        "nasdaq_enrichment_cap": 400,
+        "nasdaq_premarket_enriched": 371,
+        "nonzero_premarket_activity_count": 371,
+        "strict_activity_count": 146,
+        "retained_by_cap": 100,
+        "broad_pool_cap": 100,
+        "selected_for_deep": 60,
+        "analyzed_count": 60,
+        "score70_count": 1,
+        "a_grade_count": 1,
+        "runtime_seconds": 331.193
+      }
     }
   ],
-  "last_updated_et": "2026-09-16T09:07:37.067001-04:00"
+  "last_updated_et": "2026-09-16T09:23:46.044741-04:00"
 }

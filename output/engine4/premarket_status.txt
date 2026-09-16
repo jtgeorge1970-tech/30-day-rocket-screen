@@ -1,1 +1,1 @@
-REFRESH: 1425 naturally broad-qualified; 100 retained by Top-100 cap; 60 completed refreshed deep scoring; Top 25 frozen; 2 strict A-grade. Runtime 312.2s
+REFRESH: 1397 naturally broad-qualified; 100 retained by Top-100 cap; 60 completed refreshed deep scoring; Top 25 frozen; 1 strict A-grade. Runtime 331.2s

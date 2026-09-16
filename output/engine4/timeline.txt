@@ -11,3 +11,9 @@ ENGINE 4 DAILY TIMELINE — 2026-09-16
   Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 1 scored >=70 and 0 met every strict premarket A-grade gate.
   Stocks: STX, AU, INTC, COHR, LITE, GFS, OKLO, MXL, STM, ASML
   Counts: selected_for_deep=60 | analyzed_count=60 | score70_count=1 | b_grade_count=13 | a_grade_count=0 | runtime_seconds=143.684
+09:18:14 AM ET — 09:18 REFRESH + RANKING — STARTED
+  Mandatory fresh full-universe premarket refresh/rerank started.
+09:23:46 AM ET — TOP-25 FREEZE — COMPLETED
+  Refresh found 1397 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, and the best 25 were frozen for the 09:45 live confirmation.
+  Stocks: STX, INTC, GEV, FPS, COHR, OKLO, LITE, GFS, ASML, STM, CRML, IREN, TRMD, B, CRWV, AAOI, ARIS, NBIS, AMKR, MXL, AU, VRT, GLW, BE, MRVL
+  Counts: baseline_eligible=1870 | trustworthy_observed=1397 | broad_qualified=1397 | strict_activity_count=146 | retained_by_cap=100 | selected_for_deep=60 | analyzed_count=60 | score70_count=1 | a_grade_count=1 | runtime_seconds=331.193
