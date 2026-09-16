@@ -16,6 +16,9 @@ jobs:
     timeout-minutes: 190
     permissions:
       contents: write
+      issues: write
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -102,6 +105,7 @@ jobs:
           wait_until_et 585
           fail_if_late 588 '09:45 final live confirmation start'
           python engine4_pipeline_runner_guarded.py final
+          python engine4_notify.py final
           save_stage '09:45 final live result'
 
           echo '=== STAGE 5: POST-OPEN HOOK-SET / RECOVERY WATCH ==='
@@ -109,6 +113,7 @@ jobs:
           # the module exits immediately with a BUY or a broker-side stop-limit
           # instruction. Otherwise it closes the watch at 11:30 ET.
           python engine4_recovery.py monitor --interval-seconds 300
+          python engine4_notify.py recovery
           save_stage 'post-open recovery result'
 
           echo '=== ENGINE 4 ORDERED CYCLE COMPLETE ==='
@@ -117,3 +122,9 @@ jobs:
           cat output/engine4/final_alert.txt
           echo '--- RECOVERY ALERT ---'
           cat output/engine4/recovery_alert.txt
+
+      - name: Send immediate pipeline-failure alert
+        if: failure()
+        run: >-
+          python engine4_notify.py failure
+          --message "ENGINE 4 DATA/PIPELINE FAILURE — the scheduled workflow did not complete. The candidate queue remains preserved; no official order is authorized until valid data returns."
