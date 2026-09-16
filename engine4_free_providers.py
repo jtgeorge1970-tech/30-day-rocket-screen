@@ -144,11 +144,45 @@ def nasdaq_quote_spread(ticker: str) -> Tuple[float, float, float]:
         return math.nan, math.nan, math.nan
 
 
-def _google_news_items(query: str, limit: int = 12) -> list[tuple[str, datetime | None]]:
-    q = quote_plus(query)
-    url = f"https://news.google.com/rss/search?q={q}&hl=en-US&gl=US&ceid=US:en"
+def cboe_delayed_quote_spread(ticker: str) -> Tuple[float, float, float]:
+    """Independent queue-preservation quote; never treated as order-authoritative.
+
+    Cboe labels this public feed as delayed. It is useful for retaining and ranking
+    an alternate when both real-time retrieval paths fail, but callers must not use
+    it to authorize an official BUY/ARM instruction.
+    """
+    ticker = ticker.upper()
+    url = f"https://cdn.cboe.com/api/global/delayed_quotes/quotes/{ticker}.json"
     try:
-        r = _session().get(url, headers={"User-Agent": NASDAQ_HEADERS["User-Agent"]}, timeout=5)
+        r = requests.get(
+            url,
+            headers={"User-Agent": NASDAQ_HEADERS["User-Agent"], "Accept-Language": "en-US,en;q=0.9"},
+            timeout=10,
+        )
+        if r.status_code != 200:
+            return math.nan, math.nan, math.nan
+        data = (r.json() or {}).get("data") or {}
+        if str(data.get("symbol") or "").upper() != ticker:
+            return math.nan, math.nan, math.nan
+        bid = _num(data.get("bid"))
+        ask = _num(data.get("ask"))
+        if not (math.isfinite(bid) and math.isfinite(ask) and bid > 0 and ask >= bid):
+            return bid, ask, math.nan
+        mid = (bid + ask) / 2.0
+        return bid, ask, (ask - bid) / mid * 100.0
+    except Exception:
+        return math.nan, math.nan, math.nan
+
+
+def _rss_news_items(url: str, limit: int = 12) -> list[tuple[str, datetime | None]]:
+    try:
+        # Do not reuse the Nasdaq session here: its Nasdaq Origin/Referer headers can
+        # cause independent RSS providers to reject an otherwise valid request.
+        r = requests.get(
+            url,
+            headers={"User-Agent": NASDAQ_HEADERS["User-Agent"], "Accept-Language": "en-US,en;q=0.9"},
+            timeout=5,
+        )
         if r.status_code != 200:
             return []
         root = ET.fromstring(r.content)
@@ -169,6 +203,65 @@ def _google_news_items(query: str, limit: int = 12) -> list[tuple[str, datetime 
                 ts = None
         if title:
             out.append((title, ts))
+    return out
+
+
+def _google_news_items(query: str, limit: int = 12) -> list[tuple[str, datetime | None]]:
+    q = quote_plus(query)
+    url = f"https://news.google.com/rss/search?q={q}&hl=en-US&gl=US&ceid=US:en"
+    return _rss_news_items(url, limit)
+
+
+def _bing_news_items(query: str, limit: int = 12) -> list[tuple[str, datetime | None]]:
+    q = quote_plus(query)
+    url = f"https://www.bing.com/news/search?q={q}&format=rss&setlang=en-US"
+    return _rss_news_items(url, limit)
+
+
+def _nasdaq_company_news_items(ticker: str, limit: int = 12) -> list[tuple[str, datetime | None]]:
+    """Return Nasdaq-tagged company news with structured ticker evidence.
+
+    Nasdaq supplies ``primarysymbol`` and ``related_symbols`` fields. We still pass
+    each result through the same company-name identity check used for RSS results;
+    the exact structured symbol is appended to the evidence text so a similarly
+    named issuer cannot satisfy the ticker requirement by accident.
+    """
+    ticker = ticker.upper()
+    url = (
+        "https://api.nasdaq.com/api/news/topic/articlebysymbol"
+        f"?q={quote_plus(ticker + '|stocks')}&limit={limit}&offset=0"
+    )
+    payload = _get_json(url, attempts=2, timeout=6.0)
+    if not payload:
+        return []
+
+    rows = ((payload.get("data") or {}).get("rows") or [])[:limit]
+    out = []
+    for row in rows:
+        primary = str(row.get("primarysymbol") or "").upper()
+        related = {
+            str(value).split("|", 1)[0].upper()
+            for value in (row.get("related_symbols") or [])
+        }
+        if ticker != primary and ticker not in related:
+            continue
+        title = str(row.get("title") or "").strip()
+        description = str(row.get("description") or "").strip()
+        if not title:
+            continue
+        # The appended exact structured ticker is evidence from Nasdaq's response,
+        # not an inferred keyword. Company identity must still appear in title/body.
+        evidence = f"{title} ({ticker}) {description}".strip()
+        ts = None
+        raw = str(row.get("created") or "").strip()
+        if raw:
+            try:
+                ts = datetime.strptime(raw, "%b %d, %Y").replace(
+                    hour=12, tzinfo=timezone.utc
+                )
+            except ValueError:
+                ts = None
+        out.append((evidence, ts))
     return out
 
 
@@ -233,7 +326,8 @@ def _headline_matches_company(text: str, ticker: str, company_name: str | None) 
     return company_key == ticker_key
 
 
-def google_news_catalyst(
+def _score_news_items(
+    items: list[tuple[str, datetime | None]],
     ticker: str,
     reference_time: datetime,
     catalyst_rules,
@@ -246,14 +340,6 @@ def google_news_catalyst(
         # No identity evidence means no catalyst. Never fall back to ticker-only
         # matching because globally ambiguous symbols can name unrelated companies.
         return 0.0, "", math.inf
-    company_term = ""
-    if company_name:
-        cleaned = re.sub(r"\b(Common Stock|Class [A-Z]|Inc\.?|Corporation|Corp\.?|Ltd\.?|PLC|Holdings?)\b", "", company_name, flags=re.I)
-        cleaned = re.sub(r"\s+", " ", cleaned).strip()
-        if cleaned:
-            company_term = f' OR "{cleaned}"'
-    query = f'("{ticker}" stock{company_term}) when:2d'
-    items = _google_news_items(query, limit=15)
     if not items:
         return 0.0, "", math.inf
 
@@ -284,13 +370,95 @@ def google_news_catalyst(
     return best
 
 
+def _company_news_query(ticker: str, company_name: str) -> str:
+    cleaned = re.sub(
+        r"\b(Common Stock|Class [A-Z]|Inc\.?|Corporation|Corp\.?|Ltd\.?|PLC|Holdings?)\b",
+        "",
+        company_name,
+        flags=re.I,
+    )
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    company_term = f' OR "{cleaned}"' if cleaned else ""
+    return f'("{ticker.upper()}" stock{company_term})'
+
+
+def google_news_catalyst(
+    ticker: str,
+    reference_time: datetime,
+    catalyst_rules,
+    negative_pattern,
+    promotional_pattern,
+    company_name: str | None = None,
+) -> Tuple[float, str, float]:
+    if not company_name:
+        return 0.0, "", math.inf
+    query = _company_news_query(ticker, company_name) + " when:2d"
+    return _score_news_items(
+        _google_news_items(query, limit=15),
+        ticker,
+        reference_time,
+        catalyst_rules,
+        negative_pattern,
+        promotional_pattern,
+        company_name,
+    )
+
+
+def verified_news_catalyst(
+    ticker: str,
+    reference_time: datetime,
+    catalyst_rules,
+    negative_pattern,
+    promotional_pattern,
+    company_name: str | None = None,
+) -> tuple[float, str, float, str]:
+    """Use independent providers in order without weakening identity validation."""
+    if not company_name:
+        return 0.0, "", math.inf, "UNAVAILABLE"
+
+    query = _company_news_query(ticker, company_name)
+    providers = (
+        ("Google News RSS", lambda: _google_news_items(query + " when:2d", limit=15)),
+        ("Bing News RSS", lambda: _bing_news_items(query, limit=15)),
+        ("Nasdaq company news", lambda: _nasdaq_company_news_items(ticker, limit=15)),
+    )
+    for source, loader in providers:
+        try:
+            items = loader()
+        except Exception:
+            items = []
+        score, headline, age = _score_news_items(
+            items,
+            ticker,
+            reference_time,
+            catalyst_rules,
+            negative_pattern,
+            promotional_pattern,
+            company_name,
+        )
+        if score > 0:
+            return score, headline, age, source
+    return 0.0, "", math.inf, "NO_VERIFIED_CATALYST"
+
+
 def provider_smoke() -> dict:
     pm = nasdaq_premarket_snapshot("NVDA", attempts=2, timeout=6.0)
     bid, ask, spread = nasdaq_quote_spread("NVDA")
-    news = _google_news_items('"NVDA" stock when:2d', limit=3)
+    cboe_bid, cboe_ask, cboe_spread = cboe_delayed_quote_spread("NVDA")
+    google_news = _google_news_items('"NVDA" stock when:2d', limit=3)
+    bing_news = _bing_news_items('"NVDA" stock', limit=3)
+    nasdaq_news = _nasdaq_company_news_items("NVDA", limit=3)
+    news_provider_count = sum(bool(items) for items in (google_news, bing_news, nasdaq_news))
     return {
         "nasdaq_premarket_ok": bool(pm.get("ok") and math.isfinite(pm.get("premarket_volume", math.nan))),
         "nasdaq_premarket_volume": pm.get("premarket_volume"),
         "nasdaq_quote_ok": bool(math.isfinite(bid) and math.isfinite(ask) and math.isfinite(spread)),
-        "google_news_ok": bool(news),
+        "cboe_delayed_quote_ok": bool(
+            math.isfinite(cboe_bid) and math.isfinite(cboe_ask) and math.isfinite(cboe_spread)
+        ),
+        "google_news_ok": bool(google_news),
+        "bing_news_ok": bool(bing_news),
+        "nasdaq_news_ok": bool(nasdaq_news),
+        "news_provider_count": news_provider_count,
+        "news_provider_ok": news_provider_count > 0,
     }
