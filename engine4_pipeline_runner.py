@@ -58,13 +58,14 @@ NASDAQ_ENRICH_CAP = 400
 MIN_PM_INTENSITY_PCT = 2.0
 
 
-def provider_catalyst(ticker: str, reference_time):
+def provider_catalyst(ticker: str, reference_time, company_name: str | None = None):
     return google_news_catalyst(
         ticker,
         reference_time,
         CATALYST_RULES,
         NEGATIVE_CATALYST,
         PROMOTIONAL,
+        company_name=company_name,
     )
 
 
@@ -253,7 +254,7 @@ def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) ->
         room = (resistance / row["last_premarket"] - 1.0) * 100.0 if math.isfinite(resistance) else 10.0
         sector_etf = SECTOR_ETF.get(row["sector"])
         sector_return = benchmark_returns.get(sector_etf, market_return)
-        catalyst, headline, age_hours = provider_catalyst(symbol, reference)
+        catalyst, headline, age_hours = provider_catalyst(symbol, reference, row.get("name"))
         bid, ask, spread = nasdaq_quote_spread(symbol)
         if math.isfinite(spread):
             quote_ok_count += 1
