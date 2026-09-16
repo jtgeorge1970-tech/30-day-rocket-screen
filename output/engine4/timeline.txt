@@ -5,3 +5,9 @@ ENGINE 4 DAILY TIMELINE — 2026-09-16
   1353 stocks naturally met the broad qualification; the strongest 100 were retained by the configured Top-100 cap.
   Stocks: TRMD, INTC, RIO, ASML, AUR, QURE, FRO, CAMT, ARIS, EXK, SBSW, MCHP, BE, AG, AEHR, COIN, DELL, FPS, LITE, COHR, AXTI, ASST, HYMC, CRWV, MXL, UMC, PLPC, POET, VRT, HMY, APLD, AMD, STX, OKLO, AAOI, CRML, LEU, TSM, STM, ORA, IREN, BCS, OUST, DXYZ, AMKR, GLW, WDC, NBIS, MRVL, TSEM, CIEN, BB, B, GFS, VST, SMCI, WULF, IBRX, CIFR, AU, GEV, USAR, NVTS, TER, UUUU, PLAB, STRL, CAVA, VKTX, FLNC, ALAB, CLSK, AMAT, NCLH, UAL, UEC, DAL, PAAS, INFQ, BA, HPE, SWKS, NVS, WING, LFUS, LRCX, KRMN, ALM, LUNR, KLAC, AZN, BTDR, COO, HL, RIOT, CELH, MT, CEG, FN, IOVA
   Counts: baseline_eligible=1870 | trustworthy_observed=1353 | broad_qualified=1353 | strict_activity_count=143 | retained_by_cap=100 | runtime_seconds=175.22
+09:05:13 AM ET — DEEP 100-POINT ANALYSIS — STARTED
+  Detailed 100-point analysis started on the highest-ranked retained pre-screen candidates.
+09:07:37 AM ET — DEEP 100-POINT ANALYSIS — COMPLETED
+  Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 1 scored >=70 and 0 met every strict premarket A-grade gate.
+  Stocks: STX, AU, INTC, COHR, LITE, GFS, OKLO, MXL, STM, ASML
+  Counts: selected_for_deep=60 | analyzed_count=60 | score70_count=1 | b_grade_count=13 | a_grade_count=0 | runtime_seconds=143.684

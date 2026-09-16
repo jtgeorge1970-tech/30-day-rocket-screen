@@ -127,7 +127,39 @@
         "broad_pool_cap": 100,
         "runtime_seconds": 175.22
       }
+    },
+    {
+      "time_et": "2026-09-16T09:05:13.371451-04:00",
+      "stage": "DEEP 100-POINT ANALYSIS",
+      "status": "STARTED",
+      "summary": "Detailed 100-point analysis started on the highest-ranked retained pre-screen candidates."
+    },
+    {
+      "time_et": "2026-09-16T09:07:37.067001-04:00",
+      "stage": "DEEP 100-POINT ANALYSIS",
+      "status": "COMPLETED",
+      "summary": "Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 1 scored >=70 and 0 met every strict premarket A-grade gate.",
+      "tickers": [
+        "STX",
+        "AU",
+        "INTC",
+        "COHR",
+        "LITE",
+        "GFS",
+        "OKLO",
+        "MXL",
+        "STM",
+        "ASML"
+      ],
+      "details": {
+        "selected_for_deep": 60,
+        "analyzed_count": 60,
+        "score70_count": 1,
+        "b_grade_count": 13,
+        "a_grade_count": 0,
+        "runtime_seconds": 143.684
+      }
     }
   ],
-  "last_updated_et": "2026-09-16T08:58:10.781317-04:00"
+  "last_updated_et": "2026-09-16T09:07:37.067001-04:00"
 }
