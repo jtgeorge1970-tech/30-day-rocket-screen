@@ -10,8 +10,9 @@ verified data-source defects:
    on the strongest preliminary candidates, then computes an auditable premarket
    volume intensity = premarket shares / estimated average daily shares.
 2) Yahoo Ticker.news / Ticker.info produced repeated 401/429 failures. Engine 4 now
-   uses Google News RSS for catalyst headlines and Nasdaq's public quote endpoint for
-   bid/ask spread. No paid data source or API key is required.
+   uses a verified three-provider news chain and Nasdaq quote data with Yahoo as the
+   quote fallback. A single provider outage degrades the affected evidence instead
+   of terminating the full candidate pipeline.
 
 Yahoo remains the batched source for broad price bars and historical/daily bars. All
 provider substitutions are explicit in audit fields; no proxy is mislabeled as true
@@ -44,13 +45,15 @@ from engine4_data import (
     download_intraday,
     historical_premarket_baseline,
     prior_regular_close,
+    quote_spread as yahoo_quote_spread,
     slice_window,
 )
 from engine4_free_providers import (
-    google_news_catalyst,
+    cboe_delayed_quote_spread,
     nasdaq_premarket_many,
     nasdaq_quote_spread,
     provider_smoke,
+    verified_news_catalyst,
 )
 from engine4_score import preliminary_activity_score, score_candidate
 
@@ -59,7 +62,12 @@ MIN_PM_INTENSITY_PCT = 2.0
 
 
 def provider_catalyst(ticker: str, reference_time, company_name: str | None = None):
-    return google_news_catalyst(
+    result = provider_catalyst_with_source(ticker, reference_time, company_name)
+    return result[:3]
+
+
+def provider_catalyst_with_source(ticker: str, reference_time, company_name: str | None = None):
+    return verified_news_catalyst(
         ticker,
         reference_time,
         CATALYST_RULES,
@@ -67,6 +75,25 @@ def provider_catalyst(ticker: str, reference_time, company_name: str | None = No
         PROMOTIONAL,
         company_name=company_name,
     )
+
+
+def quote_spread_with_source(ticker: str, *, allow_delayed: bool = True):
+    bid, ask, spread = nasdaq_quote_spread(ticker)
+    if math.isfinite(bid) and math.isfinite(ask) and math.isfinite(spread):
+        return bid, ask, spread, "Nasdaq quote"
+    bid, ask, spread = yahoo_quote_spread(ticker)
+    if math.isfinite(bid) and math.isfinite(ask) and math.isfinite(spread):
+        return bid, ask, spread, "Yahoo quote fallback"
+    if allow_delayed:
+        bid, ask, spread = cboe_delayed_quote_spread(ticker)
+        if math.isfinite(bid) and math.isfinite(ask) and math.isfinite(spread):
+            return bid, ask, spread, "Cboe delayed quote fallback"
+    return bid, ask, spread, "UNAVAILABLE"
+
+
+def resilient_quote_spread(ticker: str):
+    # Final/recovery order gates may use only real-time-capable quote paths.
+    return quote_spread_with_source(ticker, allow_delayed=False)[:3]
 
 
 def _estimated_avg_daily_shares(avg_daily_dollar_volume: float, price: float) -> float:
@@ -188,8 +215,8 @@ def repaired_build_broad_pool(date_et, cutoff: str, max_symbols: int | None = No
     meta["nonzero_premarket_activity_count"] = int((enriched.premarket_volume > 0).sum()) if not enriched.empty else 0
     meta["strict_activity_count"] = int(enriched.strict_activity_pass.sum()) if not enriched.empty else 0
 
-    if enriched.empty or meta["nasdaq_premarket_enriched"] == 0:
-        # This is a provider failure, not a legitimate no-opportunity day.
+    meta["premarket_data_degraded"] = meta["nasdaq_premarket_enriched"] == 0
+    if enriched.empty:
         return pd.DataFrame(), meta
 
     broad = enriched.sort_values(
@@ -224,7 +251,6 @@ def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) ->
         market_return = 0.0
 
     enriched = []
-    quote_ok_count = 0
     for row in selected.to_dict("records"):
         symbol = row["ticker"]
         hist = history.get(symbol)
@@ -254,10 +280,11 @@ def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) ->
         room = (resistance / row["last_premarket"] - 1.0) * 100.0 if math.isfinite(resistance) else 10.0
         sector_etf = SECTOR_ETF.get(row["sector"])
         sector_return = benchmark_returns.get(sector_etf, market_return)
-        catalyst, headline, age_hours = provider_catalyst(symbol, reference, row.get("name"))
-        bid, ask, spread = nasdaq_quote_spread(symbol)
-        if math.isfinite(spread):
-            quote_ok_count += 1
+        catalyst, headline, age_hours, catalyst_source = provider_catalyst_with_source(
+            symbol, reference, row.get("name")
+        )
+        bid, ask, spread, quote_source = quote_spread_with_source(symbol)
+        quote_order_authoritative = quote_source in {"Nasdaq quote", "Yahoo quote fallback"}
 
         row.update({
             "premarket_rvol": float(rvol),
@@ -271,11 +298,12 @@ def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) ->
             "catalyst_quality": catalyst,
             "catalyst_headline": headline,
             "catalyst_age_hours": age_hours,
-            "catalyst_source": "Google News RSS",
+            "catalyst_source": catalyst_source,
             "bid": bid,
             "ask": ask,
             "spread_pct": spread,
-            "spread_source": "Nasdaq quote",
+            "spread_source": quote_source,
+            "spread_order_authoritative": quote_order_authoritative,
         })
         score, components = score_candidate(row)
         row["score"] = score
@@ -287,7 +315,11 @@ def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) ->
             "pm_volume_strength": bool(volume_gate),
             "atr": math.isfinite(atr_pct) and atr_pct >= MIN_ATR_PCT,
             "room": room > 0,
-            "spread": math.isfinite(spread) and spread <= MAX_SPREAD_PCT,
+            "spread": (
+                math.isfinite(spread)
+                and spread <= MAX_SPREAD_PCT
+                and quote_order_authoritative
+            ),
             "score70": score >= MIN_SCORE,
         }
         row["premarket_gate_count"] = int(sum(gate_map.values()))
@@ -300,11 +332,9 @@ def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) ->
     if ranked.empty:
         return ranked
 
-    # Systemic quote-provider outage must fail closed instead of silently grading every stock poorly.
-    if quote_ok_count < max(5, int(0.50 * len(ranked))):
-        raise RuntimeError(
-            f"Nasdaq quote provider health failure: valid spreads for only {quote_ok_count}/{len(ranked)} analyzed names"
-        )
+    # Quote outages fail the affected ticker's spread gate. They do not erase the
+    # alternate queue or terminate analysis of candidates with valid data.
+    ranked["quote_data_degraded"] = ~ranked["spread_order_authoritative"].fillna(False).astype(bool)
 
     return ranked.sort_values(
         ["premarket_a_grade", "score", "premarket_gate_count", "premarket_volume_intensity_pct", "premarket_dollar_volume"],
@@ -317,8 +347,8 @@ def install_repairs() -> None:
     core.build_broad_pool = repaired_build_broad_pool
     core._score_pool = repaired_score_pool
     core.catalyst_for = provider_catalyst
-    core.quote_spread = nasdaq_quote_spread
-    engine4_live.quote_spread = nasdaq_quote_spread
+    core.quote_spread = resilient_quote_spread
+    engine4_live.quote_spread = resilient_quote_spread
 
     # final_stage was imported into core from engine4_intraday. opening_structure delegates
     # to engine4_live, so patching engine4_live.quote_spread repairs refreshed final spreads too.
@@ -326,11 +356,12 @@ def install_repairs() -> None:
 
 def assert_provider_health(required: list[str] | None = None) -> dict:
     health = provider_smoke()
-    required = required or ["nasdaq_premarket_ok", "nasdaq_quote_ok", "google_news_ok"]
+    required = [] if required is None else required
     failed = [k for k in required if not health.get(k)]
     if failed:
         raise RuntimeError(f"Engine 4 free-provider health check failed: {failed}; details={health}")
-    print(f"ENGINE4_FREE_PROVIDER_HEALTH_PASS {health}", flush=True)
+    state = "PASS" if health.get("news_provider_ok") and health.get("nasdaq_quote_ok") else "DEGRADED"
+    print(f"ENGINE4_FREE_PROVIDER_HEALTH_{state} {health}", flush=True)
     return health
 
 
@@ -362,10 +393,10 @@ def main() -> None:
         assert_provider_health()
         core.refresh_and_freeze(args.date, args.max_symbols)
     elif args.command == "final":
-        # The catalyst/news snapshot is frozen during the 09:18 refresh. Final live
-        # confirmation must not fail because Google News is temporarily unavailable;
-        # it needs only the live Nasdaq quote/spread provider.
-        assert_provider_health(["nasdaq_quote_ok"])
+        # The catalyst/news snapshot is frozen during the 09:18 refresh. Provider
+        # health is reported here, while each ticker independently attempts the
+        # real-time quote chain and fails only its own order gate when unavailable.
+        assert_provider_health()
         core.final_with_timeline(args.date)
     elif args.command == "provider-smoke":
         assert_provider_health()
