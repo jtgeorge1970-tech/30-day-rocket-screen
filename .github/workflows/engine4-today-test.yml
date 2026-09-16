@@ -130,3 +130,5 @@ jobs:
           print('real_pm_vol',real_pm_vol,'of',len(rows))
           print('volume_intensity',intensity,'of',len(rows))
           PY
+
+# Manual fresh-run trigger: 2026-09-16 10:13 ET
