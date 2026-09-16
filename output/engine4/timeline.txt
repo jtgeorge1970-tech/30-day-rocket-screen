@@ -1,32 +1,7 @@
-ENGINE 4 DAILY TIMELINE — 2026-09-15
-08:55:11 AM ET — PRE-SCREEN — STARTED
+ENGINE 4 DAILY TIMELINE — 2026-09-16
+08:55:15 AM ET — PRE-SCREEN — STARTED
   Broad liquid U.S. universe scan started.
-08:58:17 AM ET — PRE-SCREEN — COMPLETED
-  1384 stocks naturally met the broad qualification; the strongest 100 were retained by the configured Top-100 cap.
-  Stocks: VERA, FPS, ASML, SNAP, WTM, WAY, RKLB, MT, FRO, BE, NVDA, COHR, INTC, LITE, AMD, MU, AXTI, CRDO, NXPI, KTOS, GLW, AEHR, TENB, STM, TSEM, GEV, CRWV, DELL, AAOI, NVMI, SNDK, MRVL, TSM, NBIS, O, TER, WOLF, LLY, VRT, QRVO, STX, MXL, BB, TTMI, SBSW, CIEN, DHT, LRCX, LEU, ETSY, AMAT, IOVA, ON, AUR, PODD, DAVE, UMAC, ARWR, WDC, ALM, SNX, CLS, WFC, KLAC, CAT, ECHO, RMBS, ETN, FLEX, ANET, NTR, MTSI, STLD, PNR, CCJ, C, FN, FIX, ULTA, MPWR, MCHP, SMTC, LHX, LINE, AXSM, MNST, STLA, BELFB, TNL, MDLZ, SII, AVGO, AU, REGN, AG, ALAB, SGML, ERAS, IREN, ICHR
-  Counts: baseline_eligible=1870 | trustworthy_observed=1384 | broad_qualified=1384 | strict_activity_count=83 | retained_by_cap=100 | runtime_seconds=185.658
-09:05:04 AM ET — DEEP 100-POINT ANALYSIS — STARTED
-  Detailed 100-point analysis started on the highest-ranked retained pre-screen candidates.
-09:07:35 AM ET — DEEP 100-POINT ANALYSIS — COMPLETED
-  Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 3 scored >=70 and 2 met every strict premarket A-grade gate.
-  Stocks: FPS, RKLB, VERA, ASML, BE, COHR, LITE, ETSY, STM, TTMI
-  Counts: selected_for_deep=60 | analyzed_count=60 | score70_count=3 | b_grade_count=7 | a_grade_count=2 | runtime_seconds=151.024
-09:18:12 AM ET — 09:18 REFRESH + RANKING — STARTED
-  Mandatory fresh full-universe premarket refresh/rerank started.
-09:23:25 AM ET — TOP-25 FREEZE — COMPLETED
-  Refresh found 1425 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, and the best 25 were frozen for the 09:45 live confirmation.
-  Stocks: VERA, RKLB, FPS, ETSY, ASML, LITE, COHR, STM, BE, CRWV, TTMI, AU, KTOS, TENB, SNAP, INTC, WOLF, WAY, CRDO, MU, TER, GEV, AMAT, SNDK, TSEM
-  Counts: baseline_eligible=1870 | trustworthy_observed=1425 | broad_qualified=1425 | strict_activity_count=102 | retained_by_cap=100 | selected_for_deep=60 | analyzed_count=60 | score70_count=3 | a_grade_count=2 | runtime_seconds=312.222
-09:45:19 AM ET — FINAL 09:45 LIVE CONFIRMATION — STARTED
-  Opening-range/VWAP/volume/relative-strength confirmation started on the frozen shortlist only.
-09:46:14 AM ET — FINAL 09:45 LIVE CONFIRMATION — COMPLETED
-  WAIT — DO NOT BUY CRDO YET
-BUY ONLY IF PRICE REACHES $154.78
-VALID BUY RANGE: $154.78 TO $155.55
-IF BOUGHT, ENTER SELL STOP AT $151.99
-IF PRICE THEN RISES TO $161.73, MOVE SELL STOP TO $156.17
-Current price: $153.84
-DO NOT BUY BELOW $154.78
-DO NOT BUY ABOVE $155.55
-  Stocks: CRDO
-  Counts: runtime_seconds=55.024
+08:58:10 AM ET — PRE-SCREEN — COMPLETED
+  1353 stocks naturally met the broad qualification; the strongest 100 were retained by the configured Top-100 cap.
+  Stocks: TRMD, INTC, RIO, ASML, AUR, QURE, FRO, CAMT, ARIS, EXK, SBSW, MCHP, BE, AG, AEHR, COIN, DELL, FPS, LITE, COHR, AXTI, ASST, HYMC, CRWV, MXL, UMC, PLPC, POET, VRT, HMY, APLD, AMD, STX, OKLO, AAOI, CRML, LEU, TSM, STM, ORA, IREN, BCS, OUST, DXYZ, AMKR, GLW, WDC, NBIS, MRVL, TSEM, CIEN, BB, B, GFS, VST, SMCI, WULF, IBRX, CIFR, AU, GEV, USAR, NVTS, TER, UUUU, PLAB, STRL, CAVA, VKTX, FLNC, ALAB, CLSK, AMAT, NCLH, UAL, UEC, DAL, PAAS, INFQ, BA, HPE, SWKS, NVS, WING, LFUS, LRCX, KRMN, ALM, LUNR, KLAC, AZN, BTDR, COO, HL, RIOT, CELH, MT, CEG, FN, IOVA
+  Counts: baseline_eligible=1870 | trustworthy_observed=1353 | broad_qualified=1353 | strict_activity_count=143 | retained_by_cap=100 | runtime_seconds=175.22
