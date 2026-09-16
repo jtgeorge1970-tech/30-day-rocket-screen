@@ -172,6 +172,67 @@ def _google_news_items(query: str, limit: int = 12) -> list[tuple[str, datetime 
     return out
 
 
+_COMPANY_SUFFIXES = {
+    "adr", "ads", "class", "common", "company", "co", "corp", "corporation",
+    "inc", "incorporated", "limited", "ltd", "lp", "llc", "ordinary", "plc",
+    "shares", "stock",
+}
+
+_GENERIC_IDENTITY_WORDS = {
+    "global", "group", "holding", "holdings", "international", "industries",
+    "pharmaceutical", "pharmaceuticals", "solutions", "systems", "technology",
+    "technologies", "therapeutics",
+}
+
+
+def _normalized_words(value: str) -> list[str]:
+    return re.findall(r"[a-z0-9]+", value.lower())
+
+
+def _headline_matches_company(text: str, ticker: str, company_name: str | None) -> bool:
+    """Fail-closed entity check for a catalyst headline.
+
+    Google News search results are only discovery candidates. They are not evidence
+    that a headline belongs to the requested security. A catalyst can score only
+    when the headline body (excluding the publisher suffix) contains both the exact
+    ticker token and an independent company-name identity token. For companies whose
+    legal name is itself the ticker (for example NIO Inc.), the exact ticker/company
+    token is sufficient.
+    """
+    if not company_name:
+        return False
+
+    # Google News RSS titles conventionally end in " - Publisher". Do not allow a
+    # publisher name to satisfy the company identity test.
+    headline = text.rsplit(" - ", 1)[0]
+    ticker_pattern = rf"(?<![A-Za-z0-9]){re.escape(ticker)}(?![A-Za-z0-9])"
+    if not re.search(ticker_pattern, headline, flags=re.I):
+        return False
+
+    ticker_key = "".join(_normalized_words(ticker))
+    company_words = [
+        word for word in _normalized_words(company_name)
+        if word not in _COMPANY_SUFFIXES
+    ]
+    if not company_words:
+        return False
+
+    headline_words = set(_normalized_words(headline))
+    independent_terms = [
+        word for word in company_words
+        if len(word) >= 4
+        and word not in _GENERIC_IDENTITY_WORDS
+        and word != ticker_key
+    ]
+    if independent_terms:
+        return any(word in headline_words for word in independent_terms)
+
+    # A small number of issuers use their ticker as their company name. This is the
+    # only allowed case without a second identity token.
+    company_key = "".join(company_words)
+    return company_key == ticker_key
+
+
 def google_news_catalyst(
     ticker: str,
     reference_time: datetime,
@@ -181,6 +242,10 @@ def google_news_catalyst(
     company_name: str | None = None,
 ) -> Tuple[float, str, float]:
     ticker = ticker.upper()
+    if not company_name:
+        # No identity evidence means no catalyst. Never fall back to ticker-only
+        # matching because globally ambiguous symbols can name unrelated companies.
+        return 0.0, "", math.inf
     company_term = ""
     if company_name:
         cleaned = re.sub(r"\b(Common Stock|Class [A-Z]|Inc\.?|Corporation|Corp\.?|Ltd\.?|PLC|Holdings?)\b", "", company_name, flags=re.I)
@@ -195,6 +260,8 @@ def google_news_catalyst(
     ref_utc = reference_time.astimezone(timezone.utc)
     best = (0.0, "", math.inf)
     for text, timestamp in items:
+        if not _headline_matches_company(text, ticker, company_name):
+            continue
         if promotional_pattern.search(text):
             continue
         age = math.inf
