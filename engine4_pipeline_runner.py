@@ -31,6 +31,7 @@ from engine4_config import (
     BROAD_POOL_SIZE,
     DEEP_POOL_SIZE,
     MAX_SPREAD_PCT,
+    MAX_TRADABLE_PRICE,
     MIN_ATR_PCT,
     MIN_PRICE,
     MIN_PREMARKET_RVOL,
@@ -320,6 +321,7 @@ def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) ->
                 and spread <= MAX_SPREAD_PCT
                 and quote_order_authoritative
             ),
+            "price_cap": math.isfinite(row["last_premarket"]) and row["last_premarket"] <= MAX_TRADABLE_PRICE,
         }
         gate_map = {**evidence_gate_map, "score80": score >= MIN_SCORE}
         mandatory_evidence_pass = bool(all(evidence_gate_map.values()))
