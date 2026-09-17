@@ -1,2 +1,3 @@
 Emergency same-day Engine 4 catch-up requested 2026-09-17.
 Retry after excluding private notification receipts: 2026-09-17 09:51 ET.
+Manual on-demand Engine 4 run requested: 2026-09-17T16:23:14.294Z
