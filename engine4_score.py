@@ -5,7 +5,23 @@ from typing import Dict, Tuple
 
 import numpy as np
 
-from engine4_config import MAX_SPREAD_PCT, WEIGHTS
+from engine4_config import MAX_SPREAD_PCT, MIN_SCORE, WEIGHTS
+
+
+def premarket_grade(score: float, mandatory_gates_pass: bool) -> str:
+    """Return the locked, conventional premarket grade.
+
+    A numerical score never overrides a missing catalyst, weak volume, unsuitable
+    ATR, no room, or a non-authoritative/wide spread.  Such a name is rejected
+    from the official launchpad even when its raw score is high.
+    """
+    if not mandatory_gates_pass or not math.isfinite(score) or score < MIN_SCORE:
+        return "REJECT"
+    if score >= 95.0:
+        return "A+"
+    if score >= 90.0:
+        return "A"
+    return "B"
 
 
 def clamp(value: float, low: float = 0.0, high: float = 1.0) -> float:

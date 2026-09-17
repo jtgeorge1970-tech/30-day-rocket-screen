@@ -1,5 +1,5 @@
-# Engine 4 — Intraday Perfect Setup SSOT v4.9
-Locked for live trial: 2026-09-14
+# Engine 4 — Intraday Perfect Setup SSOT v5.4
+Locked for live trial: 2026-09-17
 
 ## Golden Rules
 1. Never guess or assume.
@@ -16,8 +16,9 @@ The following quantities must always be labeled separately:
 - RETAINED BY CAP = how many names were deliberately kept because the engine is configured to carry only the strongest N forward.
 - SELECTED FOR DEEP ANALYSIS = how many names were deliberately chosen for the 100-point analysis because of the configured deep-analysis cap.
 - ACTUALLY ANALYZED = how many selected names had enough trustworthy data to complete scoring.
-- SCORE >=70 COUNT = how many actually reached the 70-point reference threshold.
-- STRICT A-GRADE COUNT = how many met every strict premarket A-grade gate.
+- SCORE >=80 COUNT = how many actually reached the locked B-or-better numerical threshold.
+- LAUNCHPAD ELIGIBLE COUNT = how many scored at least 80 and met every mandatory premarket evidence gate.
+- STRICT A/A+ COUNT = how many launchpad-eligible names scored at least 90.
 - FROZEN FINAL-SCAN COUNT = how many ranked names were frozen for the 09:45 live scan.
 
 Rounded values such as 100, 60 or 25 are expected when they are configured caps. They must be explicitly labeled as caps and never presented as organic pass/fail results.
@@ -160,23 +161,30 @@ For the 20-point activity component:
 - if true RVOL exists, retain the locked RVOL scoring curve
 - otherwise use premarket-volume intensity, with 10% of estimated ADV receiving the full 20 points and lower values scaling proportionally
 
-Reference strict premarket A-grade volume gate:
+Mandatory premarket launchpad volume gate:
 - true RVOL >= 1.5x when a trustworthy historical premarket baseline exists, OR
 - Nasdaq premarket-volume intensity >= 2.0% of estimated ADV when historical premarket RVOL is unavailable
 
-Other reference A-grade gates:
+Other mandatory launchpad gates:
 - identifiable positive catalyst/reason from recent Google News RSS headlines
 - ATR >= 1.5% of price
 - Nasdaq live bid/ask spread <= 0.60%
 - positive room to resistance
-- score >= 70/100
+- score >= 80/100
 
-These gates classify/rank quality; they do not automatically erase every near-miss before the 09:45 opening test. Promotional-looking moves remain rejected by catalyst logic. Missing/stale data must be marked, never fabricated.
+All gates are mandatory for the official 09:45 launchpad. A numerical score cannot override missing evidence. Scores below 80 and any gate failure remain in audit output only and receive no 09:45 or recovery analysis. Promotional-looking moves remain rejected by catalyst logic. Missing/stale data must be marked, never fabricated.
+
+Locked conventional grade bands, applied only when every mandatory evidence gate passes:
+- B = 80.00–89.99
+- A = 90.00–94.99
+- A+ = 95.00–100.00
+- REJECT = below 80 or any mandatory evidence-gate failure
 
 Required output after completion:
 - SELECTED FOR DEEP ANALYSIS count, explicitly labeled as cap-driven
 - ACTUALLY ANALYZED count
-- SCORE >=70 count
+- SCORE >=80 count
+- LAUNCHPAD ELIGIBLE count
 - B-grade count
 - STRICT A-GRADE count
 - ranked leaders and scores
@@ -195,13 +203,14 @@ Report:
 - retained-by-Top-100-cap count
 - selected-for-deep count
 - actually analyzed count
-- score >=70 count
-- strict A-grade count
+- score >=80 count
+- launchpad-eligible count
+- strict A/A+ count
 
-Then freeze up to the best 25 trustworthy ranked names. Top-25 is a configured final-scan arena cap, not a claim that exactly 25 stocks passed an independent threshold.
+Then freeze no more than the best 25 launchpad-eligible names. Top-25 is a maximum capacity, never a quota. Do not pad the shortlist with a sub-80 or gate-failing name. A healthy run may freeze 25, 10, 5, 3, 1, or zero names.
 
 Sort by:
-1. strict premarket A-grade status
+1. launchpad eligibility
 2. total 100-point score
 3. count of quality gates passed
 4. premarket-volume intensity / true RVOL strength
@@ -209,7 +218,7 @@ Sort by:
 
 Do not insert random names. Do not silently convert a ranking limit into a “survivor” count.
 
-Internal/audit output must retain the complete frozen Top-25 with score and grade per name. User-facing reports show only the ranked Top 10 finalists to prove the final-scan arena formed without redundant clutter. The full Top-25 remains preserved in the production artifact.
+Internal/audit output must retain the complete deep ranking, including rejected names and their failure reasons. The frozen launchpad contains only eligible names, up to 25. User-facing reports show no more than the ranked Top 10 finalists. If zero names qualify, preserve an empty valid launchpad artifact and proceed to a normal NO TRADE result.
 
 ## Stage 4 — 09:45 final A+ live gates
 Analyze only the frozen shortlist. Every BUY must pass the live mandatory setup logic:
@@ -227,7 +236,7 @@ Analyze only the frozen shortlist. Every BUY must pass the live mandatory setup 
 - at least 2.0:1 reward/risk before known resistance / management level
 - reject if SPY and QQQ both suffer a hard adverse opening reversal <= -0.60% with negative recent momentum
 
-The 09:45 live gate is intentionally the strictest stage. Premarket near-misses may enter the arena because a stock can improve materially after the opening bell; it still receives no BUY unless the live setup fully qualifies.
+The 09:45 live gate is intentionally the strictest stage. Premarket scores below 80 and evidence-gate failures may not enter the arena and may not be promoted after the open. Every frozen candidate is revalidated against the premarket eligibility contract before live analysis, and it still receives no BUY unless the live setup fully qualifies.
 
 ## Locked plain-English buy-signal state machine
 The user-facing signal must use plain English. Do not lead with broker order-type jargon such as STOP-LIMIT or LIMIT. Engine 4 may use technical order logic internally, but the user should see only whether to BUY NOW, WAIT, or NOT BUY, plus the exact valid price range and exact downside/profit-protection instructions.
@@ -328,11 +337,12 @@ The daily result must be understandable without opening code and must clearly di
 `09:05:00 ET — DEEP 100-POINT ANALYSIS STARTED`
 `Selected for deep analysis by Top-60 cap: 60`
 `Actually analyzed: 57`
-`Score >=70: 9`
-`Strict A-grade: 3`
+`Score >=80: 9`
+`Launchpad eligible: 6`
+`Strict A/A+: 3`
 `09:18:00 ET — REFRESH + RANKING STARTED`
-`09:23:47 ET — TOP-25 FROZEN`
-`Final-scan Top 10: 1. TICKER score/grade ... through 10. TICKER score/grade`
+`09:23:47 ET — LAUNCHPAD FROZEN: 6 of maximum 25`
+`Final-scan leaders: 1. TICKER score/grade ... through available eligible names`
 `09:45:00 ET — FINAL LIVE CONFIRMATION STARTED`
 `09:47:26 ET — FINAL LIVE CONFIRMATION COMPLETED`
 `RESULT: BUY ...`, `RESULT: WAIT ...`, or `RESULT: NO TRADE ...`
@@ -348,6 +358,9 @@ All numbers and times above are illustrative only. Production must display actua
 6. SSOT v4.9 locks the complete pre-calculated risk-management plan. Every BUY/WAIT signal must include the initial sell stop, first management level, and the exact profit-protection stop calculated at +0.50R from the breakout trigger once that management level is reached.
 
 ## Final output
+If no ticker scores at least 80 and passes every mandatory premarket gate:
+`NO TRADE — no B-or-better premarket candidates. DO NOT BUY.`
+
 If no ticker passes every final live mandatory gate:
 `NO TRADE — no A+ setup. DO NOT BUY.`
 
@@ -375,7 +388,10 @@ If one or more names pass every final gate AND the fresh live-price validation, 
 
 ## Fail-safe rules
 - Missing or stale required data => DATA FAILURE or NO TRADE as appropriate; never fabricated values.
-- Missing frozen Top-25 => final stage must not pretend a normal full-cycle NO TRADE occurred.
+- Missing or invalid frozen launchpad artifact => DATA/PIPELINE FAILURE.
+- A valid empty frozen launchpad => normal NO TRADE — no B-or-better premarket candidates.
+- Top-25, Top-10, Top-5, and Top-3 are maximum capacities, never minimum fill requirements.
+- A sub-80 or mandatory-gate-failing name may remain in audit output but may never receive 09:45 or recovery analysis.
 - BUY NOW requires a fresh current-price/quote timestamp recorded immediately before alert generation.
 - An earlier touch of the breakout trigger does not authorize a later BUY NOW if current price has fallen below the trigger.
 - Below-trigger price before any valid breakout => WAIT, not BUY.

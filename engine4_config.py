@@ -12,7 +12,9 @@ MIN_DOLLAR_VOLUME = 20_000_000.0
 MIN_PREMARKET_DOLLAR_VOLUME = 500_000.0
 MIN_PREMARKET_RVOL = 1.5
 MIN_ATR_PCT = 1.5
-MIN_SCORE = 70.0
+# A score below 80 is not eligible for the official launchpad.  The Top-25 is
+# a maximum capacity, never a quota that may be padded with weaker names.
+MIN_SCORE = 80.0
 MIN_REWARD_RISK = 2.0
 MAX_GAP_PCT = 25.0
 MIN_GAP_PCT = 0.5

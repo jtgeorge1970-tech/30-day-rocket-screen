@@ -8,13 +8,58 @@ from datetime import datetime, timezone
 import pandas as pd
 
 import engine4_live
-from engine4_config import ET, MAX_BREAKOUT_CHASE_PCT, MAX_TRADABLE_PRICE, RECOVERY_WATCH_COUNT, SECTOR_ETF
+from engine4_config import (
+    ET,
+    MAX_BREAKOUT_CHASE_PCT,
+    MAX_SPREAD_PCT,
+    MAX_TRADABLE_PRICE,
+    MIN_ATR_PCT,
+    MIN_SCORE,
+    RECOVERY_WATCH_COUNT,
+    SECTOR_ETF,
+)
 from engine4_data import download_intraday, now_et
 from engine4_intraday import OUT, serializable, write_final
 from engine4_live import live_quality, market_context, opening_structure
 
 
 PROFIT_LOCK_R = 0.50
+
+
+def _artifact_bool(value) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)) and math.isfinite(float(value)):
+        return bool(value)
+    return str(value).strip().lower() in {"true", "1", "yes"}
+
+
+def _premarket_eligibility_failures(row: pd.Series) -> list[str]:
+    """Revalidate the frozen launchpad contract before any live analysis."""
+    failures = []
+    score = pd.to_numeric(pd.Series([row.get("score")]), errors="coerce").iloc[0]
+    catalyst = pd.to_numeric(pd.Series([row.get("catalyst_quality")]), errors="coerce").iloc[0]
+    atr_pct = pd.to_numeric(pd.Series([row.get("atr_pct")]), errors="coerce").iloc[0]
+    room = pd.to_numeric(pd.Series([row.get("resistance_room_pct")]), errors="coerce").iloc[0]
+    spread = pd.to_numeric(pd.Series([row.get("spread_pct")]), errors="coerce").iloc[0]
+
+    if not _artifact_bool(row.get("premarket_eligible", False)):
+        failures.append("not_launchpad_eligible")
+    if not math.isfinite(score) or score < MIN_SCORE:
+        failures.append("premarket_score_below_80")
+    if not math.isfinite(catalyst) or catalyst <= 0:
+        failures.append("missing_verified_catalyst")
+    if not _artifact_bool(row.get("premarket_volume_gate_pass", False)):
+        failures.append("premarket_volume_strength")
+    if not math.isfinite(atr_pct) or atr_pct < MIN_ATR_PCT:
+        failures.append("premarket_atr")
+    if not math.isfinite(room) or room <= 0:
+        failures.append("premarket_room")
+    if not _artifact_bool(row.get("spread_order_authoritative", False)):
+        failures.append("premarket_spread_not_authoritative")
+    if not math.isfinite(spread) or spread > MAX_SPREAD_PCT:
+        failures.append("premarket_spread")
+    return failures
 
 
 def _current_mid(symbol: str) -> tuple[float, float, float, float]:
@@ -92,12 +137,29 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
         top = pd.read_csv(frozen_path)
     except Exception:
         top = pd.DataFrame()
-    if top.empty or "ticker" not in top.columns:
+    if "ticker" not in top.columns:
         return write_final({
             "status": "PIPELINE_FAILURE",
-            "reason": "empty_top25",
-            "message": "ENGINE 4 DATA/PIPELINE FAILURE — frozen Top 25 is empty or invalid.",
+            "reason": "invalid_top25",
+            "message": "ENGINE 4 DATA/PIPELINE FAILURE — frozen launchpad artifact is invalid.",
             "order_instruction": "NO_ORDER",
+            "runtime_seconds": round(time.monotonic() - started, 3),
+        })
+    if top.empty:
+        _write_recovery_watch(date_et, [])
+        (OUT / "final_live_audit.json").write_text(json.dumps({
+            "target_date_et": str(date_et),
+            "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+            "max_tradable_price": MAX_TRADABLE_PRICE,
+            "status": "NO_QUALIFIED_LAUNCHPAD",
+            "candidates": [],
+        }, indent=2), encoding="utf-8")
+        return write_final({
+            "status": "NO_TRADE",
+            "reason": "no_b_or_better_premarket_candidates",
+            "message": "NO TRADE — no B-or-better premarket candidates. DO NOT BUY.",
+            "order_instruction": "NO_ORDER",
+            "max_tradable_price": MAX_TRADABLE_PRICE,
             "runtime_seconds": round(time.monotonic() - started, 3),
         })
 
@@ -116,6 +178,15 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
 
     for _, row in top.iterrows():
         symbol = str(row.ticker)
+        premarket_failures = _premarket_eligibility_failures(row)
+        if premarket_failures:
+            audit.append({
+                "ticker": symbol,
+                "pass": False,
+                "failures": premarket_failures,
+                "stage": "premarket_eligibility_recheck",
+            })
+            continue
         frame = candidate_frames.get(symbol)
         if frame is None or frame.empty:
             audit.append({"ticker": symbol, "pass": False, "failures": ["missing_live_data"]})

@@ -36,7 +36,7 @@ from engine4_data import (
     slice_window,
 )
 from engine4_intraday import final_stage
-from engine4_score import preliminary_activity_score, score_candidate
+from engine4_score import premarket_grade, preliminary_activity_score, score_candidate
 
 OUT = Path("output/engine4")
 OUT.mkdir(parents=True, exist_ok=True)
@@ -91,7 +91,8 @@ def _write_timeline_text(payload: dict) -> None:
                 "retained_by_cap",
                 "selected_for_deep",
                 "analyzed_count",
-                "score70_count",
+                "score80_count",
+                "launchpad_eligible_count",
                 "b_grade_count",
                 "a_grade_count",
                 "runtime_seconds",
@@ -316,25 +317,27 @@ def _score_pool(broad: pd.DataFrame, date_et, reference: datetime, cutoff: str) 
         for key, value in components.items():
             row[f"pts_{key}"] = value
 
-        gate_map = {
+        evidence_gate_map = {
             "catalyst": catalyst > 0,
             "rvol": math.isfinite(rvol) and rvol >= MIN_PREMARKET_RVOL,
             "atr": math.isfinite(atr_pct) and atr_pct >= MIN_ATR_PCT,
             "room": room > 0,
             "spread": math.isfinite(spread) and spread <= MAX_SPREAD_PCT,
-            "score70": score >= MIN_SCORE,
         }
+        gate_map = {**evidence_gate_map, "score80": score >= MIN_SCORE}
+        mandatory_evidence_pass = bool(all(evidence_gate_map.values()))
+        row["premarket_eligible"] = bool(mandatory_evidence_pass and score >= MIN_SCORE)
         row["premarket_gate_count"] = int(sum(gate_map.values()))
-        row["premarket_a_grade"] = bool(all(gate_map.values()))
+        row["premarket_grade"] = premarket_grade(score, mandatory_evidence_pass)
+        row["premarket_a_grade"] = row["premarket_grade"] in {"A", "A+"}
         row["premarket_failures"] = ",".join(k for k, passed in gate_map.items() if not passed)
-        row["premarket_grade"] = "A" if row["premarket_a_grade"] else ("B" if score >= 60 and row["premarket_gate_count"] >= 3 else "WATCH")
         enriched.append(row)
 
     ranked = pd.DataFrame(enriched)
     if ranked.empty:
         return ranked
     return ranked.sort_values(
-        ["premarket_a_grade", "score", "premarket_gate_count", "premarket_rvol", "premarket_dollar_volume"],
+        ["premarket_eligible", "score", "premarket_gate_count", "premarket_rvol", "premarket_dollar_volume"],
         ascending=False,
         na_position="last",
     ).reset_index(drop=True)
@@ -357,7 +360,8 @@ def deep_stage(date_override: str | None = None) -> pd.DataFrame:
         raise RuntimeError("Engine 4 deep-analysis data failure")
 
     runtime = round(time.monotonic() - started, 3)
-    score70_count = int((ranked.score >= MIN_SCORE).sum())
+    score80_count = int((ranked.score >= MIN_SCORE).sum())
+    launchpad_eligible_count = int(ranked.premarket_eligible.sum())
     a_grade_count = int(ranked.premarket_a_grade.sum())
     b_grade_count = int((ranked.premarket_grade == "B").sum())
     ranked.to_csv(OUT / "deep_ranked.csv", index=False)
@@ -367,7 +371,8 @@ def deep_stage(date_override: str | None = None) -> pd.DataFrame:
         "selected_for_deep": selected_count,
         "deep_pool_cap": DEEP_POOL_SIZE,
         "analyzed_count": len(ranked),
-        "score70_count": score70_count,
+        "score80_count": score80_count,
+        "launchpad_eligible_count": launchpad_eligible_count,
         "b_grade_count": b_grade_count,
         "a_grade_count": a_grade_count,
         "runtime_seconds": runtime,
@@ -379,12 +384,13 @@ def deep_stage(date_override: str | None = None) -> pd.DataFrame:
     log_event(
         "DEEP 100-POINT ANALYSIS",
         "COMPLETED",
-        f"Top {selected_count} were selected for deep analysis by the configured cap; {len(ranked)} actually completed scoring. Of those, {score70_count} scored >=70 and {a_grade_count} met every strict premarket A-grade gate.",
+        f"Top {selected_count} were selected for deep analysis by the configured cap; {len(ranked)} actually completed scoring. Of those, {score80_count} scored >=80 and {launchpad_eligible_count} passed every mandatory premarket gate for B-or-better launchpad eligibility.",
         tickers=leaders,
         details={
             "selected_for_deep": selected_count,
             "analyzed_count": len(ranked),
-            "score70_count": score70_count,
+            "score80_count": score80_count,
+            "launchpad_eligible_count": launchpad_eligible_count,
             "b_grade_count": b_grade_count,
             "a_grade_count": a_grade_count,
             "runtime_seconds": runtime,
@@ -409,7 +415,11 @@ def refresh_and_freeze(date_override: str | None = None, max_symbols: int | None
         log_event("09:18 REFRESH + RANKING", "DATA FAILURE", "Refresh produced no trustworthy scored names.")
         raise RuntimeError("Engine 4 refresh scoring failure")
 
-    top = ranked_all.head(TOP_N).copy().reset_index(drop=True)
+    # The Top-25 is a maximum capacity, never a quota.  Sub-80 and gate-failing
+    # names remain in the audit ranking but consume no launchpad slot and receive
+    # no 09:45 or recovery analysis.
+    eligible = ranked_all[ranked_all.premarket_eligible].copy()
+    top = eligible.head(TOP_N).copy().reset_index(drop=True)
     top.insert(0, "rank", np.arange(1, len(top) + 1))
     top["frozen_at_et"] = _now_iso()
     runtime = round(time.monotonic() - started, 3)
@@ -423,7 +433,8 @@ def refresh_and_freeze(date_override: str | None = None, max_symbols: int | None
         **meta,
         "selected_for_deep": min(DEEP_POOL_SIZE, len(broad)),
         "refresh_analyzed_count": len(ranked_all),
-        "score70_count": int((ranked_all.score >= MIN_SCORE).sum()),
+        "score80_count": int((ranked_all.score >= MIN_SCORE).sum()),
+        "launchpad_eligible_count": len(eligible),
         "requested_top_n": TOP_N,
         "actual_count": len(top),
         "a_grade_count": int(top.premarket_a_grade.sum()),
@@ -432,20 +443,21 @@ def refresh_and_freeze(date_override: str | None = None, max_symbols: int | None
     }
     (OUT / "top25_frozen.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
     (OUT / "premarket_status.txt").write_text(
-        f"REFRESH: {meta['broad_qualified']} naturally broad-qualified; {meta['retained_by_cap']} retained by Top-{BROAD_POOL_SIZE} cap; {len(ranked_all)} completed refreshed deep scoring; Top {len(top)} frozen; {payload['a_grade_count']} strict A-grade. Runtime {runtime:.1f}s\n",
+        f"REFRESH: {meta['broad_qualified']} naturally broad-qualified; {meta['retained_by_cap']} retained by Top-{BROAD_POOL_SIZE} cap; {len(ranked_all)} completed refreshed deep scoring; {len(eligible)} passed the >=80 plus mandatory-gates rule; {len(top)} frozen (Top-{TOP_N} maximum, not quota). Runtime {runtime:.1f}s\n",
         encoding="utf-8",
     )
 
     log_event(
         "TOP-25 FREEZE",
         "COMPLETED",
-        f"Refresh found {meta['broad_qualified']} naturally broad-qualified names; {meta['retained_by_cap']} were retained by cap, {len(ranked_all)} completed refreshed deep scoring, and the best {len(top)} were frozen for the 09:45 live confirmation.",
+        f"Refresh found {meta['broad_qualified']} naturally broad-qualified names; {meta['retained_by_cap']} were retained by cap, {len(ranked_all)} completed refreshed deep scoring, {len(eligible)} passed the >=80 plus mandatory-gates rule, and {len(top)} were frozen for the 09:45 live confirmation.",
         tickers=top.ticker.astype(str).tolist(),
         details={
             **meta,
             "selected_for_deep": min(DEEP_POOL_SIZE, len(broad)),
             "analyzed_count": len(ranked_all),
-            "score70_count": int((ranked_all.score >= MIN_SCORE).sum()),
+            "score80_count": int((ranked_all.score >= MIN_SCORE).sum()),
+            "launchpad_eligible_count": len(eligible),
             "a_grade_count": int(top.premarket_a_grade.sum()),
             "runtime_seconds": runtime,
         },
@@ -477,6 +489,7 @@ def self_test() -> None:
     assert DEEP_POOL_SIZE >= TOP_N
     assert BROAD_POOL_SIZE == 100
     assert DEEP_POOL_SIZE == 60
+    assert MIN_SCORE == 80.0
     print("ENGINE4_PIPELINE_SELF_TEST_PASS")
 
 

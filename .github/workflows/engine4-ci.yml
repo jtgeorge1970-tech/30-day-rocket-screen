@@ -59,8 +59,8 @@ jobs:
               {
                 "ticker": "VERA",
                 "rank": 1,
-                "score": 70.0,
-                "premarket_grade": "A",
+                "score": 85.0,
+                "premarket_grade": "B",
                 "sector": "Healthcare",
                 "primary_failures": ["below_vwap", "no_higher_low_or_tight_base", "not_attacking_breakout"]
               }
@@ -116,14 +116,16 @@ jobs:
           assert pre['retained_by_cap'] <= pre['broad_qualified']
           assert deep['selected_for_deep'] <= deep['deep_pool_cap']
           assert deep['analyzed_count'] <= deep['selected_for_deep']
-          assert deep['score70_count'] <= deep['analyzed_count']
+          assert deep['score80_count'] <= deep['analyzed_count']
+          assert deep['launchpad_eligible_count'] <= deep['score80_count']
           assert deep['a_grade_count'] <= deep['analyzed_count']
           rows=deep['ranked']
           finite_spreads=sum(1 for r in rows if isinstance(r.get('spread_pct'),(int,float)) and math.isfinite(r['spread_pct']))
           real_pm_vol=sum(1 for r in rows if isinstance(r.get('premarket_volume'),(int,float)) and r['premarket_volume']>0)
           assert finite_spreads >= max(5,len(rows)//2)
           assert real_pm_vol >= max(5,len(rows)//2)
-          assert 0 < top['actual_count'] <= 25
+          assert 0 <= top['actual_count'] <= 25
+          assert top['actual_count'] == min(25, top['launchpad_eligible_count'])
           assert final['status'] in {'BUY','NO_TRADE'}
 
           stages=[e['stage'] for e in timeline['events']]

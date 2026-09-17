@@ -55,7 +55,7 @@ from engine4_free_providers import (
     provider_smoke,
     verified_news_catalyst,
 )
-from engine4_score import preliminary_activity_score, score_candidate
+from engine4_score import premarket_grade, preliminary_activity_score, score_candidate
 
 NASDAQ_ENRICH_CAP = 400
 MIN_PM_INTENSITY_PCT = 2.0
@@ -310,7 +310,7 @@ def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) ->
         for key, value in components.items():
             row[f"pts_{key}"] = value
 
-        gate_map = {
+        evidence_gate_map = {
             "catalyst": catalyst > 0,
             "pm_volume_strength": bool(volume_gate),
             "atr": math.isfinite(atr_pct) and atr_pct >= MIN_ATR_PCT,
@@ -320,12 +320,14 @@ def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) ->
                 and spread <= MAX_SPREAD_PCT
                 and quote_order_authoritative
             ),
-            "score70": score >= MIN_SCORE,
         }
+        gate_map = {**evidence_gate_map, "score80": score >= MIN_SCORE}
+        mandatory_evidence_pass = bool(all(evidence_gate_map.values()))
+        row["premarket_eligible"] = bool(mandatory_evidence_pass and score >= MIN_SCORE)
         row["premarket_gate_count"] = int(sum(gate_map.values()))
-        row["premarket_a_grade"] = bool(all(gate_map.values()))
+        row["premarket_grade"] = premarket_grade(score, mandatory_evidence_pass)
+        row["premarket_a_grade"] = row["premarket_grade"] in {"A", "A+"}
         row["premarket_failures"] = ",".join(k for k, passed in gate_map.items() if not passed)
-        row["premarket_grade"] = "A" if row["premarket_a_grade"] else ("B" if score >= 60 and row["premarket_gate_count"] >= 3 else "WATCH")
         enriched.append(row)
 
     ranked = pd.DataFrame(enriched)
@@ -337,7 +339,7 @@ def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) ->
     ranked["quote_data_degraded"] = ~ranked["spread_order_authoritative"].fillna(False).astype(bool)
 
     return ranked.sort_values(
-        ["premarket_a_grade", "score", "premarket_gate_count", "premarket_volume_intensity_pct", "premarket_dollar_volume"],
+        ["premarket_eligible", "score", "premarket_gate_count", "premarket_volume_intensity_pct", "premarket_dollar_volume"],
         ascending=False,
         na_position="last",
     ).reset_index(drop=True)

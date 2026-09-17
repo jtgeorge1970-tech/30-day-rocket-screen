@@ -358,7 +358,7 @@ def write_final(payload: dict) -> dict:
 def self_test() -> None:
     assert TOP_N == 25
     assert sum(WEIGHTS.values()) == 100.0
-    assert MIN_SCORE == 70.0
+    assert MIN_SCORE == 80.0
     print("ENGINE4_SELF_TEST_PASS")
 
 
