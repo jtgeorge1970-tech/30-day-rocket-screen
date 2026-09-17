@@ -128,7 +128,40 @@
         "premarket_data_degraded": false,
         "runtime_seconds": 201.162
       }
+    },
+    {
+      "time_et": "2026-09-17T09:54:32.067667-04:00",
+      "stage": "DEEP 100-POINT ANALYSIS",
+      "status": "STARTED",
+      "summary": "Detailed 100-point analysis started on the highest-ranked retained pre-screen candidates."
+    },
+    {
+      "time_et": "2026-09-17T10:01:03.018998-04:00",
+      "stage": "DEEP 100-POINT ANALYSIS",
+      "status": "COMPLETED",
+      "summary": "Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 1 scored >=80 and 1 passed every mandatory premarket gate for B-or-better launchpad eligibility.",
+      "tickers": [
+        "GFS",
+        "MRVL",
+        "IONQ",
+        "LRCX",
+        "IREN",
+        "HOOD",
+        "CLSK",
+        "FPS",
+        "RKLB",
+        "QCOM"
+      ],
+      "details": {
+        "selected_for_deep": 60,
+        "analyzed_count": 60,
+        "score80_count": 1,
+        "launchpad_eligible_count": 1,
+        "b_grade_count": 1,
+        "a_grade_count": 0,
+        "runtime_seconds": 390.945
+      }
     }
   ],
-  "last_updated_et": "2026-09-17T09:54:30.134423-04:00"
+  "last_updated_et": "2026-09-17T10:01:03.018998-04:00"
 }
