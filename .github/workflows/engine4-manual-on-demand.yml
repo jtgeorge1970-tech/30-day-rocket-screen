@@ -1,0 +1,263 @@
+name: Engine 4 Manual On-Demand
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Run mode'
+        required: true
+        default: 'live_today'
+        type: choice
+        options:
+          - live_today
+          - acceptance_replay
+          - preflight_only
+      acceptance_date_et:
+        description: 'Historical ET date for acceptance_replay (YYYY-MM-DD)'
+        required: false
+        default: '2026-09-16'
+        type: string
+
+concurrency:
+  group: engine4-production
+  cancel-in-progress: false
+
+jobs:
+  manual-on-demand:
+    runs-on: ubuntu-latest
+    timeout-minutes: 190
+    permissions:
+      contents: read
+      issues: write
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+      OPENPHONE_API_KEY: ${{ secrets.OPENPHONE_API_KEY }}
+      OPENPHONE_FROM_NUMBER: ${{ secrets.OPENPHONE_FROM_NUMBER }}
+      ENGINE4_SMS_TO: ${{ secrets.ENGINE4_SMS_TO }}
+      RUN_MODE: ${{ inputs.mode }}
+      ACCEPTANCE_DATE_ET: ${{ inputs.acceptance_date_et }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install Engine 4 dependencies
+        run: pip install -r requirements.txt pytest
+
+      - name: Validate requested mode and date
+        shell: bash
+        run: |
+          set -euo pipefail
+          case "$RUN_MODE" in
+            live_today|acceptance_replay|preflight_only) ;;
+            *) echo "INVALID MANUAL MODE: $RUN_MODE"; exit 64 ;;
+          esac
+
+          if [ "$RUN_MODE" = 'acceptance_replay' ]; then
+            python - "$ACCEPTANCE_DATE_ET" <<'PY'
+          from datetime import date
+          import sys
+
+          value = sys.argv[1]
+          try:
+              parsed = date.fromisoformat(value)
+          except ValueError as exc:
+              raise SystemExit(f"INVALID ACCEPTANCE DATE: {value!r}; expected YYYY-MM-DD") from exc
+          if parsed.weekday() >= 5:
+              raise SystemExit(f"INVALID ACCEPTANCE DATE: {value} is not a weekday")
+          print(f"LOCKED ACCEPTANCE MARKET DATE: {value} ET")
+          PY
+          fi
+
+      - name: Compile and test Engine 4
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile \
+            engine4_config.py engine4_data.py engine4_free_providers.py engine4_score.py \
+            engine4_live.py engine4_intraday.py engine4_pipeline.py engine4_pipeline_runner.py \
+            engine4_final_guard.py engine4_pipeline_runner_guarded.py engine4_recovery.py engine4_notify.py
+          pytest -q test_engine4_*.py
+          python engine4_intraday.py self-test
+          python engine4_pipeline.py self-test
+          python engine4_pipeline_runner.py self-test
+          python engine4_recovery.py self-test
+
+      - name: Verify providers
+        run: python engine4_pipeline_runner_guarded.py provider-smoke
+
+      - name: Complete preflight-only request
+        if: inputs.mode == 'preflight_only'
+        run: echo 'ENGINE 4 MANUAL PREFLIGHT PASS — code, tests, self-tests, and providers passed.'
+
+      - name: Enforce valid live-today start window
+        if: inputs.mode == 'live_today'
+        shell: bash
+        run: |
+          set -euo pipefail
+          H=$(TZ=America/New_York date +%H)
+          M=$(TZ=America/New_York date +%M)
+          NOW=$((10#$H * 60 + 10#$M))
+          echo "Engine 4 manual live runner requested at ${H}:${M} ET"
+          if [ "$NOW" -lt 535 ] || [ "$NOW" -gt 630 ]; then
+            echo 'MANUAL LIVE RUN REFUSED — valid full-cycle start window is 08:55-10:30 ET.'
+            echo 'Use acceptance_replay outside that window; production data will not be fabricated or mislabeled.'
+            exit 78
+          fi
+
+      - name: Send manual live run-started notification
+        if: inputs.mode == 'live_today'
+        run: >-
+          python engine4_notify.py start --require-delivery
+          --message "ENGINE 4 MANUAL RUN STARTED — live on-demand cycle is active for $(TZ=America/New_York date +%F) ET."
+
+      - name: Run manual live Engine 4 cycle
+        if: inputs.mode == 'live_today'
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENGINE_DATE_ET=$(TZ=America/New_York date +%F)
+          export ENGINE_DATE_ET
+
+          verify_date() {
+            python - "$1" "$ENGINE_DATE_ET" <<'PY'
+          import json, sys
+          from pathlib import Path
+          path = Path(sys.argv[1])
+          expected = sys.argv[2]
+          payload = json.loads(path.read_text(encoding='utf-8'))
+          actual = str(payload.get('target_date_et') or payload.get('market_date_et') or '')
+          if actual != expected:
+              raise SystemExit(f"ENGINE 4 DATE FAILURE — {path} has {actual!r}; expected {expected!r}")
+          print(f"DATE VERIFIED: {path} = {expected} ET")
+          PY
+          }
+
+          reject_pipeline_failure() {
+            python - "$1" <<'PY'
+          import json, sys
+          from pathlib import Path
+          path = Path(sys.argv[1])
+          payload = json.loads(path.read_text(encoding='utf-8'))
+          if payload.get('status') == 'PIPELINE_FAILURE':
+              raise SystemExit(f"ENGINE 4 PIPELINE FAILURE — {path}: {payload.get('reason')}")
+          print(f"TERMINAL STATUS VERIFIED: {path} = {payload.get('status')}")
+          PY
+          }
+
+          echo '=== MANUAL LIVE STAGE 1: BROAD PRE-SCREEN ==='
+          python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"
+          verify_date output/engine4/prescreen_report.json
+          verify_date output/engine4/timeline.json
+
+          echo '=== MANUAL LIVE STAGE 2: DEEP 100-POINT ANALYSIS ==='
+          python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"
+          verify_date output/engine4/deep_ranked.json
+
+          echo '=== MANUAL LIVE STAGE 3: REFRESH + RANK + FREEZE ==='
+          python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"
+          verify_date output/engine4/top25_frozen.json
+
+          echo '=== MANUAL LIVE STAGE 4: FINAL LIVE CONFIRMATION ==='
+          python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"
+          verify_date output/engine4/final_signal.json
+          reject_pipeline_failure output/engine4/final_signal.json
+          python engine4_notify.py final --require-delivery
+
+          echo '=== MANUAL LIVE STAGE 5: RECOVERY WATCH ==='
+          python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300
+          verify_date output/engine4/recovery_signal.json
+          reject_pipeline_failure output/engine4/recovery_signal.json
+          python engine4_notify.py recovery --require-delivery
+          python engine4_notify.py complete --require-delivery \
+            --message "ENGINE 4 MANUAL RUN COMPLETE — every required stage finished for ${ENGINE_DATE_ET} ET and all dated artifacts were verified."
+
+      - name: Run isolated historical acceptance replay
+        if: inputs.mode == 'acceptance_replay'
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '=== ACCEPTANCE STAGE 1: BROAD PRE-SCREEN ==='
+          python engine4_pipeline_runner_guarded.py prescreen --date "$ACCEPTANCE_DATE_ET"
+          echo '=== ACCEPTANCE STAGE 2: DEEP 100-POINT ANALYSIS ==='
+          python engine4_pipeline_runner_guarded.py deep --date "$ACCEPTANCE_DATE_ET"
+          echo '=== ACCEPTANCE STAGE 3: REFRESH + RANK + FREEZE ==='
+          python engine4_pipeline_runner_guarded.py refresh --date "$ACCEPTANCE_DATE_ET"
+          echo '=== ACCEPTANCE STAGE 4: FINAL CONFIRMATION REPLAY ==='
+          python engine4_pipeline_runner_guarded.py final --date "$ACCEPTANCE_DATE_ET"
+
+      - name: Verify staged acceptance replay
+        if: inputs.mode == 'acceptance_replay'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+
+          expected = os.environ['ACCEPTANCE_DATE_ET']
+          files = {
+              'prescreen': Path('output/engine4/prescreen_report.json'),
+              'deep': Path('output/engine4/deep_ranked.json'),
+              'freeze': Path('output/engine4/top25_frozen.json'),
+              'final': Path('output/engine4/final_signal.json'),
+              'timeline': Path('output/engine4/timeline.json'),
+          }
+          payloads = {name: json.loads(path.read_text(encoding='utf-8')) for name, path in files.items()}
+          for name in ('prescreen', 'deep', 'freeze', 'final'):
+              assert payloads[name]['target_date_et'] == expected, (name, payloads[name].get('target_date_et'), expected)
+          assert payloads['timeline']['market_date_et'] == expected
+          stages = [event['stage'] for event in payloads['timeline']['events']]
+          required = [
+              'PRE-SCREEN',
+              'DEEP 100-POINT ANALYSIS',
+              '09:18 REFRESH + RANKING',
+              'TOP-25 FREEZE',
+              'FINAL 09:45 LIVE CONFIRMATION',
+          ]
+          for stage in required:
+              assert stage in stages, f'missing stage audit: {stage}'
+          assert payloads['prescreen']['broad_qualified'] > 0
+          assert 0 < payloads['prescreen']['retained_by_cap'] <= 100
+          assert 0 < payloads['deep']['analyzed_count'] <= 60
+          assert 0 <= payloads['freeze']['actual_count'] <= 25
+          assert payloads['final']['status'] in {'BUY', 'NO_TRADE'}
+          print('ENGINE4_MANUAL_ACCEPTANCE_PASS')
+          print('acceptance_date_et', expected)
+          print('final_status', payloads['final']['status'])
+          print('final_reason', payloads['final'].get('reason'))
+          PY
+
+      - name: Stage isolated manual artifacts
+        if: inputs.mode != 'preflight_only' && always()
+        shell: bash
+        run: |
+          mkdir -p "manual-artifacts/${GITHUB_RUN_ID}"
+          if [ -d output/engine4 ]; then
+            cp -a output/engine4/. "manual-artifacts/${GITHUB_RUN_ID}/"
+          fi
+          printf '%s\n' \
+            "run_id=${GITHUB_RUN_ID}" \
+            "mode=${RUN_MODE}" \
+            "requested_acceptance_date_et=${ACCEPTANCE_DATE_ET}" \
+            "completed_utc=$(date -u +%FT%TZ)" \
+            > "manual-artifacts/${GITHUB_RUN_ID}/manual_run_metadata.txt"
+
+      - name: Upload isolated manual artifacts
+        if: inputs.mode != 'preflight_only' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-manual-${{ inputs.mode }}-${{ github.run_id }}
+          path: manual-artifacts/${{ github.run_id }}/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Send manual live pipeline-failure alert
+        if: failure() && inputs.mode == 'live_today'
+        run: >-
+          python engine4_notify.py failure --require-delivery
+          --message "ENGINE 4 MANUAL RUN FAILURE — the live on-demand workflow did not complete. Review the failed stage; no completed result is being reported."
