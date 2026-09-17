@@ -1,3 +1,3 @@
-mode=acceptance_replay
-acceptance_date_et=2026-09-16
-request=manual_on_demand_2026-09-17T13:04:17_ET
+mode=live_today
+acceptance_date_et=
+request=live_on_demand_2026-09-17T15:09:14_ET
