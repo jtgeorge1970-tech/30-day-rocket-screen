@@ -109,4 +109,84 @@ def test_notification_dry_run_contains_committed_instruction(tmp_path, monkeypat
     result = notifier.notify("recovery", dry_run=True)
     assert result["delivery"] == "DRY_RUN"
     assert "PLACE RECOVERY BUY STOP-LIMIT NOW" in result["body"]
+    assert "PLACE RECOVERY BUY STOP-LIMIT NOW" in result["sms_text"]
     assert "ENGINE4-ALERT:2026-09-16:recovery:ARM:FPS" in result["marker"]
+
+
+def test_openphone_sms_uses_official_api_and_e164_numbers(monkeypatch):
+    monkeypatch.setenv("OPENPHONE_API_KEY", "secret-test-key")
+    monkeypatch.setenv("OPENPHONE_FROM_NUMBER", "+15551234567")
+    monkeypatch.setenv("ENGINE4_SMS_TO", "+15557654321")
+
+    class Response:
+        status_code = 202
+
+        @staticmethod
+        def raise_for_status():
+            return None
+
+        @staticmethod
+        def json():
+            return {"data": {"id": "AC123"}}
+
+    captured = {}
+
+    def fake_post(url, **kwargs):
+        captured["url"] = url
+        captured.update(kwargs)
+        return Response()
+
+    monkeypatch.setattr(notifier.requests, "post", fake_post)
+    result = notifier._send_openphone_sms("Engine 4 test")
+    assert result == {
+        "delivery": "API_ACCEPTED",
+        "recipient_count": 1,
+        "messages": [{"http_status": 202, "message_id": "AC123"}],
+    }
+    assert captured["url"] == "https://api.quo.com/v1/messages"
+    assert captured["headers"]["Authorization"] == "secret-test-key"
+    assert captured["json"] == {
+        "content": "Engine 4 test",
+        "from": "+15551234567",
+        "to": ["+15557654321"],
+    }
+
+
+def test_openphone_sms_rejects_non_e164_number(monkeypatch):
+    monkeypatch.setenv("OPENPHONE_API_KEY", "secret-test-key")
+    monkeypatch.setenv("OPENPHONE_FROM_NUMBER", "555-123-4567")
+    monkeypatch.setenv("ENGINE4_SMS_TO", "+15557654321")
+    result = notifier._send_openphone_sms("Engine 4 test")
+    assert result["delivery"] == "FAILED"
+    assert "E.164" in result["reason"]
+
+
+def test_openphone_sms_sends_separate_message_to_each_recipient(monkeypatch):
+    monkeypatch.setenv("OPENPHONE_API_KEY", "secret-test-key")
+    monkeypatch.setenv("OPENPHONE_FROM_NUMBER", "+15551234567")
+    monkeypatch.setenv("ENGINE4_SMS_TO", "+15557654321,+15559876543")
+
+    class Response:
+        status_code = 202
+
+        @staticmethod
+        def raise_for_status():
+            return None
+
+        @staticmethod
+        def json():
+            return {"data": {"id": "AC123"}}
+
+    payloads = []
+
+    def fake_post(url, **kwargs):
+        payloads.append(kwargs["json"])
+        return Response()
+
+    monkeypatch.setattr(notifier.requests, "post", fake_post)
+    result = notifier._send_openphone_sms("Engine 4 test")
+    assert result["recipient_count"] == 2
+    assert [payload["to"] for payload in payloads] == [
+        ["+15557654321"],
+        ["+15559876543"],
+    ]

@@ -19,6 +19,9 @@ jobs:
       issues: write
     env:
       GITHUB_TOKEN: ${{ github.token }}
+      OPENPHONE_API_KEY: ${{ secrets.OPENPHONE_API_KEY }}
+      OPENPHONE_FROM_NUMBER: ${{ secrets.OPENPHONE_FROM_NUMBER }}
+      ENGINE4_SMS_TO: ${{ secrets.ENGINE4_SMS_TO }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

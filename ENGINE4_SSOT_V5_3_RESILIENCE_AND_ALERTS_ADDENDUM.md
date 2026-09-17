@@ -33,11 +33,13 @@ order-authoritative path without changing this safety rule.
 
 ## 4. Event-driven notifications
 
-The production workflow must send an immediate, deduplicated GitHub notification for
-the final result, recovery result, and pipeline failure. The alert is assigned to the
-repository owner and contains the committed Engine 4 instruction and workflow link.
-Fixed-time ChatGPT reports remain secondary summaries; they are not the immediate
-delivery mechanism.
+The production workflow must send an immediate, deduplicated real SMS through the
+user's existing OpenPhone/Quo account for the final result, recovery result, and
+pipeline failure. GitHub Issues remains the independent audit trail and fallback
+notification channel. OpenPhone credentials and both phone numbers must exist only
+as encrypted GitHub Actions secrets; they must never be committed to the repository.
+The alert contains the Engine 4 instruction and workflow link. Fixed-time ChatGPT
+reports remain secondary summaries; they are not the immediate delivery mechanism.
 
 No alert creates authority to trade. An official BUY or ARM still requires every
 locked Engine 4 gate and a confirmed live broker quote.
