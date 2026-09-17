@@ -15,6 +15,7 @@ from engine4_config import (
     DEEP_POOL_SIZE,
     ET,
     MAX_SPREAD_PCT,
+    MAX_TRADABLE_PRICE,
     MIN_ATR_PCT,
     MIN_DOLLAR_VOLUME,
     MIN_MARKET_CAP,
@@ -324,6 +325,7 @@ def _score_pool(broad: pd.DataFrame, date_et, reference: datetime, cutoff: str) 
             "atr": math.isfinite(atr_pct) and atr_pct >= MIN_ATR_PCT,
             "room": room > 0,
             "spread": math.isfinite(spread) and spread <= MAX_SPREAD_PCT,
+            "price_cap": math.isfinite(row["last_premarket"]) and row["last_premarket"] <= MAX_TRADABLE_PRICE,
         }
         gate_map = {**evidence_gate_map, "score80": score >= MIN_SCORE}
         mandatory_evidence_pass = bool(all(evidence_gate_map.values()))
