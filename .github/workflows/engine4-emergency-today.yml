@@ -1,0 +1,143 @@
+name: Engine 4 Emergency Same-Day Catch-up
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/engine4-emergency-trigger.txt'
+
+concurrency:
+  group: engine4-production
+  cancel-in-progress: false
+
+jobs:
+  emergency-cycle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 190
+    permissions:
+      contents: write
+      issues: write
+    env:
+      GITHUB_TOKEN: ${{ github.token }}
+      OPENPHONE_API_KEY: ${{ secrets.OPENPHONE_API_KEY }}
+      OPENPHONE_FROM_NUMBER: ${{ secrets.OPENPHONE_FROM_NUMBER }}
+      ENGINE4_SMS_TO: ${{ secrets.ENGINE4_SMS_TO }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Verify emergency run window and providers
+        shell: bash
+        run: |
+          H=$(TZ=America/New_York date +%H)
+          M=$(TZ=America/New_York date +%M)
+          T=$((10#$H * 60 + 10#$M))
+          echo "Emergency Engine 4 runner woke at ${H}:${M} ET"
+          if [ "$T" -lt 535 ] || [ "$T" -gt 630 ]; then
+            echo 'ENGINE 4 DATA/PIPELINE FAILURE — emergency full-cycle start is allowed only from 08:55-10:30 ET.'
+            exit 78
+          fi
+          python engine4_pipeline_runner_guarded.py provider-smoke
+
+      - name: Send emergency run-started notification
+        run: >-
+          python engine4_notify.py start --require-delivery
+          --message "ENGINE 4 STARTED — emergency same-day catch-up cycle is active for $(TZ=America/New_York date +%F) ET."
+
+      - name: Run ordered emergency Engine 4 cycle
+        shell: bash
+        run: |
+          set -euo pipefail
+          ENGINE_DATE_ET=$(TZ=America/New_York date +%F)
+          export ENGINE_DATE_ET
+          echo "Locked Engine 4 market date: ${ENGINE_DATE_ET} ET"
+
+          verify_date() {
+            FILE="$1"
+            python - "$FILE" "$ENGINE_DATE_ET" <<'PY'
+          import json, sys
+          from pathlib import Path
+          path=Path(sys.argv[1])
+          expected=sys.argv[2]
+          payload=json.loads(path.read_text(encoding='utf-8'))
+          actual=str(payload.get('target_date_et') or payload.get('market_date_et') or '')
+          if actual != expected:
+              raise SystemExit(f"ENGINE 4 DATE FAILURE — {path} has {actual!r}; expected {expected!r}")
+          print(f"DATE VERIFIED: {path} = {expected} ET")
+          PY
+          }
+
+          reject_pipeline_failure() {
+            FILE="$1"
+            python - "$FILE" <<'PY'
+          import json, sys
+          from pathlib import Path
+          path=Path(sys.argv[1])
+          payload=json.loads(path.read_text(encoding='utf-8'))
+          if payload.get('status') == 'PIPELINE_FAILURE':
+              raise SystemExit(f"ENGINE 4 PIPELINE FAILURE — {path}: {payload.get('reason')}")
+          print(f"TERMINAL STATUS VERIFIED: {path} = {payload.get('status')}")
+          PY
+          }
+
+          save_stage() {
+            LABEL="$1"
+            git config user.name 'engine4-bot'
+            git config user.email 'actions@users.noreply.github.com'
+            git add output/engine4/ || true
+            if git diff --cached --quiet; then
+              echo "No Engine 4 output changes for ${LABEL}."
+              return
+            fi
+            git commit -m "Engine 4 emergency ${LABEL}"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          }
+
+          echo '=== EMERGENCY STAGE 1: BROAD PRE-SCREEN ==='
+          python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"
+          verify_date output/engine4/prescreen_report.json
+          verify_date output/engine4/timeline.json
+          save_stage 'pre-screen complete'
+
+          echo '=== EMERGENCY STAGE 2: DEEP 100-POINT ANALYSIS ==='
+          python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"
+          verify_date output/engine4/deep_ranked.json
+          save_stage 'deep analysis complete'
+
+          echo '=== EMERGENCY STAGE 3: REFRESH + RANK + FREEZE ==='
+          python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"
+          verify_date output/engine4/top25_frozen.json
+          save_stage 'refresh and Top-25 freeze'
+
+          echo '=== EMERGENCY STAGE 4: FINAL LIVE CONFIRMATION ==='
+          python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"
+          verify_date output/engine4/final_signal.json
+          reject_pipeline_failure output/engine4/final_signal.json
+          python engine4_notify.py final --require-delivery
+          save_stage 'final live result'
+
+          echo '=== EMERGENCY STAGE 5: POST-OPEN RECOVERY WATCH ==='
+          python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300
+          verify_date output/engine4/recovery_signal.json
+          reject_pipeline_failure output/engine4/recovery_signal.json
+          python engine4_notify.py recovery --require-delivery
+          save_stage 'recovery result'
+
+          python engine4_notify.py complete --require-delivery             --message "ENGINE 4 COMPLETE — emergency same-day cycle finished for ${ENGINE_DATE_ET} ET; all dated artifacts were verified."
+
+          echo '=== ENGINE 4 EMERGENCY ORDERED CYCLE COMPLETE ==='
+          cat output/engine4/timeline.txt
+          cat output/engine4/final_alert.txt
+          cat output/engine4/recovery_alert.txt
+
+      - name: Send immediate pipeline-failure alert
+        if: failure()
+        run: >-
+          python engine4_notify.py failure --require-delivery
+          --message "ENGINE 4 DATA/PIPELINE FAILURE — the emergency same-day workflow did not complete. Review the linked failed stage; no completed result is being reported."
