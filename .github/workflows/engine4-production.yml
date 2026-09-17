@@ -2,8 +2,11 @@ name: Engine 4 Intraday Production
 
 on:
   workflow_dispatch:
+  # Redundant wake requests: GitHub scheduled events are best-effort and can
+  # be delayed under load. Duplicate detection below allows the first usable
+  # wake to run while later wakes exit safely.
   schedule:
-    - cron: '35 8 * * 1-5'
+    - cron: '35,40,45,50 8 * * 1-5'
       timezone: 'America/New_York'
 
 concurrency:
