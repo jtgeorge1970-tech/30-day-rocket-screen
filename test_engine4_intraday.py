@@ -165,6 +165,24 @@ def test_refresh_freezes_only_b_or_better_fully_gated_names(tmp_path, monkeypatc
     assert report.ticker.tolist() == ["GOOD"]
 
 
+def test_refresh_does_not_freeze_names_above_locked_price_cap(tmp_path, monkeypatch):
+    broad = pd.DataFrame({"ticker": ["AFFORDABLE", "TOO_HIGH"]})
+    ranked = pd.DataFrame([
+        {"ticker": "AFFORDABLE", "score": 85.0, "last_premarket": 99.99, "premarket_eligible": True, "premarket_grade": "B", "premarket_a_grade": False},
+        {"ticker": "TOO_HIGH", "score": 95.0, "last_premarket": 100.01, "premarket_eligible": False, "premarket_grade": "REJECT", "premarket_a_grade": False, "premarket_failures": "price_cap"},
+    ])
+    monkeypatch.setattr(pipeline, "OUT", tmp_path)
+    monkeypatch.setattr(pipeline, "TIMELINE", tmp_path / "timeline.json")
+    monkeypatch.setattr(pipeline, "build_broad_pool", lambda *args, **kwargs: (broad, _refresh_meta()))
+    monkeypatch.setattr(pipeline, "_score_pool", lambda *args, **kwargs: ranked)
+
+    frozen = pipeline.refresh_and_freeze("2026-09-17")
+
+    assert frozen.ticker.tolist() == ["AFFORDABLE"]
+    report = pd.read_csv(tmp_path / "top25_frozen.csv")
+    assert report.ticker.tolist() == ["AFFORDABLE"]
+
+
 def test_empty_qualified_launchpad_is_normal_no_trade(tmp_path, monkeypatch):
     pd.DataFrame(columns=["ticker", "score", "premarket_eligible"]).to_csv(
         tmp_path / "top25_frozen.csv", index=False
