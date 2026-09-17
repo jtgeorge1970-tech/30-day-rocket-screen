@@ -4,6 +4,7 @@
   "message": "NO PRIMARY TRADE \u2014 no A+ setup. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.",
   "order_instruction": "NO_ORDER",
   "max_tradable_price": 100.0,
-  "runtime_seconds": 53.3,
-  "generated_at_utc": "2026-09-16T13:54:28.870972+00:00"
+  "runtime_seconds": 2.839,
+  "target_date_et": "2026-09-17",
+  "generated_at_utc": "2026-09-17T14:11:05.361000+00:00"
 }

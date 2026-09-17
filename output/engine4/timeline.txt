@@ -17,3 +17,8 @@ ENGINE 4 DAILY TIMELINE — 2026-09-17
   Refresh found 1801 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, 1 passed the >=80 plus mandatory-gates rule, and 1 were frozen for the 09:45 live confirmation.
   Stocks: GFS
   Counts: baseline_eligible=1870 | trustworthy_observed=1801 | broad_qualified=1801 | strict_activity_count=227 | retained_by_cap=100 | selected_for_deep=60 | analyzed_count=60 | score80_count=1 | launchpad_eligible_count=1 | a_grade_count=0 | runtime_seconds=577.999
+10:11:02 AM ET — FINAL 09:45 LIVE CONFIRMATION — STARTED
+  Opening-range/VWAP/volume/relative-strength confirmation started on the frozen shortlist only.
+10:11:05 AM ET — FINAL 09:45 LIVE CONFIRMATION — COMPLETED
+  NO PRIMARY TRADE — no A+ setup. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.
+  Counts: runtime_seconds=2.84
