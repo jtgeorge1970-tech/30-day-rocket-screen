@@ -8,6 +8,7 @@ on:
       - 'ENGINE4_SSOT*.md'
       - '.github/workflows/engine4-ci.yml'
       - '.github/workflows/engine4-production.yml'
+      - '.github/workflows/engine4-manual-on-demand.yml'
   workflow_dispatch:
 
 jobs:
