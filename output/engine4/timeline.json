@@ -161,7 +161,41 @@
         "a_grade_count": 0,
         "runtime_seconds": 390.945
       }
+    },
+    {
+      "time_et": "2026-09-17T10:01:16.221179-04:00",
+      "stage": "09:18 REFRESH + RANKING",
+      "status": "STARTED",
+      "summary": "Mandatory fresh full-universe premarket refresh/rerank started."
+    },
+    {
+      "time_et": "2026-09-17T10:10:54.223806-04:00",
+      "stage": "TOP-25 FREEZE",
+      "status": "COMPLETED",
+      "summary": "Refresh found 1801 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, 1 passed the >=80 plus mandatory-gates rule, and 1 were frozen for the 09:45 live confirmation.",
+      "tickers": [
+        "GFS"
+      ],
+      "details": {
+        "baseline_eligible": 1870,
+        "symbols_with_intraday_data": 1870,
+        "trustworthy_observed": 1801,
+        "broad_qualified": 1801,
+        "nasdaq_enrichment_cap": 400,
+        "nasdaq_premarket_enriched": 377,
+        "nonzero_premarket_activity_count": 377,
+        "strict_activity_count": 227,
+        "retained_by_cap": 100,
+        "broad_pool_cap": 100,
+        "premarket_data_degraded": false,
+        "selected_for_deep": 60,
+        "analyzed_count": 60,
+        "score80_count": 1,
+        "launchpad_eligible_count": 1,
+        "a_grade_count": 0,
+        "runtime_seconds": 577.999
+      }
     }
   ],
-  "last_updated_et": "2026-09-17T10:01:03.018998-04:00"
+  "last_updated_et": "2026-09-17T10:10:54.223806-04:00"
 }

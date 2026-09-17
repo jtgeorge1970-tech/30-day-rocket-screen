@@ -11,3 +11,9 @@ ENGINE 4 DAILY TIMELINE — 2026-09-17
   Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 1 scored >=80 and 1 passed every mandatory premarket gate for B-or-better launchpad eligibility.
   Stocks: GFS, MRVL, IONQ, LRCX, IREN, HOOD, CLSK, FPS, RKLB, QCOM
   Counts: selected_for_deep=60 | analyzed_count=60 | score80_count=1 | launchpad_eligible_count=1 | b_grade_count=1 | a_grade_count=0 | runtime_seconds=390.945
+10:01:16 AM ET — 09:18 REFRESH + RANKING — STARTED
+  Mandatory fresh full-universe premarket refresh/rerank started.
+10:10:54 AM ET — TOP-25 FREEZE — COMPLETED
+  Refresh found 1801 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, 1 passed the >=80 plus mandatory-gates rule, and 1 were frozen for the 09:45 live confirmation.
+  Stocks: GFS
+  Counts: baseline_eligible=1870 | trustworthy_observed=1801 | broad_qualified=1801 | strict_activity_count=227 | retained_by_cap=100 | selected_for_deep=60 | analyzed_count=60 | score80_count=1 | launchpad_eligible_count=1 | a_grade_count=0 | runtime_seconds=577.999
