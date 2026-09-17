@@ -2,10 +2,6 @@ name: Engine 4 SMS Test
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/engine4-sms-test.yml'
 
 jobs:
   sms-test:
