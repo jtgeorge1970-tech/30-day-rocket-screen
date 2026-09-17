@@ -12,7 +12,11 @@ without operating GitHub himself.
 
 1. `live_today`
    - Runs the complete current-date guarded Engine 4 cycle.
-   - May start only from 08:55 through 10:30 Eastern on a weekday.
+   - May start from 08:55 through 15:30 Eastern on a weekday while the regular market is open.
+   - A start after the original morning stages replays those stages from the same
+     current Eastern market date, then performs final confirmation with the live
+     quote available at execution time. It is identified as an on-demand recovery
+     run, never mislabeled as the original scheduled morning run.
    - Uses the current Eastern market date for every stage.
    - Requires provider health, all code/unit/self-tests, date verification,
      terminal-state verification, and required SMS delivery.
@@ -36,8 +40,10 @@ without operating GitHub himself.
 ## Safety rules
 
 - A manual request never bypasses market-time integrity.
-- Midday or overnight data must never be described as a valid premarket live
-  production cycle.
+- A midday current-date recovery run must never be described as the original
+  scheduled premarket production cycle; an overnight request must be refused.
+- The locked $100 maximum tradable price is a mandatory launchpad gate. Names
+  above the cap remain in audit rankings but cannot occupy a frozen slot.
 - Historical acceptance output must remain isolated from production output.
 - Automatic production and manual operation share one concurrency lock so they
   cannot execute simultaneously.
