@@ -1,24 +1,7 @@
-ENGINE 4 DAILY TIMELINE — 2026-09-16
-08:55:15 AM ET — PRE-SCREEN — STARTED
+ENGINE 4 DAILY TIMELINE — 2026-09-17
+09:51:08 AM ET — PRE-SCREEN — STARTED
   Broad liquid U.S. universe scan started.
-08:58:10 AM ET — PRE-SCREEN — COMPLETED
-  1353 stocks naturally met the broad qualification; the strongest 100 were retained by the configured Top-100 cap.
-  Stocks: TRMD, INTC, RIO, ASML, AUR, QURE, FRO, CAMT, ARIS, EXK, SBSW, MCHP, BE, AG, AEHR, COIN, DELL, FPS, LITE, COHR, AXTI, ASST, HYMC, CRWV, MXL, UMC, PLPC, POET, VRT, HMY, APLD, AMD, STX, OKLO, AAOI, CRML, LEU, TSM, STM, ORA, IREN, BCS, OUST, DXYZ, AMKR, GLW, WDC, NBIS, MRVL, TSEM, CIEN, BB, B, GFS, VST, SMCI, WULF, IBRX, CIFR, AU, GEV, USAR, NVTS, TER, UUUU, PLAB, STRL, CAVA, VKTX, FLNC, ALAB, CLSK, AMAT, NCLH, UAL, UEC, DAL, PAAS, INFQ, BA, HPE, SWKS, NVS, WING, LFUS, LRCX, KRMN, ALM, LUNR, KLAC, AZN, BTDR, COO, HL, RIOT, CELH, MT, CEG, FN, IOVA
-  Counts: baseline_eligible=1870 | trustworthy_observed=1353 | broad_qualified=1353 | strict_activity_count=143 | retained_by_cap=100 | runtime_seconds=175.22
-09:05:13 AM ET — DEEP 100-POINT ANALYSIS — STARTED
-  Detailed 100-point analysis started on the highest-ranked retained pre-screen candidates.
-09:07:37 AM ET — DEEP 100-POINT ANALYSIS — COMPLETED
-  Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 1 scored >=70 and 0 met every strict premarket A-grade gate.
-  Stocks: STX, AU, INTC, COHR, LITE, GFS, OKLO, MXL, STM, ASML
-  Counts: selected_for_deep=60 | analyzed_count=60 | score70_count=1 | b_grade_count=13 | a_grade_count=0 | runtime_seconds=143.684
-09:18:14 AM ET — 09:18 REFRESH + RANKING — STARTED
-  Mandatory fresh full-universe premarket refresh/rerank started.
-09:23:46 AM ET — TOP-25 FREEZE — COMPLETED
-  Refresh found 1397 naturally broad-qualified names; 100 were retained by cap, 60 completed refreshed deep scoring, and the best 25 were frozen for the 09:45 live confirmation.
-  Stocks: STX, INTC, GEV, FPS, COHR, OKLO, LITE, GFS, ASML, STM, CRML, IREN, TRMD, B, CRWV, AAOI, ARIS, NBIS, AMKR, MXL, AU, VRT, GLW, BE, MRVL
-  Counts: baseline_eligible=1870 | trustworthy_observed=1397 | broad_qualified=1397 | strict_activity_count=146 | retained_by_cap=100 | selected_for_deep=60 | analyzed_count=60 | score70_count=1 | a_grade_count=1 | runtime_seconds=331.193
-09:53:35 AM ET — FINAL 09:45 LIVE CONFIRMATION — STARTED
-  Opening-range/VWAP/volume/relative-strength confirmation started on the frozen shortlist only.
-09:54:28 AM ET — FINAL 09:45 LIVE CONFIRMATION — COMPLETED
-  NO PRIMARY TRADE — no A+ setup. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.
-  Counts: runtime_seconds=53.301
+09:54:30 AM ET — PRE-SCREEN — COMPLETED
+  1794 stocks naturally met the broad qualification; the strongest 100 were retained by the configured Top-100 cap.
+  Stocks: NXPI, STLA, CCXI, MGNI, NBIS, HOOD, FPS, GFS, CRCL, APLD, TSEM, AXTI, AEHR, CRDO, PPTA, PURR, COIN, HMY, BTDR, BULL, CLSK, BE, IREN, LRCX, ESE, WULF, AAOI, RCAT, BMNR, AMD, ASML, ALOY, GFL, MSTR, RUM, INTC, LPTH, ORCL, ARIS, CIFR, RKLB, COHR, EXK, IONQ, NVTS, LITE, QBTS, POET, MU, NKE, QUBT, SOFI, CRML, AVGO, USAR, RGTI, MRVL, QCOM, TM, CAMT, SNDK, ASM, MARA, AMAT, GLW, HUT, AMKR, CORZ, SBSW, UAL, AFRM, AG, STM, ON, INFQ, AEVA, MT, TEM, NUAI, VST, HYMC, OKLO, VRT, MXL, NNE, BLSH, NG, GEV, IOVA, JOBY, ALAB, ALM, SXI, BRUN, CLS, OUST, UUUU, CHYM, AMPX, RDW
+  Counts: baseline_eligible=1870 | trustworthy_observed=1794 | broad_qualified=1794 | strict_activity_count=233 | retained_by_cap=100 | runtime_seconds=201.162
