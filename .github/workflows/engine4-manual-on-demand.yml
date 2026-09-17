@@ -105,7 +105,7 @@ jobs:
         if: env.RUN_MODE == 'preflight_only'
         run: echo 'ENGINE 4 MANUAL PREFLIGHT PASS — code, tests, self-tests, and providers passed.'
 
-      - name: Enforce valid live-today start window
+      - name: Enforce valid current-day live window
         if: env.RUN_MODE == 'live_today'
         shell: bash
         run: |
@@ -114,9 +114,9 @@ jobs:
           M=$(TZ=America/New_York date +%M)
           NOW=$((10#$H * 60 + 10#$M))
           echo "Engine 4 manual live runner requested at ${H}:${M} ET"
-          if [ "$NOW" -lt 535 ] || [ "$NOW" -gt 630 ]; then
-            echo 'MANUAL LIVE RUN REFUSED — valid full-cycle start window is 08:55-10:30 ET.'
-            echo 'Use acceptance_replay outside that window; production data will not be fabricated or mislabeled.'
+          if [ "$NOW" -lt 535 ] || [ "$NOW" -gt 930 ]; then
+            echo 'MANUAL LIVE RUN REFUSED — valid current-day on-demand start window is 08:55-15:30 ET.'
+            echo 'Outside market hours, use acceptance_replay; production data will not be fabricated or mislabeled.'
             exit 78
           fi
 
@@ -124,7 +124,7 @@ jobs:
         if: env.RUN_MODE == 'live_today'
         run: >-
           python engine4_notify.py start --require-delivery
-          --message "ENGINE 4 MANUAL RUN STARTED — live on-demand cycle is active for $(TZ=America/New_York date +%F) ET."
+          --message "ENGINE 4 MANUAL RUN STARTED — current-day live on-demand cycle is active for $(TZ=America/New_York date +%F) ET."
 
       - name: Run manual live Engine 4 cycle
         if: env.RUN_MODE == 'live_today'
