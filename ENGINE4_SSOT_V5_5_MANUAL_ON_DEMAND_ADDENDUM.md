@@ -3,6 +3,11 @@
 This addendum locks the permanent manual control implemented by
 `.github/workflows/engine4-manual-on-demand.yml`.
 
+The workflow can be started from GitHub's **Run workflow** button or by an
+authorized Engine 4 operator updating `.github/engine4-manual-trigger.txt`.
+The trigger file exists so Joseph can request an on-demand run in ChatGPT
+without operating GitHub himself.
+
 ## Locked modes
 
 1. `live_today`
