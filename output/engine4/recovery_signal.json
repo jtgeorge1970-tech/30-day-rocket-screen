@@ -1,15 +1,7 @@
 {
-  "status": "ARM",
-  "reason": "recovery_base_confirmed_trigger_not_reached",
-  "ticker": "FPS",
-  "message": "PLACE RECOVERY BUY STOP-LIMIT NOW \u2014 FPS\nSTOP PRICE: $34.32\nLIMIT PRICE: $34.49\nTIME IN FORCE: DAY\nCURRENT PRICE: $33.84\nIF FILLED, ENTER GTC SELL STOP AT $33.70\nIF PRICE THEN RISES TO $35.85, MOVE SELL STOP TO $34.62\nDO NOT CHASE ABOVE $34.49",
-  "order_instruction": "ARM_STOP_LIMIT_DAY",
-  "current_price": 33.84,
-  "entry_trigger": 34.31714923667908,
-  "max_allowed_buy_price": 34.48873498286247,
-  "initial_stop": 33.702559440612795,
-  "first_target": 35.85362372684479,
-  "precalculated_profit_stop": 34.62444413471222,
-  "target_date_et": "2026-09-16",
-  "generated_at_utc": "2026-09-16T13:59:58.646777+00:00"
+  "status": "TIMEOUT",
+  "reason": "recovery_window_expired",
+  "message": "RECOVERY WATCH CLOSED \u2014 no valid second-chance trigger before 11:30 ET.",
+  "target_date_et": "2026-09-17",
+  "generated_at_utc": "2026-09-17T15:31:59.567971+00:00"
 }
