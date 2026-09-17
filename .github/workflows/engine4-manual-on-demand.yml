@@ -17,6 +17,10 @@ on:
         required: false
         default: '2026-09-16'
         type: string
+  push:
+    branches: [main]
+    paths:
+      - '.github/engine4-manual-trigger.txt'
 
 concurrency:
   group: engine4-production
@@ -34,8 +38,8 @@ jobs:
       OPENPHONE_API_KEY: ${{ secrets.OPENPHONE_API_KEY }}
       OPENPHONE_FROM_NUMBER: ${{ secrets.OPENPHONE_FROM_NUMBER }}
       ENGINE4_SMS_TO: ${{ secrets.ENGINE4_SMS_TO }}
-      RUN_MODE: ${{ inputs.mode }}
-      ACCEPTANCE_DATE_ET: ${{ inputs.acceptance_date_et }}
+      RUN_MODE: ${{ inputs.mode || 'acceptance_replay' }}
+      ACCEPTANCE_DATE_ET: ${{ inputs.acceptance_date_et || '2026-09-16' }}
 
     steps:
       - uses: actions/checkout@v4
@@ -52,6 +56,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          if [ "$GITHUB_EVENT_NAME" = 'push' ]; then
+            REQUESTED_MODE=$(sed -n 's/^mode=//p' .github/engine4-manual-trigger.txt | head -1)
+            REQUESTED_DATE=$(sed -n 's/^acceptance_date_et=//p' .github/engine4-manual-trigger.txt | head -1)
+            if [ -n "$REQUESTED_MODE" ]; then RUN_MODE="$REQUESTED_MODE"; fi
+            if [ -n "$REQUESTED_DATE" ]; then ACCEPTANCE_DATE_ET="$REQUESTED_DATE"; fi
+            printf 'RUN_MODE=%s\nACCEPTANCE_DATE_ET=%s\n' "$RUN_MODE" "$ACCEPTANCE_DATE_ET" >> "$GITHUB_ENV"
+          fi
           case "$RUN_MODE" in
             live_today|acceptance_replay|preflight_only) ;;
             *) echo "INVALID MANUAL MODE: $RUN_MODE"; exit 64 ;;
@@ -91,11 +102,11 @@ jobs:
         run: python engine4_pipeline_runner_guarded.py provider-smoke
 
       - name: Complete preflight-only request
-        if: inputs.mode == 'preflight_only'
+        if: env.RUN_MODE == 'preflight_only'
         run: echo 'ENGINE 4 MANUAL PREFLIGHT PASS — code, tests, self-tests, and providers passed.'
 
       - name: Enforce valid live-today start window
-        if: inputs.mode == 'live_today'
+        if: env.RUN_MODE == 'live_today'
         shell: bash
         run: |
           set -euo pipefail
@@ -110,13 +121,13 @@ jobs:
           fi
 
       - name: Send manual live run-started notification
-        if: inputs.mode == 'live_today'
+        if: env.RUN_MODE == 'live_today'
         run: >-
           python engine4_notify.py start --require-delivery
           --message "ENGINE 4 MANUAL RUN STARTED — live on-demand cycle is active for $(TZ=America/New_York date +%F) ET."
 
       - name: Run manual live Engine 4 cycle
-        if: inputs.mode == 'live_today'
+        if: env.RUN_MODE == 'live_today'
         shell: bash
         run: |
           set -euo pipefail
@@ -177,7 +188,7 @@ jobs:
             --message "ENGINE 4 MANUAL RUN COMPLETE — every required stage finished for ${ENGINE_DATE_ET} ET and all dated artifacts were verified."
 
       - name: Run isolated historical acceptance replay
-        if: inputs.mode == 'acceptance_replay'
+        if: env.RUN_MODE == 'acceptance_replay'
         shell: bash
         run: |
           set -euo pipefail
@@ -191,7 +202,7 @@ jobs:
           python engine4_pipeline_runner_guarded.py final --date "$ACCEPTANCE_DATE_ET"
 
       - name: Verify staged acceptance replay
-        if: inputs.mode == 'acceptance_replay'
+        if: env.RUN_MODE == 'acceptance_replay'
         shell: bash
         run: |
           set -euo pipefail
@@ -233,7 +244,7 @@ jobs:
           PY
 
       - name: Stage isolated manual artifacts
-        if: inputs.mode != 'preflight_only' && always()
+        if: env.RUN_MODE != 'preflight_only' && always()
         shell: bash
         run: |
           mkdir -p "manual-artifacts/${GITHUB_RUN_ID}"
@@ -248,16 +259,16 @@ jobs:
             > "manual-artifacts/${GITHUB_RUN_ID}/manual_run_metadata.txt"
 
       - name: Upload isolated manual artifacts
-        if: inputs.mode != 'preflight_only' && always()
+        if: env.RUN_MODE != 'preflight_only' && always()
         uses: actions/upload-artifact@v4
         with:
-          name: engine4-manual-${{ inputs.mode }}-${{ github.run_id }}
+          name: engine4-manual-${{ env.RUN_MODE }}-${{ github.run_id }}
           path: manual-artifacts/${{ github.run_id }}/
           if-no-files-found: error
           retention-days: 30
 
       - name: Send manual live pipeline-failure alert
-        if: failure() && inputs.mode == 'live_today'
+        if: failure() && env.RUN_MODE == 'live_today'
         run: >-
           python engine4_notify.py failure --require-delivery
           --message "ENGINE 4 MANUAL RUN FAILURE — the live on-demand workflow did not complete. Review the failed stage; no completed result is being reported."
