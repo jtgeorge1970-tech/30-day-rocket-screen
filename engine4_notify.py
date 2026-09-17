@@ -51,6 +51,18 @@ def _signal_for(kind: str, failure_message: str | None) -> dict:
             "ticker": "SYSTEM",
             "message": failure_message or "Engine 4 test text delivered successfully.",
         }
+    if kind == "start":
+        return {
+            "status": "STARTED",
+            "ticker": "SYSTEM",
+            "message": failure_message or "Engine 4 scheduled run started.",
+        }
+    if kind == "complete":
+        return {
+            "status": "COMPLETE",
+            "ticker": "SYSTEM",
+            "message": failure_message or "Engine 4 scheduled run completed.",
+        }
     return {
         "status": "PIPELINE_FAILURE",
         "reason": "workflow_stage_failed",
@@ -247,12 +259,17 @@ def notify(kind: str, failure_message: str | None = None, dry_run: bool = False)
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("kind", choices=("final", "recovery", "failure", "test"))
+    parser.add_argument(
+        "kind", choices=("start", "final", "recovery", "complete", "failure", "test")
+    )
     parser.add_argument("--message")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--require-delivery", action="store_true")
     args = parser.parse_args()
     result = notify(args.kind, args.message, args.dry_run)
     print(json.dumps(result, indent=2), flush=True)
+    if args.require_delivery and result.get("delivery") != "SENT":
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

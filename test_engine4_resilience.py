@@ -113,6 +113,16 @@ def test_notification_dry_run_contains_committed_instruction(tmp_path, monkeypat
     assert "ENGINE4-ALERT:2026-09-16:recovery:ARM:FPS" in result["marker"]
 
 
+def test_start_and_complete_notifications_carry_current_et_date(tmp_path, monkeypatch):
+    monkeypatch.setattr(notifier, "OUT", tmp_path)
+    started = notifier.notify("start", "Engine 4 started.", dry_run=True)
+    completed = notifier.notify("complete", "Engine 4 completed.", dry_run=True)
+    assert ":start:STARTED:SYSTEM" in started["marker"]
+    assert "ENGINE 4 START: STARTED" in started["sms_text"]
+    assert ":complete:COMPLETE:SYSTEM" in completed["marker"]
+    assert "ENGINE 4 COMPLETE: COMPLETE" in completed["sms_text"]
+
+
 def test_openphone_sms_uses_official_api_and_e164_numbers(monkeypatch):
     monkeypatch.setenv("OPENPHONE_API_KEY", "secret-test-key")
     monkeypatch.setenv("OPENPHONE_FROM_NUMBER", "+15551234567")

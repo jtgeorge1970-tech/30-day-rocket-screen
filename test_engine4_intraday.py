@@ -1,3 +1,4 @@
+import json
 import math
 from pathlib import Path
 
@@ -127,8 +128,8 @@ def test_live_fails_hard_market_reversal(monkeypatch):
 def test_final_fail_closed_without_top25(tmp_path, monkeypatch):
     monkeypatch.setattr(e4, "OUT", tmp_path)
     result = e4.final_stage()
-    assert result["status"] == "NO_TRADE"
-    assert "Top 25 unavailable" in result["message"]
+    assert result["status"] == "PIPELINE_FAILURE"
+    assert result["reason"] == "missing_frozen_artifact"
     assert (tmp_path / "final_alert.txt").exists()
 
 
@@ -167,6 +168,10 @@ def test_refresh_freezes_only_b_or_better_fully_gated_names(tmp_path, monkeypatc
 def test_empty_qualified_launchpad_is_normal_no_trade(tmp_path, monkeypatch):
     pd.DataFrame(columns=["ticker", "score", "premarket_eligible"]).to_csv(
         tmp_path / "top25_frozen.csv", index=False
+    )
+    (tmp_path / "top25_frozen.json").write_text(
+        json.dumps({"target_date_et": "2026-09-17", "actual_count": 0, "candidates": []}),
+        encoding="utf-8",
     )
     monkeypatch.setattr(final_guard, "OUT", tmp_path)
     monkeypatch.setattr(e4, "OUT", tmp_path)

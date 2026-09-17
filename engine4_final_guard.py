@@ -123,9 +123,31 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
     started = time.monotonic()
     reference = now_et() if date_override is None else datetime.fromisoformat(date_override + "T09:45:00").replace(tzinfo=ET)
     date_et = reference.date()
+    def finish(payload: dict) -> dict:
+        payload["target_date_et"] = str(date_et)
+        return write_final(payload)
+
+    frozen_json = OUT / "top25_frozen.json"
+    if not frozen_json.exists():
+        return finish({
+            "status": "PIPELINE_FAILURE",
+            "reason": "missing_frozen_artifact",
+            "message": "ENGINE 4 DATA/PIPELINE FAILURE — dated freeze artifact unavailable.",
+            "order_instruction": "NO_ORDER",
+            "runtime_seconds": round(time.monotonic() - started, 3),
+        })
+    frozen_meta = json.loads(frozen_json.read_text(encoding="utf-8"))
+    if frozen_meta.get("target_date_et") != str(date_et):
+        return finish({
+            "status": "PIPELINE_FAILURE",
+            "reason": "frozen_artifact_date_mismatch",
+            "message": "ENGINE 4 DATA/PIPELINE FAILURE — frozen shortlist date does not match the active ET market date.",
+            "order_instruction": "NO_ORDER",
+            "runtime_seconds": round(time.monotonic() - started, 3),
+        })
     frozen_path = OUT / "top25_frozen.csv"
     if not frozen_path.exists() or frozen_path.stat().st_size < 5:
-        return write_final({
+        return finish({
             "status": "PIPELINE_FAILURE",
             "reason": "missing_top25",
             "message": "ENGINE 4 DATA/PIPELINE FAILURE — frozen Top 25 unavailable.",
@@ -138,7 +160,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
     except Exception:
         top = pd.DataFrame()
     if "ticker" not in top.columns:
-        return write_final({
+        return finish({
             "status": "PIPELINE_FAILURE",
             "reason": "invalid_top25",
             "message": "ENGINE 4 DATA/PIPELINE FAILURE — frozen launchpad artifact is invalid.",
@@ -154,7 +176,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             "status": "NO_QUALIFIED_LAUNCHPAD",
             "candidates": [],
         }, indent=2), encoding="utf-8")
-        return write_final({
+        return finish({
             "status": "NO_TRADE",
             "reason": "no_b_or_better_premarket_candidates",
             "message": "NO TRADE — no B-or-better premarket candidates. DO NOT BUY.",
@@ -299,7 +321,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             f"Current price: ${metrics['current_live_price']:.2f}\n"
             f"Reason: full A+ gates passed and fresh live price is inside the valid buy range; R:R {metrics['reward_risk']:.2f}:1."
         )
-        return write_final({
+        return finish({
             "status": "BUY",
             "reason": "live_trigger_confirmed",
             "ticker": symbol,
@@ -331,7 +353,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             f"IF PRICE THEN RISES TO ${metrics['first_target']:.2f}, MOVE SELL STOP TO ${metrics['precalculated_profit_stop']:.2f}\n"
             f"DO NOT CHASE ABOVE ${metrics['max_allowed_buy_price']:.2f}"
         )
-        return write_final({
+        return finish({
             "status": "ARM",
             "reason": "trigger_not_reached",
             "ticker": symbol,
@@ -353,7 +375,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
     if missed:
         missed.sort(key=lambda item: item[0], reverse=True)
         _, row, metrics = missed[0]
-        return write_final({
+        return finish({
             "status": "NO_TRADE",
             "reason": "entry_missed_recovery_watch_active",
             "ticker": str(row.ticker),
@@ -368,7 +390,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
     if shadow_only:
         shadow_only.sort(key=lambda item: item[0], reverse=True)
         _, row, metrics = shadow_only[0]
-        return write_final({
+        return finish({
             "status": "NO_TRADE",
             "reason": "best_setup_above_trade_cap",
             "ticker": str(row.ticker),
@@ -382,7 +404,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             "runtime_seconds": round(time.monotonic() - started, 3),
         })
 
-    return write_final({
+    return finish({
         "status": "NO_TRADE",
         "reason": "no_a_plus_recovery_watch_active",
         "message": "NO PRIMARY TRADE — no A+ setup. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.",

@@ -265,12 +265,31 @@ def final_stage(date_override: str | None = None) -> dict:
     started = time.monotonic()
     reference = now_et() if date_override is None else datetime.fromisoformat(date_override + "T09:45:00").replace(tzinfo=ET)
     date_et = reference.date()
+    frozen_json = OUT / "top25_frozen.json"
+    if not frozen_json.exists():
+        return write_final({
+            "status": "PIPELINE_FAILURE",
+            "reason": "missing_frozen_artifact",
+            "message": "ENGINE 4 DATA/PIPELINE FAILURE — dated freeze artifact unavailable.",
+            "target_date_et": str(date_et),
+            "runtime_seconds": round(time.monotonic() - started, 3),
+        })
+    frozen_meta = json.loads(frozen_json.read_text(encoding="utf-8"))
+    if frozen_meta.get("target_date_et") != str(date_et):
+        return write_final({
+            "status": "PIPELINE_FAILURE",
+            "reason": "frozen_artifact_date_mismatch",
+            "message": "ENGINE 4 DATA/PIPELINE FAILURE — frozen shortlist date does not match the active ET market date.",
+            "target_date_et": str(date_et),
+            "runtime_seconds": round(time.monotonic() - started, 3),
+        })
     frozen_path = OUT / "top25_frozen.csv"
     if not frozen_path.exists() or frozen_path.stat().st_size < 5:
         return write_final({
             "status": "NO_TRADE",
             "reason": "missing_top25",
             "message": "NO TRADE — premarket Top 25 unavailable.",
+            "target_date_et": str(date_et),
             "runtime_seconds": round(time.monotonic() - started, 3),
         })
     try:
@@ -282,6 +301,7 @@ def final_stage(date_override: str | None = None) -> dict:
             "status": "NO_TRADE",
             "reason": "empty_top25",
             "message": "NO TRADE — no A+ setup.",
+            "target_date_et": str(date_et),
             "runtime_seconds": round(time.monotonic() - started, 3),
         })
 
@@ -321,6 +341,7 @@ def final_stage(date_override: str | None = None) -> dict:
             "status": "NO_TRADE",
             "reason": "entry_missed" if otherwise_valid_but_missed else "no_a_plus",
             "message": message,
+            "target_date_et": str(date_et),
             "runtime_seconds": round(time.monotonic() - started, 3),
         })
 
@@ -339,6 +360,7 @@ def final_stage(date_override: str | None = None) -> dict:
         "status": "BUY",
         "ticker": symbol,
         "message": message,
+        "target_date_et": str(date_et),
         "entry_trigger": metrics["entry_trigger"],
         "initial_stop": metrics["initial_stop"],
         "first_target": metrics["first_target"],

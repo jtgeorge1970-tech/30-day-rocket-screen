@@ -220,8 +220,9 @@ def build_broad_pool(date_et, cutoff: str, max_symbols: int | None = None) -> tu
 def prescreen_stage(date_override: str | None = None, max_symbols: int | None = None) -> pd.DataFrame:
     reference = _reference(date_override, "08:55")
     date_et = reference.date()
-    if date_override is None:
-        reset_timeline(date_et)
+    # Every run starts a fresh, date-locked timeline.  This is required even
+    # when production passes an explicit ET date to prevent midnight/date drift.
+    reset_timeline(date_et)
     log_event("PRE-SCREEN", "STARTED", "Broad liquid U.S. universe scan started.")
     started = time.monotonic()
     broad, meta = build_broad_pool(date_et, "09:05", max_symbols)
@@ -351,6 +352,14 @@ def deep_stage(date_override: str | None = None) -> pd.DataFrame:
     path = OUT / "prescreen_retained.csv"
     if not path.exists() or path.stat().st_size < 5:
         raise RuntimeError("Pre-screen retained candidates missing; refusing to skip stages")
+    report_path = OUT / "prescreen_report.json"
+    if not report_path.exists():
+        raise RuntimeError("Pre-screen report missing; refusing to skip date verification")
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    if report.get("target_date_et") != str(date_et):
+        raise RuntimeError(
+            f"Engine 4 date mismatch: pre-screen={report.get('target_date_et')} deep={date_et}"
+        )
 
     broad = pd.read_csv(path)
     selected_count = min(DEEP_POOL_SIZE, len(broad))

@@ -390,8 +390,10 @@ def monitor(date_override: str | None = None, interval_seconds: int = RECOVERY_S
     base.install_repairs()
     base.assert_provider_health()
 
-    if date_override is not None:
-        # Historical/date override is one-shot by design so CI never sleeps.
+    if date_override is not None and str(date_override) != str(now_et().date()):
+        # Historical overrides are one-shot by design so CI never sleeps.  A
+        # same-day override locks production to its ET market date while keeping
+        # the live recovery monitor active.
         return scan_once(date_override)
 
     last_result = {}
@@ -405,7 +407,7 @@ def monitor(date_override: str | None = None, interval_seconds: int = RECOVERY_S
                 "message": "RECOVERY WATCH CLOSED — no valid second-chance trigger before 11:30 ET.",
             })
 
-        last_result = scan_once()
+        last_result = scan_once(date_override)
         if last_result.get("status") in {"ARM", "BUY", "BLOCKED_BY_PRIMARY", "NO_RECOVERY_WATCH"}:
             return last_result
         time.sleep(max(30, int(interval_seconds)))

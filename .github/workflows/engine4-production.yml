@@ -42,10 +42,46 @@ jobs:
             exit 78
           fi
 
+      - name: Send run-started notification
+        run: >-
+          python engine4_notify.py start --require-delivery
+          --message "ENGINE 4 STARTED — the scheduled run is active for $(TZ=America/New_York date +%F) ET."
+
       - name: Run ordered Engine 4 cycle
         shell: bash
         run: |
           set -euo pipefail
+          ENGINE_DATE_ET=$(TZ=America/New_York date +%F)
+          export ENGINE_DATE_ET
+          echo "Locked Engine 4 market date: ${ENGINE_DATE_ET} ET"
+
+          verify_date() {
+            FILE="$1"
+            python - "$FILE" "$ENGINE_DATE_ET" <<'PY'
+          import json, sys
+          from pathlib import Path
+          path=Path(sys.argv[1])
+          expected=sys.argv[2]
+          payload=json.loads(path.read_text(encoding='utf-8'))
+          actual=str(payload.get('target_date_et') or payload.get('market_date_et') or '')
+          if actual != expected:
+              raise SystemExit(f"ENGINE 4 DATE FAILURE — {path} has {actual!r}; expected {expected!r}")
+          print(f"DATE VERIFIED: {path} = {expected} ET")
+          PY
+          }
+
+          reject_pipeline_failure() {
+            FILE="$1"
+            python - "$FILE" <<'PY'
+          import json, sys
+          from pathlib import Path
+          path=Path(sys.argv[1])
+          payload=json.loads(path.read_text(encoding='utf-8'))
+          if payload.get('status') == 'PIPELINE_FAILURE':
+              raise SystemExit(f"ENGINE 4 PIPELINE FAILURE — {path}: {payload.get('reason')}")
+          print(f"TERMINAL STATUS VERIFIED: {path} = {payload.get('status')}")
+          PY
+          }
 
           wait_until_et() {
             TARGET="$1"
@@ -89,35 +125,46 @@ jobs:
           echo '=== STAGE 1: 08:55 ET BROAD PRE-SCREEN ==='
           wait_until_et 535
           fail_if_late 540 '08:55 pre-screen start'
-          python engine4_pipeline_runner_guarded.py prescreen
+          python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"
+          verify_date output/engine4/prescreen_report.json
+          verify_date output/engine4/timeline.json
           save_stage '08:55 pre-screen complete'
 
           echo '=== STAGE 2: 09:05 ET DEEP 100-POINT ANALYSIS ==='
           wait_until_et 545
           fail_if_late 550 '09:05 deep-analysis start'
-          python engine4_pipeline_runner_guarded.py deep
+          python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"
+          verify_date output/engine4/deep_ranked.json
           save_stage '09:05 deep analysis complete'
 
           echo '=== STAGE 3: 09:18 ET REFRESH + RANK + FREEZE ==='
           wait_until_et 558
           fail_if_late 565 '09:18 refresh/freeze start'
-          python engine4_pipeline_runner_guarded.py refresh
+          python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"
+          verify_date output/engine4/top25_frozen.json
           save_stage '09:18 refresh and Top-25 freeze'
 
           echo '=== STAGE 4: 09:45 ET FINAL LIVE CONFIRMATION ==='
           wait_until_et 585
           fail_if_late 588 '09:45 final live confirmation start'
-          python engine4_pipeline_runner_guarded.py final
-          python engine4_notify.py final
+          python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"
+          verify_date output/engine4/final_signal.json
+          reject_pipeline_failure output/engine4/final_signal.json
+          python engine4_notify.py final --require-delivery
           save_stage '09:45 final live result'
 
           echo '=== STAGE 5: POST-OPEN HOOK-SET / RECOVERY WATCH ==='
           # Only the small recovery-watch list is polled. If a valid base forms,
           # the module exits immediately with a BUY or a broker-side stop-limit
           # instruction. Otherwise it closes the watch at 11:30 ET.
-          python engine4_recovery.py monitor --interval-seconds 300
-          python engine4_notify.py recovery
+          python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300
+          verify_date output/engine4/recovery_signal.json
+          reject_pipeline_failure output/engine4/recovery_signal.json
+          python engine4_notify.py recovery --require-delivery
           save_stage 'post-open recovery result'
+
+          python engine4_notify.py complete --require-delivery \
+            --message "ENGINE 4 COMPLETE — all required stages finished for ${ENGINE_DATE_ET} ET and the dated artifacts were verified."
 
           echo '=== ENGINE 4 ORDERED CYCLE COMPLETE ==='
           cat output/engine4/timeline.txt
@@ -130,4 +177,5 @@ jobs:
         if: failure()
         run: >-
           python engine4_notify.py failure
-          --message "ENGINE 4 DATA/PIPELINE FAILURE — the scheduled workflow did not complete. The candidate queue remains preserved; no official order is authorized until valid data returns."
+          --require-delivery
+          --message "ENGINE 4 DATA/PIPELINE FAILURE — the scheduled workflow did not complete. Review the linked run for the failed stage; no completed result is being reported."

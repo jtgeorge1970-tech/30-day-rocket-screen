@@ -1,16 +1,6 @@
 name: Engine 4 Today Full-Cycle Test
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - '.github/workflows/engine4-today-test.yml'
-      - 'engine4_pipeline_runner.py'
-      - 'engine4_pipeline_runner_guarded.py'
-      - 'engine4_final_guard.py'
-      - 'engine4_free_providers.py'
-      - 'engine4_score.py'
-      - 'ENGINE4_SSOT.md'
   workflow_dispatch:
 
 jobs:
@@ -31,6 +21,13 @@ jobs:
         run: |
           set -euo pipefail
           TODAY=$(TZ=America/New_York date +%F)
+          H=$(TZ=America/New_York date +%H)
+          M=$(TZ=America/New_York date +%M)
+          NOW=$((10#$H * 60 + 10#$M))
+          if [ "$NOW" -lt 535 ] || [ "$NOW" -gt 690 ]; then
+            echo 'TODAY TEST REFUSED — run manually only during 08:55-11:30 ET.'
+            exit 78
+          fi
           echo "TODAY_ET=${TODAY}"
           echo '=== STAGE 1 PRE-SCREEN ==='
           python engine4_pipeline_runner_guarded.py prescreen --date "$TODAY"
