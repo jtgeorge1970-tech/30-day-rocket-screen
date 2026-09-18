@@ -51,6 +51,24 @@ def _signal_for(kind: str, failure_message: str | None) -> dict:
             "ticker": "SYSTEM",
             "message": failure_message or "Engine 4 test text delivered successfully.",
         }
+    if kind == "preflight":
+        return {
+            "status": "CHECKING",
+            "ticker": "SYSTEM",
+            "message": failure_message or "Engine 4 early preflight is active.",
+        }
+    if kind == "launch":
+        return {
+            "status": "DISPATCHED",
+            "ticker": "SYSTEM",
+            "message": failure_message or "Engine 4 early controller dispatched production.",
+        }
+    if kind == "watchdog":
+        return {
+            "status": "RECOVERY_DISPATCHED",
+            "ticker": "SYSTEM",
+            "message": failure_message or "Engine 4 watchdog dispatched a recovery wake.",
+        }
     if kind == "start":
         return {
             "status": "STARTED",
@@ -260,7 +278,18 @@ def notify(kind: str, failure_message: str | None = None, dry_run: bool = False)
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "kind", choices=("start", "final", "recovery", "complete", "failure", "test")
+        "kind",
+        choices=(
+            "preflight",
+            "launch",
+            "watchdog",
+            "start",
+            "final",
+            "recovery",
+            "complete",
+            "failure",
+            "test",
+        ),
     )
     parser.add_argument("--message")
     parser.add_argument("--dry-run", action="store_true")
