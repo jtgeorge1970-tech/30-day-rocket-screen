@@ -20,7 +20,9 @@ historical RVOL.
 """
 
 import argparse
+import json
 import math
+from datetime import datetime
 
 import numpy as np
 import pandas as pd
@@ -365,6 +367,16 @@ def assert_provider_health(required: list[str] | None = None) -> dict:
     if failed:
         raise RuntimeError(f"Engine 4 free-provider health check failed: {failed}; details={health}")
     state = "PASS" if health.get("news_provider_ok") and health.get("nasdaq_quote_ok") else "DEGRADED"
+    provider_audit = {
+        "checked_at_et": datetime.now(core.ET).isoformat(),
+        "target_date_et": str(datetime.now(core.ET).date()),
+        "state": state,
+        **health,
+    }
+    core.OUT.mkdir(parents=True, exist_ok=True)
+    (core.OUT / "provider_health.json").write_text(
+        json.dumps(provider_audit, indent=2), encoding="utf-8"
+    )
     print(f"ENGINE4_FREE_PROVIDER_HEALTH_{state} {health}", flush=True)
     return health
 

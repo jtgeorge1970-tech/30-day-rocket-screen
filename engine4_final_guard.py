@@ -4,6 +4,7 @@ import json
 import math
 import time
 from datetime import datetime, timezone
+from pathlib import Path
 
 import pandas as pd
 
@@ -24,6 +25,7 @@ from engine4_live import live_quality, market_context, opening_structure
 
 
 PROFIT_LOCK_R = 0.50
+BENCH_STATE = Path("state/engine4/watch_bench.json")
 
 
 def _artifact_bool(value) -> bool:
@@ -114,12 +116,24 @@ def _write_recovery_watch(date_et, candidates: list[tuple[float, pd.Series, dict
             "previous_close": serializable(row.get("previous_close")),
             "resistance_price": serializable(row.get("resistance_price")),
             "primary_failures": list(metrics.get("failures", [])),
+            "candidate_source": row.get("candidate_source", "TODAY_LAUNCHPAD"),
         })
     (OUT / "recovery_watch.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
 
 
+def _hot_bench(date_et) -> pd.DataFrame:
+    try:
+        payload = json.loads(BENCH_STATE.read_text(encoding="utf-8"))
+    except Exception:
+        return pd.DataFrame()
+    if payload.get("target_date_et") != str(date_et):
+        return pd.DataFrame()
+    rows = [row for row in payload.get("candidates", []) if row.get("tier") == "HOT"]
+    return pd.DataFrame(rows[:5])
+
+
 def guarded_final_stage(date_override: str | None = None) -> dict:
-    """Final Engine 4 stage: frozen Top-25 only, with live entry guard and hook-set handoff."""
+    """Final stage: today's launchpad plus the freshly scored Hot-5 Bench."""
     started = time.monotonic()
     reference = now_et() if date_override is None else datetime.fromisoformat(date_override + "T09:45:00").replace(tzinfo=ET)
     date_et = reference.date()
@@ -167,13 +181,24 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             "order_instruction": "NO_ORDER",
             "runtime_seconds": round(time.monotonic() - started, 3),
         })
+    if not top.empty:
+        top["candidate_source"] = "TODAY_LAUNCHPAD"
+    bench_hot = _hot_bench(date_et)
+    if not bench_hot.empty:
+        bench_hot["candidate_source"] = "BENCH_HOT"
+        if top.empty:
+            top = bench_hot.copy()
+        else:
+            top = pd.concat([top, bench_hot], ignore_index=True)
+            top = top.drop_duplicates(subset=["ticker"], keep="first").reset_index(drop=True)
+
     if top.empty:
         _write_recovery_watch(date_et, [])
         (OUT / "final_live_audit.json").write_text(json.dumps({
             "target_date_et": str(date_et),
             "generated_at_utc": datetime.now(timezone.utc).isoformat(),
             "max_tradable_price": MAX_TRADABLE_PRICE,
-            "status": "NO_QUALIFIED_LAUNCHPAD",
+            "status": "NO_QUALIFIED_LAUNCHPAD_OR_HOT_BENCH",
             "candidates": [],
         }, indent=2), encoding="utf-8")
         return finish({
@@ -215,6 +240,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             continue
 
         metrics = opening_structure(symbol, frame, row, market, date_et)
+        metrics["candidate_source"] = row.get("candidate_source", "TODAY_LAUNCHPAD")
         metrics["max_tradable_price"] = MAX_TRADABLE_PRICE
         opening_last = float(metrics.get("last", math.nan))
         officially_tradable = bool(math.isfinite(opening_last) and opening_last <= MAX_TRADABLE_PRICE)
@@ -305,6 +331,8 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
         "market": {k: serializable(v) for k, v in market.items()},
         "shadow_only_count": len(shadow_only),
         "recovery_watch_count": min(len(recovery_pool), RECOVERY_WATCH_COUNT),
+        "today_launchpad_count": int((top.candidate_source == "TODAY_LAUNCHPAD").sum()),
+        "bench_hot_count": int((top.candidate_source == "BENCH_HOT").sum()),
         "candidates": [{k: serializable(v) for k, v in item.items()} for item in audit],
     }, indent=2), encoding="utf-8")
 
@@ -337,6 +365,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             "reward_risk": metrics["reward_risk"],
             "max_tradable_price": MAX_TRADABLE_PRICE,
             "runtime_seconds": round(time.monotonic() - started, 3),
+            "selection_source": row.get("candidate_source", "TODAY_LAUNCHPAD"),
         })
 
     if watches:
@@ -370,6 +399,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             "profit_lock_r": PROFIT_LOCK_R,
             "max_tradable_price": MAX_TRADABLE_PRICE,
             "runtime_seconds": round(time.monotonic() - started, 3),
+            "selection_source": row.get("candidate_source", "TODAY_LAUNCHPAD"),
         })
 
     if missed:

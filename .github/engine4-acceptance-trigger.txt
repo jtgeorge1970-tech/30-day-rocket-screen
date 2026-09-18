@@ -1,0 +1,2 @@
+Engine 4 acceptance trigger file.
+The verification sequence updates this file once for each isolated acceptance run.

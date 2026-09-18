@@ -40,14 +40,30 @@ def test_watchdog_has_seasonal_guard_and_intervention_sms():
     assert "engine4_notify.py watchdog --require-delivery" in workflow
     assert "engine4-manual-on-demand.yml" in workflow
     assert "is_morning_manual" in workflow
+    assert "mode=live_today" in workflow
     assert "steps.wake.outputs.dispatched == 'true'" in workflow
 
 
 def test_early_manual_failsafe_preserves_live_stage_times():
     workflow = (ROOT / ".github/workflows/engine4-manual-on-demand.yml").read_text()
-    assert "08:50-15:30 ET" in workflow
-    for minute in (535, 545, 558, 585):
-        assert f"wait_until_et {minute}" in workflow
+    assert "08:35-15:30 ET" in workflow
+    for checkpoint in ("0855", "0905", "0918", "0945"):
+        assert f'-lt {checkpoint}' in workflow
+
+
+def test_every_live_stage_is_visible_and_reported_in_both_runners():
+    for filename in ("engine4-production.yml", "engine4-manual-on-demand.yml"):
+        workflow = (ROOT / ".github/workflows" / filename).read_text()
+        for kind in ("prescreen", "deep", "freeze", "bench", "final", "recovery"):
+            assert f"engine4_notify.py {kind} --require-delivery" in workflow
+        assert "engine4_stage_report.py verify-complete" in workflow
+        assert "--recipients 2" in workflow
+
+
+def test_acceptance_replay_cannot_suppress_live_cycle():
+    for filename in ("engine4-production.yml", "engine4-manual-on-demand.yml", "engine4-watchdog.yml"):
+        workflow = (ROOT / ".github/workflows" / filename).read_text()
+        assert "mode=live_today" in workflow
 
 
 def test_primary_result_sms_cannot_claim_full_completion():

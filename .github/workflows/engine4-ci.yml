@@ -9,6 +9,9 @@ on:
       - '.github/workflows/engine4-ci.yml'
       - '.github/workflows/engine4-production.yml'
       - '.github/workflows/engine4-manual-on-demand.yml'
+      - '.github/workflows/engine4-early-wake.yml'
+      - '.github/workflows/engine4-watchdog.yml'
+      - '.github/engine4-acceptance-trigger.txt'
   workflow_dispatch:
 
 jobs:
@@ -30,6 +33,7 @@ jobs:
           engine4_config.py engine4_data.py engine4_free_providers.py engine4_score.py
           engine4_live.py engine4_intraday.py engine4_pipeline.py engine4_pipeline_runner.py
           engine4_final_guard.py engine4_pipeline_runner_guarded.py engine4_recovery.py engine4_notify.py
+          engine4_bench.py engine4_stage_report.py
           test_engine4_intraday.py test_engine4_catalyst_identity.py
           test_engine4_recovery_safety.py test_engine4_resilience.py
       - name: Deterministic self tests
@@ -38,6 +42,7 @@ jobs:
           python engine4_pipeline.py self-test
           python engine4_pipeline_runner.py self-test
           python engine4_recovery.py self-test
+          python engine4_bench.py self-test
       - name: Unit tests
         run: pytest -q test_engine4_*.py
       - name: Verified free-provider smoke test

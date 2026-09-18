@@ -446,6 +446,7 @@ def refresh_and_freeze(date_override: str | None = None, max_symbols: int | None
         "refresh_analyzed_count": len(ranked_all),
         "score80_count": int((ranked_all.score >= MIN_SCORE).sum()),
         "launchpad_eligible_count": len(eligible),
+        "b_grade_count": int((ranked_all.premarket_grade == "B").sum()),
         "requested_top_n": TOP_N,
         "actual_count": len(top),
         "a_grade_count": int(top.premarket_a_grade.sum()),

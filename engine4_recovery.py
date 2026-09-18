@@ -267,6 +267,11 @@ def recovery_metrics(
 
 
 def _write_outputs(date_et, audit: list[dict], result: dict) -> dict:
+    watch = _read_json(OUT / "recovery_watch.json")
+    watch_candidates = watch.get("candidates", [])
+    watch_tickers = [str(row.get("ticker")) for row in watch_candidates if row.get("ticker")]
+    result.setdefault("recovery_watch_count", len(watch_tickers))
+    result.setdefault("recovery_watch_tickers", watch_tickers)
     (OUT / "recovery_audit.json").write_text(json.dumps({
         "target_date_et": str(date_et),
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -390,26 +395,53 @@ def monitor(date_override: str | None = None, interval_seconds: int = RECOVERY_S
     base.install_repairs()
     base.assert_provider_health()
 
+    watch = _read_json(OUT / "recovery_watch.json")
+    watch_tickers = [
+        str(row.get("ticker"))
+        for row in watch.get("candidates", [])
+        if row.get("ticker")
+    ]
+    base.core.log_event(
+        "POST-OPEN RECOVERY WATCH",
+        "STARTED",
+        f"Recovery watch started for {len(watch_tickers)} eligible candidates.",
+        tickers=watch_tickers,
+        details={"recovery_watch_count": len(watch_tickers)},
+    )
+
+    def finish(result: dict) -> dict:
+        base.core.log_event(
+            "POST-OPEN RECOVERY WATCH",
+            "COMPLETED",
+            str(result.get("message") or result.get("reason") or result.get("status")),
+            tickers=result.get("recovery_watch_tickers", watch_tickers),
+            details={
+                "recovery_watch_count": result.get("recovery_watch_count", len(watch_tickers)),
+                "recovery_status": result.get("status"),
+            },
+        )
+        return result
+
     if date_override is not None and str(date_override) != str(now_et().date()):
         # Historical overrides are one-shot by design so CI never sleeps.  A
         # same-day override locks production to its ET market date while keeping
         # the live recovery monitor active.
-        return scan_once(date_override)
+        return finish(scan_once(date_override))
 
     last_result = {}
     while True:
         now = now_et()
         end = now.replace(hour=RECOVERY_END_HOUR_ET, minute=RECOVERY_END_MINUTE_ET, second=0, microsecond=0)
         if now > end:
-            return _write_outputs(now.date(), _read_json(OUT / "recovery_audit.json").get("candidates", []), {
+            return finish(_write_outputs(now.date(), _read_json(OUT / "recovery_audit.json").get("candidates", []), {
                 "status": "TIMEOUT",
                 "reason": "recovery_window_expired",
                 "message": "RECOVERY WATCH CLOSED — no valid second-chance trigger before 11:30 ET.",
-            })
+            }))
 
         last_result = scan_once(date_override)
         if last_result.get("status") in {"ARM", "BUY", "BLOCKED_BY_PRIMARY", "NO_RECOVERY_WATCH"}:
-            return last_result
+            return finish(last_result)
         time.sleep(max(30, int(interval_seconds)))
 
 

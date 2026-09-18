@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 190
     permissions:
-      contents: read
+      contents: write
       issues: write
     env:
       GITHUB_TOKEN: ${{ github.token }}
@@ -84,6 +84,74 @@ jobs:
           PY
           fi
 
+      - name: Prevent duplicate live daily cycle
+        id: duplicate
+        if: env.RUN_MODE == 'live_today'
+        shell: bash
+        run: |
+          python - <<'PY'
+          import base64, json, os, urllib.parse, urllib.request
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+
+          repo = os.environ['GITHUB_REPOSITORY']
+          current = int(os.environ['GITHUB_RUN_ID'])
+          token = os.environ['GITHUB_TOKEN']
+          headers = {
+              'Accept': 'application/vnd.github+json',
+              'Authorization': f'Bearer {token}',
+              'X-GitHub-Api-Version': '2022-11-28',
+          }
+          runs = []
+          for workflow in ('engine4-production.yml', 'engine4-manual-on-demand.yml'):
+              url = f'https://api.github.com/repos/{repo}/actions/workflows/{workflow}/runs?per_page=30'
+              with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=20) as response:
+                  runs.extend(json.load(response).get('workflow_runs', []))
+
+          et = ZoneInfo('America/New_York')
+          today = datetime.now(et).date()
+          existing = []
+          for run in runs:
+              if int(run.get('id', 0)) == current:
+                  continue
+              created = datetime.fromisoformat(run['created_at'].replace('Z', '+00:00')).astimezone(et)
+              active = run.get('status') in {'queued', 'in_progress', 'waiting', 'pending'}
+              successful = run.get('status') == 'completed' and run.get('conclusion') == 'success'
+              is_production='engine4-production.yml' in str(run.get('path') or '')
+              is_live_manual=False
+              if (
+                  'engine4-manual-on-demand.yml' in str(run.get('path') or '')
+                  and run.get('event') == 'push'
+              ):
+                  ref=urllib.parse.quote(str(run.get('head_sha') or ''), safe='')
+                  content_url=(
+                      f'https://api.github.com/repos/{repo}/contents/'
+                      f'.github/engine4-manual-trigger.txt?ref={ref}'
+                  )
+                  try:
+                      with urllib.request.urlopen(
+                          urllib.request.Request(content_url, headers=headers), timeout=20
+                      ) as response:
+                          encoded=json.load(response).get('content', '')
+                      trigger=base64.b64decode(encoded).decode('utf-8', errors='replace')
+                      is_live_manual='mode=live_today' in trigger
+                  except Exception as exc:
+                      print(f"Could not classify manual run {run.get('id')}: {exc}")
+              if (
+                  created.date() == today
+                  and (active or successful)
+                  and (is_production or is_live_manual)
+              ):
+                  existing.append(run)
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+              output.write(f"skip={'true' if existing else 'false'}\n")
+          if existing:
+              print(f"Manual duplicate safely skipped; existing run={existing[0]['id']} status={existing[0]['status']}")
+          else:
+              print('No active or successful Engine 4 daily cycle exists; manual live run admitted.')
+          PY
+
       - name: Compile and test Engine 4
         shell: bash
         run: |
@@ -91,12 +159,14 @@ jobs:
           python -m py_compile \
             engine4_config.py engine4_data.py engine4_free_providers.py engine4_score.py \
             engine4_live.py engine4_intraday.py engine4_pipeline.py engine4_pipeline_runner.py \
-            engine4_final_guard.py engine4_pipeline_runner_guarded.py engine4_recovery.py engine4_notify.py
+            engine4_final_guard.py engine4_pipeline_runner_guarded.py engine4_recovery.py engine4_notify.py \
+            engine4_bench.py engine4_stage_report.py
           pytest -q test_engine4_*.py
           python engine4_intraday.py self-test
           python engine4_pipeline.py self-test
           python engine4_pipeline_runner.py self-test
           python engine4_recovery.py self-test
+          python engine4_bench.py self-test
 
       - name: Verify providers
         run: python engine4_pipeline_runner_guarded.py provider-smoke
@@ -106,7 +176,7 @@ jobs:
         run: echo 'ENGINE 4 MANUAL PREFLIGHT PASS — code, tests, self-tests, and providers passed.'
 
       - name: Enforce valid current-day live window
-        if: env.RUN_MODE == 'live_today'
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -114,95 +184,157 @@ jobs:
           M=$(TZ=America/New_York date +%M)
           NOW=$((10#$H * 60 + 10#$M))
           echo "Engine 4 manual live runner requested at ${H}:${M} ET"
-          if [ "$NOW" -lt 530 ] || [ "$NOW" -gt 930 ]; then
-            echo 'MANUAL LIVE RUN REFUSED — valid current-day on-demand start window is 08:50-15:30 ET.'
+          if [ "$NOW" -lt 515 ] || [ "$NOW" -gt 930 ]; then
+            echo 'MANUAL LIVE RUN REFUSED — valid current-day on-demand start window is 08:35-15:30 ET.'
             echo 'Outside market hours, use acceptance_replay; production data will not be fabricated or mislabeled.'
             exit 78
           fi
 
       - name: Send manual live run-started notification
-        if: env.RUN_MODE == 'live_today'
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
         run: >-
           python engine4_notify.py start --require-delivery
           --message "ENGINE 4 MANUAL RUN STARTED — current-day live on-demand cycle is active for $(TZ=America/New_York date +%F) ET."
 
-      - name: Run manual live Engine 4 cycle
-        if: env.RUN_MODE == 'live_today'
+      - name: Lock manual live Eastern market date
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        run: echo "ENGINE_DATE_ET=$(TZ=America/New_York date +%F)" >> "$GITHUB_ENV"
+
+      - name: Manual Stage 1 — broad pre-screen and exact counts
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
         shell: bash
         run: |
           set -euo pipefail
-          ENGINE_DATE_ET=$(TZ=America/New_York date +%F)
-          export ENGINE_DATE_ET
-
-          verify_date() {
-            python - "$1" "$ENGINE_DATE_ET" <<'PY'
-          import json, sys
-          from pathlib import Path
-          path = Path(sys.argv[1])
-          expected = sys.argv[2]
-          payload = json.loads(path.read_text(encoding='utf-8'))
-          actual = str(payload.get('target_date_et') or payload.get('market_date_et') or '')
-          if actual != expected:
-              raise SystemExit(f"ENGINE 4 DATE FAILURE — {path} has {actual!r}; expected {expected!r}")
-          print(f"DATE VERIFIED: {path} = {expected} ET")
-          PY
-          }
-
-          reject_pipeline_failure() {
-            python - "$1" <<'PY'
-          import json, sys
-          from pathlib import Path
-          path = Path(sys.argv[1])
-          payload = json.loads(path.read_text(encoding='utf-8'))
-          if payload.get('status') == 'PIPELINE_FAILURE':
-              raise SystemExit(f"ENGINE 4 PIPELINE FAILURE — {path}: {payload.get('reason')}")
-          print(f"TERMINAL STATUS VERIFIED: {path} = {payload.get('status')}")
-          PY
-          }
-
-          wait_until_et() {
-            TARGET="$1"
-            while true; do
-              H=$(TZ=America/New_York date +%H)
-              M=$(TZ=America/New_York date +%M)
-              NOW=$((10#$H * 60 + 10#$M))
-              if [ "$NOW" -ge "$TARGET" ]; then
-                break
-              fi
-              sleep 15
-            done
-          }
-
-          echo '=== MANUAL LIVE STAGE 1: BROAD PRE-SCREEN ==='
-          wait_until_et 535
+          while [ "$(TZ=America/New_York date +%H%M)" -lt 0855 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"
-          verify_date output/engine4/prescreen_report.json
-          verify_date output/engine4/timeline.json
+          python engine4_stage_report.py prescreen --date "$ENGINE_DATE_ET"
+          python engine4_notify.py prescreen --require-delivery \
+            --message "$(cat output/engine4/stage_prescreen_sms.txt)"
 
-          echo '=== MANUAL LIVE STAGE 2: DEEP 100-POINT ANALYSIS ==='
-          wait_until_et 545
+      - name: Upload manual Stage 1 immediately
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-manual-stage1-${{ github.run_id }}
+          path: output/engine4/
+          if-no-files-found: error
+
+      - name: Manual Stage 2 — deep analysis and exact counts
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          while [ "$(TZ=America/New_York date +%H%M)" -lt 0905 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"
-          verify_date output/engine4/deep_ranked.json
+          python engine4_stage_report.py deep --date "$ENGINE_DATE_ET"
+          python engine4_notify.py deep --require-delivery \
+            --message "$(cat output/engine4/stage_deep_sms.txt)"
 
-          echo '=== MANUAL LIVE STAGE 3: REFRESH + RANK + FREEZE ==='
-          wait_until_et 558
+      - name: Upload manual Stage 2 immediately
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-manual-stage2-${{ github.run_id }}
+          path: output/engine4/
+          if-no-files-found: error
+
+      - name: Manual Stage 3 — refresh, rerank, freeze, and exact counts
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          while [ "$(TZ=America/New_York date +%H%M)" -lt 0918 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"
-          verify_date output/engine4/top25_frozen.json
+          python engine4_stage_report.py freeze --date "$ENGINE_DATE_ET"
+          python engine4_notify.py freeze --require-delivery \
+            --message "$(cat output/engine4/stage_freeze_sms.txt)"
 
-          echo '=== MANUAL LIVE STAGE 4: FINAL LIVE CONFIRMATION ==='
-          wait_until_et 585
+      - name: Upload manual Stage 3 immediately
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-manual-stage3-${{ github.run_id }}
+          path: output/engine4/
+          if-no-files-found: error
+
+      - name: Manual Stage 3B — rebuild and rank the Top-25 multi-day Bench
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python engine4_bench.py update --date "$ENGINE_DATE_ET"
+          python engine4_stage_report.py bench --date "$ENGINE_DATE_ET"
+          python engine4_notify.py bench --require-delivery \
+            --message "$(cat output/engine4/stage_bench_sms.txt)"
+          git config user.name 'engine4-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add state/engine4/watch_bench.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Engine 4 ${ENGINE_DATE_ET} Top-25 Bench"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Upload manual Stage 3B Bench immediately
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-manual-bench-${{ github.run_id }}
+          path: |
+            output/engine4/watch_bench*
+            output/engine4/stage_bench_*
+            state/engine4/watch_bench.json
+          if-no-files-found: error
+
+      - name: Manual Stage 4 — primary live confirmation
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          while [ "$(TZ=America/New_York date +%H%M)" -lt 0945 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"
-          verify_date output/engine4/final_signal.json
-          reject_pipeline_failure output/engine4/final_signal.json
+          python engine4_stage_report.py final --date "$ENGINE_DATE_ET"
           python engine4_notify.py final --require-delivery
 
-          echo '=== MANUAL LIVE STAGE 5: RECOVERY WATCH ==='
+      - name: Upload manual Stage 4 immediately
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-manual-stage4-${{ github.run_id }}
+          path: output/engine4/
+          if-no-files-found: error
+
+      - name: Manual Stage 5 — post-open recovery watch
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
           python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300
-          verify_date output/engine4/recovery_signal.json
-          reject_pipeline_failure output/engine4/recovery_signal.json
+          python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"
           python engine4_notify.py recovery --require-delivery
+
+      - name: Verify manual artifacts, order, counts, and both-recipient SMS acceptance
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        run: python engine4_stage_report.py verify-complete --date "$ENGINE_DATE_ET" --recipients 2
+
+      - name: Send true manual terminal completion notification
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
           python engine4_notify.py complete --require-delivery \
             --message "ENGINE 4 MANUAL RUN COMPLETE — every required stage finished for ${ENGINE_DATE_ET} ET and all dated artifacts were verified."
+          python engine4_stage_report.py verify-notification --date "$ENGINE_DATE_ET" --kind complete --recipients 2
+          python engine4_stage_report.py complete --date "$ENGINE_DATE_ET" --recipients 2
+
+      - name: Upload complete manual terminal artifact set
+        if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-manual-complete-${{ github.run_id }}
+          path: output/engine4/
+          if-no-files-found: error
+          retention-days: 30
 
       - name: Run isolated historical acceptance replay
         if: env.RUN_MODE == 'acceptance_replay'
@@ -285,7 +417,7 @@ jobs:
           retention-days: 30
 
       - name: Send manual live pipeline-failure alert
-        if: failure() && env.RUN_MODE == 'live_today'
+        if: failure() && env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
         run: >-
           python engine4_notify.py failure --require-delivery
           --message "ENGINE 4 MANUAL RUN FAILURE — the live on-demand workflow did not complete. Review the failed stage; no completed result is being reported."

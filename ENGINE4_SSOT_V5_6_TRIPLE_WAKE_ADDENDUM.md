@@ -25,18 +25,25 @@ eligibility, catalyst, price-cap, or trade-safety rules.
    - Sends both phones a distinct watchdog-intervention SMS only when it acts.
    - The Eastern-time guard rejects the wrong seasonal duplicate.
 
-4. **Independent ChatGPT manual wake — 08:50 ET**
+4. **Independent ChatGPT manual guard — 08:20 ET**
    - Checks actual GitHub Actions state rather than schedule configuration.
-   - If no valid production or live-manual run exists, updates the manual trigger
-     for `live_today` and monitors the run through terminal completion.
+   - At 08:36 ET, requires an actual production or live-manual run ID.
+   - If none exists, updates the manual trigger for `live_today`, verifies the
+     resulting run ID, and retries until a real run exists or an explicit
+     repository/permission/provider blocker is proven.
+   - This guard remains active for at least the next five market mornings.
    - The manual workflow preserves the required 08:55, 09:05, 09:18, and 09:45
      ET stage checkpoints when started early.
 
 ## Notification proof
 
 The following notification kinds are independent and cannot deduplicate one
-another: `preflight`, `launch`, `watchdog`, `start`, `final`,
+another: `preflight`, `launch`, `watchdog`, `start`, `prescreen`, `deep`,
+`freeze`, `bench`, `final`,
 `recovery`, `complete`, and `failure`.
+
+An SMS deduplication is valid only when the existing GitHub issue audit marker
+records API acceptance for exactly two configured recipients.
 
 A successful wake claim requires an actual GitHub Actions run ID. A configured
 cron expression is not proof that Engine 4 started.

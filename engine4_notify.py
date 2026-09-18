@@ -23,7 +23,10 @@ ET = ZoneInfo("America/New_York")
 API = "https://api.github.com"
 OPENPHONE_API = "https://api.quo.com/v1/messages"
 E164 = re.compile(r"^\+[1-9]\d{7,14}$")
-SMS_ACCEPTED_MARKER = "<!-- ENGINE4-SMS-API-ACCEPTED -->"
+SMS_ACCEPTED_MARKER = "<!-- ENGINE4-SMS-API-ACCEPTED"
+SMS_ACCEPTED_RE = re.compile(
+    r"<!-- ENGINE4-SMS-API-ACCEPTED recipients=(\d+) -->"
+)
 
 
 def _read_json(path: Path) -> dict:
@@ -38,6 +41,15 @@ def _write_audit(payload: dict) -> None:
     (OUT / "notification_audit.json").write_text(
         json.dumps(payload, indent=2), encoding="utf-8"
     )
+    history_path = OUT / "notification_audit_log.json"
+    try:
+        history = json.loads(history_path.read_text(encoding="utf-8"))
+        if not isinstance(history, list):
+            history = []
+    except Exception:
+        history = []
+    history.append(payload)
+    history_path.write_text(json.dumps(history, indent=2), encoding="utf-8")
 
 
 def _signal_for(kind: str, failure_message: str | None) -> dict:
@@ -74,6 +86,12 @@ def _signal_for(kind: str, failure_message: str | None) -> dict:
             "status": "STARTED",
             "ticker": "SYSTEM",
             "message": failure_message or "Engine 4 scheduled run started.",
+        }
+    if kind in {"prescreen", "deep", "freeze", "bench"}:
+        return {
+            "status": "COMPLETED",
+            "ticker": "MARKET",
+            "message": failure_message or f"Engine 4 {kind} stage completed.",
         }
     if kind == "complete":
         return {
@@ -227,7 +245,8 @@ def notify(kind: str, failure_message: str | None = None, dry_run: bool = False)
                 None,
             )
             if issue:
-                sms_already_accepted = SMS_ACCEPTED_MARKER in str(issue.get("body") or "")
+                accepted_match = SMS_ACCEPTED_RE.search(str(issue.get("body") or ""))
+                sms_already_accepted = accepted_match is not None
                 github_result = {
                     "delivery": "DEDUPLICATED",
                     "issue_number": issue.get("number"),
@@ -250,9 +269,18 @@ def notify(kind: str, failure_message: str | None = None, dry_run: bool = False)
     except Exception as exc:
         github_result = {"delivery": "FAILED", "reason": f"{type(exc).__name__}: {exc}"}
 
-    sms_result = (
-        {"delivery": "DEDUPLICATED"}
+    accepted_match = (
+        SMS_ACCEPTED_RE.search(str((issue or {}).get("body") or ""))
         if sms_already_accepted
+        else None
+    )
+    sms_result = (
+        {
+            "delivery": "DEDUPLICATED",
+            "recipient_count": int(accepted_match.group(1)),
+            "proof": "existing_GitHub_issue_SMS_acceptance_marker",
+        }
+        if accepted_match
         else _send_openphone_sms(sms_text)
     )
 
@@ -264,8 +292,12 @@ def notify(kind: str, failure_message: str | None = None, dry_run: bool = False)
     ):
         try:
             issue_body = str(issue.get("body") or body)
-            if SMS_ACCEPTED_MARKER not in issue_body:
-                issue_body = f"{issue_body}\n\n{SMS_ACCEPTED_MARKER}"
+            acceptance_marker = (
+                f"{SMS_ACCEPTED_MARKER} recipients="
+                f"{int(sms_result.get('recipient_count', 0))} -->"
+            )
+            if acceptance_marker not in issue_body:
+                issue_body = f"{issue_body}\n\n{acceptance_marker}"
                 _github_request(
                     "PATCH",
                     f"{API}/repos/{repository}/issues/{issue['number']}",
@@ -296,6 +328,10 @@ def main() -> None:
             "launch",
             "watchdog",
             "start",
+            "prescreen",
+            "deep",
+            "freeze",
+            "bench",
             "final",
             "recovery",
             "complete",

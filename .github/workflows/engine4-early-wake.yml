@@ -64,7 +64,7 @@ jobs:
         run: |
           set -euo pipefail
           pip install -r requirements.txt pytest
-          python -m py_compile engine4_intraday.py engine4_pipeline_runner_guarded.py engine4_notify.py
+          python -m py_compile engine4_intraday.py engine4_pipeline_runner_guarded.py engine4_notify.py engine4_bench.py engine4_stage_report.py
           pytest -q test_engine4_*.py
           python engine4_pipeline_runner_guarded.py provider-smoke
 

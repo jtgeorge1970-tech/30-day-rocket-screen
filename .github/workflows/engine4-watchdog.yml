@@ -56,7 +56,7 @@ jobs:
         shell: bash
         run: |
           python - <<'PY'
-          import json, os, urllib.request
+          import base64, json, os, urllib.parse, urllib.request
           from datetime import datetime
           from zoneinfo import ZoneInfo
 
@@ -82,11 +82,25 @@ jobs:
               active = run.get("status") in {"queued", "in_progress", "waiting", "pending"}
               successful = run.get("status") == "completed" and run.get("conclusion") == "success"
               is_production = "engine4-production.yml" in str(run.get("path") or "")
-              is_morning_manual = (
+              is_morning_manual = False
+              if (
                   "engine4-manual-on-demand.yml" in str(run.get("path") or "")
                   and run.get("event") == "push"
-                  and (created_at.hour * 60 + created_at.minute) >= 530
-              )
+              ):
+                  ref = urllib.parse.quote(str(run.get("head_sha") or ""), safe="")
+                  content_url = (
+                      f"https://api.github.com/repos/{repo}/contents/"
+                      f".github/engine4-manual-trigger.txt?ref={ref}"
+                  )
+                  try:
+                      with urllib.request.urlopen(
+                          urllib.request.Request(content_url, headers=headers), timeout=20
+                      ) as response:
+                          encoded = json.load(response).get("content", "")
+                      trigger = base64.b64decode(encoded).decode("utf-8", errors="replace")
+                      is_morning_manual = "mode=live_today" in trigger
+                  except Exception as exc:
+                      print(f"Could not classify manual run {run.get('id')}: {exc}")
               if created_at.date() == today and (active or successful) and (is_production or is_morning_manual):
                   existing.append(run)
 
