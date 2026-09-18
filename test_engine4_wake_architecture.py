@@ -38,6 +38,8 @@ def test_watchdog_has_seasonal_guard_and_intervention_sms():
     workflow = (ROOT / ".github/workflows/engine4-watchdog.yml").read_text()
     assert 'if [ "$T" -lt 522 ] || [ "$T" -gt 535 ]' in workflow
     assert "engine4_notify.py watchdog --require-delivery" in workflow
+    assert "engine4-manual-on-demand.yml" in workflow
+    assert "is_morning_manual" in workflow
     assert "steps.wake.outputs.dispatched == 'true'" in workflow
 
 
