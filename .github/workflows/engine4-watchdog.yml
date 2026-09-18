@@ -2,16 +2,19 @@ name: Engine 4 Production Wake Watchdog
 
 on:
   workflow_dispatch:
-  # Explicit UTC schedules mirror the proven production timing model.
-  # Both EDT and EST equivalents run; each check verifies whether production
-  # is already active/successful before dispatching any backup.
+  # Both UTC equivalents run; the ET guard admits only 08:42-08:52 ET.
   schedule:
     - cron: '42,47,52 12 * * 1-5'  # 08:42-08:52 EDT
     - cron: '42,47,52 13 * * 1-5'  # 08:42-08:52 EST
 
+concurrency:
+  group: engine4-wake-watchdog
+  cancel-in-progress: false
+
 jobs:
   verify-wake:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       actions: write
       contents: read
@@ -23,7 +26,33 @@ jobs:
       ENGINE4_SMS_TO: ${{ secrets.ENGINE4_SMS_TO }}
     steps:
       - uses: actions/checkout@v4
-      - name: Verify production wake or dispatch backup
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify correct watchdog ET window
+        id: window
+        shell: bash
+        run: |
+          H=$(TZ=America/New_York date +%H)
+          M=$(TZ=America/New_York date +%M)
+          T=$((10#$H * 60 + 10#$M))
+          echo "Wake watchdog ran at ${H}:${M} ET"
+          if [ "$T" -lt 522 ] || [ "$T" -gt 535 ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Wrong seasonal duplicate; exiting harmlessly."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install notifier dependency
+        if: steps.window.outputs.skip != 'true'
+        run: pip install requests
+
+      - name: Verify production wake or dispatch recovery wake
+        if: steps.window.outputs.skip != 'true'
+        id: wake
         shell: bash
         run: |
           python - <<'PY'
@@ -31,47 +60,58 @@ jobs:
           from datetime import datetime
           from zoneinfo import ZoneInfo
 
-          repo=os.environ['GITHUB_REPOSITORY']
-          token=os.environ['GITHUB_TOKEN']
-          headers={
-              "Accept":"application/vnd.github+json",
-              "Authorization":f"Bearer {token}",
-              "X-GitHub-Api-Version":"2022-11-28",
+          repo = os.environ["GITHUB_REPOSITORY"]
+          token = os.environ["GITHUB_TOKEN"]
+          headers = {
+              "Accept": "application/vnd.github+json",
+              "Authorization": f"Bearer {token}",
+              "X-GitHub-Api-Version": "2022-11-28",
           }
-          runs_url=f"https://api.github.com/repos/{repo}/actions/workflows/engine4-production.yml/runs?per_page=30"
-          request=urllib.request.Request(runs_url, headers=headers)
+          runs_url = f"https://api.github.com/repos/{repo}/actions/workflows/engine4-production.yml/runs?per_page=30"
+          request = urllib.request.Request(runs_url, headers=headers)
           with urllib.request.urlopen(request, timeout=20) as response:
-              runs=json.load(response).get('workflow_runs', [])
+              runs = json.load(response).get("workflow_runs", [])
 
-          et=ZoneInfo('America/New_York')
-          today=datetime.now(et).date()
-          existing=[]
+          et = ZoneInfo("America/New_York")
+          today = datetime.now(et).date()
+          existing = []
           for run in runs:
-              created=datetime.fromisoformat(run['created_at'].replace('Z','+00:00')).astimezone(et).date()
-              active=run.get('status') in {'queued','in_progress','waiting','pending'}
-              successful=run.get('status') == 'completed' and run.get('conclusion') == 'success'
+              created = datetime.fromisoformat(run["created_at"].replace("Z", "+00:00")).astimezone(et).date()
+              active = run.get("status") in {"queued", "in_progress", "waiting", "pending"}
+              successful = run.get("status") == "completed" and run.get("conclusion") == "success"
               if created == today and (active or successful):
                   existing.append(run)
 
-          if existing:
-              print(f"ENGINE 4 WAKE VERIFIED — run={existing[0]['id']} status={existing[0]['status']}")
-              raise SystemExit(0)
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              if existing:
+                  output.write("dispatched=false\n")
+                  output.write(f"verified_run={existing[0]['id']}\n")
+                  print(f"ENGINE 4 WAKE VERIFIED — run={existing[0]['id']} status={existing[0]['status']}")
+                  raise SystemExit(0)
 
-          dispatch_url=f"https://api.github.com/repos/{repo}/actions/workflows/engine4-production.yml/dispatches"
-          body=json.dumps({"ref":"main"}).encode('utf-8')
-          dispatch=urllib.request.Request(dispatch_url, data=body, headers={**headers, "Content-Type":"application/json"}, method='POST')
-          with urllib.request.urlopen(dispatch, timeout=20) as response:
-              if response.status != 204:
-                  raise RuntimeError(f"Unexpected dispatch status {response.status}")
-          print("ENGINE 4 BACKUP WAKE DISPATCHED")
+              dispatch_url = f"https://api.github.com/repos/{repo}/actions/workflows/engine4-production.yml/dispatches"
+              body = json.dumps({"ref": "main"}).encode("utf-8")
+              dispatch = urllib.request.Request(
+                  dispatch_url,
+                  data=body,
+                  headers={**headers, "Content-Type": "application/json"},
+                  method="POST",
+              )
+              with urllib.request.urlopen(dispatch, timeout=20) as response:
+                  if response.status != 204:
+                      raise RuntimeError(f"Unexpected dispatch status {response.status}")
+              output.write("dispatched=true\n")
+              print("ENGINE 4 RECOVERY WAKE DISPATCHED")
           PY
 
-      - name: Install notifier dependency after watchdog failure
-        if: failure()
-        run: pip install requests
+      - name: Send watchdog intervention notification
+        if: steps.window.outputs.skip != 'true' && steps.wake.outputs.dispatched == 'true'
+        run: >-
+          python engine4_notify.py watchdog --require-delivery
+          --message "ENGINE 4 WATCHDOG INTERVENED — no active production run was found, so the recovery wake dispatched production."
 
-      - name: Send watchdog failure SMS
-        if: failure()
+      - name: Send watchdog failure notification
+        if: failure() && steps.window.outputs.skip != 'true'
         run: >-
           python engine4_notify.py failure --require-delivery
-          --message "ENGINE 4 WAKE WATCHDOG FAILURE — neither the primary wake nor the backup dispatch could be verified. Review GitHub immediately; no completed engine result is being reported."
+          --message "ENGINE 4 WAKE WATCHDOG FAILURE — neither an active production run nor a successful recovery dispatch could be verified. Review GitHub immediately; no completed engine result is being reported."
