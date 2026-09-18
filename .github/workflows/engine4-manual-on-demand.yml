@@ -114,8 +114,8 @@ jobs:
           M=$(TZ=America/New_York date +%M)
           NOW=$((10#$H * 60 + 10#$M))
           echo "Engine 4 manual live runner requested at ${H}:${M} ET"
-          if [ "$NOW" -lt 535 ] || [ "$NOW" -gt 930 ]; then
-            echo 'MANUAL LIVE RUN REFUSED — valid current-day on-demand start window is 08:55-15:30 ET.'
+          if [ "$NOW" -lt 530 ] || [ "$NOW" -gt 930 ]; then
+            echo 'MANUAL LIVE RUN REFUSED — valid current-day on-demand start window is 08:50-15:30 ET.'
             echo 'Outside market hours, use acceptance_replay; production data will not be fabricated or mislabeled.'
             exit 78
           fi
@@ -160,20 +160,37 @@ jobs:
           PY
           }
 
+          wait_until_et() {
+            TARGET="$1"
+            while true; do
+              H=$(TZ=America/New_York date +%H)
+              M=$(TZ=America/New_York date +%M)
+              NOW=$((10#$H * 60 + 10#$M))
+              if [ "$NOW" -ge "$TARGET" ]; then
+                break
+              fi
+              sleep 15
+            done
+          }
+
           echo '=== MANUAL LIVE STAGE 1: BROAD PRE-SCREEN ==='
+          wait_until_et 535
           python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"
           verify_date output/engine4/prescreen_report.json
           verify_date output/engine4/timeline.json
 
           echo '=== MANUAL LIVE STAGE 2: DEEP 100-POINT ANALYSIS ==='
+          wait_until_et 545
           python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"
           verify_date output/engine4/deep_ranked.json
 
           echo '=== MANUAL LIVE STAGE 3: REFRESH + RANK + FREEZE ==='
+          wait_until_et 558
           python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"
           verify_date output/engine4/top25_frozen.json
 
           echo '=== MANUAL LIVE STAGE 4: FINAL LIVE CONFIRMATION ==='
+          wait_until_et 585
           python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"
           verify_date output/engine4/final_signal.json
           reject_pipeline_failure output/engine4/final_signal.json
