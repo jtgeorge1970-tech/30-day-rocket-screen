@@ -100,9 +100,21 @@ def _github_request(method: str, url: str, token: str, **kwargs) -> requests.Res
 
 
 def _sms_text(kind: str, status: str, ticker: str, message: str, run_url: str) -> str:
-    heading = f"ENGINE 4 {kind.upper()}: {status} — {ticker}"
+    labels = {
+        "final": "ENGINE 4 PRIMARY RESULT — RUN STILL ACTIVE",
+        "recovery": "ENGINE 4 RECOVERY RESULT",
+        "complete": "ENGINE 4 COMPLETE",
+    }
+    heading = f"{labels.get(kind, f'ENGINE 4 {kind.upper()}')}: {status} — {ticker}"
+    progress = (
+        "The full Engine 4 run is NOT complete. Recovery watch and terminal verification continue."
+        if kind == "final"
+        else ""
+    )
     safety = "Confirm the live broker quote before any order."
-    return "\n".join(part for part in (heading, message, safety, run_url) if part)[:1200]
+    return "\n".join(
+        part for part in (heading, message, progress, safety, run_url) if part
+    )[:1200]
 
 
 def _send_openphone_sms(content: str) -> dict:
