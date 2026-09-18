@@ -20,7 +20,7 @@ eligibility, catalyst, price-cap, or trade-safety rules.
    - Duplicate protection permits no more than one valid daily cycle.
 
 3. **Recovery watchdog — 08:42, 08:47, 08:52 ET**
-   - Verifies actual production state.
+   - Verifies actual production state or an active morning manual-failsafe run.
    - Dispatches a recovery wake if production is absent.
    - Sends both phones a distinct watchdog-intervention SMS only when it acts.
    - The Eastern-time guard rejects the wrong seasonal duplicate.
