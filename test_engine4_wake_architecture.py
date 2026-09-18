@@ -48,3 +48,17 @@ def test_early_manual_failsafe_preserves_live_stage_times():
     assert "08:50-15:30 ET" in workflow
     for minute in (535, 545, 558, 585):
         assert f"wait_until_et {minute}" in workflow
+
+
+def test_primary_result_sms_cannot_claim_full_completion():
+    text = engine4_notify._sms_text(
+        "final", "NO_TRADE", "MARKET", "No primary trade.", "https://example.test/run"
+    )
+    assert "PRIMARY RESULT — RUN STILL ACTIVE" in text
+    assert "full Engine 4 run is NOT complete" in text
+    assert "ENGINE 4 FINAL" not in text
+
+    completed = engine4_notify._sms_text(
+        "complete", "COMPLETE", "SYSTEM", "All stages finished.", ""
+    )
+    assert completed.startswith("ENGINE 4 COMPLETE:")
