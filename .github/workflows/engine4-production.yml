@@ -2,12 +2,12 @@ name: Engine 4 Intraday Production
 
 on:
   workflow_dispatch:
-  # Redundant wake requests: GitHub scheduled events are best-effort and can
-  # be delayed under load. Duplicate detection below allows the first usable
-  # wake to run while later wakes exit safely.
+  # Proven UTC scheduling restored after timezone-aware schedules produced
+  # no events on 2026-09-18. Both EDT and EST equivalents are requested;
+  # the ET wake guard and duplicate detector admit only one usable daily cycle.
   schedule:
-    - cron: '35,40,45,50 8 * * 1-5'
-      timezone: 'America/New_York'
+    - cron: '35,40,45,50 12 * * 1-5'  # 08:35-08:50 EDT
+    - cron: '35,40,45,50 13 * * 1-5'  # 08:35-08:50 EST
 
 concurrency:
   group: engine4-production
