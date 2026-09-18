@@ -2,11 +2,12 @@ name: Engine 4 Production Wake Watchdog
 
 on:
   workflow_dispatch:
-  # Repeated watchdog checks independently verify that production actually
-  # woke. Each check dispatches a backup run when none is active or successful.
+  # Explicit UTC schedules mirror the proven production timing model.
+  # Both EDT and EST equivalents run; each check verifies whether production
+  # is already active/successful before dispatching any backup.
   schedule:
-    - cron: '42,47,52 8 * * 1-5'
-      timezone: 'America/New_York'
+    - cron: '42,47,52 12 * * 1-5'  # 08:42-08:52 EDT
+    - cron: '42,47,52 13 * * 1-5'  # 08:42-08:52 EST
 
 jobs:
   verify-wake:
