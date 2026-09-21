@@ -475,6 +475,13 @@ def refresh_and_freeze(date_override: str | None = None, max_symbols: int | None
         f"and {len(top)} were frozen for the 09:45 live confirmation."
     )
     log_event(
+        "TOP-25 FREEZE",
+        "STARTED",
+        "Freezing the eligible refreshed shortlist for the 09:45 live confirmation.",
+        tickers=top.ticker.astype(str).tolist(),
+        details=refresh_details,
+    )
+    log_event(
         "09:18 REFRESH + RANKING",
         "COMPLETED",
         refresh_summary,
