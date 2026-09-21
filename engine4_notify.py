@@ -130,8 +130,17 @@ def _sms_text(kind: str, status: str, ticker: str, message: str, run_url: str) -
         else ""
     )
     safety = "Confirm the live broker quote before any order."
+    run_id = os.getenv("GITHUB_RUN_ID", "").strip()
+    generated_et = datetime.now(ET).strftime("%Y-%m-%d %I:%M:%S %p ET")
+    run_context = " | ".join(
+        part for part in (
+            f"Run {run_id}" if run_id else "",
+            f"Generated {generated_et}",
+        )
+        if part
+    )
     return "\n".join(
-        part for part in (heading, message, progress, safety, run_url) if part
+        part for part in (heading, message, progress, run_context, safety, run_url) if part
     )[:1200]
 
 
@@ -196,7 +205,8 @@ def notify(kind: str, failure_message: str | None = None, dry_run: bool = False)
     status = str(signal.get("status") or "UNKNOWN").upper()
     ticker = str(signal.get("ticker") or "MARKET").upper()
     date_et = str(signal.get("target_date_et") or datetime.now(ET).date())
-    marker = f"ENGINE4-ALERT:{date_et}:{kind}:{status}:{ticker}"
+    run_id = os.getenv("GITHUB_RUN_ID", "").strip()
+    marker = f"ENGINE4-ALERT:{date_et}:{kind}:{status}:{ticker}:RUN:{run_id or 'NO-RUN'}"
     title = f"[ENGINE 4] {kind.upper()} {status} — {ticker} — {date_et}"
     message = str(signal.get("message") or signal.get("reason") or "No message supplied.")
     run_url = ""
