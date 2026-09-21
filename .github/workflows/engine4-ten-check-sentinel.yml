@@ -99,7 +99,10 @@ jobs:
               successful = run.get("status") == "completed" and run.get("conclusion") == "success"
               is_production = "engine4-production.yml" in str(run.get("path") or "")
               live_manual = "engine4-manual-on-demand.yml" in str(run.get("path") or "") and is_live_manual(run)
-              if created.date() == today and (active or successful) and (is_production or live_manual):
+              created_minute = created.hour * 60 + created.minute
+              valid_production_wake = is_production and 515 <= created_minute <= 545
+              valid_live_manual = live_manual and 515 <= created_minute <= 930
+              if created.date() == today and (active or successful) and (valid_production_wake or valid_live_manual):
                   valid.append(run)
 
           if valid:
