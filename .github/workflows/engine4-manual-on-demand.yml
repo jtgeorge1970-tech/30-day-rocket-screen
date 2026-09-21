@@ -59,9 +59,11 @@ jobs:
           if [ "$GITHUB_EVENT_NAME" = 'push' ]; then
             REQUESTED_MODE=$(sed -n 's/^mode=//p' .github/engine4-manual-trigger.txt | head -1)
             REQUESTED_DATE=$(sed -n 's/^acceptance_date_et=//p' .github/engine4-manual-trigger.txt | head -1)
+            CERTIFICATION_FORCE=$(sed -n 's/^certification_force=//p' .github/engine4-manual-trigger.txt | head -1)
             if [ -n "$REQUESTED_MODE" ]; then RUN_MODE="$REQUESTED_MODE"; fi
             if [ -n "$REQUESTED_DATE" ]; then ACCEPTANCE_DATE_ET="$REQUESTED_DATE"; fi
-            printf 'RUN_MODE=%s\nACCEPTANCE_DATE_ET=%s\n' "$RUN_MODE" "$ACCEPTANCE_DATE_ET" >> "$GITHUB_ENV"
+            if [ "$CERTIFICATION_FORCE" != 'true' ]; then CERTIFICATION_FORCE='false'; fi
+            printf 'RUN_MODE=%s\nACCEPTANCE_DATE_ET=%s\nCERTIFICATION_FORCE=%s\n' "$RUN_MODE" "$ACCEPTANCE_DATE_ET" "$CERTIFICATION_FORCE" >> "$GITHUB_ENV"
           fi
           case "$RUN_MODE" in
             live_today|acceptance_replay|preflight_only) ;;
@@ -97,6 +99,12 @@ jobs:
           repo = os.environ['GITHUB_REPOSITORY']
           current = int(os.environ['GITHUB_RUN_ID'])
           token = os.environ['GITHUB_TOKEN']
+          certification_force = os.getenv('CERTIFICATION_FORCE', 'false').lower() == 'true'
+          if certification_force:
+              with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+                  output.write("skip=false\n")
+              print('CERTIFICATION OVERRIDE ACTIVE — duplicate protection preserved for normal runs; this explicit proof run is admitted.')
+              raise SystemExit(0)
           headers = {
               'Accept': 'application/vnd.github+json',
               'Authorization': f'Bearer {token}',
