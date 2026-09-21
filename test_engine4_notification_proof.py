@@ -33,7 +33,8 @@ def _configure(monkeypatch, tmp_path, issue_body: str):
 def test_sms_dedup_requires_and_preserves_two_recipient_proof(tmp_path, monkeypatch):
     signal = notify._signal_for("start", None)
     date_et = str(signal.get("target_date_et") or notify.datetime.now(notify.ET).date())
-    marker = f"<!-- ENGINE4-ALERT:{date_et}:start:STARTED:SYSTEM -->"
+    monkeypatch.setenv("GITHUB_RUN_ID", "123456789")
+    marker = f"<!-- ENGINE4-ALERT:{date_et}:start:STARTED:SYSTEM:RUN:123456789 -->"
     _configure(
         monkeypatch,
         tmp_path,
@@ -58,7 +59,8 @@ def test_sms_dedup_requires_and_preserves_two_recipient_proof(tmp_path, monkeypa
 def test_legacy_marker_without_recipient_count_resends_sms(tmp_path, monkeypatch):
     signal = notify._signal_for("start", None)
     date_et = str(signal.get("target_date_et") or notify.datetime.now(notify.ET).date())
-    marker = f"<!-- ENGINE4-ALERT:{date_et}:start:STARTED:SYSTEM -->"
+    monkeypatch.setenv("GITHUB_RUN_ID", "987654321")
+    marker = f"<!-- ENGINE4-ALERT:{date_et}:start:STARTED:SYSTEM:RUN:987654321 -->"
     _configure(monkeypatch, tmp_path, f"{marker}\n<!-- ENGINE4-SMS-API-ACCEPTED -->")
     calls = []
     monkeypatch.setattr(
