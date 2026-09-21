@@ -22,5 +22,5 @@ Scope: operational and reporting failures observed from 2026-09-14 through 2026-
 | Watch candidates could accumulate without bound | A watch list could grow to 50–200 stale names | Top-25 is a hard capacity; weak, stale, expired, or displaced names are removed daily |
 | A prior setup could be chased after price deterioration | Stale entry logic could create unsafe execution | Bench never carries trade approval; live gates and a fresh setup are mandatory, with the $100 official price cap retained |
 
-No repair is considered proven by this register alone. Deployment plus five
+No repair is considered proven by this register alone. Deployment plus three
 consecutive green full acceptance workflow runs is the release gate.
