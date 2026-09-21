@@ -1,3 +1,3 @@
 Engine 4 acceptance trigger file.
-acceptance_sequence=final-hardened-3-of-3
-requested_at_utc=2026-09-21T14:34:45Z
+acceptance_sequence=final-clean-head-validation
+requested_at_utc=2026-09-21T21:22:30Z
