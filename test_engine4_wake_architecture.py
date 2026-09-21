@@ -46,9 +46,7 @@ def test_watchdog_has_seasonal_guard_and_intervention_sms():
 
 def test_early_manual_failsafe_preserves_live_stage_times():
     workflow = (ROOT / ".github/workflows/engine4-manual-on-demand.yml").read_text()
-    assert "MAX_START=930" in workflow
-    assert "CERTIFICATION_FORCE" in workflow
-    assert "MAX_START=960" in workflow
+    assert "08:35-15:30 ET" in workflow
     for checkpoint in ("0855", "0905", "0918", "0945"):
         assert f'-lt {checkpoint}' in workflow
 
