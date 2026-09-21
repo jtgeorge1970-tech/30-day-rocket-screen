@@ -1,3 +1,4 @@
 mode=live_today
 acceptance_date_et=
-request=certification_full_notify_clean_2026-09-21T17:06:00Z
+certification_force=true
+request=certification_full_notify_forced_2026-09-21T17:12:00Z
