@@ -11,6 +11,7 @@ on:
       - '.github/workflows/engine4-manual-on-demand.yml'
       - '.github/workflows/engine4-early-wake.yml'
       - '.github/workflows/engine4-watchdog.yml'
+      - '.github/workflows/engine4-ten-check-sentinel.yml'
       - '.github/engine4-acceptance-trigger.txt'
   workflow_dispatch:
 
@@ -116,3 +117,13 @@ jobs:
           set -euo pipefail
           grep -F "git pull --rebase --autostash origin main" .github/workflows/engine4-production.yml
           grep -F "git pull --rebase --autostash origin main" .github/workflows/engine4-manual-on-demand.yml
+
+      - name: Verify ten-check morning sentinel cannot accept test runs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(grep -c "cron:" .github/workflows/engine4-ten-check-sentinel.yml)" -eq 20
+          grep -F 'mode=live_today' .github/workflows/engine4-ten-check-sentinel.yml
+          grep -F 'run.get("event") != "push"' .github/workflows/engine4-ten-check-sentinel.yml
+          grep -F 'contents: write' .github/workflows/engine4-ten-check-sentinel.yml
+          grep -F 'MANUAL live_today PUSH TRIGGERED BY SENTINEL' .github/workflows/engine4-ten-check-sentinel.yml
