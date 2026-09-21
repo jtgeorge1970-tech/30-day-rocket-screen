@@ -94,10 +94,29 @@ def _signal_for(kind: str, failure_message: str | None) -> dict:
             "message": failure_message or f"Engine 4 {kind} stage completed.",
         }
     if kind == "complete":
+        primary = _read_json(OUT / "final_signal.json")
+        recovery = _read_json(OUT / "recovery_signal.json")
+        bench = _read_json(OUT / "watch_bench_report.json")
+        primary_status = str(primary.get("status") or "UNAVAILABLE").upper()
+        recovery_status = str(recovery.get("status") or "UNAVAILABLE").upper()
+        actionable = {primary_status, recovery_status} & {"BUY", "ARM"}
+        outcome = "BUY/ARM SIGNAL PRESENT" if actionable else "NO BUY SIGNAL TODAY"
+        watch = [
+            str(row.get("ticker"))
+            for row in bench.get("candidates", [])
+            if row.get("ticker")
+        ]
+        watch_text = ", ".join(watch) if watch else "NONE"
+        message = (
+            f"{outcome}\n"
+            f"Primary: {primary_status}\n"
+            f"Recovery: {recovery_status}\n"
+            f"Watchlist: {watch_text}"
+        )
         return {
             "status": "COMPLETE",
             "ticker": "SYSTEM",
-            "message": failure_message or "Engine 4 scheduled run completed.",
+            "message": message,
         }
     return {
         "status": "PIPELINE_FAILURE",
