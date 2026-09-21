@@ -1,4 +1,4 @@
-mode=live_today
+mode=preflight_only
 acceptance_date_et=
-certification_force=true
-request=live_current_day_full_retry_2026-09-21T19:56:30Z
+certification_force=false
+request=clean_reset_no_run
