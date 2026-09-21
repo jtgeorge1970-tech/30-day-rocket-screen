@@ -1,44 +1,40 @@
 from __future__ import annotations
 
+import json
+
 import engine4_notify as notify
 
 
-class _Response:
-    def __init__(self, payload):
-        self._payload = payload
-
-    def json(self):
-        return self._payload
-
-
-def _configure(monkeypatch, tmp_path, issue_body: str):
+def _configure(monkeypatch, tmp_path):
     monkeypatch.setattr(notify, "OUT", tmp_path)
     monkeypatch.setenv("GITHUB_TOKEN", "test-token")
     monkeypatch.setenv("GITHUB_REPOSITORY", "owner/repo")
-    monkeypatch.setattr(
-        notify,
-        "_github_request",
-        lambda method, url, token, **kwargs: _Response(
-            [
-                {
-                    "number": 7,
-                    "html_url": "https://example.test/issues/7",
-                    "body": issue_body,
-                }
-            ]
-        ),
-    )
 
 
 def test_sms_dedup_requires_and_preserves_two_recipient_proof(tmp_path, monkeypatch):
+    _configure(monkeypatch, tmp_path)
     signal = notify._signal_for("start", None)
     date_et = str(signal.get("target_date_et") or notify.datetime.now(notify.ET).date())
     monkeypatch.setenv("GITHUB_RUN_ID", "123456789")
-    marker = f"<!-- ENGINE4-ALERT:{date_et}:start:STARTED:SYSTEM:RUN:123456789 -->"
-    _configure(
-        monkeypatch,
-        tmp_path,
-        f"{marker}\n<!-- ENGINE4-SMS-API-ACCEPTED recipients=2 -->",
+    marker = f"ENGINE4-ALERT:{date_et}:start:STARTED:SYSTEM:RUN:123456789"
+    (tmp_path / "notification_audit_log.json").write_text(
+        json.dumps(
+            [
+                {
+                    "marker": marker,
+                    "sms": {
+                        "delivery": "API_ACCEPTED",
+                        "recipient_count": 2,
+                        "messages": [],
+                    },
+                    "github": {
+                        "delivery": "DISABLED",
+                        "reason": "sms_only_user_preference",
+                    },
+                }
+            ]
+        ),
+        encoding="utf-8",
     )
     monkeypatch.setattr(
         notify,
@@ -52,16 +48,31 @@ def test_sms_dedup_requires_and_preserves_two_recipient_proof(tmp_path, monkeypa
     assert result["sms"] == {
         "delivery": "DEDUPLICATED",
         "recipient_count": 2,
-        "proof": "existing_GitHub_issue_SMS_acceptance_marker",
+        "proof": "existing_local_notification_audit",
+    }
+    assert result["github"] == {
+        "delivery": "DISABLED",
+        "reason": "sms_only_user_preference",
     }
 
 
-def test_legacy_marker_without_recipient_count_resends_sms(tmp_path, monkeypatch):
+def test_local_audit_without_accepted_sms_resends_sms(tmp_path, monkeypatch):
+    _configure(monkeypatch, tmp_path)
     signal = notify._signal_for("start", None)
     date_et = str(signal.get("target_date_et") or notify.datetime.now(notify.ET).date())
     monkeypatch.setenv("GITHUB_RUN_ID", "987654321")
-    marker = f"<!-- ENGINE4-ALERT:{date_et}:start:STARTED:SYSTEM:RUN:987654321 -->"
-    _configure(monkeypatch, tmp_path, f"{marker}\n<!-- ENGINE4-SMS-API-ACCEPTED -->")
+    marker = f"ENGINE4-ALERT:{date_et}:start:STARTED:SYSTEM:RUN:987654321"
+    (tmp_path / "notification_audit_log.json").write_text(
+        json.dumps(
+            [
+                {
+                    "marker": marker,
+                    "sms": {"delivery": "FAILED", "recipient_count": 0},
+                }
+            ]
+        ),
+        encoding="utf-8",
+    )
     calls = []
     monkeypatch.setattr(
         notify,
