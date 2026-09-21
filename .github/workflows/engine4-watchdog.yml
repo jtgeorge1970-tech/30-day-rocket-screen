@@ -101,7 +101,10 @@ jobs:
                       is_morning_manual = "mode=live_today" in trigger
                   except Exception as exc:
                       print(f"Could not classify manual run {run.get('id')}: {exc}")
-              if created_at.date() == today and (active or successful) and (is_production or is_morning_manual):
+              created_minute = created_at.hour * 60 + created_at.minute
+              valid_production_wake = is_production and 515 <= created_minute <= 545
+              valid_morning_manual = is_morning_manual and 515 <= created_minute <= 930
+              if created_at.date() == today and (active or successful) and (valid_production_wake or valid_morning_manual):
                   existing.append(run)
 
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
