@@ -54,6 +54,8 @@ jobs:
           python engine4_pipeline_runner.py prescreen --date "$ACCEPTANCE_DATE_ET"
           python engine4_pipeline_runner.py deep --date "$ACCEPTANCE_DATE_ET"
           python engine4_pipeline_runner.py refresh --date "$ACCEPTANCE_DATE_ET"
+          python engine4_bench.py update --date "$ACCEPTANCE_DATE_ET"
+          python engine4_stage_report.py bench --date "$ACCEPTANCE_DATE_ET"
           python engine4_pipeline_runner.py final --date "$ACCEPTANCE_DATE_ET"
           cat output/engine4/timeline.txt
           cat output/engine4/final_signal.json
@@ -66,6 +68,7 @@ jobs:
           deep=json.loads(Path('output/engine4/deep_ranked.json').read_text())
           top=json.loads(Path('output/engine4/top25_frozen.json').read_text())
           final=json.loads(Path('output/engine4/final_signal.json').read_text())
+          bench=json.loads(Path('output/engine4/watch_bench_report.json').read_text())
           timeline=json.loads(Path('output/engine4/timeline.json').read_text())
 
           expected=os.environ['ACCEPTANCE_DATE_ET']
@@ -73,6 +76,9 @@ jobs:
           assert deep['target_date_et'] == expected
           assert top['target_date_et'] == expected
           assert final['target_date_et'] == expected
+          assert bench['target_date_et'] == expected
+          assert 0 <= bench['retained_by_top25_bench_cap'] <= 25
+          assert len(bench['candidates']) == bench['retained_by_top25_bench_cap']
           assert timeline['market_date_et'] == expected
           assert pre['broad_qualified'] > 0
           assert 0 < pre['retained_by_cap'] <= pre['broad_pool_cap']
@@ -100,5 +106,13 @@ jobs:
           print('natural_broad_qualified', pre['broad_qualified'])
           print('acceptance_date_et', expected)
           print('finite_spreads', finite_spreads, 'of', len(rows))
+          print('bench_retained', bench['retained_by_top25_bench_cap'])
           print('final_status', final['status'])
           PY
+
+      - name: Verify both live workflows use dirty-tree-safe Bench persistence
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F "git pull --rebase --autostash origin main" .github/workflows/engine4-production.yml
+          grep -F "git pull --rebase --autostash origin main" .github/workflows/engine4-manual-on-demand.yml
