@@ -258,83 +258,24 @@ def notify(kind: str, failure_message: str | None = None, dry_run: bool = False)
         _write_audit(result)
         return result
 
-    token = os.getenv("GITHUB_TOKEN", "")
-    repository = os.getenv("GITHUB_REPOSITORY", "")
-    github_result: dict = {"delivery": "NOT_CONFIGURED"}
-    issue: dict | None = None
-    sms_already_accepted = False
-    try:
-        if token and "/" in repository:
-            issues_url = f"{API}/repos/{repository}/issues"
-            issues = _github_request(
-                "GET", issues_url, token, params={"state": "all", "per_page": 100}
-            ).json()
-            issue = next(
-                (item for item in issues if marker in str(item.get("body") or "")),
-                None,
-            )
-            if issue:
-                accepted_match = SMS_ACCEPTED_RE.search(str(issue.get("body") or ""))
-                sms_already_accepted = accepted_match is not None
-                github_result = {
-                    "delivery": "DEDUPLICATED",
-                    "issue_number": issue.get("number"),
-                    "issue_url": issue.get("html_url"),
-                }
-            else:
-                owner = repository.split("/", 1)[0]
-                issue = _github_request(
-                    "POST",
-                    issues_url,
-                    token,
-                    json={"title": title, "body": body, "assignees": [owner]},
-                ).json()
-                github_result = {
-                    "delivery": "SENT",
-                    "issue_number": issue.get("number"),
-                    "issue_url": issue.get("html_url"),
-                    "assigned_to": owner,
-                }
-    except Exception as exc:
-        github_result = {"delivery": "FAILED", "reason": f"{type(exc).__name__}: {exc}"}
-
-    accepted_match = (
-        SMS_ACCEPTED_RE.search(str((issue or {}).get("body") or ""))
-        if sms_already_accepted
-        else None
-    )
-    sms_result = (
-        {
+    prior_entries = [
+        e for e in _read_json(OUT / "notification_audit_log.json")
+        if isinstance(e, dict) and e.get("marker") == marker
+    ]
+    prior_sms = prior_entries[-1].get("sms", {}) if prior_entries else {}
+    if prior_sms.get("delivery") in {"API_ACCEPTED", "DEDUPLICATED"}:
+        sms_result = {
             "delivery": "DEDUPLICATED",
-            "recipient_count": int(accepted_match.group(1)),
-            "proof": "existing_GitHub_issue_SMS_acceptance_marker",
+            "recipient_count": int(prior_sms.get("recipient_count", 0)),
+            "proof": "existing_local_notification_audit",
         }
-        if accepted_match
-        else _send_openphone_sms(sms_text)
-    )
+    else:
+        sms_result = _send_openphone_sms(sms_text)
 
-    if (
-        sms_result.get("delivery") == "API_ACCEPTED"
-        and issue
-        and token
-        and "/" in repository
-    ):
-        try:
-            issue_body = str(issue.get("body") or body)
-            acceptance_marker = (
-                f"{SMS_ACCEPTED_MARKER} recipients="
-                f"{int(sms_result.get('recipient_count', 0))} -->"
-            )
-            if acceptance_marker not in issue_body:
-                issue_body = f"{issue_body}\n\n{acceptance_marker}"
-                _github_request(
-                    "PATCH",
-                    f"{API}/repos/{repository}/issues/{issue['number']}",
-                    token,
-                    json={"body": issue_body},
-                )
-        except Exception as exc:
-            sms_result["dedup_marker_update"] = f"FAILED: {type(exc).__name__}: {exc}"
+    github_result = {
+        "delivery": "DISABLED",
+        "reason": "sms_only_user_preference",
+    }
 
     result = {
         "delivery": "SENT"
