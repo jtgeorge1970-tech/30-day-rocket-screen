@@ -36,7 +36,7 @@ jobs:
     timeout-minutes: 10
     permissions:
       actions: write
-      contents: read
+      contents: write
     env:
       GITHUB_TOKEN: ${{ github.token }}
     steps:
@@ -69,14 +69,37 @@ jobs:
               with urllib.request.urlopen(req, timeout=20) as response:
                   return json.load(response).get("workflow_runs", [])
 
-          runs = runs_for("engine4-production.yml") + runs_for("engine4-manual-on-demand.yml")
+          production_runs = runs_for("engine4-production.yml")
+          manual_runs = runs_for("engine4-manual-on-demand.yml")
           today = now.date()
+
+          def is_live_manual(run):
+              # Only the auditable push trigger containing mode=live_today counts.
+              # Acceptance/preflight workflow_dispatch runs must never satisfy the
+              # morning production proof gate.
+              if run.get("event") != "push":
+                  return False
+              ref = run.get("head_sha") or ""
+              url = f"https://api.github.com/repos/{repo}/contents/.github/engine4-manual-trigger.txt?ref={ref}"
+              try:
+                  req = urllib.request.Request(url, headers=headers)
+                  with urllib.request.urlopen(req, timeout=20) as response:
+                      payload = json.load(response)
+                  import base64
+                  trigger = base64.b64decode(payload.get("content","")).decode("utf-8", errors="replace")
+                  return "mode=live_today" in trigger
+              except Exception as exc:
+                  print(f"Could not classify manual run {run.get('id')}: {exc}")
+                  return False
+
           valid = []
-          for run in runs:
+          for run in production_runs + manual_runs:
               created = datetime.fromisoformat(run["created_at"].replace("Z","+00:00")).astimezone(et)
               active = run.get("status") in {"queued","in_progress","waiting","pending"}
               successful = run.get("status") == "completed" and run.get("conclusion") == "success"
-              if created.date() == today and (active or successful):
+              is_production = "engine4-production.yml" in str(run.get("path") or "")
+              live_manual = "engine4-manual-on-demand.yml" in str(run.get("path") or "") and is_live_manual(run)
+              if created.date() == today and (active or successful) and (is_production or live_manual):
                   valid.append(run)
 
           if valid:
@@ -89,24 +112,45 @@ jobs:
               raise SystemExit(0)
 
           # 08:36 ET or later: absence of a real run is actionable.
-          url = f"https://api.github.com/repos/{repo}/actions/workflows/engine4-manual-on-demand.yml/dispatches"
-          body = json.dumps({"ref":"main","inputs":{"mode":"live_today","acceptance_date_et":""}}).encode()
-          req = urllib.request.Request(
-              url, data=body,
-              headers={**headers,"Content-Type":"application/json"},
-              method="POST",
-          )
+          # Use the auditable push trigger so later checks can prove this was
+          # specifically mode=live_today rather than an acceptance/preflight run.
+          trigger_path = ".github/engine4-manual-trigger.txt"
+          content_url = f"https://api.github.com/repos/{repo}/contents/{trigger_path}"
+          req = urllib.request.Request(content_url, headers=headers)
           with urllib.request.urlopen(req, timeout=20) as response:
-              if response.status != 204:
-                  raise RuntimeError(f"manual dispatch returned {response.status}")
-          print(f"MANUAL live_today DISPATCHED BY SENTINEL — {now:%H:%M} ET")
+              current_file = json.load(response)
+          trigger_text = (
+              "mode=live_today\n"
+              "acceptance_date_et=\n"
+              f"request=sentinel_{now:%Y-%m-%dT%H:%M:%S%z}\n"
+          )
+          import base64
+          body = json.dumps({
+              "message": f"Engine 4 sentinel live_today wake {now:%Y-%m-%d %H:%M} ET",
+              "content": base64.b64encode(trigger_text.encode()).decode(),
+              "sha": current_file["sha"],
+              "branch": "main",
+          }).encode()
+          put = urllib.request.Request(
+              content_url, data=body,
+              headers={**headers,"Content-Type":"application/json"},
+              method="PUT",
+          )
+          with urllib.request.urlopen(put, timeout=20) as response:
+              if response.status not in {200,201}:
+                  raise RuntimeError(f"manual trigger update returned {response.status}")
+          print(f"MANUAL live_today PUSH TRIGGERED BY SENTINEL — {now:%H:%M} ET")
 
           # Immediate proof check. Later sentinel wakes retry safely if GitHub has not created a run.
           confirm = runs_for("engine4-manual-on-demand.yml")
           todays = []
           for run in confirm:
               created = datetime.fromisoformat(run["created_at"].replace("Z","+00:00")).astimezone(et)
-              if created.date() == today and run.get("status") in {"queued","in_progress","waiting","pending","completed"}:
+              if (
+                  created.date() == today
+                  and is_live_manual(run)
+                  and run.get("status") in {"queued","in_progress","waiting","pending","completed"}
+              ):
                   todays.append(run)
           if todays:
               run = sorted(todays, key=lambda r: r["created_at"], reverse=True)[0]
