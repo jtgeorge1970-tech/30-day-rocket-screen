@@ -108,10 +108,11 @@ jobs:
           today = datetime.now(et).date()
           existing = []
           for run in runs:
-              created = datetime.fromisoformat(run["created_at"].replace("Z", "+00:00")).astimezone(et).date()
+              created_at = datetime.fromisoformat(run["created_at"].replace("Z", "+00:00")).astimezone(et)
+              created_minute = created_at.hour * 60 + created_at.minute
               active = run.get("status") in {"queued", "in_progress", "waiting", "pending"}
               successful = run.get("status") == "completed" and run.get("conclusion") == "success"
-              if created == today and (active or successful):
+              if created_at.date() == today and 515 <= created_minute <= 545 and (active or successful):
                   existing.append(run)
 
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
