@@ -459,20 +459,34 @@ def refresh_and_freeze(date_override: str | None = None, max_symbols: int | None
         encoding="utf-8",
     )
 
+    refresh_details = {
+        **meta,
+        "selected_for_deep": min(DEEP_POOL_SIZE, len(broad)),
+        "analyzed_count": len(ranked_all),
+        "score80_count": int((ranked_all.score >= MIN_SCORE).sum()),
+        "launchpad_eligible_count": len(eligible),
+        "a_grade_count": int(top.premarket_a_grade.sum()),
+        "runtime_seconds": runtime,
+    }
+    refresh_summary = (
+        f"Refresh found {meta['broad_qualified']} naturally broad-qualified names; "
+        f"{meta['retained_by_cap']} were retained by cap, {len(ranked_all)} completed "
+        f"refreshed deep scoring, {len(eligible)} passed the >=80 plus mandatory-gates rule, "
+        f"and {len(top)} were frozen for the 09:45 live confirmation."
+    )
+    log_event(
+        "09:18 REFRESH + RANKING",
+        "COMPLETED",
+        refresh_summary,
+        tickers=top.ticker.astype(str).tolist(),
+        details=refresh_details,
+    )
     log_event(
         "TOP-25 FREEZE",
         "COMPLETED",
-        f"Refresh found {meta['broad_qualified']} naturally broad-qualified names; {meta['retained_by_cap']} were retained by cap, {len(ranked_all)} completed refreshed deep scoring, {len(eligible)} passed the >=80 plus mandatory-gates rule, and {len(top)} were frozen for the 09:45 live confirmation.",
+        refresh_summary,
         tickers=top.ticker.astype(str).tolist(),
-        details={
-            **meta,
-            "selected_for_deep": min(DEEP_POOL_SIZE, len(broad)),
-            "analyzed_count": len(ranked_all),
-            "score80_count": int((ranked_all.score >= MIN_SCORE).sum()),
-            "launchpad_eligible_count": len(eligible),
-            "a_grade_count": int(top.premarket_a_grade.sum()),
-            "runtime_seconds": runtime,
-        },
+        details=refresh_details,
     )
     return top
 
