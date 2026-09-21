@@ -180,10 +180,19 @@ def update_bench(date_override: str | None = None, state_path: Path = STATE) -> 
         details={"bench_competition_universe": len(symbols), "bench_cap": BENCH_CAP},
     )
 
-    seed, missing = _fresh_seed_rows(symbols, date_et, "09:18")
-    ranked = runner.repaired_score_pool(seed, date_et, reference, "09:18")
-    if ranked.empty and symbols:
-        raise RuntimeError("ENGINE 4 BENCH FAILURE — no Bench candidates could be refreshed")
+    # Zero candidates is a valid market outcome, not a pipeline failure.  Avoid
+    # sending an empty/no-schema frame through the scoring stack, which can
+    # legitimately return a DataFrame with no ticker column.
+    if symbols:
+        seed, missing = _fresh_seed_rows(symbols, date_et, "09:18")
+        ranked = runner.repaired_score_pool(seed, date_et, reference, "09:18")
+        if ranked.empty:
+            raise RuntimeError("ENGINE 4 BENCH FAILURE — no Bench candidates could be refreshed")
+        if "ticker" not in ranked.columns:
+            raise RuntimeError("ENGINE 4 BENCH FAILURE — refreshed Bench data is missing ticker")
+    else:
+        missing = []
+        ranked = pd.DataFrame(columns=["ticker"])
 
     refreshed = {str(row["ticker"]): row for row in _records(ranked)}
     qualified: list[dict] = []
@@ -325,6 +334,8 @@ def self_test() -> None:
     assert MAX_WATCH_SESSIONS == 5
     assert GENERAL_ADMISSION_SCORE == 85.0
     assert TOP3_ADMISSION_SCORE == MIN_SCORE == 80.0
+    empty_ranked = pd.DataFrame(columns=["ticker"])
+    assert _records(empty_ranked) == []
     print("ENGINE4_BENCH_SELF_TEST_PASS")
 
 
