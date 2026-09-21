@@ -195,7 +195,7 @@ jobs:
           git add state/engine4/watch_bench.json
           if ! git diff --cached --quiet; then
             git commit -m "Engine 4 ${ENGINE_DATE_ET} Top-25 Bench"
-            git pull --rebase origin main
+            git pull --rebase --autostash origin main
             git push origin HEAD:main
           fi
 
