@@ -92,6 +92,22 @@ def _top_rows(rows: list[dict], limit: int = 10) -> list[str]:
     return lines or ["No eligible finalists."]
 
 
+def _sms_candidate_roster(rows: list[dict], limit: int = 25) -> str:
+    items = []
+    for index, row in enumerate(rows[:limit], start=1):
+        ticker = str(row.get("ticker") or "UNAVAILABLE")
+        score = _number(row.get("score"))
+        grade = str(row.get("premarket_grade") or "UNAVAILABLE")
+        status = str(
+            row.get("tier")
+            or row.get("status")
+            or row.get("admission_reason")
+            or ("ELIGIBLE" if row.get("premarket_eligible") is True else "WATCH")
+        )
+        items.append(f"#{index} {ticker} {score}/{grade} {status}")
+    return "; ".join(items) if items else "NONE"
+
+
 def _write(stage: str, expected: str, lines: list[str], sms_lines: list[str]) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     full = "\n".join(lines).rstrip() + "\n"
@@ -158,6 +174,7 @@ def report_deep(expected: str) -> None:
         f"STAGE 2 DEEP ANALYSIS COMPLETE — {expected} ET",
         f"Selected by Top-60 cap {counts['SELECTED FOR DEEP ANALYSIS BY TOP-60 CAP']}; actually analyzed {counts['ACTUALLY ANALYZED']}.",
         f">=80 {counts['SCORE >=80']}; launchpad eligible {counts['LAUNCHPAD ELIGIBLE']}; B {counts['B-grade']}; strict A/A+ {counts['STRICT A/A+']}.",
+        "Leaders: " + _sms_candidate_roster([r for r in deep.get("ranked", []) if r.get("premarket_eligible") is True], 10),
     ]
     _write("deep", expected, lines, sms)
 
@@ -197,6 +214,7 @@ def report_freeze(expected: str) -> None:
         f"STAGE 3 REFRESH/FREEZE COMPLETE — {expected} ET",
         f"Natural broad {counts['NATURAL broad-qualified']}; retained by Top-100 cap {counts['RETAINED BY TOP-100 CAP']}; selected by Top-60 cap {counts['SELECTED FOR DEEP ANALYSIS BY TOP-60 CAP']}; analyzed {counts['ACTUALLY ANALYZED']}.",
         f">=80 {counts['SCORE >=80']}; eligible {counts['LAUNCHPAD ELIGIBLE']}; B {counts['B-grade']}; strict A/A+ {counts['STRICT A/A+']}; frozen {counts['FROZEN FINAL-SCAN COUNT']}.",
+        "Frozen: " + _sms_candidate_roster(top.get("candidates", []), 25),
     ]
     _write("freeze", expected, lines, sms)
 
@@ -234,6 +252,7 @@ def report_bench(expected: str) -> None:
         f"Natural watch-qualified {_number(bench.get('naturally_watch_qualified_count'))}; retained by Top-25 Bench cap {_number(bench.get('retained_by_top25_bench_cap'))}.",
         f"Hot {_number(bench.get('hot_count'))}; Developing {_number(bench.get('developing_count'))}; Reserve {_number(bench.get('reserve_count'))}.",
         f"Added {len(bench.get('additions', []))}; promoted {len(bench.get('promotions', []))}; demoted {len(bench.get('demotions', []))}; removed {len(bench.get('removals', []))}.",
+        "Bench: " + _sms_candidate_roster(candidates, 25),
     ]
     _write("bench", expected, lines, sms)
 
