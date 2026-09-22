@@ -1,0 +1,27 @@
+{
+  "snapshot_id": "ENGINE4-REPLAY-2026-09-21-SSOT-V1",
+  "market_date_et": "2026-09-21",
+  "status": "SSOT_LOCKED",
+  "context": "INSTANT_REPLAY",
+  "production_state_writes": false,
+  "production_sms": false,
+  "live_provider_fallback": false,
+  "universe": ["NUAI", "WBD"],
+  "files": ["bars.csv", "quotes.csv", "catalysts.csv"],
+  "sources": {
+    "bars": "Alpaca SIP historical stock bars, retrieved 2026-09-21",
+    "quotes": "Alpaca SIP historical level-1 quotes, point-in-time before 08:55 ET",
+    "catalysts": "Same-day Sept. 21 historical reporting; exact catalyst timing relaxed by user for replay completion"
+  },
+  "coverage": {
+    "bars": "verified historical point-in-time observations spanning premarket through final-confirmation window for recovered replay universe",
+    "quotes": "verified SIP quote for each recovered replay ticker immediately before 08:55 ET",
+    "catalysts": "one same-day catalyst record per recovered replay ticker"
+  },
+  "locked_rules": [
+    "Do not substitute live data during INSTANT_REPLAY",
+    "Do not overwrite this snapshot with stale or unverified data",
+    "Any future revision must create a new manifest version and preserve prior Git history",
+    "Engine 4 production AUTO/MANUAL behavior remains unchanged"
+  ]
+}
