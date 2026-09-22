@@ -12,6 +12,7 @@ import engine4_feed as feed
 import engine4_replay_snapshot as snapshot
 
 ET = ZoneInfo("America/New_York")
+BENCHMARKS = {"SPY", "QQQ", "XLC", "XLK"}
 
 
 def _parse_date(value: str) -> date:
@@ -36,12 +37,12 @@ def _snapshot_universe(value: str) -> list[str]:
 
 
 def _install_pipeline_routes(value: str):
-    """Route locked Engine 4 evidence calls through Feeder #3 only in REPLAY."""
     if feed.current().mode is not feed.FeedMode.REPLAY:
         raise RuntimeError("Replay routes may only be installed in INSTANT_REPLAY context")
     import engine4_pipeline as pipeline
 
     universe = _snapshot_universe(value)
+    allowed_intraday = set(universe) | BENCHMARKS
     original_eligible_baseline = pipeline.eligible_baseline
 
     def replay_eligible_baseline():
@@ -57,9 +58,9 @@ def _install_pipeline_routes(value: str):
 
     def replay_intraday(tickers, *, period="1d", interval="1m", prepost=True, date_et=None, lookback_days=0):
         requested = [str(t).upper() for t in tickers]
-        outside = [t for t in requested if t not in universe]
+        outside = [t for t in requested if t not in allowed_intraday]
         if outside:
-            raise RuntimeError(f"REPLAY DATA FAILURE: Engine 4 requested ticker outside certified snapshot universe: {outside}")
+            raise RuntimeError(f"REPLAY DATA FAILURE: Engine 4 requested ticker outside certified snapshot evidence set: {outside}")
         rows_by_ticker = feed.premarket_many(requested)
         result = {}
         for ticker, rows in rows_by_ticker.items():
@@ -129,6 +130,7 @@ def preflight(value: str) -> None:
     (out / "replay_manifest.json").write_text(json.dumps(replay_manifest(value), indent=2), encoding="utf-8")
     print(f"ENGINE4_REPLAY_PREFLIGHT_PASS date={value}")
     print(f"REPLAY_UNIVERSE_LOCKED tickers={','.join(_snapshot_universe(value))}")
+    print("REPLAY_BENCHMARKS_LOCKED tickers=SPY,QQQ,XLC,XLK")
     print("FEEDER3_LOCKED_ENGINE4_ROUTES_INSTALLED")
     print("AUTO_MANUAL_PROVIDER_PATHS_UNCHANGED")
     print("LIVE_FALLBACK_FORBIDDEN")
@@ -136,13 +138,7 @@ def preflight(value: str) -> None:
 
 
 def run(value: str) -> None:
-    """Run all locked Engine 4 stages in one process so Replay routing persists."""
-    stages = [
-        ("08:55", "prescreen_stage"),
-        ("09:05", "deep_stage"),
-        ("09:18", "refresh_stage"),
-        ("09:45", "final_stage_run"),
-    ]
+    stages = [("08:55", "prescreen_stage"), ("09:05", "deep_stage"), ("09:18", "refresh_stage"), ("09:45", "final_stage_run")]
     for hhmm, fn_name in stages:
         pipeline = _configure(value, hhmm)
         fn = getattr(pipeline, fn_name)
