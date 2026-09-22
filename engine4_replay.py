@@ -6,6 +6,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 import engine4_feed as feed
+import engine4_replay_snapshot as snapshot
 
 ET = ZoneInfo("America/New_York")
 
@@ -18,7 +19,7 @@ def _parse_date(value: str) -> date:
 
 
 def replay_manifest(value: str) -> dict:
-    d = _parse_date(value)
+    _parse_date(value)
     stages = [
         ("PRE-SCREEN", "08:55"),
         ("DEEP 100-POINT ANALYSIS", "09:05"),
@@ -31,10 +32,7 @@ def replay_manifest(value: str) -> dict:
         "production_state_writes": False,
         "production_sms": False,
         "live_provider_fallback": False,
-        "stages": [
-            {"stage": name, "asof_et": f"{value}T{hhmm}:00-04:00"}
-            for name, hhmm in stages
-        ],
+        "stages": [{"stage": name, "asof_et": f"{value}T{hhmm}:00-04:00"} for name, hhmm in stages],
     }
 
 
@@ -43,8 +41,7 @@ def preflight(value: str) -> None:
     asof = datetime(d.year, d.month, d.day, 8, 55, tzinfo=ET)
     feed.configure_replay(d, asof)
 
-    # This is the critical isolation proof. Until a real point-in-time source is
-    # installed, replay MUST fail rather than touch a live provider.
+    # Preserve the original fail-closed proof first.
     failures = []
     for kind in ("catalyst", "quote", "premarket"):
         try:
@@ -54,12 +51,16 @@ def preflight(value: str) -> None:
     if failures != ["catalyst", "quote", "premarket"]:
         raise RuntimeError(f"Replay fail-closed guard failed: {failures}")
 
+    # Then install only the certified point-in-time snapshot for this date.
+    snapshot.install(feed, value)
+    for kind in ("catalyst", "quote", "premarket"):
+        feed.require_replay_source(kind)
+
     out = Path("output/engine4-replay") / value
     out.mkdir(parents=True, exist_ok=True)
-    (out / "replay_manifest.json").write_text(
-        json.dumps(replay_manifest(value), indent=2), encoding="utf-8"
-    )
+    (out / "replay_manifest.json").write_text(json.dumps(replay_manifest(value), indent=2), encoding="utf-8")
     print(f"ENGINE4_REPLAY_PREFLIGHT_PASS date={value}")
+    print("CERTIFIED_HISTORICAL_SOURCES_INSTALLED")
     print("LIVE_FALLBACK_FORBIDDEN")
     print("PRODUCTION_STATE_ISOLATED")
 
