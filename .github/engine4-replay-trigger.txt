@@ -1,4 +1,4 @@
 date_et=2026-09-21
 context=INSTANT_REPLAY
 request=run_now
-trigger_nonce=2026-09-22-replay-006-benchmark-bars
+trigger_nonce=2026-09-22-replay-007-full-static-audit
