@@ -27,14 +27,40 @@ def replay_manifest(value: str) -> dict:
     return {"mode": "INSTANT_REPLAY", "market_date_et": value, "production_state_writes": False, "production_sms": False, "live_provider_fallback": False, "stages": [{"stage": n, "asof_et": f"{value}T{t}:00-04:00"} for n, t in stages]}
 
 
-def _install_pipeline_routes():
+def _snapshot_universe(value: str) -> list[str]:
+    manifest = snapshot.verify_snapshot(value)
+    universe = [str(t).strip().upper() for t in manifest.get("universe", []) if str(t).strip()]
+    if not universe:
+        raise RuntimeError("REPLAY DATA FAILURE: certified snapshot manifest has no universe")
+    return universe
+
+
+def _install_pipeline_routes(value: str):
     """Route locked Engine 4 evidence calls through Feeder #3 only in REPLAY."""
     if feed.current().mode is not feed.FeedMode.REPLAY:
         raise RuntimeError("Replay routes may only be installed in INSTANT_REPLAY context")
     import engine4_pipeline as pipeline
 
+    universe = _snapshot_universe(value)
+    original_eligible_baseline = pipeline.eligible_baseline
+
+    def replay_eligible_baseline():
+        base = original_eligible_baseline()
+        replay_base = base[base.ticker.astype(str).str.upper().isin(universe)].copy()
+        found = set(replay_base.ticker.astype(str).str.upper())
+        missing = [ticker for ticker in universe if ticker not in found]
+        if missing:
+            raise RuntimeError(f"REPLAY DATA FAILURE: snapshot universe missing from Engine 4 baseline: {missing}")
+        order = {ticker: i for i, ticker in enumerate(universe)}
+        replay_base["_replay_order"] = replay_base.ticker.astype(str).str.upper().map(order)
+        return replay_base.sort_values("_replay_order").drop(columns=["_replay_order"]).reset_index(drop=True)
+
     def replay_intraday(tickers, *, period="1d", interval="1m", prepost=True, date_et=None, lookback_days=0):
-        rows_by_ticker = feed.premarket_many(list(tickers))
+        requested = [str(t).upper() for t in tickers]
+        outside = [t for t in requested if t not in universe]
+        if outside:
+            raise RuntimeError(f"REPLAY DATA FAILURE: Engine 4 requested ticker outside certified snapshot universe: {outside}")
+        rows_by_ticker = feed.premarket_many(requested)
         result = {}
         for ticker, rows in rows_by_ticker.items():
             frame = pd.DataFrame(rows)
@@ -65,6 +91,7 @@ def _install_pipeline_routes():
         mid = (bid + ask) / 2.0
         return bid, ask, ((ask - bid) / mid * 100.0 if mid > 0 else math.nan)
 
+    pipeline.eligible_baseline = replay_eligible_baseline
     pipeline.download_intraday = replay_intraday
     pipeline.catalyst_for = replay_catalyst
     pipeline.quote_spread = replay_quote
@@ -77,7 +104,7 @@ def _configure(value: str, hhmm: str):
     asof = datetime(d.year, d.month, d.day, h, m, tzinfo=ET)
     feed.configure_replay(d, asof)
     snapshot.install(feed, value)
-    return _install_pipeline_routes()
+    return _install_pipeline_routes(value)
 
 
 def preflight(value: str) -> None:
@@ -95,11 +122,12 @@ def preflight(value: str) -> None:
     snapshot.install(feed, value)
     for kind in ("catalyst", "quote", "premarket"):
         feed.require_replay_source(kind)
-    _install_pipeline_routes()
+    _install_pipeline_routes(value)
     out = Path("output/engine4-replay") / value
     out.mkdir(parents=True, exist_ok=True)
     (out / "replay_manifest.json").write_text(json.dumps(replay_manifest(value), indent=2), encoding="utf-8")
     print(f"ENGINE4_REPLAY_PREFLIGHT_PASS date={value}")
+    print(f"REPLAY_UNIVERSE_LOCKED tickers={','.join(_snapshot_universe(value))}")
     print("FEEDER3_LOCKED_ENGINE4_ROUTES_INSTALLED")
     print("AUTO_MANUAL_PROVIDER_PATHS_UNCHANGED")
     print("LIVE_FALLBACK_FORBIDDEN")
