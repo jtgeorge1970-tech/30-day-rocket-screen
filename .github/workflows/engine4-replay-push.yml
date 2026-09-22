@@ -35,11 +35,7 @@ jobs:
       - name: Replay preflight
         run: python engine4_replay.py preflight --date "$REPLAY_DATE_ET"
       - name: Run locked Engine 4 stages
-        run: |
-          python engine4_pipeline.py prescreen --date "$REPLAY_DATE_ET"
-          python engine4_pipeline.py deep --date "$REPLAY_DATE_ET"
-          python engine4_pipeline.py refresh --date "$REPLAY_DATE_ET"
-          python engine4_pipeline.py final --date "$REPLAY_DATE_ET"
+        run: python engine4_replay.py run --date "$REPLAY_DATE_ET"
       - name: Upload replay artifacts
         uses: actions/upload-artifact@v4
         with:
