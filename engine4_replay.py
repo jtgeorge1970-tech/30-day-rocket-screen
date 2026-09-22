@@ -71,6 +71,15 @@ def _install_pipeline_routes():
     return pipeline
 
 
+def _configure(value: str, hhmm: str):
+    d = _parse_date(value)
+    h, m = map(int, hhmm.split(":"))
+    asof = datetime(d.year, d.month, d.day, h, m, tzinfo=ET)
+    feed.configure_replay(d, asof)
+    snapshot.install(feed, value)
+    return _install_pipeline_routes()
+
+
 def preflight(value: str) -> None:
     d = _parse_date(value)
     asof = datetime(d.year, d.month, d.day, 8, 55, tzinfo=ET)
@@ -97,10 +106,29 @@ def preflight(value: str) -> None:
     print("PRODUCTION_STATE_ISOLATED")
 
 
+def run(value: str) -> None:
+    """Run all locked Engine 4 stages in one process so Replay routing persists."""
+    stages = [
+        ("08:55", "prescreen_stage"),
+        ("09:05", "deep_stage"),
+        ("09:18", "refresh_stage"),
+        ("09:45", "final_stage_run"),
+    ]
+    for hhmm, fn_name in stages:
+        pipeline = _configure(value, hhmm)
+        fn = getattr(pipeline, fn_name)
+        fn(value)
+        print(f"ENGINE4_REPLAY_STAGE_PASS stage={fn_name} asof={hhmm}")
+    print(f"ENGINE4_REPLAY_COMPLETE date={value}")
+
+
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["preflight"])
+    parser.add_argument("command", choices=["preflight", "run"])
     parser.add_argument("--date", required=True)
     args = parser.parse_args()
-    preflight(args.date)
+    if args.command == "preflight":
+        preflight(args.date)
+    else:
+        run(args.date)
