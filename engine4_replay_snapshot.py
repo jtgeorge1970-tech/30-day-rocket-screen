@@ -43,7 +43,7 @@ def verify_snapshot(day: str) -> dict:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if manifest.get("market_date_et") != day:
         raise SnapshotError("manifest market date mismatch")
-    for name in ("bars.csv", "quotes.csv", "catalysts.csv"):
+    for name in ("bars.csv", "quotes.csv", "catalysts.csv", "benchmark_bars.csv"):
         if not (root / name).exists():
             raise SnapshotError(f"missing certified replay file: {root / name}")
     return manifest
@@ -52,7 +52,7 @@ def verify_snapshot(day: str) -> dict:
 def install(feed, day: str) -> None:
     verify_snapshot(day)
     root = _root(day)
-    bars = _read_csv(root / "bars.csv")
+    bars = _read_csv(root / "bars.csv") + _read_csv(root / "benchmark_bars.csv")
     quotes = _read_csv(root / "quotes.csv")
     catalysts = _read_csv(root / "catalysts.csv")
 
