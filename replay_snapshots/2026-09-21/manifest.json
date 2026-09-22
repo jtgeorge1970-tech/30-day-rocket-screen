@@ -23,5 +23,6 @@
     "Do not overwrite this snapshot with stale or unverified data",
     "Any future revision must create a new manifest version and preserve prior Git history",
     "Engine 4 production AUTO/MANUAL behavior remains unchanged"
-  ]
+  ],
+  "replay_trigger_nonce": "2026-09-22T-replay-trigger-001"
 }
