@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 import json
+import math
 from datetime import date, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
+
+import pandas as pd
 
 import engine4_feed as feed
 import engine4_replay_snapshot as snapshot
@@ -20,28 +23,58 @@ def _parse_date(value: str) -> date:
 
 def replay_manifest(value: str) -> dict:
     _parse_date(value)
-    stages = [
-        ("PRE-SCREEN", "08:55"),
-        ("DEEP 100-POINT ANALYSIS", "09:05"),
-        ("REFRESH + TOP-25 FREEZE", "09:18"),
-        ("FINAL CONFIRMATION", "09:45"),
-    ]
-    return {
-        "mode": "INSTANT_REPLAY",
-        "market_date_et": value,
-        "production_state_writes": False,
-        "production_sms": False,
-        "live_provider_fallback": False,
-        "stages": [{"stage": name, "asof_et": f"{value}T{hhmm}:00-04:00"} for name, hhmm in stages],
-    }
+    stages = [("PRE-SCREEN", "08:55"), ("DEEP 100-POINT ANALYSIS", "09:05"), ("REFRESH + TOP-25 FREEZE", "09:18"), ("FINAL CONFIRMATION", "09:45")]
+    return {"mode": "INSTANT_REPLAY", "market_date_et": value, "production_state_writes": False, "production_sms": False, "live_provider_fallback": False, "stages": [{"stage": n, "asof_et": f"{value}T{t}:00-04:00"} for n, t in stages]}
+
+
+def _install_pipeline_routes():
+    """Route locked Engine 4 evidence calls through Feeder #3 only in REPLAY."""
+    if feed.current().mode is not feed.FeedMode.REPLAY:
+        raise RuntimeError("Replay routes may only be installed in INSTANT_REPLAY context")
+    import engine4_pipeline as pipeline
+
+    def replay_intraday(tickers, *, period="1d", interval="1m", prepost=True, date_et=None, lookback_days=0):
+        rows_by_ticker = feed.premarket_many(list(tickers))
+        result = {}
+        for ticker, rows in rows_by_ticker.items():
+            frame = pd.DataFrame(rows)
+            if frame.empty:
+                continue
+            if "timestamp" not in frame.columns:
+                raise RuntimeError(f"REPLAY DATA FAILURE: {ticker} bars missing timestamp")
+            frame.index = pd.to_datetime(frame.pop("timestamp"), utc=True).tz_convert(ET)
+            frame = frame.rename(columns={"open":"Open", "high":"High", "low":"Low", "close":"Close", "volume":"Volume"})
+            result[ticker] = frame
+        return result
+
+    def replay_catalyst(ticker, reference_time):
+        rows = feed.catalyst(ticker, reference_time)
+        best = rows[0]
+        headline = str(best.get("headline") or best.get("title") or "")[:180]
+        quality = float(best.get("quality") or best.get("catalyst_quality") or 0.0)
+        stamp = datetime.fromisoformat(str(best["timestamp"]).replace("Z", "+00:00")).astimezone(ET)
+        age = max(0.0, (reference_time - stamp).total_seconds() / 3600.0)
+        return quality, headline, age
+
+    def replay_quote(ticker):
+        row = feed.quote(ticker)
+        bid = float(row.get("bid") or math.nan)
+        ask = float(row.get("ask") or math.nan)
+        if not (math.isfinite(bid) and math.isfinite(ask) and bid > 0 and ask >= bid):
+            return bid, ask, math.nan
+        mid = (bid + ask) / 2.0
+        return bid, ask, ((ask - bid) / mid * 100.0 if mid > 0 else math.nan)
+
+    pipeline.download_intraday = replay_intraday
+    pipeline.catalyst_for = replay_catalyst
+    pipeline.quote_spread = replay_quote
+    return pipeline
 
 
 def preflight(value: str) -> None:
     d = _parse_date(value)
     asof = datetime(d.year, d.month, d.day, 8, 55, tzinfo=ET)
     feed.configure_replay(d, asof)
-
-    # Preserve the original fail-closed proof first.
     failures = []
     for kind in ("catalyst", "quote", "premarket"):
         try:
@@ -50,24 +83,22 @@ def preflight(value: str) -> None:
             failures.append(kind)
     if failures != ["catalyst", "quote", "premarket"]:
         raise RuntimeError(f"Replay fail-closed guard failed: {failures}")
-
-    # Then install only the certified point-in-time snapshot for this date.
     snapshot.install(feed, value)
     for kind in ("catalyst", "quote", "premarket"):
         feed.require_replay_source(kind)
-
+    _install_pipeline_routes()
     out = Path("output/engine4-replay") / value
     out.mkdir(parents=True, exist_ok=True)
     (out / "replay_manifest.json").write_text(json.dumps(replay_manifest(value), indent=2), encoding="utf-8")
     print(f"ENGINE4_REPLAY_PREFLIGHT_PASS date={value}")
-    print("CERTIFIED_HISTORICAL_SOURCES_INSTALLED")
+    print("FEEDER3_LOCKED_ENGINE4_ROUTES_INSTALLED")
+    print("AUTO_MANUAL_PROVIDER_PATHS_UNCHANGED")
     print("LIVE_FALLBACK_FORBIDDEN")
     print("PRODUCTION_STATE_ISOLATED")
 
 
 if __name__ == "__main__":
     import argparse
-
     parser = argparse.ArgumentParser()
     parser.add_argument("command", choices=["preflight"])
     parser.add_argument("--date", required=True)
