@@ -68,7 +68,8 @@ def _install_pipeline_routes(value: str):
                 continue
             if "timestamp" not in frame.columns:
                 raise RuntimeError(f"REPLAY DATA FAILURE: {ticker} bars missing timestamp")
-            frame.index = pd.to_datetime(frame.pop("timestamp"), utc=True).tz_convert(ET)
+            timestamps = pd.DatetimeIndex(pd.to_datetime(frame.pop("timestamp"), utc=True)).tz_convert(ET)
+            frame.index = timestamps
             frame = frame.rename(columns={"open":"Open", "high":"High", "low":"Low", "close":"Close", "volume":"Volume"})
             result[ticker] = frame
         return result
