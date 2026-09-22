@@ -13,6 +13,7 @@ import engine4_replay_snapshot as snapshot
 
 ET = ZoneInfo("America/New_York")
 BENCHMARKS = {"SPY", "QQQ", "XLC", "XLK"}
+REQUIRED_PIPELINE_STAGES = ("prescreen_stage", "deep_stage", "refresh_and_freeze", "final_with_timeline")
 
 
 def _parse_date(value: str) -> date:
@@ -40,6 +41,7 @@ def _install_pipeline_routes(value: str):
     if feed.current().mode is not feed.FeedMode.REPLAY:
         raise RuntimeError("Replay routes may only be installed in INSTANT_REPLAY context")
     import engine4_pipeline as pipeline
+    import engine4_intraday as intraday
 
     universe = _snapshot_universe(value)
     allowed_intraday = set(universe) | BENCHMARKS
@@ -93,10 +95,21 @@ def _install_pipeline_routes(value: str):
         mid = (bid + ask) / 2.0
         return bid, ask, ((ask - bid) / mid * 100.0 if mid > 0 else math.nan)
 
+    # Replay-only routing for the pipeline stages.
     pipeline.eligible_baseline = replay_eligible_baseline
     pipeline.download_intraday = replay_intraday
     pipeline.catalyst_for = replay_catalyst
     pipeline.quote_spread = replay_quote
+
+    # final_with_timeline calls engine4_intraday.final_stage, whose provider globals
+    # live in that module. Route those too so 09:45 can never fall back to live data.
+    intraday.download_intraday = replay_intraday
+    intraday.catalyst_for = replay_catalyst
+    intraday.quote_spread = replay_quote
+
+    missing = [name for name in REQUIRED_PIPELINE_STAGES if not callable(getattr(pipeline, name, None))]
+    if missing:
+        raise RuntimeError(f"REPLAY STATIC AUDIT FAILURE: missing locked Engine 4 stages: {missing}")
     return pipeline
 
 
@@ -124,21 +137,33 @@ def preflight(value: str) -> None:
     snapshot.install(feed, value)
     for kind in ("catalyst", "quote", "premarket"):
         feed.require_replay_source(kind)
-    _install_pipeline_routes(value)
+    pipeline = _install_pipeline_routes(value)
+    for name in REQUIRED_PIPELINE_STAGES:
+        if not callable(getattr(pipeline, name, None)):
+            raise RuntimeError(f"REPLAY STATIC AUDIT FAILURE: {name} unavailable")
+    # Prove all snapshot symbols and benchmarks are addressable before launching.
+    feed.premarket_many(_snapshot_universe(value) + sorted(BENCHMARKS))
     out = Path("output/engine4-replay") / value
     out.mkdir(parents=True, exist_ok=True)
     (out / "replay_manifest.json").write_text(json.dumps(replay_manifest(value), indent=2), encoding="utf-8")
     print(f"ENGINE4_REPLAY_PREFLIGHT_PASS date={value}")
+    print("REPLAY_STATIC_STAGE_AUDIT_PASS stages=" + ",".join(REQUIRED_PIPELINE_STAGES))
     print(f"REPLAY_UNIVERSE_LOCKED tickers={','.join(_snapshot_universe(value))}")
     print("REPLAY_BENCHMARKS_LOCKED tickers=SPY,QQQ,XLC,XLK")
     print("FEEDER3_LOCKED_ENGINE4_ROUTES_INSTALLED")
+    print("FINAL_STAGE_REPLAY_PROVIDER_ROUTES_INSTALLED")
     print("AUTO_MANUAL_PROVIDER_PATHS_UNCHANGED")
     print("LIVE_FALLBACK_FORBIDDEN")
     print("PRODUCTION_STATE_ISOLATED")
 
 
 def run(value: str) -> None:
-    stages = [("08:55", "prescreen_stage"), ("09:05", "deep_stage"), ("09:18", "refresh_stage"), ("09:45", "final_stage_run")]
+    stages = [
+        ("08:55", "prescreen_stage"),
+        ("09:05", "deep_stage"),
+        ("09:18", "refresh_and_freeze"),
+        ("09:45", "final_with_timeline"),
+    ]
     for hhmm, fn_name in stages:
         pipeline = _configure(value, hhmm)
         fn = getattr(pipeline, fn_name)
