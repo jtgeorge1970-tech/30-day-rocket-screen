@@ -1,4 +1,6 @@
-mode=preflight_only
-acceptance_date_et=
+mode=live_today
+acceptance_date_et=2026-09-22
 certification_force=false
-request=clean_reset_no_run
+request=launch_guard_20260922T123800Z
+requested_at_utc=2026-09-22T12:38:00Z
+target_date_et=2026-09-22
