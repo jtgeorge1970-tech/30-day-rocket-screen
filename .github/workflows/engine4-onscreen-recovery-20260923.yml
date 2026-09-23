@@ -1,0 +1,187 @@
+name: Engine 4 One-Time On-Screen Recovery 2026-09-23
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/engine4-onscreen-recovery-20260923.yml'
+
+concurrency:
+  group: engine4-production
+  cancel-in-progress: false
+
+jobs:
+  onscreen-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    permissions:
+      contents: write
+    env:
+      ENGINE_DATE_ET: '2026-09-23'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt pytest
+
+      - name: Compile, test, and verify providers
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(TZ=America/New_York date +%F)" = "$ENGINE_DATE_ET"
+          python -m py_compile             engine4_config.py engine4_data.py engine4_free_providers.py engine4_score.py             engine4_live.py engine4_intraday.py engine4_pipeline.py engine4_pipeline_runner.py             engine4_final_guard.py engine4_pipeline_runner_guarded.py engine4_recovery.py             engine4_notify.py engine4_bench.py engine4_stage_report.py
+          pytest -q test_engine4_*.py
+          python engine4_intraday.py self-test
+          python engine4_pipeline.py self-test
+          python engine4_pipeline_runner.py self-test
+          python engine4_recovery.py self-test
+          python engine4_bench.py self-test
+          python engine4_pipeline_runner_guarded.py provider-smoke
+
+      - name: Stage 1 — broad pre-screen
+        shell: bash
+        run: |
+          set -euo pipefail
+          python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"
+          python engine4_stage_report.py prescreen --date "$ENGINE_DATE_ET"
+
+      - name: Upload Stage 1
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-onscreen-stage1-${{ github.run_id }}
+          path: output/engine4/
+          if-no-files-found: error
+
+      - name: Stage 2 — deep analysis
+        shell: bash
+        run: |
+          set -euo pipefail
+          python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"
+          python engine4_stage_report.py deep --date "$ENGINE_DATE_ET"
+
+      - name: Upload Stage 2
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-onscreen-stage2-${{ github.run_id }}
+          path: output/engine4/
+          if-no-files-found: error
+
+      - name: Stage 3 — refresh, rerank, and freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"
+          python engine4_stage_report.py freeze --date "$ENGINE_DATE_ET"
+
+      - name: Upload Stage 3
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-onscreen-stage3-${{ github.run_id }}
+          path: output/engine4/
+          if-no-files-found: error
+
+      - name: Stage 3B — update Top-25 Bench
+        shell: bash
+        run: |
+          set -euo pipefail
+          python engine4_bench.py update --date "$ENGINE_DATE_ET"
+          python engine4_stage_report.py bench --date "$ENGINE_DATE_ET"
+          git config user.name 'engine4-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add state/engine4/watch_bench.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Engine 4 ${ENGINE_DATE_ET} Top-25 Bench"
+            git pull --rebase --autostash origin main
+            git push origin HEAD:main
+          fi
+
+      - name: Upload Stage 3B
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-onscreen-bench-${{ github.run_id }}
+          path: |
+            output/engine4/watch_bench*
+            output/engine4/stage_bench_*
+            state/engine4/watch_bench.json
+          if-no-files-found: error
+
+      - name: Stage 4 — primary live confirmation
+        shell: bash
+        run: |
+          set -euo pipefail
+          while [ "$(TZ=America/New_York date +%H%M)" -lt 0945 ]; do sleep 15; done
+          python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"
+          python engine4_stage_report.py final --date "$ENGINE_DATE_ET"
+
+      - name: Upload Stage 4
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-onscreen-stage4-${{ github.run_id }}
+          path: output/engine4/
+          if-no-files-found: error
+
+      - name: Stage 5 — post-open recovery watch
+        shell: bash
+        run: |
+          set -euo pipefail
+          python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300
+          python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"
+
+      - name: Verify dated artifacts and ordered completion
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+
+          expected = os.environ["ENGINE_DATE_ET"]
+          names = [
+              "prescreen_report.json", "deep_ranked.json", "top25_frozen.json",
+              "watch_bench_report.json", "final_signal.json",
+              "recovery_signal.json", "timeline.json",
+          ]
+          payloads = {}
+          for name in names:
+              path = Path("output/engine4") / name
+              if not path.exists():
+                  raise SystemExit(f"missing artifact: {name}")
+              payload = json.loads(path.read_text())
+              if payload.get("target_date_et") != expected and payload.get("market_date_et") != expected:
+                  raise SystemExit(f"date mismatch: {name}")
+              payloads[name] = payload
+          for name in ("final_signal.json", "recovery_signal.json"):
+              if payloads[name].get("status") == "PIPELINE_FAILURE":
+                  raise SystemExit(f"pipeline failure: {name}")
+          stages = [e.get("stage") for e in payloads["timeline.json"].get("events", [])]
+          required = [
+              "PRE-SCREEN", "DEEP 100-POINT ANALYSIS", "09:18 REFRESH + RANKING",
+              "TOP-25 FREEZE", "TOP-25 MULTI-DAY BENCH",
+              "FINAL 09:45 LIVE CONFIRMATION", "POST-OPEN RECOVERY WATCH",
+          ]
+          positions = []
+          for stage in required:
+              if stage not in stages:
+                  raise SystemExit(f"missing stage: {stage}")
+              positions.append(stages.index(stage))
+              states = [e.get("status") for e in payloads["timeline.json"]["events"] if e.get("stage") == stage]
+              if "STARTED" not in states or "COMPLETED" not in states:
+                  raise SystemExit(f"incomplete stage: {stage} {states}")
+          if positions != sorted(positions):
+              raise SystemExit("stage order failure")
+          print(f"ENGINE4_ONSCREEN_INVARIANT_PASS date={expected}")
+          PY
+
+      - name: Upload complete on-screen artifact set
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-onscreen-complete-${{ github.run_id }}
+          path: output/engine4/
+          if-no-files-found: error
+          retention-days: 30
