@@ -22,8 +22,8 @@ def test_early_controller_has_seasonal_guard_and_dispatch_proof():
     assert "cron: '20 13 * * 1-5'" in workflow
     assert 'if [ "$T" -lt 495 ] || [ "$T" -gt 510 ]' in workflow
     assert "wait_until" not in workflow or "08:35 ET launch checkpoint" in workflow
-    assert "engine4_notify.py preflight --require-delivery" in workflow
-    assert "engine4_notify.py launch --require-delivery" in workflow
+    assert "engine4_notify.py preflight" in workflow
+    assert "engine4_notify.py launch" in workflow
 
 
 def test_primary_wake_retries_and_recognizes_manual_failsafe():
@@ -37,7 +37,7 @@ def test_primary_wake_retries_and_recognizes_manual_failsafe():
 def test_watchdog_has_seasonal_guard_and_intervention_sms():
     workflow = (ROOT / ".github/workflows/engine4-watchdog.yml").read_text()
     assert 'if [ "$T" -lt 522 ] || [ "$T" -gt 535 ]' in workflow
-    assert "engine4_notify.py watchdog --require-delivery" in workflow
+    assert "engine4_notify.py watchdog" in workflow
     assert "engine4-manual-on-demand.yml" in workflow
     assert "is_morning_manual" in workflow
     assert "mode=live_today" in workflow
@@ -51,13 +51,24 @@ def test_early_manual_failsafe_preserves_live_stage_times():
         assert f'-lt {checkpoint}' in workflow
 
 
+def test_sms_delivery_can_never_stop_engine4_invocation():
+    for filename in (
+        "engine4-early-wake.yml",
+        "engine4-production.yml",
+        "engine4-manual-on-demand.yml",
+        "engine4-watchdog.yml",
+    ):
+        workflow = (ROOT / ".github/workflows" / filename).read_text()
+        assert "--require-delivery" not in workflow
+
+
 def test_every_live_stage_is_visible_and_reported_in_both_runners():
     for filename in ("engine4-production.yml", "engine4-manual-on-demand.yml"):
         workflow = (ROOT / ".github/workflows" / filename).read_text()
         for kind in ("prescreen", "deep", "freeze", "bench", "final", "recovery"):
-            assert f"engine4_notify.py {kind} --require-delivery" in workflow
+            assert f"engine4_notify.py {kind}" in workflow
         assert "engine4_stage_report.py verify-complete" in workflow
-        assert "--recipients 2" in workflow
+        assert "--recipients 0" in workflow
 
 
 def test_acceptance_replay_cannot_suppress_live_cycle():
