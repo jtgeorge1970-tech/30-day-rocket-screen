@@ -132,11 +132,11 @@ jobs:
       - name: Send watchdog intervention notification
         if: steps.window.outputs.skip != 'true' && steps.wake.outputs.dispatched == 'true'
         run: >-
-          python engine4_notify.py watchdog --require-delivery
+          python engine4_notify.py watchdog
           --message "ENGINE 4 WATCHDOG INTERVENED — no active production run was found, so the recovery wake dispatched production."
 
       - name: Send watchdog failure notification
         if: failure() && steps.window.outputs.skip != 'true'
         run: >-
-          python engine4_notify.py failure --require-delivery
+          python engine4_notify.py failure
           --message "ENGINE 4 WAKE WATCHDOG FAILURE — neither an active production run nor a successful recovery dispatch could be verified. Review GitHub immediately; no completed engine result is being reported."
