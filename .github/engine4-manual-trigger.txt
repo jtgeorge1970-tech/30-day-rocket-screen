@@ -1,4 +1,4 @@
 mode=live_today
-market_date_et=2026-09-24
-requested_at=2026-09-24T13:11:27.080Z
-reason=full_engine_run_sms_nonblocking
+acceptance_date_et=2026-09-24
+certification_force=true
+requested_by=manual-full-cycle-no-shortcuts
