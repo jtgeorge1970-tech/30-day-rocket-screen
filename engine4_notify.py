@@ -196,7 +196,17 @@ def _send_openphone_sms(content: str) -> dict:
                 json={"content": content, "from": from_number, "to": [to_number]},
                 timeout=20,
             )
-            response.raise_for_status()
+            if not 200 <= response.status_code < 300:
+                try:
+                    response_body = response.text.strip()[:1000]
+                except Exception:
+                    response_body = ""
+                return {
+                    "delivery": "FAILED",
+                    "http_status": response.status_code,
+                    "response_body": response_body or "UNAVAILABLE",
+                    "recipient_count_accepted_before_failure": len(deliveries),
+                }
             try:
                 payload = response.json()
             except ValueError:
