@@ -1,4 +1,4 @@
 mode=live_today
 acceptance_date_et=2026-09-24
 certification_force=true
-requested_by=manual-full-cycle-no-shortcuts
+requested_by=manual-rerun-20260924
