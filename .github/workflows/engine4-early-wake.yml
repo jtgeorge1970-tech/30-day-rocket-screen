@@ -55,7 +55,7 @@ jobs:
       - name: Send early protection notification
         if: steps.window.outputs.skip != 'true'
         run: >-
-          python engine4_notify.py preflight --require-delivery
+          python engine4_notify.py preflight
           --message "ENGINE 4 EARLY PROTECTION ACTIVE — preflight checks started before the production wake for $(TZ=America/New_York date +%F) ET."
 
       - name: Run preflight tests and provider verification
@@ -140,11 +140,11 @@ jobs:
       - name: Send early-controller dispatch notification
         if: steps.window.outputs.skip != 'true' && steps.launch.outputs.dispatched == 'true'
         run: >-
-          python engine4_notify.py launch --require-delivery
+          python engine4_notify.py launch
           --message "ENGINE 4 EARLY CONTROLLER DISPATCHED PRODUCTION — the 08:35 ET launch checkpoint found no active production run and started one."
 
       - name: Send early-controller failure notification
         if: failure() && steps.window.outputs.skip != 'true'
         run: >-
-          python engine4_notify.py failure --require-delivery
+          python engine4_notify.py failure
           --message "ENGINE 4 EARLY WAKE FAILURE — preflight or dispatch failed before production. The primary schedule and recovery watchdog remain armed, but review GitHub immediately."
