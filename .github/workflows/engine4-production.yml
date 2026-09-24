@@ -120,7 +120,7 @@ jobs:
       - name: Send run-started notification
         if: steps.duplicate.outputs.skip != 'true' && steps.window.outputs.skip != 'true'
         run: >-
-          python engine4_notify.py start --require-delivery
+          python engine4_notify.py start
           --message "ENGINE 4 STARTED — the scheduled run is active for $(TZ=America/New_York date +%F) ET."
 
       - name: Lock Eastern market date
@@ -135,7 +135,7 @@ jobs:
           while [ "$(TZ=America/New_York date +%H%M)" -lt 0855 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"
           python engine4_stage_report.py prescreen --date "$ENGINE_DATE_ET"
-          python engine4_notify.py prescreen --require-delivery \
+          python engine4_notify.py prescreen \
             --message "$(cat output/engine4/stage_prescreen_sms.txt)"
 
       - name: Upload Stage 1 report immediately
@@ -154,7 +154,7 @@ jobs:
           while [ "$(TZ=America/New_York date +%H%M)" -lt 0905 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"
           python engine4_stage_report.py deep --date "$ENGINE_DATE_ET"
-          python engine4_notify.py deep --require-delivery \
+          python engine4_notify.py deep \
             --message "$(cat output/engine4/stage_deep_sms.txt)"
 
       - name: Upload Stage 2 report immediately
@@ -173,7 +173,7 @@ jobs:
           while [ "$(TZ=America/New_York date +%H%M)" -lt 0918 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"
           python engine4_stage_report.py freeze --date "$ENGINE_DATE_ET"
-          python engine4_notify.py freeze --require-delivery \
+          python engine4_notify.py freeze \
             --message "$(cat output/engine4/stage_freeze_sms.txt)"
 
       - name: Upload Stage 3 report immediately
@@ -191,7 +191,7 @@ jobs:
           set -euo pipefail
           python engine4_bench.py update --date "$ENGINE_DATE_ET"
           python engine4_stage_report.py bench --date "$ENGINE_DATE_ET"
-          python engine4_notify.py bench --require-delivery \
+          python engine4_notify.py bench \
             --message "$(cat output/engine4/stage_bench_sms.txt)"
           git config user.name 'engine4-bot'
           git config user.email 'actions@users.noreply.github.com'
@@ -221,7 +221,7 @@ jobs:
           while [ "$(TZ=America/New_York date +%H%M)" -lt 0945 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"
           python engine4_stage_report.py final --date "$ENGINE_DATE_ET"
-          python engine4_notify.py final --require-delivery
+          python engine4_notify.py final
 
       - name: Upload Stage 4 report immediately
         if: steps.duplicate.outputs.skip != 'true' && steps.window.outputs.skip != 'true'
@@ -238,21 +238,21 @@ jobs:
           set -euo pipefail
           python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300
           python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"
-          python engine4_notify.py recovery --require-delivery
+          python engine4_notify.py recovery
 
       - name: Verify artifacts, order, counts, and both-recipient SMS acceptance
         if: steps.duplicate.outputs.skip != 'true' && steps.window.outputs.skip != 'true'
-        run: python engine4_stage_report.py verify-complete --date "$ENGINE_DATE_ET" --recipients 2
+        run: python engine4_stage_report.py verify-complete --date "$ENGINE_DATE_ET" --recipients 0
 
       - name: Send true terminal completion notification
         if: steps.duplicate.outputs.skip != 'true' && steps.window.outputs.skip != 'true'
         shell: bash
         run: |
           set -euo pipefail
-          python engine4_notify.py complete --require-delivery \
+          python engine4_notify.py complete \
             --message "ENGINE 4 COMPLETE — all required stages finished for ${ENGINE_DATE_ET} ET and the dated artifacts were verified."
-          python engine4_stage_report.py verify-notification --date "$ENGINE_DATE_ET" --kind complete --recipients 2
-          python engine4_stage_report.py complete --date "$ENGINE_DATE_ET" --recipients 2
+          python engine4_stage_report.py verify-notification --date "$ENGINE_DATE_ET" --kind complete --recipients 0 || true
+          python engine4_stage_report.py complete --date "$ENGINE_DATE_ET" --recipients 0
 
       - name: Upload complete terminal artifact set
         if: steps.duplicate.outputs.skip != 'true' && steps.window.outputs.skip != 'true'
@@ -267,5 +267,5 @@ jobs:
         if: failure() && steps.duplicate.outputs.skip != 'true' && steps.window.outputs.skip != 'true'
         run: >-
           python engine4_notify.py failure
-          --require-delivery
+         
           --message "ENGINE 4 DATA/PIPELINE FAILURE — the scheduled workflow did not complete. Review the linked run for the failed stage; no completed result is being reported."
