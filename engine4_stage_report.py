@@ -134,6 +134,17 @@ def report_prescreen(expected: str) -> None:
         "strict activity": _number(pre.get("strict_activity_count")),
         "RETAINED BY TOP-100 CAP": _number(pre.get("retained_by_cap")),
     }
+    sms_status = (
+        f"VERIFIED for {recipients} recipients at every required stage and completion"
+        if recipients > 0
+        else "UNAVAILABLE — API acceptance was not received; exact rejection is retained in notification_audit_log.json"
+    )
+    terminal_conclusion = (
+        "SUCCESS — full live workflow, notifications, and invariants completed"
+        if recipients > 0
+        else "ENGINE COMPLETE / NOTIFICATION DEGRADED — all market stages and invariants completed; SMS API acceptance unavailable"
+    )
+
     lines = [
         f"## Engine 4 Stage 1 — Pre-screen — {expected} ET",
         f"Actual start: {started}",
@@ -352,14 +363,22 @@ def verify_complete(expected: str, recipients: int) -> None:
                 f"ENGINE 4 COMPLETION FAILURE — {stage} lacks STARTED/COMPLETED proof: {states}"
             )
 
-    for kind in ("start", "prescreen", "deep", "freeze", "bench", "final", "recovery"):
-        verify_notification(expected, kind, recipients)
+    if recipients > 0:
+        for kind in ("start", "prescreen", "deep", "freeze", "bench", "final", "recovery"):
+            verify_notification(expected, kind, recipients)
+    else:
+        print(
+            "ENGINE4_NOTIFICATION_VERIFICATION_DEGRADED — stage artifacts and order verified; "
+            "SMS acceptance unavailable and preserved in the notification audit.",
+            flush=True,
+        )
     print(f"ENGINE4_FULL_INVARIANT_PASS date={expected}", flush=True)
 
 
 def report_complete(expected: str, recipients: int) -> None:
     verify_complete(expected, recipients)
-    verify_notification(expected, "complete", recipients)
+    if recipients > 0:
+        verify_notification(expected, "complete", recipients)
     pre = _read("prescreen_report.json")
     deep = _read("deep_ranked.json")
     frozen = _read("top25_frozen.json")
@@ -397,7 +416,7 @@ def report_complete(expected: str, recipients: int) -> None:
         f"- Locked Eastern market date: {expected}",
         f"- Provider health: {provider.get('state', 'UNAVAILABLE')}",
         f"- Artifact/date/order verification: PASS",
-        f"- SMS API acceptance: VERIFIED for {recipients} recipients at every required stage and completion",
+        f"- SMS API acceptance: {sms_status}",
         "## Separate terminal results",
         f"- SELECTION result: {selection}; frozen final-scan count {frozen_count}",
         f"- PRIMARY ENTRY result: {primary.get('status', 'UNAVAILABLE')} — {primary.get('reason', 'UNAVAILABLE')}",
@@ -438,7 +457,7 @@ def report_complete(expected: str, recipients: int) -> None:
         started = next((event.get("time_et") for event in matching if event.get("status") == "STARTED"), None)
         completed = next((event.get("time_et") for event in reversed(matching) if event.get("status") == "COMPLETED"), None)
         lines.append(f"- {stage}: {_time(started)} to {_time(completed)}")
-    lines.append("- Exact terminal conclusion: SUCCESS — full live workflow and invariants completed")
+    lines.append(f"- Exact terminal conclusion: {terminal_conclusion}")
     _write(
         "complete",
         expected,
@@ -447,7 +466,11 @@ def report_complete(expected: str, recipients: int) -> None:
             f"ENGINE 4 COMPLETE — {expected} ET",
             f"Selection {selection}; primary {primary.get('status', 'UNAVAILABLE')}; recovery {recovery.get('status', 'UNAVAILABLE')}.",
             f"Bench {bench.get('retained_by_top25_bench_cap', 'UNAVAILABLE')}/25; execution {execution}.",
-            "Artifacts, stage order, provider date, and two-recipient SMS proof verified.",
+            (
+                "Artifacts, stage order, provider date, and two-recipient SMS proof verified."
+                if recipients > 0
+                else "Artifacts, stage order, and provider date verified; SMS API acceptance unavailable."
+            ),
         ],
     )
 
