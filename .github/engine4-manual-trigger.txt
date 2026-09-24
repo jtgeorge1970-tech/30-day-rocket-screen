@@ -1,4 +1,4 @@
 mode=live_today
 market_date_et=2026-09-24
-requested_at=2026-09-24T13:05:57.162Z
-reason=diagnostic_repair_full_run
+requested_at=2026-09-24T13:08:58.117Z
+reason=notification_decoupled_full_engine_run
