@@ -134,17 +134,6 @@ def report_prescreen(expected: str) -> None:
         "strict activity": _number(pre.get("strict_activity_count")),
         "RETAINED BY TOP-100 CAP": _number(pre.get("retained_by_cap")),
     }
-    sms_status = (
-        f"VERIFIED for {recipients} recipients at every required stage and completion"
-        if recipients > 0
-        else "UNAVAILABLE — API acceptance was not received; exact rejection is retained in notification_audit_log.json"
-    )
-    terminal_conclusion = (
-        "SUCCESS — full live workflow, notifications, and invariants completed"
-        if recipients > 0
-        else "ENGINE COMPLETE / NOTIFICATION DEGRADED — all market stages and invariants completed; SMS API acceptance unavailable"
-    )
-
     lines = [
         f"## Engine 4 Stage 1 — Pre-screen — {expected} ET",
         f"Actual start: {started}",
@@ -408,6 +397,17 @@ def report_complete(expected: str, recipients: int) -> None:
             f"{os.getenv('GITHUB_SERVER_URL', 'https://github.com')}/"
             f"{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}"
         )
+
+    sms_status = (
+        f"VERIFIED for {recipients} recipients at every required stage and completion"
+        if recipients > 0
+        else "UNAVAILABLE — API acceptance was not received; exact rejection is retained in notification_audit_log.json"
+    )
+    terminal_conclusion = (
+        "SUCCESS — full live workflow, notifications, and invariants completed"
+        if recipients > 0
+        else "ENGINE COMPLETE / NOTIFICATION DEGRADED — all market stages and invariants completed; SMS API acceptance unavailable"
+    )
 
     lines = [
         f"# Engine 4 terminal report — {expected} ET",
