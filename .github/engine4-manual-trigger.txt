@@ -1,4 +1,5 @@
 mode=live_today
-acceptance_date_et=2026-09-24
-certification_force=true
-requested_by=manual-rerun-20260924
+acceptance_date_et=2026-09-25
+certification_force=false
+requested_by=engine4-launch-owner
+requested_at=2026-09-25T08:53:43-04:00
