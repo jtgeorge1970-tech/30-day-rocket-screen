@@ -1,2 +1,3 @@
 ready=true
 purpose=hardened-live-manual-runner
+proof=2026-09-24T20:50ET
