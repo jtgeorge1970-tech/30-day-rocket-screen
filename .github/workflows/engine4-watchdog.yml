@@ -2,10 +2,10 @@ name: Engine 4 Production Wake Watchdog
 
 on:
   workflow_dispatch:
-  # Both UTC equivalents run; the ET guard admits only 08:42-08:52 ET.
+  # Both UTC equivalents run; the ET guard admits only 08:12-08:22 ET.
   schedule:
-    - cron: '42,47,52 12 * * 1-5'  # 08:42-08:52 EDT
-    - cron: '42,47,52 13 * * 1-5'  # 08:42-08:52 EST
+    - cron: '12,17,22 12 * * 1-5'  # 08:12-08:22 EDT
+    - cron: '12,17,22 13 * * 1-5'  # 08:12-08:22 EST
 
 concurrency:
   group: engine4-wake-watchdog
@@ -39,7 +39,7 @@ jobs:
           M=$(TZ=America/New_York date +%M)
           T=$((10#$H * 60 + 10#$M))
           echo "Wake watchdog ran at ${H}:${M} ET"
-          if [ "$T" -lt 522 ] || [ "$T" -gt 535 ]; then
+          if [ "$T" -lt 492 ] || [ "$T" -gt 505 ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "Wrong seasonal duplicate; exiting harmlessly."
           else
@@ -102,8 +102,8 @@ jobs:
                   except Exception as exc:
                       print(f"Could not classify manual run {run.get('id')}: {exc}")
               created_minute = created_at.hour * 60 + created_at.minute
-              valid_production_wake = is_production and 515 <= created_minute <= 545
-              valid_morning_manual = is_morning_manual and 515 <= created_minute <= 930
+              valid_production_wake = is_production and 485 <= created_minute <= 515
+              valid_morning_manual = is_morning_manual and 485 <= created_minute <= 930
               if created_at.date() == today and (active or successful) and (valid_production_wake or valid_morning_manual):
                   existing.append(run)
 
