@@ -3,8 +3,8 @@ name: Engine 4 Intraday Production
 on:
   workflow_dispatch:
   schedule:
-    - cron: '35,40,45,50 12 * * 1-5'
-    - cron: '35,40,45,50 13 * * 1-5'
+    - cron: '5,10,15,20 12 * * 1-5'
+    - cron: '5,10,15,20 13 * * 1-5'
 
 # A fresh production/manual start may supersede obsolete tail work. Completed
 # artifacts remain in GitHub; stale execution must not hold the lane.
@@ -37,7 +37,7 @@ jobs:
         run: |
           H=$(TZ=America/New_York date +%H); M=$(TZ=America/New_York date +%M); T=$((10#$H * 60 + 10#$M))
           echo "Engine 4 production runner woke at ${H}:${M} ET"
-          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then echo 'skip=false' >> "$GITHUB_OUTPUT"; elif [ "$T" -lt 515 ] || [ "$T" -gt 545 ]; then echo 'skip=true' >> "$GITHUB_OUTPUT"; else echo 'skip=false' >> "$GITHUB_OUTPUT"; fi
+          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then echo 'skip=false' >> "$GITHUB_OUTPUT"; elif [ "$T" -lt 485 ] || [ "$T" -gt 515 ]; then echo 'skip=true' >> "$GITHUB_OUTPUT"; else echo 'skip=false' >> "$GITHUB_OUTPUT"; fi
       - name: Lock Eastern market date
         if: steps.window.outputs.skip != 'true'
         run: echo "ENGINE_DATE_ET=$(TZ=America/New_York date +%F)" >> "$GITHUB_ENV"
@@ -47,7 +47,7 @@ jobs:
       - name: Stage 1 — broad pre-screen and exact counts
         if: steps.window.outputs.skip != 'true'
         run: |
-          while [ "$(TZ=America/New_York date +%H%M)" -lt 0855 ]; do sleep 15; done
+          while [ "$(TZ=America/New_York date +%H%M)" -lt 0825 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"
           python engine4_stage_report.py prescreen --date "$ENGINE_DATE_ET"
           python engine4_notify.py prescreen --message "$(cat output/engine4/stage_prescreen_sms.txt)"
@@ -58,7 +58,7 @@ jobs:
       - name: Stage 2 — deep analysis and exact counts
         if: steps.window.outputs.skip != 'true'
         run: |
-          while [ "$(TZ=America/New_York date +%H%M)" -lt 0905 ]; do sleep 15; done
+          while [ "$(TZ=America/New_York date +%H%M)" -lt 0835 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"
           python engine4_stage_report.py deep --date "$ENGINE_DATE_ET"
           python engine4_notify.py deep --message "$(cat output/engine4/stage_deep_sms.txt)"
@@ -69,7 +69,7 @@ jobs:
       - name: Stage 3 — refresh, rerank, freeze, and exact counts
         if: steps.window.outputs.skip != 'true'
         run: |
-          while [ "$(TZ=America/New_York date +%H%M)" -lt 0918 ]; do sleep 15; done
+          while [ "$(TZ=America/New_York date +%H%M)" -lt 0848 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"
           python engine4_stage_report.py freeze --date "$ENGINE_DATE_ET"
           python engine4_notify.py freeze --message "$(cat output/engine4/stage_freeze_sms.txt)"
