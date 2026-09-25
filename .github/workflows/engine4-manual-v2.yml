@@ -1,0 +1,92 @@
+name: Engine 4 Manual V2 Hardened
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/engine4-manual-v2-trigger.txt']
+
+concurrency:
+  group: engine4-production
+  cancel-in-progress: true
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 190
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12', cache: pip}
+      - run: pip install -r requirements.txt pytest
+      - name: Compile/test/provider proof
+        run: |
+          python -m py_compile engine4_config.py engine4_data.py engine4_free_providers.py engine4_score.py engine4_live.py engine4_intraday.py engine4_pipeline.py engine4_pipeline_runner.py engine4_final_guard.py engine4_pipeline_runner_guarded.py engine4_recovery.py engine4_notify.py engine4_bench.py engine4_stage_report.py
+          pytest -q test_engine4_*.py
+          python engine4_pipeline_runner_guarded.py provider-smoke
+      - name: Enforce live window and lock date
+        run: |
+          H=$(TZ=America/New_York date +%H); M=$(TZ=America/New_York date +%M); T=$((10#$H * 60 + 10#$M))
+          if [ "$T" -lt 515 ] || [ "$T" -gt 930 ]; then echo 'Outside 08:35-15:30 ET live window'; exit 78; fi
+          echo "ENGINE_DATE_ET=$(TZ=America/New_York date +%F)" >> "$GITHUB_ENV"
+      - name: START notification
+        run: python engine4_notify.py start --message "ENGINE 4 MANUAL RUN STARTED — current-day live on-demand cycle is active for $(TZ=America/New_York date +%F) ET."
+      - name: Stage 1
+        run: |
+          python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"
+          python engine4_stage_report.py prescreen --date "$ENGINE_DATE_ET"
+          python engine4_notify.py prescreen --message "$(cat output/engine4/stage_prescreen_sms.txt)"
+      - uses: actions/upload-artifact@v4
+        with: {name: 'engine4-manual-v2-stage1-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
+      - name: Stage 2
+        run: |
+          python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"
+          python engine4_stage_report.py deep --date "$ENGINE_DATE_ET"
+          python engine4_notify.py deep --message "$(cat output/engine4/stage_deep_sms.txt)"
+      - uses: actions/upload-artifact@v4
+        with: {name: 'engine4-manual-v2-stage2-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
+      - name: Stage 3
+        run: |
+          python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"
+          python engine4_stage_report.py freeze --date "$ENGINE_DATE_ET"
+          python engine4_notify.py freeze --message "$(cat output/engine4/stage_freeze_sms.txt)"
+      - uses: actions/upload-artifact@v4
+        with: {name: 'engine4-manual-v2-stage3-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
+      - name: Stage 3B conflict-safe
+        run: |
+          python engine4_bench.py update --date "$ENGINE_DATE_ET"
+          python engine4_stage_report.py bench --date "$ENGINE_DATE_ET"
+          python engine4_notify.py bench --message "$(cat output/engine4/stage_bench_sms.txt)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: engine4-manual-v2-bench-${{ github.run_id }}
+          path: |
+            output/engine4/watch_bench*
+            output/engine4/stage_bench_*
+            output/engine4/notification_bench*
+            state/engine4/watch_bench.json
+          if-no-files-found: error
+      - name: Stage 4
+        run: |
+          python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"
+          python engine4_stage_report.py final --date "$ENGINE_DATE_ET"
+          python engine4_notify.py final
+      - uses: actions/upload-artifact@v4
+        with: {name: 'engine4-manual-v2-stage4-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
+      - name: Stage 5
+        run: |
+          python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300
+          python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"
+          python engine4_notify.py recovery
+      - name: Verify and COMPLETE
+        run: |
+          python engine4_stage_report.py verify-complete --date "$ENGINE_DATE_ET" --recipients 0
+          python engine4_notify.py complete --message "ENGINE 4 MANUAL RUN COMPLETE — every required stage finished for ${ENGINE_DATE_ET} ET and all dated artifacts were verified."
+          python engine4_stage_report.py complete --date "$ENGINE_DATE_ET" --recipients 0
+      - uses: actions/upload-artifact@v4
+        with: {name: 'engine4-manual-v2-complete-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error, retention-days: 30}
+      - name: FAILURE notification
+        if: failure()
+        run: python engine4_notify.py failure --message "ENGINE 4 DATA/PIPELINE FAILURE — manual V2 did not complete. Review failed stage; no completed result is being reported."
