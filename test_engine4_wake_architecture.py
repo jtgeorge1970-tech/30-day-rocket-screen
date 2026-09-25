@@ -13,22 +13,22 @@ def test_wake_notification_kinds_are_distinct(tmp_path, monkeypatch):
 
 def test_early_controller_has_seasonal_guard_and_dispatch_proof():
     workflow=(ROOT/".github/workflows/engine4-early-wake.yml").read_text()
-    assert "cron: '20 12 * * 1-5'" in workflow
-    assert "cron: '20 13 * * 1-5'" in workflow
-    assert 'if [ "$T" -lt 495 ] || [ "$T" -gt 510 ]' in workflow
+    assert "cron: '50 11 * * 1-5'" in workflow
+    assert "cron: '50 12 * * 1-5'" in workflow
+    assert 'if [ "$T" -lt 465 ] || [ "$T" -gt 480 ]' in workflow
     assert "engine4_notify.py preflight" in workflow
     assert "engine4_notify.py launch" in workflow
 
 def test_primary_wake_has_retries_and_manual_dispatch_entry():
     workflow=(ROOT/".github/workflows/engine4-production.yml").read_text()
-    assert "cron: '35,40,45,50 12 * * 1-5'" in workflow
-    assert "cron: '35,40,45,50 13 * * 1-5'" in workflow
+    assert "cron: '5,10,15,20 12 * * 1-5'" in workflow
+    assert "cron: '5,10,15,20 13 * * 1-5'" in workflow
     assert "workflow_dispatch:" in workflow
     assert "cancel-in-progress: true" in workflow
 
 def test_watchdog_has_seasonal_guard_and_intervention_notification():
     workflow=(ROOT/".github/workflows/engine4-watchdog.yml").read_text()
-    assert 'if [ "$T" -lt 522 ] || [ "$T" -gt 535 ]' in workflow
+    assert 'if [ "$T" -lt 492 ] || [ "$T" -gt 505 ]' in workflow
     assert "engine4_notify.py watchdog" in workflow
     assert "engine4-manual-on-demand.yml" in workflow
     assert "mode=live_today" in workflow
@@ -36,8 +36,8 @@ def test_watchdog_has_seasonal_guard_and_intervention_notification():
 
 def test_early_manual_failsafe_preserves_live_stage_times():
     workflow=(ROOT/".github/workflows/engine4-manual-on-demand.yml").read_text()
-    assert "08:35-15:30 ET" in workflow
-    for checkpoint in ("0855","0905","0918","0945"):
+    assert "08:05-15:30 ET" in workflow
+    for checkpoint in ("0825","0835","0848","0945"):
         assert f'-lt {checkpoint}' in workflow
 
 def test_notification_delivery_can_never_stop_engine4_invocation():
