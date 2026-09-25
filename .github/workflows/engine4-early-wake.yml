@@ -2,11 +2,11 @@ name: Engine 4 Early Wake Controller
 
 on:
   workflow_dispatch:
-  # Run once at 08:20 ET. Both UTC equivalents are requested; the ET guard
+  # Run once at 07:50 ET. Both UTC equivalents are requested; the ET guard
   # admits only the correct seasonal event.
   schedule:
-    - cron: '20 12 * * 1-5'  # 08:20 EDT
-    - cron: '20 13 * * 1-5'  # 08:20 EST
+    - cron: '50 11 * * 1-5'  # 07:50 EDT
+    - cron: '50 12 * * 1-5'  # 07:50 EST
 
 concurrency:
   group: engine4-early-wake-controller
@@ -41,7 +41,7 @@ jobs:
           M=$(TZ=America/New_York date +%M)
           T=$((10#$H * 60 + 10#$M))
           echo "Early controller woke at ${H}:${M} ET"
-          if [ "$T" -lt 495 ] || [ "$T" -gt 510 ]; then
+          if [ "$T" -lt 465 ] || [ "$T" -gt 480 ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
             echo "Wrong seasonal duplicate; exiting harmlessly."
           else
@@ -68,7 +68,7 @@ jobs:
           pytest -q test_engine4_*.py
           python engine4_pipeline_runner_guarded.py provider-smoke
 
-      - name: Wait for 08:35 ET launch checkpoint
+      - name: Wait for 08:05 ET launch checkpoint
         if: steps.window.outputs.skip != 'true'
         shell: bash
         run: |
@@ -76,7 +76,7 @@ jobs:
             H=$(TZ=America/New_York date +%H)
             M=$(TZ=America/New_York date +%M)
             NOW=$((10#$H * 60 + 10#$M))
-            if [ "$NOW" -ge 515 ]; then
+            if [ "$NOW" -ge 485 ]; then
               break
             fi
             sleep 15
@@ -112,7 +112,7 @@ jobs:
               created_minute = created_at.hour * 60 + created_at.minute
               active = run.get("status") in {"queued", "in_progress", "waiting", "pending"}
               successful = run.get("status") == "completed" and run.get("conclusion") == "success"
-              if created_at.date() == today and 515 <= created_minute <= 545 and (active or successful):
+              if created_at.date() == today and 485 <= created_minute <= 515 and (active or successful):
                   existing.append(run)
 
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
@@ -141,7 +141,7 @@ jobs:
         if: steps.window.outputs.skip != 'true' && steps.launch.outputs.dispatched == 'true'
         run: >-
           python engine4_notify.py launch
-          --message "ENGINE 4 EARLY CONTROLLER DISPATCHED PRODUCTION — the 08:35 ET launch checkpoint found no active production run and started one."
+          --message "ENGINE 4 EARLY CONTROLLER DISPATCHED PRODUCTION — the 08:05 ET launch checkpoint found no active production run and started one."
 
       - name: Send early-controller failure notification
         if: failure() && steps.window.outputs.skip != 'true'
