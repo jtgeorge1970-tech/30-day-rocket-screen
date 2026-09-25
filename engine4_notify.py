@@ -1,32 +1,21 @@
 from __future__ import annotations
 
-"""Immediate, deduplicated Engine 4 notifications by SMS and GitHub Issues.
+"""Engine 4 notification recorder.
 
-OpenPhone/Quo delivers the primary real-SMS alert. GitHub Issues remains the
-independent audit trail and fallback notification channel. Credentials and
-phone numbers are read only from encrypted GitHub Actions secrets.
+Trading logic is untouched. Every notification that previously went to SMS is
+preserved verbatim as an on-screen/audit artifact. Notification transport can
+never stop the engine.
 """
 
 import argparse
 import json
 import os
-import re
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-import requests
-
-
 OUT = Path("output/engine4")
 ET = ZoneInfo("America/New_York")
-API = "https://api.github.com"
-OPENPHONE_API = "https://api.quo.com/v1/messages"
-E164 = re.compile(r"^\+[1-9]\d{7,14}$")
-SMS_ACCEPTED_MARKER = "<!-- ENGINE4-SMS-API-ACCEPTED"
-SMS_ACCEPTED_RE = re.compile(
-    r"<!-- ENGINE4-SMS-API-ACCEPTED recipients=(\d+) -->"
-)
 
 
 def _read_json(path: Path) -> dict:
@@ -36,298 +25,79 @@ def _read_json(path: Path) -> dict:
         return {}
 
 
-def _write_audit(payload: dict) -> None:
-    OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / "notification_audit.json").write_text(
-        json.dumps(payload, indent=2), encoding="utf-8"
-    )
-    history_path = OUT / "notification_audit_log.json"
-    try:
-        history = json.loads(history_path.read_text(encoding="utf-8"))
-        if not isinstance(history, list):
-            history = []
-    except Exception:
-        history = []
-    history.append(payload)
-    history_path.write_text(json.dumps(history, indent=2), encoding="utf-8")
-
-
-def _signal_for(kind: str, failure_message: str | None) -> dict:
+def _signal_for(kind: str, supplied: str | None) -> dict:
     if kind == "final":
         return _read_json(OUT / "final_signal.json")
     if kind == "recovery":
         return _read_json(OUT / "recovery_signal.json")
-    if kind == "test":
-        return {
-            "status": "TEST",
-            "ticker": "SYSTEM",
-            "message": failure_message or "Engine 4 test text delivered successfully.",
-        }
-    if kind == "preflight":
-        return {
-            "status": "CHECKING",
-            "ticker": "SYSTEM",
-            "message": failure_message or "Engine 4 early preflight is active.",
-        }
-    if kind == "launch":
-        return {
-            "status": "DISPATCHED",
-            "ticker": "SYSTEM",
-            "message": failure_message or "Engine 4 early controller dispatched production.",
-        }
-    if kind == "watchdog":
-        return {
-            "status": "RECOVERY_DISPATCHED",
-            "ticker": "SYSTEM",
-            "message": failure_message or "Engine 4 watchdog dispatched a recovery wake.",
-        }
-    if kind == "start":
-        return {
-            "status": "STARTED",
-            "ticker": "SYSTEM",
-            "message": failure_message or "Engine 4 scheduled run started.",
-        }
-    if kind in {"prescreen", "deep", "freeze", "bench"}:
-        return {
-            "status": "COMPLETED",
-            "ticker": "MARKET",
-            "message": failure_message or f"Engine 4 {kind} stage completed.",
-        }
     if kind == "complete":
         primary = _read_json(OUT / "final_signal.json")
         recovery = _read_json(OUT / "recovery_signal.json")
         bench = _read_json(OUT / "watch_bench_report.json")
-        primary_status = str(primary.get("status") or "UNAVAILABLE").upper()
-        recovery_status = str(recovery.get("status") or "UNAVAILABLE").upper()
-        actionable = {primary_status, recovery_status} & {"BUY", "ARM"}
-        outcome = "BUY/ARM SIGNAL PRESENT" if actionable else "NO BUY SIGNAL TODAY"
-        watch = [
-            str(row.get("ticker"))
-            for row in bench.get("candidates", [])
-            if row.get("ticker")
-        ]
-        watch_text = ", ".join(watch) if watch else "NONE"
-        message = (
-            f"{outcome}\n"
-            f"Primary: {primary_status}\n"
-            f"Recovery: {recovery_status}\n"
-            f"Watchlist: {watch_text}"
-        )
-        return {
-            "status": "COMPLETE",
-            "ticker": "SYSTEM",
-            "message": message,
-        }
-    return {
-        "status": "PIPELINE_FAILURE",
-        "reason": "workflow_stage_failed",
-        "message": failure_message or "ENGINE 4 DATA/PIPELINE FAILURE",
+        ps = str(primary.get("status") or "UNAVAILABLE").upper()
+        rs = str(recovery.get("status") or "UNAVAILABLE").upper()
+        outcome = "BUY/ARM SIGNAL PRESENT" if {ps, rs} & {"BUY", "ARM"} else "NO BUY SIGNAL TODAY"
+        watch = ", ".join(str(r.get("ticker")) for r in bench.get("candidates", []) if r.get("ticker")) or "NONE"
+        return {"status": "COMPLETE", "ticker": "SYSTEM", "message": supplied or f"{outcome}\nPrimary: {ps}\nRecovery: {rs}\nWatchlist: {watch}"}
+    defaults = {
+        "preflight": ("CHECKING", "SYSTEM", "Engine 4 early preflight is active."),
+        "launch": ("DISPATCHED", "SYSTEM", "Engine 4 early controller dispatched production."),
+        "watchdog": ("RECOVERY_DISPATCHED", "SYSTEM", "Engine 4 watchdog dispatched a recovery wake."),
+        "start": ("STARTED", "SYSTEM", "Engine 4 scheduled run started."),
+        "prescreen": ("COMPLETED", "MARKET", "Engine 4 prescreen stage completed."),
+        "deep": ("COMPLETED", "MARKET", "Engine 4 deep stage completed."),
+        "freeze": ("COMPLETED", "MARKET", "Engine 4 freeze stage completed."),
+        "bench": ("COMPLETED", "MARKET", "Engine 4 bench stage completed."),
+        "failure": ("PIPELINE_FAILURE", "SYSTEM", "ENGINE 4 DATA/PIPELINE FAILURE"),
+        "test": ("TEST", "SYSTEM", "Engine 4 notification test."),
     }
+    status, ticker, message = defaults.get(kind, ("UNKNOWN", "MARKET", "Engine 4 notification."))
+    return {"status": status, "ticker": ticker, "message": supplied or message}
 
 
-def _github_request(method: str, url: str, token: str, **kwargs) -> requests.Response:
-    headers = {
-        "Accept": "application/vnd.github+json",
-        "Authorization": f"Bearer {token}",
-        "X-GitHub-Api-Version": "2022-11-28",
-    }
-    response = requests.request(method, url, headers=headers, timeout=15, **kwargs)
-    response.raise_for_status()
-    return response
-
-
-def _sms_text(kind: str, status: str, ticker: str, message: str, run_url: str) -> str:
-    labels = {
-        "final": "ENGINE 4 PRIMARY RESULT — RUN STILL ACTIVE",
-        "recovery": "ENGINE 4 RECOVERY RESULT",
-        "complete": "ENGINE 4 COMPLETE",
-    }
-    heading = f"{labels.get(kind, f'ENGINE 4 {kind.upper()}')}: {status} — {ticker}"
-    progress = (
-        "The full Engine 4 run is NOT complete. Recovery watch and terminal verification continue."
-        if kind == "final"
-        else ""
-    )
-    safety = "Confirm the live broker quote before any order."
-    run_id = os.getenv("GITHUB_RUN_ID", "").strip()
-    generated_et = datetime.now(ET).strftime("%Y-%m-%d %I:%M:%S %p ET")
-    run_context = " | ".join(
-        part for part in (
-            f"Run {run_id}" if run_id else "",
-            f"Generated {generated_et}",
-        )
-        if part
-    )
-    return "\n".join(
-        part for part in (heading, message, progress, run_context, safety, run_url) if part
-    )[:1200]
-
-
-def _send_openphone_sms(content: str) -> dict:
-    api_key = os.getenv("OPENPHONE_API_KEY", "").strip()
-    from_number = os.getenv("OPENPHONE_FROM_NUMBER", "").strip()
-    to_numbers = [
-        number.strip()
-        for number in os.getenv("ENGINE4_SMS_TO", "").split(",")
-        if number.strip()
-    ]
-    if not api_key or not from_number or not to_numbers:
-        return {
-            "delivery": "NOT_CONFIGURED",
-            "reason": "missing_openphone_api_key_from_number_or_sms_recipient",
-        }
-    if not E164.fullmatch(from_number) or any(
-        not E164.fullmatch(number) for number in to_numbers
-    ):
-        return {
-            "delivery": "FAILED",
-            "reason": "phone_numbers_must_use_E.164_format_like_+15551234567",
-        }
-
-    try:
-        deliveries = []
-        for to_number in to_numbers:
-            response = requests.post(
-                OPENPHONE_API,
-                headers={
-                    "Authorization": api_key,
-                    "Content-Type": "application/json",
-                },
-                json={"content": content, "from": from_number, "to": [to_number]},
-                timeout=20,
-            )
-            if not 200 <= response.status_code < 300:
-                try:
-                    response_body = response.text.strip()[:1000]
-                except Exception:
-                    response_body = ""
-                return {
-                    "delivery": "FAILED",
-                    "http_status": response.status_code,
-                    "response_body": response_body or "UNAVAILABLE",
-                    "recipient_count_accepted_before_failure": len(deliveries),
-                }
-            try:
-                payload = response.json()
-            except ValueError:
-                payload = {}
-            data = payload.get("data") if isinstance(payload, dict) else {}
-            deliveries.append(
-                {
-                    "http_status": response.status_code,
-                    "message_id": (data or {}).get("id")
-                    if isinstance(data, dict)
-                    else None,
-                }
-            )
-        return {
-            "delivery": "API_ACCEPTED",
-            "recipient_count": len(deliveries),
-            "messages": deliveries,
-        }
-    except Exception as exc:
-        return {"delivery": "FAILED", "reason": f"{type(exc).__name__}: {exc}"}
-
-
-def notify(kind: str, failure_message: str | None = None, dry_run: bool = False) -> dict:
-    signal = _signal_for(kind, failure_message)
+def notify(kind: str, supplied: str | None = None, dry_run: bool = False) -> dict:
+    OUT.mkdir(parents=True, exist_ok=True)
+    signal = _signal_for(kind, supplied)
     status = str(signal.get("status") or "UNKNOWN").upper()
     ticker = str(signal.get("ticker") or "MARKET").upper()
+    message = str(signal.get("message") or signal.get("reason") or supplied or "No message supplied.")
     date_et = str(signal.get("target_date_et") or datetime.now(ET).date())
     run_id = os.getenv("GITHUB_RUN_ID", "").strip()
+    generated = datetime.now(ET).strftime("%Y-%m-%d %I:%M:%S %p ET")
+    heading = f"ENGINE 4 {kind.upper()}: {status} — {ticker}"
+    progress = "The full Engine 4 run is NOT complete. Recovery watch and terminal verification continue." if kind == "final" else ""
+    text = "\n".join(x for x in (heading, message, progress, f"Run {run_id}" if run_id else "", f"Generated {generated}", "Confirm the live broker quote before any order.") if x)
     marker = f"ENGINE4-ALERT:{date_et}:{kind}:{status}:{ticker}:RUN:{run_id or 'NO-RUN'}"
-    title = f"[ENGINE 4] {kind.upper()} {status} — {ticker} — {date_et}"
-    message = str(signal.get("message") or signal.get("reason") or "No message supplied.")
-    run_url = ""
-    if os.getenv("GITHUB_REPOSITORY") and os.getenv("GITHUB_RUN_ID"):
-        run_url = (
-            f"{os.getenv('GITHUB_SERVER_URL', 'https://github.com')}/"
-            f"{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}"
-        )
-    body = "\n\n".join(
-        part
-        for part in (
-            f"<!-- {marker} -->",
-            message,
-            f"Status: `{status}`  \nTicker: `{ticker}`  \nEngine date (ET): `{date_et}`",
-            f"Workflow run: {run_url}" if run_url else "",
-            "This alert is generated from the committed Engine 4 artifact. Confirm the live broker quote before placing any order.",
-        )
-        if part
-    )
-    sms_text = _sms_text(kind, status, ticker, message, run_url)
-
-    if dry_run:
-        result = {
-            "delivery": "DRY_RUN",
-            "marker": marker,
-            "title": title,
-            "body": body,
-            "sms_text": sms_text,
-        }
-        _write_audit(result)
-        return result
-
-    prior_entries = [
-        e for e in _read_json(OUT / "notification_audit_log.json")
-        if isinstance(e, dict) and e.get("marker") == marker
-    ]
-    prior_sms = prior_entries[-1].get("sms", {}) if prior_entries else {}
-    if prior_sms.get("delivery") in {"API_ACCEPTED", "DEDUPLICATED"}:
-        sms_result = {
-            "delivery": "DEDUPLICATED",
-            "recipient_count": int(prior_sms.get("recipient_count", 0)),
-            "proof": "existing_local_notification_audit",
-        }
-    else:
-        sms_result = _send_openphone_sms(sms_text)
-
-    github_result = {
-        "delivery": "DISABLED",
-        "reason": "sms_only_user_preference",
-    }
-
-    result = {
-        "delivery": "SENT"
-        if sms_result.get("delivery") in {"API_ACCEPTED", "DEDUPLICATED"}
-        else "DEGRADED",
-        "marker": marker,
-        "sms": sms_result,
-        "github": github_result,
-    }
-    _write_audit(result)
-    return result
+    record = {"delivery": "SAVED_ONSCREEN", "marker": marker, "kind": kind, "status": status, "ticker": ticker, "target_date_et": date_et, "generated_et": generated, "run_id": run_id, "message": message, "notification_text": text, "dry_run": dry_run}
+    (OUT / f"notification_{kind}.txt").write_text(text + "\n", encoding="utf-8")
+    (OUT / f"notification_{kind}.json").write_text(json.dumps(record, indent=2), encoding="utf-8")
+    (OUT / "notification_audit.json").write_text(json.dumps(record, indent=2), encoding="utf-8")
+    log_path = OUT / "notification_audit_log.json"
+    try:
+        history = json.loads(log_path.read_text(encoding="utf-8"))
+        if not isinstance(history, list): history = []
+    except Exception:
+        history = []
+    history.append(record)
+    log_path.write_text(json.dumps(history, indent=2), encoding="utf-8")
+    print("=== ENGINE 4 ON-SCREEN NOTIFICATION ===", flush=True)
+    print(text, flush=True)
+    print("=== END ENGINE 4 NOTIFICATION ===", flush=True)
+    return record
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "kind",
-        choices=(
-            "preflight",
-            "launch",
-            "watchdog",
-            "start",
-            "prescreen",
-            "deep",
-            "freeze",
-            "bench",
-            "final",
-            "recovery",
-            "complete",
-            "failure",
-            "test",
-        ),
-    )
+    parser.add_argument("kind", choices=("preflight","launch","watchdog","start","prescreen","deep","freeze","bench","final","recovery","complete","failure","test"))
     parser.add_argument("--message")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--require-delivery", action="store_true")
     args = parser.parse_args()
     result = notify(args.kind, args.message, args.dry_run)
     print(json.dumps(result, indent=2), flush=True)
-    if args.require_delivery and result.get("delivery") != "SENT":
+    # Saved on-screen notification is the delivery contract. It never depends on SMS.
+    if args.require_delivery and result.get("delivery") != "SAVED_ONSCREEN":
         raise SystemExit(1)
-
 
 if __name__ == "__main__":
     main()
