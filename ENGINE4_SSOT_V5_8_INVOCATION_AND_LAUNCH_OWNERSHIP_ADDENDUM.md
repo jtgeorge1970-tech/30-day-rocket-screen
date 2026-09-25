@@ -22,23 +22,27 @@ This addendum governs the ChatGPT invocation layer and morning launch accountabi
 - ChatGPT cannot truthfully claim it will “wake itself.” It acts when the enabled automation scheduler invokes it.
 - GitHub's independent production schedule, sentinel, and watchdog remain separate protections if a ChatGPT invocation is absent.
 
-## Required 08:20 ET early preflight
+## Locked earlier production timing
 
-An enabled exact-schedule ChatGPT automation must invoke at 08:20 Eastern on every U.S. market weekday.
+The Engine 4 production target is 08:05 Eastern, exactly 30 minutes earlier than the former 08:35 target. The aligned checkpoints are Stage 1 at 08:25, Stage 2 at 08:35, and Stage 3 at 08:48. Stage 4 remains locked to 09:45 because primary confirmation requires post-open market data. The independent watchdog checks begin at 08:12 Eastern.
+
+## Required 07:50 ET early preflight
+
+An enabled exact-schedule ChatGPT automation must invoke at 07:50 Eastern on every U.S. market weekday.
 
 It must perform a read-only preflight:
 - lock and display the current Eastern market date;
 - verify authenticated read access to the repository and GitHub Actions;
 - verify deployed `main` and required Engine 4 workflow availability;
 - verify the latest applicable acceptance result without substituting it for today's live run;
-- verify the 08:36 launch-owner automation remains enabled;
+- verify the 08:06 launch-owner automation remains enabled;
 - identify any permissions/platform blocker before the launch window.
 
 This preflight must not redesign Engine 4, alter scoring, or create an early duplicate production cycle. It must produce a permanent on-screen status. A passing preflight is readiness evidence only, not proof of launch.
 
-## Required 08:36 ET launch owner
+## Required 08:06 ET launch owner
 
-A separate enabled exact-schedule ChatGPT automation must invoke at 08:36 Eastern on every U.S. market weekday.
+A separate enabled exact-schedule ChatGPT automation must invoke at 08:06 Eastern on every U.S. market weekday.
 
 It is the sole ChatGPT manual-launch owner and must:
 
@@ -120,8 +124,8 @@ This addendum is standing authorization only for the defined current-day launch 
 ## Proof standard
 
 Reliability is demonstrated by three consecutive market-day cycles in which:
-- the 08:20 preflight invokes;
-- the 08:36 launch owner invokes;
+- the 07:50 preflight invokes;
+- the 08:06 launch owner invokes;
 - a healthy current-day run reaches Stage 1 without user prompting;
 - the run is monitored through its correct terminal result;
 - all reporting follows this SSOT;
