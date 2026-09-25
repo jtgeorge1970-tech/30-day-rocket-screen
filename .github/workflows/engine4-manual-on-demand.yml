@@ -192,8 +192,8 @@ jobs:
           M=$(TZ=America/New_York date +%M)
           NOW=$((10#$H * 60 + 10#$M))
           echo "Engine 4 manual live runner requested at ${H}:${M} ET"
-          if [ "$NOW" -lt 515 ] || [ "$NOW" -gt 930 ]; then
-            echo 'MANUAL LIVE RUN REFUSED — valid current-day on-demand start window is 08:35-15:30 ET.'
+          if [ "$NOW" -lt 485 ] || [ "$NOW" -gt 930 ]; then
+            echo 'MANUAL LIVE RUN REFUSED — valid current-day on-demand start window is 08:05-15:30 ET.'
             echo 'Outside market hours, use acceptance_replay; production data will not be fabricated or mislabeled.'
             exit 78
           fi
@@ -213,7 +213,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          while [ "$(TZ=America/New_York date +%H%M)" -lt 0855 ]; do sleep 15; done
+          while [ "$(TZ=America/New_York date +%H%M)" -lt 0825 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"
           python engine4_stage_report.py prescreen --date "$ENGINE_DATE_ET"
           python engine4_notify.py prescreen \
@@ -232,7 +232,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          while [ "$(TZ=America/New_York date +%H%M)" -lt 0905 ]; do sleep 15; done
+          while [ "$(TZ=America/New_York date +%H%M)" -lt 0835 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"
           python engine4_stage_report.py deep --date "$ENGINE_DATE_ET"
           python engine4_notify.py deep \
@@ -251,7 +251,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          while [ "$(TZ=America/New_York date +%H%M)" -lt 0918 ]; do sleep 15; done
+          while [ "$(TZ=America/New_York date +%H%M)" -lt 0848 ]; do sleep 15; done
           python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"
           python engine4_stage_report.py freeze --date "$ENGINE_DATE_ET"
           python engine4_notify.py freeze \
