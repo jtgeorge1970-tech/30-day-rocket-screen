@@ -1,3 +1,4 @@
 mode=live_today
 acceptance_date_et=2026-09-28
-requested_at=2026-09-28T12:11:11.036Z
+certification_force=true
+requested_at=2026-09-28T14:34:00Z
