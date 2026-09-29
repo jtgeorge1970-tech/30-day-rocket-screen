@@ -100,8 +100,8 @@ jobs:
               is_production = "engine4-production.yml" in str(run.get("path") or "")
               live_manual = "engine4-manual-on-demand.yml" in str(run.get("path") or "") and is_live_manual(run)
               created_minute = created.hour * 60 + created.minute
-              valid_production_wake = is_production and 515 <= created_minute <= 545
-              valid_live_manual = live_manual and 515 <= created_minute <= 930
+              valid_production_wake = is_production and 485 <= created_minute <= 515
+              valid_live_manual = live_manual and 485 <= created_minute <= 930
               if created.date() == today and (active or successful) and (valid_production_wake or valid_live_manual):
                   valid.append(run)
 
@@ -110,11 +110,7 @@ jobs:
               print(f"REAL ENGINE 4 RUN VERIFIED — id={run['id']} status={run['status']} event={run['event']} created={run['created_at']}")
               raise SystemExit(0)
 
-          if minute < 516:
-              print(f"PRE-LAUNCH SENTINEL AWAKE — {now:%H:%M} ET; no run required yet.")
-              raise SystemExit(0)
-
-          # 08:36 ET or later: absence of a real run is actionable.
+          # 08:15 ET or later: absence of a real run is actionable.
           # Use the auditable push trigger so later checks can prove this was
           # specifically mode=live_today rather than an acceptance/preflight run.
           trigger_path = ".github/engine4-manual-trigger.txt"
