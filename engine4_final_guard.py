@@ -347,7 +347,7 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             f"IF PRICE RISES TO ${metrics['first_target']:.2f}, MOVE SELL STOP TO ${metrics['precalculated_profit_stop']:.2f}\n"
             f"DO NOT BUY ABOVE ${metrics['max_allowed_buy_price']:.2f}\n"
             f"Current price: ${metrics['current_live_price']:.2f}\n"
-            f"Reason: full A+ gates passed and fresh live price is inside the valid buy range; R:R {metrics['reward_risk']:.2f}:1."
+            f"Reason: B-or-better premarket eligibility and all required live entry gates passed; fresh live price is inside the valid buy range; R:R {metrics['reward_risk']:.2f}:1."
         )
         return finish({
             "status": "BUY",
@@ -436,8 +436,8 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
 
     return finish({
         "status": "NO_TRADE",
-        "reason": "no_a_plus_recovery_watch_active",
-        "message": "NO PRIMARY TRADE — no A+ setup. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.",
+        "reason": "no_live_entry_setup_recovery_watch_active",
+        "message": "NO PRIMARY TRADE — no B-or-better candidate passed all required live entry gates. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.",
         "order_instruction": "NO_ORDER",
         "max_tradable_price": MAX_TRADABLE_PRICE,
         "runtime_seconds": round(time.monotonic() - started, 3),
