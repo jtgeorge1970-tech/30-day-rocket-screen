@@ -15,10 +15,14 @@ on:
       - '.github/engine4-acceptance-trigger.txt'
   workflow_dispatch:
 
+concurrency:
+  group: engine4-ci-validation
+  cancel-in-progress: true
+
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 40
     env:
       ACCEPTANCE_DATE_ET: '2026-09-16'
     steps:
@@ -48,15 +52,31 @@ jobs:
         run: pytest -q test_engine4_*.py
       - name: Verified free-provider smoke test
         run: python engine4_pipeline_runner.py provider-smoke
-      - name: Historical staged acceptance replay — repaired runner
+      - name: Acceptance replay — prescreen
+        timeout-minutes: 8
+        run: python engine4_pipeline_runner.py prescreen --date "$ACCEPTANCE_DATE_ET"
+
+      - name: Acceptance replay — deep
+        timeout-minutes: 8
+        run: python engine4_pipeline_runner.py deep --date "$ACCEPTANCE_DATE_ET"
+
+      - name: Acceptance replay — refresh/freeze
+        timeout-minutes: 8
+        run: python engine4_pipeline_runner.py refresh --date "$ACCEPTANCE_DATE_ET"
+
+      - name: Acceptance replay — bench
+        timeout-minutes: 5
         shell: bash
         run: |
           set -euo pipefail
-          python engine4_pipeline_runner.py prescreen --date "$ACCEPTANCE_DATE_ET"
-          python engine4_pipeline_runner.py deep --date "$ACCEPTANCE_DATE_ET"
-          python engine4_pipeline_runner.py refresh --date "$ACCEPTANCE_DATE_ET"
           python engine4_bench.py update --date "$ACCEPTANCE_DATE_ET"
           python engine4_stage_report.py bench --date "$ACCEPTANCE_DATE_ET"
+
+      - name: Acceptance replay — final
+        timeout-minutes: 8
+        shell: bash
+        run: |
+          set -euo pipefail
           python engine4_pipeline_runner.py final --date "$ACCEPTANCE_DATE_ET"
           cat output/engine4/timeline.txt
           cat output/engine4/final_signal.json
