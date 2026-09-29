@@ -1,5 +1,5 @@
 mode=live_today
 acceptance_date_et=
 certification_force=false
-requested_at=2026-09-29T11:43:00Z
-request=manual_guard_2026-09-29
+requested_at=2026-09-29T12:05:00Z
+request=manual_guard_2026-09-29_0805_ET
