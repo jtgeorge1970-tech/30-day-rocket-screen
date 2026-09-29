@@ -1,3 +1,4 @@
 ready=true
 purpose=hardened-live-manual-runner
-proof=2026-09-24T20:50ET
+proof=2026-09-29T11:20ET
+request=fresh-clean-engine4-run-2026-09-29
