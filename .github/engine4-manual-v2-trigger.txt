@@ -1,4 +1,6 @@
 ready=true
 purpose=hardened-live-manual-runner
-proof=2026-09-29T11:20ET
-request=fresh-clean-engine4-run-2026-09-29
+mode=live_today
+engine_date_et=2026-09-30
+requested_at=2026-09-30T12:08:41.377Z
+request=fresh-clean-engine4-run-2026-09-30-2026-09-30T12-08-41-376Z
