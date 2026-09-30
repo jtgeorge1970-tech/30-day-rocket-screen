@@ -73,7 +73,11 @@ def _records(frame: pd.DataFrame) -> list[dict]:
 
 def _fresh_seed_rows(symbols: list[str], date_et, cutoff: str) -> tuple[pd.DataFrame, list[str]]:
     baseline = core.eligible_baseline().set_index("ticker")
-    symbols = [symbol for symbol in symbols if symbol in baseline.index]
+    requested = list(symbols)
+    symbols = [symbol for symbol in requested if symbol in baseline.index]
+    missing: list[str] = [symbol for symbol in requested if symbol not in baseline.index]
+    if not symbols:
+        return pd.DataFrame(columns=["ticker"]), missing
     frames = download_intraday(
         symbols,
         period="1d",
@@ -84,7 +88,6 @@ def _fresh_seed_rows(symbols: list[str], date_et, cutoff: str) -> tuple[pd.DataF
     )
     snapshots = runner.nasdaq_premarket_many(symbols, max_workers=12)
     rows: list[dict] = []
-    missing: list[str] = []
 
     for symbol in symbols:
         frame = frames.get(symbol)
@@ -180,16 +183,17 @@ def update_bench(date_override: str | None = None, state_path: Path = STATE) -> 
         details={"bench_competition_universe": len(symbols), "bench_cap": BENCH_CAP},
     )
 
-    # Zero candidates is a valid market outcome, not a pipeline failure.  Avoid
-    # sending an empty/no-schema frame through the scoring stack, which can
-    # legitimately return a DataFrame with no ticker column.
+    # Zero candidates, or candidates that are no longer in today's eligible
+    # baseline, are valid market outcomes.  They are removed from the Bench
+    # rather than being sent through the scoring stack as a no-schema frame.
     if symbols:
         seed, missing = _fresh_seed_rows(symbols, date_et, "09:18")
-        ranked = runner.repaired_score_pool(seed, date_et, reference, "09:18")
-        if ranked.empty:
-            raise RuntimeError("ENGINE 4 BENCH FAILURE — no Bench candidates could be refreshed")
-        if "ticker" not in ranked.columns:
-            raise RuntimeError("ENGINE 4 BENCH FAILURE — refreshed Bench data is missing ticker")
+        if seed.empty or "ticker" not in seed.columns:
+            ranked = pd.DataFrame(columns=["ticker"])
+        else:
+            ranked = runner.repaired_score_pool(seed, date_et, reference, "09:18")
+            if "ticker" not in ranked.columns:
+                raise RuntimeError("ENGINE 4 BENCH FAILURE — refreshed Bench data is missing ticker")
     else:
         missing = []
         ranked = pd.DataFrame(columns=["ticker"])
