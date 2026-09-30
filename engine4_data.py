@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import io
 import math
+import os
 import random
 import re
 import time
@@ -134,6 +135,12 @@ def load_baseline() -> pd.DataFrame:
     or Yahoo Ticker.info failed during an earlier fundamentals pass.
     """
     universe = _fresh_exchange_universe()
+    # Acceptance/CI may explicitly cap the feeder before expensive market-data
+    # hydration. Production does not set this variable and therefore remains
+    # full-universe with unchanged trading logic.
+    acceptance_cap = int(os.environ.get("ENGINE4_ACCEPTANCE_UNIVERSE_CAP", "0") or 0)
+    if acceptance_cap > 0:
+        universe = universe.head(acceptance_cap).copy()
     legacy_inv_path = BASE_OUT / "03_investable.csv"
     legacy_fund_path = BASE_OUT / "fundamentals_checkpoint.csv"
     legacy_inv = pd.read_csv(legacy_inv_path) if legacy_inv_path.exists() else pd.DataFrame()
