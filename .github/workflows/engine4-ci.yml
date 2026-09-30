@@ -153,8 +153,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          grep -F 'valid_production_wake = is_production and 485 <= created_minute <= 515' .github/workflows/engine4-production.yml
-          grep -F '485 <= created_minute <= 515' .github/workflows/engine4-early-wake.yml
+          # Production itself admits scheduled execution only during 08:05-08:35 ET.
+          grep -F 'if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then echo '\''skip=false'\'' >> "$GITHUB_OUTPUT"; elif [ "$T" -lt 485 ] || [ "$T" -gt 515 ]' .github/workflows/engine4-production.yml
+          # Early controller verifies any production proof was actually created in that same ET window.
+          grep -F '485 <= created_minute <= 515 and (active or successful)' .github/workflows/engine4-early-wake.yml
+          # Watchdog and sentinel independently apply the same production-wake proof window.
           grep -F 'valid_production_wake = is_production and 485 <= created_minute <= 515' .github/workflows/engine4-watchdog.yml
           grep -F 'valid_production_wake = is_production and 485 <= created_minute <= 515' .github/workflows/engine4-ten-check-sentinel.yml
 
