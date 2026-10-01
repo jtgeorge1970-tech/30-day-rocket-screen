@@ -184,3 +184,50 @@ The current development evidence supports a robust candidate zone rather than a 
 
 Do not tighten to 40% crash, 10x volume, or RSP > 0 merely because those smaller samples look cleaner. Those would be classic sample-size overfit.
 
+## Targeted expansion falsification test — untouched 2026 months
+Purpose: test the frozen candidate outside the original March/April/August/September development months without changing the rule.
+
+Untouched source months screened:
+- January 2026
+- February 2026
+- May 2026
+- June 2026
+- July 2026
+
+Numeric screen was applied before outcome review:
+- crash >=30%
+- relative volume >=5x
+- RSP prior-5 > -1%
+
+From 500 source events, 111 passed the numeric screen. A conservative pre-rebound headline review then identified 20 clear Probable Overreaction cases before outcomes were retrieved. These 20 were frozen in crash_rebound/targeted_expansion_probable_overreaction_preoutcome.csv before outcome retrieval.
+
+Outcome source for this expansion test:
+Yahoo Finance daily bars via yfinance, used because the Alpaca connector repeatedly failed on the expansion outcome pull. The source change is documented and should be reconciled against the canonical source before any final model decision.
+
+### Targeted expansion result — 20 clear PO cases
+- Day 1: 35.0% positive; median -2.93%; mean -2.69%
+- Day 3: 30.0% positive; median -1.86%; mean -1.55%
+- Day 5: 30.0% positive; median -3.02%; mean -1.69%
+- Day 10: 40.0% positive; median -3.01%; mean -4.77%
+- Median maximum additional downside through Day 10: -17.58%
+
+### Day-10 results by untouched month
+- January: N=4, 75.0% positive, median +9.77%
+- February: N=3, 33.3% positive, median -14.89%
+- May: N=9, 33.3% positive, median -2.65%
+- June: N=1, 0% positive, return -18.41%
+- July: N=3, 33.3% positive, median -20.83%
+
+### Interpretation
+The targeted expansion materially falsifies the earlier development-pocket result. The frozen combination of:
+- Probable Overreaction
+- crash >=30%
+- relative volume >=5x
+- RSP prior-5 > -1%
+
+did NOT reproduce in the untouched expansion sample. The earlier 8-case result (87.5% Day-10 positive, median +15.61%) was therefore not robust enough to carry forward as a trigger.
+
+This is strong evidence against freezing that candidate in Step 4.
+
+Do not rescue the candidate by retrospectively changing the classification labels, tightening thresholds, removing losing months, or introducing additional filters after seeing these expansion outcomes. Any new hypothesis must be treated as a new development hypothesis and tested separately.
+
