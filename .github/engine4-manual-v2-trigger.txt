@@ -1,6 +1,6 @@
 ready=true
 purpose=hardened-live-manual-runner
 mode=live_today
-engine_date_et=2026-09-30
-requested_at=2026-09-30T14:14:20.740Z
-request=fresh-live-engine4-run-2026-09-30-2026-09-30T14-14-20-740Z
+engine_date_et=2026-10-01
+requested_at=2026-10-01T12:07:00.094Z
+request=fresh-live-engine4-run-2026-10-01-2026-10-01T12-07-00-094Z
