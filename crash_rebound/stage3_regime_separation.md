@@ -119,3 +119,68 @@ The most plausible development hypothesis is an interaction:
 
 The fourth item is not yet validated. It should be treated as a candidate regime modifier to stress-test, not a rule to retroactively impose.
 
+## Threshold robustness stress test
+Purpose: determine whether the candidate edge is a broad zone or a fragile artifact of the exact 30% crash / 5x relative-volume thresholds. Pre-rebound classifications remained frozen.
+
+### Crash and relative-volume neighborhood
+Without applying the breadth modifier:
+- Crash >=25%, RV >=5x: N=13, Day-10 win rate 69.23%, median +12.74%, median excess vs SPY +5.58%, median max downside -3.14%.
+- Crash >=30%, RV >=3x: N=14, Day-10 win rate 64.29%, median +8.82%, median excess vs SPY +5.10%, median max downside -8.86%.
+- Crash >=30%, RV >=5x: N=12, Day-10 win rate 75.00%, median +12.78%, median excess vs SPY +8.12%, median max downside -5.75%.
+- Crash >=30%, RV >=7x: N=8, Day-10 win rate 75.00%, median +10.44%, median excess vs SPY +8.12%, median max downside -3.02%.
+- Crash >=35%, RV >=5x: N=8, Day-10 win rate 75.00%, median +8.82%, median excess vs SPY +8.12%, median max downside -6.25%.
+- Crash >=40%, RV >=5x: N=5, 100% positive, median +15.97%, but N=5 is too small and should not be treated as a superior cutoff.
+
+Interpretation: performance remains positive across nearby crash and volume thresholds. The evidence favors a broad extreme-crash/high-volume zone rather than one exact optimized boundary.
+
+### Breadth neighborhood
+The exact RSP > 0% split was month-confounded because all five qualifying cases were August. Therefore the more useful robustness check is the pre-specified nearby threshold RSP prior-5 > -1%.
+
+For Probable Overreaction + crash >=30% + RV >=5x + RSP prior-5 > -1%:
+- N=8 across March, April, and August
+- Day 3: 87.5% positive, median +11.67%
+- Day 5: 87.5% positive, median +18.41%
+- Day 10: 87.5% positive, median +15.61%
+- Median max additional downside through Day 10: -1.99%
+
+The eight cases were MAZE, ERAS, ORIC, NCMI, VATE, CDNL, UWMC, and SLE. MAZE was the single Day-10 loser.
+
+### Nearby thresholds with RSP prior-5 > -1%
+The edge remains positive across the nearby grid:
+- Crash >=25%, RV >=3x: N=13, Day-10 61.54% positive, median +4.34%
+- Crash >=25%, RV >=5x: N=9, Day-10 77.78% positive, median +12.74%
+- Crash >=30%, RV >=3x: N=10, Day-10 70.00% positive, median +8.82%
+- Crash >=30%, RV >=5x: N=8, Day-10 87.50% positive, median +15.61%
+- Crash >=30%, RV >=7x: N=6, Day-10 83.33% positive, median +11.68%
+- Crash >=35%, RV >=5x: N=6, Day-10 83.33% positive, median +8.82%
+
+This is evidence of local robustness, not proof. Tighter thresholds above 40% and/or 10x quickly reduce N and should not be selected merely because the observed win rate rises.
+
+### Leave-one-month-out check for the RSP > -1% candidate
+Base: Probable Overreaction + crash >=30% + RV >=5x + RSP prior-5 > -1%.
+
+- Excluding March: N=7, 100% Day-10 positive, median +18.47%
+- Excluding April: N=6, 83.33% positive, median +15.61%
+- Excluding August: N=3, 66.67% positive, median +4.90%
+
+The edge survives removal of any one month directionally, but excluding August leaves only three observations. August still contributes heavily to the apparent strength.
+
+### Day-1 confirmation within the RSP > -1% candidate
+- Base N=8.
+- Five had a positive Day-1 close.
+- For those five, entering after Day 1:
+  - Day 1 to Day 3: 80% positive, median +2.61%
+  - Day 1 to Day 5: 80% positive, median +16.71%
+  - Day 1 to Day 10: 80% positive, median +12.61%
+
+This suggests positive Day-1 confirmation can preserve a substantial portion of the move, but it also excludes CDNL and ERAS, both of which ultimately became winners after negative Day 1. Confirmation therefore trades false-positive reduction for missed rebounds.
+
+## Stress-test interpretation
+The current development evidence supports a robust candidate zone rather than a single overfit threshold:
+- Probable Overreaction
+- crash magnitude roughly 30% or greater
+- relative volume roughly 5x or greater
+- supportive-to-neutral equal-weight breadth, with RSP prior-5 above roughly -1% emerging as the strongest non-month-confounded modifier tested
+
+Do not tighten to 40% crash, 10x volume, or RSP > 0 merely because those smaller samples look cleaner. Those would be classic sample-size overfit.
+
