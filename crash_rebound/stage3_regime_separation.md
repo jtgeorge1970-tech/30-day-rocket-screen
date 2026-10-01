@@ -80,3 +80,42 @@ This suggests next-session confirmation may retain meaningful upside while avoid
 6. No trigger should be frozen until the regime/context interaction is stress-tested without changing the frozen classifications.
 7. September long-horizon cells remain right-censored and must continue to mature.
 
+## Forensic split of the 12-event candidate
+Candidate definition remained unchanged: Probable Overreaction + crash <= -30% + relative volume >= 5x.
+
+### Continuous correlations with Day-10 return inside the 12-event candidate
+Because N=12 is very small, these are exploratory only:
+- RSP prior-5-session return: Pearson +0.554; Spearman +0.504
+- QQQ prior-5-session return: Pearson +0.426; Spearman +0.483
+- SPY prior-5-session return: Pearson +0.394; Spearman +0.392
+- Day-1 stock return: Pearson +0.322; Spearman +0.343
+- Relative volume: Pearson +0.319; Spearman +0.210
+- Crash size showed essentially no monotonic relationship inside this already-filtered subset (Spearman -0.021)
+
+### Simple zero-line breadth test
+No threshold was optimized. The test used the natural 0% line for the prior-5-session benchmark return.
+
+- Candidate with RSP prior-5 > 0: N=5, 5/5 positive at Day 10, median Day-10 return +18.47%, median max additional downside through Day 10 -0.41%.
+- Candidate with RSP prior-5 <= 0: N=7, 4/7 positive at Day 10, median Day-10 return +4.90%, median max additional downside -9.35%.
+- Candidate with SPY prior-5 > 0: N=5, 5/5 positive, median Day-10 +18.47%.
+- Candidate with QQQ prior-5 > 0: N=5, 5/5 positive, median Day-10 +18.47%.
+- Candidate with both SPY and RSP prior-5 > 0: N=4, 4/4 positive, median Day-10 +19.57%, median max additional downside +0.92%.
+
+Important: 5/5 versus 4/7 is not statistically decisive at this sample size (two-sided Fisher exact p ≈ 0.205). Treat this as a candidate interaction, not a validated filter.
+
+### Critical falsification check
+Positive prior-5 market breadth is NOT generally helpful across all Probable Overreaction cases:
+- All PO with RSP prior-5 > 0: Day-10 N=16, positive rate 43.8%, median -7.55%.
+- All PO with RSP prior-5 <= 0: Day-10 N=39, positive rate 43.6%, median -4.17%.
+
+Therefore the possible breadth effect is conditional on the extreme-crash/high-volume candidate, not a general bullish-regime effect.
+
+### Current interpretation
+The most plausible development hypothesis is an interaction:
+1. Probable Overreaction classification
+2. Crash magnitude at least 30%
+3. Relative volume at least 5x
+4. Supportive broad-market/equal-weight context may improve persistence and reduce adverse excursion
+
+The fourth item is not yet validated. It should be treated as a candidate regime modifier to stress-test, not a rule to retroactively impose.
+
