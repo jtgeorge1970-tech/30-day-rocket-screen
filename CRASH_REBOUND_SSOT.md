@@ -101,3 +101,20 @@ Status symbols:
 - Regime mix using prior-5-day SPY/IWM/RSP average: 82 mild risk-off, 11 broad risk-off, 7 mild risk-on.
 - Conservative pre-rebound classification: 15 Probable Overreaction, 13 Justified, 72 Uncertain. Classification used only contemporaneous announcement/catalyst information and did not use post-crash outcomes.
 - Preliminary result: unlike August, March does NOT show the same early long-vs-short separation. Probable Overreaction median raw returns were -0.17% Day 1, -3.77% Day 5, -6.84% Day 10; median excess vs SPY was -0.26%, -5.04%, -7.06%. This suggests market regime and/or classification refinement materially matters. Do not define the final trigger from August alone.
+
+## April 2026 strong risk-on development cohort
+- Purpose: complete the intended development-regime spectrum before freezing the framework.
+- Source cohort: 100/100 StockTitan April 2026 ranked losers reconstructed.
+- Outcomes: crash-date bars 100/100; Day 1/3/5/10/20/30 available for 99/100; missing cells remain blank rather than guessed.
+- Market context attached per crash: SPY, IWM, RSP and QQQ crash-day and prior-5-day returns, plus forward SPY/IWM/RSP returns and stock excess returns through Day 30.
+- Regime mix using prior-5-day SPY/IWM/RSP average: 29 broad risk-on, 40 mild risk-on, 31 mild risk-off.
+- Conservative pre-rebound classification: 11 Probable Overreaction, 21 Justified, 68 Uncertain.
+- April Probable Overreaction medians: Day 1 +3.64%, Day 3 +1.06%, Day 5 +1.01%, Day 10 -1.45%, Day 20 -3.64%, Day 30 -4.23%.
+- April Justified medians: Day 1 0.00%, Day 3 +4.41%, Day 5 -0.10%, Day 10 +5.49%, Day 20 +2.20%, Day 30 +6.59%.
+
+## Development framework freeze after April cohort
+- Development months now include March, April, August, and September 2026. Do not add or remove development months merely because their results are favorable or unfavorable.
+- Do not change the pre-rebound classification labels after reviewing post-crash outcomes. Any future rule refinement must be documented as a new candidate rule before out-of-sample validation.
+- Current pooled classified sample across four months: 400 crash events = 70 Probable Overreaction, 65 Justified, 265 Uncertain.
+- Pooled available raw medians (unequal horizon maturity must be respected): Probable Overreaction Day 1 +0.68%, Day 3 -0.69%, Day 5 -2.74%, Day 10 -4.18%; Justified Day 1 -1.09%, Day 3 -0.95%, Day 5 -0.72%, Day 10 -1.03%; Uncertain Day 1 -0.64%, Day 3 -1.27%, Day 5 -0.71%, Day 10 -2.78%.
+- Interpretation: the simple three-way headline classification alone is not sufficient as a universal standalone long/short trigger. Market regime appears material and must be tested explicitly in Step 3 rather than tuned retrospectively.
