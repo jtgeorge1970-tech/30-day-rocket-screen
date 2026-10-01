@@ -92,3 +92,12 @@ Status symbols:
 - September availability as of 2026-09-30: Day 10 = 58/100, Day 20 = 7/100, Day 30 = 0/100. These are preserved as pending future observations.
 - Existing Day 1 / 3 / 5 fields remain unchanged.
 - Preliminary August high-confidence separation remains strongest through Day 10; longer-horizon medians weaken materially by Day 20/30, so the current signal looks more like an early-rebound effect than a persistent 30-day drift. This is exploratory development evidence, not a final trigger.
+
+## March 2026 risk-off development cohort
+- Purpose: test whether the crash-classification effect survives materially different market conditions from August/September.
+- Source cohort: 100/100 StockTitan March 2026 ranked losers reconstructed; integrity gate passed.
+- Outcomes: Day 1/3/5 complete for 100/100; Day 10/20/30 complete for 99/100; one later-history gap remains blank rather than guessed.
+- Market context attached per crash: SPY, IWM, RSP and QQQ crash-day and prior-5-day returns; forward SPY/IWM/RSP returns and stock excess returns through Day 30.
+- Regime mix using prior-5-day SPY/IWM/RSP average: 82 mild risk-off, 11 broad risk-off, 7 mild risk-on.
+- Conservative pre-rebound classification: 15 Probable Overreaction, 13 Justified, 72 Uncertain. Classification used only contemporaneous announcement/catalyst information and did not use post-crash outcomes.
+- Preliminary result: unlike August, March does NOT show the same early long-vs-short separation. Probable Overreaction median raw returns were -0.17% Day 1, -3.77% Day 5, -6.84% Day 10; median excess vs SPY was -0.26%, -5.04%, -7.06%. This suggests market regime and/or classification refinement materially matters. Do not define the final trigger from August alone.
