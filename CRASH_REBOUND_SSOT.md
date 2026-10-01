@@ -15,11 +15,11 @@ Status symbols:
 
 ## Original seven processing steps
 
-1. 🟡 Finish Stage 1 classification on the existing September sample
+1. ✅ Finish Stage 1 classification on the existing September sample
    - Classification buckets: Probable Overreaction / Uncertain / Justified
-   - Current issue: the complete September working dataset must be recovered/rebuilt and verified before this step can be completed.
+   - September source reconstruction and pre-rebound classification are complete at 100/100.
 
-2. 🔴 Finish the outcome fields for every classified crash
+2. 🟡 Finish the outcome fields for every classified crash
    - Crash %
    - Catalyst
    - Close position in day range
@@ -29,7 +29,7 @@ Status symbols:
    - 5-day rebound
    - Maximum additional downside
 
-3. 🔴 Run the first real separation test
+3. 🟡 Run the first real separation test
    - Compare Probable Overreaction vs Justified
    - Rebound frequency
    - Median rebound
@@ -73,9 +73,9 @@ Status symbols:
 
 ## Current verified project status
 - Step 1: ✅ COMPLETE — September source dataset reconstruction is 100/100 and pre-rebound classification is 100/100. Consistency check passed: 100 rows, 100 unique ranks, no missing ranks, no duplicates.
-- Steps 2–7: 🔴 Not complete / not started.
-
 - Step 2: 🟡 Working — observable outcomes through 2026-09-30 populated. 75/100 rows have full 5-session outcome windows; 25/100 are pending future market sessions. Day-1 available for 93/100; Day-3 for 81/100; Day-5 for 75/100; max 5-day additional downside for 93/100.
+
+- Step 3: 🟡 Working — first regime-separation pass completed on the frozen 400-event development set. The simple classification and simple regime flag are not sufficient alone. The strongest current candidate intersection is Probable Overreaction + crash <= -30% + relative volume >= 5x (N=12): Day-5 median +12.47%, Day-10 median +12.78%, 75% positive at both horizons, median Day-10 excess vs SPY +8.12%, median max additional downside through Day 10 -5.75%. However March reverses after Day 3 while April/August drive the pooled strength, so this is not yet a universal trigger. Full details are locked in crash_rebound/stage3_regime_separation.md and crash_rebound/stage3_regime_separation.csv.
 
 ## Additional development cohort — August 2026
 - Purpose: compensate for the 25 late-September crashes whose full five-session outcomes do not yet exist, without deleting or changing any September case.
