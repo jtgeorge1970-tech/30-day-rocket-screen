@@ -156,3 +156,10 @@ The frozen Day-1 technical candidate was tested without threshold changes on unt
 Conclusion: the candidate does not validate out of sample and must not be promoted as a trading trigger. Do not retune on 2025 and relabel it as validation.
 Detailed report: crash_rebound/oos_2025_validation_report.md
 
+## Project termination decision
+- User decision: STOP / KILL the Crash Rebound project.
+- Reason: the original headline-based overreaction thesis failed to replicate in the larger targeted expansion sample, and the later Day-1 technical approach showed some positive pockets but not a sufficiently robust, low-risk, executable edge to justify continued development.
+- Important integrity note: this is a project termination decision, NOT a claim that formal Step 6 out-of-sample validation or Step 7 final evidence package was completed.
+- Do not revive or present the earlier 8-case development pocket, RSP breadth interaction, or headline-classification candidate as validated.
+- The project is closed as NO-GO for further development unless the user explicitly reopens it with a new hypothesis.
+
