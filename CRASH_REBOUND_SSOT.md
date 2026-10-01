@@ -72,5 +72,5 @@ Status symbols:
 - If a required source is missing, mark the step blocked/working rather than infer completion.
 
 ## Current verified project status
-- Step 1: 🟡 Working — September source dataset reconstruction is COMPLETE at 100/100 verified ranked rows. Pre-rebound classification: 75/100 completed and committed with evidence and confidence labels.
+- Step 1: ✅ COMPLETE — September source dataset reconstruction is 100/100 and pre-rebound classification is 100/100. Consistency check passed: 100 rows, 100 unique ranks, no missing ranks, no duplicates.
 - Steps 2–7: 🔴 Not complete / not started.
