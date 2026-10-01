@@ -1,0 +1,84 @@
+name: Crash Rebound Targeted Expansion Sources
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/crash-rebound-targeted-expansion.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build untouched 2026 source cohorts
+        shell: python
+        run: |
+          import csv, re, pathlib, urllib.request
+
+          months = {
+              "01":"january",
+              "02":"february",
+              "05":"may",
+              "06":"june",
+              "07":"july",
+          }
+          rank_re = re.compile(r"(?m)^(\d{1,3})\[([A-Z][A-Z0-9]{0,5})\]\([^\n)]+\).*?(-\d+(?:\.\d+)?)%(\d{2}/\d{2}/2026) against")
+          catalysts=[
+              "Clinical Trial Results","Offering / Dilution","FDA & Regulatory",
+              "M&A / Acquisition","Contract / Partnership","Buyback / Dividend",
+              "Leadership Change","Uplisting / Compliance","Crypto & Treasury",
+              "Earnings","Other Announcement"
+          ]
+
+          for mm,name in months.items():
+              src=f"https://r.jina.ai/https://www.stocktitan.net/rankings/top-news/losers/2026-{mm}"
+              req=urllib.request.Request(src,headers={"User-Agent":"Mozilla/5.0"})
+              text=urllib.request.urlopen(req,timeout=60).read().decode("utf-8","replace")
+              if "100 Moves" not in text:
+                  raise SystemExit(f"{name}: expected 100 Moves title not found")
+              starts=list(rank_re.finditer(text))
+              byrank={}
+              for j,m in enumerate(starts):
+                  rank=int(m.group(1))
+                  if not 1 <= rank <= 100 or rank in byrank:
+                      continue
+                  block=text[m.start():(starts[j+1].start() if j+1 < len(starts) else len(text))]
+                  catalyst=""
+                  for cand in catalysts:
+                      if cand in block:
+                          catalyst=cand
+                          break
+                  links=re.findall(r"\[([^\]]+)\]\(https?://[^)]+\)",block)
+                  announcement=links[1] if len(links)>1 else ""
+                  byrank[rank]={
+                      "rank":rank,"ticker":m.group(2),"crash_date":m.group(4),
+                      "crash_pct":m.group(3),"catalyst":catalyst,
+                      "announcement":announcement,
+                      "source":f"StockTitan 2026-{mm} losers final board"
+                  }
+              out=[byrank[i] for i in range(1,101) if i in byrank]
+              if len(out)!=100:
+                  missing=[i for i in range(1,101) if i not in byrank]
+                  raise SystemExit(f"{name}: acceptance gate failed rows={len(out)} missing={missing}")
+              path=pathlib.Path(f"crash_rebound/expansion_2026_{mm}_source.csv")
+              with path.open("w",newline="") as f:
+                  w=csv.DictWriter(f,fieldnames=list(out[0].keys()))
+                  w.writeheader();w.writerows(out)
+              print(name, "ROWS", len(out), "FIRST", out[0]["ticker"], "LAST", out[-1]["ticker"])
+
+      - name: Commit source cohorts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add crash_rebound/expansion_2026_*_source.csv
+          git diff --cached --quiet && exit 0
+          git commit -m "Crash Rebound: build targeted expansion source cohorts"
+          git push
