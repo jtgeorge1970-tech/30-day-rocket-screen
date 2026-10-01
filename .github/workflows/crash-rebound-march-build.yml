@@ -23,7 +23,7 @@ jobs:
         run: |
           import csv, re, pathlib, urllib.request
 
-          src = "https://r.jina.ai/http://www.stocktitan.net/rankings/top-news/losers/2026-03"
+          src = "https://r.jina.ai/https://www.stocktitan.net/rankings/top-news/losers/2026-03"
           req = urllib.request.Request(src, headers={"User-Agent":"Mozilla/5.0"})
           text = urllib.request.urlopen(req, timeout=60).read().decode("utf-8","replace")
           if "100 ranked drops in March 2026" not in text:
