@@ -125,3 +125,24 @@ Status symbols:
 - Final Day-1 technical make-or-break test: the best executable technical candidate uses no news classification. Candidate = crash-day RV >=10x, Day 1 holds the crash low, Day 1 closes above crash-day midpoint, Day 1 gap > -5%, entry at Day-1 close, current development exit at Day-10 close. In the 22-case base, RV>=10x retained N=14 with 78.6% winners, median +9.81%, mean +11.29%, lower quartile +4.72%, worst -13.47%. Nearby RV thresholds (8x/12x/15x/20x) remained directionally positive, and leave-one-month-out medians stayed positive. January was weak (N=3, median 0%), and month-level Ns are small. Treat this as the strongest current executable technical candidate, not validated. Freeze before any true OOS test; do not reintroduce headline labels or retune after OOS.
 - TRUE OOS 2025 validation: frozen Day-1 technical trigger FAILED. Untouched 2025 universe = 1,200 source events; 205 passed the mechanical screen; 51 generated the frozen Day-1 signal. Day-10 post-entry win rate 41.2%, median -3.14%, median MAE -10.70%. Positive arithmetic mean was dominated by extreme outliers (e.g. OTLY +1705.74%, MNTS +884.23%, UNCY +876.98%). Removing the largest winner leaves median -4.68%; excluding >500% diagnostic outliers leaves median -6.59% and mean -2.51%. Do not promote this trigger. Any new variant is a new hypothesis requiring a different untouched validation set.
 - True untouched 2025 OOS validation: FAILED. Frozen technical rule was committed before outcomes. 1,200 source events -> 342 crashes >=30% -> 205 mechanical base-screen matches -> 51 full Day-1 triggers. From Day-1 close to Day-10 close: 41.2% positive, median -3.14%; median max adverse excursion -10.70%. Large positive outliers distort the mean, so median/win-rate remain the primary interpretation. This rule must not be promoted to live trading. Full report: crash_rebound/oos_2025_validation_report.md.
+
+## Frozen true out-of-sample technical validation rule
+Validation period: calendar year 2025. This period was not used to develop the Day-1 technical rule.
+
+The rule is frozen before viewing 2025 forward outcomes:
+- Crash magnitude >= 30%
+- Crash-day relative volume >= 5x prior-20-session median
+- RSP prior-5-session return > -1%
+- Day 1 low holds at or above the crash-day low
+- Day 1 close is above the crash-day midpoint
+- Day 1 opening gap versus crash close is better than -5%
+- Entry assumption: Day 1 close
+- Primary exits for evaluation: Day 5 and Day 10 closes
+- No news classification is used in the signal
+- No threshold changes are permitted after viewing the 2025 validation outcomes
+
+Acceptance logic:
+- The test is intended to determine whether a positive post-entry edge survives in a genuinely untouched period.
+- Results must be reported with sample size, win rate, median/mean post-entry return, downside distribution, and month concentration.
+- If the edge fails materially, do not retune on 2025 and call it validation.
+
