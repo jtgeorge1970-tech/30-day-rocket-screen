@@ -72,5 +72,5 @@ Status symbols:
 - If a required source is missing, mark the step blocked/working rather than infer completion.
 
 ## Current verified project status
-- Step 1: 🟡 Working — source dataset reconstruction underway. Verified source recovered: StockTitan September 2026 Stock Losers on News board. 60 of 100 ranked rows have been reconstructed, verified against the final September 30 board, and committed.csv` as of 2026-09-30.
+- Step 1: 🟡 Working — September source dataset reconstruction is COMPLETE at 100/100 verified ranked rows. Pre-rebound classification is now the active subtask.
 - Steps 2–7: 🔴 Not complete / not started.
