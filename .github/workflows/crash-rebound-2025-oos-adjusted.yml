@@ -1,0 +1,106 @@
+name: Crash Rebound 2025 OOS Adjusted Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/crash-rebound-2025-oos-adjusted.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -q yfinance pandas
+      - name: Run frozen 2025 validation on adjusted daily bars
+        shell: python
+        run: |
+          import glob, csv, math, time
+          import pandas as pd
+          import yfinance as yf
+
+          events=[]
+          for path in sorted(glob.glob("crash_rebound/oos_2025_*_source.csv")):
+              month=path.split("_")[-2]
+              with open(path,newline="") as f:
+                  for r in csv.DictReader(f):
+                      try: crash=float(r["crash_pct"])
+                      except: continue
+                      if crash<=-30:
+                          dt=pd.to_datetime(r["crash_date"]).date()
+                          r["month"]=month
+                          r["crash_date_iso"]=str(dt)
+                          events.append(r)
+
+          rsp=yf.download("RSP",start="2024-12-01",end="2026-02-02",auto_adjust=True,progress=False,threads=False)
+          if isinstance(rsp.columns,pd.MultiIndex): rsp.columns=rsp.columns.get_level_values(0)
+          rsp.index=pd.to_datetime(rsp.index).tz_localize(None).normalize()
+
+          def get_rsp5(dt):
+              dt=pd.Timestamp(dt)
+              if dt not in rsp.index: return None
+              pos=rsp.index.get_loc(dt)
+              if not isinstance(pos,(int,)): return None
+              if pos<5:return None
+              return (float(rsp.iloc[pos]["Close"])/float(rsp.iloc[pos-5]["Close"])-1)*100
+
+          out=[]
+          missing=[]
+          for n,r in enumerate(events,1):
+              sym=r["ticker"]
+              try:
+                  df=yf.download(sym,start="2024-12-01",end="2026-02-02",auto_adjust=True,progress=False,threads=False)
+                  if isinstance(df.columns,pd.MultiIndex): df.columns=df.columns.get_level_values(0)
+                  df.index=pd.to_datetime(df.index).tz_localize(None).normalize()
+                  dt=pd.Timestamp(r["crash_date_iso"])
+                  if dt not in df.index:
+                      missing.append((sym,r["crash_date_iso"],"no crash bar")); continue
+                  pos=df.index.get_loc(dt)
+                  if not isinstance(pos,(int,)) or pos<20 or pos+10>=len(df):
+                      missing.append((sym,r["crash_date_iso"],"insufficient window")); continue
+                  c=df.iloc[pos]; d1=df.iloc[pos+1]; d5=df.iloc[pos+5]; d10=df.iloc[pos+10]
+                  prior=df.iloc[pos-20:pos]
+                  medvol=float(prior["Volume"].median())
+                  rv=float(c["Volume"])/medvol if medvol>0 else None
+                  r5=get_rsp5(dt)
+                  if rv is None or rv<5 or r5 is None or r5<=-1: continue
+                  midpoint=(float(c["High"])+float(c["Low"]))/2
+                  gap=(float(d1["Open"])/float(c["Close"])-1)*100
+                  hold=float(d1["Low"])>=float(c["Low"])
+                  reclaim=float(d1["Close"])>midpoint
+                  if not (hold and reclaim and gap>-5): continue
+                  entry=float(d1["Close"])
+                  d5ret=(float(d5["Close"])/entry-1)*100
+                  d10ret=(float(d10["Close"])/entry-1)*100
+                  d10low=min((float(df.iloc[k]["Low"])/entry-1)*100 for k in range(pos+2,pos+11))
+                  out.append({
+                      "month":r["month"],"ticker":sym,"crash_date":r["crash_date_iso"],
+                      "crash_pct_source":r["crash_pct"],"crash_rv_adj":round(rv,2),
+                      "rsp_prior5_pct":round(r5,2),"d1_gap_pct":round(gap,2),
+                      "entry_day1_close_adj":round(entry,6),
+                      "day5_from_entry_pct":round(d5ret,2),
+                      "day10_from_entry_pct":round(d10ret,2),
+                      "max_additional_downside_day10_pct":round(d10low,2)
+                  })
+              except Exception as e:
+                  missing.append((sym,r["crash_date_iso"],str(e)[:120]))
+              if n%25==0: time.sleep(1)
+
+          pd.DataFrame(out).to_csv("crash_rebound/oos_2025_validation_adjusted.csv",index=False)
+          pd.DataFrame(missing,columns=["ticker","date","reason"]).to_csv("crash_rebound/oos_2025_validation_missing.csv",index=False)
+          print("crash>=30 events",len(events),"qualifiers",len(out),"missing",len(missing))
+      - name: Commit validation outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add crash_rebound/oos_2025_validation_adjusted.csv crash_rebound/oos_2025_validation_missing.csv
+          git diff --cached --quiet && exit 0
+          git commit -m "Crash Rebound: run frozen 2025 adjusted OOS validation"
+          git push
