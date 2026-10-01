@@ -76,3 +76,11 @@ Status symbols:
 - Steps 2–7: 🔴 Not complete / not started.
 
 - Step 2: 🟡 Working — observable outcomes through 2026-09-30 populated. 75/100 rows have full 5-session outcome windows; 25/100 are pending future market sessions. Day-1 available for 93/100; Day-3 for 81/100; Day-5 for 75/100; max 5-day additional downside for 93/100.
+
+## Additional development cohort — August 2026
+- Purpose: compensate for the 25 late-September crashes whose full five-session outcomes do not yet exist, without deleting or changing any September case.
+- August source cohort: 100/100 ranked events reconstructed; integrity check passed (100 rows, 100 unique ranks, no missing ranks, no duplicates).
+- August mature outcomes: 100/100 have Day-1, Day-3, Day-5, and five-session maximum additional downside from Alpaca IEX daily bars.
+- Close position in crash-day range: 100/100 available.
+- Relative volume vs prior-20-session median (IEX): 99/100 available; XTNT lacks enough usable prior IEX volume history for this derived field and remains blank rather than guessed.
+- August remains DEVELOPMENT data only. It is not the frozen out-of-sample validation set for Step 6.
