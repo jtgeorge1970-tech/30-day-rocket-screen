@@ -146,3 +146,13 @@ Acceptance logic:
 - Results must be reported with sample size, win rate, median/mean post-entry return, downside distribution, and month concentration.
 - If the edge fails materially, do not retune on 2025 and call it validation.
 
+## 2025 true OOS result — candidate failed
+The frozen Day-1 technical candidate was tested without threshold changes on untouched calendar-year 2025 data using a split-adjusted daily-bar validation feed.
+- 50 complete qualifiers across 11 months
+- Day-5 win rate 36.0%, median -3.25%, mean -2.27%
+- Day-10 win rate 38.0%, median -6.79%, mean -1.85%
+- Day-10 median maximum additional downside -13.50%
+- Worst Day-10 maximum additional downside -55.29%
+Conclusion: the candidate does not validate out of sample and must not be promoted as a trading trigger. Do not retune on 2025 and relabel it as validation.
+Detailed report: crash_rebound/oos_2025_validation_report.md
+
