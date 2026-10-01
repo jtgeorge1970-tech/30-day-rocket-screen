@@ -85,3 +85,10 @@ Status symbols:
 - Relative volume vs prior-20-session median (IEX): 99/100 available; XTNT lacks enough usable prior IEX volume history for this derived field and remains blank rather than guessed.
 - August pre-rebound classification is COMPLETE at 100/100 using a conservative acceptance gate: 11 Probable Overreaction, 6 Justified, 83 Uncertain. Only clearly supported cases were forced into directional buckets; ambiguous earnings/clinical/other events remained Uncertain.
 - August remains DEVELOPMENT data only. It is not the frozen out-of-sample validation set for Step 6.
+
+## Extended rebound horizons — Day 10 / 20 / 30
+- Added to both August and September outcome tables: Day 10, Day 20, Day 30 return from crash close, plus maximum additional downside through Day 10, Day 20, and Day 30.
+- August availability as of 2026-09-30: Day 10 = 99/100, Day 20 = 99/100, Day 30 = 85/100. The missing late-horizon cells are future-dependent or lack usable market bars and remain blank rather than guessed.
+- September availability as of 2026-09-30: Day 10 = 58/100, Day 20 = 7/100, Day 30 = 0/100. These are preserved as pending future observations.
+- Existing Day 1 / 3 / 5 fields remain unchanged.
+- Preliminary August high-confidence separation remains strongest through Day 10; longer-horizon medians weaken materially by Day 20/30, so the current signal looks more like an early-rebound effect than a persistent 30-day drift. This is exploratory development evidence, not a final trigger.
