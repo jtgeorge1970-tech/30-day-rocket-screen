@@ -26,54 +26,40 @@ jobs:
           src = "https://r.jina.ai/https://www.stocktitan.net/rankings/top-news/losers/2026-03"
           req = urllib.request.Request(src, headers={"User-Agent":"Mozilla/5.0"})
           text = urllib.request.urlopen(req, timeout=60).read().decode("utf-8","replace")
-          if "100 ranked drops in March 2026" not in text:
-              print("FETCH_PREFIX_START")
-              print(text[:5000])
-              print("FETCH_PREFIX_END")
-              raise SystemExit("Expected March board marker not found")
+          if "March 2026 Stock Losers on News: 100 Moves" not in text:
+              raise SystemExit("Expected March board title not found")
 
-          # Normalize lines and parse each ranked block from rank start to next rank start.
-          lines = text.splitlines()
-          starts=[]
-          for i,line in enumerate(lines):
-              m=re.match(r"^\s*(\d{1,3})\s*\|\s*", line)
-              if m and 1 <= int(m.group(1)) <= 100:
-                  starts.append((i,int(m.group(1))))
-          # Deduplicate by rank, preserving first ranked table occurrence.
+          # Jina's markdown collapses each rank header into a single line:
+          # 1[IMMP](... )release reads positive-82.44%03/13/2026 against ...
+          rank_re = re.compile(r"(?m)^(\d{1,3})\[([A-Z][A-Z0-9]{0,5})\]\([^\n)]+\).*?(-\d+(?:\.\d+)?)%(\d{2}/\d{2}/2026) against")
+          starts=list(rank_re.finditer(text))
           byrank={}
-          for j,(i,rank) in enumerate(starts):
-              if rank in byrank: continue
-              end=starts[j+1][0] if j+1 < len(starts) else len(lines)
-              block="\n".join(lines[i:end])
-              head=lines[i]
-              parts=[p.strip() for p in head.split("|")]
-              if len(parts) < 6: continue
-              ticker_match=re.search(r"\b([A-Z][A-Z0-9]{0,5})\b", parts[1])
-              move=re.search(r"(-\d+(?:\.\d+)?)%", parts[2])
-              date=re.search(r"(\d{2}/\d{2}/2026)\s+against", parts[3])
-              d1=re.search(r"Day \+1\s+([+-]?\d+(?:\.\d+)?)%", block)
-              d5=re.search(r"Day \+5\s+([+-]?\d+(?:\.\d+)?)%", block)
-              best=re.search(r"Best recovery within 5\s+([+-]?\d+(?:\.\d+)?)%", block)
-              cb=re.search(r"Close before and after\s*\n\s*\$?([0-9.]+)\s+to\s+\$?([0-9.]+)", block)
-              rp=re.search(r"Close inside the session range\s*\n\s*([0-9.]+)\s+of the range", block)
-              rv=re.search(r"Relative volume\s*\n\s*(?:over\s+)?([0-9,.]+)x", block)
-              catalyst=parts[4]
-              catalyst=re.sub(r"\s+Release reads positive.*$","",catalyst).strip()
-              announcement=parts[5]
+          catalysts=[
+              "Clinical Trial Results","Offering / Dilution","FDA & Regulatory",
+              "M&A / Acquisition","Contract / Partnership","Buyback / Dividend",
+              "Leadership Change","Uplisting / Compliance","Crypto & Treasury",
+              "Earnings","Other Announcement"
+          ]
+          for j,m in enumerate(starts):
+              rank=int(m.group(1))
+              if not 1 <= rank <= 100 or rank in byrank:
+                  continue
+              block=text[m.start():(starts[j+1].start() if j+1 < len(starts) else len(text))]
+              catalyst=""
+              for cand in catalysts:
+                  if cand in block:
+                      catalyst=cand
+                      break
+              # First linked headline after the ticker link.
+              links=re.findall(r"\[([^\]]+)\]\(https?://[^)]+\)", block)
+              announcement=links[1] if len(links)>1 else ""
               byrank[rank]={
                   "rank":rank,
-                  "ticker":ticker_match.group(1) if ticker_match else "",
-                  "crash_date":date.group(1) if date else "",
-                  "crash_pct":move.group(1) if move else "",
+                  "ticker":m.group(2),
+                  "crash_date":m.group(4),
+                  "crash_pct":m.group(3),
                   "catalyst":catalyst,
                   "announcement":announcement,
-                  "pre_close":cb.group(1) if cb else "",
-                  "crash_close":cb.group(2) if cb else "",
-                  "range_position":rp.group(1) if rp else "",
-                  "relative_volume":rv.group(1).replace(",","") if rv else "",
-                  "day1_vs_preclose":d1.group(1) if d1 else "",
-                  "day5_vs_preclose":d5.group(1) if d5 else "",
-                  "best5_vs_preclose":best.group(1) if best else "",
                   "source":"StockTitan Mar 2026 losers final board"
               }
 
