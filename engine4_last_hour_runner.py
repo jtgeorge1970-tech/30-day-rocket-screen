@@ -128,8 +128,19 @@ def score_pool(seed,date_s):
         room=(resistance/px-1)*100 if math.isfinite(resistance) else 10.0
         sector_ret=rets.get(SECTOR_ETF.get(row.get("sector")),market)
         cat,headline,age,cat_source=runner.provider_catalyst_with_source(s,reference,row.get("name"))
-        bid,ask,spread,spread_source=runner.quote_spread_with_source(s)
-        auth=spread_source in {"Nasdaq quote","Yahoo quote fallback"}
+        # Historical snapshot integrity: a quote fetched after the requested
+        # last-hour window must never be presented as the spread at that window.
+        # For the current live session, the existing real-time-capable quote path
+        # remains valid. Historical windows require timestamp-aligned quote data;
+        # until such data is available, mark spread evidence unverified.
+        is_current_live = date_et == core.now_et().date() and core.now_et().time() <= time(16, 0)
+        if is_current_live:
+            bid,ask,spread,spread_source=runner.quote_spread_with_source(s, allow_delayed=False)
+            auth=spread_source in {"Nasdaq quote","Yahoo quote fallback"}
+        else:
+            bid=ask=spread=math.nan
+            spread_source="UNVERIFIED_HISTORICAL_WINDOW"
+            auth=False
         row.update({"premarket_rvol":rvol,"premarket_volume_metric_source":"historical_last_hour_rvol" if math.isfinite(rvol) else "last_hour_volume_pct_adv",
           "premarket_volume_gate_pass":bool(volume_gate),"atr_pct":atr_pct,"resistance_price":resistance,
           "resistance_room_pct":room,"market_relative_strength_pct":finite(row.get("last_hour_return_pct"),0)-market,
