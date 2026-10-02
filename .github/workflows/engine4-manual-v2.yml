@@ -16,8 +16,56 @@ jobs:
     timeout-minutes: 260
     permissions:
       contents: read
+      actions: write
     steps:
       - uses: actions/checkout@v4
+      - name: Clean requested prior run outputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, shutil, time, urllib.request
+          from pathlib import Path
+          from datetime import datetime, timezone
+          fields = dict(line.split("=", 1) for line in Path(".github/engine4-manual-v2-trigger.txt").read_text().splitlines() if "=" in line)
+          repo = os.environ["GITHUB_REPOSITORY"]
+          current = int(os.environ["GITHUB_RUN_ID"])
+          token = os.environ["GH_TOKEN"]
+          def api(path, method="GET"):
+              req = urllib.request.Request("https://api.github.com/repos/" + repo + path, method=method,
+                  headers={"Authorization": "Bearer " + token, "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"})
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  data = response.read()
+                  return json.loads(data) if data else None
+          deleted = []
+          for value in filter(None, fields.get("purge_run_ids", "").split(",")):
+              old = int(value)
+              if old == current:
+                  raise RuntimeError("Refusing to purge current run")
+              for attempt in range(12):
+                  info = api(f"/actions/runs/{old}")
+                  if info["status"] == "completed":
+                      break
+                  time.sleep(5)
+              if info["status"] != "completed" or info["conclusion"] not in {"cancelled", "failure", "timed_out"}:
+                  raise RuntimeError(f"Refusing to purge nonfailed or active run {old}")
+              while True:
+                  artifacts = api(f"/actions/runs/{old}/artifacts?per_page=100")["artifacts"]
+                  if not artifacts:
+                      break
+                  for artifact in artifacts:
+                      api(f"/actions/artifacts/{artifact['id']}", "DELETE")
+                      deleted.append({"run_id": old, "artifact_id": artifact["id"], "name": artifact["name"]})
+          out = Path("output/engine4")
+          if out.exists():
+              shutil.rmtree(out)
+          out.mkdir(parents=True)
+          manifest = {"run_id": current, "reset_at_utc": datetime.now(timezone.utc).isoformat(),
+              "prior_engine4_outputs_removed": True, "deleted_artifacts": deleted,
+              "bench_state_preserved_for_fresh_rescoring": True}
+          (out / "fresh_start_manifest.json").write_text(json.dumps(manifest, indent=2))
+          print(json.dumps(manifest, indent=2))
+          PY
       - uses: actions/setup-python@v5
         with: {python-version: '3.12', cache: pip}
       - run: pip install -r requirements.txt pytest
