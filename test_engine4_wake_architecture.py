@@ -19,12 +19,14 @@ def test_early_controller_has_seasonal_guard_and_dispatch_proof():
     assert "engine4_notify.py preflight" in workflow
     assert "engine4_notify.py launch" in workflow
 
-def test_primary_wake_has_retries_and_manual_dispatch_entry():
+def test_primary_wake_retries_cannot_cancel_active_live_cycle():
     workflow=(ROOT/".github/workflows/engine4-production.yml").read_text()
     assert "cron: '5,10,15,20 12 * * 1-5'" in workflow
     assert "cron: '5,10,15,20 13 * * 1-5'" in workflow
     assert "workflow_dispatch:" in workflow
-    assert "cancel-in-progress: true" in workflow
+    assert "group: engine4-production" in workflow
+    assert "cancel-in-progress: false" in workflow
+    assert "timeout-minutes: 260" in workflow
 
 def test_watchdog_has_seasonal_guard_and_intervention_notification():
     workflow=(ROOT/".github/workflows/engine4-watchdog.yml").read_text()
