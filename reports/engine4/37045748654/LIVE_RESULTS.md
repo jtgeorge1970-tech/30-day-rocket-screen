@@ -2,7 +2,7 @@
 
 Golden Rules: never guess; no shortcuts; follow the SSOT exactly; verify before reporting.
 
-**STATUS: INCOMPLETE — Stage 3 passed; Bench processing running.** This is a current-run stage report, not terminal completion or a buy order.
+**TERMINAL WORKFLOW STATUS: SUCCESS — completed October 2, 2026 at 15:52:48 Eastern. PRIMARY RESULT: NO_TRADE / NO_ORDER.** All required workflow stages finished; the afternoon run's opening-window and expired-recovery limitations are disclosed below.
 
 [Live workflow](https://github.com/jtgeorge1970-tech/30-day-rocket-screen/actions/runs/37045748654)
 
@@ -537,15 +537,60 @@ ON 90.982/A is the only frozen finalist. LQDA was not in the refreshed retained 
 | 59 | CVSA | 0 | 1.482 | 15 | 3.008 | 0.982 | 1.881 | 2.585 | 3.676 |
 | 60 | DXYZ | 0 | 0.497 | 15 | 0.786 | 0.553 | 2.823 | 5 | 2.457 |
 
-## Pending stages and timing distinction
+## Verified terminal stages and results
 
-Bench: RUNNING. Prior carried identity KMX is pending fresh rescoring; its September 29 score is not current eligibility. Cap 25, no age expiry in this build.
+| Stage | Actual start Eastern | Actual completion Eastern | Result |
+|---|---|---|---|
+| Stage 1 broad prescreen | 14:12:30.303343 | 14:42:47.965994 | PASSED |
+| Stage 2 deep scoring | 14:42:49.675755 | 14:48:59.030501 | PASSED |
+| Stage 3 refresh/rank | 14:49:10.376605 | 15:25:45.129506 | PASSED |
+| Freeze | 15:25:45.127892 | 15:25:45.130613 | 1 finalist |
+| Stage 3B Bench | 15:25:46.867278 | 15:52:15.891691 | PASSED and persisted |
+| Stage 4 primary | 15:52:25.505264 | 15:52:29.471669 | NO_TRADE |
+| Stage 5 recovery | 15:52:43.741143 | 15:52:43.742694 | TIMEOUT: window already expired |
+| Completion on-screen record | — | 15:52:44 | SAVED_ONSCREEN |
+| GitHub terminal conclusion | 14:11:21 | 15:52:48 | success |
 
-SELECTION: Frozen ON 90.982/A. PRIMARY ENTRY: PENDING. RECOVERY: PENDING. EXECUTION: PENDING; no broker fill verified.
+Times are October 2, 2026, America/New_York. Workflow: Engine 4 Manual V2 Hardened; event push; run 37045748654; job live / 110966770770; exact source commit e1629b17880ffcd038689cad0dc1fe3a0a390bba.
 
-The locked Stage 4 structure calculation uses today's 09:30–09:45 opening window, followed by a current quote check only if those structure gates pass. This is opening-window context, not proof of a newly formed afternoon setup. The current manual selection prices do satisfy the fresh-request boundary; do not conflate that with all structural observations being afternoon observations.
+### Every Bench identity and change
 
-Final verification, final upload, persisted Bench verification and terminal GitHub conclusion: PENDING.
+Configured cap 25 is a limit, not a quota. No age expiry: max_watch_sessions=null, policy score_and_mandatory_gates_only. Competition universe 2; freshly scored 2; naturally qualified 1; retained by cap 1; Hot 1 / Developing 0 / Reserve 0. Missing current data: none. No promotions/demotions.
+
+| Symbol | Current score/grade | Change | Reason/status |
+|---|---|---|---|
+| ON | 90.662 / A | Added and retained, rank 1 | HOT / HOT_WATCH; current_score_85_plus |
+| KMX | 48.496 / current grade unavailable | Removed | below_current_B_grade |
+
+ON Bench snapshot: fresh Yahoo intraday bar 15:25 ET, selection price 84.04499816894531; Nasdaq quote bid 84.73 / ask 84.76; spread 0.03540031860286877%; quote observation timestamp unavailable. Premarket volume 957026; historical_premarket_rvol 8.062696928339147; Google News RSS recorded Yahoo Finance headline “ON Semiconductor, Synaptics stocks jump on revised merger deal.” Screening failures empty. Bench state read back from main matches this complete artifact exactly.
+
+LQDA passed initial deep screening at 83.539/B but is absent from the refreshed retained Top-100. It was not rescored in Stage 3 and was not in the prior-Bench-plus-frozen competition. A current failed gate or sub-80 refreshed score cannot be inferred.
+
+### SELECTION / PRIMARY ENTRY / RECOVERY / EXECUTION
+
+- SELECTION: one frozen finalist, ON 90.982/A, B-or-better screening gates passed. Frozen selection snapshot 14:49 ET; price 83.48999786376953. Nasdaq quote bid 83.77 / ask 83.79, spread 0.02387204582954825%; observation timestamp unavailable. Recorded catalyst: Google News RSS / Yahoo Finance merger headline; historical premarket volume 957026 and RVOL 8.062696928339147. Headline source is recorded evidence, not an independent verification of the publisher article's full contents.
+- PRIMARY ENTRY: NO_TRADE, exact reason no_live_entry_setup_recovery_watch_active. ON failed below_vwap, not_attacking_breakout, breakout_volume_not_expanding. Structure last 84.88999938964844; VWAP 85.09798873091108; opening-range high 86.44999694824219. Higher low true; tight base false; breakout volume ratio 1.148474821306706; pullback volume ratio 0.242852189538279.
+- Rejected reference levels, NOT BUY ORDERS: entry trigger 86.4932219467163, initial stop 85.01289074218018, first target 90.19404995805662, reward/risk 2.5. No order quantity was issued.
+- Final audit quote: bid 84.81 / ask 84.84, spread 0.0353669319186574%; this audit does not record the quote provider or observation timestamp. The separate frozen/Bench quote source is Nasdaq.
+- RECOVERY: actual watch count 1, ON; configured watch cap 5. TIMEOUT, reason recovery_window_expired. The 11:30 ET deadline had already passed, so this afternoon run did not perform an active recovery polling interval.
+- EXECUTION: NO_ORDER. No actionable BUY/ARM instruction, broker order, or fill verified.
+
+### Observation timing — material limits
+
+Fresh manual selection prices were captured after the 14:11:18.756 ET request. Historical premarket activity remains earlier-session context. The locked Stage 4 structure calculation uses today's 09:30–09:45 opening window, with a current quote included in the final audit. Therefore its structural rejection is not proof that no new afternoon setup exists. Stage 5 closed immediately because its locked 11:30 deadline was already expired; the generic notification saying “no valid trigger before 11:30” must not be interpreted as actual monitoring of that earlier interval.
+
+### Provider, artifacts, tests and notifications
+
+Provider health PASS at 15:52:43.740151 ET for locked date 2026-10-02: Nasdaq premarket, Nasdaq quote, Cboe delayed quote, Google news, Bing news, Nasdaq news all passed the provider proof. Provider proof is not independent validation of every headline or an assertion that every candidate quote has a recorded timestamp.
+
+Live compile/test/provider step passed; live unit log: 54 passed in 2.13s. All required stage order/date/artifact invariant checks passed; ENGINE4_FULL_INVARIANT_PASS recorded twice at 15:52:43.966 and 15:52:44.050 ET.
+
+All 8 notification audit records match run 37045748654/date 2026-10-02 and SAVED_ONSCREEN: start 14:12:21; prescreen 14:42:48; deep 14:48:59; freeze 15:25:45; Bench 15:52:16; primary 15:52:29; recovery 15:52:43; completion 15:52:44. SMS was not attempted. SMS API acceptance for both recipients is NOT ATTEMPTED, not a verified rejection. The original automatic complete report's “degraded/rejection” wording is inaccurate for this on-screen-only run; original evidence is preserved unchanged and corrected here.
+
+Six artifacts for this exact run/source commit were uploaded and exported: Stage 1 11245746345; Stage 2 11245554741; Stage 3 11247483964; Bench 11247929416; Stage 4 11248139336; complete 11248763892. Complete upload 15:52:44 ET. Dated JSON, ordered timeline and persisted Bench verified. Recorded GitHub digests are in the manifest; no independent digest recomputation is claimed.
+
+Exact terminal conclusion: **GitHub completed / success.** Required workflow completed with no failed step. Primary NO_TRADE / NO_ORDER; recovery TIMEOUT because window already expired. No claim of an active afternoon recovery watch or verified afternoon buy setup.
+
 
 ## Baseline metadata coverage
 
@@ -553,4 +598,4 @@ Stage 1 captured CSV has 1,975 distinct symbols. Recorded market-cap bins: below
 
 ## Source snapshots
 
-[Stage 1](engine4-manual-v2-stage1-37045748654/), [Stage 2](engine4-manual-v2-stage2-37045748654/), [Stage 3](engine4-manual-v2-stage3-37045748654/), [manifest](export_manifest.json).
+[Stage 1](engine4-manual-v2-stage1-37045748654/), [Stage 2](engine4-manual-v2-stage2-37045748654/), [Stage 3](engine4-manual-v2-stage3-37045748654/), [Bench](engine4-manual-v2-bench-37045748654/), [Stage 4](engine4-manual-v2-stage4-37045748654/), [Complete evidence](engine4-manual-v2-complete-37045748654/), [manifest](export_manifest.json).
