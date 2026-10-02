@@ -1,0 +1,13 @@
+{
+  "delivery": "SAVED_ONSCREEN",
+  "marker": "ENGINE4-ALERT:2026-10-02:complete:COMPLETE:SYSTEM:RUN:37045748654",
+  "kind": "complete",
+  "status": "COMPLETE",
+  "ticker": "SYSTEM",
+  "target_date_et": "2026-10-02",
+  "generated_et": "2026-10-02 03:52:44 PM ET",
+  "run_id": "37045748654",
+  "message": "ENGINE 4 MANUAL RUN COMPLETE \u2014 every required stage finished for 2026-10-02 ET and all dated artifacts were verified.",
+  "notification_text": "ENGINE 4 COMPLETE: COMPLETE \u2014 SYSTEM\nENGINE 4 MANUAL RUN COMPLETE \u2014 every required stage finished for 2026-10-02 ET and all dated artifacts were verified.\nRun 37045748654\nGenerated 2026-10-02 03:52:44 PM ET\nConfirm the live broker quote before any order.",
+  "dry_run": false
+}

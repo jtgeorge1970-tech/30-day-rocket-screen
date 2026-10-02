@@ -1,0 +1,11 @@
+ENGINE 4 DEEP: COMPLETED — MARKET
+STAGE 2 DEEP ANALYSIS COMPLETE — 2026-10-02 ET
+Selected by Top-60 cap 60; actually analyzed 60.
+>=80 2; launchpad eligible 2; B 1; strict A/A+ 1.
+Leaders: #1 ON 91.122/A ELIGIBLE; #2 LQDA 83.539/B ELIGIBLE
+ALL >=80 CANDIDATES (survivors AND rejects):
+ON — score=91.122 grade=A eligible=True status=N/A failures=NONE
+LQDA — score=83.539 grade=B eligible=True status=N/A failures=NONE
+Run 37045748654
+Generated 2026-10-02 02:48:59 PM ET
+Confirm the live broker quote before any order.

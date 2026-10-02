@@ -1,0 +1,10 @@
+{
+  "status": "NO_TRADE",
+  "reason": "no_live_entry_setup_recovery_watch_active",
+  "message": "NO PRIMARY TRADE \u2014 no B-or-better candidate passed all required live entry gates. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.",
+  "order_instruction": "NO_ORDER",
+  "max_tradable_price": 100.0,
+  "runtime_seconds": 3.965,
+  "target_date_et": "2026-10-02",
+  "generated_at_utc": "2026-10-02T19:52:29.471086+00:00"
+}

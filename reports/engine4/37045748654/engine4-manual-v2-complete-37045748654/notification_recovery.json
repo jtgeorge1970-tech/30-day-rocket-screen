@@ -1,0 +1,13 @@
+{
+  "delivery": "SAVED_ONSCREEN",
+  "marker": "ENGINE4-ALERT:2026-10-02:recovery:TIMEOUT:MARKET:RUN:37045748654",
+  "kind": "recovery",
+  "status": "TIMEOUT",
+  "ticker": "MARKET",
+  "target_date_et": "2026-10-02",
+  "generated_et": "2026-10-02 03:52:43 PM ET",
+  "run_id": "37045748654",
+  "message": "RECOVERY WATCH CLOSED \u2014 no valid second-chance trigger before 11:30 ET.",
+  "notification_text": "ENGINE 4 RECOVERY: TIMEOUT \u2014 MARKET\nRECOVERY WATCH CLOSED \u2014 no valid second-chance trigger before 11:30 ET.\nRun 37045748654\nGenerated 2026-10-02 03:52:43 PM ET\nConfirm the live broker quote before any order.",
+  "dry_run": false
+}

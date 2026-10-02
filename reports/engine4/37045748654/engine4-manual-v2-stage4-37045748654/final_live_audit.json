@@ -1,0 +1,61 @@
+{
+  "target_date_et": "2026-10-02",
+  "generated_at_utc": "2026-10-02T19:52:29.470351+00:00",
+  "max_tradable_price": 100.0,
+  "market": {
+    "SPY_ret": 0.13560991551568868,
+    "SPY_last": 771.625,
+    "SPY_vwap": 770.4905746994963,
+    "SPY_last5_ret": 0.15185609596981564,
+    "QQQ_ret": 0.09317222042910522,
+    "QQQ_last": 752.010009765625,
+    "QQQ_vwap": 750.4613704744949,
+    "QQQ_last5_ret": 0.19519507675453962,
+    "XLK_ret": -0.19139196598257913,
+    "XLK_last": 200.77000427246094,
+    "XLK_vwap": 200.3660122736935,
+    "XLK_last5_ret": 0.21463908477119542
+  },
+  "shadow_only_count": 0,
+  "recovery_watch_count": 1,
+  "today_launchpad_count": 1,
+  "bench_hot_count": 0,
+  "candidates": [
+    {
+      "ticker": "ON",
+      "data_ok": true,
+      "last": 84.88999938964844,
+      "vwap": 85.09798873091108,
+      "opening_range_high": 86.44999694824219,
+      "higher_low": true,
+      "tight_base": false,
+      "pullback_volume_ratio": 0.242852189538279,
+      "breakout_volume_ratio": 1.148474821306706,
+      "entry_trigger": 86.4932219467163,
+      "initial_stop": 85.01289074218018,
+      "first_target": 90.19404995805662,
+      "reward_risk": 2.5,
+      "relative_strength_market_pct": 0.0507999522617375,
+      "relative_strength_sector_pct": 0.3565829862167136,
+      "extension_vwap_pct": -0.24441158288750486,
+      "live_bid": 84.81,
+      "live_ask": 84.84,
+      "live_spread_pct": 0.0353669319186574,
+      "hard_market_reversal": false,
+      "failures": [
+        "below_vwap",
+        "not_attacking_breakout",
+        "breakout_volume_not_expanding"
+      ],
+      "pass": false,
+      "candidate_source": "TODAY_LAUNCHPAD",
+      "max_tradable_price": 100.0,
+      "officially_tradable": true,
+      "failures_before_current_price_guard": [
+        "below_vwap",
+        "not_attacking_breakout",
+        "breakout_volume_not_expanding"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "delivery": "SAVED_ONSCREEN",
+  "marker": "ENGINE4-ALERT:2026-10-02:bench:COMPLETED:MARKET:RUN:37045748654",
+  "kind": "bench",
+  "status": "COMPLETED",
+  "ticker": "MARKET",
+  "target_date_et": "2026-10-02",
+  "generated_et": "2026-10-02 03:52:16 PM ET",
+  "run_id": "37045748654",
+  "message": "STAGE 3B TOP-25 BENCH COMPLETE \u2014 2026-10-02 ET\nNatural watch-qualified 1; retained by Top-25 Bench cap 1.\nHot 1; Developing 0; Reserve 0.\nAdded 1; promoted 0; demoted 0; removed 1.\nBench: #1 ON 90.662/A HOT",
+  "notification_text": "ENGINE 4 BENCH: COMPLETED \u2014 MARKET\nSTAGE 3B TOP-25 BENCH COMPLETE \u2014 2026-10-02 ET\nNatural watch-qualified 1; retained by Top-25 Bench cap 1.\nHot 1; Developing 0; Reserve 0.\nAdded 1; promoted 0; demoted 0; removed 1.\nBench: #1 ON 90.662/A HOT\nRun 37045748654\nGenerated 2026-10-02 03:52:16 PM ET\nConfirm the live broker quote before any order.",
+  "dry_run": false
+}

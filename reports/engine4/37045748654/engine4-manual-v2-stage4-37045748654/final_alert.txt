@@ -1,0 +1,1 @@
+NO PRIMARY TRADE — no B-or-better candidate passed all required live entry gates. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.

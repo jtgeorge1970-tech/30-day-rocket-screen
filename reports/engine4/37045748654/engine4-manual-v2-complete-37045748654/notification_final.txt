@@ -1,0 +1,6 @@
+ENGINE 4 FINAL: NO_TRADE — MARKET
+NO PRIMARY TRADE — no B-or-better candidate passed all required live entry gates. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.
+The full Engine 4 run is NOT complete. Recovery watch and terminal verification continue.
+Run 37045748654
+Generated 2026-10-02 03:52:29 PM ET
+Confirm the live broker quote before any order.

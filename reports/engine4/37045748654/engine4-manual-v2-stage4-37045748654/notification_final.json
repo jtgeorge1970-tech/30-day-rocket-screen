@@ -1,0 +1,13 @@
+{
+  "delivery": "SAVED_ONSCREEN",
+  "marker": "ENGINE4-ALERT:2026-10-02:final:NO_TRADE:MARKET:RUN:37045748654",
+  "kind": "final",
+  "status": "NO_TRADE",
+  "ticker": "MARKET",
+  "target_date_et": "2026-10-02",
+  "generated_et": "2026-10-02 03:52:29 PM ET",
+  "run_id": "37045748654",
+  "message": "NO PRIMARY TRADE \u2014 no B-or-better candidate passed all required live entry gates. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.",
+  "notification_text": "ENGINE 4 FINAL: NO_TRADE \u2014 MARKET\nNO PRIMARY TRADE \u2014 no B-or-better candidate passed all required live entry gates. Eligible top candidates remain on RECOVERY WATCH until the locked timeout.\nThe full Engine 4 run is NOT complete. Recovery watch and terminal verification continue.\nRun 37045748654\nGenerated 2026-10-02 03:52:29 PM ET\nConfirm the live broker quote before any order.",
+  "dry_run": false
+}

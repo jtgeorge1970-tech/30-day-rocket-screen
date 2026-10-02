@@ -1,0 +1,28 @@
+{
+  "target_date_et": "2026-10-02",
+  "generated_at_utc": "2026-10-02T19:52:29.470041+00:00",
+  "max_tradable_price": 100.0,
+  "requested_count": 5,
+  "actual_count": 1,
+  "candidates": [
+    {
+      "ticker": "ON",
+      "rank": 1.0,
+      "score": 90.982,
+      "premarket_grade": "A",
+      "sector": "Technology",
+      "quality_at_0945": 58.08074802211401,
+      "last_0945": 84.88999938964844,
+      "vwap_0945": 85.09798873091108,
+      "opening_range_high": 86.44999694824219,
+      "previous_close": 80.07,
+      "resistance_price": 86.44999694824219,
+      "primary_failures": [
+        "below_vwap",
+        "not_attacking_breakout",
+        "breakout_volume_not_expanding"
+      ],
+      "candidate_source": "TODAY_LAUNCHPAD"
+    }
+  ]
+}
