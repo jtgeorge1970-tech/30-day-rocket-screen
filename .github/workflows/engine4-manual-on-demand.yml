@@ -29,7 +29,7 @@ concurrency:
 jobs:
   manual-on-demand:
     runs-on: ubuntu-latest
-    timeout-minutes: 190
+    timeout-minutes: 260
     permissions:
       contents: write
       issues: write
