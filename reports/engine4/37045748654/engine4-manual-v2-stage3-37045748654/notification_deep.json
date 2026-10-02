@@ -1,0 +1,13 @@
+{
+  "delivery": "SAVED_ONSCREEN",
+  "marker": "ENGINE4-ALERT:2026-10-02:deep:COMPLETED:MARKET:RUN:37045748654",
+  "kind": "deep",
+  "status": "COMPLETED",
+  "ticker": "MARKET",
+  "target_date_et": "2026-10-02",
+  "generated_et": "2026-10-02 02:48:59 PM ET",
+  "run_id": "37045748654",
+  "message": "STAGE 2 DEEP ANALYSIS COMPLETE \u2014 2026-10-02 ET\nSelected by Top-60 cap 60; actually analyzed 60.\n>=80 2; launchpad eligible 2; B 1; strict A/A+ 1.\nLeaders: #1 ON 91.122/A ELIGIBLE; #2 LQDA 83.539/B ELIGIBLE\nALL >=80 CANDIDATES (survivors AND rejects):\nON \u2014 score=91.122 grade=A eligible=True status=N/A failures=NONE\nLQDA \u2014 score=83.539 grade=B eligible=True status=N/A failures=NONE",
+  "notification_text": "ENGINE 4 DEEP: COMPLETED \u2014 MARKET\nSTAGE 2 DEEP ANALYSIS COMPLETE \u2014 2026-10-02 ET\nSelected by Top-60 cap 60; actually analyzed 60.\n>=80 2; launchpad eligible 2; B 1; strict A/A+ 1.\nLeaders: #1 ON 91.122/A ELIGIBLE; #2 LQDA 83.539/B ELIGIBLE\nALL >=80 CANDIDATES (survivors AND rejects):\nON \u2014 score=91.122 grade=A eligible=True status=N/A failures=NONE\nLQDA \u2014 score=83.539 grade=B eligible=True status=N/A failures=NONE\nRun 37045748654\nGenerated 2026-10-02 02:48:59 PM ET\nConfirm the live broker quote before any order.",
+  "dry_run": false
+}

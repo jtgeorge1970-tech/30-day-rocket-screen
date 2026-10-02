@@ -1,0 +1,13 @@
+{
+  "delivery": "SAVED_ONSCREEN",
+  "marker": "ENGINE4-ALERT:2026-10-02:freeze:COMPLETED:MARKET:RUN:37045748654",
+  "kind": "freeze",
+  "status": "COMPLETED",
+  "ticker": "MARKET",
+  "target_date_et": "2026-10-02",
+  "generated_et": "2026-10-02 03:25:45 PM ET",
+  "run_id": "37045748654",
+  "message": "STAGE 3 REFRESH/FREEZE COMPLETE \u2014 2026-10-02 ET\nNatural broad 1976; retained by Top-100 cap 100; selected by Top-60 cap 60; analyzed 60.\n>=80 1; eligible 1; B 0; strict A/A+ 1; frozen 1.\nFrozen: #1 ON 90.982/A ELIGIBLE\nALL >=80 CANDIDATES (survivors AND rejects):\nON \u2014 score=90.982 grade=A eligible=True status=N/A failures=NONE",
+  "notification_text": "ENGINE 4 FREEZE: COMPLETED \u2014 MARKET\nSTAGE 3 REFRESH/FREEZE COMPLETE \u2014 2026-10-02 ET\nNatural broad 1976; retained by Top-100 cap 100; selected by Top-60 cap 60; analyzed 60.\n>=80 1; eligible 1; B 0; strict A/A+ 1; frozen 1.\nFrozen: #1 ON 90.982/A ELIGIBLE\nALL >=80 CANDIDATES (survivors AND rejects):\nON \u2014 score=90.982 grade=A eligible=True status=N/A failures=NONE\nRun 37045748654\nGenerated 2026-10-02 03:25:45 PM ET\nConfirm the live broker quote before any order.",
+  "dry_run": false
+}

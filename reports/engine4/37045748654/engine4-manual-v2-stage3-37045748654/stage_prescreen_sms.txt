@@ -1,0 +1,4 @@
+STAGE 1 PRE-SCREEN COMPLETE — 2026-10-02 ET
+Baseline 1975; trustworthy 1621; natural broad 1621.
+Nasdaq enriched 316; nonzero activity 316; strict activity 138.
+Retained by configured Top-100 cap: 100.
