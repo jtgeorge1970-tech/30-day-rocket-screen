@@ -1,5 +1,5 @@
-mode=last_hour_snapshot
-engine_date_et=2026-10-02
-window_et=15:00-16:00
-requested_at=2026-10-02T21:53:14Z
-request=manual-full-cycle-last-hour-2026-10-02
+fresh manual Engine 4 run
+window=10:00-11:00 ET
+date=2026-10-02
+flush_old_output=true
+runner_commit=bef00007cdcd841978def18bff7fc75ad1594016
