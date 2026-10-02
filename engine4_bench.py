@@ -4,14 +4,15 @@ from __future__ import annotations
 
 The Bench is a capacity-limited development queue, never a trade approval.  It
 combines yesterday's Bench with today's launchpad, refreshes every candidate
-with current evidence, and retains only the strongest 25 for at most five
-completed market sessions.  Only the Hot 5 are exposed to the existing 09:45
+with current evidence, and retains only the strongest 25 while their fresh
+scores and mandatory gates remain qualified; elapsed sessions do not expire them.  Only the Hot 5 are exposed to the existing 09:45
 live-entry guard, which still revalidates every mandatory gate.
 """
 
 import argparse
 import json
 import math
+import os
 from datetime import datetime
 from pathlib import Path
 
@@ -31,7 +32,7 @@ BENCH_CAP = 25
 HOT_CAP = 5
 DEVELOPING_CAP = 10
 RESERVE_CAP = 10
-MAX_WATCH_SESSIONS = 5
+MAX_WATCH_SESSIONS = None
 GENERAL_ADMISSION_SCORE = 85.0
 TOP3_ADMISSION_SCORE = MIN_SCORE
 
@@ -72,6 +73,9 @@ def _records(frame: pd.DataFrame) -> list[dict]:
 
 
 def _fresh_seed_rows(symbols: list[str], date_et, cutoff: str) -> tuple[pd.DataFrame, list[str]]:
+    manual_current = os.environ.get("ENGINE4_MANUAL_CURRENT_SNAPSHOT") == "1" and date_et == core.now_et().date()
+    if manual_current:
+        cutoff = core.now_et().strftime("%H:%M")
     baseline = core.eligible_baseline().set_index("ticker")
     requested = list(symbols)
     symbols = [symbol for symbol in requested if symbol in baseline.index]
@@ -93,14 +97,24 @@ def _fresh_seed_rows(symbols: list[str], date_et, cutoff: str) -> tuple[pd.DataF
         frame = frames.get(symbol)
         snap = snapshots.get(symbol, {})
         yahoo_price = math.nan
+        observed_at = None
         if frame is not None and not frame.empty:
             pm = slice_window(frame, date_et, "04:00", cutoff)
             if not pm.empty and "Close" in pm.columns:
                 close = pd.to_numeric(pm["Close"], errors="coerce").dropna()
                 if not close.empty:
                     yahoo_price = float(close.iloc[-1])
+                    observed_at = pd.Timestamp(close.index[-1])
         nasdaq_price = _finite(snap.get("premarket_price"))
-        current = nasdaq_price if math.isfinite(nasdaq_price) else yahoo_price
+        if manual_current:
+            requested_at = os.environ.get("ENGINE4_FRESH_REQUESTED_AT")
+            if not requested_at:
+                raise RuntimeError("Fresh manual Bench missing requested-at freshness boundary")
+            floor = pd.Timestamp(requested_at)
+            if observed_at is None or observed_at.tzinfo is None or observed_at < floor:
+                missing.append(symbol)
+                continue
+        current = yahoo_price if manual_current else (nasdaq_price if math.isfinite(nasdaq_price) else yahoo_price)
         if not math.isfinite(current) or current <= 0:
             missing.append(symbol)
             continue
@@ -128,6 +142,10 @@ def _fresh_seed_rows(symbols: list[str], date_et, cutoff: str) -> tuple[pd.DataF
                 "avg_daily_dollar_volume": daily_dollar,
                 "previous_close": previous,
                 "last_premarket": current,
+                "selection_price": current,
+                "selection_price_source": "fresh Yahoo intraday bar" if manual_current else "Nasdaq premarket / Yahoo fallback",
+                "selection_bar_timestamp": str(observed_at) if observed_at is not None else None,
+                "snapshot_mode": "CURRENT_LIVE_MANUAL" if manual_current else "PREMARKET",
                 "premarket_volume": volume,
                 "premarket_dollar_volume": pm_dollar,
                 "premarket_volume_intensity_pct": intensity,
@@ -228,9 +246,6 @@ def update_bench(date_override: str | None = None, state_path: Path = STATE) -> 
         age = int((prior or {}).get("age_sessions") or 0)
         if last_date != expected:
             age += 1
-        if age > MAX_WATCH_SESSIONS:
-            removed.append({"ticker": symbol, "reason": "five_session_watch_expired", "age_sessions": age})
-            continue
 
         gate_count = _finite(row.get("premarket_gate_count"), 0.0)
         activity = _finite(row.get("activity_score"), 0.0)
@@ -287,6 +302,7 @@ def update_bench(date_override: str | None = None, state_path: Path = STATE) -> 
         "bench_cap": BENCH_CAP,
         "bench_cap_is_quota": False,
         "max_watch_sessions": MAX_WATCH_SESSIONS,
+        "watch_expiry_policy": "score_and_mandatory_gates_only",
         "general_admission_score": GENERAL_ADMISSION_SCORE,
         "top3_admission_score": TOP3_ADMISSION_SCORE,
         "competition_universe_count": len(symbols),
@@ -335,7 +351,7 @@ def update_bench(date_override: str | None = None, state_path: Path = STATE) -> 
 def self_test() -> None:
     assert BENCH_CAP == HOT_CAP + DEVELOPING_CAP + RESERVE_CAP
     assert BENCH_CAP == 25
-    assert MAX_WATCH_SESSIONS == 5
+    assert MAX_WATCH_SESSIONS is None
     assert GENERAL_ADMISSION_SCORE == 85.0
     assert TOP3_ADMISSION_SCORE == MIN_SCORE == 80.0
     empty_ranked = pd.DataFrame(columns=["ticker"])
