@@ -30,6 +30,7 @@ class ManualFreshnessTests(unittest.TestCase):
         core = SimpleNamespace(now_et=lambda: datetime(2026, 10, 2, 13, 0, tzinfo=ZoneInfo("America/New_York")), eligible_baseline=lambda: base.copy(), download_intraday=lambda *args, **kwargs: {"TEST": self.frame}, slice_window=window, prior_regular_close=lambda *args: 10.0)
         namespace = {"os": os, "pd": pd, "math": math, "core": core, "MIN_PRICE": 2.0, "NASDAQ_ENRICH_CAP": 500, "BROAD_POOL_SIZE": 100, "preliminary_activity_score": lambda *args: 1.0, "_estimated_avg_daily_shares": lambda *args: 1e6, "nasdaq_premarket_many": lambda *args, **kwargs: {"TEST": {"ok": True, "premarket_price": 9.2, "premarket_volume": 100000.0}}}
         exec(compile(ast.Module(body=[function], type_ignores=[]), "actual_pool_builder", "exec"), namespace)
+        self.namespace = namespace
         self.build = namespace["repaired_build_broad_pool"]
         self.date = core.now_et().date()
 
@@ -69,6 +70,28 @@ class ManualFreshnessTests(unittest.TestCase):
         self.assertEqual(self.cutoffs, ["09:05"])
         self.assertEqual(pool.iloc[0]["last_premarket"], 9.2)
         self.assertEqual(pool.iloc[0]["snapshot_mode"], "PREMARKET")
+
+
+
+class BenchFreshnessTests(ManualFreshnessTests):
+    def setUp(self):
+        super().setUp()
+        source = Path(__file__).with_name("engine4_bench.py").read_text()
+        tree = ast.parse(source)
+        functions = [node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name in {"_finite", "_fresh_seed_rows"}]
+        namespace = dict(self.namespace)
+        core = namespace["core"]
+        namespace.update({"runner": SimpleNamespace(nasdaq_premarket_many=namespace["nasdaq_premarket_many"]), "download_intraday": core.download_intraday, "prior_regular_close": core.prior_regular_close, "slice_window": core.slice_window})
+        exec(compile(ast.Module(body=functions, type_ignores=[]), "actual_bench_seed_builder", "exec"), namespace)
+        self.seed = namespace["_fresh_seed_rows"]
+
+    def run_pool(self, requested, manual="1"):
+        env = {"ENGINE4_MANUAL_CURRENT_SNAPSHOT": manual}
+        if requested is not None:
+            env["ENGINE4_FRESH_REQUESTED_AT"] = requested
+        with patch.dict(os.environ, env, clear=True):
+            pool, _ = self.seed(["TEST"], self.date, "09:05")
+        return pool, {"trustworthy_observed": len(pool)}
 
 
 if __name__ == "__main__":
