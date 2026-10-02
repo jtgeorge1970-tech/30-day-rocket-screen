@@ -295,6 +295,16 @@ def verify_notification(expected: str, kind: str, recipients: int) -> None:
     entries = [e for e in _audit_entries() if str(e.get("marker", "")).startswith(prefix)]
     if not entries:
         raise RuntimeError(f"ENGINE 4 NOTIFICATION FAILURE — no audit entry for {kind}")
+    if recipients == 0:
+        record = entries[-1]
+        _require_date(record, expected, f"{kind} on-screen notification")
+        current_run = os.environ.get("GITHUB_RUN_ID")
+        if current_run and str(record.get("run_id")) != current_run:
+            raise RuntimeError(f"ENGINE 4 NOTIFICATION FAILURE — {kind} audit belongs to another run")
+        if record.get("delivery") != "SAVED_ONSCREEN":
+            raise RuntimeError(f"ENGINE 4 NOTIFICATION FAILURE — {kind} has no saved on-screen proof")
+        print(f"ON-SCREEN VERIFIED: {kind} SAVED_ONSCREEN", flush=True)
+        return
     sms = entries[-1].get("sms", {})
     if sms.get("delivery") not in {"API_ACCEPTED", "DEDUPLICATED"}:
         raise RuntimeError(
@@ -356,9 +366,11 @@ def verify_complete(expected: str, recipients: int) -> None:
         for kind in ("start", "prescreen", "deep", "freeze", "bench", "final", "recovery"):
             verify_notification(expected, kind, recipients)
     else:
+        for kind in ("start", "prescreen", "deep", "freeze", "bench", "final", "recovery"):
+            verify_notification(expected, kind, 0)
         print(
-            "ENGINE4_NOTIFICATION_VERIFICATION_DEGRADED — stage artifacts and order verified; "
-            "SMS acceptance unavailable and preserved in the notification audit.",
+            "ENGINE4_ONSCREEN_NOTIFICATION_VERIFIED — required on-screen records verified; "
+            "SMS is not required by this run.",
             flush=True,
         )
     print(f"ENGINE4_FULL_INVARIANT_PASS date={expected}", flush=True)
@@ -366,8 +378,7 @@ def verify_complete(expected: str, recipients: int) -> None:
 
 def report_complete(expected: str, recipients: int) -> None:
     verify_complete(expected, recipients)
-    if recipients > 0:
-        verify_notification(expected, "complete", recipients)
+    verify_notification(expected, "complete", recipients)
     pre = _read("prescreen_report.json")
     deep = _read("deep_ranked.json")
     frozen = _read("top25_frozen.json")
@@ -401,12 +412,12 @@ def report_complete(expected: str, recipients: int) -> None:
     sms_status = (
         f"VERIFIED for {recipients} recipients at every required stage and completion"
         if recipients > 0
-        else "UNAVAILABLE — API acceptance was not received; exact rejection is retained in notification_audit_log.json"
+        else "NOT ATTEMPTED — on-screen-only notification mode; all required on-screen records verified"
     )
     terminal_conclusion = (
         "SUCCESS — full live workflow, notifications, and invariants completed"
         if recipients > 0
-        else "ENGINE COMPLETE / NOTIFICATION DEGRADED — all market stages and invariants completed; SMS API acceptance unavailable"
+        else "SUCCESS — all market stages, on-screen notifications, and invariants completed; SMS not attempted"
     )
 
     lines = [
@@ -469,7 +480,7 @@ def report_complete(expected: str, recipients: int) -> None:
             (
                 "Artifacts, stage order, provider date, and two-recipient SMS proof verified."
                 if recipients > 0
-                else "Artifacts, stage order, and provider date verified; SMS API acceptance unavailable."
+                else "Artifacts, stage order, provider date, and on-screen notification proof verified; SMS not attempted."
             ),
         ],
     )
