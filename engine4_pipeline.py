@@ -133,6 +133,7 @@ def eligible_baseline() -> pd.DataFrame:
     ].copy()
     if base.empty:
         raise RuntimeError("No eligible baseline universe after baseline investability gates")
+    base.to_csv(OUT / "baseline_eligible_universe.csv", index=False)
     return base
 
 
@@ -429,6 +430,8 @@ def refresh_and_freeze(date_override: str | None = None, max_symbols: int | None
     # The Top-25 is a maximum capacity, never a quota.  Sub-80 and gate-failing
     # names remain in the audit ranking but consume no launchpad slot and receive
     # no 09:45 or recovery analysis.
+    ranked_all.to_csv(OUT / "refresh_ranked_all.csv", index=False)
+    broad.to_csv(OUT / "refresh_retained_all.csv", index=False)
     eligible = ranked_all[ranked_all.premarket_eligible].copy()
     top = eligible.head(TOP_N).copy().reset_index(drop=True)
     top.insert(0, "rank", np.arange(1, len(top) + 1))
@@ -444,6 +447,8 @@ def refresh_and_freeze(date_override: str | None = None, max_symbols: int | None
         **meta,
         "selected_for_deep": min(DEEP_POOL_SIZE, len(broad)),
         "refresh_analyzed_count": len(ranked_all),
+        "ranked_all": _records(ranked_all),
+        "retained_candidates": _records(broad),
         "score80_count": int((ranked_all.score >= MIN_SCORE).sum()),
         "launchpad_eligible_count": len(eligible),
         "b_grade_count": int((ranked_all.premarket_grade == "B").sum()),
