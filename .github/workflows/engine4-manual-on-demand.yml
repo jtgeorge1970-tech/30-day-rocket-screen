@@ -321,7 +321,7 @@ jobs:
           python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"
           python engine4_notify.py recovery
 
-      - name: Verify manual artifacts, order, counts, and both-recipient SMS acceptance
+      - name: Verify manual artifacts, order, counts, and on-screen notification proof
         if: env.RUN_MODE == 'live_today' && steps.duplicate.outputs.skip != 'true'
         run: python engine4_stage_report.py verify-complete --date "$ENGINE_DATE_ET" --recipients 0
 
