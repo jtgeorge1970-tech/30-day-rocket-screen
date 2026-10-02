@@ -6,16 +6,16 @@ on:
     - cron: '5,10,15,20 12 * * 1-5'
     - cron: '5,10,15,20 13 * * 1-5'
 
-# A fresh production/manual start may supersede obsolete tail work. Completed
-# artifacts remain in GitHub; stale execution must not hold the lane.
+# Scheduled/dispatch arrivals must queue behind an active full live cycle.
+# Only an explicitly requested manual replacement may supersede active work.
 concurrency:
   group: engine4-production
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   engine4:
     runs-on: ubuntu-latest
-    timeout-minutes: 190
+    timeout-minutes: 260
     permissions:
       contents: write
     steps:
