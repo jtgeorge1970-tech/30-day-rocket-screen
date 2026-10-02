@@ -2,7 +2,7 @@
 
 Golden Rules: never guess; no shortcuts; follow the SSOT exactly; verify before reporting.
 
-**STATUS: INCOMPLETE — Stage 3 running.** This is a current-run stage report, not terminal completion or a buy order.
+**STATUS: INCOMPLETE — Stage 3 passed; Bench processing running.** This is a current-run stage report, not terminal completion or a buy order.
 
 [Live workflow](https://github.com/jtgeorge1970-tech/30-day-rocket-screen/actions/runs/37045748654)
 
@@ -278,26 +278,279 @@ ON 91.122/A and LQDA 83.539/B passed the screening gates. No live entry order is
 | 59 | TRMD | 0 | 0 | 15 | 5.005 | 0.315 | 3.935 | 2.961 | 4.579 |
 | 60 | CVSA | 0 | 1.482 | 13.501 | 2.989 | 1.414 | 1.895 | 2.302 | 3.677 |
 
-## Remaining stages
 
-Stage 3 refresh/freeze: RUNNING. Frozen final-scan count: UNAVAILABLE.
+## Stage 3 — 14:49:00 to 15:25:45 Eastern — PASSED
 
-Bench additions/removals/retained/tickers: PENDING. Configured Bench cap: 25; no age expiry; fresh score and mandatory gates determine retention.
+| Measure | Actual result |
+|---|---:|
+| Baseline eligible | 1976 |
+| Trustworthy observations | 1976 |
+| NATURAL broad-qualified | 1976 |
+| Nasdaq premarket enriched | 312 |
+| NONZERO activity | 312 |
+| Strict activity | 133 |
+| RETAINED BY TOP-100 CAP | 100 |
+| SELECTED BY TOP-60 CAP | 60 |
+| ACTUALLY ANALYZED | 60 |
+| SCORE >=80 | 1 |
+| LAUNCHPAD ELIGIBLE | 1 |
+| B-grade | 0 |
+| STRICT A/A+ | 1 |
+| FROZEN FINAL-SCAN COUNT | 1 |
 
-SELECTION: Stage 2 candidates ON and LQDA; refresh result pending.
+Configured frozen cap 25; actual frozen count 1. The refreshed baseline is a separately evaluated snapshot; Stage 1 counts are preserved above.
 
-PRIMARY ENTRY: PENDING. RECOVERY: PENDING. EXECUTION: PENDING; no executed broker order verified.
+ON 90.982/A is the only frozen finalist. LQDA was not in the refreshed retained Top-100 and was not rescored in Stage 3; no refreshed LQDA score or gate failure is available. It is incorrect to describe this as a proven sub-B score.
 
-Artifact date/run/commit verified for Stage 1 and Stage 2. Final artifact/date/order verification and terminal conclusion: PENDING.
+### All refreshed retained symbols
 
-Notifications: Stage 2 audit SAVED_ONSCREEN at 14:48:59 Eastern; SMS not attempted by this on-screen notifier and not a completion requirement.
+| Rank | Symbol | Selection price | Bar timestamp | Activity score | Gap % |
+|---:|---|---:|---|---:|---:|
+| 1 | SYNA | 121.36000061035156 | 2026-10-02 14:49:00-04:00 | 10.318696757547674 | 14.328780603251579 |
+| 2 | PLPC | 426.1099853515625 | 2026-10-02 14:45:00-04:00 | 6.140466571623842 | 4.687611564642058 |
+| 3 | QMCO | 34.20500183105469 | 2026-10-02 14:49:00-04:00 | 7.202971262474151 | 7.276154401927815 |
+| 4 | ECHO | 93.75 | 2026-10-02 14:49:00-04:00 | 7.326535392016886 | 6.232294617563738 |
+| 5 | VSAT | 72.63500213623047 | 2026-10-02 14:49:00-04:00 | 5.964743853387578 | 3.2480485234263945 |
+| 6 | WOLF | 35.19499969482422 | 2026-10-02 14:49:00-04:00 | 9.173927916882938 | 12.913056447944227 |
+| 7 | LITE | 1086.949951171875 | 2026-10-02 14:49:00-04:00 | 7.233405174173229 | 4.060305213438742 |
+| 8 | ON | 83.48999786376953 | 2026-10-02 14:49:00-04:00 | 6.840260575773236 | 4.271259977231856 |
+| 9 | AAOI | 115.3499984741211 | 2026-10-02 14:49:00-04:00 | 8.055398288398695 | 7.9550757829865315 |
+| 10 | AVGO | 355.6000061035156 | 2026-10-02 14:49:00-04:00 | 7.113301490133532 | 3.3811105920619866 |
+| 11 | BULL | 7.414999961853027 | 2026-10-02 14:49:00-04:00 | 6.575630437526722 | 5.4765286181085004 |
+| 12 | AXTI | 85.5999984741211 | 2026-10-02 14:49:00-04:00 | 6.933609102432613 | 5.04459299406681 |
+| 13 | APLD | 25.065000534057617 | 2026-10-02 14:49:00-04:00 | 6.320517563980143 | 3.631336784503958 |
+| 14 | NVTS | 12.460000038146973 | 2026-10-02 14:49:00-04:00 | 5.753450826165695 | 2.805280842796809 |
+| 15 | STM | 56.94499969482422 | 2026-10-02 14:49:00-04:00 | 7.310539115013475 | 6.439251766026577 |
+| 16 | COHR | 336.1199951171875 | 2026-10-02 14:49:00-04:00 | 7.420660007625617 | 5.5583630216560875 |
+| 17 | ASML | 1861.2750244140625 | 2026-10-02 14:49:00-04:00 | 6.461868524121964 | 2.7193722082816008 |
+| 18 | LFUS | 458.6549987792969 | 2026-10-02 14:49:00-04:00 | 6.402072237584798 | 5.304786770588188 |
+| 19 | NBIS | 242.00999450683594 | 2026-10-02 14:49:00-04:00 | 6.550061446130672 | 2.6509986880030256 |
+| 20 | AEHR | 106.5 | 2026-10-02 14:49:00-04:00 | 6.550110714671696 | 4.822834645669305 |
+| 21 | TSLA | 371.5899963378906 | 2026-10-02 14:49:00-04:00 | 7.689691112938934 | 4.829744784577139 |
+| 22 | LIFE | 34.20000076293945 | 2026-10-02 14:49:00-04:00 | 6.234283976030896 | 5.004607807612693 |
+| 23 | AMD | 631.8200073242188 | 2026-10-02 14:49:00-04:00 | 6.837651287277025 | 2.4617292624900644 |
+| 24 | RKLB | 73.2156982421875 | 2026-10-02 14:49:00-04:00 | 6.634872401115132 | 3.6755851631088854 |
+| 25 | LUNR | 14.640000343322754 | 2026-10-02 14:49:00-04:00 | 6.0961461710680815 | 4.199290699806069 |
+| 26 | PENG | 60.95500183105469 | 2026-10-02 14:49:00-04:00 | 8.29415870281199 | 10.867591544297373 |
+| 27 | MXL | 105.2300033569336 | 2026-10-02 14:49:00-04:00 | 9.808558534419696 | 14.231440899841076 |
+| 28 | CCXI | 12.069899559020996 | 2026-10-02 14:49:00-04:00 | 5.557402560591437 | 3.8717690105077196 |
+| 29 | DXYZ | 32.80500030517578 | 2026-10-02 14:49:00-04:00 | 6.194656846772781 | 5.822581629599299 |
+| 30 | OUST | 42.92499923706055 | 2026-10-02 14:49:00-04:00 | 6.26446392026566 | 5.028136131785055 |
+| 31 | BTDR | 10.914999961853027 | 2026-10-02 14:49:00-04:00 | 5.4952269778832 | 2.584586107641229 |
+| 32 | ORCL | 141.91000366210938 | 2026-10-02 14:49:00-04:00 | 6.621846438927247 | 2.7588730355607494 |
+| 33 | CLS | 383.8399963378906 | 2026-10-02 14:49:00-04:00 | 6.410048577128065 | 3.6956981677897627 |
+| 34 | VSH | 38.54999923706055 | 2026-10-02 14:49:00-04:00 | 8.92245174475178 | 12.489055258420034 |
+| 35 | BE | 289.8550109863281 | 2026-10-02 14:49:00-04:00 | 7.077283114429602 | 4.151998198465012 |
+| 36 | VECO | 58.349998474121094 | 2026-10-02 14:48:00-04:00 | 7.601936199876845 | 9.701068761272968 |
+| 37 | CRDO | 220.1999969482422 | 2026-10-02 14:49:00-04:00 | 6.979101969384704 | 4.857141403924858 |
+| 38 | FPS | 40.2599983215332 | 2026-10-02 14:49:00-04:00 | 7.620050191616033 | 7.8489105854090635 |
+| 39 | NCLH | 14.984999656677246 | 2026-10-02 14:49:00-04:00 | 5.609144595128541 | 2.356555031948404 |
+| 40 | TSM | 471.77801513671875 | 2026-10-02 14:49:00-04:00 | 6.54817709174302 | 2.855588893502814 |
+| 41 | KALU | 151.67999267578125 | 2026-10-02 14:43:00-04:00 | 4.935808970335257 | 2.2171255986126237 |
+| 42 | SMTC | 197.38999938964844 | 2026-10-02 14:49:00-04:00 | 7.320026778846419 | 6.697296967377531 |
+| 43 | LRCX | 348.3800048828125 | 2026-10-02 14:49:00-04:00 | 6.371135300343331 | 2.7154538676216866 |
+| 44 | AZTA | 38.470001220703125 | 2026-10-02 14:49:00-04:00 | 8.203612340003206 | 11.57192929438262 |
+| 45 | KLAC | 206.46539306640625 | 2026-10-02 14:49:00-04:00 | 6.361942815875795 | 3.1295669662368963 |
+| 46 | GATX | 172.61000061035156 | 2026-10-02 14:47:00-04:00 | 5.01736459863822 | 2.2086692387207396 |
+| 47 | CCL | 25.625 | 2026-10-02 14:49:00-04:00 | 5.74080005780509 | 2.213801356202638 |
+| 48 | SMCI | 43.630001068115234 | 2026-10-02 14:49:00-04:00 | 6.747836077873214 | 4.353028146652083 |
+| 49 | FCEL | 18.049999237060547 | 2026-10-02 14:49:00-04:00 | 7.56343675547254 | 8.931799861560318 |
+| 50 | DKS | 137.11500549316406 | 2026-10-02 14:49:00-04:00 | 5.954925897123616 | 3.210391790112199 |
+| 51 | HUT | 88.32499694824219 | 2026-10-02 14:49:00-04:00 | 5.646582238676081 | 2.2753554287195277 |
+| 52 | IBRX | 10.125 | 2026-10-02 14:49:00-04:00 | 7.646740734019875 | 9.105603448275868 |
+| 53 | BRUN | 16.459999084472656 | 2026-10-02 14:49:00-04:00 | 5.374139522437847 | 3.587155975284184 |
+| 54 | PL | 17.344999313354492 | 2026-10-02 14:49:00-04:00 | 6.960205396532269 | 6.6347755004641185 |
+| 55 | CVSA | 125.97000122070312 | 2026-10-02 14:49:00-04:00 | 4.946187714011852 | 2.148881949970094 |
+| 56 | AMKR | 55.88999938964844 | 2026-10-02 14:49:00-04:00 | 6.589863659451976 | 5.652172759259799 |
+| 57 | DELL | 564.8599853515625 | 2026-10-02 14:49:00-04:00 | 7.000778167000621 | 4.312013693479799 |
+| 58 | HPE | 70.12000274658203 | 2026-10-02 14:49:00-04:00 | 8.258427272607848 | 8.881991842518676 |
+| 59 | CIEN | 391.3700866699219 | 2026-10-02 14:49:00-04:00 | 6.152369915867757 | 3.2257442290240856 |
+| 60 | QGEN | 45.16999816894531 | 2026-10-02 14:49:00-04:00 | 6.969804895348697 | 7.445285844303795 |
+| 61 | TER | 450.25 | 2026-10-02 14:49:00-04:00 | 7.9255262890606275 | 8.287837610332138 |
+| 62 | PDI | 14.510000228881836 | 2026-10-02 14:49:00-04:00 | 5.165819513852063 | 2.544171228846892 |
+| 63 | AKAM | 110.9000015258789 | 2026-10-02 14:49:00-04:00 | 6.290004787802387 | 3.965502508558072 |
+| 64 | ONTO | 327.8900146484375 | 2026-10-02 14:49:00-04:00 | 6.054379590569152 | 4.131737375647071 |
+| 65 | VRT | 252.22500610351562 | 2026-10-02 14:49:00-04:00 | 5.9667060044835525 | 2.480499798275493 |
+| 66 | SNAP | 5.722400188446045 | 2026-10-02 14:49:00-04:00 | 5.292745980385671 | 2.1857176508222276 |
+| 67 | DE | 681.594970703125 | 2026-10-02 14:49:00-04:00 | 5.714422169627605 | 2.1483335885749133 |
+| 68 | POWL | 196.5399932861328 | 2026-10-02 14:48:00-04:00 | 5.43064125665979 | 3.1164707692197258 |
+| 69 | GFS | 50.06999969482422 | 2026-10-02 14:49:00-04:00 | 5.513275177734306 | 2.855381460197659 |
+| 70 | FN | 461.75 | 2026-10-02 14:49:00-04:00 | 5.464708911534111 | 2.283802941697677 |
+| 71 | CAT | 846.2849731445312 | 2026-10-02 14:49:00-04:00 | 6.008829402006819 | 2.4124127965790887 |
+| 72 | DAVE | 349.8299865722656 | 2026-10-02 14:44:00-04:00 | 5.410086102884894 | 3.0153969705426054 |
+| 73 | PGY | 18.2450008392334 | 2026-10-02 14:49:00-04:00 | 5.754225783050962 | 4.615830500191498 |
+| 74 | ONON | 30.834999084472656 | 2026-10-02 14:49:00-04:00 | 5.4168147010972305 | 2.1026459750750126 |
+| 75 | JBL | 305.6300048828125 | 2026-10-02 14:49:00-04:00 | 5.90487457274726 | 3.3092228511399924 |
+| 76 | PI | 191 | 2026-10-02 14:46:00-04:00 | 5.579327151709142 | 3.8777397074019726 |
+| 77 | SEDG | 32.814998626708984 | 2026-10-02 14:49:00-04:00 | 6.54528132498176 | 6.300611035662396 |
+| 78 | SHAZ | 51.01499938964844 | 2026-10-02 14:49:00-04:00 | 5.057565260971606 | 2.2959682968687334 |
+| 79 | CACC | 526.0499877929688 | 2026-10-02 14:48:00-04:00 | 5.178308347743835 | 2.754172828004453 |
+| 80 | TTMI | 131.72500610351562 | 2026-10-02 14:48:00-04:00 | 5.8646605547155435 | 3.7776775415706343 |
+| 81 | TXN | 294.1400146484375 | 2026-10-02 14:49:00-04:00 | 6.669896544853902 | 4.560810013308281 |
+| 82 | MPWR | 1439.77001953125 | 2026-10-02 14:49:00-04:00 | 6.95245715997737 | 5.789989458345879 |
+| 83 | MTSI | 322.7200012207031 | 2026-10-02 14:49:00-04:00 | 6.916222823678117 | 6.4590622223075655 |
+| 84 | VIAV | 47.31999969482422 | 2026-10-02 14:49:00-04:00 | 6.4947244103691535 | 5.672174396659702 |
+| 85 | ADI | 416.5299987792969 | 2026-10-02 14:49:00-04:00 | 6.0114456129484335 | 2.9485908994801857 |
+| 86 | FSLR | 175.8699951171875 | 2026-10-02 14:49:00-04:00 | 5.478536962660664 | 2.1846465151283967 |
+| 87 | VG | 13.25 | 2026-10-02 14:49:00-04:00 | 5.793345930199175 | 3.758809710258415 |
+| 88 | GNRC | 216.89999389648438 | 2026-10-02 14:49:00-04:00 | 6.085486452118936 | 4.323983404590637 |
+| 89 | UMC | 26.290000915527344 | 2026-10-02 14:49:00-04:00 | 6.033913379461534 | 4.284017911651494 |
+| 90 | S | 25.19499969482422 | 2026-10-02 14:49:00-04:00 | 5.1911976156368365 | 2.1280895615087836 |
+| 91 | PBR | 21.485000610351562 | 2026-10-02 14:49:00-04:00 | 5.515276187891428 | 2.4070572466709406 |
+| 92 | PWR | 677.1500244140625 | 2026-10-02 14:49:00-04:00 | 5.478051896534629 | 2.19589864383678 |
+| 93 | ALM | 13.595000267028809 | 2026-10-02 14:49:00-04:00 | 5.332112725942999 | 3.1487121929348216 |
+| 94 | ALGM | 39.724998474121094 | 2026-10-02 14:49:00-04:00 | 7.431742254462808 | 9.194608230129454 |
+| 95 | IBKR | 88.44999694824219 | 2026-10-02 14:49:00-04:00 | 5.654503595591627 | 3.0765609465588817 |
+| 96 | TRU | 64.45500183105469 | 2026-10-02 14:49:00-04:00 | 5.722370552096592 | 3.6587351474965057 |
+| 97 | XE | 14.460000038146973 | 2026-10-02 14:49:00-04:00 | 5.540925150529633 | 3.6559142519496213 |
+| 98 | STRL | 533.9450073242188 | 2026-10-02 14:48:00-04:00 | 6.494425060275786 | 5.70656622668253 |
+| 99 | TXG | 92.29000091552734 | 2026-10-02 14:49:00-04:00 | 5.858532638232654 | 3.977017705641428 |
+| 100 | VMI | 481.2650146484375 | 2026-10-02 14:48:00-04:00 | 5.135522722197115 | 2.7729167695476065 |
 
-## Exact source files
+### Every refreshed scored symbol and evidence
 
-[Stage 1 artifact files](engine4-manual-v2-stage1-37045748654/)
+| Rank | Symbol | Score | Grade | Eligible | Failed gates | Catalyst source | Recorded headline | Activity source | Premarket volume | RVOL | Spread source | Bid | Ask | Spread % |
+|---:|---|---:|---|---|---|---|---|---|---:|---:|---|---:|---:|---:|
+| 1 | ON | 90.982 | A | true | NONE | Google News RSS | ON Semiconductor, Synaptics stocks jump on revised merger deal - Yahoo Finance | historical_premarket_rvol | 957026 | 8.062696928339147 | Nasdaq quote | 83.77 | 83.79 | 0.023872045834340216 |
+| 2 | SYNA | 76.566 | REJECT | false | price_cap,score80 | Google News RSS | Synaptics (SYNA) Soars As Onsemi Ups All-Cash Buyout To $123 - StocksToTrade | historical_premarket_rvol | 1444285 | 189.4144262295082 | Nasdaq quote | 121.56 | 121.61 | 0.04112349385203533 |
+| 3 | RKLB | 72.297 | REJECT | false | pm_volume_strength,score80 | Google News RSS | RKLB Stock Eyes Worst Month Ever, But Cathie Wood Keeps Buying — ARK Adds Rocket Lab, Cuts Exposure To $8B Takeover Target - Stocktwits | historical_premarket_rvol | 894032 | 0.7820495437770242 | Nasdaq quote | 73.56 | 73.58 | 0.02718499388337097 |
+| 4 | GATX | 71.141 | REJECT | false | price_cap,score80 | Google News RSS | GATX stock reports a USD 2.84 EPS beat in second quarter - AD HOC NEWS | historical_premarket_rvol | 6118 | 7.6475 | Nasdaq quote | 172.37 | 172.68 | 0.17968410375308058 |
+| 5 | BULL | 66.876 | REJECT | false | score80 | Google News RSS | Webull (BULL) Stock May Be Overvalued Despite Its AI Platform Launch - Yahoo Finance | historical_premarket_rvol | 837295 | 3.4458144195827796 | Nasdaq quote | 7.39 | 7.4 | 0.13522650439487052 |
+| 6 | NBIS | 66.123 | REJECT | false | pm_volume_strength,price_cap,score80 | Google News RSS | NBIS Stock Gains Premarket: Nebius Acquires Inferize To Target AI’s ‘Idle GPU Tax’ - Stocktwits | historical_premarket_rvol | 732299 | 0.9205969871558757 | Nasdaq quote | 242.01 | 242.12 | 0.045442339867396625 |
+| 7 | CRDO | 65.566 | REJECT | false | pm_volume_strength,price_cap,score80 | Google News RSS | How Optical Revenue Surge Will Impact Credo Technology Group Holding (CRDO) Investors - Simply Wall Street | historical_premarket_rvol | 199813 | 0.513737337378516 | Nasdaq quote | 219.11 | 219.31 | 0.091236713653569 |
+| 8 | CCL | 64.342 | REJECT | false | pm_volume_strength,score80 | Google News RSS | Earnings Beat Could Be A Fresh Catalyst For Carnival Stock (CCL) - Simply Wall Street | historical_premarket_rvol | 527825 | 0.46071495594261846 | Nasdaq quote | 25.75 | 25.76 | 0.03882741215298607 |
+| 9 | AEHR | 61.878 | REJECT | false | pm_volume_strength,price_cap,score80 | Google News RSS | A trust acquired 1,089 Aehr Test Systems (AEHR) shares; CFO Chris Siu had 194 withheld for taxes. - Stock Titan | historical_premarket_rvol | 112481 | 1.2487482653344435 | Nasdaq quote | 106.08 | 106.24 | 0.15071590052750244 |
+| 10 | AAOI | 58.796 | REJECT | false | price_cap,score80 | Google News RSS | Learn Why The Bull Case For Applied Optoelectronics (AAOI) Could Change Following AI Network Automation Launch - Simply Wall Street | historical_premarket_rvol | 503781 | 1.6312778069204017 | Nasdaq quote | 115.19 | 115.28 | 0.0781012713151416 |
+| 11 | ECHO | 58.157 | REJECT | false | catalyst,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 494354 | 20.7502518468771 | Nasdaq quote | 94.44 | 94.49 | 0.05292965648652639 |
+| 12 | QGEN | 57.674 | REJECT | false | pm_volume_strength,score80 | Google News RSS | Qiagen (QGEN) Stock Surges 7.3% Amid Advanced Acquisition Talks - gurufocus.com | historical_premarket_rvol | 32331 | 0.9482343969967152 | Nasdaq quote | 44.85 | 44.87 | 0.044583147570209584 |
+| 13 | SMTC | 56.638 | REJECT | false | pm_volume_strength,price_cap,score80 | Google News RSS | Semtech (NASDAQ:SMTC) Stock Price Target Raised at Oppenheimer - MarketBeat | historical_premarket_rvol | 73225 | 0.897530183244469 | Nasdaq quote | 196.01 | 196.3 | 0.14784226759451477 |
+| 14 | LUNR | 55.921 | REJECT | false | pm_volume_strength,score80 | Nasdaq company news | Intuitive Machines vs. Rocket Lab: Which Space Stock Can Send Your Returns Into Orbit in 2026? (LUNR) Key PointsIntuitive Machines provides essential cislunar infrastructure and lu | historical_premarket_rvol | 343266 | 1.1384140881504328 | Nasdaq quote | 14.68 | 14.69 | 0.068096697310179 |
+| 15 | VSAT | 54.914 | REJECT | false | catalyst,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 190094 | 10.966539748471213 | Nasdaq quote | 72.31 | 72.44 | 0.17962003454230804 |
+| 16 | LIFE | 53.052 | REJECT | false | catalyst,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 90920 | 10.026466696074106 | Nasdaq quote | 34 | 34.15 | 0.4402054292002892 |
+| 17 | APLD | 52.012 | REJECT | false | catalyst,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 978362 | 1.629891613995222 | Nasdaq quote | 25.2 | 25.21 | 0.03967466772466401 |
+| 18 | AZTA | 51.08 | REJECT | false | catalyst,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 20353 | 3.6931591362729086 | Nasdaq quote | 38.35 | 38.43 | 0.20838760093773975 |
+| 19 | BTDR | 49.182 | REJECT | false | catalyst,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 380141 | 2.124143672958505 | Nasdaq quote | 11 | 11.01 | 0.09086778736937562 |
+| 20 | TSM | 49.069 | REJECT | false | pm_volume_strength,price_cap,score80 | Nasdaq company news | Intel vs. Taiwan Semiconductor Manufacturing: Which Technology Stock Is a Better Buy in 2026? (TSM) Key PointsIntel is pivoting toward a foundry model while strengthening its opera | historical_premarket_rvol | 234719 | 0.5440551660195863 | Nasdaq quote | 472.9 | 472.92 | 0.0042291345076311895 |
+| 21 | LITE | 48.718 | REJECT | false | catalyst,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 385547 | 1.9467154758899268 | Nasdaq quote | 1084.2 | 1085 | 0.07375991148810203 |
+| 22 | BE | 48.613 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 540618 | 0.6119471746209981 | Nasdaq quote | 289.96 | 290.35 | 0.1344109183023016 |
+| 23 | HUT | 47.801 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 99296 | 0.9382860706624964 | Nasdaq quote | 88.64 | 88.82 | 0.2028626169277501 |
+| 24 | CLS | 47.742 | REJECT | false | catalyst,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 68208 | 1.7157087158847943 | Nasdaq quote | 386.58 | 386.99 | 0.10600204247838595 |
+| 25 | WOLF | 47.591 | REJECT | false | catalyst,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 202670 | 3.114550036882223 | Nasdaq quote | 35.62 | 35.65 | 0.08418689490669605 |
+| 26 | COHR | 47.295 | REJECT | false | catalyst,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 318817 | 1.5110741420087495 | Nasdaq quote | 336.17 | 336.44 | 0.0802842657706492 |
+| 27 | SMCI | 46.902 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 771010 | 0.5940208836851314 | Nasdaq quote | 43.78 | 43.79 | 0.02283887175973053 |
+| 28 | AVGO | 46.777 | REJECT | false | catalyst,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 1617111 | 1.891187577259124 | Nasdaq quote | 354.91 | 354.96 | 0.01408708636791371 |
+| 29 | TSLA | 45.305 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 1808762 | 1.4586966777823924 | Nasdaq quote | 372.19 | 372.22 | 0.008060074421361765 |
+| 30 | AXTI | 45.205 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 437331 | 0.7233382015577215 | Nasdaq quote | 85.25 | 85.34 | 0.10551614983293675 |
+| 31 | HPE | 45.063 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 341911 | 0.7343875181765266 | Nasdaq quote | 69.53 | 69.55 | 0.02876042565429397 |
+| 32 | ORCL | 44.186 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 1255552 | 0.5578480707831232 | Nasdaq quote | 142.36 | 142.43 | 0.04915902946029929 |
+| 33 | AMD | 43.722 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 974323 | 1.0620690181407526 | Nasdaq quote | 632.83 | 633.07 | 0.03791768702109315 |
+| 34 | DELL | 43.318 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 142692 | 0.5427759582796042 | Nasdaq quote | 564.86 | 565.8 | 0.16627456529813403 |
+| 35 | VSH | 43.002 | REJECT | false | catalyst,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 91588 | 2.7130754191599027 | Nasdaq quote | 38.54 | 38.57 | 0.0778109194657013 |
+| 36 | CIEN | 42.983 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 38978 | 0.6820178124617242 | Nasdaq quote | 393.99 | 394.3 | 0.07865125778584083 |
+| 37 | FPS | 42.837 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 253230 | 1.1771678799542578 | Nasdaq quote | 40.37 | 40.39 | 0.04952947003467838 |
+| 38 | NVTS | 42.573 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 720338 | 0.8158652098224853 | Nasdaq quote | 12.41 | 12.42 | 0.08054772452678041 |
+| 39 | QMCO | 42.471 | REJECT | false | catalyst,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 244524 | 2.870168437114854 | Nasdaq quote | 34.7 | 34.81 | 0.3165012228456321 |
+| 40 | LRCX | 42.056 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 200467 | 0.8389285056663152 | Nasdaq quote | 347.01 | 347.14 | 0.037455881293667205 |
+| 41 | KLAC | 41.974 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 192287 | 0.9090724281391831 | Nasdaq quote | 206.36 | 206.38 | 0.009691331104318366 |
+| 42 | PL | 41.311 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 234085 | 0.9228697925085453 | Nasdaq quote | 17.66 | 17.67 | 0.0566091140673737 |
+| 43 | IBRX | 40.991 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 213948 | 0.7514963329305645 | Nasdaq quote | 10.19 | 10.2 | 0.09808729769494641 |
+| 44 | ASML | 39.692 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 65108 | 0.6829749291933285 | Nasdaq quote | 1864.35 | 1864.86 | 0.027351637478178537 |
+| 45 | DKS | 39.124 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 60194 | 1.4612676911125677 | Nasdaq quote | 137.2 | 137.34 | 0.10198878123407504 |
+| 46 | STM | 39.007 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 431926 | 0.929666833834478 | Nasdaq quote | 57.08 | 57.09 | 0.017517736708426233 |
+| 47 | BRUN | 38.459 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 39185 | 1.4709636247606892 | Nasdaq quote | 16.35 | 16.39 | 0.24434941967012305 |
+| 48 | VECO | 38.405 | REJECT | false | catalyst,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 17683 | 2.007834676961508 | Nasdaq quote | 57.38 | 57.47 | 0.15672616456246638 |
+| 49 | NCLH | 38.15 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 494598 | 0.9960327689259074 | Nasdaq quote | 15.06 | 15.07 | 0.06637902422834242 |
+| 50 | AMKR | 38.089 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 65673 | 0.8156312874139944 | Nasdaq quote | 56.25 | 56.28 | 0.05331911490269464 |
+| 51 | MXL | 37.786 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 94729 | 1.1831216356301597 | Nasdaq quote | 104.96 | 105.08 | 0.11426394972386646 |
+| 52 | PENG | 37.657 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 49559 | 1.4999697336561744 | Nasdaq quote | 61.25 | 61.28 | 0.04896759977148639 |
+| 53 | FCEL | 37.03 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 113480 | 0.7509512622836912 | Nasdaq quote | 18.14 | 18.17 | 0.16524373450840615 |
+| 54 | OUST | 37.017 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 71572 | 0.9981034194232163 | Nasdaq quote | 43.23 | 43.3 | 0.16179359759621006 |
+| 55 | LFUS | 36.721 | REJECT | false | catalyst,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 8571 | 1.8870541611624836 | Nasdaq quote | 458.59 | 458.92 | 0.07193382088479491 |
+| 56 | CCXI | 35.564 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 89031 | 1.138343711242664 | Nasdaq quote | 11.99 | 12.03 | 0.3330557868442893 |
+| 57 | KALU | 30.168 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 5317 | 1.327922077922078 | Nasdaq quote | 151.41 | 151.65 | 0.15838447832113053 |
+| 58 | PLPC | 29.355 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 11307 | 1.3347104999114678 | Nasdaq quote | 425.17 | 426.56 | 0.32639451469362035 |
+| 59 | CVSA | 28.614 | REJECT | false | catalyst,pm_volume_strength,price_cap,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 6667 | 1.2964511424404472 | Nasdaq quote | 125.79 | 125.99 | 0.1588688537612111 |
+| 60 | DXYZ | 27.116 | REJECT | false | catalyst,pm_volume_strength,score80 | NO_VERIFIED_CATALYST | UNAVAILABLE | historical_premarket_rvol | 27370 | 1.0993733933161953 | Nasdaq quote | 32.72 | 32.82 | 0.30515715593531106 |
 
-[Stage 2 artifact files](engine4-manual-v2-stage2-37045748654/)
+### All refreshed score components
 
-[Full baseline eligible CSV](engine4-manual-v2-stage1-37045748654/baseline_eligible_universe.csv)
+| Rank | Symbol | Catalyst | RVOL | Gap | Liquidity | Resistance room | ATR | Relative strength | Spread |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | ON | 23.75 | 20 | 15 | 14.522 | 4.432 | 4.203 | 4.274 | 4.801 |
+| 2 | SYNA | 23.75 | 20 | 12.403 | 5.909 | 0.639 | 4.208 | 5 | 4.657 |
+| 3 | RKLB | 23.75 | 0 | 15 | 15 | 4.907 | 5 | 3.867 | 4.773 |
+| 4 | GATX | 15 | 20 | 15 | 3.25 | 10 | 1.988 | 2.4 | 3.503 |
+| 5 | BULL | 16.25 | 12.229 | 15 | 6.265 | 3.259 | 5 | 5 | 3.873 |
+| 6 | NBIS | 19 | 0 | 15 | 15 | 4.375 | 5 | 3.127 | 4.621 |
+| 7 | CRDO | 15 | 0 | 15 | 15 | 6.466 | 5 | 4.86 | 4.24 |
+| 8 | CCL | 25 | 0 | 15 | 13.101 | 1.098 | 3.193 | 2.274 | 4.676 |
+| 9 | AEHR | 19 | 1.244 | 15 | 9.566 | 3.498 | 5 | 4.826 | 3.744 |
+| 10 | AAOI | 9.75 | 3.156 | 15 | 13.994 | 2.547 | 5 | 5 | 4.349 |
+| 11 | ECHO | 0 | 20 | 15 | 10.391 | 1 | 2.207 | 5 | 4.559 |
+| 12 | QGEN | 23.75 | 0 | 15 | 5.733 | 1.19 | 2.373 | 5 | 4.628 |
+| 13 | SMTC | 12 | 0 | 15 | 12.97 | 2.9 | 5 | 5 | 3.768 |
+| 14 | LUNR | 9.75 | 0.692 | 15 | 6.656 | 10 | 5 | 4.39 | 4.433 |
+| 15 | VSAT | 0 | 20 | 15 | 6.833 | 1.327 | 5 | 3.251 | 3.503 |
+| 16 | LIFE | 0 | 20 | 15 | 4.454 | 2.266 | 5 | 5 | 1.332 |
+| 17 | APLD | 0 | 3.149 | 15 | 11.658 | 8.902 | 5 | 3.634 | 4.669 |
+| 18 | AZTA | 0 | 13.466 | 14.057 | 1.82 | 10 | 3.474 | 5 | 3.263 |
+| 19 | BTDR | 0 | 5.621 | 15 | 6.73 | 10 | 5 | 2.588 | 4.243 |
+| 20 | TSM | 9.75 | 0 | 15 | 15 | 0.642 | 0.853 | 2.859 | 4.965 |
+| 21 | LITE | 0 | 4.734 | 15 | 15 | 0.536 | 5 | 4.063 | 4.385 |
+| 22 | BE | 0 | 0 | 15 | 15 | 5.39 | 5 | 4.343 | 3.88 |
+| 23 | HUT | 0 | 0 | 15 | 11.729 | 10 | 5 | 2.763 | 3.309 |
+| 24 | CLS | 0 | 3.579 | 15 | 14.05 | 2.491 | 4.806 | 3.699 | 4.117 |
+| 25 | WOLF | 0 | 10.573 | 13.252 | 4.87 | 4.598 | 5 | 5 | 4.298 |
+| 26 | COHR | 0 | 2.555 | 15 | 15 | 0.409 | 5 | 5 | 4.331 |
+| 27 | SMCI | 0 | 0 | 15 | 15 | 2.736 | 5 | 4.356 | 4.81 |
+| 28 | AVGO | 0 | 4.456 | 15 | 15 | 2.2 | 1.854 | 3.384 | 4.883 |
+| 29 | TSLA | 0 | 2.293 | 15 | 15 | 0.932 | 2.257 | 4.89 | 4.933 |
+| 30 | AXTI | 0 | 0 | 15 | 13.236 | 2.848 | 5 | 5 | 4.121 |
+| 31 | HPE | 0 | 0 | 15 | 15 | 0.303 | 5 | 5 | 4.76 |
+| 32 | ORCL | 0 | 0 | 15 | 15 | 2.598 | 4.236 | 2.762 | 4.59 |
+| 33 | AMD | 0 | 0.31 | 15 | 15 | 2.699 | 3.564 | 2.465 | 4.684 |
+| 34 | DELL | 0 | 0 | 15 | 15 | 0.695 | 4.694 | 4.315 | 3.614 |
+| 35 | VSH | 0 | 8.565 | 13.507 | 6.386 | 1.265 | 3.927 | 5 | 4.352 |
+| 36 | CIEN | 0 | 0 | 15 | 14.595 | 0.814 | 5 | 3.229 | 4.345 |
+| 37 | FPS | 0 | 0.886 | 15 | 11.433 | 0.931 | 5 | 5 | 4.587 |
+| 38 | NVTS | 0 | 0 | 15 | 8.062 | 7.374 | 5 | 2.808 | 4.329 |
+| 39 | QMCO | 0 | 9.351 | 15 | 3.584 | 2.174 | 5 | 5 | 2.362 |
+| 40 | LRCX | 0 | 0 | 15 | 15 | 1.5 | 3.149 | 2.719 | 4.688 |
+| 41 | KLAC | 0 | 0 | 15 | 15 | 1.341 | 2.581 | 3.133 | 4.919 |
+| 42 | PL | 0 | 0 | 15 | 9.008 | 2.775 | 5 | 5 | 4.528 |
+| 43 | IBRX | 0 | 0 | 15 | 6.561 | 5.247 | 5 | 5 | 4.183 |
+| 44 | ASML | 0 | 0 | 15 | 15 | 0.821 | 1.377 | 2.722 | 4.772 |
+| 45 | DKS | 0 | 2.306 | 15 | 11.418 | 0.214 | 2.765 | 3.271 | 4.15 |
+| 46 | STM | 0 | 0 | 15 | 11.952 | 0.296 | 1.905 | 5 | 4.854 |
+| 47 | BRUN | 0 | 2.355 | 15 | 1.956 | 7.594 | 5 | 3.59 | 2.964 |
+| 48 | VECO | 0 | 5.039 | 15 | 1.784 | 3.513 | 4.375 | 5 | 3.694 |
+| 49 | NCLH | 0 | 0 | 15 | 10.275 | 2.461 | 3.55 | 2.417 | 4.447 |
+| 50 | AMKR | 0 | 0 | 15 | 8.712 | 0.895 | 3.926 | 5 | 4.556 |
+| 51 | MXL | 0 | 0.916 | 12.461 | 9.625 | 0.736 | 5 | 5 | 4.048 |
+| 52 | PENG | 0 | 2.5 | 14.479 | 5.049 | 1.097 | 4.94 | 5 | 4.592 |
+| 53 | FCEL | 0 | 0 | 15 | 6.052 | 2.355 | 5 | 5 | 3.623 |
+| 54 | OUST | 0 | 0 | 15 | 5.526 | 2.839 | 5 | 5 | 3.652 |
+| 55 | LFUS | 0 | 4.435 | 15 | 5.2 | 0.728 | 1.957 | 5 | 4.401 |
+| 56 | CCXI | 0 | 0.692 | 15 | 1.245 | 7.043 | 5 | 4.359 | 2.225 |
+| 57 | KALU | 0 | 1.64 | 15 | 1.846 | 2.497 | 3.172 | 2.333 | 3.68 |
+| 58 | PLPC | 0 | 1.674 | 15 | 1.434 | 0.446 | 3.642 | 4.879 | 2.28 |
+| 59 | CVSA | 0 | 1.482 | 15 | 3.008 | 0.982 | 1.881 | 2.585 | 3.676 |
+| 60 | DXYZ | 0 | 0.497 | 15 | 0.786 | 0.553 | 2.823 | 5 | 2.457 |
 
-[Export manifest](export_manifest.json)
+## Pending stages and timing distinction
+
+Bench: RUNNING. Prior carried identity KMX is pending fresh rescoring; its September 29 score is not current eligibility. Cap 25, no age expiry in this build.
+
+SELECTION: Frozen ON 90.982/A. PRIMARY ENTRY: PENDING. RECOVERY: PENDING. EXECUTION: PENDING; no broker fill verified.
+
+The locked Stage 4 structure calculation uses today's 09:30–09:45 opening window, followed by a current quote check only if those structure gates pass. This is opening-window context, not proof of a newly formed afternoon setup. The current manual selection prices do satisfy the fresh-request boundary; do not conflate that with all structural observations being afternoon observations.
+
+Final verification, final upload, persisted Bench verification and terminal GitHub conclusion: PENDING.
+
+## Baseline metadata coverage
+
+Stage 1 captured CSV has 1,975 distinct symbols. Recorded market-cap bins: below $2B 206; $2B to below $10B 942; at least $10B 827. No missing market-cap values. Total-market denominator/coverage percentage and exchange composition: UNAVAILABLE in the artifact.
+
+## Source snapshots
+
+[Stage 1](engine4-manual-v2-stage1-37045748654/), [Stage 2](engine4-manual-v2-stage2-37045748654/), [Stage 3](engine4-manual-v2-stage3-37045748654/), [manifest](export_manifest.json).
