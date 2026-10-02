@@ -1,0 +1,13 @@
+ENGINE 4 DAILY TIMELINE — 2026-10-02
+02:12:30 PM ET — PRE-SCREEN — STARTED
+  Broad liquid U.S. universe scan started.
+02:42:47 PM ET — PRE-SCREEN — COMPLETED
+  1621 stocks naturally met the broad qualification; the strongest 100 were retained by the configured Top-100 cap.
+  Stocks: SYNA, QMCO, QRVO, ECHO, WOLF, LITE, ON, AAOI, AVGO, BULL, AXTI, APLD, HOOD, NVTS, STM, ASML, COHR, LFUS, NBIS, AEHR, TSLA, AMD, RKLB, LUNR, PENG, MXL, CCXI, OUST, BTDR, ORCL, VSH, CLS, BE, VECO, LQDA, TRMD, AMAT, CRDO, GLW, QCOM, FPS, NCLH, WULF, TSM, LRCX, SMTC, AZTA, WYFI, KLAC, GATX, CCL, SMCI, RDW, FCEL, DKS, HUT, MP, IBRX, PL, CVSA, AMKR, DELL, HPE, CIEN, QGEN, TER, PDI, FRO, ONTO, AKAM, RCL, VRT, SNAP, DE, POWL, GFS, FN, CAT, DAVE, PGY, SLS, JBL, SEDG, SHAZ, TTMI, FRVO, TXN, MPWR, VIAV, ADI, FSLR, VG, GNRC, UMC, S, PBR, PWR, ALGM, ALM, IBKR
+  Counts: baseline_eligible=1975 | trustworthy_observed=1621 | broad_qualified=1621 | strict_activity_count=138 | retained_by_cap=100 | runtime_seconds=1817.655
+02:42:49 PM ET — DEEP 100-POINT ANALYSIS — STARTED
+  Detailed 100-point analysis started on the highest-ranked retained pre-screen candidates.
+02:48:59 PM ET — DEEP 100-POINT ANALYSIS — COMPLETED
+  Top 60 were selected for deep analysis by the configured cap; 60 actually completed scoring. Of those, 2 scored >=80 and 2 passed every mandatory premarket gate for B-or-better launchpad eligibility.
+  Stocks: ON, LQDA, SYNA, RKLB, GATX, QCOM, BULL, HOOD, NBIS, CRDO
+  Counts: selected_for_deep=60 | analyzed_count=60 | score80_count=2 | launchpad_eligible_count=2 | b_grade_count=1 | a_grade_count=1 | runtime_seconds=369.343
