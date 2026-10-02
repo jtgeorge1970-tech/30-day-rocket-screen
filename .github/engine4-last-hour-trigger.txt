@@ -1,0 +1,5 @@
+mode=last_hour_snapshot
+engine_date_et=2026-10-02
+window_et=15:00-16:00
+requested_at=2026-10-02T21:53:14Z
+request=manual-full-cycle-last-hour-2026-10-02
