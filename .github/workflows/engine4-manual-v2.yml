@@ -17,7 +17,7 @@ jobs:
     env:
       ENGINE4_MANUAL_CURRENT_SNAPSHOT: '1'
     permissions:
-      contents: read
+      contents: write
       actions: write
     steps:
       - uses: actions/checkout@v4
@@ -121,6 +121,23 @@ jobs:
             output/engine4/notification_bench*
             state/engine4/watch_bench.json
           if-no-files-found: error
+      - name: Persist fresh Bench without changing the live checkout
+        continue-on-error: true
+        run: |
+          python -c 'import json,os; from pathlib import Path; p=json.loads(Path("state/engine4/watch_bench.json").read_text()); assert p["target_date_et"] == os.environ["ENGINE_DATE_ET"]'
+          BENCH_WORKTREE="$RUNNER_TEMP/engine4-bench-persist"
+          git fetch origin main
+          git worktree add --detach "$BENCH_WORKTREE" origin/main
+          mkdir -p "$BENCH_WORKTREE/state/engine4"
+          cp state/engine4/watch_bench.json "$BENCH_WORKTREE/state/engine4/watch_bench.json"
+          git -C "$BENCH_WORKTREE" config user.name 'engine4-bot'
+          git -C "$BENCH_WORKTREE" config user.email 'actions@users.noreply.github.com'
+          git -C "$BENCH_WORKTREE" add state/engine4/watch_bench.json
+          if ! git -C "$BENCH_WORKTREE" diff --cached --quiet; then
+            git -C "$BENCH_WORKTREE" commit -m "Engine 4 ${ENGINE_DATE_ET} fresh Bench run ${GITHUB_RUN_ID}"
+            git -C "$BENCH_WORKTREE" pull --rebase --autostash origin main
+            git -C "$BENCH_WORKTREE" push origin HEAD:main
+          fi
       - name: Stage 4
         run: |
           python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"
