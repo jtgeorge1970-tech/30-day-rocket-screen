@@ -22,6 +22,7 @@ historical RVOL.
 import argparse
 import json
 import math
+import os
 from datetime import datetime
 
 import numpy as np
@@ -106,6 +107,9 @@ def _estimated_avg_daily_shares(avg_daily_dollar_volume: float, price: float) ->
 
 
 def repaired_build_broad_pool(date_et, cutoff: str, max_symbols: int | None = None):
+    manual_current = os.environ.get("ENGINE4_MANUAL_CURRENT_SNAPSHOT") == "1" and date_et == core.now_et().date()
+    if manual_current:
+        cutoff = core.now_et().strftime("%H:%M")
     base = core.eligible_baseline()
     if max_symbols:
         base = base.head(max_symbols).copy()
@@ -133,6 +137,14 @@ def repaired_build_broad_pool(date_et, cutoff: str, max_symbols: int | None = No
         if close.empty:
             continue
 
+        if manual_current:
+            requested = os.environ.get("ENGINE4_FRESH_REQUESTED_AT")
+            if not requested:
+                raise RuntimeError("Fresh manual run missing requested-at freshness boundary")
+            observed_at = pd.Timestamp(close.index[-1])
+            floor = pd.Timestamp(requested)
+            if observed_at.tzinfo is None or observed_at < floor:
+                continue
         current = float(close.iloc[-1])
         previous = core.prior_regular_close(frame, date_et)
         if not math.isfinite(previous):
@@ -150,6 +162,10 @@ def repaired_build_broad_pool(date_et, cutoff: str, max_symbols: int | None = No
             "avg_daily_dollar_volume": daily_dollar,
             "previous_close": previous,
             "last_premarket": current,
+            "selection_price": current,
+            "selection_price_source": "fresh Yahoo intraday bar",
+            "selection_bar_timestamp": str(close.index[-1]),
+            "snapshot_mode": "CURRENT_LIVE_MANUAL" if manual_current else "PREMARKET",
             "premarket_volume": 0.0,
             "premarket_dollar_volume": 0.0,
             "premarket_volume_intensity_pct": math.nan,
@@ -192,7 +208,7 @@ def repaired_build_broad_pool(date_et, cutoff: str, max_symbols: int | None = No
         if snap.get("ok"):
             px = snap.get("premarket_price", math.nan)
             vol = snap.get("premarket_volume", math.nan)
-            if math.isfinite(px) and px >= MIN_PRICE:
+            if not manual_current and math.isfinite(px) and px >= MIN_PRICE:
                 row["last_premarket"] = float(px)
                 row["gap_pct"] = (float(px) / row["previous_close"] - 1.0) * 100.0
             if math.isfinite(vol) and vol >= 0:
@@ -232,6 +248,10 @@ def repaired_build_broad_pool(date_et, cutoff: str, max_symbols: int | None = No
 
 
 def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) -> pd.DataFrame:
+    manual_current = os.environ.get("ENGINE4_MANUAL_CURRENT_SNAPSHOT") == "1" and date_et == core.now_et().date()
+    if manual_current:
+        reference = core.now_et()
+        cutoff = reference.strftime("%H:%M")
     selected = broad.head(DEEP_POOL_SIZE).copy()
     deep_symbols = selected.ticker.astype(str).tolist()
     history = download_intraday(deep_symbols, period="7d", interval="1m", prepost=True, date_et=date_et, lookback_days=7)
@@ -260,7 +280,7 @@ def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) ->
         if hist is None or hist.empty:
             continue
 
-        baseline_volume = historical_premarket_baseline(hist, date_et, cutoff)
+        baseline_volume = historical_premarket_baseline(hist, date_et, "09:30" if manual_current else cutoff)
         rvol = (
             row["premarket_volume"] / baseline_volume
             if math.isfinite(baseline_volume) and baseline_volume > 0 and row.get("premarket_volume", 0) > 0
