@@ -151,3 +151,11 @@ Joseph explicitly authorized repair of the clean manual process and replacement 
 - If a run fails, inspect the exact failed step and logs, repair the authorized operational defect, verify no duplicate remains active, and use a new fresh request when the live window permits. Do not change locked trade logic simply to force a positive result.
 
 The clean manual freshness behavior is covered by `test_engine4_manual_freshness.py`: current-price preservation, pre-request bar rejection, naive-timestamp rejection, explicit missing-boundary failure, and unchanged normal premarket behavior. Passing those checks is not a claim that a complete live cycle or the three-cycle reliability proof has finished.
+
+### Enforced clean-run ownership and Bench corrections — 2026-10-02
+
+- Production arrivals share the live-run concurrency group but use `cancel-in-progress: false`: a late schedule must not cancel an active manual/full cycle before its own window check. Production and both manual runners allow 260 minutes for the complete existing stage/recovery sequence; this changes execution capacity, not trade windows.
+- Manual V2 may replace active work only for an explicitly authorized clean replacement or necessary repair/restart. Ordinary guards must first verify that no healthy current-day live cycle exists.
+- Joseph's strongest-survive rule overrides the former five-session Bench expiry. A candidate has no maximum age; it must still pass current score and mandatory gates, and compete for the Top-25 capacity. Age remains reporting context only.
+- In clean manual mode, Bench selection-price observations use the same requested-at freshness boundary as the main scan and cannot be overwritten by older premarket prices. Historical activity remains labeled context.
+- Manual V2 exports the Bench artifact before attempting persistence. It saves the dated Bench through an isolated Git worktree so the live checkout and dirty stage outputs do not change. A persistence-step error must not kill market stages; the run owner must inspect its evidence and repair/verify durable Bench state before calling the overall work complete.
