@@ -86,7 +86,7 @@ def test_bench_is_daily_competition_capped_at_25(tmp_path, monkeypatch):
     assert any(row["reason"] == "displaced_by_Top25_Bench_cap" for row in result["removals"])
 
 
-def test_candidate_expires_after_five_completed_watch_sessions(tmp_path, monkeypatch):
+def test_strong_candidate_survives_beyond_five_completed_watch_sessions(tmp_path, monkeypatch):
     out = _configure_paths(tmp_path, monkeypatch)
     today = "2026-09-18"
     (out / "top25_frozen.json").write_text(
@@ -116,10 +116,12 @@ def test_candidate_expires_after_five_completed_watch_sessions(tmp_path, monkeyp
     monkeypatch.setattr(bench.runner, "install_repairs", lambda: None)
 
     result = bench.update_bench(today, state)
-    assert result["retained_by_top25_bench_cap"] == 0
-    assert result["removals"] == [
-        {"ticker": "RIPE", "reason": "five_session_watch_expired", "age_sessions": 6}
-    ]
+    assert result["retained_by_top25_bench_cap"] == 1
+    assert result["removals"] == []
+    assert result["candidates"][0]["ticker"] == "RIPE"
+    assert result["candidates"][0]["age_sessions"] == 6
+    assert result["max_watch_sessions"] is None
+    assert result["watch_expiry_policy"] == "score_and_mandatory_gates_only"
 
 
 def test_only_current_date_hot_five_reach_final_guard(tmp_path, monkeypatch):
