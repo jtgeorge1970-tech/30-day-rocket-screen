@@ -1,0 +1,93 @@
+name: Engine 4 Artifact Report Export
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/engine4-artifact-export-trigger.txt']
+concurrency:
+  group: engine4-artifact-report-export
+  cancel-in-progress: false
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Export verified live artifacts to isolated report branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import io,json,os,re,subprocess,urllib.request,urllib.error,zipfile
+          from pathlib import Path
+          from datetime import datetime,timezone
+          fields=dict(line.split("=",1) for line in Path(".github/engine4-artifact-export-trigger.txt").read_text().splitlines() if "=" in line)
+          run_id=int(fields["run_id"])
+          expected=fields["expected_commit"]
+          expected_date=fields["market_date_et"]
+          branch=f"engine4-results-{run_id}"
+          repo=os.environ["GITHUB_REPOSITORY"]
+          headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"}
+          def api(path):
+              req=urllib.request.Request("https://api.github.com/repos/"+repo+path,headers=headers)
+              with urllib.request.urlopen(req,timeout=60) as r: return json.loads(r.read())
+          run=api(f"/actions/runs/{run_id}")
+          assert run["head_sha"]==expected,"Run commit mismatch"
+          assert run["event"]=="push","Expected live push run"
+          assert run["name"]=="Engine 4 Manual V2 Hardened","Unrelated workflow"
+          artifacts=api(f"/actions/runs/{run_id}/artifacts?per_page=100")["artifacts"]
+          assert artifacts,"No stage artifacts yet"
+          subprocess.run(["git","fetch","origin",branch],check=True)
+          subprocess.run(["git","switch","-C","report-export","FETCH_HEAD"],check=True)
+          root=Path("reports/engine4")/str(run_id)
+          root.mkdir(parents=True,exist_ok=True)
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self,req,fp,code,msg,headers,newurl): return None
+          opener=urllib.request.build_opener(NoRedirect)
+          records=[]
+          for a in artifacts:
+              assert a["workflow_run"]["head_sha"]==expected,"Artifact commit mismatch"
+              assert not a["expired"],"Expired artifact"
+              assert re.fullmatch(r"engine4-manual-v2-(stage[1-4]|bench|complete)-"+str(run_id),a["name"]),"Unexpected artifact"
+              req=urllib.request.Request(a["archive_download_url"],headers=headers)
+              try:
+                  with opener.open(req,timeout=60) as response: raw=response.read()
+              except urllib.error.HTTPError as e:
+                  if e.code not in (301,302,303,307,308): raise
+                  with urllib.request.urlopen(e.headers["Location"],timeout=60) as response: raw=response.read()
+              out=root/a["name"]
+              out.mkdir(exist_ok=True)
+              names=[]
+              with zipfile.ZipFile(io.BytesIO(raw)) as z:
+                  for member in z.infolist():
+                      p=Path(member.filename)
+                      assert not p.is_absolute() and ".." not in p.parts,"Unsafe ZIP path"
+                      if member.is_dir() or p.suffix.lower() not in {".json",".csv",".txt",".md"}: continue
+                      data=z.read(member)
+                      data.decode("utf-8")
+                      if p.suffix.lower()==".json":
+                          payload=json.loads(data)
+                          if isinstance(payload,dict):
+                              date=payload.get("target_date_et") or payload.get("market_date_et")
+                              if date: assert date==expected_date,f"Artifact date mismatch: {p}"
+                      dest=out/p
+                      dest.parent.mkdir(parents=True,exist_ok=True)
+                      dest.write_bytes(data)
+                      names.append(str(p))
+              records.append({"artifact_id":a["id"],"name":a["name"],"created_at_utc":a["created_at"],"digest":a.get("digest"),"files":names})
+          manifest={"run_id":run_id,"source_commit":expected,"market_date_et":expected_date,
+            "run_status_at_export":run["status"],"run_conclusion_at_export":run["conclusion"],
+            "exported_at_utc":datetime.now(timezone.utc).isoformat(),"artifacts":records,
+            "report_only":True,"live_outputs_unmodified":True}
+          (root/"export_manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
+          subprocess.run(["git","config","user.name","engine4-report-bot"],check=True)
+          subprocess.run(["git","config","user.email","actions@users.noreply.github.com"],check=True)
+          subprocess.run(["git","add",str(root)],check=True)
+          if subprocess.run(["git","diff","--cached","--quiet"]).returncode:
+              subprocess.run(["git","commit","-m",f"Verified artifact snapshots for live Engine 4 run {run_id}"],check=True)
+              subprocess.run(["git","push","origin","HEAD:"+branch],check=True)
+          print(json.dumps(manifest,indent=2))
+          PY
