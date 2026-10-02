@@ -132,3 +132,22 @@ Reliability is demonstrated by three consecutive market-day cycles in which:
 - no unauthorized modification or duplicate occurs.
 
 No promise or configured schedule substitutes for this measured proof.
+
+## Clean current-data manual run contract — 2026-10-02
+
+Joseph explicitly authorized repair of the clean manual process and replacement of the failed October 2 cycle. For clean current-data manual requests, use the existing **Engine 4 Manual V2 Hardened** workflow and `.github/engine4-manual-v2-trigger.txt`. This operational contract preserves the locked scoring, B-or-better score >=80 floor, mandatory selection/entry gates, providers, risk rules, and Bench survival rules.
+
+- Inspect actual Actions state immediately before triggering. Do not duplicate a healthy current-day run. Replacing a healthy run requires Joseph's explicit instruction; a replacement uses the shared production concurrency group.
+- Write `ready=true`, `purpose=hardened-live-manual-runner`, `mode=live_today`, the current `engine_date_et`, and a new timezone-aware `requested_at` timestamp. Verify the trigger at the resulting run's commit.
+- A clean run deletes its checked-out `output/engine4` directory before provider checks and Stage 1, then writes `fresh_start_manifest.json` with the new run ID and actual reset timestamp.
+- Old GitHub artifact deletion is limited to explicitly requested `purge_run_ids`. The cleanup refuses its own run, active runs, and successful runs; it accepts only terminal failed, cancelled, or timed-out runs. Never delete unrelated history.
+- Persisted Bench identities are preserved for fresh rescoring. Prior scores and prior stage outputs are not proof for the new run.
+- Manual V2 opts into `ENGINE4_MANUAL_CURRENT_SNAPSHOT=1`. Its selection-price bars must have a timezone-aware timestamp at or after `ENGINE4_FRESH_REQUESTED_AT`. Earlier bars and ambiguous timestamps cannot be retained as fresh selection-price observations. An older Nasdaq premarket price must not overwrite the current manual selection price.
+- Previous closes, historical comparisons, and premarket activity remain necessary context. Label them accurately; never represent historical context as a new observation after the request.
+- Preserve the complete eligible baseline CSV, Stage 1 retained roster, all deep-analysis rows, and all refresh/ranking rows, including rejected candidates and exact failures. Report natural counts separately from the Top-100, Top-60, and Top-25 caps.
+- Run every required stage in order. Manual current-data mode does not extend the locked primary/recovery windows or authorize orders that fail final live-entry gates.
+- On-screen notification records are valid reporting evidence when SMS is bypassed under Joseph's instruction. Do not let unavailable SMS acceptance terminate market processing, and never claim an SMS was attempted, accepted, rejected, or delivered without its actual audit evidence.
+- Full completion requires current-date artifacts, ordered STARTED/COMPLETED stage evidence, final invariant verification, the final artifact upload, and the actual terminal GitHub conclusion. Invocation, prerequisite tests, or selection candidates alone are not completion or buy signals.
+- If a run fails, inspect the exact failed step and logs, repair the authorized operational defect, verify no duplicate remains active, and use a new fresh request when the live window permits. Do not change locked trade logic simply to force a positive result.
+
+The clean manual freshness behavior is covered by `test_engine4_manual_freshness.py`: current-price preservation, pre-request bar rejection, naive-timestamp rejection, explicit missing-boundary failure, and unchanged normal premarket behavior. Passing those checks is not a claim that a complete live cycle or the three-cycle reliability proof has finished.
