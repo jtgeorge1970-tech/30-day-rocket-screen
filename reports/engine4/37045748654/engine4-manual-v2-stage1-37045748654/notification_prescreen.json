@@ -1,0 +1,13 @@
+{
+  "delivery": "SAVED_ONSCREEN",
+  "marker": "ENGINE4-ALERT:2026-10-02:prescreen:COMPLETED:MARKET:RUN:37045748654",
+  "kind": "prescreen",
+  "status": "COMPLETED",
+  "ticker": "MARKET",
+  "target_date_et": "2026-10-02",
+  "generated_et": "2026-10-02 02:42:48 PM ET",
+  "run_id": "37045748654",
+  "message": "STAGE 1 PRE-SCREEN COMPLETE \u2014 2026-10-02 ET\nBaseline 1975; trustworthy 1621; natural broad 1621.\nNasdaq enriched 316; nonzero activity 316; strict activity 138.\nRetained by configured Top-100 cap: 100.",
+  "notification_text": "ENGINE 4 PRESCREEN: COMPLETED \u2014 MARKET\nSTAGE 1 PRE-SCREEN COMPLETE \u2014 2026-10-02 ET\nBaseline 1975; trustworthy 1621; natural broad 1621.\nNasdaq enriched 316; nonzero activity 316; strict activity 138.\nRetained by configured Top-100 cap: 100.\nRun 37045748654\nGenerated 2026-10-02 02:42:48 PM ET\nConfirm the live broker quote before any order.",
+  "dry_run": false
+}

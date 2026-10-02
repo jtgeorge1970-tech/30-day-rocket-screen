@@ -1,0 +1,13 @@
+{
+  "delivery": "SAVED_ONSCREEN",
+  "marker": "ENGINE4-ALERT:2026-10-02:start:STARTED:SYSTEM:RUN:37045748654",
+  "kind": "start",
+  "status": "STARTED",
+  "ticker": "SYSTEM",
+  "target_date_et": "2026-10-02",
+  "generated_et": "2026-10-02 02:12:21 PM ET",
+  "run_id": "37045748654",
+  "message": "ENGINE 4 MANUAL RUN STARTED \u2014 current-day live on-demand cycle is active for 2026-10-02 ET.",
+  "notification_text": "ENGINE 4 START: STARTED \u2014 SYSTEM\nENGINE 4 MANUAL RUN STARTED \u2014 current-day live on-demand cycle is active for 2026-10-02 ET.\nRun 37045748654\nGenerated 2026-10-02 02:12:21 PM ET\nConfirm the live broker quote before any order.",
+  "dry_run": false
+}

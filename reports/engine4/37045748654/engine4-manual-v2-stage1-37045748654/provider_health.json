@@ -1,0 +1,14 @@
+{
+  "checked_at_et": "2026-10-02T14:12:30.302354-04:00",
+  "target_date_et": "2026-10-02",
+  "state": "PASS",
+  "nasdaq_premarket_ok": true,
+  "nasdaq_premarket_volume": 8283058.0,
+  "nasdaq_quote_ok": true,
+  "cboe_delayed_quote_ok": true,
+  "google_news_ok": true,
+  "bing_news_ok": true,
+  "nasdaq_news_ok": true,
+  "news_provider_count": 3,
+  "news_provider_ok": true
+}
