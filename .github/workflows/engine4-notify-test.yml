@@ -1,0 +1,23 @@
+name: Engine 4 Push Notification Test
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/engine4-notify-test-trigger.txt']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send ntfy push test
+        env:
+          NTFY_TOPIC: "engine4-06266e9f662a70ac891974f1"
+        run: |
+          stamp=$(TZ=America/New_York date '+%Y-%m-%d %I:%M:%S %p ET')
+          msg="ENGINE 4 TEST PUSH — if you see this, the 5-minute notification path works — ${stamp}"
+          curl --fail --silent --show-error -X POST \
+            -H "Title: Engine 4 TEST" \
+            -H "Priority: max" \
+            -H "Tags: white_check_mark,rocket" \
+            -d "$msg" \
+            "https://ntfy.sh/$NTFY_TOPIC"
