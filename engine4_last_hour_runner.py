@@ -17,8 +17,8 @@ from engine4_score import preliminary_activity_score, score_candidate, premarket
 
 OUT = Path("output/engine4_last_hour")
 OUT.mkdir(parents=True, exist_ok=True)
-WINDOW_START = "10:00"
-WINDOW_END = "11:00"
+WINDOW_START = "14:30"
+WINDOW_END = "15:30"
 BENCH_CAP = 25
 
 def finite(x, default=math.nan):
@@ -41,7 +41,7 @@ def recs(df):
     return out
 
 def ref(date_et):
-    return datetime.combine(date_et, time(11,0), tzinfo=core.ET)
+    return datetime.combine(date_et, time(15,30), tzinfo=core.ET)
 
 def window_metrics(frame, date_et):
     w=slice_window(frame,date_et,WINDOW_START,WINDOW_END)
@@ -88,12 +88,12 @@ def stage1(date_s):
           "last_hour_dollar_volume":m["dollar_volume"],"premarket_dollar_volume":m["dollar_volume"],
           "last_hour_volume_intensity_pct":intensity,"premarket_volume_intensity_pct":intensity,
           "strict_activity_pass":strict,"activity_score":preliminary_activity_score(m["return_pct"],max(m["dollar_volume"],1),max(adv_dollar,1)),
-          "selection_bar_timestamp":m["last_timestamp"],"snapshot_mode":"MANUAL_WINDOW_1000_1100_ET"})
+          "selection_bar_timestamp":m["last_timestamp"],"snapshot_mode":"MANUAL_WINDOW_1430_1530_ET"})
     all_df=pd.DataFrame(rows)
     if all_df.empty: raise RuntimeError("No trustworthy last-hour observations")
     retained=all_df.sort_values(["strict_activity_pass","premarket_volume_intensity_pct","activity_score","last_hour_dollar_volume","last_hour_return_pct"],ascending=False,na_position="last").head(BROAD_POOL_SIZE).reset_index(drop=True)
     retained.to_csv(OUT/"stage1_retained.csv",index=False)
-    meta={"target_date_et":date_s,"window":"10:00-11:00 ET","baseline_eligible":len(base),
+    meta={"target_date_et":date_s,"window":"14:30-15:30 ET","baseline_eligible":len(base),
       "trustworthy_last_hour_observations":len(all_df),"strict_activity_count":int(all_df.strict_activity_pass.sum()),
       "retained_by_top100_cap":len(retained),"symbols":retained.ticker.tolist()}
     (OUT/"stage1_report.json").write_text(json.dumps(meta,indent=2))
@@ -179,18 +179,16 @@ def stage3(date_s):
     if not elig.empty:
         elig.insert(0,"rank",range(1,len(elig)+1))
     elig.to_csv(OUT/"top25_frozen.csv",index=False)
-    payload={"target_date_et":date_s,"window":"10:00-11:00 ET","actual_count":len(elig),"candidates":recs(elig)}
+    payload={"target_date_et":date_s,"window":"14:30-15:30 ET","actual_count":len(elig),"candidates":recs(elig)}
     (OUT/"top25_frozen.json").write_text(json.dumps(payload,indent=2))
     print(json.dumps({"target_date_et":date_s,"score_ge_80":int((ranked.score>=80).sum()) if not ranked.empty else 0,
       "launchpad_eligible":len(elig),"frozen_finalists":[{"ticker":r["ticker"],"score":r["score"],"grade":r["premarket_grade"]} for r in recs(elig)]},indent=2))
 
 def bench(date_s):
     frozen=pd.read_csv(OUT/"top25_frozen.csv") if (OUT/"top25_frozen.csv").stat().st_size>1 else pd.DataFrame()
-    prior_path=Path("state/engine4/watch_bench.json")
-    prior=json.loads(prior_path.read_text()) if prior_path.exists() else {"candidates":[]}
-    prior_syms=[str(x.get("ticker")) for x in prior.get("candidates",[]) if x.get("ticker")]
+    # Fresh rerun isolation: do not carry any prior Bench/watchlist state into this run.
     frozen_syms=frozen.ticker.astype(str).tolist() if not frozen.empty and "ticker" in frozen else []
-    union=list(dict.fromkeys(frozen_syms+prior_syms))
+    union=list(dict.fromkeys(frozen_syms))
     source=pd.read_csv(OUT/"stage3_ranked.csv")
     known=source[source.ticker.astype(str).isin(union)].copy() if union else pd.DataFrame()
     qualified=known[(known.premarket_eligible==True)&(known.score>=80)].copy() if not known.empty else known
@@ -226,7 +224,7 @@ def verify(date_s):
     req=["stage1_report.json","stage2_report.json","top25_frozen.json","stage_bench_report.json","stage4_report.json","stage5_report.json"]
     missing=[x for x in req if not (OUT/x).exists()]
     if missing: raise RuntimeError("Missing artifacts: "+",".join(missing))
-    payload={"target_date_et":date_s,"status":"COMPLETE","mode":"MANUAL_WINDOW_1000_1100_ET_SNAPSHOT",
+    payload={"target_date_et":date_s,"status":"COMPLETE","mode":"MANUAL_WINDOW_1430_1530_ET_SNAPSHOT",
       "verified_artifacts":req,"generated_at_et":datetime.now(core.ET).isoformat()}
     (OUT/"complete_report.json").write_text(json.dumps(payload,indent=2)); print(json.dumps(payload,indent=2))
 
