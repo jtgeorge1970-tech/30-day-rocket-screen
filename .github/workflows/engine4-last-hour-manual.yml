@@ -13,7 +13,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       HEARTBEAT_ISSUE: "37"
-      NTFY_TOPIC: "engine4-06266e9f662a70ac891974f1"
+      NTFY_TOPIC: "notifyme"
     permissions:
       contents: read
       actions: write
