@@ -191,8 +191,9 @@ def bench(date_s):
     union=list(dict.fromkeys(frozen_syms))
     source=pd.read_csv(OUT/"stage3_ranked.csv")
     known=source[source.ticker.astype(str).isin(union)].copy() if union else pd.DataFrame()
-    qualified=known[(known.premarket_eligible==True)&(known.score>=80)].copy() if not known.empty else known
-    qualified=qualified.sort_values("score",ascending=False).head(BENCH_CAP)
+    qualified=known[(known.premarket_eligible==True)&(known.score>=80)].copy() if not known.empty else known.copy()
+    if not qualified.empty and "score" in qualified.columns:
+        qualified=qualified.sort_values("score",ascending=False).head(BENCH_CAP)
     if not qualified.empty:
         qualified["bench_rank"]=range(1,len(qualified)+1)
         qualified["tier"]=qualified.bench_rank.map(lambda x:"HOT" if x<=5 else ("DEVELOPING" if x<=15 else "RESERVE"))
