@@ -12,13 +12,11 @@ jobs:
     timeout-minutes: 260
     env:
       GH_TOKEN: ${{ github.token }}
-      HEARTBEAT_ISSUE: "37"
       NOTIFY_DEVICE_ID: ${{ secrets.NOTIFY_DEVICE_ID }}
       NOTIFY_DEVICE_TOKEN: ${{ secrets.NOTIFY_DEVICE_TOKEN }}
     permissions:
       contents: read
       actions: write
-      issues: write
     steps:
       - uses: actions/checkout@v4
       - name: Flush prior last-hour outputs and artifacts
@@ -82,14 +80,7 @@ jobs:
           mkdir -p "$(dirname "$log")"
           post_heartbeat() {
             local msg="$1"
-            local payload
-            payload=$(python -c 'import json,sys; print(json.dumps({"body":"@jtgeorge1970-tech "+sys.argv[1]}))' "$msg")
-            curl --fail --silent --show-error --max-time 10 --retry 1 -X POST \
-              -H "Authorization: Bearer $GH_TOKEN" \
-              -H "Accept: application/vnd.github+json" \
-              -H "X-GitHub-Api-Version: 2022-11-28" \
-              "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$HEARTBEAT_ISSUE/comments" \
-              -d "$payload" >/dev/null || echo "github_heartbeat_delivery_failed"
+            local notify_payload
             notify_payload=$(python -c 'import json,sys; print(json.dumps({"text":sys.argv[1],"title":"Engine 4 heartbeat"}))' "$msg")
             curl --fail --silent --show-error --max-time 10 --retry 1 -X POST \
               "https://push.getnotifyapp.com/notify-json/$NOTIFY_DEVICE_ID?token=$NOTIFY_DEVICE_TOKEN" \
