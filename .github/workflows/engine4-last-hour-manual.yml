@@ -8,7 +8,7 @@ on:
 
 concurrency:
   group: engine4-last-hour-snapshot
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   run:
