@@ -1,0 +1,25 @@
+name: Stable Swing Stock Screen
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/swing-stability-trigger.txt']
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12', cache: pip}
+      - run: pip install -r requirements.txt
+      - name: Run stable swing screen
+        run: python swing_stability_screen.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: swing-stability-results-${{ github.run_id }}
+          path: output/swing_stability/
+          if-no-files-found: error
+          retention-days: 30
