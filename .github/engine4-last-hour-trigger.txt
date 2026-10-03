@@ -10,5 +10,5 @@ heartbeat_seconds=300
 heartbeat_required=true
 heartbeat_delivery=github_issue_37
 no_openphone=true
-restart_after_heartbeat_delivery_fix=true
-request=fresh-1430-1530-cycle-2026-10-02-v11-heartbeat-fixed
+restart_after_heartbeat_fix=true
+request=fresh-1430-1530-cycle-2026-10-02-v11-github-heartbeat-fixed
