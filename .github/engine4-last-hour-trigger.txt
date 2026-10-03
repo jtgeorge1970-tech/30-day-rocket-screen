@@ -1,5 +1,8 @@
-fresh manual Engine 4 run
-window=10:00-11:00 ET
+fresh_manual_engine4_run=true
+window=14:30-15:30 ET
 date=2026-10-02
 flush_old_output=true
-runner_commit=bef00007cdcd841978def18bff7fc75ad1594016
+flush_prior_snapshot_artifacts=true
+ignore_prior_bench=true
+requested_at=2026-10-03T02:32:00Z
+request=fresh-1430-1530-cycle-2026-10-02-v1
