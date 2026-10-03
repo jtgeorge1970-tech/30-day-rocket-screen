@@ -63,6 +63,9 @@ jobs:
           python -m py_compile engine4_last_hour_runner.py engine4_score.py engine4_data.py engine4_pipeline_runner.py
           python engine4_pipeline_runner_guarded.py provider-smoke
       - name: Install 5-minute heartbeat helper
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEARTBEAT_ISSUE: "37"
         run: |
           cat > /tmp/run_with_engine4_heartbeat.sh <<'SH'
           #!/usr/bin/env bash
@@ -70,6 +73,26 @@ jobs:
           label="$1"; shift
           log="output/engine4_last_hour/heartbeat.log"
           mkdir -p "$(dirname "$log")"
+          post_heartbeat() {
+            local text="$1"
+            python - "$text" <<'PY'
+import json, os, sys, urllib.request
+msg=sys.argv[1]
+repo=os.environ["GITHUB_REPOSITORY"]
+issue=os.environ.get("HEARTBEAT_ISSUE","37")
+token=os.environ["GH_TOKEN"]
+url=f"https://api.github.com/repos/{repo}/issues/{issue}/comments"
+body=json.dumps({"body":msg}).encode()
+req=urllib.request.Request(url,data=body,method="POST",headers={
+    "Authorization":"Bearer "+token,
+    "Accept":"application/vnd.github+json",
+    "X-GitHub-Api-Version":"2022-11-28",
+    "Content-Type":"application/json"
+})
+with urllib.request.urlopen(req,timeout=30) as r:
+    r.read()
+PY
+          }
           "$@" &
           pid=$!
           next=0
@@ -77,8 +100,9 @@ jobs:
             now_epoch=$(date +%s)
             if [ "$now_epoch" -ge "$next" ]; then
               stamp=$(TZ=America/New_York date '+%Y-%m-%d %I:%M:%S %p ET')
-              line="ENGINE4_HEARTBEAT run=${GITHUB_RUN_ID} stage=${label} status=RUNNING at=${stamp}"
+              line="ENGINE4 HEARTBEAT — run ${GITHUB_RUN_ID} — ${label} RUNNING — ${stamp}"
               echo "$line" | tee -a "$log"
+              post_heartbeat "$line"
               next=$((now_epoch + 300))
             fi
             sleep 5
@@ -87,10 +111,12 @@ jobs:
           rc=$?
           stamp=$(TZ=America/New_York date '+%Y-%m-%d %I:%M:%S %p ET')
           if [ "$rc" -eq 0 ]; then
-            echo "ENGINE4_HEARTBEAT run=${GITHUB_RUN_ID} stage=${label} status=COMPLETE at=${stamp}" | tee -a "$log"
+            line="ENGINE4 HEARTBEAT — run ${GITHUB_RUN_ID} — ${label} COMPLETE — ${stamp}"
           else
-            echo "ENGINE4_HEARTBEAT run=${GITHUB_RUN_ID} stage=${label} status=FAILED rc=${rc} at=${stamp}" | tee -a "$log"
+            line="ENGINE4 HEARTBEAT — run ${GITHUB_RUN_ID} — ${label} FAILED rc=${rc} — ${stamp}"
           fi
+          echo "$line" | tee -a "$log"
+          post_heartbeat "$line"
           exit "$rc"
           SH
           chmod +x /tmp/run_with_engine4_heartbeat.sh
