@@ -62,27 +62,59 @@ jobs:
         run: |
           python -m py_compile engine4_last_hour_runner.py engine4_score.py engine4_data.py engine4_pipeline_runner.py
           python engine4_pipeline_runner_guarded.py provider-smoke
+      - name: Install 5-minute heartbeat helper
+        run: |
+          cat > /tmp/run_with_engine4_heartbeat.sh <<'SH'
+          #!/usr/bin/env bash
+          set -euo pipefail
+          label="$1"; shift
+          log="output/engine4_last_hour/heartbeat.log"
+          mkdir -p "$(dirname "$log")"
+          "$@" &
+          pid=$!
+          next=0
+          while kill -0 "$pid" 2>/dev/null; do
+            now_epoch=$(date +%s)
+            if [ "$now_epoch" -ge "$next" ]; then
+              stamp=$(TZ=America/New_York date '+%Y-%m-%d %I:%M:%S %p ET')
+              line="ENGINE4_HEARTBEAT run=${GITHUB_RUN_ID} stage=${label} status=RUNNING at=${stamp}"
+              echo "$line" | tee -a "$log"
+              next=$((now_epoch + 300))
+            fi
+            sleep 5
+          done
+          wait "$pid"
+          rc=$?
+          stamp=$(TZ=America/New_York date '+%Y-%m-%d %I:%M:%S %p ET')
+          if [ "$rc" -eq 0 ]; then
+            echo "ENGINE4_HEARTBEAT run=${GITHUB_RUN_ID} stage=${label} status=COMPLETE at=${stamp}" | tee -a "$log"
+          else
+            echo "ENGINE4_HEARTBEAT run=${GITHUB_RUN_ID} stage=${label} status=FAILED rc=${rc} at=${stamp}" | tee -a "$log"
+          fi
+          exit "$rc"
+          SH
+          chmod +x /tmp/run_with_engine4_heartbeat.sh
       - name: Stage 1 14:30-15:30 ET broad screen
-        run: python engine4_last_hour_runner.py stage1 --date 2026-10-02
+        run: /tmp/run_with_engine4_heartbeat.sh STAGE1 python engine4_last_hour_runner.py stage1 --date 2026-10-02
       - uses: actions/upload-artifact@v4
         with: {name: 'engine4-last-hour-stage1-${{ github.run_id }}', path: 'output/engine4_last_hour/', if-no-files-found: error}
       - name: Stage 2 deep analysis
-        run: python engine4_last_hour_runner.py stage2 --date 2026-10-02
+        run: /tmp/run_with_engine4_heartbeat.sh STAGE2 python engine4_last_hour_runner.py stage2 --date 2026-10-02
       - uses: actions/upload-artifact@v4
         with: {name: 'engine4-last-hour-stage2-${{ github.run_id }}', path: 'output/engine4_last_hour/', if-no-files-found: error}
       - name: Stage 3 refresh and freeze
-        run: python engine4_last_hour_runner.py stage3 --date 2026-10-02
+        run: /tmp/run_with_engine4_heartbeat.sh STAGE3 python engine4_last_hour_runner.py stage3 --date 2026-10-02
       - uses: actions/upload-artifact@v4
         with: {name: 'engine4-last-hour-stage3-${{ github.run_id }}', path: 'output/engine4_last_hour/', if-no-files-found: error}
       - name: Stage 3B Bench
-        run: python engine4_last_hour_runner.py bench --date 2026-10-02
+        run: /tmp/run_with_engine4_heartbeat.sh STAGE3B python engine4_last_hour_runner.py bench --date 2026-10-02
       - uses: actions/upload-artifact@v4
         with: {name: 'engine4-last-hour-bench-${{ github.run_id }}', path: 'output/engine4_last_hour/', if-no-files-found: error}
       - name: Stage 4 15:30 snapshot evaluation
-        run: python engine4_last_hour_runner.py stage4 --date 2026-10-02
+        run: /tmp/run_with_engine4_heartbeat.sh STAGE4 python engine4_last_hour_runner.py stage4 --date 2026-10-02
       - name: Stage 5 recovery disposition
-        run: python engine4_last_hour_runner.py stage5 --date 2026-10-02
+        run: /tmp/run_with_engine4_heartbeat.sh STAGE5 python engine4_last_hour_runner.py stage5 --date 2026-10-02
       - name: Verify complete
-        run: python engine4_last_hour_runner.py verify --date 2026-10-02
+        run: /tmp/run_with_engine4_heartbeat.sh VERIFY python engine4_last_hour_runner.py verify --date 2026-10-02
       - uses: actions/upload-artifact@v4
         with: {name: 'engine4-last-hour-complete-${{ github.run_id }}', path: 'output/engine4_last_hour/', if-no-files-found: error, retention-days: 30}
