@@ -105,7 +105,13 @@ def universe():
 def recent_rank(t,name,f):
     if f.empty or len(f)<80: return None
     f=f.dropna(subset=["High","Low","Close","Volume"]).tail(120)
+    if len(f) < 60:
+        return None
     c=pd.to_numeric(f.Close,errors="coerce"); v=pd.to_numeric(f.Volume,errors="coerce")
+    c=c.dropna()
+    v=v.reindex(c.index).fillna(0)
+    if c.empty:
+        return None
     px=float(c.iloc[-1]); dv=float((c.tail(20)*v.tail(20)).mean())
     if px<MIN_PRICE or dv<MIN_DOLLAR_VOL: return None
     ps=pivots(f,2,4.0)
@@ -124,7 +130,7 @@ rank=[]
 for i in range(0,len(syms),100):
     b=syms[i:i+100]
     try:
-        data=yf.download(b,period="6mo",interval="1d",group_by="column",auto_adjust=True,actions=False,threads=True,progress=False,timeout=30)
+        data=yf.download(b,period="6mo",interval="1d",group_by="column",auto_adjust=True,actions=False,threads=False,progress=False,timeout=30)
     except Exception:
         continue
     for t in b:
