@@ -16,6 +16,8 @@ jobs:
     timeout-minutes: 260
     env:
       ENGINE4_MANUAL_CURRENT_SNAPSHOT: '1'
+      NOTIFY_DEVICE_ID: ${{ secrets.NOTIFY_DEVICE_ID }}
+      NOTIFY_DEVICE_TOKEN: ${{ secrets.NOTIFY_DEVICE_TOKEN }}
     permissions:
       contents: write
       actions: write
@@ -76,6 +78,52 @@ jobs:
           python -m py_compile engine4_config.py engine4_data.py engine4_free_providers.py engine4_score.py engine4_live.py engine4_intraday.py engine4_pipeline.py engine4_pipeline_runner.py engine4_final_guard.py engine4_pipeline_runner_guarded.py engine4_recovery.py engine4_notify.py engine4_bench.py engine4_stage_report.py
           pytest -q test_engine4_*.py
           python engine4_pipeline_runner_guarded.py provider-smoke
+      - name: Validate direct iPhone heartbeat secrets
+        run: |
+          test -n "$NOTIFY_DEVICE_ID"
+          test -n "$NOTIFY_DEVICE_TOKEN"
+      - name: Install direct 5-minute iPhone heartbeat helper
+        run: |
+          cat > /tmp/run_engine4_heartbeat.sh <<'SH'
+          #!/usr/bin/env bash
+          set -euo pipefail
+          label="$1"; shift
+          post_push() {
+            local msg="$1"
+            local payload
+            payload=$(python -c 'import json,sys; print(json.dumps({"text":sys.argv[1],"title":"Engine 4 heartbeat"}))' "$msg")
+            curl --fail --silent --show-error --max-time 10 --retry 1 -X POST \
+              "https://push.getnotifyapp.com/notify-json/$NOTIFY_DEVICE_ID?token=$NOTIFY_DEVICE_TOKEN" \
+              -H 'Content-Type: application/json' \
+              -d "$payload" >/dev/null || echo "notify_heartbeat_delivery_failed"
+          }
+          "$@" &
+          pid=$!
+          next=0
+          while kill -0 "$pid" 2>/dev/null; do
+            now=$(date +%s)
+            if [ "$now" -ge "$next" ]; then
+              stamp=$(TZ=America/New_York date '+%Y-%m-%d %I:%M:%S %p ET')
+              line="ENGINE4 HEARTBEAT — run ${GITHUB_RUN_ID} — ${label} RUNNING — ${stamp}"
+              echo "$line"
+              post_push "$line"
+              next=$((now+300))
+            fi
+            sleep 5
+          done
+          wait "$pid"
+          rc=$?
+          stamp=$(TZ=America/New_York date '+%Y-%m-%d %I:%M:%S %p ET')
+          if [ "$rc" -eq 0 ]; then
+            line="ENGINE4 HEARTBEAT — run ${GITHUB_RUN_ID} — ${label} COMPLETE — ${stamp}"
+          else
+            line="ENGINE4 HEARTBEAT — run ${GITHUB_RUN_ID} — ${label} FAILED rc=${rc} — ${stamp}"
+          fi
+          echo "$line"
+          post_push "$line"
+          exit "$rc"
+          SH
+          chmod +x /tmp/run_engine4_heartbeat.sh
       - name: Enforce live window and lock date
         run: |
           H=$(TZ=America/New_York date +%H); M=$(TZ=America/New_York date +%M); T=$((10#$H * 60 + 10#$M))
@@ -87,31 +135,19 @@ jobs:
       - name: START notification
         run: python engine4_notify.py start --message "ENGINE 4 MANUAL RUN STARTED — current-day live on-demand cycle is active for $(TZ=America/New_York date +%F) ET."
       - name: Stage 1
-        run: |
-          python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"
-          python engine4_stage_report.py prescreen --date "$ENGINE_DATE_ET"
-          python engine4_notify.py prescreen --message "$(cat output/engine4/stage_prescreen_sms.txt)"
+        run: /tmp/run_engine4_heartbeat.sh STAGE1 bash -lc 'python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"; python engine4_stage_report.py prescreen --date "$ENGINE_DATE_ET"; python engine4_notify.py prescreen --message "$(cat output/engine4/stage_prescreen_sms.txt)"'
       - uses: actions/upload-artifact@v4
         with: {name: 'engine4-manual-v2-stage1-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
       - name: Stage 2
-        run: |
-          python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"
-          python engine4_stage_report.py deep --date "$ENGINE_DATE_ET"
-          python engine4_notify.py deep --message "$(cat output/engine4/stage_deep_sms.txt)"
+        run: /tmp/run_engine4_heartbeat.sh STAGE2 bash -lc 'python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"; python engine4_stage_report.py deep --date "$ENGINE_DATE_ET"; python engine4_notify.py deep --message "$(cat output/engine4/stage_deep_sms.txt)"'
       - uses: actions/upload-artifact@v4
         with: {name: 'engine4-manual-v2-stage2-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
       - name: Stage 3
-        run: |
-          python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"
-          python engine4_stage_report.py freeze --date "$ENGINE_DATE_ET"
-          python engine4_notify.py freeze --message "$(cat output/engine4/stage_freeze_sms.txt)"
+        run: /tmp/run_engine4_heartbeat.sh STAGE3 bash -lc 'python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"; python engine4_stage_report.py freeze --date "$ENGINE_DATE_ET"; python engine4_notify.py freeze --message "$(cat output/engine4/stage_freeze_sms.txt)"'
       - uses: actions/upload-artifact@v4
         with: {name: 'engine4-manual-v2-stage3-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
       - name: Stage 3B conflict-safe
-        run: |
-          python engine4_bench.py update --date "$ENGINE_DATE_ET"
-          python engine4_stage_report.py bench --date "$ENGINE_DATE_ET"
-          python engine4_notify.py bench --message "$(cat output/engine4/stage_bench_sms.txt)"
+        run: /tmp/run_engine4_heartbeat.sh STAGE3B bash -lc 'python engine4_bench.py update --date "$ENGINE_DATE_ET"; python engine4_stage_report.py bench --date "$ENGINE_DATE_ET"; python engine4_notify.py bench --message "$(cat output/engine4/stage_bench_sms.txt)"'
       - uses: actions/upload-artifact@v4
         with:
           name: engine4-manual-v2-bench-${{ github.run_id }}
@@ -139,17 +175,11 @@ jobs:
             git -C "$BENCH_WORKTREE" push origin HEAD:main
           fi
       - name: Stage 4
-        run: |
-          python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"
-          python engine4_stage_report.py final --date "$ENGINE_DATE_ET"
-          python engine4_notify.py final
+        run: /tmp/run_engine4_heartbeat.sh STAGE4 bash -lc 'python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"; python engine4_stage_report.py final --date "$ENGINE_DATE_ET"; python engine4_notify.py final'
       - uses: actions/upload-artifact@v4
         with: {name: 'engine4-manual-v2-stage4-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
       - name: Stage 5
-        run: |
-          python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300
-          python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"
-          python engine4_notify.py recovery
+        run: /tmp/run_engine4_heartbeat.sh STAGE5 bash -lc 'python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300; python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"; python engine4_notify.py recovery'
       - name: Verify and COMPLETE
         run: |
           python engine4_stage_report.py verify-complete --date "$ENGINE_DATE_ET" --recipients 0
