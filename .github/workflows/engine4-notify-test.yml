@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Send ntfy push test
         env:
-          NTFY_TOPIC: "engine4-06266e9f662a70ac891974f1"
+          NTFY_TOPIC: "notifyme"
         run: |
           stamp=$(TZ=America/New_York date '+%Y-%m-%d %I:%M:%S %p ET')
           msg="ENGINE 4 TEST PUSH — if you see this, the 5-minute notification path works — ${stamp}"
