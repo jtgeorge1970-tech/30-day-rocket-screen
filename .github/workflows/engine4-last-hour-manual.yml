@@ -10,6 +10,9 @@ jobs:
   run:
     runs-on: ubuntu-latest
     timeout-minutes: 260
+    env:
+      GH_TOKEN: ${{ github.token }}
+      HEARTBEAT_ISSUE: "37"
     permissions:
       contents: read
       actions: write
@@ -64,9 +67,6 @@ jobs:
           python -m py_compile engine4_last_hour_runner.py engine4_score.py engine4_data.py engine4_pipeline_runner.py
           python engine4_pipeline_runner_guarded.py provider-smoke
       - name: Install 5-minute heartbeat helper
-        env:
-          GH_TOKEN: ${{ github.token }}
-          HEARTBEAT_ISSUE: "37"
         run: |
           cat > /tmp/run_with_engine4_heartbeat.sh <<'SH'
           #!/usr/bin/env bash
