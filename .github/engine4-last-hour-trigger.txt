@@ -1,10 +1,10 @@
 fresh_manual_engine4_run=true
 window=14:30-15:30 ET
 date=2026-10-02
+hard_reset=true
+kill_all_older_snapshot_runs=true
 flush_old_output=true
 flush_prior_snapshot_artifacts=true
 ignore_prior_bench=true
-restart_due_to_reporting_failure=true
-discard_prior_run=37093024018
-requested_at=2026-10-03T03:31:00Z
-request=fresh-1430-1530-cycle-2026-10-02-v3
+requested_at=2026-10-03T03:35:00Z
+request=fresh-1430-1530-cycle-2026-10-02-v4-hard-reset
