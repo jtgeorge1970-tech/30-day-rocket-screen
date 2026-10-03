@@ -6,10 +6,6 @@ on:
     branches: [main]
     paths: ['.github/engine4-last-hour-trigger.txt']
 
-concurrency:
-  group: engine4-last-hour-snapshot
-  cancel-in-progress: true
-
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -37,6 +33,16 @@ jobs:
                   data=r.read()
                   return json.loads(data) if data else None
           runs=api(f"https://api.github.com/repos/{repo}/actions/workflows/engine4-last-hour-manual.yml/runs?per_page=50")["workflow_runs"]
+          cancelled=[]
+          for run in runs:
+              rid=int(run["id"])
+              if rid==current: continue
+              if run.get("status") in ("queued","in_progress","pending","waiting","requested"):
+                  try:
+                      api(f"https://api.github.com/repos/{repo}/actions/runs/{rid}/cancel","POST")
+                      cancelled.append(rid)
+                  except Exception as e:
+                      print(f"cancel_failed run={rid} error={e}")
           deleted=[]
           for run in runs:
               rid=int(run["id"])
@@ -46,8 +52,8 @@ jobs:
                   api(f"https://api.github.com/repos/{repo}/actions/artifacts/{art['id']}", "DELETE")
                   deleted.append({"run_id":rid,"artifact_id":art["id"],"name":art["name"]})
           with open("output/engine4_last_hour/fresh_reset_manifest.json","w") as f:
-              json.dump({"current_run_id":current,"old_artifacts_deleted":deleted,"old_output_flushed":True,"prior_bench_state_ignored":True},f,indent=2)
-          print(json.dumps({"old_artifacts_deleted_count":len(deleted),"old_output_flushed":True,"prior_bench_state_ignored":True}))
+              json.dump({"current_run_id":current,"older_runs_cancelled":cancelled,"old_artifacts_deleted":deleted,"old_output_flushed":True,"prior_bench_state_ignored":True},f,indent=2)
+          print(json.dumps({"older_runs_cancelled":cancelled,"old_artifacts_deleted_count":len(deleted),"old_output_flushed":True,"prior_bench_state_ignored":True}))
           PY
       - uses: actions/setup-python@v5
         with: {python-version: '3.12', cache: pip}
