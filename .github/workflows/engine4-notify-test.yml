@@ -19,7 +19,7 @@ jobs:
       - name: Send Notify iPhone push test
         run: |
           stamp=$(TZ=America/New_York date '+%Y-%m-%d %I:%M:%S %p ET')
-          curl --fail --silent --show-error -X POST \
+          curl --fail --silent --show-error --max-time 15 --retry 1 -X POST \
             "https://push.getnotifyapp.com/notify-json/$NOTIFY_DEVICE_ID?token=$NOTIFY_DEVICE_TOKEN" \
             -H 'Content-Type: application/json' \
             -d "{"text":"Engine 4 direct push test — if you see this banner, the notification path is working — $stamp","title":"Engine 4 TEST"}"
