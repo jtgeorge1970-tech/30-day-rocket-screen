@@ -11,4 +11,4 @@ heartbeat_required=true
 heartbeat_delivery=direct_notify_ios_plus_github
 notification_failure_nonfatal=true
 auto_repeat_until_stopped=true
-request=fresh-1430-1530-cycle-2026-10-02-v15-direct-notify
+request=fresh-retry-after-empty-bench-fix-2026-10-03T06:42Z
