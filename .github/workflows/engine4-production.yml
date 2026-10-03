@@ -16,8 +16,12 @@ jobs:
   engine4:
     runs-on: ubuntu-latest
     timeout-minutes: 260
+    env:
+      NOTIFY_DEVICE_ID: ${{ secrets.NOTIFY_DEVICE_ID }}
+      NOTIFY_DEVICE_TOKEN: ${{ secrets.NOTIFY_DEVICE_TOKEN }}
     permissions:
       contents: write
+      actions: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -31,6 +35,52 @@ jobs:
           pytest -q test_engine4_*.py
       - name: Verify providers
         run: python engine4_pipeline_runner_guarded.py provider-smoke
+      - name: Validate direct iPhone heartbeat secrets
+        run: |
+          test -n "$NOTIFY_DEVICE_ID"
+          test -n "$NOTIFY_DEVICE_TOKEN"
+      - name: Install direct 5-minute iPhone heartbeat helper
+        run: |
+          cat > /tmp/run_engine4_heartbeat.sh <<'SH'
+          #!/usr/bin/env bash
+          set -euo pipefail
+          label="$1"; shift
+          post_push() {
+            local msg="$1"
+            local payload
+            payload=$(python -c 'import json,sys; print(json.dumps({"text":sys.argv[1],"title":"Engine 4 heartbeat"}))' "$msg")
+            curl --fail --silent --show-error --max-time 10 --retry 1 -X POST \
+              "https://push.getnotifyapp.com/notify-json/$NOTIFY_DEVICE_ID?token=$NOTIFY_DEVICE_TOKEN" \
+              -H 'Content-Type: application/json' \
+              -d "$payload" >/dev/null || echo "notify_heartbeat_delivery_failed"
+          }
+          "$@" &
+          pid=$!
+          next=0
+          while kill -0 "$pid" 2>/dev/null; do
+            now=$(date +%s)
+            if [ "$now" -ge "$next" ]; then
+              stamp=$(TZ=America/New_York date '+%Y-%m-%d %I:%M:%S %p ET')
+              line="ENGINE4 HEARTBEAT — run ${GITHUB_RUN_ID} — ${label} RUNNING — ${stamp}"
+              echo "$line"
+              post_push "$line"
+              next=$((now+300))
+            fi
+            sleep 5
+          done
+          wait "$pid"
+          rc=$?
+          stamp=$(TZ=America/New_York date '+%Y-%m-%d %I:%M:%S %p ET')
+          if [ "$rc" -eq 0 ]; then
+            line="ENGINE4 HEARTBEAT — run ${GITHUB_RUN_ID} — ${label} COMPLETE — ${stamp}"
+          else
+            line="ENGINE4 HEARTBEAT — run ${GITHUB_RUN_ID} — ${label} FAILED rc=${rc} — ${stamp}"
+          fi
+          echo "$line"
+          post_push "$line"
+          exit "$rc"
+          SH
+          chmod +x /tmp/run_engine4_heartbeat.sh
       - name: Verify correct ET wake
         id: window
         shell: bash
@@ -46,51 +96,28 @@ jobs:
         run: python engine4_notify.py start --message "ENGINE 4 STARTED — the scheduled run is active for $(TZ=America/New_York date +%F) ET."
       - name: Stage 1 — broad pre-screen and exact counts
         if: steps.window.outputs.skip != 'true'
-        run: |
-          while [ "$(TZ=America/New_York date +%H%M)" -lt 0825 ]; do sleep 15; done
-          python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"
-          python engine4_stage_report.py prescreen --date "$ENGINE_DATE_ET"
-          python engine4_notify.py prescreen --message "$(cat output/engine4/stage_prescreen_sms.txt)"
+        run: /tmp/run_engine4_heartbeat.sh STAGE1 bash -lc 'while [ "$(TZ=America/New_York date +%H%M)" -lt 0825 ]; do sleep 15; done; python engine4_pipeline_runner_guarded.py prescreen --date "$ENGINE_DATE_ET"; python engine4_stage_report.py prescreen --date "$ENGINE_DATE_ET"; python engine4_notify.py prescreen --message "$(cat output/engine4/stage_prescreen_sms.txt)"'
       - name: Upload Stage 1 immediately
         if: steps.window.outputs.skip != 'true'
         uses: actions/upload-artifact@v4
         with: {name: 'engine4-stage1-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
       - name: Stage 2 — deep analysis and exact counts
         if: steps.window.outputs.skip != 'true'
-        run: |
-          while [ "$(TZ=America/New_York date +%H%M)" -lt 0835 ]; do sleep 15; done
-          python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"
-          python engine4_stage_report.py deep --date "$ENGINE_DATE_ET"
-          python engine4_notify.py deep --message "$(cat output/engine4/stage_deep_sms.txt)"
+        run: /tmp/run_engine4_heartbeat.sh STAGE2 bash -lc 'while [ "$(TZ=America/New_York date +%H%M)" -lt 0835 ]; do sleep 15; done; python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"; python engine4_stage_report.py deep --date "$ENGINE_DATE_ET"; python engine4_notify.py deep --message "$(cat output/engine4/stage_deep_sms.txt)"'
       - name: Upload Stage 2 immediately
         if: steps.window.outputs.skip != 'true'
         uses: actions/upload-artifact@v4
         with: {name: 'engine4-stage2-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
       - name: Stage 3 — refresh, rerank, freeze, and exact counts
         if: steps.window.outputs.skip != 'true'
-        run: |
-          while [ "$(TZ=America/New_York date +%H%M)" -lt 0848 ]; do sleep 15; done
-          python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"
-          python engine4_stage_report.py freeze --date "$ENGINE_DATE_ET"
-          python engine4_notify.py freeze --message "$(cat output/engine4/stage_freeze_sms.txt)"
+        run: /tmp/run_engine4_heartbeat.sh STAGE3 bash -lc 'while [ "$(TZ=America/New_York date +%H%M)" -lt 0848 ]; do sleep 15; done; python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"; python engine4_stage_report.py freeze --date "$ENGINE_DATE_ET"; python engine4_notify.py freeze --message "$(cat output/engine4/stage_freeze_sms.txt)"'
       - name: Upload Stage 3 immediately
         if: steps.window.outputs.skip != 'true'
         uses: actions/upload-artifact@v4
         with: {name: 'engine4-stage3-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
       - name: Stage 3B — rebuild and rank Top-25 Bench
         if: steps.window.outputs.skip != 'true'
-        run: |
-          python engine4_bench.py update --date "$ENGINE_DATE_ET"
-          python engine4_stage_report.py bench --date "$ENGINE_DATE_ET"
-          python engine4_notify.py bench --message "$(cat output/engine4/stage_bench_sms.txt)"
-          git config user.name 'engine4-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add state/engine4/watch_bench.json
-          if ! git diff --cached --quiet; then
-            git commit -m "Engine 4 ${ENGINE_DATE_ET} Top-25 Bench"
-            git pull --rebase --autostash origin main
-            git push origin HEAD:main
-          fi
+        run: /tmp/run_engine4_heartbeat.sh STAGE3B bash -lc 'python engine4_bench.py update --date "$ENGINE_DATE_ET"; python engine4_stage_report.py bench --date "$ENGINE_DATE_ET"; python engine4_notify.py bench --message "$(cat output/engine4/stage_bench_sms.txt)"; git config user.name engine4-bot; git config user.email actions@users.noreply.github.com; git add state/engine4/watch_bench.json; if ! git diff --cached --quiet; then git commit -m "Engine 4 $ENGINE_DATE_ET Top-25 Bench"; git pull --rebase --autostash origin main; git push origin HEAD:main; fi'
       - name: Upload Stage 3B Bench immediately
         if: steps.window.outputs.skip != 'true'
         uses: actions/upload-artifact@v4
@@ -104,21 +131,14 @@ jobs:
           if-no-files-found: error
       - name: Stage 4 — primary live confirmation
         if: steps.window.outputs.skip != 'true'
-        run: |
-          while [ "$(TZ=America/New_York date +%H%M)" -lt 0945 ]; do sleep 15; done
-          python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"
-          python engine4_stage_report.py final --date "$ENGINE_DATE_ET"
-          python engine4_notify.py final
+        run: /tmp/run_engine4_heartbeat.sh STAGE4 bash -lc 'while [ "$(TZ=America/New_York date +%H%M)" -lt 0945 ]; do sleep 15; done; python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"; python engine4_stage_report.py final --date "$ENGINE_DATE_ET"; python engine4_notify.py final'
       - name: Upload Stage 4 immediately
         if: steps.window.outputs.skip != 'true'
         uses: actions/upload-artifact@v4
         with: {name: 'engine4-stage4-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
       - name: Stage 5 — post-open recovery watch
         if: steps.window.outputs.skip != 'true'
-        run: |
-          python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300
-          python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"
-          python engine4_notify.py recovery
+        run: /tmp/run_engine4_heartbeat.sh STAGE5 bash -lc 'python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300; python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"; python engine4_notify.py recovery'
       - name: Verify artifacts, order and counts
         if: steps.window.outputs.skip != 'true'
         run: python engine4_stage_report.py verify-complete --date "$ENGINE_DATE_ET" --recipients 0
@@ -134,3 +154,30 @@ jobs:
       - name: FAILURE notification
         if: failure() && steps.window.outputs.skip != 'true'
         run: python engine4_notify.py failure --message "ENGINE 4 DATA/PIPELINE FAILURE — the scheduled workflow did not complete. Review the failed stage; no completed result is being reported."
+
+  restart_on_failure:
+    needs: engine4
+    if: ${{ failure() }}
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Auto-restart failed production cycle during market-day window
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          D=$(TZ=America/New_York date +%u)
+          H=$(TZ=America/New_York date +%H)
+          M=$(TZ=America/New_York date +%M)
+          T=$((10#$H * 60 + 10#$M))
+          if [ "$D" -le 5 ] && [ "$T" -ge 485 ] && [ "$T" -le 930 ]; then
+            sleep 30
+            curl --fail --silent --show-error --max-time 15 --retry 2 -X POST \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/workflows/engine4-production.yml/dispatches" \
+              -d '{"ref":"main"}'
+          else
+            echo "Outside market-day restart window; no re-dispatch."
+          fi
