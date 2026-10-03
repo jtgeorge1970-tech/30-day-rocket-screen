@@ -8,16 +8,18 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      NOTIFY_DEVICE_ID: ${{ secrets.NOTIFY_DEVICE_ID }}
+      NOTIFY_DEVICE_TOKEN: ${{ secrets.NOTIFY_DEVICE_TOKEN }}
     steps:
-      - name: Send ntfy push test
-        env:
-          NTFY_TOPIC: "notifyme"
+      - name: Validate Notify secrets
+        run: |
+          test -n "$NOTIFY_DEVICE_ID"
+          test -n "$NOTIFY_DEVICE_TOKEN"
+      - name: Send Notify iPhone push test
         run: |
           stamp=$(TZ=America/New_York date '+%Y-%m-%d %I:%M:%S %p ET')
-          msg="ENGINE 4 TEST PUSH — if you see this, the 5-minute notification path works — ${stamp}"
           curl --fail --silent --show-error -X POST \
-            -H "Title: Engine 4 TEST" \
-            -H "Priority: max" \
-            -H "Tags: white_check_mark,rocket" \
-            -d "$msg" \
-            "https://ntfy.sh/$NTFY_TOPIC"
+            "https://push.getnotifyapp.com/notify-json/$NOTIFY_DEVICE_ID?token=$NOTIFY_DEVICE_TOKEN" \
+            -H 'Content-Type: application/json' \
+            -d "{"text":"Engine 4 direct push test — if you see this banner, the notification path is working — $stamp","title":"Engine 4 TEST"}"
