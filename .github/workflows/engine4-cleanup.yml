@@ -1,0 +1,73 @@
+name: Engine 4 Cleanup
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/engine4-cleanup-trigger.txt'
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Delete Engine 4 artifacts and verify clean output
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          from pathlib import Path
+
+          repo = os.environ["GITHUB_REPOSITORY"]
+          token = os.environ["GH_TOKEN"]
+
+          def api(path, method="GET"):
+              req = urllib.request.Request(
+                  "https://api.github.com/repos/" + repo + path,
+                  method=method,
+                  headers={
+                      "Authorization": "Bearer " + token,
+                      "Accept": "application/vnd.github+json",
+                      "X-GitHub-Api-Version": "2022-11-28",
+                  },
+              )
+              with urllib.request.urlopen(req, timeout=30) as response:
+                  data = response.read()
+                  return json.loads(data) if data else None
+
+          deleted = []
+          while True:
+              payload = api("/actions/artifacts?per_page=100")
+              matches = [
+                  a for a in payload.get("artifacts", [])
+                  if a.get("name", "").lower().startswith("engine4-manual-v2-")
+              ]
+              if not matches:
+                  break
+              for artifact in matches:
+                  api(f"/actions/artifacts/{artifact['id']}", "DELETE")
+                  deleted.append({"id": artifact["id"], "name": artifact["name"]})
+
+          remaining = api("/actions/artifacts?per_page=100").get("artifacts", [])
+          remaining_engine4 = [
+              {"id": a["id"], "name": a["name"]}
+              for a in remaining
+              if a.get("name", "").lower().startswith("engine4-manual-v2-")
+          ]
+          if remaining_engine4:
+              raise RuntimeError(f"Engine 4 artifacts remain: {remaining_engine4}")
+
+          if Path("output/engine4").exists():
+              raise RuntimeError("output/engine4 still exists in main checkout")
+
+          print(json.dumps({
+              "deleted_engine4_artifacts": deleted,
+              "remaining_engine4_artifacts": remaining_engine4,
+              "output_engine4_present": False,
+          }, indent=2))
+          PY
