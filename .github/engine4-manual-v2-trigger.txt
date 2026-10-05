@@ -1,7 +1,7 @@
-ready=true
-purpose=hardened-live-manual-runner
-mode=live_today
+ready=false
+purpose=stop-current-engine4-run
+mode=stop
 engine_date_et=2026-10-05
-requested_at=2026-10-05T13:11:23.509Z
-request=rescue-full-run-2026-10-05-2026-10-05T13-11-23-509Z
-purge_run_ids=37307494740
+requested_at=2026-10-05T13:16:00Z
+request=stop-run-37314895921
+purge_run_ids=
