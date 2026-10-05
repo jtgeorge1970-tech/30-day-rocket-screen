@@ -45,7 +45,7 @@ jobs:
               payload = api("/actions/artifacts?per_page=100")
               matches = [
                   a for a in payload.get("artifacts", [])
-                  if a.get("name", "").lower().startswith("engine4-manual-v2-")
+                  if a.get("name", "").lower().startswith("engine4-")
               ]
               if not matches:
                   break
@@ -57,7 +57,7 @@ jobs:
           remaining_engine4 = [
               {"id": a["id"], "name": a["name"]}
               for a in remaining
-              if a.get("name", "").lower().startswith("engine4-manual-v2-")
+              if a.get("name", "").lower().startswith("engine4-")
           ]
           if remaining_engine4:
               raise RuntimeError(f"Engine 4 artifacts remain: {remaining_engine4}")
