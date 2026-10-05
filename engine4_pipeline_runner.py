@@ -142,8 +142,17 @@ def repaired_build_broad_pool(date_et, cutoff: str, max_symbols: int | None = No
             if not requested:
                 raise RuntimeError("Fresh manual run missing requested-at freshness boundary")
             observed_at = pd.Timestamp(close.index[-1])
-            floor = pd.Timestamp(requested)
-            if observed_at.tzinfo is None or observed_at < floor:
+            requested_at = pd.Timestamp(requested)
+            if observed_at.tzinfo is None:
+                continue
+            if requested_at.tzinfo is None:
+                requested_at = requested_at.tz_localize("UTC")
+            requested_at = requested_at.tz_convert(observed_at.tz)
+            # One-minute bars are labeled at the start of the minute. A run requested
+            # a few seconds into that same minute must accept that current bar rather
+            # than falsely rejecting the entire universe as stale.
+            freshness_floor = requested_at.floor("min")
+            if observed_at < freshness_floor:
                 continue
         current = float(close.iloc[-1])
         previous = core.prior_regular_close(frame, date_et)
