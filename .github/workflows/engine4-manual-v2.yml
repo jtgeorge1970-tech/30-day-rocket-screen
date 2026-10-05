@@ -143,13 +143,38 @@ jobs:
         run: /tmp/run_engine4_heartbeat.sh STAGE2 bash -lc 'python engine4_pipeline_runner_guarded.py deep --date "$ENGINE_DATE_ET"; python engine4_stage_report.py deep --date "$ENGINE_DATE_ET"; python engine4_notify.py deep --message "$(cat output/engine4/stage_deep_sms.txt)"'
       - uses: actions/upload-artifact@v4
         with: {name: 'engine4-manual-v2-stage2-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
+      - name: Stage 2 qualification gate
+        id: stage2_gate
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = json.loads(Path("output/engine4/deep_ranked.json").read_text())
+          count = int(p.get("score80_count", 0))
+          eligible = int(p.get("launchpad_eligible_count", 0))
+          proceed = count > 0
+          with open(os.environ["GITHUB_OUTPUT"], "a") as fh:
+              fh.write(f"proceed={'true' if proceed else 'false'}\n")
+              fh.write(f"score80_count={count}\n")
+              fh.write(f"launchpad_eligible_count={eligible}\n")
+          print(f"Stage 2 gate: score80_count={count}; launchpad_eligible_count={eligible}; proceed={proceed}")
+          PY
+      - name: End Engine 4 when Stage 2 has zero scores >=80
+        if: ${{ steps.stage2_gate.outputs.proceed != 'true' }}
+        run: |
+          python engine4_notify.py complete --message "ENGINE 4 ENDED AFTER STAGE 2 — zero candidates scored >=80. No Stage 3/3B/4/5 work will run."
+          echo "ENGINE 4 STOPPED CLEANLY: Stage 2 produced zero score >=80 candidates."
       - name: Stage 3
+        if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         run: /tmp/run_engine4_heartbeat.sh STAGE3 bash -lc 'python engine4_pipeline_runner_guarded.py refresh --date "$ENGINE_DATE_ET"; python engine4_stage_report.py freeze --date "$ENGINE_DATE_ET"; python engine4_notify.py freeze --message "$(cat output/engine4/stage_freeze_sms.txt)"'
       - uses: actions/upload-artifact@v4
+        if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         with: {name: 'engine4-manual-v2-stage3-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
       - name: Stage 3B conflict-safe
+        if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         run: /tmp/run_engine4_heartbeat.sh STAGE3B bash -lc 'python engine4_bench.py update --date "$ENGINE_DATE_ET"; python engine4_stage_report.py bench --date "$ENGINE_DATE_ET"; python engine4_notify.py bench --message "$(cat output/engine4/stage_bench_sms.txt)"'
       - uses: actions/upload-artifact@v4
+        if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         with:
           name: engine4-manual-v2-bench-${{ github.run_id }}
           path: |
@@ -159,6 +184,7 @@ jobs:
             state/engine4/watch_bench.json
           if-no-files-found: error
       - name: Persist fresh Bench without changing the live checkout
+        if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         continue-on-error: true
         run: |
           python -c 'import json,os; from pathlib import Path; p=json.loads(Path("state/engine4/watch_bench.json").read_text()); assert p["target_date_et"] == os.environ["ENGINE_DATE_ET"]'
@@ -176,17 +202,22 @@ jobs:
             git -C "$BENCH_WORKTREE" push origin HEAD:main
           fi
       - name: Stage 4
+        if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         run: /tmp/run_engine4_heartbeat.sh STAGE4 bash -lc 'python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"; python engine4_stage_report.py final --date "$ENGINE_DATE_ET"; python engine4_notify.py final'
       - uses: actions/upload-artifact@v4
+        if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         with: {name: 'engine4-manual-v2-stage4-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
       - name: Stage 5
+        if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         run: /tmp/run_engine4_heartbeat.sh STAGE5 bash -lc 'python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300; python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"; python engine4_notify.py recovery'
       - name: Verify and COMPLETE
+        if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         run: |
           python engine4_stage_report.py verify-complete --date "$ENGINE_DATE_ET" --recipients 0
           python engine4_notify.py complete --message "ENGINE 4 MANUAL RUN COMPLETE — every required stage finished for ${ENGINE_DATE_ET} ET and all dated artifacts were verified."
           python engine4_stage_report.py complete --date "$ENGINE_DATE_ET" --recipients 0
       - uses: actions/upload-artifact@v4
+        if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         with: {name: 'engine4-manual-v2-complete-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error, retention-days: 30}
       - name: FAILURE notification
         if: failure()
