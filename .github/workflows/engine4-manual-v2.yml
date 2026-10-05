@@ -171,7 +171,6 @@ jobs:
         if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         with: {name: 'engine4-manual-v2-stage3-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
       - name: Stage 3B conflict-safe
-        if: steps.stage2_gate.outputs.continue == 'true'
         if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         run: /tmp/run_engine4_heartbeat.sh STAGE3B bash -lc 'python engine4_bench.py update --date "$ENGINE_DATE_ET"; python engine4_stage_report.py bench --date "$ENGINE_DATE_ET"; python engine4_notify.py bench --message "$(cat output/engine4/stage_bench_sms.txt)"'
       - uses: actions/upload-artifact@v4
@@ -185,7 +184,6 @@ jobs:
             state/engine4/watch_bench.json
           if-no-files-found: error
       - name: Persist fresh Bench without changing the live checkout
-        if: steps.stage2_gate.outputs.continue == 'true'
         if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         continue-on-error: true
         run: |
@@ -204,18 +202,15 @@ jobs:
             git -C "$BENCH_WORKTREE" push origin HEAD:main
           fi
       - name: Stage 4
-        if: steps.stage2_gate.outputs.continue == 'true'
         if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         run: /tmp/run_engine4_heartbeat.sh STAGE4 bash -lc 'python engine4_pipeline_runner_guarded.py final --date "$ENGINE_DATE_ET"; python engine4_stage_report.py final --date "$ENGINE_DATE_ET"; python engine4_notify.py final'
       - uses: actions/upload-artifact@v4
         if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         with: {name: 'engine4-manual-v2-stage4-${{ github.run_id }}', path: 'output/engine4/', if-no-files-found: error}
       - name: Stage 5
-        if: steps.stage2_gate.outputs.continue == 'true'
         if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         run: /tmp/run_engine4_heartbeat.sh STAGE5 bash -lc 'python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300; python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"; python engine4_notify.py recovery'
       - name: Verify and COMPLETE
-        if: steps.stage2_gate.outputs.continue == 'true'
         if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         run: |
           python engine4_stage_report.py verify-complete --date "$ENGINE_DATE_ET" --recipients 0
