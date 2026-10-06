@@ -74,6 +74,7 @@ def recovery_metrics(
     date_et,
     previous_close: float = math.nan,
     resistance_price: float = math.nan,
+    frozen_entry_trigger: float = math.nan,
 ) -> dict:
     if frame is None or frame.empty:
         return {"ticker": symbol, "data_ok": False, "failures": ["missing_live_data"]}
@@ -138,11 +139,26 @@ def recovery_metrics(
         else math.nan
     )
 
-    # A recovery entry must clear both the recent base and the existing session high.
-    # The old base-only trigger could buy directly into the session-high resistance,
-    # as happened in the verified FPS September 16 dry run.
-    breakout_level = max(base_high, session_high) if math.isfinite(base_high) else session_high
-    trigger = breakout_level * (1.0 + RECOVERY_TRIGGER_BUFFER_PCT / 100.0) if math.isfinite(breakout_level) else math.nan
+    # Build the candidate breakout line from resistance that existed BEFORE the
+    # newest bar. Once confirmed, scan_once persists this line so a rising stock
+    # cannot force Engine 4 to chase its own trigger upward on every rescan.
+    prior_session_high = float(high.iloc[:-1].max()) if len(high) >= 2 else session_high
+    prior_post_low_high = post_low_high.iloc[:-1] if len(post_low_high) >= 2 else post_low_high
+    prior_lookback = min(10, len(prior_post_low_high))
+    prior_base_high = (
+        float(prior_post_low_high.iloc[-prior_lookback:].max())
+        if prior_lookback >= 2
+        else prior_session_high
+    )
+    candidate_breakout_level = max(prior_base_high, prior_session_high)
+    candidate_entry_trigger = (
+        candidate_breakout_level * (1.0 + RECOVERY_TRIGGER_BUFFER_PCT / 100.0)
+        if math.isfinite(candidate_breakout_level)
+        else math.nan
+    )
+    trigger_is_frozen = math.isfinite(frozen_entry_trigger) and frozen_entry_trigger > 0
+    trigger = float(frozen_entry_trigger) if trigger_is_frozen else candidate_entry_trigger
+    breakout_level = trigger / (1.0 + RECOVERY_TRIGGER_BUFFER_PCT / 100.0) if trigger_is_frozen else candidate_breakout_level
     raw_max_allowed = trigger * (1.0 + RECOVERY_MAX_CHASE_PCT / 100.0) if math.isfinite(trigger) else math.nan
     stop = recent_low * (1.0 - RECOVERY_STOP_BUFFER_PCT / 100.0) if math.isfinite(recent_low) else math.nan
     if math.isfinite(stop) and math.isfinite(trigger) and stop >= trigger:
@@ -186,19 +202,22 @@ def recovery_metrics(
     if not math.isfinite(current):
         current = current_bar_close
 
-    failures = []
+    base_confirmation_failures = []
     if not math.isfinite(flush_pct) or flush_pct < RECOVERY_MIN_FLUSH_PCT:
-        failures.append("opening_flush_not_large_enough")
+        base_confirmation_failures.append("opening_flush_not_large_enough")
     if bars_since_low < RECOVERY_MIN_BARS_SINCE_LOW:
-        failures.append("low_not_old_enough_to_confirm_base")
+        base_confirmation_failures.append("low_not_old_enough_to_confirm_base")
     if not higher_low:
-        failures.append("no_confirmed_higher_low")
+        base_confirmation_failures.append("no_confirmed_higher_low")
     if not math.isfinite(base_range_pct) or base_range_pct > RECOVERY_MAX_BASE_RANGE_PCT:
-        failures.append("base_not_tight_enough")
+        base_confirmation_failures.append("base_not_tight_enough")
     if green_bars < RECOVERY_MIN_GREEN_BARS:
-        failures.append("insufficient_green_bars")
+        base_confirmation_failures.append("insufficient_green_bars")
     if not math.isfinite(volume_expansion) or volume_expansion < RECOVERY_MIN_VOLUME_EXPANSION:
-        failures.append("demand_volume_not_improving")
+        base_confirmation_failures.append("demand_volume_not_improving")
+
+    base_confirmation_ready = len(base_confirmation_failures) == 0
+    failures = list(base_confirmation_failures)
     if not math.isfinite(spread) or spread > MAX_SPREAD_PCT:
         failures.append("spread")
     if not math.isfinite(current) or current > MAX_TRADABLE_PRICE:
@@ -218,7 +237,7 @@ def recovery_metrics(
 
     setup_ready = len(failures) == 0
     if setup_ready and current < trigger:
-        state = "ARM"
+        state = "WATCH_TRIGGER"
     elif setup_ready and trigger <= current <= max_allowed:
         state = "BUY"
     elif setup_ready and current > max_allowed:
@@ -244,7 +263,12 @@ def recovery_metrics(
         "base_high": base_high,
         "base_low": base_low,
         "base_range_pct": base_range_pct,
+        "base_confirmation_ready": base_confirmation_ready,
+        "base_confirmation_failures": base_confirmation_failures,
         "breakout_level": breakout_level,
+        "candidate_breakout_level": candidate_breakout_level,
+        "candidate_entry_trigger": candidate_entry_trigger,
+        "trigger_frozen": trigger_is_frozen,
         "session_high_clearance_required": True,
         "green_bars_last4": green_bars,
         "volume_expansion_ratio": volume_expansion,
@@ -313,10 +337,21 @@ def scan_once(date_override: str | None = None) -> dict:
     frames = download_intraday(symbols, period="1d", interval="1m", prepost=False, date_et=date_et, lookback_days=0)
     audit = []
     ready = []
+
+    trigger_state_path = OUT / "recovery_trigger_state.json"
+    trigger_state = _read_json(trigger_state_path)
+    if trigger_state.get("target_date_et") != str(date_et):
+        trigger_state = {"target_date_et": str(date_et), "triggers": {}}
+    trigger_map = trigger_state.setdefault("triggers", {})
+
     for candidate in candidates:
         symbol = str(candidate.get("ticker"))
         previous_close = candidate.get("previous_close", math.nan)
         resistance_price = candidate.get("resistance_price", math.nan)
+        candidate_frozen_trigger = candidate.get("frozen_entry_trigger", math.nan)
+        persisted = trigger_map.get(symbol, {})
+        persisted_trigger = persisted.get("entry_trigger", math.nan) if isinstance(persisted, dict) else math.nan
+
         try:
             previous_close = float(previous_close)
         except (TypeError, ValueError):
@@ -325,69 +360,122 @@ def scan_once(date_override: str | None = None) -> dict:
             resistance_price = float(resistance_price)
         except (TypeError, ValueError):
             resistance_price = math.nan
+        try:
+            candidate_frozen_trigger = float(candidate_frozen_trigger)
+        except (TypeError, ValueError):
+            candidate_frozen_trigger = math.nan
+        try:
+            persisted_trigger = float(persisted_trigger)
+        except (TypeError, ValueError):
+            persisted_trigger = math.nan
+
+        frozen_trigger = candidate_frozen_trigger if math.isfinite(candidate_frozen_trigger) and candidate_frozen_trigger > 0 else persisted_trigger
         metrics = recovery_metrics(
             symbol,
             frames.get(symbol),
             date_et,
             previous_close=previous_close,
             resistance_price=resistance_price,
+            frozen_entry_trigger=frozen_trigger,
         )
+
+        # For candidates without a primary frozen trigger, freeze the first
+        # structurally confirmed recovery breakout line and persist it for every
+        # later scan. This prevents the trigger from ratcheting higher with price.
+        if not (math.isfinite(frozen_trigger) and frozen_trigger > 0) and metrics.get("base_confirmation_ready"):
+            proposed = metrics.get("candidate_entry_trigger", math.nan)
+            try:
+                proposed = float(proposed)
+            except (TypeError, ValueError):
+                proposed = math.nan
+            if math.isfinite(proposed) and proposed > 0:
+                frozen_trigger = proposed
+                trigger_map[symbol] = {
+                    "entry_trigger": frozen_trigger,
+                    "frozen_at_utc": datetime.now(timezone.utc).isoformat(),
+                    "source": "confirmed_recovery_base",
+                }
+                metrics = recovery_metrics(
+                    symbol,
+                    frames.get(symbol),
+                    date_et,
+                    previous_close=previous_close,
+                    resistance_price=resistance_price,
+                    frozen_entry_trigger=frozen_trigger,
+                )
+        elif math.isfinite(frozen_trigger) and frozen_trigger > 0:
+            trigger_map[symbol] = {
+                "entry_trigger": frozen_trigger,
+                "frozen_at_utc": persisted.get("frozen_at_utc") if isinstance(persisted, dict) else None,
+                "source": (
+                    "primary_frozen_trigger"
+                    if math.isfinite(candidate_frozen_trigger) and candidate_frozen_trigger > 0
+                    else "confirmed_recovery_base"
+                ),
+            }
+
         metrics["premarket_rank"] = candidate.get("rank")
         metrics["premarket_score"] = candidate.get("score")
         metrics["primary_failures"] = candidate.get("primary_failures", [])
+        metrics["frozen_trigger_source"] = trigger_map.get(symbol, {}).get("source")
         audit.append(metrics)
-        if metrics.get("state") in {"ARM", "BUY"}:
+        if metrics.get("state") == "BUY":
             rank = candidate.get("rank")
             rank_value = float(rank) if isinstance(rank, (int, float)) else 999.0
             score = candidate.get("score")
             score_value = float(score) if isinstance(score, (int, float)) else 0.0
             ready.append((rank_value, -score_value, metrics))
 
+    trigger_state["generated_at_utc"] = datetime.now(timezone.utc).isoformat()
+    trigger_state_path.write_text(json.dumps(trigger_state, indent=2), encoding="utf-8")
+
     if ready:
         ready.sort(key=lambda x: (x[0], x[1]))
         metrics = ready[0][2]
         symbol = metrics["ticker"]
-        if metrics["state"] == "BUY":
-            message = (
-                f"RECOVERY BUY {symbol} NOW\n"
-                f"BUY BETWEEN ${metrics['entry_trigger']:.2f} AND ${metrics['max_allowed_buy_price']:.2f}\n"
-                f"AFTER PURCHASE, ENTER GTC SELL STOP AT ${metrics['initial_stop']:.2f}\n"
-                f"IF PRICE RISES TO ${metrics['first_target']:.2f}, MOVE SELL STOP TO ${metrics['precalculated_profit_stop']:.2f}\n"
-                f"CURRENT PRICE: ${metrics['current_price']:.2f}\n"
-                f"DO NOT BUY ABOVE ${metrics['max_allowed_buy_price']:.2f}"
-            )
-            return _write_outputs(date_et, audit, {
-                "status": "BUY",
-                "reason": "recovery_trigger_confirmed",
-                "ticker": symbol,
-                "message": message,
-                "order_instruction": "BUY_NOW",
-                **{k: metrics[k] for k in ("current_price", "entry_trigger", "max_allowed_buy_price", "initial_stop", "first_target", "precalculated_profit_stop")},
-            })
-
         message = (
-            f"PLACE RECOVERY BUY STOP-LIMIT NOW — {symbol}\n"
-            f"STOP PRICE: ${metrics['entry_trigger']:.2f}\n"
-            f"LIMIT PRICE: ${metrics['max_allowed_buy_price']:.2f}\n"
-            f"TIME IN FORCE: DAY\n"
+            f"RECOVERY BUY {symbol} NOW\n"
+            f"BUY BETWEEN ${metrics['entry_trigger']:.2f} AND ${metrics['max_allowed_buy_price']:.2f}\n"
+            f"AFTER PURCHASE, ENTER GTC SELL STOP AT ${metrics['initial_stop']:.2f}\n"
+            f"IF PRICE RISES TO ${metrics['first_target']:.2f}, MOVE SELL STOP TO ${metrics['precalculated_profit_stop']:.2f}\n"
             f"CURRENT PRICE: ${metrics['current_price']:.2f}\n"
-            f"IF FILLED, ENTER GTC SELL STOP AT ${metrics['initial_stop']:.2f}\n"
-            f"IF PRICE THEN RISES TO ${metrics['first_target']:.2f}, MOVE SELL STOP TO ${metrics['precalculated_profit_stop']:.2f}\n"
-            f"DO NOT CHASE ABOVE ${metrics['max_allowed_buy_price']:.2f}"
+            f"DO NOT BUY ABOVE ${metrics['max_allowed_buy_price']:.2f}"
         )
         return _write_outputs(date_et, audit, {
-            "status": "ARM",
-            "reason": "recovery_base_confirmed_trigger_not_reached",
+            "status": "BUY",
+            "reason": "recovery_trigger_confirmed",
             "ticker": symbol,
             "message": message,
-            "order_instruction": "ARM_STOP_LIMIT_DAY",
+            "order_instruction": "BUY_NOW",
             **{k: metrics[k] for k in ("current_price", "entry_trigger", "max_allowed_buy_price", "initial_stop", "first_target", "precalculated_profit_stop")},
+        })
+
+    trigger_watches = [m for m in audit if m.get("state") == "WATCH_TRIGGER"]
+    if trigger_watches:
+        trigger_watches.sort(key=lambda m: (
+            float(m.get("premarket_rank")) if isinstance(m.get("premarket_rank"), (int, float)) else 999.0,
+            -float(m.get("premarket_score")) if isinstance(m.get("premarket_score"), (int, float)) else 0.0,
+        ))
+        best = trigger_watches[0]
+        return _write_outputs(date_et, audit, {
+            "status": "WATCH",
+            "reason": "frozen_trigger_armed_system_watch",
+            "ticker": best.get("ticker"),
+            "entry_trigger": best.get("entry_trigger"),
+            "current_price": best.get("current_price"),
+            "message": (
+                f"RECOVERY WATCH ACTIVE — {best.get('ticker')} has a frozen breakout trigger at "
+                f"${float(best.get('entry_trigger')):.2f}. No broker order is armed; Engine 4 "
+                "re-checks live spread, demand and >=2R risk/reward every minute."
+            ),
+            "order_instruction": "NO_ORDER_MONITOR_TRIGGER",
         })
 
     return _write_outputs(date_et, audit, {
         "status": "WATCH",
         "reason": "recovery_not_ready",
         "message": "RECOVERY WATCH ACTIVE — no second-chance base has fully confirmed yet.",
+        "order_instruction": "NO_ORDER",
     })
 
 
@@ -440,7 +528,7 @@ def monitor(date_override: str | None = None, interval_seconds: int = RECOVERY_S
             }))
 
         last_result = scan_once(date_override)
-        if last_result.get("status") in {"ARM", "BUY", "BLOCKED_BY_PRIMARY", "NO_RECOVERY_WATCH"}:
+        if last_result.get("status") in {"BUY", "BLOCKED_BY_PRIMARY", "NO_RECOVERY_WATCH"}:
             return finish(last_result)
         time.sleep(max(30, int(interval_seconds)))
 
