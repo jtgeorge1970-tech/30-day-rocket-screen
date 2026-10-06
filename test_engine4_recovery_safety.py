@@ -52,3 +52,47 @@ def test_missing_previous_close_fails_closed(monkeypatch):
     )
     assert "missing_previous_close_for_extension" in metrics["failures"]
     assert metrics["setup_ready"] is False
+
+
+def test_frozen_recovery_trigger_does_not_ratchet_with_new_highs(monkeypatch):
+    monkeypatch.setattr(recovery, "_current_mid", lambda symbol: (34.40, 34.38, 34.42, 0.12))
+    frame = _fps_style_frame()
+    frozen = 34.50
+
+    first = recovery.recovery_metrics(
+        "FIXED",
+        frame,
+        pd.Timestamp("2026-09-16").date(),
+        previous_close=33.00,
+        frozen_entry_trigger=frozen,
+    )
+    assert math.isclose(first["entry_trigger"], frozen, rel_tol=1e-12)
+    assert first["trigger_frozen"] is True
+
+    # Add two later bars with materially higher highs. The dynamic candidate line
+    # is allowed to rise, but the executable trigger must remain frozen.
+    last = frame.index[-1]
+    extra_idx = pd.date_range(last + pd.Timedelta(minutes=1), periods=2, freq="1min", tz="America/New_York")
+    extra = pd.DataFrame({
+        "Open": [34.60, 35.05],
+        "High": [35.00, 35.40],
+        "Low": [34.45, 34.90],
+        "Close": [34.90, 35.20],
+        "Volume": [180000, 220000],
+    }, index=extra_idx)
+    extended = pd.concat([frame, extra])
+
+    second = recovery.recovery_metrics(
+        "FIXED",
+        extended,
+        pd.Timestamp("2026-09-16").date(),
+        previous_close=33.00,
+        frozen_entry_trigger=frozen,
+    )
+    assert second["candidate_entry_trigger"] > frozen
+    assert math.isclose(second["entry_trigger"], frozen, rel_tol=1e-12)
+    assert second["trigger_frozen"] is True
+
+
+def test_recovery_monitor_checks_each_minute():
+    assert recovery.RECOVERY_SCAN_INTERVAL_SECONDS == 60
