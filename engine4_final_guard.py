@@ -27,6 +27,21 @@ from engine4_live import live_quality, market_context, opening_structure
 PROFIT_LOCK_R = 0.50
 BENCH_STATE = Path("state/engine4/watch_bench.json")
 
+# These conditions are deliberately re-checked at the actual breakout instead of
+# permanently vetoing a high-quality finalist from one 09:45 snapshot.
+DEFERRED_TRIGGER_FAILURES = frozenset({
+    "not_attacking_breakout",
+    "breakout_volume_not_expanding",
+    "spread",
+    "reward_risk_below_2",
+})
+
+
+def _split_opening_failures(failures: list[str]) -> tuple[list[str], list[str]]:
+    hard = [f for f in failures if f not in DEFERRED_TRIGGER_FAILURES and f != "entry_missed"]
+    deferred = [f for f in failures if f in DEFERRED_TRIGGER_FAILURES]
+    return hard, deferred
+
 
 def _artifact_bool(value) -> bool:
     if isinstance(value, bool):
@@ -116,6 +131,9 @@ def _write_recovery_watch(date_et, candidates: list[tuple[float, pd.Series, dict
             "previous_close": serializable(row.get("previous_close")),
             "resistance_price": serializable(row.get("resistance_price")),
             "primary_failures": list(metrics.get("failures", [])),
+            "deferred_trigger_checks": list(metrics.get("deferred_trigger_checks", [])),
+            "frozen_entry_trigger": serializable(metrics.get("frozen_entry_trigger")),
+            "frozen_breakout_level": serializable(metrics.get("frozen_breakout_level")),
             "candidate_source": row.get("candidate_source", "TODAY_LAUNCHPAD"),
         })
     (OUT / "recovery_watch.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
@@ -246,22 +264,24 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
         officially_tradable = bool(math.isfinite(opening_last) and opening_last <= MAX_TRADABLE_PRICE)
         metrics["officially_tradable"] = officially_tradable
 
-        failures = [f for f in list(metrics.get("failures", [])) if f != "entry_missed"]
-        metrics["failures_before_current_price_guard"] = list(failures)
+        opening_failures = list(metrics.get("failures", []))
+        hard_failures, deferred_failures = _split_opening_failures(opening_failures)
+        metrics["failures_before_current_price_guard"] = list(opening_failures)
+        metrics["hard_opening_failures"] = list(hard_failures)
+        metrics["deferred_trigger_checks"] = list(deferred_failures)
 
-        # Preserve promising failed names under the account-size price cap so the
-        # post-open recovery module can keep the fish on the hook instead of
-        # permanently discarding a top-ranked candidate after one failed setup.
-        if metrics.get("data_ok") and officially_tradable and not metrics.get("hard_market_reversal", False):
-            try:
-                recovery_quality = live_quality(float(row.get("score", 0)), metrics)
-            except Exception:
-                recovery_quality = float(row.get("score", 0) or 0)
-            if failures:
-                recovery_pool.append((recovery_quality, row, metrics.copy()))
-
-        if failures:
+        if hard_failures:
+            # Hard structural failures still fail closed. They may remain on the
+            # recovery watch only if they are an otherwise valid, affordable
+            # finalist and the broad market has not hard-reversed.
             metrics["pass"] = False
+            metrics["failures"] = list(hard_failures)
+            if metrics.get("data_ok") and officially_tradable and not metrics.get("hard_market_reversal", False):
+                try:
+                    recovery_quality = live_quality(float(row.get("score", 0)), metrics)
+                except Exception:
+                    recovery_quality = float(row.get("score", 0) or 0)
+                recovery_pool.append((recovery_quality, row, metrics.copy()))
             audit.append(metrics)
             continue
 
@@ -272,16 +292,27 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
         profit_protection_stop = _precalculated_profit_stop(trigger, initial_stop)
         seen = _trigger_seen(frame, date_et, trigger)
         current_tradable = bool(math.isfinite(current) and current <= MAX_TRADABLE_PRICE)
+        reward_risk = float(metrics.get("reward_risk", math.nan))
+        spread_ok_now = bool(math.isfinite(spread) and spread <= MAX_SPREAD_PCT)
+        reward_risk_ok_now = bool(math.isfinite(reward_risk) and reward_risk >= 2.0)
+        opening_breakout_volume_ok = "breakout_volume_not_expanding" not in deferred_failures
         metrics.update({
             "current_live_price": current,
             "current_bid": bid,
             "current_ask": ask,
             "current_spread_pct": spread,
+            "current_spread_ok": spread_ok_now,
+            "reward_risk_ok": reward_risk_ok_now,
+            "opening_breakout_volume_ok": opening_breakout_volume_ok,
             "max_allowed_buy_price": max_allowed,
             "precalculated_profit_stop": profit_protection_stop,
             "profit_lock_r": PROFIT_LOCK_R,
             "trigger_seen_today": seen,
             "officially_tradable": current_tradable,
+            # Freeze the primary breakout line now. Stage 5 may improve the stop
+            # after a retest, but it must not chase this trigger upward.
+            "frozen_entry_trigger": trigger,
+            "frozen_breakout_level": float(metrics.get("opening_range_high", math.nan)),
         })
 
         if not math.isfinite(current):
@@ -307,19 +338,38 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
             if seen:
                 metrics["failures"] = ["entry_missed_breakout_failed"]
                 missed.append((quality, row, metrics))
-                recovery_pool.append((quality, row, metrics.copy()))
             else:
-                metrics["failures"] = ["trigger_not_reached"]
+                metrics["failures"] = ["frozen_trigger_wait"]
                 watches.append((quality, row, metrics))
+            recovery_pool.append((quality, row, metrics.copy()))
         elif current > max_allowed:
             metrics["pass"] = False
             metrics["failures"] = ["entry_missed_chase_band"]
             missed.append((quality, row, metrics))
             recovery_pool.append((quality, row, metrics.copy()))
         else:
-            metrics["pass"] = True
-            metrics["failures"] = []
-            buyable.append((quality, row, metrics))
+            trigger_failures = []
+            # The spread is intentionally re-checked from the fresh quote at the
+            # trigger; the earlier 09:45 spread snapshot is not a permanent veto.
+            if not spread_ok_now:
+                trigger_failures.append("spread_at_trigger")
+            # Keep the locked 2R discipline. If the opening stop is too wide,
+            # Stage 5 waits for a higher-low/retest and recalculates risk.
+            if not reward_risk_ok_now:
+                trigger_failures.append("reward_risk_below_2_at_trigger")
+            # If breakout demand was not confirmed in the opening snapshot, do not
+            # buy blindly; Stage 5 re-evaluates improving demand every minute.
+            if not opening_breakout_volume_ok:
+                trigger_failures.append("breakout_volume_not_confirmed")
+
+            if trigger_failures:
+                metrics["pass"] = False
+                metrics["failures"] = trigger_failures
+                recovery_pool.append((quality, row, metrics.copy()))
+            else:
+                metrics["pass"] = True
+                metrics["failures"] = []
+                buyable.append((quality, row, metrics))
         audit.append(metrics)
 
     _write_recovery_watch(date_et, recovery_pool)
@@ -373,25 +423,21 @@ def guarded_final_stage(date_override: str | None = None) -> dict:
         _, row, metrics = watches[0]
         symbol = str(row.ticker)
         message = (
-            f"PLACE BUY STOP-LIMIT NOW — {symbol}\n"
-            f"STOP PRICE: ${metrics['entry_trigger']:.2f}\n"
-            f"LIMIT PRICE: ${metrics['max_allowed_buy_price']:.2f}\n"
-            f"TIME IN FORCE: DAY\n"
+            f"FROZEN BREAKOUT WATCH — {symbol}\n"
+            f"TRIGGER: ${metrics['entry_trigger']:.2f}\n"
             f"CURRENT PRICE: ${metrics['current_live_price']:.2f}\n"
-            f"IF FILLED, ENTER GTC SELL STOP AT ${metrics['initial_stop']:.2f}\n"
-            f"IF PRICE THEN RISES TO ${metrics['first_target']:.2f}, MOVE SELL STOP TO ${metrics['precalculated_profit_stop']:.2f}\n"
-            f"DO NOT CHASE ABOVE ${metrics['max_allowed_buy_price']:.2f}"
+            "NO BROKER ORDER YET — Engine 4 will re-check live spread, breakout demand, "
+            "and >=2R risk/reward at the trigger. Stage 5 monitors the fixed trigger every minute."
         )
         return finish({
-            "status": "ARM",
-            "reason": "trigger_not_reached",
+            "status": "WATCH_TRIGGER",
+            "reason": "frozen_breakout_trigger_wait",
             "ticker": symbol,
             "message": message,
-            "order_instruction": "ARM_STOP_LIMIT_DAY",
+            "order_instruction": "NO_ORDER_MONITOR_TRIGGER",
             "live_price": metrics["current_live_price"],
-            "stop_price": metrics["entry_trigger"],
-            "limit_price": metrics["max_allowed_buy_price"],
             "entry_trigger": metrics["entry_trigger"],
+            "frozen_entry_trigger": metrics["frozen_entry_trigger"],
             "max_allowed_buy_price": metrics["max_allowed_buy_price"],
             "initial_stop": metrics["initial_stop"],
             "first_target": metrics["first_target"],
