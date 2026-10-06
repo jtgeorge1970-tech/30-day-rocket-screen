@@ -224,5 +224,22 @@ def test_final_guard_rejects_sub80_or_missing_evidence():
     assert "missing_verified_catalyst" in failures
 
 
+
+def test_entry_model_defers_breakout_spread_and_rr_until_trigger():
+    hard, deferred = final_guard._split_opening_failures([
+        "not_attacking_breakout",
+        "spread",
+        "reward_risk_below_2",
+        "breakout_volume_not_expanding",
+        "below_vwap",
+    ])
+    assert hard == ["below_vwap"]
+    assert set(deferred) == {
+        "not_attacking_breakout",
+        "spread",
+        "reward_risk_below_2",
+        "breakout_volume_not_expanding",
+    }
+
 def test_self_test():
     e4.self_test()
