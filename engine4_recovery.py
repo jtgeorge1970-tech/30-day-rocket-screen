@@ -75,6 +75,7 @@ def recovery_metrics(
     previous_close: float = math.nan,
     resistance_price: float = math.nan,
     frozen_entry_trigger: float = math.nan,
+    continuation_mode: bool = False,
 ) -> dict:
     if frame is None or frame.empty:
         return {"ticker": symbol, "data_ok": False, "failures": ["missing_live_data"]}
@@ -150,7 +151,12 @@ def recovery_metrics(
         if prior_lookback >= 2
         else prior_session_high
     )
-    candidate_breakout_level = max(prior_base_high, prior_session_high)
+    if continuation_mode:
+        candidate_breakout_level = (
+            prior_base_high if math.isfinite(prior_base_high) else prior_session_high
+        )
+    else:
+        candidate_breakout_level = max(prior_base_high, prior_session_high)
     candidate_entry_trigger = (
         candidate_breakout_level * (1.0 + RECOVERY_TRIGGER_BUFFER_PCT / 100.0)
         if math.isfinite(candidate_breakout_level)
@@ -203,7 +209,10 @@ def recovery_metrics(
         current = current_bar_close
 
     base_confirmation_failures = []
-    if not math.isfinite(flush_pct) or flush_pct < RECOVERY_MIN_FLUSH_PCT:
+    if (
+        not continuation_mode
+        and (not math.isfinite(flush_pct) or flush_pct < RECOVERY_MIN_FLUSH_PCT)
+    ):
         base_confirmation_failures.append("opening_flush_not_large_enough")
     if bars_since_low < RECOVERY_MIN_BARS_SINCE_LOW:
         base_confirmation_failures.append("low_not_old_enough_to_confirm_base")
@@ -215,6 +224,10 @@ def recovery_metrics(
         base_confirmation_failures.append("insufficient_green_bars")
     if not math.isfinite(volume_expansion) or volume_expansion < RECOVERY_MIN_VOLUME_EXPANSION:
         base_confirmation_failures.append("demand_volume_not_improving")
+    if continuation_mode and (
+        not math.isfinite(current_vwap) or current_bar_close < current_vwap
+    ):
+        base_confirmation_failures.append("continuation_below_vwap")
 
     base_confirmation_ready = len(base_confirmation_failures) == 0
     failures = list(base_confirmation_failures)
@@ -265,11 +278,12 @@ def recovery_metrics(
         "base_range_pct": base_range_pct,
         "base_confirmation_ready": base_confirmation_ready,
         "base_confirmation_failures": base_confirmation_failures,
+        "continuation_mode": bool(continuation_mode),
         "breakout_level": breakout_level,
         "candidate_breakout_level": candidate_breakout_level,
         "candidate_entry_trigger": candidate_entry_trigger,
         "trigger_frozen": trigger_is_frozen,
-        "session_high_clearance_required": True,
+        "session_high_clearance_required": not continuation_mode,
         "green_bars_last4": green_bars,
         "volume_expansion_ratio": volume_expansion,
         "recovery_from_low_pct": recovery_from_low_pct,
@@ -348,7 +362,10 @@ def scan_once(date_override: str | None = None) -> dict:
         symbol = str(candidate.get("ticker"))
         previous_close = candidate.get("previous_close", math.nan)
         resistance_price = candidate.get("resistance_price", math.nan)
-        candidate_frozen_trigger = candidate.get("frozen_entry_trigger", math.nan)
+        continuation_mode = bool(candidate.get("continuation_candidate", False))
+        candidate_frozen_trigger = (
+            math.nan if continuation_mode else candidate.get("frozen_entry_trigger", math.nan)
+        )
         persisted = trigger_map.get(symbol, {})
         persisted_trigger = persisted.get("entry_trigger", math.nan) if isinstance(persisted, dict) else math.nan
 
@@ -377,6 +394,7 @@ def scan_once(date_override: str | None = None) -> dict:
             previous_close=previous_close,
             resistance_price=resistance_price,
             frozen_entry_trigger=frozen_trigger,
+            continuation_mode=continuation_mode,
         )
 
         # For candidates without a primary frozen trigger, freeze the first
@@ -393,7 +411,11 @@ def scan_once(date_override: str | None = None) -> dict:
                 trigger_map[symbol] = {
                     "entry_trigger": frozen_trigger,
                     "frozen_at_utc": datetime.now(timezone.utc).isoformat(),
-                    "source": "confirmed_recovery_base",
+                    "source": (
+                        "confirmed_continuation_base"
+                        if continuation_mode
+                        else "confirmed_recovery_base"
+                    ),
                 }
                 metrics = recovery_metrics(
                     symbol,
@@ -402,6 +424,7 @@ def scan_once(date_override: str | None = None) -> dict:
                     previous_close=previous_close,
                     resistance_price=resistance_price,
                     frozen_entry_trigger=frozen_trigger,
+                    continuation_mode=continuation_mode,
                 )
         elif math.isfinite(frozen_trigger) and frozen_trigger > 0:
             trigger_map[symbol] = {
@@ -410,12 +433,19 @@ def scan_once(date_override: str | None = None) -> dict:
                 "source": (
                     "primary_frozen_trigger"
                     if math.isfinite(candidate_frozen_trigger) and candidate_frozen_trigger > 0
-                    else "confirmed_recovery_base"
+                    else (
+                        "confirmed_continuation_base"
+                        if continuation_mode
+                        else "confirmed_recovery_base"
+                    )
                 ),
             }
 
         metrics["premarket_rank"] = candidate.get("rank")
         metrics["premarket_score"] = candidate.get("score")
+        metrics["candidate_source"] = candidate.get("candidate_source")
+        metrics["continuation_candidate"] = continuation_mode
+        metrics["continuation_origin_score"] = candidate.get("continuation_origin_score")
         metrics["primary_failures"] = candidate.get("primary_failures", [])
         metrics["frozen_trigger_source"] = trigger_map.get(symbol, {}).get("source")
         audit.append(metrics)
@@ -433,8 +463,9 @@ def scan_once(date_override: str | None = None) -> dict:
         ready.sort(key=lambda x: (x[0], x[1]))
         metrics = ready[0][2]
         symbol = metrics["ticker"]
+        buy_label = "CONTINUATION BUY" if metrics.get("continuation_mode") else "RECOVERY BUY"
         message = (
-            f"RECOVERY BUY {symbol} NOW\n"
+            f"{buy_label} {symbol} NOW\n"
             f"BUY BETWEEN ${metrics['entry_trigger']:.2f} AND ${metrics['max_allowed_buy_price']:.2f}\n"
             f"AFTER PURCHASE, ENTER GTC SELL STOP AT ${metrics['initial_stop']:.2f}\n"
             f"IF PRICE RISES TO ${metrics['first_target']:.2f}, MOVE SELL STOP TO ${metrics['precalculated_profit_stop']:.2f}\n"
@@ -443,7 +474,11 @@ def scan_once(date_override: str | None = None) -> dict:
         )
         return _write_outputs(date_et, audit, {
             "status": "BUY",
-            "reason": "recovery_trigger_confirmed",
+            "reason": (
+                "continuation_trigger_confirmed"
+                if metrics.get("continuation_mode")
+                else "recovery_trigger_confirmed"
+            ),
             "ticker": symbol,
             "message": message,
             "order_instruction": "BUY_NOW",
@@ -459,12 +494,16 @@ def scan_once(date_override: str | None = None) -> dict:
         best = trigger_watches[0]
         return _write_outputs(date_et, audit, {
             "status": "WATCH",
-            "reason": "frozen_trigger_armed_system_watch",
+            "reason": (
+                "continuation_base_trigger_watch"
+                if best.get("continuation_mode")
+                else "frozen_trigger_armed_system_watch"
+            ),
             "ticker": best.get("ticker"),
             "entry_trigger": best.get("entry_trigger"),
             "current_price": best.get("current_price"),
             "message": (
-                f"RECOVERY WATCH ACTIVE — {best.get('ticker')} has a frozen breakout trigger at "
+                f"{'CONTINUATION' if best.get('continuation_mode') else 'RECOVERY'} WATCH ACTIVE — {best.get('ticker')} has a frozen breakout trigger at "
                 f"${float(best.get('entry_trigger')):.2f}. No broker order is armed; Engine 4 "
                 "re-checks live spread, demand and >=2R risk/reward every minute."
             ),
