@@ -225,6 +225,35 @@ def test_final_guard_rejects_sub80_or_missing_evidence():
 
 
 
+
+def test_premarket_spread_can_defer_to_live_trigger():
+    peng_style = {
+        "score": 87.217,
+        "premarket_eligible": True,
+        "catalyst_quality": 1.0,
+        "premarket_volume_gate_pass": True,
+        "atr_pct": 3.0,
+        "resistance_room_pct": 6.0,
+        "spread_order_authoritative": True,
+        "spread_pct": 0.716,
+        "premarket_spread_deferred": True,
+    }
+    assert final_guard._premarket_eligibility_failures(pd.Series(peng_style)) == []
+
+    too_wide = {**peng_style, "spread_pct": 1.60}
+    assert "premarket_spread_excessive" in final_guard._premarket_eligibility_failures(pd.Series(too_wide))
+
+
+def test_prior_hot_continuation_does_not_need_to_rescore_80_same_morning():
+    lw_style = {
+        "score": 58.0,
+        "continuation_candidate": True,
+        "continuation_origin_score": 81.683,
+        "last_premarket": 48.24,
+        "spread_pct": 0.40,
+    }
+    assert final_guard._premarket_eligibility_failures(pd.Series(lw_style)) == []
+
 def test_entry_model_defers_breakout_spread_and_rr_until_trigger():
     hard, deferred = final_guard._split_opening_failures([
         "not_attacking_breakout",
