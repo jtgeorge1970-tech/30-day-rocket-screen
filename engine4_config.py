@@ -19,6 +19,9 @@ MIN_REWARD_RISK = 2.0
 MAX_GAP_PCT = 25.0
 MIN_GAP_PCT = 0.5
 MAX_SPREAD_PCT = 0.60
+# A strong >=80 candidate may defer a temporarily wider authoritative premarket
+# spread to the actual trigger. Live execution still requires MAX_SPREAD_PCT.
+MAX_PREMARKET_DEFERRED_SPREAD_PCT = 1.50
 MAX_VWAP_EXTENSION_PCT = 1.50
 MAX_BREAKOUT_CHASE_PCT = 0.50
 MIN_BREAKOUT_VOLUME_RATIO = 1.20
@@ -34,6 +37,10 @@ BATCH_SIZE_DEEP = 25
 # High-priced names may remain in shadow/audit rankings, but can never become
 # official live trades while the account is sized at roughly $200-$300/trade.
 RECOVERY_WATCH_COUNT = 5
+# Short continuation runway for prior HOT/B winners. This keeps proven momentum
+# names eligible for a risk-defined continuation entry without granting a trade.
+CONTINUATION_MAX_AGE_SESSIONS = 3
+CONTINUATION_MAX_DRAWDOWN_PCT = 5.0
 RECOVERY_END_HOUR_ET = 11
 RECOVERY_END_MINUTE_ET = 30
 RECOVERY_SCAN_INTERVAL_SECONDS = 60
