@@ -21,7 +21,12 @@ import pandas as pd
 
 import engine4_pipeline as core
 import engine4_pipeline_runner as runner
-from engine4_config import MAX_TRADABLE_PRICE, MIN_SCORE
+from engine4_config import (
+    CONTINUATION_MAX_AGE_SESSIONS,
+    CONTINUATION_MAX_DRAWDOWN_PCT,
+    MAX_TRADABLE_PRICE,
+    MIN_SCORE,
+)
 from engine4_data import download_intraday, prior_regular_close, slice_window
 from engine4_score import preliminary_activity_score
 
@@ -111,7 +116,13 @@ def _fresh_seed_rows(symbols: list[str], date_et, cutoff: str) -> tuple[pd.DataF
             if not requested_at:
                 raise RuntimeError("Fresh manual Bench missing requested-at freshness boundary")
             floor = pd.Timestamp(requested_at)
-            if observed_at is None or observed_at.tzinfo is None or observed_at < floor:
+            if observed_at is None or observed_at.tzinfo is None:
+                missing.append(symbol)
+                continue
+            if floor.tzinfo is None:
+                floor = floor.tz_localize("UTC")
+            floor = floor.tz_convert(observed_at.tz).floor("min")
+            if observed_at < floor:
                 missing.append(symbol)
                 continue
         current = yahoo_price if manual_current else (nasdaq_price if math.isfinite(nasdaq_price) else yahoo_price)
@@ -230,6 +241,40 @@ def update_bench(date_override: str | None = None, state_path: Path = STATE) -> 
         eligible = bool(row.get("premarket_eligible"))
         is_top3 = today_rank.get(symbol, 999) <= 3
         was_benched = prior is not None
+
+        last_date = str((prior or {}).get("last_refreshed_date") or "")
+        age = int((prior or {}).get("age_sessions") or 0)
+        if last_date != expected:
+            age += 1
+
+        current_price = _finite(row.get("last_premarket"), math.nan)
+        prior_selection = _finite((prior or {}).get("selection_price"), math.nan)
+        prior_anchor = _finite((prior or {}).get("previous_close"), math.nan)
+        prior_score = _finite((prior or {}).get("score"), 0.0)
+        prior_was_hot = str((prior or {}).get("tier") or "") == "HOT"
+        prior_was_b = bool((prior or {}).get("premarket_eligible")) and prior_score >= MIN_SCORE
+        continuation_drawdown_pct = (
+            (current_price / prior_selection - 1.0) * 100.0
+            if math.isfinite(current_price) and math.isfinite(prior_selection) and prior_selection > 0
+            else math.nan
+        )
+        above_origin_anchor = bool(
+            math.isfinite(current_price)
+            and math.isfinite(prior_anchor)
+            and prior_anchor > 0
+            and current_price >= prior_anchor
+        )
+        continuation_candidate = bool(
+            was_benched
+            and prior_was_hot
+            and prior_was_b
+            and age <= CONTINUATION_MAX_AGE_SESSIONS
+            and math.isfinite(continuation_drawdown_pct)
+            and continuation_drawdown_pct >= -CONTINUATION_MAX_DRAWDOWN_PCT
+            and above_origin_anchor
+            and current_price <= MAX_TRADABLE_PRICE
+        )
+
         admission = None
         if eligible and score >= GENERAL_ADMISSION_SCORE:
             admission = "current_score_85_plus"
@@ -237,19 +282,24 @@ def update_bench(date_override: str | None = None, state_path: Path = STATE) -> 
             admission = "current_launchpad_top3"
         elif eligible and was_benched and score >= MIN_SCORE:
             admission = "retained_current_b_grade"
+        elif continuation_candidate:
+            admission = "prior_hot_continuation"
+
         if admission is None:
             reason = "below_current_B_grade" if score < MIN_SCORE else "current_mandatory_gate_failure"
-            removed.append({"ticker": symbol, "reason": reason, "current_score": score})
+            removed.append({
+                "ticker": symbol,
+                "reason": reason,
+                "current_score": score,
+                "continuation_drawdown_pct": _serializable(continuation_drawdown_pct),
+            })
             continue
-
-        last_date = str((prior or {}).get("last_refreshed_date") or "")
-        age = int((prior or {}).get("age_sessions") or 0)
-        if last_date != expected:
-            age += 1
 
         gate_count = _finite(row.get("premarket_gate_count"), 0.0)
         activity = _finite(row.get("activity_score"), 0.0)
-        priority = score + (5.0 if is_top3 else 0.0) + min(gate_count, 7.0) * 0.10 + min(activity, 10.0) * 0.01
+        continuation_priority = prior_score if continuation_candidate else 0.0
+        priority_base = max(score, continuation_priority)
+        priority = priority_base + (5.0 if is_top3 else 0.0) + min(gate_count, 7.0) * 0.10 + min(activity, 10.0) * 0.01
         row.update(
             {
                 "age_sessions": age,
@@ -257,9 +307,14 @@ def update_bench(date_override: str | None = None, state_path: Path = STATE) -> 
                 "last_refreshed_date": expected,
                 "today_launchpad_rank": today_rank.get(symbol),
                 "admission_reason": admission,
+                "continuation_candidate": continuation_candidate,
+                "continuation_origin_score": prior_score if continuation_candidate else None,
+                "continuation_origin_selection_price": prior_selection if continuation_candidate else None,
+                "continuation_drawdown_pct": continuation_drawdown_pct if continuation_candidate else None,
+                "continuation_entry_mode": "PULLBACK_OR_BREAKOUT" if continuation_candidate else None,
                 "watch_priority": round(priority, 6),
                 "max_tradable_price": MAX_TRADABLE_PRICE,
-                "official_trade_eligible_by_price": _finite(row.get("last_premarket"), math.inf) <= MAX_TRADABLE_PRICE,
+                "official_trade_eligible_by_price": current_price <= MAX_TRADABLE_PRICE,
             }
         )
         qualified.append(row)
