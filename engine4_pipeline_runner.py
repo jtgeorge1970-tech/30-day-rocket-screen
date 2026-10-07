@@ -34,6 +34,7 @@ from engine4_config import (
     BROAD_POOL_SIZE,
     DEEP_POOL_SIZE,
     MAX_SPREAD_PCT,
+    MAX_PREMARKET_DEFERRED_SPREAD_PCT,
     MAX_TRADABLE_PRICE,
     MIN_ATR_PCT,
     MIN_PRICE,
@@ -342,25 +343,44 @@ def repaired_score_pool(broad: pd.DataFrame, date_et, reference, cutoff: str) ->
         for key, value in components.items():
             row[f"pts_{key}"] = value
 
-        evidence_gate_map = {
+        core_gate_map = {
             "catalyst": catalyst > 0,
             "pm_volume_strength": bool(volume_gate),
             "atr": math.isfinite(atr_pct) and atr_pct >= MIN_ATR_PCT,
             "room": room > 0,
-            "spread": (
-                math.isfinite(spread)
-                and spread <= MAX_SPREAD_PCT
-                and quote_order_authoritative
-            ),
             "price_cap": math.isfinite(row["last_premarket"]) and row["last_premarket"] <= MAX_TRADABLE_PRICE,
         }
-        gate_map = {**evidence_gate_map, "score80": score >= MIN_SCORE}
-        mandatory_evidence_pass = bool(all(evidence_gate_map.values()))
-        row["premarket_eligible"] = bool(mandatory_evidence_pass and score >= MIN_SCORE)
+        spread_live_ready = bool(
+            math.isfinite(spread)
+            and spread <= MAX_SPREAD_PCT
+            and quote_order_authoritative
+        )
+        spread_deferred_ok = bool(
+            math.isfinite(spread)
+            and spread <= MAX_PREMARKET_DEFERRED_SPREAD_PCT
+            and quote_order_authoritative
+        )
+        score80 = bool(score >= MIN_SCORE)
+        core_selection_pass = bool(all(core_gate_map.values()) and score80)
+        premarket_eligible = bool(core_selection_pass and spread_deferred_ok)
+        spread_deferred = bool(premarket_eligible and not spread_live_ready)
+
+        gate_map = {
+            **core_gate_map,
+            "spread_within_deferred_cap": spread_deferred_ok,
+            "score80": score80,
+        }
+        row["premarket_eligible"] = premarket_eligible
+        row["premarket_trade_ready"] = bool(premarket_eligible and spread_live_ready)
+        row["premarket_spread_deferred"] = spread_deferred
         row["premarket_gate_count"] = int(sum(gate_map.values()))
-        row["premarket_grade"] = premarket_grade(score, mandatory_evidence_pass)
+        # Grade measures candidate quality/selection eligibility. Execution spread
+        # is re-checked live at the trigger before any BUY can be issued.
+        row["premarket_grade"] = premarket_grade(score, bool(all(core_gate_map.values()) and spread_deferred_ok))
         row["premarket_a_grade"] = row["premarket_grade"] in {"A", "A+"}
-        row["premarket_failures"] = ",".join(k for k, passed in gate_map.items() if not passed)
+        failures = [k for k, passed in gate_map.items() if not passed]
+        row["premarket_failures"] = ",".join(failures)
+        row["premarket_deferred_checks"] = "spread" if spread_deferred else ""
         enriched.append(row)
 
     ranked = pd.DataFrame(enriched)
