@@ -121,7 +121,7 @@ def _continuation_frame():
 
 
 def test_hot_continuation_can_buy_without_three_percent_opening_flush(monkeypatch):
-    monkeypatch.setattr(recovery, "_current_mid", lambda symbol: (48.34, 48.32, 48.36, 0.083))
+    monkeypatch.setattr(recovery, "_current_mid", lambda symbol: (48.35, 48.34, 48.36, 0.041))
     frame = _continuation_frame()
 
     ordinary = recovery.recovery_metrics(
@@ -145,6 +145,7 @@ def test_hot_continuation_can_buy_without_three_percent_opening_flush(monkeypatc
     assert continuation["continuation_mode"] is True
     assert "opening_flush_not_large_enough" not in continuation["failures"]
     assert continuation["higher_low"] is True
-    assert continuation["entry_trigger"] < continuation["session_high"]
+    assert continuation["candidate_breakout_level"] <= continuation["session_high"]
+    assert continuation["entry_trigger"] > continuation["candidate_breakout_level"]
     assert continuation["reward_risk_at_trigger"] >= 2.0
-    assert continuation["state"] in {"WATCH_TRIGGER", "BUY"}
+    assert continuation["state"] == "BUY"
