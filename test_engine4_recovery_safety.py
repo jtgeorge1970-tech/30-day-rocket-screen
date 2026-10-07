@@ -96,3 +96,55 @@ def test_frozen_recovery_trigger_does_not_ratchet_with_new_highs(monkeypatch):
 
 def test_recovery_monitor_checks_each_minute():
     assert recovery.RECOVERY_SCAN_INTERVAL_SECONDS == 60
+
+
+def _continuation_frame():
+    idx = pd.date_range("2026-10-07 09:30", periods=30, freq="1min", tz="America/New_York")
+    closes = [
+        48.10,48.05,47.98,47.92,47.86,47.82,47.88,47.94,47.98,48.02,
+        48.00,48.04,48.08,48.06,48.10,48.12,48.14,48.13,48.16,48.18,
+        48.17,48.19,48.21,48.20,48.22,48.23,48.24,48.26,48.28,48.30,
+    ]
+    opens = [
+        48.08,48.07,48.02,47.96,47.90,47.84,47.84,47.90,47.96,48.00,
+        48.02,48.02,48.05,48.08,48.08,48.10,48.12,48.15,48.14,48.16,
+        48.18,48.17,48.19,48.22,48.20,48.21,48.22,48.24,48.25,48.27,
+    ]
+    highs = [max(o,c)+0.04 for o,c in zip(opens, closes)]
+    lows = [min(o,c)-0.04 for o,c in zip(opens, closes)]
+    volumes = [
+        150000,130000,120000,110000,100000,95000,90000,85000,80000,78000,
+        76000,75000,74000,73000,72000,71000,70000,69000,68000,70000,
+        72000,74000,76000,78000,90000,105000,120000,145000,170000,200000,
+    ]
+    return pd.DataFrame({"Open":opens,"High":highs,"Low":lows,"Close":closes,"Volume":volumes}, index=idx)
+
+
+def test_hot_continuation_can_buy_without_three_percent_opening_flush(monkeypatch):
+    monkeypatch.setattr(recovery, "_current_mid", lambda symbol: (48.34, 48.32, 48.36, 0.083))
+    frame = _continuation_frame()
+
+    ordinary = recovery.recovery_metrics(
+        "LW",
+        frame,
+        pd.Timestamp("2026-10-07").date(),
+        previous_close=47.91,
+        resistance_price=52.00,
+        continuation_mode=False,
+    )
+    assert "opening_flush_not_large_enough" in ordinary["failures"]
+
+    continuation = recovery.recovery_metrics(
+        "LW",
+        frame,
+        pd.Timestamp("2026-10-07").date(),
+        previous_close=47.91,
+        resistance_price=52.00,
+        continuation_mode=True,
+    )
+    assert continuation["continuation_mode"] is True
+    assert "opening_flush_not_large_enough" not in continuation["failures"]
+    assert continuation["higher_low"] is True
+    assert continuation["entry_trigger"] < continuation["session_high"]
+    assert continuation["reward_risk_at_trigger"] >= 2.0
+    assert continuation["state"] in {"WATCH_TRIGGER", "BUY"}
