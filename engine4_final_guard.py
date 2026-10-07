@@ -13,6 +13,7 @@ from engine4_config import (
     ET,
     MAX_BREAKOUT_CHASE_PCT,
     MAX_SPREAD_PCT,
+    MAX_PREMARKET_DEFERRED_SPREAD_PCT,
     MAX_TRADABLE_PRICE,
     MIN_ATR_PCT,
     MIN_SCORE,
@@ -52,13 +53,37 @@ def _artifact_bool(value) -> bool:
 
 
 def _premarket_eligibility_failures(row: pd.Series) -> list[str]:
-    """Revalidate the frozen launchpad contract before any live analysis."""
+    """Revalidate selection quality without confusing selection with execution.
+
+    Fresh >=80 launchpad names may defer an authoritative premarket spread up to
+    the configured research cap; the live quote still must be <= MAX_SPREAD_PCT
+    before a BUY. Prior HOT continuation candidates use their proven origin B
+    score and are judged by the live continuation structure instead of being
+    forced to recreate yesterday's catalyst/volume profile.
+    """
     failures = []
+    continuation = _artifact_bool(row.get("continuation_candidate", False))
     score = pd.to_numeric(pd.Series([row.get("score")]), errors="coerce").iloc[0]
+    spread = pd.to_numeric(pd.Series([row.get("spread_pct")]), errors="coerce").iloc[0]
+
+    if continuation:
+        origin_score = pd.to_numeric(
+            pd.Series([row.get("continuation_origin_score")]), errors="coerce"
+        ).iloc[0]
+        last_price = pd.to_numeric(
+            pd.Series([row.get("last_premarket")]), errors="coerce"
+        ).iloc[0]
+        if not math.isfinite(origin_score) or origin_score < MIN_SCORE:
+            failures.append("continuation_origin_below_80")
+        if not math.isfinite(last_price) or last_price > MAX_TRADABLE_PRICE:
+            failures.append("continuation_price_above_cap")
+        if math.isfinite(spread) and spread > MAX_PREMARKET_DEFERRED_SPREAD_PCT:
+            failures.append("continuation_premarket_spread_excessive")
+        return failures
+
     catalyst = pd.to_numeric(pd.Series([row.get("catalyst_quality")]), errors="coerce").iloc[0]
     atr_pct = pd.to_numeric(pd.Series([row.get("atr_pct")]), errors="coerce").iloc[0]
     room = pd.to_numeric(pd.Series([row.get("resistance_room_pct")]), errors="coerce").iloc[0]
-    spread = pd.to_numeric(pd.Series([row.get("spread_pct")]), errors="coerce").iloc[0]
 
     if not _artifact_bool(row.get("premarket_eligible", False)):
         failures.append("not_launchpad_eligible")
@@ -74,8 +99,8 @@ def _premarket_eligibility_failures(row: pd.Series) -> list[str]:
         failures.append("premarket_room")
     if not _artifact_bool(row.get("spread_order_authoritative", False)):
         failures.append("premarket_spread_not_authoritative")
-    if not math.isfinite(spread) or spread > MAX_SPREAD_PCT:
-        failures.append("premarket_spread")
+    if not math.isfinite(spread) or spread > MAX_PREMARKET_DEFERRED_SPREAD_PCT:
+        failures.append("premarket_spread_excessive")
     return failures
 
 
@@ -132,7 +157,14 @@ def _write_recovery_watch(date_et, candidates: list[tuple[float, pd.Series, dict
             "resistance_price": serializable(row.get("resistance_price")),
             "primary_failures": list(metrics.get("failures", [])),
             "deferred_trigger_checks": list(metrics.get("deferred_trigger_checks", [])),
-            "frozen_entry_trigger": serializable(metrics.get("frozen_entry_trigger")),
+            "continuation_candidate": _artifact_bool(row.get("continuation_candidate", False)),
+            "continuation_origin_score": serializable(row.get("continuation_origin_score")),
+            "continuation_entry_mode": row.get("continuation_entry_mode"),
+            "frozen_entry_trigger": (
+                None
+                if _artifact_bool(row.get("continuation_candidate", False))
+                else serializable(metrics.get("frozen_entry_trigger"))
+            ),
             "frozen_breakout_level": serializable(metrics.get("frozen_breakout_level")),
             "candidate_source": row.get("candidate_source", "TODAY_LAUNCHPAD"),
         })
@@ -146,7 +178,11 @@ def _hot_bench(date_et) -> pd.DataFrame:
         return pd.DataFrame()
     if payload.get("target_date_et") != str(date_et):
         return pd.DataFrame()
-    rows = [row for row in payload.get("candidates", []) if row.get("tier") == "HOT"]
+    rows = [
+        row for row in payload.get("candidates", [])
+        if row.get("tier") == "HOT" or _artifact_bool(row.get("continuation_candidate", False))
+    ]
+    rows.sort(key=lambda row: float(row.get("watch_priority") or 0.0), reverse=True)
     return pd.DataFrame(rows[:5])
 
 
