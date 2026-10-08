@@ -53,6 +53,8 @@ def main():
                 future_5d_pct=future(5),future_10d_pct=future(10),future_20d_pct=future(20),
                 research_only=True))
     assert all(x["confirmation_index"]>=x["pivot_index"] for x in out)
+    assert all(x["candidate_status_asof_confirmation"]=="CANDIDATE" for x in out)
+    assert all(x["confirmation_lag_bars"]>=0 for x in out)
     assert len({(x["symbol"],x["confirmation_index"],x["pivot_type"]) for x in out})==len(out)
     OUT.parent.mkdir(parents=True,exist_ok=True)
     with OUT.open("w",newline="") as f:
@@ -60,5 +62,5 @@ def main():
     report=ROOT/"ofts/validation/step4_acceptance.txt"
     report.write_text(f"STEP 4: RESEARCH DATASET GENERATED\\nStocks examined: {len(groups)}\\nEligible symbols: {len(eligible)}\\nConfirmed pivot events: {len(out)}\\nEvent file: ofts/validation/step4_fingerprint_events.csv\\nProduction approval: NOT GRANTED\\nSample size and future outcomes must be evaluated before model training.\\n")
     print("STEP4",len(groups),"stocks",len(eligible),"eligible",len(out),"events")
-    if not out:print("NO CONFIRMED EVENTS: INSUFFICIENT SAMPLE; NOT A SUCCESSFUL FINGERPRINT DATASET")
+    if not out: raise AssertionError("NO CONFIRMED EVENTS: insufficient sample; Step 4 FAIL")
 if __name__=="__main__":main()
