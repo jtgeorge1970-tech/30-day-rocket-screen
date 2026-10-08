@@ -136,8 +136,11 @@ def candidate_components(highs,lows,closes):
             "drift_resistance":drift_resistance(closes,deltas),
             "outlier_independence":outlier_independence(pcts),
             "capture":oscillation_capture(deltas,closes)}
+    saturated = scores["alternation"] >= 99.99 or scores["capture"] >= 99.99
     return {"turns":turns,"features":features,"components":scores,
-            "structural_quality":weighted_quality(scores)}
+            "structural_quality":weighted_quality(scores),
+            "production_eligible":False,
+            "reason":"Candidate not parity validated; mechanically inflated components" if saturated else "Candidate not parity validated"}
 
 def diagnostic_components(highs,lows,closes):
     """Research-only: exposes unvalidated metrics and saturation warnings.
