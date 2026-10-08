@@ -1,0 +1,24 @@
+name: OFTS independent full-universe worker
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: ofts-independent-worker
+  cancel-in-progress: false
+jobs:
+  verify-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate authoritative input and scoring implementation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f ofts/OFTS_MASTER_SSOT_FULL_UNIVERSE_5502.xlsx || { echo "::error::Authoritative 5502-symbol workbook is not committed to this repository"; exit 1; }
+          test -f ofts/locked_v22.py || { echo "::error::Locked v2.2 implementation not verified; refuse to invent scores"; exit 1; }
+          python -m pip install --upgrade pip
+          python ofts/locked_v22.py --help
