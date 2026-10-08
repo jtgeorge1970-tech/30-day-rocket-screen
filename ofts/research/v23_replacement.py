@@ -51,7 +51,7 @@ def _score(highs,lows,closes,threshold):
             "confirmed_turns":len(turns)}
 
 def evaluate(highs,lows,closes):
-    """206+ daily OHLC bars; recent window 90 bars; fail closed on missing evidence."""
+    """180+ daily OHLC bars; recent window 90 bars; fail closed on missing evidence."""
     if not(len(highs)==len(lows)==len(closes)) or len(closes)<180:
         raise ValueError("Requires 180+ matching daily OHLC bars")
     highs,lows,closes=([float(x) for x in seq] for seq in (highs,lows,closes))
