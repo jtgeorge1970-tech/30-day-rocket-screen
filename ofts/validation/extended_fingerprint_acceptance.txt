@@ -1,0 +1,1 @@
+Extended fingerprint events: 851\nSymbols: 13\nSymbols lacking 201 bars: CBRS\nAll event labels 20d available: True\nProduction authorization: NO\n
