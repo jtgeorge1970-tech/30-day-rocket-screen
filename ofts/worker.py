@@ -12,7 +12,7 @@ with universe.open(newline="",encoding="utf-8-sig") as fh:
 symbols=[(r.get("Symbol") or r.get("symbol") or r.get("Ticker") or "").strip().upper() for r in rows]
 if len(symbols)!=5502 or len(set(symbols))!=5502:
     raise SystemExit("INVALID_UNIVERSE")
-history=ROOT/"ofts/research/extended_history_ohlcv.csv"
+history=OUT/"universe_ohlcv.csv"\nif not history.exists(): raise SystemExit("MISSING_DOWNLOADED_HISTORY")
 with history.open(newline="",encoding="utf-8-sig") as fh:
     bars=list(csv.DictReader(fh))
 if not bars: raise SystemExit("EMPTY_HISTORY")
