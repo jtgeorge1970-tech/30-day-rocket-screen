@@ -138,3 +138,22 @@ def candidate_components(highs,lows,closes):
             "capture":oscillation_capture(deltas,closes)}
     return {"turns":turns,"features":features,"components":scores,
             "structural_quality":weighted_quality(scores)}
+
+def diagnostic_components(highs,lows,closes):
+    """Research-only: exposes unvalidated metrics and saturation warnings.
+
+    Deliberately does NOT issue a replacement v2.2 score.
+    """
+    result=candidate_components(highs,lows,closes)
+    comp=result["components"]
+    warnings=[]
+    if comp["alternation"]>=99.99:
+        warnings.append("alternation_mechanically_perfect_under_zigzag")
+    if comp["capture"]>=99.99:
+        warnings.append("capture_saturated")
+    if len(result["features"]["swings"])<4:
+        warnings.append("insufficient_swings_for_outlier_component")
+    return {"components":comp,"warnings":warnings,
+            "confirmed_swings":len(result["features"]["swings"]),
+            "candidate_structural":result["structural_quality"],
+            "approved_v22_score":None}
