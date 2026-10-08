@@ -39,8 +39,10 @@ def negative_controls():
         lows=[x*.99 for x in closes]
         r=evaluate(highs,lows,closes)
         out.append((name,r["status"],round(r.get("candidate_score",0),3),r.get("structural",{}).get("swings",0)))
-        if name=="monotonic_trend":
-            assert r["status"]!="CANDIDATE", "Trend negative control incorrectly passed"
+        if name in ("monotonic_trend","alternating_noise"):
+            assert r["status"]!="CANDIDATE", f"{name} negative control incorrectly passed"
+        if name=="regular_oscillation":
+            assert r["structural"]["swings"]>=4, "Regular oscillator was not detected"
     return out
 def main():
     grouped=read()
@@ -56,5 +58,6 @@ def main():
     for horizon in ("forward_5d_pct","forward_10d_pct","forward_20d_pct"):
         eligible=[x[horizon] for x in rows if x["status"]=="CANDIDATE"]
         print(horizon,"candidate_n",len(eligible),"mean_pct",round(statistics.mean(eligible),3) if eligible else "NA")
+    assert all(0<=v["score"]<=100 for v in rows), "Score outside 0-100 range"
     print("INTEGRATION TEST PASSED; PREDICTIVE VALIDITY NOT IMPLIED")
 if __name__=="__main__":main()
