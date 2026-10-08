@@ -1,0 +1,1 @@
+STEP 5 DIAGNOSTIC SCORING: PASS\nEvents scored: 28\nBUY scores: 15\nSELL scores: 13\n20-day labeled events: 4\nFeature/label leakage test: PASS\nPredictive training acceptance: BLOCKED - insufficient labeled history\nProduction signals: NONE; all ABSTAIN\nOutput: ofts/validation/step5_fingerprint_scores.csv\n
