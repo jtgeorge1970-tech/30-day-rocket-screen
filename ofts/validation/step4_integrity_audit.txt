@@ -1,0 +1,16 @@
+STEP 4 — VERIFIED RESEARCH DATASET ACCEPTANCE
+Status: PASS — dataset build and integrity; NOT sufficient for predictive training.
+Source: ofts/validation/step4_fingerprint_events.csv
+Records: 28
+Symbols with events: 12
+Pivot highs: 13
+Pivot lows: 15
+Duplicate (symbol, confirmation index, pivot type) records: 0
+Confirmation earlier than pivot: 0
+Ineligible status records: 0
+Confirmation lag range: 1–12 bars
+Missing 20-day forward outcomes: 24 of 28 (right-censored; do not impute)
+Research scope: 13 examined stocks; not the full 5,502-symbol universe.
+Result: Step 4 research dataset build COMPLETE.
+Restriction: Do not train or deploy a predictive fingerprint model from this limited sample. Expand event history before Step 5 statistical modeling.
+Audit: Derived from persisted GitHub event CSV; checked record counts, duplicate keys, chronology, status and label availability.
