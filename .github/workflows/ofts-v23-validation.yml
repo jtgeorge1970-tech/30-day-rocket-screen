@@ -1,0 +1,25 @@
+name: OFTS v2.3 Research Validation
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'ofts/research/v23_replacement.py'
+      - 'ofts/research/run_v23_controls.py'
+      - 'ofts/research/historical_controls_206bars_asof_2026-10-02.csv'
+      - '.github/workflows/ofts-v23-validation.yml'
+jobs:
+  controls:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run ten historical controls
+        run: python -m ofts.research.run_v23_controls
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ofts-v23-research-controls
+          path: ofts/validation/v23_candidate_results.csv
