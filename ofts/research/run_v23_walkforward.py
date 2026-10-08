@@ -59,5 +59,7 @@ def main():
         eligible=[x[horizon] for x in rows if x["status"]=="CANDIDATE"]
         print(horizon,"candidate_n",len(eligible),"mean_pct",round(statistics.mean(eligible),3) if eligible else "NA")
     assert all(0<=v["score"]<=100 for v in rows), "Score outside 0-100 range"
+    report=ROOT/"ofts/validation/step3_final_acceptance.txt"
+    report.write_text("STEP 3 RESEARCH VALIDATION: PASS\\n"+f"Historical controls: {len(grouped)}\\nWalk-forward observations: {len(rows)}\\nNegative controls: {len(controls)}\\n"+ "Predictive profitability: NOT ESTABLISHED\\nProduction authorization: BLOCKED\\n")
     print("INTEGRATION TEST PASSED; PREDICTIVE VALIDITY NOT IMPLIED")
 if __name__=="__main__":main()
