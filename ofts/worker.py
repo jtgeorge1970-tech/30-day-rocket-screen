@@ -1,21 +1,43 @@
 #!/usr/bin/env python3
-"""OFTS fail-closed data acquisition. This is NOT the locked v2.2 scorer."""
-import csv, json, os, pathlib, sys, time, urllib.request
-ROOT=pathlib.Path("ofts")
-SOURCE=ROOT/"universe.csv"
-OUT=pathlib.Path("ofts-output")
+"""OFTS v2.3 reproducible research worker. Never represents v2.2 or live BUY signals."""
+import csv,json,pathlib,sys
+from collections import defaultdict
+from ofts.research.v23_replacement import evaluate
+ROOT=pathlib.Path(__file__).resolve().parents[1]
+OUT=ROOT/"ofts-output"
 OUT.mkdir(exist_ok=True)
-if not SOURCE.exists():
-    print("INPUT_MISSING: ofts/universe.csv; no symbols processed",flush=True)
-    sys.exit(2)
-with SOURCE.open(newline="",encoding="utf-8-sig") as f:
-    rows=list(csv.DictReader(f))
+universe=ROOT/"ofts/universe.csv"
+with universe.open(newline="",encoding="utf-8-sig") as fh:
+    rows=list(csv.DictReader(fh))
 symbols=[(r.get("Symbol") or r.get("symbol") or r.get("Ticker") or "").strip().upper() for r in rows]
-symbols=[s for s in symbols if s]
 if len(symbols)!=5502 or len(set(symbols))!=5502:
-    raise SystemExit(f"Universe invalid: {len(symbols)} entries / {len(set(symbols))} unique")
-result={"universe":len(symbols),"stage":"INPUT_VALIDATED","v22_scores":0,"scoring_ready":(ROOT/"locked_v22.py").exists()}
-(OUT/"status.json").write_text(json.dumps(result,indent=2)+"\n")
-print(json.dumps(result),flush=True)
-if not result["scoring_ready"]:
-    raise SystemExit("LOCKED_V22_IMPLEMENTATION_MISSING: no fabricated scores")
+    raise SystemExit("INVALID_UNIVERSE")
+history=ROOT/"ofts/research/extended_history_ohlcv.csv"
+with history.open(newline="",encoding="utf-8-sig") as fh:
+    bars=list(csv.DictReader(fh))
+if not bars: raise SystemExit("EMPTY_HISTORY")
+print("HISTORY_COLUMNS",list(bars[0]))
+groups=defaultdict(list)
+for bar in bars:
+    s=(bar.get("symbol") or bar.get("Symbol") or "").upper().strip()
+    if s: groups[s].append(bar)
+results=[]
+for ix in range(5502):
+    sym=symbols[(ix*137)%5502]
+    data=groups.get(sym,[])
+    row={"run":ix+1,"symbol":sym,"bars":len(data),"status":"NO_USABLE_HISTORY","score":""}
+    if len(data)>=180:
+        try:
+            if "date" in data[0]: data=sorted(data,key=lambda r:r["date"])
+            score=evaluate(*[[float(b[k]) for b in data] for k in ("high","low","close")])
+            row.update(status=score["status"],score=score.get("candidate_score",""),version="v2.3-research")
+        except (ValueError,KeyError,TypeError) as e:
+            row.update(status="DATA_ERROR",error=str(e))
+    results.append(row)
+fields=["run","symbol","bars","status","score","version","error"]
+with (OUT/"v23_research_universe.csv").open("w",newline="") as fh:
+    w=csv.DictWriter(fh,fieldnames=fields,extrasaction="ignore");w.writeheader();w.writerows(results)
+status={"universe":5502,"rows_written":len(results),"candidate_scores":sum(isinstance(r["score"],(int,float)) for r in results),"version":"v2.3-research","production_approved":False,"history_symbols":len(groups)}
+(OUT/"status.json").write_text(json.dumps(status,indent=2)+"\n")
+print(json.dumps(status))
+if not status["candidate_scores"]: raise SystemExit("NO_RESEARCH_SCORES_FROM_AVAILABLE_HISTORY")
