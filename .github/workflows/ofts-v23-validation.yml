@@ -15,6 +15,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install historical data provider
+        run: python -m pip install yfinance
+      - name: Acquire multi-year market history
+        run: python -m ofts.research.acquire_extended_history
       - name: Python compile and 13-control regression
         run: |
           python -m compileall -q ofts/research
@@ -32,7 +36,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ofts/validation/v23_candidate_results.csv ofts/validation/v23_walkforward_results.csv ofts/validation/step3_final_acceptance.txt ofts/validation/step4_fingerprint_events.csv ofts/validation/step4_acceptance.txt ofts/validation/step5_fingerprint_scores.csv ofts/validation/step5_acceptance.txt ofts/validation/step6_7_outcomes.csv ofts/validation/step6_7_acceptance.txt
+          git add ofts/research/extended_history_ohlcv.csv ofts/validation/history_acquisition.txt ofts/validation/v23_candidate_results.csv ofts/validation/v23_walkforward_results.csv ofts/validation/step3_final_acceptance.txt ofts/validation/step4_fingerprint_events.csv ofts/validation/step4_acceptance.txt ofts/validation/step5_fingerprint_scores.csv ofts/validation/step5_acceptance.txt ofts/validation/step6_7_outcomes.csv ofts/validation/step6_7_acceptance.txt
           if ! git diff --cached --quiet; then
             git commit -m "OFTS v2.3 verified Python research results [skip ci]"
             git push
@@ -42,6 +46,8 @@ jobs:
         with:
           name: ofts-v23-research-results
           path: |
+            ofts/research/extended_history_ohlcv.csv
+            ofts/validation/history_acquisition.txt
             ofts/validation/v23_candidate_results.csv
             ofts/validation/v23_walkforward_results.csv
             ofts/validation/step3_final_acceptance.txt
