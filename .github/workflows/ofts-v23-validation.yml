@@ -19,6 +19,8 @@ jobs:
           python-version: '3.11'
       - name: Run ten historical controls
         run: python -m ofts.research.run_v23_controls
+      - name: Validate untouched holdout
+        run: python -m ofts.research.run_v23_holdout
       - uses: actions/upload-artifact@v4
         with:
           name: ofts-v23-research-controls
