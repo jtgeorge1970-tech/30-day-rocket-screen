@@ -11,7 +11,7 @@ result=[]
 for side in ("BUY","SELL"):
     for days in (5,10,20):
         field=f"future_{days}d_pct"
-        subset=[r for r in rows if r[field]!=" " and r[field]!=""]
+        subset=[r for r in rows if r[field].strip()!=""]
         subset=[r for r in subset if r["signal_side"]==side]
         sign=1 if side=="BUY" else -1
         vals=[sign*float(r[field]) for r in subset]
@@ -20,5 +20,5 @@ with dest.open("w",newline="") as f:
     w=csv.DictWriter(f,fieldnames=list(result[0]));w.writeheader();w.writerows(result)
 n20=sum(r["future_20d_pct"]!="" for r in rows)
 cbrs=any(r["symbol"]=="CBRS" for r in rows)
-report.write_text(f"Research events: {len(rows)}\\n20-day labeled: {n20}\\nCBRS present: {cbrs}\\nStep 6: {'REQUIRES DEDICATED CBRS TEST' if cbrs else 'BLOCKED - CBRS data absent'}\\nStep 7: BLOCKED - independent untouched validation not established\\nProduction authorization: NO\\n")
+report.write_text("\n".join(["Research events: "+str(len(rows)), "20-day labeled: "+str(n20), "CBRS present: "+str(cbrs), "Step 6: "+("REQUIRES DEDICATED CBRS TEST" if cbrs else "BLOCKED - CBRS data absent"), "Step 7: BLOCKED - independent untouched validation not established", "Production authorization: NO", ""]))
 print(report.read_text())
