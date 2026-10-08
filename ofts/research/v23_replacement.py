@@ -62,7 +62,11 @@ def evaluate(highs,lows,closes):
     structural=_score(highs,lows,closes,threshold)
     recent=_score(highs[-90:],lows[-90:],closes[-90:],threshold)
     blended=.75*structural["quality"]+.25*recent["quality"]
-    status="CANDIDATE" if structural["swings"]>=4 and recent["median_swing_pct"]>=11 else "REJECT_CANDIDATE_GATE"
+    # Reject daily flip-flop noise: confirmed pivots must have meaningful time separation.
+    recent_turns=detect_turns(closes[-90:],threshold)
+    pivot_intervals=[b[0]-a[0] for a,b in zip(recent_turns,recent_turns[1:])]
+    minimum_cadence=median(pivot_intervals)>=3 if pivot_intervals else False
+    status="CANDIDATE" if structural["swings"]>=4 and recent["median_swing_pct"]>=11 and minimum_cadence else "REJECT_CANDIDATE_GATE"
     return {"status":status,"production_eligible":False,"version":"v2.3-research",
             "threshold_pct":threshold,"structural":structural,"recent":recent,
             "candidate_score":blended,"ssot_parity_claim":False}
