@@ -5,6 +5,8 @@ on:
     paths:
       - 'ofts/research/v23_replacement.py'
       - 'ofts/research/run_v23_controls.py'
+      - 'ofts/research/run_v23_walkforward.py'
+      - 'ofts/research/run_v23_holdout.py'
       - 'ofts/research/historical_controls_206bars_asof_2026-10-02.csv'
       - '.github/workflows/ofts-v23-validation.yml'
 jobs:
@@ -21,7 +23,11 @@ jobs:
         run: python -m ofts.research.run_v23_controls
       - name: Validate untouched holdout
         run: python -m ofts.research.run_v23_holdout
+      - name: Run chronological walkforward and negative controls
+        run: python -m ofts.research.run_v23_walkforward
       - uses: actions/upload-artifact@v4
         with:
           name: ofts-v23-research-controls
-          path: ofts/validation/v23_candidate_results.csv
+          path: |
+            ofts/validation/v23_candidate_results.csv
+            ofts/validation/v23_walkforward_results.csv
