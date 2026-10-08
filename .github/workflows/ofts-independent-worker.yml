@@ -16,9 +16,13 @@ concurrency:
 jobs:
   ofts:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
+      - name: Install market-data provider
+        run: python -m pip install --quiet yfinance pandas
+      - name: Download daily OHLC for full universe
+        run: python -m ofts.fetch_universe_history
       - name: Score available historical universe (v2.3 research)
         run: python -m ofts.worker
       - name: Preserve status and checkpoints
