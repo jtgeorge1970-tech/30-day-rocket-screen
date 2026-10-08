@@ -38,6 +38,13 @@ for ix in range(5502):
 fields=["run","symbol","bars","status","score","version","error"]
 with (OUT/"v23_research_universe.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=fields,extrasaction="ignore");w.writeheader();w.writerows(results)
+ranked=sorted((r for r in results if isinstance(r["score"],(int,float))),key=lambda r:r["score"],reverse=True)
+with (OUT/"v23_research_ranked.csv").open("w",newline="") as fh:
+    w=csv.DictWriter(fh,fieldnames=["rank","symbol","score","status","bars","version"])
+    w.writeheader()
+    for rank,r in enumerate(ranked,1):
+        w.writerow({"rank":rank,**r})
+print("TOP_RESEARCH_RANKINGS",json.dumps([{"rank":i+1,"symbol":r["symbol"],"score":round(r["score"],3),"status":r["status"],"bars":r["bars"]} for i,r in enumerate(ranked[:25])]))
 status={"universe":5502,"rows_written":len(results),"candidate_scores":sum(isinstance(r["score"],(int,float)) for r in results),"version":"v2.3-research","production_approved":False,"history_symbols":len(groups)}
 (OUT/"status.json").write_text(json.dumps(status,indent=2)+"\n")
 print(json.dumps(status))
