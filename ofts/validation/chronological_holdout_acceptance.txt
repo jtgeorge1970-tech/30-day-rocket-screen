@@ -3,5 +3,9 @@ Research cohort symbols: 13
 Side-specific holdout rows: 24
 Selected rows with test observations: 11
 Selected positive test means: 6
+Selected BUY groups: 6
+Selected BUY positive test means: 5
+Selected SELL groups: 5
+Selected SELL positive test means: 1
 Independent untouched dataset: NOT ESTABLISHED
 Production approval: NO
