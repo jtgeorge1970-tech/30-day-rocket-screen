@@ -1,0 +1,7 @@
+side,horizon,count,win_rate,mean_directional_return
+BUY,5,13,0.3846,-2.7542
+BUY,10,9,0.7778,5.7363
+BUY,20,2,0.5,-4.9275
+SELL,5,9,0.2222,-16.9981
+SELL,10,9,0.2222,-13.5549
+SELL,20,2,0.0,-34.6026
