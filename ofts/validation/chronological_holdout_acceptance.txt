@@ -8,4 +8,6 @@ Selected BUY positive test means: 5
 Selected SELL groups: 5
 Selected SELL positive test means: 1
 Independent untouched dataset: NOT ESTABLISHED
+SELL research gate: REJECT - only 1/5 selected groups positive
+BUY research gate: PROMISING - NOT PRODUCTION APPROVED
 Production approval: NO
