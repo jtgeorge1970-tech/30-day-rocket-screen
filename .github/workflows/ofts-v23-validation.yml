@@ -48,4 +48,6 @@ jobs:
             ofts/validation/step4_fingerprint_events.csv
             ofts/validation/step4_acceptance.txt
             ofts/validation/step5_fingerprint_scores.csv
-            ofts/validation/step5_acceptance.txt ofts/validation/step6_7_outcomes.csv ofts/validation/step6_7_acceptance.txt
+            ofts/validation/step5_acceptance.txt
+            ofts/validation/step6_7_outcomes.csv
+            ofts/validation/step6_7_acceptance.txt
