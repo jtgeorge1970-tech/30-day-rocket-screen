@@ -1,1 +1,1 @@
-STEP 4: RESEARCH DATASET GENERATED\nStocks examined: 13\nEligible symbols: 13\nConfirmed pivot events: 28\nEvent file: ofts/validation/step4_fingerprint_events.csv\nProduction approval: NOT GRANTED\nSample size and future outcomes must be evaluated before model training.\n
+STEP 4: RESEARCH DATASET GENERATED\nStocks examined: 13\nEligible symbols: 13\nConfirmed pivot events: 25\nEvent file: ofts/validation/step4_fingerprint_events.csv\nProduction approval: NOT GRANTED\nSample size and future outcomes must be evaluated before model training.\n
