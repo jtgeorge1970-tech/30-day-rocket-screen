@@ -1,1 +1,6 @@
-Research events: 25\n20-day labeled: 4\nCBRS present: False\nStep 6: BLOCKED - CBRS data absent\nStep 7: BLOCKED - independent untouched validation not established\nProduction authorization: NO\n
+Research events: 25
+20-day labeled: 4
+CBRS present: False
+Step 6: BLOCKED - CBRS data absent
+Step 7: BLOCKED - independent untouched validation not established
+Production authorization: NO
