@@ -52,3 +52,89 @@ def weighted_quality(components):
 
 def blend(structural,recent):
     return .75*float(structural)+.25*float(recent)
+
+def atr_percent(highs,lows,closes,period=14):
+    """Candidate median true-range percent of close, over the latest period."""
+    n=len(closes)
+    if len(highs)!=n or len(lows)!=n or n<period+1:
+        raise ValueError("OHLC lengths mismatch or insufficient history")
+    ranges=[]
+    for i in range(1,n):
+        h,l,c,prev=map(float,(highs[i],lows[i],closes[i],closes[i-1]))
+        if min(h,l,c,prev)<=0 or h<l: raise ValueError("Invalid OHLC bar")
+        ranges.append(100*max(h-l,abs(h-prev),abs(l-prev))/prev)
+    return median(ranges[-period:])
+
+def adaptive_threshold(highs,lows,closes):
+    """CURRENT TEST, NOT LOCKED: 2.2 x median ATR%, bounded 6%-16%."""
+    return min(16.0,max(6.0,2.2*atr_percent(highs,lows,closes)))
+
+def detect_turns(closes,threshold_pct):
+    """Candidate percentage-reversal ZigZag, confirmed turns only.
+
+    Each pivot is (index, 'H'|'L', price); never uses a future pivot
+    without the requisite reversal. The last unconfirmed extreme is omitted.
+    """
+    prices=[float(x) for x in closes]
+    if len(prices)<3 or any(x<=0 for x in prices):
+        raise ValueError("At least 3 positive closes required")
+    if not 0<float(threshold_pct)<100: raise ValueError("Invalid threshold")
+    threshold=float(threshold_pct)/100
+    turns=[]
+    low_i=high_i=0
+    low=high=prices[0]
+    direction=0
+    for i,p in enumerate(prices[1:],1):
+        if direction==0:
+            if p<low: low,low_i=p,i
+            if p>high: high,high_i=p,i
+            if low_i<high_i and high/low-1>=threshold:
+                turns.append((low_i,"L",low))
+                direction=1
+                high,high_i=p,i
+            elif high_i<low_i and 1-low/high>=threshold:
+                turns.append((high_i,"H",high))
+                direction=-1
+                low,low_i=p,i
+        elif direction==1:
+            if p>high: high,high_i=p,i
+            elif 1-p/high>=threshold:
+                turns.append((high_i,"H",high))
+                direction=-1
+                low,low_i=p,i
+        else:
+            if p<low: low,low_i=p,i
+            elif p/low-1>=threshold:
+                turns.append((low_i,"L",low))
+                direction=1
+                high,high_i=p,i
+    return turns
+
+def swing_features(turns):
+    """Candidate swing percentages and same-side timing intervals."""
+    swings=[]
+    for a,b in zip(turns,turns[1:]):
+        if a[1]==b[1] or b[0]<=a[0]: raise ValueError("Invalid pivot sequence")
+        swings.append({"start":a[0],"end":b[0],"kind":"UP" if a[1]=="L" else "DOWN",
+                       "pct":100*abs(b[2]/a[2]-1),"price_delta":b[2]-a[2]})
+    highs=[p[0] for p in turns if p[1]=="H"]
+    lows=[p[0] for p in turns if p[1]=="L"]
+    return {"swings":swings,"peak_intervals":[b-a for a,b in zip(highs,highs[1:])],
+            "trough_intervals":[b-a for a,b in zip(lows,lows[1:])]}
+
+def candidate_components(highs,lows,closes):
+    """All seven candidate scores; does not imply locked v2.2 equivalence."""
+    turns=detect_turns(closes,adaptive_threshold(highs,lows,closes))
+    features=swing_features(turns)
+    swings=features["swings"]
+    pcts=[x["pct"] for x in swings]
+    deltas=[x["price_delta"] for x in swings]
+    scores={"amplitude":robust_consistency(pcts),
+            "peak_timing":robust_consistency(features["peak_intervals"]),
+            "trough_timing":robust_consistency(features["trough_intervals"]),
+            "alternation":alternation_purity([x[1] for x in turns]),
+            "drift_resistance":drift_resistance(closes,deltas),
+            "outlier_independence":outlier_independence(pcts),
+            "capture":oscillation_capture(deltas,closes)}
+    return {"turns":turns,"features":features,"components":scores,
+            "structural_quality":weighted_quality(scores)}
