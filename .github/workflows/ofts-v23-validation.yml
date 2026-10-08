@@ -32,6 +32,8 @@ jobs:
         run: python -m ofts.research.build_extended_fingerprints
       - name: Rank historical BUY/SELL outcomes
         run: python -m ofts.research.rank_extended_symbols
+      - name: Run chronological holdout validation
+        run: python -m ofts.research.chronological_holdout
       - name: Build Step 5 BUY/SELL research fingerprints
         run: python -m ofts.research.run_step5_fingerprints
       - name: Audit Step 6 and 7 outcomes
@@ -40,7 +42,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ofts/validation/extended_symbol_results.csv ofts/validation/extended_symbol_summary.txt ofts/validation/extended_fingerprint_events.csv ofts/validation/extended_fingerprint_acceptance.txt ofts/research/extended_history_ohlcv.csv ofts/validation/history_acquisition.txt ofts/validation/v23_candidate_results.csv ofts/validation/v23_walkforward_results.csv ofts/validation/step3_final_acceptance.txt ofts/validation/step4_fingerprint_events.csv ofts/validation/step4_acceptance.txt ofts/validation/step5_fingerprint_scores.csv ofts/validation/step5_acceptance.txt ofts/validation/step6_7_outcomes.csv ofts/validation/step6_7_acceptance.txt
+          git add ofts/validation/chronological_holdout_results.csv ofts/validation/chronological_holdout_acceptance.txt ofts/validation/extended_symbol_results.csv ofts/validation/extended_symbol_summary.txt ofts/validation/extended_fingerprint_events.csv ofts/validation/extended_fingerprint_acceptance.txt ofts/research/extended_history_ohlcv.csv ofts/validation/history_acquisition.txt ofts/validation/v23_candidate_results.csv ofts/validation/v23_walkforward_results.csv ofts/validation/step3_final_acceptance.txt ofts/validation/step4_fingerprint_events.csv ofts/validation/step4_acceptance.txt ofts/validation/step5_fingerprint_scores.csv ofts/validation/step5_acceptance.txt ofts/validation/step6_7_outcomes.csv ofts/validation/step6_7_acceptance.txt
           if ! git diff --cached --quiet; then
             git commit -m "OFTS v2.3 verified Python research results [skip ci]"
             git push
@@ -50,6 +52,8 @@ jobs:
         with:
           name: ofts-v23-research-results
           path: |
+            ofts/validation/chronological_holdout_results.csv
+            ofts/validation/chronological_holdout_acceptance.txt
             ofts/validation/extended_symbol_results.csv
             ofts/validation/extended_symbol_summary.txt
             ofts/validation/extended_fingerprint_events.csv
