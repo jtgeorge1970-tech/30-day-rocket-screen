@@ -21,6 +21,7 @@ def main():
     assert len(groups)==13
     out=[]
     eligible=set()
+    seen_pivots=set()
     for symbol,bars in sorted(groups.items()):
         assert len(bars)==206,(symbol,len(bars))
         h=[float(x["high"]) for x in bars];l=[float(x["low"]) for x in bars];c=[float(x["close"]) for x in bars]
@@ -38,6 +39,11 @@ def main():
             # at this observation under the SAME threshold on the prior day.
             if pivot in detect_turns(c[:end-1],threshold):continue
             pidx,kind,price=pivot
+            # One historical pivot is one event, even if ATR recalibration
+            # causes it to reappear with a different confirmation date.
+            pivot_key=(symbol,pidx,kind)
+            if pivot_key in seen_pivots:continue
+            seen_pivots.add(pivot_key)
             prior=pts[-2] if len(pts)>1 else None
             preceding_pct=100*abs(price/prior[2]-1) if prior else None
             preceding_bars=pidx-prior[0] if prior else None
@@ -55,12 +61,12 @@ def main():
     assert all(x["confirmation_index"]>=x["pivot_index"] for x in out)
     assert all(x["candidate_status_asof_confirmation"]=="CANDIDATE" for x in out)
     assert all(x["confirmation_lag_bars"]>=0 for x in out)
-    assert len({(x["symbol"],x["confirmation_index"],x["pivot_type"]) for x in out})==len(out)
+    assert len({(x["symbol"],x["pivot_index"],x["pivot_type"]) for x in out})==len(out)
     OUT.parent.mkdir(parents=True,exist_ok=True)
     with OUT.open("w",newline="") as f:
         w=csv.DictWriter(f,fieldnames=FIELDS);w.writeheader();w.writerows(out)
     report=ROOT/"ofts/validation/step4_acceptance.txt"
-    report.write_text(f"STEP 4: RESEARCH DATASET GENERATED\\nStocks examined: {len(groups)}\\nEligible symbols: {len(eligible)}\\nConfirmed pivot events: {len(out)}\\nEvent file: ofts/validation/step4_fingerprint_events.csv\\nProduction approval: NOT GRANTED\\nSample size and future outcomes must be evaluated before model training.\\n")
+    report.write_text(f"STEP 4: RESEARCH DATASET GENERATED\nStocks examined: {len(groups)}\nEligible symbols: {len(eligible)}\nConfirmed pivot events: {len(out)}\nEvent file: ofts/validation/step4_fingerprint_events.csv\nProduction approval: NOT GRANTED\nSample size and future outcomes must be evaluated before model training.\n")
     print("STEP4",len(groups),"stocks",len(eligible),"eligible",len(out),"events")
     if not out: raise AssertionError("NO CONFIRMED EVENTS: insufficient sample; Step 4 FAIL")
 if __name__=="__main__":main()
