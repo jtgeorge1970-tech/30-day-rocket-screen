@@ -15,7 +15,7 @@ def eval_rows(rows):
 def rolling(symbol,rows):
     # Score only with bars observable as of the signal date; forward returns are never inputs.
     out=[]
-    for end in range(180,len(rows)-20,5):
+    for end in range(180,len(rows)-19,5):
         x=eval_rows(rows[:end])
         entry=float(rows[end-1]["close"])
         if entry<=0: continue
