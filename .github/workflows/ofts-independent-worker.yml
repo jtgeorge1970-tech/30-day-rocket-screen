@@ -21,6 +21,15 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install market-data provider
         run: python -m pip install --quiet yfinance pandas
+      - name: Restore historical OHLC checkpoints
+        uses: actions/cache@v4
+        with:
+          path: |
+            ofts-output/universe_ohlcv.csv
+            ofts-output/download_completed.txt
+          key: ofts-history-${{ github.run_id }}
+          restore-keys: |
+            ofts-history-
       - name: Download daily OHLC for full universe
         run: python -m ofts.fetch_universe_history
       - name: Score available historical universe (v2.3 research)
