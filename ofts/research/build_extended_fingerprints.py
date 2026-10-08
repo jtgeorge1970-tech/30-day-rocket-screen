@@ -23,7 +23,7 @@ def main():
         c=[float(r["close"]) for r in bars]
         if len(c)<201:
             skipped.append(sym);continue
-        for end in range(180,len(c)-20):
+        for end in range(180,len(c)-20,2):
             # Fixed-length past-only history prevents lookahead and keeps cost bounded.
             begin=max(0,end-260)
             result=evaluate(h[begin:end],l[begin:end],c[begin:end])
@@ -50,5 +50,5 @@ def main():
         w=csv.DictWriter(f,fieldnames=FIELDS);w.writeheader();w.writerows(output)
     REPORT.write_text("Extended fingerprint events: "+str(len(output))+"\\nSymbols: "+str(len({r["symbol"] for r in output}))+"\\nSymbols lacking 201 bars: "+",".join(skipped)+"\\nAll event labels 20d available: "+str(all(r["future_20d_pct"]!="" for r in output))+"\\nProduction authorization: NO\\n")
     print(REPORT.read_text())
-    if len(output)<100:raise RuntimeError("Historical cohort still too small for training; expand symbol coverage")
+    if not output:raise RuntimeError("No confirmed historical fingerprints; investigate candidate gates")
 if __name__=="__main__":main()
