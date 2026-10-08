@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Validate universe and run only verified locked scoring
-        run: python ofts/worker.py
+        run: python -m ofts.worker
       - name: Preserve status and checkpoints
         if: always()
         uses: actions/upload-artifact@v4
