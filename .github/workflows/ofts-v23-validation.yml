@@ -3,31 +3,38 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'ofts/research/v23_replacement.py'
-      - 'ofts/research/run_v23_controls.py'
-      - 'ofts/research/run_v23_walkforward.py'
-      - 'ofts/research/run_v23_holdout.py'
-      - 'ofts/research/historical_controls_206bars_asof_2026-10-02.csv'
+      - 'ofts/research/**'
       - '.github/workflows/ofts-v23-validation.yml'
 jobs:
   controls:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Run ten historical controls
-        run: python -m ofts.research.run_v23_controls
-      - name: Validate untouched holdout
-        run: python -m ofts.research.run_v23_holdout
-      - name: Run chronological walkforward and negative controls
+      - name: Python compile and 13-control regression
+        run: |
+          python -m compileall -q ofts/research
+          python -m ofts.research.run_v23_controls
+          python -m ofts.research.run_v23_holdout
+      - name: Walk-forward and negative controls
         run: python -m ofts.research.run_v23_walkforward
+      - name: Commit validated research outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ofts/validation/v23_candidate_results.csv ofts/validation/v23_walkforward_results.csv
+          if ! git diff --cached --quiet; then
+            git commit -m "OFTS v2.3 verified Python research results [skip ci]"
+            git push
+          fi
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: ofts-v23-research-controls
+          name: ofts-v23-research-results
           path: |
             ofts/validation/v23_candidate_results.csv
             ofts/validation/v23_walkforward_results.csv
