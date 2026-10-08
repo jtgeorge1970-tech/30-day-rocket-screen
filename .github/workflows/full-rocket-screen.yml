@@ -1,0 +1,43 @@
+name: Full Quality Loser Reversal Screen
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  full-screen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run tests
+        run: python -m unittest discover -s tests -v
+      - name: Run full 5,000+ stock screen
+        run: python rocket_screen.py
+      - name: Validate every funnel invariant
+        run: python validate_run.py
+      - name: Run strict 30-session loser cohort study
+        run: python loser_cohort_study.py
+      - name: Validate cohort study invariants
+        run: python validate_cohort_study.py
+      - name: Upload complete audit output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-loser-reversal-v2
+          path: output/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload loser cohort study
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: loser-cohort-fingerprint-study
+          path: cohort_output/
+          if-no-files-found: error
+          retention-days: 30
