@@ -66,7 +66,7 @@ def main():
     with OUT.open("w",newline="") as f:
         w=csv.DictWriter(f,fieldnames=FIELDS);w.writeheader();w.writerows(out)
     report=ROOT/"ofts/validation/step4_acceptance.txt"
-    report.write_text(f"STEP 4: RESEARCH DATASET GENERATED\nStocks examined: {len(groups)}\nEligible symbols: {len(eligible)}\nConfirmed pivot events: {len(out)}\nEvent file: ofts/validation/step4_fingerprint_events.csv\nProduction approval: NOT GRANTED\nSample size and future outcomes must be evaluated before model training.\n")
+    report.write_text(f"STEP 4: RESEARCH DATASET GENERATED\\nStocks examined: {len(groups)}\\nEligible symbols: {len(eligible)}\\nConfirmed pivot events: {len(out)}\\nEvent file: ofts/validation/step4_fingerprint_events.csv\\nProduction approval: NOT GRANTED\\nSample size and future outcomes must be evaluated before model training.\\n")
     print("STEP4",len(groups),"stocks",len(eligible),"eligible",len(out),"events")
     if not out: raise AssertionError("NO CONFIRMED EVENTS: insufficient sample; Step 4 FAIL")
 if __name__=="__main__":main()
