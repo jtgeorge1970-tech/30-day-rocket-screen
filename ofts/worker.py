@@ -40,7 +40,7 @@ with (OUT/"v23_research_universe.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=fields,extrasaction="ignore");w.writeheader();w.writerows(results)
 ranked=sorted((r for r in results if isinstance(r["score"],(int,float))),key=lambda r:r["score"],reverse=True)
 with (OUT/"v23_research_ranked.csv").open("w",newline="") as fh:
-    w=csv.DictWriter(fh,fieldnames=["rank","symbol","score","status","bars","version"])
+    w=csv.DictWriter(fh,fieldnames=["rank","symbol","score","status","bars","version"],extrasaction="ignore")
     w.writeheader()
     for rank,r in enumerate(ranked,1):
         w.writerow({"rank":rank,**r})
