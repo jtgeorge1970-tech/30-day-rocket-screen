@@ -1,5 +1,10 @@
 name: OFTS independent full-universe worker
 on:
+  push:
+    paths:
+      - 'ofts/worker.py'
+      - 'ofts/research/**'
+      - '.github/workflows/ofts-independent-worker.yml'
   workflow_dispatch:
   schedule:
     - cron: '*/15 * * * *'
@@ -14,7 +19,7 @@ jobs:
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
-      - name: Validate universe and run only verified locked scoring
+      - name: Score available historical universe (v2.3 research)
         run: python -m ofts.worker
       - name: Preserve status and checkpoints
         if: always()
