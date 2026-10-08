@@ -33,6 +33,8 @@ def main():
     with OUT.open("w",newline="") as f:
         w=csv.DictWriter(f,fieldnames=list(results[0]));w.writeheader();w.writerows(results)
     selected=[r for r in results if r["selected_by_train"] and r["test_events"]]
-    REPORT.write_text("\n".join(["Chronological 70/30 holdout with 20-bar embargo","Research cohort symbols: "+str(len(bysymbol)),"Side-specific holdout rows: "+str(len(results)),"Selected rows with test observations: "+str(len(selected)),"Selected positive test means: "+str(sum(r["test_mean_20d_pct"]>0 for r in selected)),"Independent untouched dataset: NOT ESTABLISHED","Production approval: NO",""]))
+    buy=[r for r in selected if r["side"]=="BUY"]
+    sell=[r for r in selected if r["side"]=="SELL"]
+    REPORT.write_text("\n".join(["Chronological 70/30 holdout with 20-bar embargo","Research cohort symbols: "+str(len(bysymbol)),"Side-specific holdout rows: "+str(len(results)),"Selected rows with test observations: "+str(len(selected)),"Selected positive test means: "+str(sum(r["test_mean_20d_pct"]>0 for r in selected)),"Selected BUY groups: "+str(len(buy)),"Selected BUY positive test means: "+str(sum(r["test_mean_20d_pct"]>0 for r in buy)),"Selected SELL groups: "+str(len(sell)),"Selected SELL positive test means: "+str(sum(r["test_mean_20d_pct"]>0 for r in sell)),"Independent untouched dataset: NOT ESTABLISHED","Production approval: NO",""]))
     print(REPORT.read_text())
 if __name__=="__main__":main()
