@@ -1,0 +1,7 @@
+Chronological 70/30 holdout with 20-bar embargo
+Research cohort symbols: 13
+Side-specific holdout rows: 24
+Selected rows with test observations: 11
+Selected positive test means: 6
+Independent untouched dataset: NOT ESTABLISHED
+Production approval: NO
