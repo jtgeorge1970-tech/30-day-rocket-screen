@@ -1,0 +1,78 @@
+name: OFTS full-universe identity-aware rescore
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'ofts/worker.py'
+      - 'ofts/research/security_regimes.py'
+      - '.github/workflows/ofts-full-universe-identity-rescore.yml'
+permissions:
+  contents: read
+jobs:
+  identity-rescore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Restore original full-universe market-data cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ofts-output/universe_ohlcv.csv
+            ofts-output/download_completed.txt
+          key: ofts-history-identity-audit
+          restore-keys: |
+            ofts-history-
+      - name: Require original historical data, never fabricate
+        run: |
+          test -s ofts-output/universe_ohlcv.csv
+          test -s ofts-output/download_completed.txt
+      - name: Rescore full 5502 universe using verified identity boundaries
+        run: python -m ofts.worker
+      - name: Verify invalid historical IQMX leader was excluded
+        run: |
+          python - <<'PY'
+          import csv, json
+          from pathlib import Path
+          root = Path('ofts-output')
+          rows = list(csv.DictReader((root/'v23_research_universe.csv').open()))
+          ranked = list(csv.DictReader((root/'v23_research_ranked.csv').open()))
+          assert len(rows) == 5502, len(rows)
+          iqmx = next(r for r in rows if r['symbol'] == 'IQMX')
+          assert int(iqmx['raw_bars']) > int(iqmx['bars']), iqmx
+          assert iqmx['regime_start'] == '2026-07-02', iqmx
+          assert iqmx['status'] == 'INSUFFICIENT_POST_REGIME_HISTORY', iqmx
+          assert iqmx['score'] == '', iqmx
+          assert all(r['symbol'] != 'IQMX' for r in ranked), 'INVALID_IQMX_LEADER_RETAINED'
+          report = {
+            'universe': len(rows),
+            'scores': len(ranked),
+            'identity_boundary_iqmx': iqmx,
+            'top25': ranked[:25],
+            'research_only': True,
+            'production_approved': False,
+            'history_provenance': 'restored original full-universe GitHub Actions cache',
+          }
+          (root/'identity_rescore_report.json').write_text(json.dumps(report,indent=2)+'\n')
+          print('IDENTITY_GATE_VERIFIED', json.dumps(report))
+          with open(__import__('os').environ['GITHUB_STEP_SUMMARY'], 'a') as f:
+              f.write('# OFTS identity-aware full-universe rescore\n\n')
+              f.write('IQMX excluded: '+iqmx['status']+'; post-event bars '+iqmx['bars']+' of '+iqmx['raw_bars']+' raw.\n\n')
+              f.write('Top 10 research rankings (not BUY signals):\n\n')
+              for r in ranked[:10]:
+                  f.write('- '+r['rank']+' '+r['symbol']+' '+r['score']+' ('+r['status']+')\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ofts-identity-rescored-${{ github.run_id }}
+          path: |
+            ofts-output/v23_research_universe.csv
+            ofts-output/v23_research_ranked.csv
+            ofts-output/status.json
+            ofts-output/identity_rescore_report.json
+          if-no-files-found: warn
+          retention-days: 90
