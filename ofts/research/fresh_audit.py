@@ -101,14 +101,30 @@ def main():
         else:
             results.append(dict(symbol=symbol,status="DATA_ERROR",error=last_error,verified_trade_candidate=False))
             print("FRESH_AUDIT_ERROR",symbol,last_error,flush=True)
-    # A large historical score must not outrank a failing current health gate.\n    # Eligibility remains separate and is never imputed from price history.\n    for row in results:\n        if "error" in row: row["current_keeper_status"]="DATA_ERROR"\n        elif row["viability"] in ("DISSIPATING","FADING","CYCLE_TIMING","TOO_SMALL","TOO_SMALL_UPSIDE","STALE_SWINGS","STALE_UPSIDE","FOOLS_GOLD"):\n            row["current_keeper_status"]="REJECT_OSCILLATION_HEALTH"\n        elif row["entry_state"] in ("BREAKDOWN_NO_TRADE","FALLING_WAIT","STALE_DATA"):\n            row["current_keeper_status"]="WATCH_ENTRY_NOT_READY"\n        elif row["quality_v06"] is None:\n            row["current_keeper_status"]="INSUFFICIENT_QUALITY"\n        else: row["current_keeper_status"]="RESEARCH_KEEPER_NOT_VERIFIED_BUY"\n    ranked=sorted((row for row in results if row["current_keeper_status"]=="RESEARCH_KEEPER_NOT_VERIFIED_BUY"),\n                  key=lambda row:row["quality_v06"],reverse=True)\n    for i,row in enumerate(ranked,1):row["fresh_research_rank"]=i\n    out=dict(version="v0.8-fresh-independent-audit",target_session=target,
+    # A large historical score must not outrank a failing current health gate.
+    # Eligibility remains separate and is never imputed from price history.
+    for row in results:
+        if "error" in row: row["current_keeper_status"]="DATA_ERROR"
+        elif row["viability"] in ("DISSIPATING","FADING","CYCLE_TIMING","TOO_SMALL","TOO_SMALL_UPSIDE","STALE_SWINGS","STALE_UPSIDE","FOOLS_GOLD"):
+            row["current_keeper_status"]="REJECT_OSCILLATION_HEALTH"
+        elif row["entry_state"] in ("BREAKDOWN_NO_TRADE","FALLING_WAIT","STALE_DATA"):
+            row["current_keeper_status"]="WATCH_ENTRY_NOT_READY"
+        elif row["quality_v06"] is None:
+            row["current_keeper_status"]="INSUFFICIENT_QUALITY"
+        else: row["current_keeper_status"]="RESEARCH_KEEPER_NOT_VERIFIED_BUY"
+    ranked=sorted((row for row in results if row["current_keeper_status"]=="RESEARCH_KEEPER_NOT_VERIFIED_BUY"),
+                  key=lambda row:row["quality_v06"],reverse=True)
+    for i,row in enumerate(ranked,1):row["fresh_research_rank"]=i
+    out=dict(version="v0.8-fresh-independent-audit",target_session=target,
              research_symbols=[r["symbol"] for r in research],
              controls=controls,source="yfinance, independent fresh provider requests",
-             data_errors=sum("error" in r for r in results),\n             current_research_keepers=len(ranked),fresh_research_ranked=[r["symbol"] for r in ranked],
+             data_errors=sum("error" in r for r in results),
+             current_research_keepers=len(ranked),fresh_research_ranked=[r["symbol"] for r in ranked],
              records=results,production_approved=False,
              note="Current data plus independent 30/60/126/252-day chart-shape audits; no trading BUY")
     pathlib.Path(args.output).parent.mkdir(parents=True,exist_ok=True)
-    pathlib.Path(args.output).write_text(json.dumps(out,indent=2)+"\n")
+    pathlib.Path(args.output).write_text(json.dumps(out,indent=2)+"
+")
     with open(pathlib.Path(args.output).with_suffix(".csv"),"w",newline="") as f:
         keys=["symbol","asof","close","score_v23","quality_v06","eligibility","current_keeper_status","fresh_research_rank","swing_health",
               "viability","entry_state","entry_5d_pct","entry_20d_pct","status","error",
@@ -124,7 +140,11 @@ def main():
                             f"w{n}_swing_pct":win.get("high_low_range_pct"),
                             f"w{n}_up_legs":win.get("confirmed_up_legs")})
             w.writerow(row)
-    with open(pathlib.Path(args.output).with_name("fresh_oscillator_keepers.csv"),"w",newline="") as f:\n        keys=["fresh_research_rank","symbol","asof","close","quality_v06","score_v23","viability","entry_state","eligibility","current_keeper_status"]\n        w=csv.DictWriter(f,fieldnames=keys,extrasaction="ignore");w.writeheader();w.writerows(ranked)\n    print("FRESH_RESEARCH_KEEPERS",json.dumps([{"rank":r["fresh_research_rank"],"symbol":r["symbol"],"score":r["quality_v06"],"viability":r["viability"],"entry":r["entry_state"]} for r in ranked]),flush=True)\n    print("FRESH_AUDIT_SUMMARY",json.dumps({"target":target,"total":len(names),
+    with open(pathlib.Path(args.output).with_name("fresh_oscillator_keepers.csv"),"w",newline="") as f:
+        keys=["fresh_research_rank","symbol","asof","close","quality_v06","score_v23","viability","entry_state","eligibility","current_keeper_status"]
+        w=csv.DictWriter(f,fieldnames=keys,extrasaction="ignore");w.writeheader();w.writerows(ranked)
+    print("FRESH_RESEARCH_KEEPERS",json.dumps([{"rank":r["fresh_research_rank"],"symbol":r["symbol"],"score":r["quality_v06"],"viability":r["viability"],"entry":r["entry_state"]} for r in ranked]),flush=True)
+    print("FRESH_AUDIT_SUMMARY",json.dumps({"target":target,"total":len(names),
         "fresh":len(names)-out["data_errors"],"errors":out["data_errors"]}),flush=True)
     # Never silently pass a missing data feed.
     if out["data_errors"]:raise SystemExit("FRESH_AUDIT_INCOMPLETE")
