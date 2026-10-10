@@ -161,6 +161,19 @@ print("V06_OPPORTUNITY_RESEARCH_TOP",json.dumps([
     {"rank":i+1,"symbol":r["symbol"],"score_out_of_80":r["opportunity_v06_score"],
      "old_v23_score":round(r["score"],3),"eligibility":r["opportunity_v06_eligibility"]}
     for i,r in enumerate(opportunity_ranked[:25])]))
+# The current actionable shortlist is deliberately empty until every required gate
+# is verified on fresh dated data; stale research names remain audit-visible.
+current_ready=[r for r in opportunity_ranked
+    if r.get("entry_v07_state")=="REVERSAL_REVIEW"
+    and r.get("opportunity_v06_eligibility")=="PASS"
+    and r.get("opportunity_v06_status")=="COMPLETE"]
+with (OUT/"v07_current_verified_trading_candidates.csv").open("w",newline="") as fh:
+    w=csv.DictWriter(fh,fieldnames=["rank","symbol","opportunity_v06_score",
+        "opportunity_v06_eligibility","entry_v07_state","entry_v07_asof",
+        "entry_v07_close","entry_v07_return5"],extrasaction="ignore")
+    w.writeheader()
+    for i,r in enumerate(current_ready,1): w.writerow({"rank":i,**r})
+print("V07_CURRENT_VERIFIED_TRADING_CANDIDATES",len(current_ready))
 print("V07_ENTRY_DIAGNOSTIC",json.dumps([{"symbol":r["symbol"],"entry_state":r.get("entry_v07_state"),"asof":r.get("entry_v07_asof"),"close":r.get("entry_v07_close"),"five_day_pct":r.get("entry_v07_return5")} for r in opportunity_ranked[:25]]))
 print("V06_VERIFIED_ELIGIBLE",0,"market_cap_and_liquidity_data_not_present_in_OHLCV")
 print("V06_EXCLUDED_INELIGIBLE",json.dumps([{"symbol":r["symbol"],"reason":json.loads(r["opportunity_v06_json"]).get("eligibility_evidence",{}).get("reason")} for r in viable if r.get("opportunity_v06_eligibility")=="INELIGIBLE"]))
