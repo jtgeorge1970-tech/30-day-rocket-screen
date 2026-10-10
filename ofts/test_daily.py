@@ -13,7 +13,7 @@ from ofts.daily import (save_history, read_history, merge_history, refresh,
                         frozen_snapshot, outcomes, completed_session, market_schedule,
                         snapshot_is_qualified, load_qualified_snapshots,
                         cycle_fingerprint, current_signal_state,
-                        signal_snapshot_complete)
+                        signal_snapshot_complete, score_interpretation)
 
 
 def bar(date, close=100, split=0):
@@ -78,6 +78,16 @@ class PersistenceTests(unittest.TestCase):
         # Repeating the same as-of slice must be deterministic; later bars are
         # never supplied to the function and cannot rewrite the fingerprint.
         self.assertEqual(fp, cycle_fingerprint(closes, result['threshold_pct'], result['structural']))
+
+    def test_score_scale_has_no_invented_buy_threshold(self):
+        status = score_interpretation([
+            {'score': 39.9}, {'score': 44.6}, {'score': 62.584}, {'score': 80}])
+        self.assertEqual(status['theoretical_scale_max'], 100)
+        self.assertEqual(status['observed_max'], 80)
+        self.assertIsNone(status['validated_buy_threshold'])
+        self.assertEqual(status['system_actionability_gate'], 'RESEARCH_ONLY_NO_GO')
+        self.assertEqual(status['distribution']['40_TO_49_999'], 1)
+        self.assertEqual(status['distribution']['80_TO_89_999'], 1)
 
     def test_partial_signal_snapshot_fails_completeness_gate(self):
         partial = {'rows': [{'symbol': 'A', 'signal': {'state': 'NO_TRADE'}}, {'symbol': 'B'}]}
