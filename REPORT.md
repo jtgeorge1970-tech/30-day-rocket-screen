@@ -5,7 +5,7 @@ Selected: 125; refreshed: 124; refresh errors: 1
 Qualified prediction cohorts saved: 1; current coverage: 124/125
 Outcome counts: {'INELIGIBLE_DATA': 20, 'PENDING': 605}
 Cycle fingerprints saved: 97/125
-Signal states: BUY=1, SELL=0, NO_TRADE=120
+Signal states: BUY=1, SELL=0, NO_TRADE=124
 Production approval: NO. These are quality scores, not BUY signals.
 Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.
 Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.
