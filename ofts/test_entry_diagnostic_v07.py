@@ -29,6 +29,17 @@ class TestEntryDiagnostic(unittest.TestCase):
         c=[9.0]*30
         r=entry_diagnostic(c,dates(len(c),date(2026,10,20)),today=date(2026,10,10))
         self.assertEqual(r['state'],'STALE_DATA')
+    def test_wednesday_cache_is_stale_on_saturday(self):
+        c=[9.0]*30
+        r=entry_diagnostic(c,dates(30,date(2026,10,7)),today=date(2026,10,10))
+        self.assertEqual(r['trading_session_lag'],2)
+        self.assertEqual(r['state'],'STALE_DATA')
+        self.assertFalse(r['entry_confirmed'])
+    def test_friday_data_is_current_on_saturday(self):
+        c=[9.0]*30
+        r=entry_diagnostic(c,dates(30,date(2026,10,9)),today=date(2026,10,10))
+        self.assertEqual(r['trading_session_lag'],0)
+        self.assertNotEqual(r['state'],'STALE_DATA')
     def test_short(self):
         self.assertEqual(entry_diagnostic([9.0]*5,dates(5),today=date(2026,10,10))['state'],'INSUFFICIENT_DATA')
 if __name__=='__main__': unittest.main()
