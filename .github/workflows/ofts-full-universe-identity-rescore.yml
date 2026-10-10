@@ -60,11 +60,14 @@ jobs:
           shortlist=list(csv.DictReader((root/'v23_research_recent_viability_shortlist.csv').open()))
           assert all(r['combined_research_entry']=='REVIEW' and r['status']=='CANDIDATE' for r in shortlist), 'INVALID_REVIEW_SHORTLIST'
           v06=list(csv.DictReader((root/'v06_opportunity_research_ranked.csv').open()))
-          assert len(v06)==len(shortlist), 'V06_MUST_RANK_ALL_REVIEW_NAMES'
+          assert len(v06)<=len(shortlist), 'V06_CANNOT_ADD_UNVETTED_NAMES'
           assert all(r['opportunity_v06_status']=='PARTIAL_RESEARCH_ONLY' for r in v06), 'V06_INCORRECT_STATUS'
           assert all(r['opportunity_v06_eligibility']=='PENDING_ELIGIBILITY' for r in v06), 'UNVERIFIED_ELIGIBILITY_WAS_PASSED'
           assert all(float(a['opportunity_v06_score']) >= float(b['opportunity_v06_score']) for a,b in zip(v06,v06[1:])), 'V06_WRONG_ORDER'
           assert v06[0]['symbol']=='CTOS', 'V06_EXPECTED_CONTROL_CTOS'
+          assert 'INTS' not in [r['symbol'] for r in v06], 'KNOWN_SMALL_CAP_INTS_NOT_EXCLUDED'
+          ints=next(r for r in rows if r['symbol']=='INTS')
+          assert ints['opportunity_v06_eligibility']=='INELIGIBLE', 'INTS_EVIDENCE_GATE_MISSING'
           report = {
             'universe': len(rows),
             'scores': len(ranked),
