@@ -84,6 +84,17 @@ def keeper_status(row):
         return "INSUFFICIENT_NEW_SCORE"
     return "RESEARCH_KEEPER_NOT_VERIFIED_BUY"
 
+def entry_priority(row):
+    """Research watch tiers, never a BUY. Chasing is an absolute veto."""
+    if row.get("current_keeper_status")!="RESEARCH_KEEPER_NOT_VERIFIED_BUY":
+        return "NOT_A_KEEPER"
+    state=row.get("entry_state")
+    if state=="CHASE_RISK_WAIT":return "NO_CHASE"
+    if state=="REVERSAL_REVIEW":return "REVERSAL_REVIEW_NOT_BUY"
+    if state=="UNCONFIRMED_TROUGH_WAIT":return "TROUGH_WATCH_NOT_BUY"
+    if state=="MID_CYCLE_WAIT":return "MID_CYCLE_WAIT"
+    return "NO_ENTRY_"+str(state)
+
 def main():
     import yfinance as yf
     import pandas_market_calendars as pmc
@@ -121,20 +132,26 @@ def main():
     # a 30-60 day repeatable oscillator, regardless of a high historical score.
     for row in results:
         row["current_keeper_status"]=keeper_status(row)
+        row["entry_priority"]=entry_priority(row)
     ranked=sorted((row for row in results if row["current_keeper_status"]=="RESEARCH_KEEPER_NOT_VERIFIED_BUY"),
                   key=lambda row:row["clean_cycle_v10"]["score"],reverse=True)
     for i,row in enumerate(ranked,1):row["fresh_research_rank"]=i
+    non_chase=sorted((row for row in ranked if row["entry_priority"]!="NO_CHASE"),
+                     key=lambda row:(0 if row["entry_priority"]=="REVERSAL_REVIEW_NOT_BUY" else 1 if row["entry_priority"]=="TROUGH_WATCH_NOT_BUY" else 2,
+                                     -row["clean_cycle_v10"]["score"]))
     out=dict(version="v0.10-fresh-independent-audit",target_session=target,
              research_symbols=[r["symbol"] for r in research[:args.limit]],
              controls=controls,source="yfinance, independent fresh provider requests",
              data_errors=sum("error" in r for r in results),
              current_research_keepers=len(ranked),fresh_research_ranked=[r["symbol"] for r in ranked],
+             no_chase_count=sum(r["entry_priority"]=="NO_CHASE" for r in ranked),
+             non_chase_research_watchlist=[r["symbol"] for r in non_chase],
              records=results,production_approved=False,
              note="Current data plus independent 30/60/126/252-day chart-shape audits; no trading BUY")
     pathlib.Path(args.output).parent.mkdir(parents=True,exist_ok=True)
     pathlib.Path(args.output).write_text(json.dumps(out,indent=2)+chr(10))
     with open(pathlib.Path(args.output).with_suffix(".csv"),"w",newline="") as f:
-        keys=["symbol","asof","close","score_v23","quality_v06","clean_cycle_v10_score","eligibility","three_clear_cycles","current_keeper_status","fresh_research_rank","swing_health",
+        keys=["symbol","asof","close","score_v23","quality_v06","clean_cycle_v10_score","eligibility","three_clear_cycles","current_keeper_status","entry_priority","fresh_research_rank","swing_health",
               "viability","entry_state","entry_5d_pct","entry_20d_pct","status","error",
               "w30_high","w30_low","w30_swing_pct","w30_up_legs","w60_high","w60_low",
               "w60_swing_pct","w60_up_legs","w126_high","w126_low","w126_swing_pct",
@@ -150,9 +167,21 @@ def main():
                             f"w{n}_up_legs":win.get("confirmed_up_legs")})
             w.writerow(row)
     with open(pathlib.Path(args.output).with_name("fresh_oscillator_keepers.csv"),"w",newline="") as f:
-        keys=["fresh_research_rank","symbol","asof","close","clean_cycle_v10_score","quality_v06","score_v23","three_clear_cycles","viability","entry_state","eligibility","current_keeper_status"]
+        keys=["fresh_research_rank","symbol","asof","close","clean_cycle_v10_score","quality_v06","score_v23","three_clear_cycles","viability","entry_state","eligibility","current_keeper_status","entry_priority"]
         w=csv.DictWriter(f,fieldnames=keys,extrasaction="ignore");w.writeheader()
         for record in ranked:w.writerow({**record,"clean_cycle_v10_score":record["clean_cycle_v10"]["score"]})
+    with open(pathlib.Path(args.output).with_name("fresh_no_chase_watchlist.csv"),"w",newline="") as f:
+        keys=["non_chase_rank","symbol","asof","close","clean_cycle_v10_score",
+              "entry_priority","entry_state","eligibility","current_keeper_status"]
+        w=csv.DictWriter(f,fieldnames=keys,extrasaction="ignore");w.writeheader()
+        for i,record in enumerate(non_chase,1):
+            w.writerow({**record,"non_chase_rank":i,
+                        "clean_cycle_v10_score":record["clean_cycle_v10"]["score"]})
+    print("FRESH_NO_CHASE_WATCHLIST",json.dumps([{"rank":i+1,
+        "symbol":r["symbol"],"score":r["clean_cycle_v10"]["score"],
+        "close":r["close"],"entry_priority":r["entry_priority"],
+        "entry_state":r["entry_state"],"eligibility":r["eligibility"]}
+        for i,r in enumerate(non_chase)]),flush=True)
     fresh_clear=sorted((r for r in results if r.get("three_clear_cycles")=="THREE_CLEAR_CYCLES" and r.get("eligibility")!="INELIGIBLE"),key=lambda r:(-r["clean_cycle_v10"]["score"],r["symbol"]))
     print("FRESH_V10_CLEAN_CYCLE_RANKED",json.dumps([{"rank":i+1,"symbol":r["symbol"],"score":r["clean_cycle_v10"]["score"],"asof":r["asof"],"close":r["close"],"entry":r["entry_state"],"viability":r["viability"],"legacy_health":r["swing_health"],"cycles":r["three_clear_details"]["cycles"]} for i,r in enumerate(fresh_clear)]),flush=True)
     print("THREE_CLEAR_CYCLE_AUDIT",json.dumps([{"symbol":r["symbol"],"state":r.get("three_clear_cycles"),"keeper":r["current_keeper_status"],"three_cycles":r.get("three_clear_details",{}).get("cycles",[])} for r in results]),flush=True)
