@@ -123,8 +123,7 @@ def main():
              records=results,production_approved=False,
              note="Current data plus independent 30/60/126/252-day chart-shape audits; no trading BUY")
     pathlib.Path(args.output).parent.mkdir(parents=True,exist_ok=True)
-    pathlib.Path(args.output).write_text(json.dumps(out,indent=2)+"
-")
+    pathlib.Path(args.output).write_text(json.dumps(out,indent=2)+chr(10))
     with open(pathlib.Path(args.output).with_suffix(".csv"),"w",newline="") as f:
         keys=["symbol","asof","close","score_v23","quality_v06","eligibility","current_keeper_status","fresh_research_rank","swing_health",
               "viability","entry_state","entry_5d_pct","entry_20d_pct","status","error",
