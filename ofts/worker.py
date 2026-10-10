@@ -7,6 +7,7 @@ from ofts.research.security_regimes import post_identity_bars
 from ofts.research.swing_health import recent_swing_health
 from ofts.research.recent_viability import recent_swing_viability
 from ofts.research.opportunity_v06 import opportunity_partial, eligibility_status, VERSION as OPPORTUNITY_VERSION
+from ofts.research.entry_diagnostic_v07 import entry_diagnostic, VERSION as ENTRY_VERSION
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/"ofts-output"
 OUT.mkdir(exist_ok=True)
@@ -54,6 +55,11 @@ for ix in range(5502):
                            swing_health_json=json.dumps(health,sort_keys=True))
                 viability=recent_swing_viability(series[2],score["threshold_pct"])
                 opportunity=opportunity_partial(viability,health)
+                entry=entry_diagnostic(series[2],[b.get('date','') for b in data])
+                row.update(entry_v07_state=entry['state'],entry_v07_asof=entry.get('asof_date'),
+                           entry_v07_close=entry.get('close'),entry_v07_return5=entry.get('return_5_sessions_pct'),
+                           entry_v07_position=entry.get('position_in_prior20_band'),
+                           entry_v07_json=json.dumps(entry,sort_keys=True))
                 eligible=eligibility_status(sym,data[-1].get('date',''),series[2][-1])
                 opportunity['eligibility_status']=eligible['state']
                 opportunity['eligibility_evidence']=eligible
@@ -102,7 +108,8 @@ fields=["run","symbol","bars","raw_bars","regime_start","status","score","versio
         "prior_three_up_pct","prior_peak_intervals","prior_trough_intervals",
         "up_amplitude_ratio","cadence_ratio","recent_vs_prior_state","up_progression","historical_mean_swing_pct","recent_capture_net_pct",
         "combined_research_entry","viability_json",
-        "opportunity_v06_score","opportunity_v06_status","opportunity_v06_eligibility","opportunity_v06_json"]
+        "opportunity_v06_score","opportunity_v06_status","opportunity_v06_eligibility","opportunity_v06_json",
+        "entry_v07_state","entry_v07_asof","entry_v07_close","entry_v07_return5","entry_v07_position","entry_v07_json"]
 with (OUT/"v23_research_universe.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=fields,extrasaction="ignore");w.writeheader();w.writerows(results)
 ranked=sorted((r for r in results if isinstance(r["score"],(int,float))),key=lambda r:r["score"],reverse=True)
@@ -116,7 +123,8 @@ with (OUT/"v23_research_ranked.csv").open("w",newline="") as fh:
             "prior_three_up_pct","prior_peak_intervals","prior_trough_intervals",
             "up_amplitude_ratio","cadence_ratio","recent_vs_prior_state","up_progression",
             "historical_mean_swing_pct","recent_capture_net_pct","combined_research_entry",
-            "opportunity_v06_score","opportunity_v06_status","opportunity_v06_eligibility"],extrasaction="ignore")
+            "opportunity_v06_score","opportunity_v06_status","opportunity_v06_eligibility",
+            "entry_v07_state","entry_v07_asof","entry_v07_close","entry_v07_return5","entry_v07_position"],extrasaction="ignore")
     w.writeheader()
     for rank,r in enumerate(ranked,1):
         w.writerow({"rank":rank,**r})
@@ -142,7 +150,8 @@ opportunity_fields=["opportunity_rank","symbol","opportunity_v06_score",
     "opportunity_v06_status","opportunity_v06_eligibility","score","status",
     "swing_state","viability_state","last_three_up_pct","peak_intervals",
     "trough_intervals","up_amplitude_ratio","cadence_ratio",
-    "combined_research_entry","opportunity_v06_json"]
+    "combined_research_entry","opportunity_v06_json",
+    "entry_v07_state","entry_v07_asof","entry_v07_close","entry_v07_return5","entry_v07_position","entry_v07_json"]
 with (OUT/"v06_opportunity_research_ranked.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=opportunity_fields,extrasaction="ignore")
     w.writeheader()
@@ -152,6 +161,7 @@ print("V06_OPPORTUNITY_RESEARCH_TOP",json.dumps([
     {"rank":i+1,"symbol":r["symbol"],"score_out_of_80":r["opportunity_v06_score"],
      "old_v23_score":round(r["score"],3),"eligibility":r["opportunity_v06_eligibility"]}
     for i,r in enumerate(opportunity_ranked[:25])]))
+print("V07_ENTRY_DIAGNOSTIC",json.dumps([{"symbol":r["symbol"],"entry_state":r.get("entry_v07_state"),"asof":r.get("entry_v07_asof"),"close":r.get("entry_v07_close"),"five_day_pct":r.get("entry_v07_return5")} for r in opportunity_ranked[:25]]))
 print("V06_VERIFIED_ELIGIBLE",0,"market_cap_and_liquidity_data_not_present_in_OHLCV")
 print("V06_EXCLUDED_INELIGIBLE",json.dumps([{"symbol":r["symbol"],"reason":json.loads(r["opportunity_v06_json"]).get("eligibility_evidence",{}).get("reason")} for r in viable if r.get("opportunity_v06_eligibility")=="INELIGIBLE"]))
 print("RECENT_VIABILITY_SHORTLIST",json.dumps([
@@ -176,7 +186,8 @@ print("RECENT_VIABILITY_COUNTS",json.dumps({
 print("TOP_RESEARCH_RANKINGS",json.dumps([{"rank":i+1,"symbol":r["symbol"],"score":round(r["score"],3),"status":r["status"],"bars":r["bars"],"swing_state":r.get("swing_state"),"swing_entry":r.get("swing_entry"),"viability":r.get("viability_state"),"combined_entry":r.get("combined_research_entry") } for i,r in enumerate(ranked[:25])]))
 status={"universe":5502,"rows_written":len(results),"candidate_scores":sum(isinstance(r["score"],(int,float)) for r in results),"version":"v2.3-research","production_approved":False,"history_symbols":len(groups),"experimental_recent_viability_review":len(viable),
         "experimental_only":True,"v06_opportunity_research_ranked":len(opportunity_ranked),
-        "v06_verified_eligible":0,"v06_version":OPPORTUNITY_VERSION}
+        "v06_verified_eligible":0,"v06_version":OPPORTUNITY_VERSION,"v07_entry_version":ENTRY_VERSION,
+        "v07_entry_current_confirmed":sum(r.get("entry_v07_state")=="REVERSAL_REVIEW" for r in opportunity_ranked)}
 (OUT/"status.json").write_text(json.dumps(status,indent=2)+"\n")
 print(json.dumps(status))
 if not status["candidate_scores"]: raise SystemExit("NO_RESEARCH_SCORES_FROM_AVAILABLE_HISTORY")
