@@ -59,6 +59,11 @@ def cycle_fingerprint(closes, threshold, structural):
                 amplitude_consistency=amplitude, confidence=confidence)
 
 
+def signal_snapshot_complete(snapshot):
+    rows = snapshot.get('rows', [])
+    return bool(rows) and all(r.get('signal', {}).get('state') in {'BUY', 'SELL', 'NO_TRADE'} for r in rows)
+
+
 def current_signal_state(closes, threshold, classification):
     """Close-confirmed state for hypothetical next-open execution."""
     if classification != 'CANDIDATE':
@@ -333,12 +338,14 @@ def main():
             dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
                  model_hash=model_hash, rows=rows,
                  note='Point-in-time research fingerprints; not production BUY/SELL signals'))
-        signal_snapshot = frozen_snapshot(
-            state / 'signals' / (target + '.json'),
-            dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
-                 execution='Hypothetical next-session open', model_hash=model_hash,
-                 rows=rows, production_approved=False,
-                 note='Close-confirmed research states; not brokerage instructions'))
+        signal_candidate = dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
+                                execution='Hypothetical next-session open', model_hash=model_hash,
+                                rows=rows, production_approved=False,
+                                note='Close-confirmed research states; not brokerage instructions')
+        signal_path = state / 'signals' / (target + '.json')
+        if signal_path.exists() and not signal_snapshot_complete(load_json(signal_path, {})):
+            signal_path = state / 'signals' / (target + '-qualified.json')
+        signal_snapshot = frozen_snapshot(signal_path, signal_candidate)
     histories = {s: read_history(state, s) for s in set(refresh_symbols) | {r['symbol'] for s in snapshots for r in s['rows']}}
     results = [r for s in snapshots for r in outcomes(s, histories, schedule)]
     save_json(state / 'outcomes.json', results)
