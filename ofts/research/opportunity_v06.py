@@ -59,3 +59,22 @@ def opportunity_partial(viability, health):
             "components": {k: round(v, 4) for k, v in components.items()},
             "health_deductions": deductions,
             "reason": "NO_ASOF_MARKET_CAP_SPREAD_OR_ENTRY_METRICS"}
+
+# Verified as-of security eligibility evidence; do not use for earlier dates.
+# This is NOT a complete cap/security-type feed; all others remain PENDING.
+DATED_CAP_EVIDENCE = {
+    "INTS": {"asof": "2026-10-09", "market_cap_usd": 10_550_000,
+             "source": "https://ycharts.com/companies/INTS/market_cap"},
+}
+
+def eligibility_status(symbol, asof_date, close):
+    """Noncompensable hard gates; never treat absent dated cap as passing."""
+    if close is None or float(close) < 3.0:
+        return {"state": "INELIGIBLE", "reason": "PRICE_BELOW_3"}
+    evidence = DATED_CAP_EVIDENCE.get(str(symbol).upper())
+    if evidence and asof_date >= evidence["asof"]:
+        if evidence["market_cap_usd"] < 200_000_000:
+            return {"state": "INELIGIBLE", "reason": "MARKET_CAP_BELOW_200M",
+                    **evidence}
+    return {"state": "PENDING_ELIGIBILITY",
+            "reason": "NO_VERIFIED_ASOF_MARKET_CAP_AND_SECURITY_TYPE"}
