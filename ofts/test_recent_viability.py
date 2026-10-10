@@ -112,10 +112,10 @@ class RecentViabilityTests(unittest.TestCase):
         self.assertEqual(r['state'],'REVIEW')
 
     def test_irregular_cycle_intervals_fail_even_when_median_is_in_range(self):
-        # Alternating durations lead to recent 12/30/12-day cycles:
-        # individual intervals can pass but cadence is too irregular.
+        # Recent 24/36/12-session cycles: median 24 passes range, but
+        # relative MAD=0.5 fails regularity.
         pivot_prices=[100,108,100,108,100,108,100,108,100,108,100]
-        spans=[6,6,6,6,6,6,6,24,6,6]
+        spans=[6,6,6,6,18,6,30,6,6,6]
         p=[100.0]
         for a,b,span in zip(pivot_prices,pivot_prices[1:],spans):
             p.extend(a+(b-a)*i/span for i in range(1,span+1))
