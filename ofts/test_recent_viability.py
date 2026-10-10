@@ -27,7 +27,7 @@ class RecentViabilityTests(unittest.TestCase):
         self.assertEqual(result['proposed_entry'],'NO_TRADE')
 
     def test_repeatable_recent_healthy_swings_remain_review_not_buy(self):
-        result=recent_swing_viability(series([100,115,100,115,100,115,100,115,100,115,100]),6)
+        result=recent_swing_viability(series([100,115]*8+[100]),6)
         self.assertEqual(result['state'],'REVIEW')
         self.assertEqual(result['proposed_entry'],'REVIEW')
         self.assertFalse(result['production_approved'])
@@ -83,7 +83,7 @@ class RecentViabilityTests(unittest.TestCase):
         self.assertLess(r['hypothetical_net_capture_pct'],2.5)
 
     def test_three_strong_up_swings_pass_as_research_only(self):
-        p=series([100,108,100,108,100,108,100,108,100,108,100])
+        p=series([100,108]*8+[100])
         r=recent_swing_viability(p,6)
         self.assertEqual(r['repeated_up_pass_count'],3)
         self.assertEqual([round(x,1) for x in r['last_three_up_pct']],[8,8,8])
@@ -103,7 +103,7 @@ class RecentViabilityTests(unittest.TestCase):
         self.assertEqual(r['proposed_entry'],'NO_TRADE')
 
     def test_repeated_ups_and_twelve_session_cycles_remain_research_review(self):
-        p=series([100,108,100,108,100,108,100,108,100,108,100],spacing=6)
+        p=series([100,108]*8+[100],spacing=6)
         r=recent_swing_viability(p,6)
         self.assertEqual(r['last_three_peak_to_peak_sessions'],[12,12,12])
         self.assertEqual(r['last_three_trough_to_trough_sessions'],[12,12,12])
@@ -123,6 +123,39 @@ class RecentViabilityTests(unittest.TestCase):
         self.assertEqual(r['repeated_up_pass_count'],3)
         self.assertFalse(r['cycle_timing_pass'])
         self.assertEqual(r['state'],'CYCLE_TIMING')
+
+    def test_recent_up_amplitude_shrinks_vs_immediately_prior_three(self):
+        # Three recent 7% rebounds still pass >=5% and 12-day cycles,
+        # but prior three rebounds were 11%, hence 7/11 < 0.70.
+        ups=[11,11,11,11,11,7,7,7]
+        values=[100]
+        for x in ups: values.extend([100+x,100])
+        r=recent_swing_viability(series(values),6)
+        self.assertEqual(r['preceding_three_up_pct'],[11,11,11])
+        self.assertEqual(r['last_three_up_pct'],[7,7,7])
+        self.assertAlmostEqual(r['recent_vs_prior_up_ratio'],7/11)
+        self.assertEqual(r['recent_vs_prior_state'],'DISSIPATING')
+        self.assertEqual(r['state'],'DISSIPATING')
+        self.assertEqual(r['proposed_entry'],'NO_TRADE')
+
+    def test_recent_cycles_slow_vs_preceding_three_even_with_good_amplitude(self):
+        values=[100,110]*8+[100]
+        # Early cycles 12 sessions, latest cycles 24 sessions.
+        spans=[6]*10+[12]*6
+        prices=[100.]
+        for a,b,n in zip(values,values[1:],spans):
+            prices.extend(a+(b-a)*i/n for i in range(1,n+1))
+        r=recent_swing_viability(prices,6,lookback=400)
+        self.assertEqual(r['last_three_up_pct'],[10,10,10])
+        self.assertGreater(r['recent_vs_prior_cadence_ratio'],1.5)
+        self.assertEqual(r['recent_vs_prior_state'],'DISSIPATING')
+        self.assertEqual(r['state'],'DISSIPATING')
+
+    def test_three_up_swings_without_prior_three_fail_closed(self):
+        r=recent_swing_viability(series([100,108]*5+[100]),6)
+        self.assertEqual(r['recent_vs_prior_state'],'INSUFFICIENT')
+        self.assertEqual(r['state'],'INSUFFICIENT_COMPARISON')
+        self.assertEqual(r['proposed_entry'],'NO_TRADE')
 
     def test_frozen_asof_result_reproducible(self):
         prices=series([100,115,100,115,100,115,100,115,100,115,100])
