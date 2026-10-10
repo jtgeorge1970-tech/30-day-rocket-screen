@@ -456,14 +456,15 @@ def main():
              f'INSUFFICIENT={sum(r.get("swing_health", {}).get("state") == "INSUFFICIENT" for r in report_rows)}',
              'Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.',
              'Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.', '',
-             '| Symbol | Score | Classification | Legacy signal | Swing health | Last 3 swings | Last 3 UP % | >=5% count | Latest UP % | Old avg | Viability | Experimental review | Highs | Lows | Cycle sessions | Median swing | Confidence |',
-             '|---|---:|---|---|---|---:|---|---:|---:|---:|---|---|---|---|---:|---:|---|']
+             '| Symbol | Score | Classification | Legacy signal | Swing health | Last 3 swings | Last 3 UP % | >=5% count | Repeatability | Latest UP % | Old avg | Viability | Experimental review | Highs | Lows | Cycle sessions | Median swing | Confidence |',
+             '|---|---:|---|---|---:|---|---:|---|---:|---:|---|---|---|---|---:|---:|---|']
     lines += [f'| {r["symbol"]} | {r["score"]:.3f} | {r["classification"]} | '
               f'{r.get("signal", {}).get("state", "NO_TRADE")} | '
               f'{r.get("swing_health", {}).get("state", "n/a")} | '
               f'{r.get("recent_viability", {}).get("last_three_median_swing_pct") or "n/a"} | '
               f'{[round(v, 2) for v in r.get("recent_viability", {}).get("last_three_up_pct", [])]} | '
               f'{r.get("recent_viability", {}).get("repeated_up_pass_count", "n/a")} | '
+              f'{r.get("recent_viability", {}).get("recent_up_repeatability", "n/a")} | '
               f'{r.get("recent_viability", {}).get("last_up_pct") or "n/a"} | '
               f'{r.get("recent_viability", {}).get("historical_mean_swing_pct") or "n/a"} | '
               f'{r.get("recent_viability", {}).get("state", "n/a")} | '
