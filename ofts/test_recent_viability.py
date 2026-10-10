@@ -91,6 +91,39 @@ class RecentViabilityTests(unittest.TestCase):
         self.assertEqual(r['recent_up_repeatability'],'STABLE_3_OF_3')
         self.assertFalse(r['production_approved'])
 
+    def test_repeated_five_percent_swings_six_weeks_apart_fail_cycle_timing(self):
+        # 48 trading sessions peak-to-peak: above the 40-session preferred
+        # maximum, despite three strong 8% UP legs.
+        p=series([100,108,100,108,100,108,100,108,100,108,100],spacing=24)
+        r=recent_swing_viability(p,6,lookback=400)
+        self.assertEqual(r['repeated_up_pass_count'],3)
+        self.assertEqual(r['last_three_peak_to_peak_sessions'],[48,48,48])
+        self.assertFalse(r['cycle_timing_pass'])
+        self.assertEqual(r['state'],'CYCLE_TIMING')
+        self.assertEqual(r['proposed_entry'],'NO_TRADE')
+
+    def test_repeated_ups_and_twelve_session_cycles_remain_research_review(self):
+        p=series([100,108,100,108,100,108,100,108,100,108,100],spacing=6)
+        r=recent_swing_viability(p,6)
+        self.assertEqual(r['last_three_peak_to_peak_sessions'],[12,12,12])
+        self.assertEqual(r['last_three_trough_to_trough_sessions'],[12,12,12])
+        self.assertEqual(r['peak_cycle_median_sessions'],12)
+        self.assertTrue(r['cycle_timing_pass'])
+        self.assertEqual(r['state'],'REVIEW')
+
+    def test_irregular_cycle_intervals_fail_even_when_median_is_in_range(self):
+        # Alternating durations lead to recent 12/30/12-day cycles:
+        # individual intervals can pass but cadence is too irregular.
+        pivot_prices=[100,108,100,108,100,108,100,108,100,108,100]
+        spans=[6,6,6,6,6,6,6,24,6,6]
+        p=[100.0]
+        for a,b,span in zip(pivot_prices,pivot_prices[1:],spans):
+            p.extend(a+(b-a)*i/span for i in range(1,span+1))
+        r=recent_swing_viability(p,6)
+        self.assertEqual(r['repeated_up_pass_count'],3)
+        self.assertFalse(r['cycle_timing_pass'])
+        self.assertEqual(r['state'],'CYCLE_TIMING')
+
     def test_frozen_asof_result_reproducible(self):
         prices=series([100,115,100,115,100,115,100,115,100,115,100])
         before=recent_swing_viability(prices[:-6],6)
