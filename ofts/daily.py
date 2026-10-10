@@ -60,6 +60,27 @@ def cycle_fingerprint(closes, threshold, structural):
                 amplitude_consistency=amplitude, confidence=confidence)
 
 
+
+def score_interpretation(rows):
+    """Expose score scale and evidence gate without inventing a BUY cutoff."""
+    scores = [float(row['score']) for row in rows if row.get('score') is not None]
+    bands = {'BELOW_40': 0, '40_TO_49_999': 0, '50_TO_59_999': 0,
+             '60_TO_69_999': 0, '70_TO_79_999': 0, '80_TO_89_999': 0,
+             '90_TO_100': 0}
+    for score in scores:
+        key = ('BELOW_40' if score < 40 else '40_TO_49_999' if score < 50 else
+               '50_TO_59_999' if score < 60 else '60_TO_69_999' if score < 70 else
+               '70_TO_79_999' if score < 80 else '80_TO_89_999' if score < 90 else
+               '90_TO_100')
+        bands[key] += 1
+    return dict(theoretical_scale_min=0, theoretical_scale_max=100,
+                observed_min=min(scores) if scores else None,
+                observed_max=max(scores) if scores else None,
+                scored_rows=len(scores), distribution=bands,
+                validated_buy_threshold=None,
+                system_actionability_gate='RESEARCH_ONLY_NO_GO',
+                gate_reason='OUT_OF_SAMPLE_PREDICTIVE_VALIDATION_NOT_VERIFIED')
+
 def signal_snapshot_complete(snapshot):
     rows = snapshot.get('rows', [])
     return bool(rows) and all(r.get('signal', {}).get('state') in {'BUY', 'SELL', 'NO_TRADE'} for r in rows)
@@ -379,6 +400,7 @@ def main():
     save_json(state / 'validation_summary.json', summaries)
     report_rows = signal_snapshot['rows'] if signal_snapshot else (fingerprint_snapshot['rows'] if fingerprint_snapshot else (snapshot['rows'] if snapshot else rows))
     ranked = sorted((r for r in report_rows if r['score'] is not None and r['classification'] == 'CANDIDATE'), key=lambda r: r['score'], reverse=True)
+    score_status = score_interpretation(report_rows)
     counts = {status: sum(r['status'] == status for r in results) for status in sorted({r['status'] for r in results})}
     lines = ['# OFTS daily research', '', f'Market session: {target}',
              f'Selected: {len(selected)}; refreshed: {sum(audit[s]["status"] == "FRESH" for s in selected)}; refresh errors: {len(control["retry"])}',
@@ -395,6 +417,12 @@ def main():
              f'Cycle-speed report card: {cycle_card["status"]}; '
              f'closed forward trades={cycle_card["closed_trades"]}; '
              f'groups={list(cycle_card["groups"])}',
+             f'Score scale: theoretical 0-100; observed '
+             f'{score_status["observed_min"]:.3f}-{score_status["observed_max"]:.3f}; '
+             f'validated BUY threshold=NONE',
+             f'Score distribution: {score_status["distribution"]}',
+             f'System actionability gate: {score_status["system_actionability_gate"]}; '
+             f'{score_status["gate_reason"]}',
              'Production approval: NO. These are quality scores, not BUY signals.',
              'Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.',
              'Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.', '',
