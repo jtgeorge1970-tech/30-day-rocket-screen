@@ -1,15 +1,16 @@
-name: OFTS independent full-universe worker
+name: OFTS daily scoring and saved validation
 on:
   push:
     paths:
-      - 'ofts/worker.py'
-      - 'ofts/research/**'
+      - 'ofts/daily.py'
+      - 'ofts/test_daily.py'
+      - 'ofts/SSOT_DAILY_OPERATIONS.md'
       - '.github/workflows/ofts-independent-worker.yml'
   workflow_dispatch:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '30 22 * * 1-5'
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: ofts-independent-worker
   cancel-in-progress: false
@@ -19,26 +20,61 @@ jobs:
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
-      - name: Install market-data provider
-        run: python -m pip install --quiet yfinance pandas
-      - name: Restore historical OHLC checkpoints
-        uses: actions/cache@v4
+      - uses: actions/setup-python@v5
         with:
-          path: |
-            ofts-output/universe_ohlcv.csv
-            ofts-output/download_completed.txt
-          key: ofts-history-${{ github.run_id }}
-          restore-keys: |
-            ofts-history-
-      - name: Download daily OHLC for full universe
-        run: python -m ofts.fetch_universe_history
-      - name: Score available historical universe (v2.3 research)
-        run: python -m ofts.worker
-      - name: Preserve status and checkpoints
+          python-version: '3.11'
+      - name: Install market data and exchange calendar
+        run: python -m pip install yfinance pandas pandas_market_calendars
+      - name: Verify persistence and forward accounting
+        run: python -m unittest ofts.test_daily -v
+      - name: Restore permanent state branch
+        if: github.ref == 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          remote_ref=$(git ls-remote --heads origin refs/heads/ofts-daily-state)
+          if [ -n "$remote_ref" ]; then
+            git fetch origin ofts-daily-state
+            git worktree add ofts-state FETCH_HEAD
+            test -f ofts-state/control.json
+            test -d ofts-state/predictions
+            echo "Restored durable state $(git -C ofts-state rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
+          else
+            git worktree add --detach ofts-state
+            git -C ofts-state checkout --orphan ofts-state-initial
+            git -C ofts-state rm -rf .
+            echo 'First initialization: durable branch did not exist.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Refresh, score, freeze predictions and evaluate outcomes
+        id: daily
+        if: github.ref == 'refs/heads/main'
+        run: python -m ofts.daily --state ofts-state --batch-size 100
+      - name: Persist results and verify remote commit
+        if: always() && steps.daily.outcome != 'skipped'
+        run: |
+          set -euo pipefail
+          test -f ofts-state/control.json
+          git -C ofts-state add --all
+          if ! git -C ofts-state diff --cached --quiet; then
+            git -C ofts-state commit -m "OFTS dated research state $GITHUB_RUN_ID [skip ci]"
+            git -C ofts-state push origin HEAD:refs/heads/ofts-daily-state
+          fi
+          local_sha=$(git -C ofts-state rev-parse HEAD)
+          remote_sha=$(git ls-remote --heads origin refs/heads/ofts-daily-state | cut -f1)
+          test "$local_sha" = "$remote_sha"
+          echo "Durable save verified: $remote_sha" >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve readable report backup
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ofts-status-${{ github.run_id }}
-          path: ofts-output/
+          name: ofts-daily-${{ github.run_id }}
+          path: |
+            ofts-state/REPORT.md
+            ofts-state/refresh.json
+            ofts-state/control.json
+            ofts-state/outcomes.json
+            ofts-state/validation_summary.json
+            ofts-state/predictions/
           if-no-files-found: warn
-          retention-days: 30
+          retention-days: 90
