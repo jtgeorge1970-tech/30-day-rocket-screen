@@ -1,0 +1,1015 @@
+{
+  "asof": "2026-10-09",
+  "recorded_at": "2026-10-10T01:24:10.719738+00:00",
+  "model_version": "v2.3-research",
+  "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
+  "protocol_hash": "aa76e2e847dafb4931c5ad776daaac7729eac26e3146318040351132911a9bdd",
+  "lookback": "trailing 2 calendar years",
+  "selected": [
+    "HNRG",
+    "CHTR",
+    "FUBO",
+    "EPOW",
+    "WULF",
+    "HLIT",
+    "JACK",
+    "TGS",
+    "SPGI",
+    "CSIQ",
+    "XPRO",
+    "SFM",
+    "DTIL",
+    "TBLA",
+    "FWRG",
+    "NYAX",
+    "OWLT",
+    "SRAD",
+    "ATGL",
+    "FMC",
+    "LE",
+    "MESO",
+    "NX",
+    "MBLY",
+    "IDR",
+    "MPLX",
+    "AUC",
+    "CEPV",
+    "DXLG",
+    "FXNC",
+    "ICMB",
+    "LRE",
+    "AXIL",
+    "PROP",
+    "RNTX",
+    "SOS",
+    "VFS",
+    "ROLR",
+    "CHRW",
+    "TMO",
+    "NUTX",
+    "BIRK",
+    "CREX",
+    "FHN",
+    "HPK",
+    "KVUE",
+    "MSA",
+    "ORA",
+    "RDDT",
+    "SNWV",
+    "TRT",
+    "WFG",
+    "CTSH",
+    "ARGX",
+    "LAND",
+    "BROS",
+    "LPTH",
+    "Q",
+    "AKAM",
+    "CNXC",
+    "HLNE",
+    "PENG",
+    "TKO",
+    "CECO",
+    "CULP",
+    "CR",
+    "ARCL",
+    "CATL",
+    "DMAA",
+    "AKO.A",
+    "HTCO",
+    "LGO",
+    "NDRA",
+    "PMA",
+    "VBIO",
+    "SLSN",
+    "UCFI",
+    "ZDAI",
+    "ATOS",
+    "RVSB",
+    "ABT",
+    "BE",
+    "CLPT",
+    "FBLA",
+    "GTX",
+    "KEY",
+    "MMSI",
+    "OLMA",
+    "QFIN",
+    "STE",
+    "TORO",
+    "WAL",
+    "ORI",
+    "BCS",
+    "ICUI",
+    "USAR",
+    "WNC",
+    "KE",
+    "IBTA",
+    "CIVB",
+    "HE",
+    "OCFC",
+    "STNE",
+    "DLHC",
+    "BGSF",
+    "MVST",
+    "AMPG",
+    "BTCT",
+    "DARE",
+    "FE",
+    "HDL",
+    "KTTA",
+    "MYSZ",
+    "PDSB",
+    "LESL",
+    "SHFS",
+    "TPVG",
+    "YDES",
+    "EROC",
+    "OPAL",
+    "GIB",
+    "AYA",
+    "CGNX",
+    "ESLT",
+    "GPCR"
+  ],
+  "rows": [
+    {
+      "symbol": "HNRG",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "CHTR",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "FUBO",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "EPOW",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "WULF",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "HLIT",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "JACK",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "TGS",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "SPGI",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "CSIQ",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "XPRO",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "SFM",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "DTIL",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "TBLA",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "FWRG",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "NYAX",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "OWLT",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "SRAD",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "ATGL",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "FMC",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "LE",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "MESO",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "NX",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "MBLY",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "IDR",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "MPLX",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "AUC",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "CEPV",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 233
+    },
+    {
+      "symbol": "DXLG",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "FXNC",
+      "score": 55.66524096541002,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ICMB",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "LRE",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "AXIL",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "PROP",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "RNTX",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "SOS",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "VFS",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "ROLR",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 491
+    },
+    {
+      "symbol": "CHRW",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "TMO",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "NUTX",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "BIRK",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "CREX",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "FHN",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "HPK",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "KVUE",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "MSA",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "ORA",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "RDDT",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "SNWV",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 494
+    },
+    {
+      "symbol": "TRT",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "WFG",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "CTSH",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "ARGX",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "LAND",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "BROS",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "LPTH",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "Q",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 239
+    },
+    {
+      "symbol": "AKAM",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "CNXC",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "HLNE",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "PENG",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "TKO",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "CECO",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "CULP",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "CR",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "ARCL",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 92
+    },
+    {
+      "symbol": "CATL",
+      "score": null,
+      "classification": "INSUFFICIENT_HISTORY",
+      "asof": "2026-10-09",
+      "bars": 17
+    },
+    {
+      "symbol": "DMAA",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 408
+    },
+    {
+      "symbol": "AKO.A",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": null,
+      "bars": 0
+    },
+    {
+      "symbol": "HTCO",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "LGO",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "NDRA",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "PMA",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 469
+    },
+    {
+      "symbol": "VBIO",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "SLSN",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "UCFI",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "ZDAI",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "ATOS",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "RVSB",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "ABT",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "BE",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "CLPT",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "FBLA",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 491
+    },
+    {
+      "symbol": "GTX",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "KEY",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "MMSI",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "OLMA",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "QFIN",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "STE",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "TORO",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "WAL",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "ORI",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "BCS",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "ICUI",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "USAR",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "WNC",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "KE",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "IBTA",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "CIVB",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "HE",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "OCFC",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "STNE",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "DLHC",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "BGSF",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "MVST",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "AMPG",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "BTCT",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "DARE",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "FE",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "HDL",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "KTTA",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "MYSZ",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "PDSB",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "LESL",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "SHFS",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "TPVG",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "YDES",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 282
+    },
+    {
+      "symbol": "EROC",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 84
+    },
+    {
+      "symbol": "OPAL",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "GIB",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "AYA",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "CGNX",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "ESLT",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    },
+    {
+      "symbol": "GPCR",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": "2026-10-08",
+      "bars": 500
+    }
+  ],
+  "production_approved": false,
+  "execution": "Hypothetical next-session open; fixed-session close; no stop/target strategy",
+  "cost_assumption_roundtrip_pct": 0.2
+}
