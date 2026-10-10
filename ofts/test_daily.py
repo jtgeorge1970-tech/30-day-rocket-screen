@@ -10,7 +10,8 @@ import pandas as pd
 from ofts.daily import (save_history, read_history, merge_history, refresh,
                         frozen_snapshot, outcomes, completed_session, market_schedule,
                         snapshot_is_qualified, load_qualified_snapshots,
-                        cycle_fingerprint, current_signal_state)
+                        cycle_fingerprint, current_signal_state,
+                        signal_snapshot_complete)
 
 
 def bar(date, close=100, split=0):
@@ -75,6 +76,13 @@ class PersistenceTests(unittest.TestCase):
         # Repeating the same as-of slice must be deterministic; later bars are
         # never supplied to the function and cannot rewrite the fingerprint.
         self.assertEqual(fp, cycle_fingerprint(closes, result['threshold_pct'], result['structural']))
+
+    def test_partial_signal_snapshot_fails_completeness_gate(self):
+        partial = {'rows': [{'symbol': 'A', 'signal': {'state': 'NO_TRADE'}}, {'symbol': 'B'}]}
+        complete = {'rows': [{'symbol': 'A', 'signal': {'state': 'BUY'}},
+                             {'symbol': 'B', 'signal': {'state': 'NO_TRADE'}}]}
+        self.assertFalse(signal_snapshot_complete(partial))
+        self.assertTrue(signal_snapshot_complete(complete))
 
     def test_signal_state_requires_new_close_confirmed_turn(self):
         # Final bar first confirms a 10% reversal from the low: BUY for next open.
