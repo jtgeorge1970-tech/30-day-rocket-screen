@@ -250,7 +250,7 @@ def outcomes(snapshot, histories, schedule):
                        end_date=end_date)
             if not timely:
                 row['status'] = 'NOT_PROSPECTIVE_RECORDED_AFTER_ENTRY'
-            elif prediction['classification'] in ('STALE_DATA', 'DATA_ERROR', 'INSUFFICIENT_HISTORY'):
+            elif prediction['classification'] in DATA_FAILURES:
                 row['status'] = 'INELIGIBLE_DATA'
             elif end_date in bars and entry_date in bars:
                 interval = [bars.get(d) for d in dates[start:start + horizon]]
