@@ -92,3 +92,5 @@ substitute stale data, invent scores, mix versions, or reset progress.
 - Keep fixed 5/10/20/30/60-session audits and cycle BUY-to-SELL audits separate. Neither may replace the other.
 - Compare fixed forward outcomes with same-period SPY. If benchmark history is unavailable for an older research cohort, disclose the missing comparison instead of estimating it.
 - Historical simulation, a positive mean, or a green workflow does not authorize a production trade. Report sample size, median, outlier dependence, losses, and confidence alongside any average gain.
+- Rebuild the permanent cycle ledger deterministically from immutable signal snapshots on every run. A signal is not filled until its next-session opening bar exists; restarts must not duplicate positions or trades.
+- Keep pending and open-position symbols in the refresh queue until a later frozen SELL can be executed. Record SPY open-to-open return, excess return, adverse excursion, observed ordered swing, captured swing, and missed swing for each completed trade.
