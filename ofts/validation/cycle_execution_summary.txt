@@ -6,6 +6,7 @@ Positive net trades: 12/24
 Net win rate pct: 50.000
 Mean net cycle return pct: 13.252
 Median net cycle return pct: -0.825
+Mean excluding three largest winners pct: -1.045
 Mean captured ideal swing pct: -48.268
 Median holding sessions: 22.000
 Mean fixed 12pct stop return pct: 13.369
