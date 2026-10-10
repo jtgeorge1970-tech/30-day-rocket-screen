@@ -1,4 +1,4 @@
-"""OFTS research challenger v0.3: recent swing viability / 'fool's gold' audit.
+"""OFTS research challenger v0.4: recent swing viability / 'fool's gold' audit.
 
 Prevents a few large OLD swings from masquerading as CURRENT tradable
 oscillations. Uses a separate 2.5%-3.5% diagnostic pivot detector so that
@@ -9,7 +9,12 @@ All cutoffs and capture assumptions are experimental, NOT validated.
 from statistics import median
 from ofts.research.candidate_components import detect_turns
 
-VERSION = 'recent-viability-v0.3-experimental'
+VERSION = 'recent-viability-v0.4-experimental'
+MIN_CYCLE_SESSIONS = 10
+MAX_CYCLE_SESSIONS = 40
+MIN_INDIVIDUAL_CYCLE_SESSIONS = 8
+MAX_INDIVIDUAL_CYCLE_SESSIONS = 45
+MAX_CYCLE_RELATIVE_MAD = 0.35
 MIN_REPEATED_UP_PCT = 5.0
 MIN_CONFIRMED_UP_LEGS = 3
 ROUND_TRIP_COST_PCT = 0.20
@@ -38,6 +43,23 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
     micro_threshold = min(3.5, max(2.5, float(major_threshold_pct)/3))
     turns = [(i+start, k, p) for i,k,p in
              detect_turns(prices[start:], micro_threshold)]
+    highs = [i for i, kind, _ in turns if kind == 'H']
+    lows = [i for i, kind, _ in turns if kind == 'L']
+    peak_intervals = [b-a for a,b in zip(highs,highs[1:])][-3:]
+    trough_intervals = [b-a for a,b in zip(lows,lows[1:])][-3:]
+    def timing_stats(intervals):
+        if len(intervals) < 3:
+            return {'median':None,'relative_mad':None,'pass':False}
+        m=median(intervals)
+        mad=median(abs(x-m) for x in intervals)/max(m,1)
+        return {'median':m,'relative_mad':mad,
+                'pass':MIN_CYCLE_SESSIONS<=m<=MAX_CYCLE_SESSIONS
+                and all(MIN_INDIVIDUAL_CYCLE_SESSIONS<=x<=MAX_INDIVIDUAL_CYCLE_SESSIONS
+                        for x in intervals)
+                and mad<=MAX_CYCLE_RELATIVE_MAD}
+    peak_stats=timing_stats(peak_intervals)
+    trough_stats=timing_stats(trough_intervals)
+    cycle_timing_pass=peak_stats['pass'] and trough_stats['pass']
     legs = [{'kind':'UP' if a[1]=='L' else 'DOWN',
              'start_index':a[0], 'end_index':b[0],
              'amplitude_pct':100*abs(b[2]/a[2]-1),
@@ -85,6 +107,14 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
     info = dict(micro_pivot_threshold_pct=micro_threshold,
                 confirmed_minor_pivots=len(turns),
                 confirmed_minor_legs=len(legs),
+                last_three_peak_to_peak_sessions=peak_intervals,
+                last_three_trough_to_trough_sessions=trough_intervals,
+                peak_cycle_median_sessions=peak_stats['median'],
+                trough_cycle_median_sessions=trough_stats['median'],
+                peak_cycle_relative_mad=peak_stats['relative_mad'],
+                trough_cycle_relative_mad=trough_stats['relative_mad'],
+                preferred_cycle_range_sessions=[MIN_CYCLE_SESSIONS,MAX_CYCLE_SESSIONS],
+                cycle_timing_pass=cycle_timing_pass,
                 last_three_completed_legs=recent,
                 last_three_up_legs=recent_up,
                 last_three_up_pct=up_values,
@@ -133,4 +163,6 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
         return _result('WATCH', 'TWO_OF_THREE_UP_SWINGS_ABOVE_FIVE_PERCENT_NOT_REPEATABLE_ENOUGH', **info)
     if hypothetical_net<MIN_NET_CAPTURE_PCT:
         return _result('TOO_SMALL_UPSIDE', 'THREE_UP_SWINGS_PASS_FIVE_PERCENT_BUT_ASSUMED_NET_CAPTURE_TOO_SMALL', **info)
-    return _result('REVIEW', 'THREE_REPEATED_UP_SWINGS_PASS_MINIMUM_AND_EXPERIMENTAL_ECONOMIC_GATE', **info)
+    if not cycle_timing_pass:
+        return _result('CYCLE_TIMING', 'PEAK_AND_TROUGH_INTERVALS_NOT_REPEATED_WITHIN_10_TO_40_SESSIONS', **info)
+    return _result('REVIEW', 'REPEATED_UP_SWINGS_AND_RECENT_CYCLE_TIMING_PASS_EXPERIMENTAL_GATES', **info)
