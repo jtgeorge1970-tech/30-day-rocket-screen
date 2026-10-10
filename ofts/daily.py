@@ -445,7 +445,7 @@ def main():
              f'System actionability gate: {score_status["system_actionability_gate"]}; '
              f'{score_status["gate_reason"]}',
              'Production approval: NO. These are quality scores, not BUY signals.',
-             'Experimental recent viability v0.2: last three minor swings, last two UP legs,'
+             'Experimental recent viability v0.3: last three minor swings, last three UP legs,'
              ' old-outlier dominance, and hypothetical capture after costs; NOT validated.',
              f'Experimental viable REVIEW={sum(r.get("experimental_research_entry") == "REVIEW" for r in report_rows)}; '
              f'viability NO_TRADE={sum(r.get("recent_viability", {}).get("proposed_entry") == "NO_TRADE" for r in report_rows)}',
@@ -456,13 +456,15 @@ def main():
              f'INSUFFICIENT={sum(r.get("swing_health", {}).get("state") == "INSUFFICIENT" for r in report_rows)}',
              'Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.',
              'Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.', '',
-             '| Symbol | Score | Classification | Legacy signal | Swing health | Last 3 swings | Last 2 UP | Old avg | Viability | Experimental review | Highs | Lows | Cycle sessions | Median swing | Confidence |',
-             '|---|---:|---|---|---|---:|---:|---:|---|---|---|---|---:|---:|---|']
+             '| Symbol | Score | Classification | Legacy signal | Swing health | Last 3 swings | Last 3 UP % | >=5% count | Latest UP % | Old avg | Viability | Experimental review | Highs | Lows | Cycle sessions | Median swing | Confidence |',
+             '|---|---:|---|---|---|---:|---|---:|---:|---:|---|---|---|---|---:|---:|---|']
     lines += [f'| {r["symbol"]} | {r["score"]:.3f} | {r["classification"]} | '
               f'{r.get("signal", {}).get("state", "NO_TRADE")} | '
               f'{r.get("swing_health", {}).get("state", "n/a")} | '
               f'{r.get("recent_viability", {}).get("last_three_median_swing_pct") or "n/a"} | '
-              f'{r.get("recent_viability", {}).get("recent_up_median_pct") or "n/a"} | '
+              f'{[round(v, 2) for v in r.get("recent_viability", {}).get("last_three_up_pct", [])]} | '
+              f'{r.get("recent_viability", {}).get("repeated_up_pass_count", "n/a")} | '
+              f'{r.get("recent_viability", {}).get("last_up_pct") or "n/a"} | '
               f'{r.get("recent_viability", {}).get("historical_mean_swing_pct") or "n/a"} | '
               f'{r.get("recent_viability", {}).get("state", "n/a")} | '
               f'{r.get("experimental_research_entry", "NO_TRADE")} | '
@@ -476,11 +478,12 @@ def main():
     review = [r for r in ranked if r.get('experimental_research_entry') == 'REVIEW']
     lines += ['', '## Experimental recent-swing review shortlist (NOT BUY signals)',
               f'Count: {len(review)} of {len(ranked)} scored CANDIDATE names',
-              '| Symbol | Quality score | Last 3 swings % | Last 2 UP % | Historical avg % |',
-              '|---|---:|---:|---:|---:|']
+              '| Symbol | Quality score | Last 3 swings % | Last 3 UP % | >=5% count | Historical avg % |',
+              '|---|---:|---:|---|---:|---:|']
     lines += [f'| {r["symbol"]} | {r["score"]:.3f} | '
               f'{r["recent_viability"].get("last_three_median_swing_pct") or "n/a"} | '
-              f'{r["recent_viability"].get("recent_up_median_pct") or "n/a"} | '
+              f'{[round(v, 2) for v in r["recent_viability"].get("last_three_up_pct", [])]} | '
+              f'{r["recent_viability"].get("repeated_up_pass_count", "n/a")} | '
               f'{r["recent_viability"].get("historical_mean_swing_pct") or "n/a"} |'
               for r in review[:25]]
     lines += ['', '## Mature outcomes by score and horizon', '```json', json.dumps(summaries, indent=2), '```']
