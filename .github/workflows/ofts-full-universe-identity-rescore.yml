@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'ofts/worker.py'
+      - 'ofts/research/three_clear_cycles_v09.py'
+      - 'ofts/test_three_clear_cycles_v09.py'
       - 'ofts/research/security_regimes.py'
       - 'ofts/research/swing_health.py'
       - 'ofts/test_swing_health.py'
@@ -26,7 +28,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Verify swing-health unit regressions
-        run: python -m unittest ofts.test_swing_health ofts.test_recent_viability ofts.test_opportunity_v06 ofts.test_entry_diagnostic_v07 -v
+        run: python -m unittest ofts.test_swing_health ofts.test_recent_viability ofts.test_opportunity_v06 ofts.test_entry_diagnostic_v07 ofts.test_three_clear_cycles_v09 -v
       - name: Restore original full-universe market-data cache
         uses: actions/cache/restore@v4
         with:
@@ -84,6 +86,14 @@ jobs:
           else:
               assert ints['opportunity_v06_eligibility']=='PENDING_ELIGIBILITY', 'INTS_INVALID_ASOF_ELIGIBILITY'
               print('INTS_ASOF_EVIDENCE_PENDING: cached bars predate cap snapshot; not verified eligible')
+          v09=list(csv.DictReader((root/'v09_full_universe_cycle_audit.csv').open()))
+          v09_pass=list(csv.DictReader((root/'v09_full_universe_clear_cycle_pass.csv').open()))
+          v09_keepers=list(csv.DictReader((root/'v09_full_universe_keepers.csv').open()))
+          assert len(v09)==5502, 'V09_MUST_AUDIT_ENTIRE_UNIVERSE'
+          assert all(x['clear_v09_state']=='THREE_CLEAR_CYCLES' for x in v09_pass)
+          assert all(x['clear_v09_state']=='THREE_CLEAR_CYCLES' and x['viability_state']=='REVIEW' for x in v09_keepers)
+          assert all(x['symbol'] in {y['symbol'] for y in v09_pass} for x in v09_keepers)
+          print('V09_FULL_UNIVERSE_CHECK',json.dumps({'universe':len(v09),'three_clear_pass':len(v09_pass),'keepers':len(v09_keepers),'keeper_symbols':[x['symbol'] for x in v09_keepers]}))
           report = {
             'universe': len(rows),
             'scores': len(ranked),
@@ -128,5 +138,9 @@ jobs:
             ofts-output/v07_current_verified_trading_candidates.csv
             ofts-output/status.json
             ofts-output/identity_rescore_report.json
+            ofts-output/v09_full_universe_cycle_audit.csv
+            ofts-output/v09_full_universe_clear_cycle_pass.csv
+            ofts-output/v09_full_universe_keepers.csv
+            ofts-output/v09_full_universe_report.json
           if-no-files-found: warn
           retention-days: 90
