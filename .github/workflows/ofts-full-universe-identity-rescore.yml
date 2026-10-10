@@ -9,6 +9,8 @@ on:
       - 'ofts/test_swing_health.py'
       - 'ofts/research/recent_viability.py'
       - 'ofts/test_recent_viability.py'
+      - 'ofts/research/opportunity_v06.py'
+      - 'ofts/test_opportunity_v06.py'
       - '.github/workflows/ofts-full-universe-identity-rescore.yml'
 permissions:
   contents: read
@@ -22,7 +24,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Verify swing-health unit regressions
-        run: python -m unittest ofts.test_swing_health ofts.test_recent_viability -v
+        run: python -m unittest ofts.test_swing_health ofts.test_recent_viability ofts.test_opportunity_v06 -v
       - name: Restore original full-universe market-data cache
         uses: actions/cache/restore@v4
         with:
@@ -57,6 +59,12 @@ jobs:
           assert all(r['viability_state'] and r['viability_entry'] and r['viability_reason'] for r in ranked), 'MISSING_RECENT_VIABILITY_DIAGNOSTIC'
           shortlist=list(csv.DictReader((root/'v23_research_recent_viability_shortlist.csv').open()))
           assert all(r['combined_research_entry']=='REVIEW' and r['status']=='CANDIDATE' for r in shortlist), 'INVALID_REVIEW_SHORTLIST'
+          v06=list(csv.DictReader((root/'v06_opportunity_research_ranked.csv').open()))
+          assert len(v06)==len(shortlist), 'V06_MUST_RANK_ALL_REVIEW_NAMES'
+          assert all(r['opportunity_v06_status']=='PARTIAL_RESEARCH_ONLY' for r in v06), 'V06_INCORRECT_STATUS'
+          assert all(r['opportunity_v06_eligibility']=='PENDING_ELIGIBILITY' for r in v06), 'UNVERIFIED_ELIGIBILITY_WAS_PASSED'
+          assert all(float(a['opportunity_v06_score']) >= float(b['opportunity_v06_score']) for a,b in zip(v06,v06[1:])), 'V06_WRONG_ORDER'
+          assert v06[0]['symbol']=='CTOS', 'V06_EXPECTED_CONTROL_CTOS'
           report = {
             'universe': len(rows),
             'scores': len(ranked),
@@ -70,6 +78,8 @@ jobs:
                                         for state in sorted({r['viability_state'] for r in ranked})},
             'swing_states': {state: sum(r['swing_state'] == state for r in ranked)
                              for state in sorted({r['swing_state'] for r in ranked})},
+            'v06_opportunity_top': v06[:25],
+            'v06_verified_eligible': 0,
             'research_only': True,
             'production_approved': False,
             'history_provenance': 'restored original full-universe GitHub Actions cache',
@@ -83,6 +93,9 @@ jobs:
               for r in ranked[:10]:
                   f.write('- '+r['rank']+' '+r['symbol']+' '+r['score']+' ('+r['status']+'), swing '+r['swing_state']+', viability '+r['viability_state']+', combined '+r['combined_research_entry']+'\n')
               f.write('\nExperimental recent-swing review shortlist (NOT BUY): '+str(len(shortlist))+'\n')
+              f.write('\nPrimary v0.6 opportunity research ranking (out of 80; eligibility pending):\n')
+              for r in v06[:10]:
+                  f.write('- '+r['opportunity_rank']+' '+r['symbol']+' '+r['opportunity_v06_score']+'/80; v2.3 benchmark '+r['score']+'\n')
           PY
       - uses: actions/upload-artifact@v4
         if: always()
@@ -92,6 +105,7 @@ jobs:
             ofts-output/v23_research_universe.csv
             ofts-output/v23_research_ranked.csv
             ofts-output/v23_research_recent_viability_shortlist.csv
+            ofts-output/v06_opportunity_research_ranked.csv
             ofts-output/status.json
             ofts-output/identity_rescore_report.json
           if-no-files-found: warn
