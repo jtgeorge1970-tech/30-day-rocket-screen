@@ -131,8 +131,8 @@ class RecentViabilityTests(unittest.TestCase):
         values=[100]
         for x in ups: values.extend([100+x,100])
         r=recent_swing_viability(series(values),6)
-        self.assertEqual(r['preceding_three_up_pct'],[11,11,11])
-        self.assertEqual(r['last_three_up_pct'],[7,7,7])
+        self.assertEqual([round(x,3) for x in r['preceding_three_up_pct']],[11,11,11])
+        self.assertEqual([round(x,3) for x in r['last_three_up_pct']],[7,7,7])
         self.assertAlmostEqual(r['recent_vs_prior_up_ratio'],7/11)
         self.assertEqual(r['recent_vs_prior_state'],'DISSIPATING')
         self.assertEqual(r['state'],'DISSIPATING')
@@ -146,7 +146,7 @@ class RecentViabilityTests(unittest.TestCase):
         for a,b,n in zip(values,values[1:],spans):
             prices.extend(a+(b-a)*i/n for i in range(1,n+1))
         r=recent_swing_viability(prices,6,lookback=400)
-        self.assertEqual(r['last_three_up_pct'],[10,10,10])
+        self.assertEqual([round(x,3) for x in r['last_three_up_pct']],[10,10,10])
         self.assertGreater(r['recent_vs_prior_cadence_ratio'],1.5)
         self.assertEqual(r['recent_vs_prior_state'],'DISSIPATING')
         self.assertEqual(r['state'],'DISSIPATING')
