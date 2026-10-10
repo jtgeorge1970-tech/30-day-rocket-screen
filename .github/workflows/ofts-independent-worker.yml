@@ -4,6 +4,8 @@ on:
     paths:
       - 'ofts/daily.py'
       - 'ofts/test_daily.py'
+      - 'ofts/test_regime.py'
+      - 'ofts/research/security_regimes.py'
       - 'ofts/SSOT_DAILY_OPERATIONS.md'
       - '.github/workflows/ofts-independent-worker.yml'
   workflow_dispatch:
