@@ -1,4 +1,4 @@
-"""OFTS research challenger v0.2: recent swing viability / 'fool's gold' audit.
+"""OFTS research challenger v0.3: recent swing viability / 'fool's gold' audit.
 
 Prevents a few large OLD swings from masquerading as CURRENT tradable
 oscillations. Uses a separate 2.5%-3.5% diagnostic pivot detector so that
@@ -9,7 +9,9 @@ All cutoffs and capture assumptions are experimental, NOT validated.
 from statistics import median
 from ofts.research.candidate_components import detect_turns
 
-VERSION = 'recent-viability-v0.2-experimental'
+VERSION = 'recent-viability-v0.3-experimental'
+MIN_REPEATED_UP_PCT = 5.0
+MIN_CONFIRMED_UP_LEGS = 3
 ROUND_TRIP_COST_PCT = 0.20
 CAPTURE_FRACTION = 0.50
 MIN_NET_CAPTURE_PCT = 2.50
@@ -23,7 +25,7 @@ def _result(state, reason, **extra):
 
 
 def recent_swing_viability(closes, major_threshold_pct, lookback=252):
-    """Point-in-time audit of last THREE completed swings and last TWO UP legs.
+    """Point-in-time audit of last THREE completed swings and last THREE UP legs.
 
     No future bars; never treats DOWN legs as buyable upside. Uses identical
     minor-pivot threshold over old and recent legs for valid comparison.
@@ -44,7 +46,13 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
     recent = legs[-3:]
     older = legs[:-3]
     up = [l for l in legs if l['kind']=='UP']
-    recent_up = up[-2:]
+    recent_up = up[-3:]
+    up_values = [l['amplitude_pct'] for l in recent_up]
+    up_pass_count = sum(p >= MIN_REPEATED_UP_PCT for p in up_values)
+    latest_up_age = len(prices)-1-recent_up[-1]['end_index'] if recent_up else None
+    up_trend = ('SHRINKING' if len(up_values)==3 and up_values[0]>up_values[1]>up_values[2]
+                else 'GROWING' if len(up_values)==3 and up_values[0]<up_values[1]<up_values[2]
+                else 'MIXED' if len(up_values)==3 else 'INSUFFICIENT')
     amplitudes = [l['amplitude_pct'] for l in legs]
     latest = [l['amplitude_pct'] for l in recent]
     prior = [l['amplitude_pct'] for l in older]
@@ -57,7 +65,7 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
     top_two_share = (sum(sorted(amplitudes, reverse=True)[:2])/sum(amplitudes)
                      if len(amplitudes)>=2 and sum(amplitudes)>0 else None)
     recent_up_median = (median(l['amplitude_pct'] for l in recent_up)
-                        if len(recent_up)==2 else None)
+                        if len(recent_up)==3 else None)
     hypothetical_net = (CAPTURE_FRACTION*recent_up_median-ROUND_TRIP_COST_PCT
                         if recent_up_median is not None else None)
     last_turn_age = len(prices)-1-turns[-1][0] if turns else None
@@ -73,7 +81,14 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
                 confirmed_minor_pivots=len(turns),
                 confirmed_minor_legs=len(legs),
                 last_three_completed_legs=recent,
-                last_two_up_legs=recent_up,
+                last_three_up_legs=recent_up,
+                last_three_up_pct=up_values,
+                last_up_pct=up_values[-1] if up_values else None,
+                repeated_up_min_pct=MIN_REPEATED_UP_PCT,
+                repeated_up_pass_count=up_pass_count,
+                repeated_up_required=MIN_CONFIRMED_UP_LEGS,
+                up_progression=up_trend,
+                latest_confirmed_up_age_sessions=latest_up_age,
                 last_three_median_swing_pct=recent_median,
                 earlier_median_swing_pct=prior_median,
                 historical_mean_swing_pct=all_mean,
@@ -98,8 +113,16 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
         return _result('TOO_SMALL', 'LAST_THREE_SWINGS_NOT_ECONOMICALLY_MEANINGFUL', **info)
     if fading or recent_shrinking:
         return _result('FADING', 'RECENT_SWINGS_SHRINKING_VS_EARLIER', **info)
-    if len(recent_up)<2:
-        return _result('INSUFFICIENT_UPSIDE', 'NEED_TWO_CONFIRMED_RISING_SWINGS', **info)
+    if len(recent_up)<MIN_CONFIRMED_UP_LEGS:
+        return _result('INSUFFICIENT_UPSIDE', 'NEED_THREE_CONFIRMED_RISING_SWINGS', **info)
+    if latest_up_age is None or latest_up_age>45:
+        return _result('STALE_UPSIDE', 'LATEST_CONFIRMED_RISING_SWING_TOO_OLD', **info)
+    if up_values[-1]<MIN_REPEATED_UP_PCT:
+        return _result('TOO_SMALL_UPSIDE', 'LATEST_CONFIRMED_UP_SWING_BELOW_FIVE_PERCENT', **info)
+    if up_pass_count<2:
+        return _result('TOO_SMALL_UPSIDE', 'FEWER_THAN_TWO_OF_THREE_UP_SWINGS_ABOVE_FIVE_PERCENT', **info)
+    if up_pass_count==2:
+        return _result('WATCH', 'TWO_OF_THREE_UP_SWINGS_ABOVE_FIVE_PERCENT_NOT_REPEATABLE_ENOUGH', **info)
     if hypothetical_net<MIN_NET_CAPTURE_PCT:
-        return _result('TOO_SMALL_UPSIDE', 'LAST_TWO_UP_SWINGS_TOO_SMALL_AFTER_ASSUMED_CAPTURE_COSTS', **info)
-    return _result('REVIEW', 'RECENT_SWING_SIZE_PASSES_EXPERIMENTAL_ECONOMIC_GATE', **info)
+        return _result('TOO_SMALL_UPSIDE', 'THREE_UP_SWINGS_PASS_FIVE_PERCENT_BUT_ASSUMED_NET_CAPTURE_TOO_SMALL', **info)
+    return _result('REVIEW', 'THREE_REPEATED_UP_SWINGS_PASS_MINIMUM_AND_EXPERIMENTAL_ECONOMIC_GATE', **info)
