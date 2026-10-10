@@ -1,4 +1,4 @@
-"""OFTS research challenger v0.4: recent swing viability / 'fool's gold' audit.
+"""OFTS research challenger v0.5: recent swing viability / 'fool's gold' audit.
 
 Prevents a few large OLD swings from masquerading as CURRENT tradable
 oscillations. Uses a separate 2.5%-3.5% diagnostic pivot detector so that
@@ -9,7 +9,7 @@ All cutoffs and capture assumptions are experimental, NOT validated.
 from statistics import median
 from ofts.research.candidate_components import detect_turns
 
-VERSION = 'recent-viability-v0.4-experimental'
+VERSION = 'recent-viability-v0.5-experimental'
 MIN_CYCLE_SESSIONS = 10
 MAX_CYCLE_SESSIONS = 40
 MIN_INDIVIDUAL_CYCLE_SESSIONS = 8
@@ -45,8 +45,12 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
              detect_turns(prices[start:], micro_threshold)]
     highs = [i for i, kind, _ in turns if kind == 'H']
     lows = [i for i, kind, _ in turns if kind == 'L']
-    peak_intervals = [b-a for a,b in zip(highs,highs[1:])][-3:]
-    trough_intervals = [b-a for a,b in zip(lows,lows[1:])][-3:]
+    all_peak_gaps = [b-a for a,b in zip(highs,highs[1:])]
+    peak_intervals = all_peak_gaps[-3:]
+    prior_peak_intervals = all_peak_gaps[-6:-3]
+    all_trough_gaps = [b-a for a,b in zip(lows,lows[1:])]
+    trough_intervals = all_trough_gaps[-3:]
+    prior_trough_intervals = all_trough_gaps[-6:-3]
     def timing_stats(intervals):
         if len(intervals) < 3:
             return {'median':None,'relative_mad':None,'pass':False}
@@ -70,6 +74,25 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
     up = [l for l in legs if l['kind']=='UP']
     recent_up = up[-3:]
     up_values = [l['amplitude_pct'] for l in recent_up]
+    prior_up_values = [l['amplitude_pct'] for l in up[-6:-3]]
+    enough_comparison = all(len(x)==3 for x in
+                            (up_values,prior_up_values,peak_intervals,trough_intervals,
+                             prior_peak_intervals,prior_trough_intervals))
+    up_ratio = (median(up_values)/median(prior_up_values)
+                if len(up_values)==len(prior_up_values)==3 else None)
+    peak_ratio = (median(peak_intervals)/median(prior_peak_intervals)
+                  if len(peak_intervals)==len(prior_peak_intervals)==3 else None)
+    trough_ratio = (median(trough_intervals)/median(prior_trough_intervals)
+                    if len(trough_intervals)==len(prior_trough_intervals)==3 else None)
+    cadence_ratio = (median([peak_ratio,trough_ratio])
+                     if peak_ratio is not None and trough_ratio is not None else None)
+    shrinking = up_ratio is not None and up_ratio<0.70
+    slowing = cadence_ratio is not None and cadence_ratio>1.50
+    combined = (up_ratio is not None and cadence_ratio is not None
+                and up_ratio<0.85 and cadence_ratio>1.30)
+    comparison_state = ('INSUFFICIENT' if not enough_comparison else
+                        'DISSIPATING' if shrinking or slowing or combined else
+                        'STABLE_OR_MIXED')
     up_pass_count = sum(p >= MIN_REPEATED_UP_PCT for p in up_values)
     up_average = sum(up_values)/3 if len(up_values)==3 else None
     up_median = median(up_values) if len(up_values)==3 else None
@@ -108,6 +131,16 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
                 confirmed_minor_pivots=len(turns),
                 confirmed_minor_legs=len(legs),
                 last_three_peak_to_peak_sessions=peak_intervals,
+                preceding_three_peak_to_peak_sessions=prior_peak_intervals,
+                preceding_three_trough_to_trough_sessions=prior_trough_intervals,
+                preceding_three_up_pct=prior_up_values,
+                recent_vs_prior_up_ratio=up_ratio,
+                recent_vs_prior_peak_spacing_ratio=peak_ratio,
+                recent_vs_prior_trough_spacing_ratio=trough_ratio,
+                recent_vs_prior_cadence_ratio=cadence_ratio,
+                recent_vs_prior_sufficient=enough_comparison,
+                recent_vs_prior_state=comparison_state,
+                recent_combined_dissipation=bool(combined),
                 last_three_trough_to_trough_sessions=trough_intervals,
                 peak_cycle_median_sessions=peak_stats['median'],
                 trough_cycle_median_sessions=trough_stats['median'],
@@ -165,4 +198,8 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
         return _result('TOO_SMALL_UPSIDE', 'THREE_UP_SWINGS_PASS_FIVE_PERCENT_BUT_ASSUMED_NET_CAPTURE_TOO_SMALL', **info)
     if not cycle_timing_pass:
         return _result('CYCLE_TIMING', 'PEAK_AND_TROUGH_INTERVALS_NOT_REPEATED_WITHIN_10_TO_40_SESSIONS', **info)
-    return _result('REVIEW', 'REPEATED_UP_SWINGS_AND_RECENT_CYCLE_TIMING_PASS_EXPERIMENTAL_GATES', **info)
+    if not enough_comparison:
+        return _result('INSUFFICIENT_COMPARISON', 'NEED_THREE_PRIOR_UP_LEGS_AND_PRIOR_PEAK_TROUGH_GAPS', **info)
+    if shrinking or slowing or combined:
+        return _result('DISSIPATING', 'RECENT_UP_AMPLITUDE_OR_CYCLE_CADENCE_WORSE_THAN_PREVIOUS_THREE', **info)
+    return _result('REVIEW', 'RECENT_THREE_VS_PRECEDING_THREE_SWING_AND_TIMING_PASS', **info)
