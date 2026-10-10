@@ -1,5 +1,5 @@
 import unittest
-from ofts.research.fresh_audit import window_stats,keeper_status
+from ofts.research.fresh_audit import window_stats,keeper_status,entry_priority
 
 def bars(values):
     return [{"date":f"2026-01-{i+1:02d}","open":x,"high":x*1.01,
