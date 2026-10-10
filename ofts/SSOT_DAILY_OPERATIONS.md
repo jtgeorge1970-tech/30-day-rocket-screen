@@ -186,3 +186,13 @@ Require actual amplitudes of the **last THREE completed and confirmed UP legs** 
 - `UNSTABLE`: 0–1 of three pass, or latest UP leg <5%; **NO_TRADE** regardless of old average. `INSUFFICIENT`: fewer than three confirmed UP legs; **NO_TRADE**.
 - Keep existing 5.4% median economic opportunity and 2.5% assumed net capture hurdles; passing 5% repetition alone does not override these or downtrend/dissipation risk. Confirmed pivot lag means this is a retrospective current-cycle quality filter, not a prediction of the next UP leg.
 - Compare training-only candidates for 5/6/7/8% gross UP floors and repeatability 2-of-3 vs 3-of-3, using embargoed untouched chronological validation, missed winners, avoided losses, execution costs, SPY and all 5/10/20/30/60-session outcomes. **Do not promote or calibrate a score=80 BUY rule** without measured forward evidence.
+
+### Experimental v0.4 — recent oscillation cycle clock is mandatory (2026-10-10)
+
+User-identified issue: Three qualifying 5% upward swings six months apart are **not** a useful active oscillator. OFTS previously measured peak/trough timing as a **historical weighted component** and the daily cycle fingerprint, but did **not** require recent same-side pivot spacing as a current trade-readiness hard gate.
+
+**New research-only timing gate:** Using the same confirmed minor pivots as recent UP swing amplitude, record the **last THREE peak-to-peak trading-session intervals** and the **last THREE trough-to-trough trading-session intervals**, requiring at least four recent confirmed peaks and four recent confirmed troughs. Each series must have median **10–40 trading sessions** (roughly 2–8 calendar weeks), every individual interval **8–45 sessions**, and relative median absolute deviation / median <=**0.35**. Both peak and trough checks must pass to issue research `REVIEW`. Otherwise issue `CYCLE_TIMING / NO_TRADE`, preserving actual intervals and reason. Existing v0.3 3-of-3 UP >=5%, freshness, economic viability, v0.1 stability and structural checks remain mandatory. **Do not substitute up-leg duration for full peak-to-peak cycle length.**
+
+Cutoffs are experimental: test 10–20, 10–30, 10–40, and 10–50 session cycle ranges, stability cutoffs, forward capture, rejected winners and avoided losers on chronologically held-out cohorts before promoting. All original scores and frozen prior cohorts remain unchanged. No research `REVIEW` is an authorized BUY.
+
+Implementation: `ofts/research/recent_viability.py` v0.4, regression tests, full-universe `ofts/worker.py` output, prospective `ofts/daily.py` snapshots and reports.
