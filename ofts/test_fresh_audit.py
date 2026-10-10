@@ -35,6 +35,14 @@ class TestChartShape(unittest.TestCase):
         row.update(three_clear_cycles="THREE_CLEAR_CYCLES",
                    clean_cycle_v10={"score":79.0},eligibility="INELIGIBLE")
         self.assertEqual(keeper_status(row),"INELIGIBLE")
+    def test_chasing_never_entry_candidate(self):
+        row=dict(current_keeper_status="RESEARCH_KEEPER_NOT_VERIFIED_BUY",
+                 entry_state="CHASE_RISK_WAIT")
+        self.assertEqual(entry_priority(row),"NO_CHASE")
+        row["entry_state"]="REVERSAL_REVIEW"
+        self.assertEqual(entry_priority(row),"REVERSAL_REVIEW_NOT_BUY")
+        row["entry_state"]="UNCONFIRMED_TROUGH_WAIT"
+        self.assertEqual(entry_priority(row),"TROUGH_WATCH_NOT_BUY")
     def test_insufficient_window(self):
         self.assertEqual(window_stats(bars([10.0]*20),30)["status"],"INSUFFICIENT")
 
