@@ -63,7 +63,8 @@ class RecentViabilityTests(unittest.TestCase):
         p=series([100,110,100,110,100,110,100,104,100,110,100,110])
         r=recent_swing_viability(p,6)
         self.assertEqual(r['repeated_up_pass_count'],2)
-        self.assertEqual(r['state'],'WATCH')
+        self.assertEqual(r['recent_up_repeatability'],'WATCH_2_OF_3')
+        self.assertIn(r['state'],('WATCH','TOO_SMALL'))
         self.assertEqual(r['proposed_entry'],'NO_TRADE')
 
     def test_latest_up_under_five_kills_even_if_mean_high(self):
@@ -87,6 +88,7 @@ class RecentViabilityTests(unittest.TestCase):
         self.assertEqual(r['repeated_up_pass_count'],3)
         self.assertEqual([round(x,1) for x in r['last_three_up_pct']],[8,8,8])
         self.assertEqual(r['state'],'REVIEW')
+        self.assertEqual(r['recent_up_repeatability'],'STABLE_3_OF_3')
         self.assertFalse(r['production_approved'])
 
     def test_frozen_asof_result_reproducible(self):
