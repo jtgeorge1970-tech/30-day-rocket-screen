@@ -6,6 +6,8 @@ on:
       - 'ofts/worker.py'
       - 'ofts/research/three_clear_cycles_v09.py'
       - 'ofts/test_three_clear_cycles_v09.py'
+      - 'ofts/research/clear_cycle_rank_v10.py'
+      - 'ofts/test_clear_cycle_rank_v10.py'
       - 'ofts/research/security_regimes.py'
       - 'ofts/research/swing_health.py'
       - 'ofts/test_swing_health.py'
@@ -28,7 +30,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Verify swing-health unit regressions
-        run: python -m unittest ofts.test_swing_health ofts.test_recent_viability ofts.test_opportunity_v06 ofts.test_entry_diagnostic_v07 ofts.test_three_clear_cycles_v09 -v
+        run: python -m unittest ofts.test_swing_health ofts.test_recent_viability ofts.test_opportunity_v06 ofts.test_entry_diagnostic_v07 ofts.test_three_clear_cycles_v09 ofts.test_clear_cycle_rank_v10 -v
       - name: Restore original full-universe market-data cache
         uses: actions/cache/restore@v4
         with:
@@ -91,6 +93,8 @@ jobs:
           v09_keepers=list(csv.DictReader((root/'v09_full_universe_keepers.csv').open()))
           assert len(v09)==5502, 'V09_MUST_AUDIT_ENTIRE_UNIVERSE'
           assert all(x['clear_v09_state']=='THREE_CLEAR_CYCLES' for x in v09_pass)
+          assert all(x['clear_v10_score'] for x in v09_pass)
+          assert all(float(a['clear_v10_score'])>=float(b['clear_v10_score']) for a,b in zip(v09_pass,v09_pass[1:])), 'V10_RANK_ORDER_INVALID'
           assert all(x['clear_v09_state']=='THREE_CLEAR_CYCLES' and x['viability_state']=='REVIEW' for x in v09_keepers)
           assert all(x['symbol'] in {y['symbol'] for y in v09_pass} for x in v09_keepers)
           print('V09_FULL_UNIVERSE_CHECK',json.dumps({'universe':len(v09),'three_clear_pass':len(v09_pass),'keepers':len(v09_keepers),'keeper_symbols':[x['symbol'] for x in v09_keepers]}))
