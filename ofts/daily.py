@@ -59,6 +59,24 @@ def cycle_fingerprint(closes, threshold, structural):
                 amplitude_consistency=amplitude, confidence=confidence)
 
 
+def current_signal_state(closes, threshold, classification):
+    """Close-confirmed state for hypothetical next-open execution."""
+    if classification != 'CANDIDATE':
+        return dict(state='NO_TRADE', reason=classification)
+    turns = detect_turns(closes, threshold)
+    if not turns:
+        return dict(state='NO_TRADE', reason='NO_CONFIRMED_TURN')
+    latest = turns[-1]
+    prior_turns = detect_turns(closes[:-1], threshold) if len(closes) > 1 else []
+    if latest in prior_turns:
+        return dict(state='NO_TRADE', reason='NO_NEW_CONFIRMED_TURN',
+                    last_pivot_type=latest[1], last_pivot_index=latest[0])
+    return dict(state='BUY' if latest[1] == 'L' else 'SELL',
+                reason='NEW_CONFIRMED_REVERSAL', pivot_type=latest[1],
+                pivot_index=latest[0], confirmation_index=len(closes)-1,
+                confirmation_lag_bars=len(closes)-1-latest[0])
+
+
 def atomic(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_name(path.name + '.tmp')
@@ -238,6 +256,7 @@ def main():
     (state / 'history').mkdir(exist_ok=True)
     (state / 'predictions').mkdir(exist_ok=True)
     (state / 'fingerprints').mkdir(exist_ok=True)
+    (state / 'signals').mkdir(exist_ok=True)
     now = datetime.now(timezone.utc)
     schedule = market_schedule(now)
     target = completed_session(schedule, now)
@@ -281,6 +300,7 @@ def main():
                     row.update(score=result.get('candidate_score'), classification=result['status'])
                     if result.get('candidate_score') is not None:
                         row['cycle'] = cycle_fingerprint(series[2], result['threshold_pct'], result['structural'])
+                    row['signal'] = current_signal_state(series[2], result.get('threshold_pct', 6), result['status'])
                 except (ValueError, TypeError, KeyError) as exc:
                     row.update(classification='DATA_ERROR', error=str(exc))
         rows.append(row)
@@ -305,12 +325,19 @@ def main():
         snapshot = frozen_snapshot(destination, candidate)
     snapshots = load_qualified_snapshots(state / 'predictions')
     fingerprint_snapshot = None
+    signal_snapshot = None
     if fresh_count >= required_fresh:
         fingerprint_snapshot = frozen_snapshot(
             state / 'fingerprints' / (target + '.json'),
             dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
                  model_hash=model_hash, rows=rows,
                  note='Point-in-time research fingerprints; not production BUY/SELL signals'))
+        signal_snapshot = frozen_snapshot(
+            state / 'signals' / (target + '.json'),
+            dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
+                 execution='Hypothetical next-session open', model_hash=model_hash,
+                 rows=rows, production_approved=False,
+                 note='Close-confirmed research states; not brokerage instructions'))
     histories = {s: read_history(state, s) for s in set(refresh_symbols) | {r['symbol'] for s in snapshots for r in s['rows']}}
     results = [r for s in snapshots for r in outcomes(s, histories, schedule)]
     save_json(state / 'outcomes.json', results)
@@ -339,7 +366,7 @@ def main():
                         benchmark_pairs=len(excess), average_excess_pct=sum(excess) / len(excess) if excess else None,
                         worst_adverse_excursion_pct=min(r['adverse_excursion_pct'] for r in group)))
     save_json(state / 'validation_summary.json', summaries)
-    report_rows = fingerprint_snapshot['rows'] if fingerprint_snapshot else (snapshot['rows'] if snapshot else rows)
+    report_rows = signal_snapshot['rows'] if signal_snapshot else (fingerprint_snapshot['rows'] if fingerprint_snapshot else (snapshot['rows'] if snapshot else rows))
     ranked = sorted((r for r in report_rows if r['score'] is not None and r['classification'] == 'CANDIDATE'), key=lambda r: r['score'], reverse=True)
     counts = {status: sum(r['status'] == status for r in results) for status in sorted({r['status'] for r in results})}
     lines = ['# OFTS daily research', '', f'Market session: {target}',
@@ -347,12 +374,16 @@ def main():
              f'Qualified prediction cohorts saved: {len(snapshots)}; current coverage: {fresh_count}/{len(selected)}',
              f'Outcome counts: {counts}',
              f'Cycle fingerprints saved: {sum("cycle" in r for r in report_rows)}/{len(report_rows)}',
+             f'Signal states: BUY={sum(r.get("signal", {}).get("state") == "BUY" for r in report_rows)}, '
+             f'SELL={sum(r.get("signal", {}).get("state") == "SELL" for r in report_rows)}, '
+             f'NO_TRADE={sum(r.get("signal", {}).get("state") == "NO_TRADE" for r in report_rows)}',
              'Production approval: NO. These are quality scores, not BUY signals.',
              'Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.',
              'Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.', '',
-             '| Symbol | Score | Classification | Cycle sessions | Median swing | Confidence |',
-             '|---|---:|---|---:|---:|---|']
+             '| Symbol | Score | Classification | Signal | Cycle sessions | Median swing | Confidence |',
+             '|---|---:|---|---|---:|---:|---|']
     lines += [f'| {r["symbol"]} | {r["score"]:.3f} | {r["classification"]} | '
+              f'{r.get("signal", {}).get("state", "NO_TRADE")} | '
               f'{r.get("cycle", {}).get("cycle_sessions") or "n/a"} | '
               f'{r.get("cycle", {}).get("median_swing_pct") or "n/a"} | '
               f'{r.get("cycle", {}).get("confidence", "n/a")} |' for r in ranked[:25]]
