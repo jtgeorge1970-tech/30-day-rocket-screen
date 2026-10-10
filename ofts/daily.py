@@ -237,6 +237,7 @@ def main():
     state.mkdir(parents=True, exist_ok=True)
     (state / 'history').mkdir(exist_ok=True)
     (state / 'predictions').mkdir(exist_ok=True)
+    (state / 'fingerprints').mkdir(exist_ok=True)
     now = datetime.now(timezone.utc)
     schedule = market_schedule(now)
     target = completed_session(schedule, now)
@@ -303,6 +304,13 @@ def main():
             destination = recovery_path
         snapshot = frozen_snapshot(destination, candidate)
     snapshots = load_qualified_snapshots(state / 'predictions')
+    fingerprint_snapshot = None
+    if fresh_count >= required_fresh:
+        fingerprint_snapshot = frozen_snapshot(
+            state / 'fingerprints' / (target + '.json'),
+            dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
+                 model_hash=model_hash, rows=rows,
+                 note='Point-in-time research fingerprints; not production BUY/SELL signals'))
     histories = {s: read_history(state, s) for s in set(refresh_symbols) | {r['symbol'] for s in snapshots for r in s['rows']}}
     results = [r for s in snapshots for r in outcomes(s, histories, schedule)]
     save_json(state / 'outcomes.json', results)
@@ -331,13 +339,14 @@ def main():
                         benchmark_pairs=len(excess), average_excess_pct=sum(excess) / len(excess) if excess else None,
                         worst_adverse_excursion_pct=min(r['adverse_excursion_pct'] for r in group)))
     save_json(state / 'validation_summary.json', summaries)
-    report_rows = snapshot['rows'] if snapshot else rows
+    report_rows = fingerprint_snapshot['rows'] if fingerprint_snapshot else (snapshot['rows'] if snapshot else rows)
     ranked = sorted((r for r in report_rows if r['score'] is not None), key=lambda r: r['score'], reverse=True)
     counts = {status: sum(r['status'] == status for r in results) for status in sorted({r['status'] for r in results})}
     lines = ['# OFTS daily research', '', f'Market session: {target}',
              f'Selected: {len(selected)}; refreshed: {sum(audit[s]["status"] == "FRESH" for s in selected)}; refresh errors: {len(control["retry"])}',
              f'Qualified prediction cohorts saved: {len(snapshots)}; current coverage: {fresh_count}/{len(selected)}',
              f'Outcome counts: {counts}',
+             f'Cycle fingerprints saved: {sum("cycle" in r for r in report_rows)}/{len(report_rows)}',
              'Production approval: NO. These are quality scores, not BUY signals.',
              'Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.',
              'Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.', '',
