@@ -340,7 +340,7 @@ def main():
                         worst_adverse_excursion_pct=min(r['adverse_excursion_pct'] for r in group)))
     save_json(state / 'validation_summary.json', summaries)
     report_rows = fingerprint_snapshot['rows'] if fingerprint_snapshot else (snapshot['rows'] if snapshot else rows)
-    ranked = sorted((r for r in report_rows if r['score'] is not None), key=lambda r: r['score'], reverse=True)
+    ranked = sorted((r for r in report_rows if r['score'] is not None and r['classification'] == 'CANDIDATE'), key=lambda r: r['score'], reverse=True)
     counts = {status: sum(r['status'] == status for r in results) for status in sorted({r['status'] for r in results})}
     lines = ['# OFTS daily research', '', f'Market session: {target}',
              f'Selected: {len(selected)}; refreshed: {sum(audit[s]["status"] == "FRESH" for s in selected)}; refresh errors: {len(control["retry"])}',
