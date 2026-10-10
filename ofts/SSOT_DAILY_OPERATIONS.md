@@ -176,3 +176,13 @@ User correction to v0.2: **A current average is insufficient.** Report actual pe
 - Require three fully confirmed UP legs. If fewer, `INSUFFICIENT_UPSIDE`; if latest completed UP leg is older than 45 sessions, `STALE_UPSIDE`. Keep earlier v0.2 last-three-all-legs median, historical outlier, shrinkage and net-capture hurdles, which may reject an otherwise 3/3 passing pattern.
 - Save exact `last_three_up_pct` (chronological oldest→newest), `last_up_pct`, `repeated_up_pass_count`, `up_progression` (shrinking/growing/mixed), and hypothetical net capture. Never infer buyability from large DOWN legs or historical averages.
 - **No untested numeric gate is permanent:** compare floors 5/6/7/8% and 2-of-3 versus 3-of-3 repetitions on training then embargoed holdout / forward cohorts, with rejects, missed winners, SPY, costs, drawdown, trade frequency and cycle duration. Version all challenger changes; do not revise frozen cohorts or the original v2.3 score/BUY ledger. All states remain **RESEARCH ONLY**, no production trade recommendations.
+
+### Experimental v0.3 — three repeatable recent UP swings, not generic HIGH/LOW (2026-10-10)
+
+Require actual amplitudes of the **last THREE completed and confirmed UP legs** (not any three alternating UP/DOWN legs) to appear in the full-universe and daily outputs. Provisional minimum **5.00% gross per UP leg**; do not assume this is optimal. Independently show the count passing 5%, latest UP leg %, UP-leg progression and a named repeatability classification:
+
+- `STABLE_3_OF_3`: all three most recent completed UP legs >=5%; eligible only for additional structural/recency/economic gates and `REVIEW`, **never** an automatic BUY.
+- `WATCH_2_OF_3`: exactly two pass and the latest is >=5%; **NO_TRADE** pending stronger repeatability. Another blocker (e.g. most recent alternating swing median too small) may yield the more severe primary `state`, but the independent repeatability field must still say `WATCH_2_OF_3`.
+- `UNSTABLE`: 0–1 of three pass, or latest UP leg <5%; **NO_TRADE** regardless of old average. `INSUFFICIENT`: fewer than three confirmed UP legs; **NO_TRADE**.
+- Keep existing 5.4% median economic opportunity and 2.5% assumed net capture hurdles; passing 5% repetition alone does not override these or downtrend/dissipation risk. Confirmed pivot lag means this is a retrospective current-cycle quality filter, not a prediction of the next UP leg.
+- Compare training-only candidates for 5/6/7/8% gross UP floors and repeatability 2-of-3 vs 3-of-3, using embargoed untouched chronological validation, missed winners, avoided losses, execution costs, SPY and all 5/10/20/30/60-session outcomes. **Do not promote or calibrate a score=80 BUY rule** without measured forward evidence.
