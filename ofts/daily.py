@@ -15,6 +15,7 @@ from ofts.research.v23_replacement import evaluate
 from ofts.research.candidate_components import detect_turns
 from ofts.research.security_regimes import post_identity_bars
 from ofts.research.swing_health import recent_swing_health
+from ofts.research.recent_viability import recent_swing_viability
 from ofts.cycle_ledger import active_ledger_symbols, rebuild_cycle_ledger, build_cycle_report_card
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -339,6 +340,12 @@ def main():
                         # Experimental diagnostic; original BUY/SELL research
                         # signal and v2.3 score remain unchanged.
                         row['swing_health'] = recent_swing_health(series[2], result['threshold_pct'])
+                        row['recent_viability'] = recent_swing_viability(series[2], result['threshold_pct'])
+                        row['experimental_research_entry'] = (
+                            'REVIEW' if result['status'] == 'CANDIDATE'
+                            and row['swing_health']['proposed_entry'] == 'REVIEW'
+                            and row['recent_viability']['proposed_entry'] == 'REVIEW'
+                            else 'NO_TRADE')
                     row['signal'] = current_signal_state(series[2], result.get('threshold_pct', 6), result['status'])
             except (ValueError, TypeError, KeyError) as exc:
                 row.update(classification='DATA_ERROR', error=str(exc))
@@ -346,7 +353,8 @@ def main():
         rows.append(row)
     model_hash = hashlib.sha256(b''.join((ROOT / p).read_bytes() for p in
                                ['ofts/research/v23_replacement.py', 'ofts/research/candidate_components.py',
-                                 'ofts/research/security_regimes.py', 'ofts/research/swing_health.py'])).hexdigest()
+                                 'ofts/research/security_regimes.py', 'ofts/research/swing_health.py',
+                                  'ofts/research/recent_viability.py'])).hexdigest()
     fresh_count = sum(audit[s]['status'] == 'FRESH' for s in selected)
     required_fresh = min(MIN_FRESH_COHORT, len(selected))
     candidate = dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
@@ -437,6 +445,10 @@ def main():
              f'System actionability gate: {score_status["system_actionability_gate"]}; '
              f'{score_status["gate_reason"]}',
              'Production approval: NO. These are quality scores, not BUY signals.',
+             'Experimental recent viability v0.2: last three minor swings, last two UP legs,'
+             ' old-outlier dominance, and hypothetical capture after costs; NOT validated.',
+             f'Experimental viable REVIEW={sum(r.get("experimental_research_entry") == "REVIEW" for r in report_rows)}; '
+             f'viability NO_TRADE={sum(r.get("recent_viability", {}).get("proposed_entry") == "NO_TRADE" for r in report_rows)}',
              'Experimental swing-health v0.1: last-four-leg stability and'
              ' lower-high/lower-low deterioration (NOT validated for trading).',
              f'Experimental swing-health NO_TRADE={sum(r.get("swing_health", {}).get("proposed_entry") == "NO_TRADE" for r in report_rows)}; '
@@ -444,17 +456,33 @@ def main():
              f'INSUFFICIENT={sum(r.get("swing_health", {}).get("state") == "INSUFFICIENT" for r in report_rows)}',
              'Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.',
              'Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.', '',
-             '| Symbol | Score | Classification | Legacy signal | Swing health | Proposed entry | Highs | Lows | Cycle sessions | Median swing | Confidence |',
-             '|---|---:|---|---|---|---|---|---|---:|---:|---|']
+             '| Symbol | Score | Classification | Legacy signal | Swing health | Last 3 swings | Last 2 UP | Old avg | Viability | Experimental review | Highs | Lows | Cycle sessions | Median swing | Confidence |',
+             '|---|---:|---|---|---|---:|---:|---:|---|---|---|---|---:|---:|---|']
     lines += [f'| {r["symbol"]} | {r["score"]:.3f} | {r["classification"]} | '
               f'{r.get("signal", {}).get("state", "NO_TRADE")} | '
               f'{r.get("swing_health", {}).get("state", "n/a")} | '
-              f'{r.get("swing_health", {}).get("proposed_entry", "n/a")} | '
+              f'{r.get("recent_viability", {}).get("last_three_median_swing_pct") or "n/a"} | '
+              f'{r.get("recent_viability", {}).get("recent_up_median_pct") or "n/a"} | '
+              f'{r.get("recent_viability", {}).get("historical_mean_swing_pct") or "n/a"} | '
+              f'{r.get("recent_viability", {}).get("state", "n/a")} | '
+              f'{r.get("experimental_research_entry", "NO_TRADE")} | '
               f'{r.get("swing_health", {}).get("high_progression", "n/a")} | '
               f'{r.get("swing_health", {}).get("low_progression", "n/a")} | '
               f'{r.get("cycle", {}).get("cycle_sessions") or "n/a"} | '
               f'{r.get("cycle", {}).get("median_swing_pct") or "n/a"} | '
               f'{r.get("cycle", {}).get("confidence", "n/a")} |' for r in ranked[:25]]
+    # This separate challenger shortlist NEVER replaces the original quality
+    # ranking, signal ledger or frozen historical predictions.
+    review = [r for r in ranked if r.get('experimental_research_entry') == 'REVIEW']
+    lines += ['', '## Experimental recent-swing review shortlist (NOT BUY signals)',
+              f'Count: {len(review)} of {len(ranked)} scored CANDIDATE names',
+              '| Symbol | Quality score | Last 3 swings % | Last 2 UP % | Historical avg % |',
+              '|---|---:|---:|---:|---:|']
+    lines += [f'| {r["symbol"]} | {r["score"]:.3f} | '
+              f'{r["recent_viability"].get("last_three_median_swing_pct") or "n/a"} | '
+              f'{r["recent_viability"].get("recent_up_median_pct") or "n/a"} | '
+              f'{r["recent_viability"].get("historical_mean_swing_pct") or "n/a"} |'
+              for r in review[:25]]
     lines += ['', '## Mature outcomes by score and horizon', '```json', json.dumps(summaries, indent=2), '```']
     lines += ['', '## Identity-boundary exclusions (current processing; prior snapshots immutable)']
     lines += [f'- {r["symbol"]}: {r["classification"]}; '
