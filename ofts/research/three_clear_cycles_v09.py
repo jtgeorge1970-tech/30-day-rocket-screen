@@ -21,6 +21,11 @@ MAX_UP_OUTLIER_RATIO=3.0
 MAX_SINGLE_DOWN_LEG_PCT=20.0
 MIN_WORST_LEG_EFFICIENCY=0.40
 MIN_MEDIAN_LEG_EFFICIENCY=0.60
+# User-approved requirement: reject meaningfully shrinking UP swings.
+# Research thresholds are provisional; tiny rounding drift is tolerated.
+MAX_LATEST_UP_DROP_FROM_PRIOR=0.15
+MAX_LATEST_UP_DROP_FROM_FIRST=0.15
+MAX_CONSECUTIVE_SHRINK_FROM_FIRST=0.05
 
 def three_clear_cycles(closes,lookback=126):
     p=[float(x) for x in closes]
@@ -69,7 +74,14 @@ def three_clear_cycles(closes,lookback=126):
                   (x["rise_path_efficiency"],x["fall_path_efficiency"])]
     worst_efficiency=min(efficiencies) if efficiencies else None
     median_efficiency=median(efficiencies) if efficiencies else None
+    up_progression=("SHRINKING" if len(rises)==3 and rises[0]>rises[1]>rises[2] else
+                    "GROWING" if len(rises)==3 and rises[0]<rises[1]<rises[2] else "MIXED")
+    recent_up_ratio=round(rises[-1]/rises[-2],4) if len(rises)==3 else None
+    first_to_latest_up_ratio=round(rises[-1]/rises[0],4) if len(rises)==3 else None
     info=dict(base,cycles=latest,completed_cycles=len(cycles),
+              last_three_up_pct=rises,up_progression=up_progression,
+              latest_to_prior_up_ratio=recent_up_ratio,
+              latest_to_first_up_ratio=first_to_latest_up_ratio,
               qualifying_last_three=sum(x["qualifies"] for x in latest),
               last_completed_trough_age_sessions=age,
               max_drawdown_pct=round(max_dd,3),
@@ -94,6 +106,12 @@ def three_clear_cycles(closes,lookback=126):
     if worst_efficiency<MIN_WORST_LEG_EFFICIENCY or median_efficiency<MIN_MEDIAN_LEG_EFFICIENCY:
         return dict(info,state="REJECT_CHOPPY_SWINGS",
                     reason="INTRASWING_PATH_TOO_NOISY_FOR_CLEAR_ENTRY_EXIT")
+    # Non-compensable deterioration veto: no quality score can hide a fading oscillator.
+    if (recent_up_ratio < 1-MAX_LATEST_UP_DROP_FROM_PRIOR or
+        first_to_latest_up_ratio < 1-MAX_LATEST_UP_DROP_FROM_FIRST or
+        (up_progression=="SHRINKING" and first_to_latest_up_ratio < 1-MAX_CONSECUTIVE_SHRINK_FROM_FIRST)):
+        return dict(info,state="REJECT_UPSWING_DETERIORATION",
+                    reason="LAST_THREE_COMPLETED_UPSWINGS_SHOW_MEANINGFUL_AMPLITUDE_DECAY")
     if age>MAX_LAST_TROUGH_AGE:
         return dict(info,state="REJECT_STALE_CYCLES",reason="LATEST_COMPLETED_CYCLE_TOO_OLD")
     return dict(info,state="THREE_CLEAR_CYCLES",reason="THREE_RECENT_COMPLETE_5_PERCENT_UP_AND_DOWN_CYCLES")
