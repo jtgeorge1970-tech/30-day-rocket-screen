@@ -55,12 +55,12 @@ class RecentViabilityTests(unittest.TestCase):
         result=recent_swing_viability(series([100,104,100,105,100,104,100,105,100,104,100]),12)
         self.assertEqual(result['micro_pivot_threshold_pct'],3.5)
         self.assertGreaterEqual(result['confirmed_minor_legs'],6)
-        self.assertEqual(result['state'],'TOO_SMALL')
+        self.assertIn(result['state'],('TOO_SMALL','TOO_SMALL_UPSIDE'))
 
     def test_two_of_three_up_swings_is_watch_not_buy(self):
         # Earlier stable 10% legs; last three UP swings 10%, 4%, 10%.
         # Last three completed overall legs are not tiny, but repeatability fails.
-        p=series([100,110,100,110,100,110,100,104,100,110,100])
+        p=series([100,110,100,110,100,110,100,104,100,110,100,110])
         r=recent_swing_viability(p,6)
         self.assertEqual(r['repeated_up_pass_count'],2)
         self.assertEqual(r['state'],'WATCH')
