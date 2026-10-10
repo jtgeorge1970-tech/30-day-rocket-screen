@@ -167,3 +167,12 @@ Implement independent **experimental recent-viability v0.2** without silently ch
 - Backtest on chronological, embargoed holdouts and forward snapshots with the original unfiltered baseline, including frequency of candidates, capture assumptions, spread/slippage sensitivity, missed winners, outlier influence, false rejections, 5/10/20/30/60-session returns and SPY. Tune thresholds only on training data, freeze before untouched evaluation, and promote nothing without verified out-of-sample improvement.
 
 Code: `ofts/research/recent_viability.py`, `ofts/test_recent_viability.py`, full-universe `ofts/worker.py` and prospective daily `ofts/daily.py`. Research challenger, not proven profitability.
+
+## LOCKED — REPEATED MINIMUM CURRENT UP SWING, EXPERIMENTAL v0.3 (2026-10-10)
+
+User correction to v0.2: **A current average is insufficient.** Report actual percentages for the **three latest separately confirmed UP swings** and require repeated economic amplitude. A 15%, 12%, 4% sequence fails even if its average is high.
+
+- Starting research-only floor: **5.0% gross for EACH of the latest three completed UP legs**. All **3 of 3** must reach 5% for v0.3 `REVIEW`; **2 of 3** is `WATCH` with proposed `NO_TRADE`; **0–1 of 3** is `TOO_SMALL_UPSIDE` / `NO_TRADE`. The **most recent** UP leg below 5% is independently `NO_TRADE` regardless of mean.
+- Require three fully confirmed UP legs. If fewer, `INSUFFICIENT_UPSIDE`; if latest completed UP leg is older than 45 sessions, `STALE_UPSIDE`. Keep earlier v0.2 last-three-all-legs median, historical outlier, shrinkage and net-capture hurdles, which may reject an otherwise 3/3 passing pattern.
+- Save exact `last_three_up_pct` (chronological oldest→newest), `last_up_pct`, `repeated_up_pass_count`, `up_progression` (shrinking/growing/mixed), and hypothetical net capture. Never infer buyability from large DOWN legs or historical averages.
+- **No untested numeric gate is permanent:** compare floors 5/6/7/8% and 2-of-3 versus 3-of-3 repetitions on training then embargoed holdout / forward cohorts, with rejects, missed winners, SPY, costs, drawdown, trade frequency and cycle duration. Version all challenger changes; do not revise frozen cohorts or the original v2.3 score/BUY ledger. All states remain **RESEARCH ONLY**, no production trade recommendations.
