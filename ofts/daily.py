@@ -13,6 +13,7 @@ from statistics import median
 
 from ofts.research.v23_replacement import evaluate
 from ofts.research.candidate_components import detect_turns
+from ofts.research.security_regimes import post_identity_bars
 from ofts.cycle_ledger import active_ledger_symbols, rebuild_cycle_ledger, build_cycle_report_card
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,7 +21,7 @@ WATCH = 'HNRG CHTR FUBO EPOW WULF HLIT JACK TGS SPGI CSIQ XPRO SFM DTIL TBLA FWR
 HORIZONS = (5, 10, 20, 30, 60)
 FIELDS = ['date', 'open', 'high', 'low', 'close', 'volume', 'split']
 MIN_FRESH_COHORT = 100
-DATA_FAILURES = {'STALE_DATA', 'DATA_ERROR', 'INSUFFICIENT_HISTORY'}
+DATA_FAILURES = {'STALE_DATA', 'DATA_ERROR', 'INSUFFICIENT_HISTORY', 'INSUFFICIENT_POST_REGIME_HISTORY'}
 
 
 def snapshot_is_qualified(snapshot, minimum=MIN_FRESH_COHORT):
@@ -317,23 +318,31 @@ def main():
         row = dict(symbol=symbol, score=None, classification='STALE_DATA',
                    asof=bars[-1]['date'] if bars else None, bars=len(bars))
         if audit[symbol]['status'] == 'FRESH':
-            if len(bars) < 180:
-                row['classification'] = 'INSUFFICIENT_HISTORY'
-            else:
-                try:
+            try:
+                # Do not blend a predecessor SPAC's trading history with a
+                # newly listed operating-company security (verified event dates).
+                eligible_bars, regime = post_identity_bars(symbol, bars, target)
+                if regime:
+                    row.update(raw_bars=len(bars), bars=len(eligible_bars),
+                               regime_start=regime['start'], regime_source=regime['source'])
+                if len(eligible_bars) < 180:
+                    row['classification'] = ('INSUFFICIENT_POST_REGIME_HISTORY'
+                                             if regime else 'INSUFFICIENT_HISTORY')
+                else:
                     # Existing evaluate implementation remains byte-for-byte unchanged.
-                    series = [[float(r[k]) for r in bars] for k in ('high', 'low', 'close')]
+                    series = [[float(r[k]) for r in eligible_bars] for k in ('high', 'low', 'close')]
                     result = evaluate(*series)
                     row.update(score=result.get('candidate_score'), classification=result['status'])
                     if result.get('candidate_score') is not None:
                         row['cycle'] = cycle_fingerprint(series[2], result['threshold_pct'], result['structural'])
                     row['signal'] = current_signal_state(series[2], result.get('threshold_pct', 6), result['status'])
-                except (ValueError, TypeError, KeyError) as exc:
-                    row.update(classification='DATA_ERROR', error=str(exc))
+            except (ValueError, TypeError, KeyError) as exc:
+                row.update(classification='DATA_ERROR', error=str(exc))
         row.setdefault('signal', dict(state='NO_TRADE', reason=row['classification']))
         rows.append(row)
     model_hash = hashlib.sha256(b''.join((ROOT / p).read_bytes() for p in
-                               ['ofts/research/v23_replacement.py', 'ofts/research/candidate_components.py'])).hexdigest()
+                               ['ofts/research/v23_replacement.py', 'ofts/research/candidate_components.py',
+                                 'ofts/research/security_regimes.py'])).hexdigest()
     fresh_count = sum(audit[s]['status'] == 'FRESH' for s in selected)
     required_fresh = min(MIN_FRESH_COHORT, len(selected))
     candidate = dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
@@ -434,6 +443,11 @@ def main():
               f'{r.get("cycle", {}).get("median_swing_pct") or "n/a"} | '
               f'{r.get("cycle", {}).get("confidence", "n/a")} |' for r in ranked[:25]]
     lines += ['', '## Mature outcomes by score and horizon', '```json', json.dumps(summaries, indent=2), '```']
+    lines += ['', '## Identity-boundary exclusions (current processing; prior snapshots immutable)']
+    lines += [f'- {r["symbol"]}: {r["classification"]}; '
+              f'post-event bars={r["bars"]}; raw bars={r["raw_bars"]}; '
+              f'event={r["regime_start"]}; source={r["regime_source"]}'
+              for r in rows if r.get('regime_start')]
     lines += ['', '## Refresh failures'] + [f'- {s}: {audit[s]["error"]}' for s in control['retry']]
     atomic(state / 'REPORT.md', ('\n'.join(lines) + '\n').encode())
     print('\n'.join(lines), flush=True)
