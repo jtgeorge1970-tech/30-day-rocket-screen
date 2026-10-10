@@ -75,23 +75,13 @@ def audit_symbol(symbol, target, yf, calendar, expected):
         verified_trade_candidate=False)
 
 def keeper_status(row):
+    """Current research keeper: NEW three-cycle gate, never old health veto."""
     if "error" in row:return "DATA_ERROR"
+    if row.get("eligibility")=="INELIGIBLE":return "INELIGIBLE"
     if row.get("three_clear_cycles")!="THREE_CLEAR_CYCLES":
-        return "REJECT_NO_THREE_CLEAR_5PCT_CYCLES" if row.get("three_clear_cycles")!="REJECT_BIG_LOSS" else "REJECT_BIG_LOSS"
-    if row["viability"]!="REVIEW":return "REJECT_OSCILLATION_HEALTH"
-    w30=row.get("w30",{})
-    w60=row.get("w60",{})
-    if w30.get("status")!="MEASURED" or w60.get("status")!="MEASURED":
-        return "INSUFFICIENT_RECENT_CHART"
-    if w30.get("confirmed_up_legs",0)<2 or w60.get("confirmed_up_legs",0)<3:
-        return "REJECT_RECENT_REPEATABILITY"
-    if w60.get("completed_peak_intervals",0)<2 or w60.get("completed_trough_intervals",0)<2:
-        return "REJECT_RECENT_CADENCE"
-    if row.get("swing_health") in ("DOWNTREND","DOWNTREND_WEAK_BOUNCE","DECAYING","IRREGULAR","INSUFFICIENT"):
-        return "WATCH_TREND_OR_SWING_HEALTH"
-    if row.get("entry_state") in ("BREAKDOWN_NO_TRADE","FALLING_WAIT","STALE_DATA"):
-        return "WATCH_ENTRY_NOT_READY"
-    if row.get("quality_v06") is None:return "INSUFFICIENT_QUALITY"
+        return "REJECT_NEW_CYCLE_GATE"
+    if row.get("clean_cycle_v10",{}).get("score") is None:
+        return "INSUFFICIENT_NEW_SCORE"
     return "RESEARCH_KEEPER_NOT_VERIFIED_BUY"
 
 def main():
@@ -132,9 +122,9 @@ def main():
     for row in results:
         row["current_keeper_status"]=keeper_status(row)
     ranked=sorted((row for row in results if row["current_keeper_status"]=="RESEARCH_KEEPER_NOT_VERIFIED_BUY"),
-                  key=lambda row:row["quality_v06"],reverse=True)
+                  key=lambda row:row["clean_cycle_v10"]["score"],reverse=True)
     for i,row in enumerate(ranked,1):row["fresh_research_rank"]=i
-    out=dict(version="v0.8-fresh-independent-audit",target_session=target,
+    out=dict(version="v0.10-fresh-independent-audit",target_session=target,
              research_symbols=[r["symbol"] for r in research[:args.limit]],
              controls=controls,source="yfinance, independent fresh provider requests",
              data_errors=sum("error" in r for r in results),
@@ -144,7 +134,7 @@ def main():
     pathlib.Path(args.output).parent.mkdir(parents=True,exist_ok=True)
     pathlib.Path(args.output).write_text(json.dumps(out,indent=2)+chr(10))
     with open(pathlib.Path(args.output).with_suffix(".csv"),"w",newline="") as f:
-        keys=["symbol","asof","close","score_v23","quality_v06","eligibility","three_clear_cycles","current_keeper_status","fresh_research_rank","swing_health",
+        keys=["symbol","asof","close","score_v23","quality_v06","clean_cycle_v10_score","eligibility","three_clear_cycles","current_keeper_status","fresh_research_rank","swing_health",
               "viability","entry_state","entry_5d_pct","entry_20d_pct","status","error",
               "w30_high","w30_low","w30_swing_pct","w30_up_legs","w60_high","w60_low",
               "w60_swing_pct","w60_up_legs","w126_high","w126_low","w126_swing_pct",
@@ -152,6 +142,7 @@ def main():
         w=csv.DictWriter(f,fieldnames=keys);w.writeheader()
         for record in results:
             row={k:v for k,v in record.items() if k in keys}
+            row["clean_cycle_v10_score"]=record.get("clean_cycle_v10",{}).get("score")
             for n in (30,60,126,252):
                 win=record.get(f"w{n}",{})
                 row.update({f"w{n}_high":win.get("high"),f"w{n}_low":win.get("low"),
@@ -159,12 +150,13 @@ def main():
                             f"w{n}_up_legs":win.get("confirmed_up_legs")})
             w.writerow(row)
     with open(pathlib.Path(args.output).with_name("fresh_oscillator_keepers.csv"),"w",newline="") as f:
-        keys=["fresh_research_rank","symbol","asof","close","quality_v06","score_v23","three_clear_cycles","viability","entry_state","eligibility","current_keeper_status"]
-        w=csv.DictWriter(f,fieldnames=keys,extrasaction="ignore");w.writeheader();w.writerows(ranked)
+        keys=["fresh_research_rank","symbol","asof","close","clean_cycle_v10_score","quality_v06","score_v23","three_clear_cycles","viability","entry_state","eligibility","current_keeper_status"]
+        w=csv.DictWriter(f,fieldnames=keys,extrasaction="ignore");w.writeheader()
+        for record in ranked:w.writerow({**record,"clean_cycle_v10_score":record["clean_cycle_v10"]["score"]})
     fresh_clear=sorted((r for r in results if r.get("three_clear_cycles")=="THREE_CLEAR_CYCLES" and r.get("eligibility")!="INELIGIBLE"),key=lambda r:(-r["clean_cycle_v10"]["score"],r["symbol"]))
     print("FRESH_V10_CLEAN_CYCLE_RANKED",json.dumps([{"rank":i+1,"symbol":r["symbol"],"score":r["clean_cycle_v10"]["score"],"asof":r["asof"],"close":r["close"],"entry":r["entry_state"],"viability":r["viability"],"legacy_health":r["swing_health"],"cycles":r["three_clear_details"]["cycles"]} for i,r in enumerate(fresh_clear)]),flush=True)
     print("THREE_CLEAR_CYCLE_AUDIT",json.dumps([{"symbol":r["symbol"],"state":r.get("three_clear_cycles"),"keeper":r["current_keeper_status"],"three_cycles":r.get("three_clear_details",{}).get("cycles",[])} for r in results]),flush=True)
-    print("FRESH_RESEARCH_KEEPERS",json.dumps([{"rank":r["fresh_research_rank"],"symbol":r["symbol"],"score":r["quality_v06"],"viability":r["viability"],"entry":r["entry_state"]} for r in ranked]),flush=True)
+    print("FRESH_RESEARCH_KEEPERS",json.dumps([{"rank":r["fresh_research_rank"],"symbol":r["symbol"],"score":r["clean_cycle_v10"]["score"],"viability_benchmark":r["viability"],"entry":r["entry_state"]} for r in ranked]),flush=True)
     print("FRESH_AUDIT_SUMMARY",json.dumps({"target":target,"total":len(names),
         "fresh":len(names)-out["data_errors"],"errors":out["data_errors"]}),flush=True)
     # Never silently pass a missing data feed.
