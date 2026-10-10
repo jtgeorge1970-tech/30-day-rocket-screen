@@ -8,7 +8,7 @@ No future data, no trade approval; thresholds require holdout calibration.
 from ofts.research.candidate_components import detect_turns
 from statistics import median
 
-VERSION="v0.9-three-clear-cycles-experimental"
+VERSION="v0.9b-three-clear-cycles-choppiness-experimental"
 PIVOT_PCT=5.0
 MIN_LEG_PCT=5.0
 MAX_CYCLE_BARS=45
@@ -19,6 +19,8 @@ MAX_WINDOW_DRAWDOWN_PCT=25.0
 LOSS_RISK_WINDOW=60
 MAX_UP_OUTLIER_RATIO=3.0
 MAX_SINGLE_DOWN_LEG_PCT=20.0
+MIN_WORST_LEG_EFFICIENCY=0.40
+MIN_MEDIAN_LEG_EFFICIENCY=0.60
 
 def three_clear_cycles(closes,lookback=126):
     p=[float(x) for x in closes]
@@ -33,12 +35,20 @@ def three_clear_cycles(closes,lookback=126):
         rise=100*(b[2]/a[2]-1)
         fall=100*(1-c[2]/b[2])
         length=c[0]-a[0]
+        def efficiency(start,end):
+            segment=prices[start:end+1]
+            traveled=sum(abs(y-x) for x,y in zip(segment,segment[1:]))
+            return abs(segment[-1]-segment[0])/traveled if traveled>0 else 0.0
+        rise_efficiency=efficiency(a[0],b[0])
+        fall_efficiency=efficiency(b[0],c[0])
         cycles.append(dict(trough_start_index=a[0],peak_index=b[0],
                            trough_end_index=c[0],
                            low=round(a[2],4),high=round(b[2],4),
                            next_low=round(c[2],4),
                            rise_pct=round(rise,3),fall_pct=round(fall,3),
                            cycle_sessions=length,
+                           rise_path_efficiency=round(rise_efficiency,4),
+                           fall_path_efficiency=round(fall_efficiency,4),
                            qualifies=(rise>=MIN_LEG_PCT and fall>=MIN_LEG_PCT
                                       and MIN_CYCLE_BARS<=length<=MAX_CYCLE_BARS)))
     latest=cycles[-3:]
@@ -55,6 +65,10 @@ def three_clear_cycles(closes,lookback=126):
     rises=[x['rise_pct'] for x in latest]
     up_outlier_ratio=max(rises)/median(rises) if len(rises)==3 else None
     worst_completed_fall=max((x["fall_pct"] for x in latest),default=0.0)
+    efficiencies=[e for x in latest for e in
+                  (x["rise_path_efficiency"],x["fall_path_efficiency"])]
+    worst_efficiency=min(efficiencies) if efficiencies else None
+    median_efficiency=median(efficiencies) if efficiencies else None
     info=dict(base,cycles=latest,completed_cycles=len(cycles),
               qualifying_last_three=sum(x["qualifies"] for x in latest),
               last_completed_trough_age_sessions=age,
@@ -62,6 +76,8 @@ def three_clear_cycles(closes,lookback=126):
               drawdown_window_sessions=LOSS_RISK_WINDOW,
               largest_rise_to_median_ratio=round(up_outlier_ratio,3) if up_outlier_ratio else None,
               worst_daily_return_pct=round(worst_day,3),
+              worst_leg_path_efficiency=worst_efficiency,
+              median_leg_path_efficiency=median_efficiency,
               largest_recent_peak_to_valley_loss_pct=round(worst_completed_fall,3))
     if worst_day<=-MAX_ONE_DAY_LOSS_PCT:
         return dict(info,state="REJECT_BIG_LOSS",reason="ONE_DAY_DROP_EXCEEDS_12_PERCENT")
@@ -75,6 +91,9 @@ def three_clear_cycles(closes,lookback=126):
         return dict(info,state="REJECT_ONE_OFF_SPIKE",reason="ONE_RISE_OVER_3X_TYPICAL_RECENT_RISE")
     if not all(x["qualifies"] for x in latest):
         return dict(info,state="REJECT_NOISY_OR_IRREGULAR",reason="EACH_OF_LAST_THREE_CYCLES_MUST_HAVE_5_PERCENT_UP_AND_DOWN_AND_8_TO_45_SESSIONS")
+    if worst_efficiency<MIN_WORST_LEG_EFFICIENCY or median_efficiency<MIN_MEDIAN_LEG_EFFICIENCY:
+        return dict(info,state="REJECT_CHOPPY_SWINGS",
+                    reason="INTRASWING_PATH_TOO_NOISY_FOR_CLEAR_ENTRY_EXIT")
     if age>MAX_LAST_TROUGH_AGE:
         return dict(info,state="REJECT_STALE_CYCLES",reason="LATEST_COMPLETED_CYCLE_TOO_OLD")
     return dict(info,state="THREE_CLEAR_CYCLES",reason="THREE_RECENT_COMPLETE_5_PERCENT_UP_AND_DOWN_CYCLES")
