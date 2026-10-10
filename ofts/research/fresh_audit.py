@@ -12,6 +12,7 @@ from ofts.research.swing_health import recent_swing_health
 from ofts.research.opportunity_v06 import opportunity_partial,eligibility_status
 from ofts.research.entry_diagnostic_v07 import entry_diagnostic
 from ofts.research.v23_replacement import evaluate
+from ofts.research.three_clear_cycles_v09 import three_clear_cycles
 
 def window_stats(bars, sessions):
     window=bars[-sessions:]
@@ -58,11 +59,13 @@ def audit_symbol(symbol, target, yf, calendar, expected):
     health=recent_swing_health(closes,v23["threshold_pct"])
     opportunity=opportunity_partial(viability,health)
     entry=entry_diagnostic(closes,[r["date"] for r in bars])
+    clear_cycles=three_clear_cycles(closes)
     return dict(symbol=symbol,source="Yahoo Finance via yfinance; unadjusted OHLC",
         asof=latest,bars=len(bars),close=round(closes[-1],4),
         score_v23=round(v23["candidate_score"],4),quality_v06=opportunity.get("measured_score"),
         eligibility=eligibility_status(symbol,latest,closes[-1])["state"],
         swing_health=health["state"],viability=viability["state"],
+        three_clear_cycles=clear_cycles["state"],three_clear_details=clear_cycles,
         entry_state=entry["state"],entry_5d_pct=entry.get("return_5_sessions_pct"),
         entry_20d_pct=entry.get("return_20_sessions_pct"),
         w30=window_stats(bars,30),w60=window_stats(bars,60),
@@ -71,6 +74,8 @@ def audit_symbol(symbol, target, yf, calendar, expected):
 
 def keeper_status(row):
     if "error" in row:return "DATA_ERROR"
+    if row.get("three_clear_cycles")!="THREE_CLEAR_CYCLES":
+        return "REJECT_NO_THREE_CLEAR_5PCT_CYCLES" if row.get("three_clear_cycles")!="REJECT_BIG_LOSS" else "REJECT_BIG_LOSS"
     if row["viability"]!="REVIEW":return "REJECT_OSCILLATION_HEALTH"
     w30=row.get("w30",{})
     w60=row.get("w60",{})
@@ -136,7 +141,7 @@ def main():
     pathlib.Path(args.output).parent.mkdir(parents=True,exist_ok=True)
     pathlib.Path(args.output).write_text(json.dumps(out,indent=2)+chr(10))
     with open(pathlib.Path(args.output).with_suffix(".csv"),"w",newline="") as f:
-        keys=["symbol","asof","close","score_v23","quality_v06","eligibility","current_keeper_status","fresh_research_rank","swing_health",
+        keys=["symbol","asof","close","score_v23","quality_v06","eligibility","three_clear_cycles","current_keeper_status","fresh_research_rank","swing_health",
               "viability","entry_state","entry_5d_pct","entry_20d_pct","status","error",
               "w30_high","w30_low","w30_swing_pct","w30_up_legs","w60_high","w60_low",
               "w60_swing_pct","w60_up_legs","w126_high","w126_low","w126_swing_pct",
@@ -151,8 +156,9 @@ def main():
                             f"w{n}_up_legs":win.get("confirmed_up_legs")})
             w.writerow(row)
     with open(pathlib.Path(args.output).with_name("fresh_oscillator_keepers.csv"),"w",newline="") as f:
-        keys=["fresh_research_rank","symbol","asof","close","quality_v06","score_v23","viability","entry_state","eligibility","current_keeper_status"]
+        keys=["fresh_research_rank","symbol","asof","close","quality_v06","score_v23","three_clear_cycles","viability","entry_state","eligibility","current_keeper_status"]
         w=csv.DictWriter(f,fieldnames=keys,extrasaction="ignore");w.writeheader();w.writerows(ranked)
+    print("THREE_CLEAR_CYCLE_AUDIT",json.dumps([{"symbol":r["symbol"],"state":r.get("three_clear_cycles"),"keeper":r["current_keeper_status"],"three_cycles":r.get("three_clear_details",{}).get("cycles",[])} for r in results]),flush=True)
     print("FRESH_RESEARCH_KEEPERS",json.dumps([{"rank":r["fresh_research_rank"],"symbol":r["symbol"],"score":r["quality_v06"],"viability":r["viability"],"entry":r["entry_state"]} for r in ranked]),flush=True)
     print("FRESH_AUDIT_SUMMARY",json.dumps({"target":target,"total":len(names),
         "fresh":len(names)-out["data_errors"],"errors":out["data_errors"]}),flush=True)
