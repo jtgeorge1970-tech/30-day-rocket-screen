@@ -6,7 +6,7 @@ from ofts.research.v23_replacement import evaluate
 from ofts.research.security_regimes import post_identity_bars
 from ofts.research.swing_health import recent_swing_health
 from ofts.research.recent_viability import recent_swing_viability
-from ofts.research.opportunity_v06 import opportunity_partial, VERSION as OPPORTUNITY_VERSION
+from ofts.research.opportunity_v06 import opportunity_partial, eligibility_status, VERSION as OPPORTUNITY_VERSION
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/"ofts-output"
 OUT.mkdir(exist_ok=True)
@@ -54,6 +54,9 @@ for ix in range(5502):
                            swing_health_json=json.dumps(health,sort_keys=True))
                 viability=recent_swing_viability(series[2],score["threshold_pct"])
                 opportunity=opportunity_partial(viability,health)
+                eligible=eligibility_status(sym,data[-1].get('date',''),series[2][-1])
+                opportunity['eligibility_status']=eligible['state']
+                opportunity['eligibility_evidence']=eligible
                 row.update(opportunity_v06_score=opportunity.get("measured_score"),
                            opportunity_v06_status=opportunity["status"],
                            opportunity_v06_eligibility=opportunity.get("eligibility_status","PENDING_ELIGIBILITY"),
@@ -132,7 +135,8 @@ with (OUT/"v23_research_recent_viability_shortlist.csv").open("w",newline="") as
 # Experimental v0.6 opportunity ranking is the primary research review order.
 # Original v2.3 score and frozen cohorts remain unchanged for benchmarking.
 opportunity_ranked=sorted(
-    (r for r in viable if isinstance(r.get("opportunity_v06_score"),(int,float))),
+    (r for r in viable if isinstance(r.get("opportunity_v06_score"),(int,float))
+     and r.get("opportunity_v06_eligibility")!="INELIGIBLE"),
     key=lambda r:(-r["opportunity_v06_score"],r["symbol"]))
 opportunity_fields=["opportunity_rank","symbol","opportunity_v06_score",
     "opportunity_v06_status","opportunity_v06_eligibility","score","status",
@@ -149,6 +153,7 @@ print("V06_OPPORTUNITY_RESEARCH_TOP",json.dumps([
      "old_v23_score":round(r["score"],3),"eligibility":r["opportunity_v06_eligibility"]}
     for i,r in enumerate(opportunity_ranked[:25])]))
 print("V06_VERIFIED_ELIGIBLE",0,"market_cap_and_liquidity_data_not_present_in_OHLCV")
+print("V06_EXCLUDED_INELIGIBLE",json.dumps([{"symbol":r["symbol"],"reason":json.loads(r["opportunity_v06_json"]).get("eligibility_evidence",{}).get("reason")} for r in viable if r.get("opportunity_v06_eligibility")=="INELIGIBLE"]))
 print("RECENT_VIABILITY_SHORTLIST",json.dumps([
     {"rank":i+1,"symbol":r["symbol"],"score":round(r["score"],3),
      "last_three_swing_pct":r.get("recent_three_swing_pct"),
