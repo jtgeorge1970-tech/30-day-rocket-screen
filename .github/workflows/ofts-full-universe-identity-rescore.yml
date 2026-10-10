@@ -11,6 +11,8 @@ on:
       - 'ofts/test_recent_viability.py'
       - 'ofts/research/opportunity_v06.py'
       - 'ofts/test_opportunity_v06.py'
+      - 'ofts/research/entry_diagnostic_v07.py'
+      - 'ofts/test_entry_diagnostic_v07.py'
       - '.github/workflows/ofts-full-universe-identity-rescore.yml'
 permissions:
   contents: read
@@ -24,7 +26,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Verify swing-health unit regressions
-        run: python -m unittest ofts.test_swing_health ofts.test_recent_viability ofts.test_opportunity_v06 -v
+        run: python -m unittest ofts.test_swing_health ofts.test_recent_viability ofts.test_opportunity_v06 ofts.test_entry_diagnostic_v07 -v
       - name: Restore original full-universe market-data cache
         uses: actions/cache/restore@v4
         with:
@@ -65,6 +67,9 @@ jobs:
           assert all(r['opportunity_v06_eligibility']=='PENDING_ELIGIBILITY' for r in v06), 'UNVERIFIED_ELIGIBILITY_WAS_PASSED'
           assert all(float(a['opportunity_v06_score']) >= float(b['opportunity_v06_score']) for a,b in zip(v06,v06[1:])), 'V06_WRONG_ORDER'
           assert v06[0]['symbol']=='CTOS', 'V06_EXPECTED_CONTROL_CTOS'
+          assert all(r['entry_v07_state'] and r['entry_v07_asof'] for r in v06), 'MISSING_ENTRY_DIAGNOSTICS'
+          assert all(r['entry_v07_state']!='REVERSAL_REVIEW' for r in v06 if r['entry_v07_state']=='STALE_DATA'), 'STALE_BUY_ERROR'
+          print('V07_ENTRY_STATES',[(r['symbol'],r['entry_v07_state'],r['entry_v07_asof'],r['entry_v07_close']) for r in v06])
           # Cached OHLC can predate dated cap evidence; never leak 2026-10-09
           # knowledge backward into an earlier historical snapshot.
           ints=next(r for r in rows if r['symbol']=='INTS')
