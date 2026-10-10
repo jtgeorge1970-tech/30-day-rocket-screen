@@ -7,6 +7,8 @@ on:
       - 'ofts/test_regime.py'
       - 'ofts/test_swing_health.py'
       - 'ofts/research/swing_health.py'
+      - 'ofts/research/recent_viability.py'
+      - 'ofts/test_recent_viability.py'
       - 'ofts/research/security_regimes.py'
       - 'ofts/SSOT_DAILY_OPERATIONS.md'
       - '.github/workflows/ofts-independent-worker.yml'
@@ -30,7 +32,7 @@ jobs:
       - name: Install market data and exchange calendar
         run: python -m pip install yfinance pandas pandas_market_calendars
       - name: Verify persistence and forward accounting
-        run: python -m unittest ofts.test_daily ofts.test_regime ofts.test_swing_health -v
+        run: python -m unittest ofts.test_daily ofts.test_regime ofts.test_swing_health ofts.test_recent_viability -v
       - name: Restore permanent state branch
         if: github.ref == 'refs/heads/main'
         run: |
