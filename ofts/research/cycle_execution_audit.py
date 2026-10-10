@@ -130,6 +130,7 @@ def main():
         f"Net win rate pct: {100 * sum(v > 0 for v in values) / len(values):.3f}",
         f"Mean net cycle return pct: {mean(values):.3f}",
         f"Median net cycle return pct: {median(values):.3f}",
+        f"Mean excluding three largest winners pct: {mean(sorted(values)[:-3]):.3f}" if len(values) > 3 else "Mean excluding three largest winners pct: n/a",
         f"Mean captured ideal swing pct: {mean(captures):.3f}" if captures else "Mean captured ideal swing pct: n/a",
         f"Median holding sessions: {median(r['hold_sessions'] for r in clean):.3f}",
         f"Mean fixed 12pct stop return pct: {mean(r['fixed_stop_12_pct'] for r in clean):.3f}",
