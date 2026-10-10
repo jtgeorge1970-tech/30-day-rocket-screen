@@ -48,5 +48,7 @@ Overlapping observations are not independent trades. No portfolio win rate or dr
 []
 ```
 
+## Identity-boundary exclusions (current processing; prior snapshots immutable)
+
 ## Refresh failures
 - AKO.A: ValueError: EMPTY_PROVIDER_RESPONSE
