@@ -109,6 +109,8 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
         return _result('STALE_SWINGS', 'RECENT_COMPLETED_SWINGS_TOO_OLD', **info)
     if outlier_foolsgold:
         return _result('FOOLS_GOLD', 'OLD_OUTLIERS_DOMINATE_RECENT_TINY_SWINGS', **info)
+    if len(recent_up)>=MIN_CONFIRMED_UP_LEGS and up_values[-1]<MIN_REPEATED_UP_PCT:
+        return _result('TOO_SMALL_UPSIDE', 'LATEST_CONFIRMED_UP_SWING_BELOW_FIVE_PERCENT', **info)
     if recent_median<MIN_GROSS_UPSIDE_PCT:
         return _result('TOO_SMALL', 'LAST_THREE_SWINGS_NOT_ECONOMICALLY_MEANINGFUL', **info)
     if fading or recent_shrinking:
@@ -117,8 +119,6 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
         return _result('INSUFFICIENT_UPSIDE', 'NEED_THREE_CONFIRMED_RISING_SWINGS', **info)
     if latest_up_age is None or latest_up_age>45:
         return _result('STALE_UPSIDE', 'LATEST_CONFIRMED_RISING_SWING_TOO_OLD', **info)
-    if up_values[-1]<MIN_REPEATED_UP_PCT:
-        return _result('TOO_SMALL_UPSIDE', 'LATEST_CONFIRMED_UP_SWING_BELOW_FIVE_PERCENT', **info)
     if up_pass_count<2:
         return _result('TOO_SMALL_UPSIDE', 'FEWER_THAN_TWO_OF_THREE_UP_SWINGS_ABOVE_FIVE_PERCENT', **info)
     if up_pass_count==2:
