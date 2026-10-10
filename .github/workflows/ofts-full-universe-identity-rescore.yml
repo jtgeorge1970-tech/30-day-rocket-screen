@@ -7,6 +7,8 @@ on:
       - 'ofts/research/security_regimes.py'
       - 'ofts/research/swing_health.py'
       - 'ofts/test_swing_health.py'
+      - 'ofts/research/recent_viability.py'
+      - 'ofts/test_recent_viability.py'
       - '.github/workflows/ofts-full-universe-identity-rescore.yml'
 permissions:
   contents: read
@@ -20,7 +22,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Verify swing-health unit regressions
-        run: python -m unittest ofts.test_swing_health -v
+        run: python -m unittest ofts.test_swing_health ofts.test_recent_viability -v
       - name: Restore original full-universe market-data cache
         uses: actions/cache/restore@v4
         with:
