@@ -1,6 +1,6 @@
 """Experimental v0.6 opportunity component regression tests."""
 import unittest
-from ofts.research.opportunity_v06 import opportunity_partial
+from ofts.research.opportunity_v06 import opportunity_partial, eligibility_status
 
 class OpportunityV06Tests(unittest.TestCase):
     def _data(self,ups,peaks=(10,10,10),troughs=(10,10,10),cadence=1.0):
@@ -24,6 +24,11 @@ class OpportunityV06Tests(unittest.TestCase):
         x=opportunity_partial(self._data([9,9],peaks=(10,10)),{"state":"STABLE_RANGE"})
         self.assertEqual(x["status"],"INSUFFICIENT")
         self.assertIsNone(x["measured_score"])
+    def test_eligibility_dated_market_cap_and_unknown(self):
+        self.assertEqual(eligibility_status('INTS','2026-10-09',3.63)['state'],'INELIGIBLE')
+        self.assertEqual(eligibility_status('INTS','2026-10-08',3.63)['state'],'PENDING_ELIGIBILITY')
+        self.assertEqual(eligibility_status('CTOS','2026-10-09',9.25)['state'],'PENDING_ELIGIBILITY')
+        self.assertEqual(eligibility_status('CTOS','2026-10-09',2.90)['state'],'INELIGIBLE')
     def test_partial_never_becomes_buy_or_eligible(self):
         x=opportunity_partial(self._data([15,15,15]),{"state":"STABLE_RANGE"})
         self.assertEqual(x["eligibility_status"],"PENDING_ELIGIBILITY")
