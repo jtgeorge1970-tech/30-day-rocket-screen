@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-10-10T08:36:04.858110+00:00",
+  "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
+  "production_approved": false,
+  "positions": [
+    {
+      "symbol": "YDES",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-09",
+      "planned_entry_date": "2026-10-12",
+      "entry_score": 44.6109488168825,
+      "cycle": {
+        "cycle_sessions": 12.0,
+        "median_swing_pct": 32.359922854719535,
+        "completed_cycle_intervals": 28,
+        "confirmed_turns": 30,
+        "timing_consistency": 20.73545454545455,
+        "amplitude_consistency": 38.27560540117212,
+        "confidence": "LOW"
+      },
+      "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6"
+    }
+  ],
+  "trades": [],
+  "exceptions": [],
+  "summary": {
+    "complete_signal_cohorts": 1,
+    "pending_entries": 1,
+    "open_positions": 0,
+    "closed_trades": 0,
+    "benchmark_pairs": 0,
+    "review_trades": 0
+  }
+}
