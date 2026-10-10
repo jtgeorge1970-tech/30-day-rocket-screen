@@ -14,6 +14,7 @@ from ofts.research.entry_diagnostic_v07 import entry_diagnostic
 from ofts.research.v23_replacement import evaluate
 from ofts.research.three_clear_cycles_v09 import three_clear_cycles
 from ofts.research.clear_cycle_rank_v10 import score_clear_cycles
+from ofts.research.liquidity_gate import liquidity_gate
 
 def window_stats(bars, sessions):
     window=bars[-sessions:]
@@ -61,12 +62,14 @@ def audit_symbol(symbol, target, yf, calendar, expected):
     opportunity=opportunity_partial(viability,health)
     entry=entry_diagnostic(closes,[r["date"] for r in bars])
     clear_cycles=three_clear_cycles(closes)
+    liquidity=liquidity_gate(bars)
     return dict(symbol=symbol,source="Yahoo Finance via yfinance; unadjusted OHLC",
         asof=latest,bars=len(bars),close=round(closes[-1],4),
         score_v23=round(v23["candidate_score"],4),quality_v06=opportunity.get("measured_score"),
         eligibility=eligibility_status(symbol,latest,closes[-1])["state"],
         swing_health=health["state"],viability=viability["state"],
         three_clear_cycles=clear_cycles["state"],three_clear_details=clear_cycles,
+        liquidity=liquidity,liquidity_state=liquidity["state"],
         clean_cycle_v10=score_clear_cycles(clear_cycles,eligibility_status(symbol,latest,closes[-1])["state"]),
         entry_state=entry["state"],entry_5d_pct=entry.get("return_5_sessions_pct"),
         entry_20d_pct=entry.get("return_20_sessions_pct"),
@@ -82,6 +85,9 @@ def keeper_status(row):
         return "REJECT_NEW_CYCLE_GATE"
     if row.get("clean_cycle_v10",{}).get("score") is None:
         return "INSUFFICIENT_NEW_SCORE"
+    if row.get("liquidity_state")=="REJECT_LOW_LIQUIDITY":return "REJECT_LOW_LIQUIDITY"
+    if row.get("liquidity_state") not in ("LIQUIDITY_HISTORY_PASS_SPREAD_UNVERIFIED","LIQUIDITY_PASS"):
+        return "LIQUIDITY_UNVERIFIED"
     return "RESEARCH_KEEPER_NOT_VERIFIED_BUY"
 
 def entry_priority(row):
