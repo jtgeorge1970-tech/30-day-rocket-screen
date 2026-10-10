@@ -70,6 +70,12 @@ jobs:
           assert all(r['entry_v07_state'] and r['entry_v07_asof'] for r in v06), 'MISSING_ENTRY_DIAGNOSTICS'
           assert all(r['entry_v07_state']!='REVERSAL_REVIEW' for r in v06 if r['entry_v07_state']=='STALE_DATA'), 'STALE_BUY_ERROR'
           print('V07_ENTRY_STATES',[(r['symbol'],r['entry_v07_state'],r['entry_v07_asof'],r['entry_v07_close']) for r in v06])
+          ctos=next(r for r in v06 if r['symbol']=='CTOS')
+          if ctos['entry_v07_asof']=='2026-10-07':
+              assert ctos['entry_v07_state']=='STALE_DATA', 'CTOS_STALE_CACHE_FALSE_CURRENT'
+          current=list(csv.DictReader((root/'v07_current_verified_trading_candidates.csv').open()))
+          assert all(r['opportunity_v06_eligibility']=='PASS' and r['entry_v07_state']=='REVERSAL_REVIEW' for r in current), 'UNVERIFIED_CURRENT_TRADE'
+          print('V07_VERIFIED_CURRENT',len(current))
           # Cached OHLC can predate dated cap evidence; never leak 2026-10-09
           # knowledge backward into an earlier historical snapshot.
           ints=next(r for r in rows if r['symbol']=='INTS')
@@ -119,6 +125,7 @@ jobs:
             ofts-output/v23_research_ranked.csv
             ofts-output/v23_research_recent_viability_shortlist.csv
             ofts-output/v06_opportunity_research_ranked.csv
+            ofts-output/v07_current_verified_trading_candidates.csv
             ofts-output/status.json
             ofts-output/identity_rescore_report.json
           if-no-files-found: warn
