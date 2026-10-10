@@ -18,24 +18,23 @@ class TestChartShape(unittest.TestCase):
         w=window_stats(b,30)
         self.assertEqual(w["confirmed_up_legs"],0)
         self.assertIsNone(w["up_median_pct"])
-    def test_evi_single_spike_and_downtrend_never_keeper(self):
+    def test_evi_single_spike_cannot_be_keeper(self):
         evi=dict(symbol="EVI",viability="REVIEW",swing_health="DOWNTREND",
-                 entry_state="MID_CYCLE_WAIT",quality_v06=52.9703,
+                 three_clear_cycles="REJECT_TOO_FEW_CYCLES",
+                 clean_cycle_v10={"score":None},eligibility="PENDING_ELIGIBILITY")
+        self.assertEqual(keeper_status(evi),"REJECT_NEW_CYCLE_GATE")
+    def test_old_health_not_hard_veto(self):
+        row=dict(viability="DISSIPATING",swing_health="IRREGULAR",
                  three_clear_cycles="THREE_CLEAR_CYCLES",
-                 w30=dict(status="MEASURED",confirmed_up_legs=1),
-                 w60=dict(status="MEASURED",confirmed_up_legs=3,
-                          completed_peak_intervals=3,completed_trough_intervals=2))
-        self.assertEqual(keeper_status(evi),"REJECT_RECENT_REPEATABILITY")
-        evi["w30"]["confirmed_up_legs"]=3
-        self.assertEqual(keeper_status(evi),"WATCH_TREND_OR_SWING_HEALTH")
-    def test_failing_health_vetoes_big_score(self):
-        self.assertEqual(keeper_status(dict(viability="DISSIPATING",three_clear_cycles="THREE_CLEAR_CYCLES",quality_v06=79.99)),
-                         "REJECT_OSCILLATION_HEALTH")
-    def test_three_clear_gate_blocks_historical_score(self):
-        self.assertEqual(keeper_status(dict(three_clear_cycles="REJECT_BIG_LOSS",quality_v06=79.99)),
-                         "REJECT_BIG_LOSS")
-        self.assertEqual(keeper_status(dict(three_clear_cycles="REJECT_TOO_FEW_CYCLES",quality_v06=79.99)),
-                         "REJECT_NO_THREE_CLEAR_5PCT_CYCLES")
+                 clean_cycle_v10={"score":70.0},eligibility="PENDING_ELIGIBILITY")
+        self.assertEqual(keeper_status(row),"RESEARCH_KEEPER_NOT_VERIFIED_BUY")
+    def test_new_gate_and_known_ineligibility_veto(self):
+        row=dict(three_clear_cycles="REJECT_BIG_LOSS",
+                 clean_cycle_v10={"score":None},eligibility="PENDING_ELIGIBILITY")
+        self.assertEqual(keeper_status(row),"REJECT_NEW_CYCLE_GATE")
+        row.update(three_clear_cycles="THREE_CLEAR_CYCLES",
+                   clean_cycle_v10={"score":79.0},eligibility="INELIGIBLE")
+        self.assertEqual(keeper_status(row),"INELIGIBLE")
     def test_insufficient_window(self):
         self.assertEqual(window_stats(bars([10.0]*20),30)["status"],"INSUFFICIENT")
 
