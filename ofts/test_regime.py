@@ -72,6 +72,9 @@ class SecurityIdentityTests(unittest.TestCase):
             self.assertEqual(row['raw_bars'], 340)
             self.assertLess(row['bars'], 180)
             self.assertEqual(row['regime_start'], '2026-07-02')
+            audits = daily.outcomes(frozen, {}, schedule)
+            self.assertEqual(len(audits), 5)
+            self.assertTrue(all(a['status'] == 'INELIGIBLE_DATA' for a in audits))
 
 
 if __name__ == '__main__':
