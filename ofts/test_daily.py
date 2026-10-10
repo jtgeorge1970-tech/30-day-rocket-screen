@@ -10,7 +10,7 @@ import pandas as pd
 from ofts.daily import (save_history, read_history, merge_history, refresh,
                         frozen_snapshot, outcomes, completed_session, market_schedule,
                         snapshot_is_qualified, load_qualified_snapshots,
-                        cycle_fingerprint)
+                        cycle_fingerprint, current_signal_state)
 
 
 def bar(date, close=100, split=0):
@@ -75,6 +75,21 @@ class PersistenceTests(unittest.TestCase):
         # Repeating the same as-of slice must be deterministic; later bars are
         # never supplied to the function and cannot rewrite the fingerprint.
         self.assertEqual(fp, cycle_fingerprint(closes, result['threshold_pct'], result['structural']))
+
+    def test_signal_state_requires_new_close_confirmed_turn(self):
+        # Final bar first confirms a 10% reversal from the low: BUY for next open.
+        closes = [100, 96, 90, 82, 80, 84, 87, 89]
+        signal = current_signal_state(closes, 10, 'CANDIDATE')
+        self.assertEqual(signal['state'], 'BUY')
+        self.assertEqual(signal['confirmation_index'], len(closes)-1)
+        # Without the last bar the pivot is not yet confirmed; no look-ahead.
+        self.assertEqual(current_signal_state(closes[:-1], 10, 'CANDIDATE')['state'], 'NO_TRADE')
+        self.assertEqual(current_signal_state(closes, 10, 'REJECT_CANDIDATE_GATE')['state'], 'NO_TRADE')
+
+    def test_signal_state_sells_only_after_confirmed_high_reversal(self):
+        closes = [80, 84, 90, 98, 100, 96, 93, 89]
+        self.assertEqual(current_signal_state(closes, 10, 'CANDIDATE')['state'], 'SELL')
+        self.assertEqual(current_signal_state(closes[:-1], 10, 'CANDIDATE')['state'], 'NO_TRADE')
 
     def test_saved_prediction_is_immutable(self):
         with tempfile.TemporaryDirectory() as d:
