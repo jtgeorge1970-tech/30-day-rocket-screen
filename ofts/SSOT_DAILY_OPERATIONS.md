@@ -106,3 +106,13 @@ Trigger: manual review of 2026-10-09 #1 research-quality symbol AKAM (62.584, 32
 - Audit ranking stability and outcomes on frozen future cohorts, with separate fast/medium/slow groups and missed-opportunity controls. Record failures and rejected candidates. No cherry-picking of only visually attractive winners.
 - Any new score weights or hard gates must be versioned as an experimental challenger, backtested chronologically against untouched holdouts, and never silently overwrite frozen v2.3 scores. Do not present any challenger as production approved until it demonstrates forward net performance.
 - For AKAM as of 2026-10-09, current saved signal is NO_TRADE; no automatic purchase recommendation is authorized.
+
+## LOCKED — YDES CHART CHALLENGE AND ENTRY-CHASE AUDIT (2026-10-10)
+
+Trigger: user-supplied YDES brokerage charts as of 2026-10-09 showing +16.23% one day, -17.02% five days, +58.35% one month and -60.55% one year; 5-minute chart shows a rapid intraday rebound. These are user-supplied chart readings, NOT independently verified market-data bars. The existing frozen research BUY state is score 44.611, estimated cycle 12 sessions, 32.36% median historical swing, LOW confidence, hypothetical next-open entry only.
+
+- Keep the original 2026-10-09 BUY research observation immutable and include its hypothetical future result even if the setup proves bad. Do not rewrite the signal as NO_TRADE or remove it from the denominator after seeing price action.
+- A newly confirmed low reversal is not sufficient evidence for an attractive entry. Independently report point-in-time latest-session return, trailing 5-session return, distance above the most recent confirmed low, and confidence. Flag abrupt rebound/chase risk and low-confidence cycles as *research warnings*; never silently change locked v2.3 scores.
+- Audit next-session opening gaps, next-open fill price, slippage sensitivity, maximum adverse excursion, and whether entry occurred after most of the rebound. Include failures, missed entries and stopped-out outcomes.
+- Test any candidate BUY rejection thresholds prospectively and on chronological untouched holdouts before adoption. A hard-coded retrospective filter chosen after seeing YDES is prohibited.
+- Research BUY is NOT a production recommendation or brokerage authorization. Current forward cycle ledger must remain intact.
