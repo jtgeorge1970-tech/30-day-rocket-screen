@@ -13,6 +13,7 @@ from statistics import median
 
 from ofts.research.v23_replacement import evaluate
 from ofts.research.candidate_components import detect_turns
+from ofts.cycle_ledger import active_ledger_symbols, rebuild_cycle_ledger
 
 ROOT = Path(__file__).resolve().parents[1]
 WATCH = 'HNRG CHTR FUBO EPOW WULF HLIT JACK TGS SPGI CSIQ XPRO SFM DTIL TBLA FWRG NYAX OWLT SRAD ATGL FMC LE MESO NX MBLY IDR'.split()
@@ -280,7 +281,7 @@ def main():
     snapshots = load_qualified_snapshots(state / 'predictions')
     dates = [str(d.date()) for d in schedule.index]
     pending = {r['symbol'] for s in snapshots if s['asof'] in dates and dates.index(target) - dates.index(s['asof']) <= 65 for r in s['rows']}
-    refresh_symbols = list(dict.fromkeys(selected + sorted(pending) + ['SPY']))
+    refresh_symbols = list(dict.fromkeys(selected + sorted(pending) + active_ledger_symbols(state) + ['SPY']))
     import yfinance as yf
     import pandas as pd
     audit = refresh(state, refresh_symbols, target, yf.download)
@@ -349,6 +350,7 @@ def main():
     histories = {s: read_history(state, s) for s in set(refresh_symbols) | {r['symbol'] for s in snapshots for r in s['rows']}}
     results = [r for s in snapshots for r in outcomes(s, histories, schedule)]
     save_json(state / 'outcomes.json', results)
+    cycle_ledger = rebuild_cycle_ledger(state, histories, schedule)
     # Cursor advances only once per session; failed symbols remain in retry queue.
     if control['last_session'] != target:
         control['cursor'] = (cursor + args.batch_size) % len(universe)
@@ -385,6 +387,10 @@ def main():
              f'Signal states: BUY={sum(r.get("signal", {}).get("state") == "BUY" for r in report_rows)}, '
              f'SELL={sum(r.get("signal", {}).get("state") == "SELL" for r in report_rows)}, '
              f'NO_TRADE={sum(r.get("signal", {}).get("state") == "NO_TRADE" for r in report_rows)}',
+             f'Cycle ledger: pending entries={cycle_ledger["summary"]["pending_entries"]}; '
+             f'open positions={cycle_ledger["summary"]["open_positions"]}; '
+             f'closed trades={cycle_ledger["summary"]["closed_trades"]}; '
+             f'SPY pairs={cycle_ledger["summary"]["benchmark_pairs"]}',
              'Production approval: NO. These are quality scores, not BUY signals.',
              'Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.',
              'Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.', '',
