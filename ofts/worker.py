@@ -3,6 +3,7 @@
 import csv,json,pathlib,sys
 from collections import defaultdict
 from ofts.research.v23_replacement import evaluate
+from ofts.research.security_regimes import post_identity_bars
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/"ofts-output"
 OUT.mkdir(exist_ok=True)
@@ -25,17 +26,24 @@ for bar in bars:
 results=[]
 for ix in range(5502):
     sym=symbols[(ix*137)%5502]
-    data=groups.get(sym,[])
-    row={"run":ix+1,"symbol":sym,"bars":len(data),"status":"NO_USABLE_HISTORY","score":""}
-    if len(data)>=180:
-        try:
-            if "date" in data[0]: data=sorted(data,key=lambda r:r["date"])
+    raw=groups.get(sym,[])
+    data=sorted(raw,key=lambda r:r.get("date",""))
+    row={"run":ix+1,"symbol":sym,"bars":len(data),"raw_bars":len(raw),
+         "regime_start":"","status":"NO_USABLE_HISTORY","score":""}
+    try:
+        data,regime=post_identity_bars(sym,data)
+        row["bars"]=len(data)
+        if regime:
+            row["regime_start"]=regime["start"]
+        if len(data)<180:
+            row["status"]="INSUFFICIENT_POST_REGIME_HISTORY" if regime else "NO_USABLE_HISTORY"
+        else:
             score=evaluate(*[[float(b[k]) for b in data] for k in ("high","low","close")])
             row.update(status=score["status"],score=score.get("candidate_score",""),version="v2.3-research")
-        except (ValueError,KeyError,TypeError) as e:
-            row.update(status="DATA_ERROR",error=str(e))
+    except (ValueError,KeyError,TypeError) as e:
+        row.update(status="DATA_ERROR",error=str(e))
     results.append(row)
-fields=["run","symbol","bars","status","score","version","error"]
+fields=["run","symbol","bars","raw_bars","regime_start","status","score","version","error"]
 with (OUT/"v23_research_universe.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=fields,extrasaction="ignore");w.writeheader();w.writerows(results)
 ranked=sorted((r for r in results if isinstance(r["score"],(int,float))),key=lambda r:r["score"],reverse=True)
