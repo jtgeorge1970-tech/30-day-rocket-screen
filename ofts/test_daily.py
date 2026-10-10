@@ -8,7 +8,8 @@ import io
 import json
 import pandas as pd
 from ofts.daily import (save_history, read_history, merge_history, refresh,
-                        frozen_snapshot, outcomes, completed_session, market_schedule)
+                        frozen_snapshot, outcomes, completed_session, market_schedule,
+                        snapshot_is_qualified, load_qualified_snapshots)
 
 
 def bar(date, close=100, split=0):
@@ -45,6 +46,20 @@ class PersistenceTests(unittest.TestCase):
             audit = refresh(Path(d), ['ABC'], '2026-10-08', provider)
             self.assertEqual(audit['ABC']['status'], 'FRESH')
             self.assertEqual(provider.call_count, 2)
+
+    def test_failed_coverage_is_preserved_but_not_used_as_forward_cohort(self):
+        with tempfile.TemporaryDirectory() as d:
+            predictions = Path(d)
+            failed = dict(asof='2026-10-09', rows=[
+                dict(symbol=f'S{i}', score=None, classification='STALE_DATA', asof='2026-10-08')
+                for i in range(125)])
+            frozen_snapshot(predictions / '2026-10-09.json', failed)
+            self.assertFalse(snapshot_is_qualified(failed))
+            self.assertEqual(load_qualified_snapshots(predictions), [])
+            recovered = dict(asof='2026-10-09', coverage={'fresh': 124}, rows=[])
+            frozen_snapshot(predictions / '2026-10-09-qualified.json', recovered)
+            self.assertEqual(load_qualified_snapshots(predictions), [recovered])
+            self.assertTrue((predictions / '2026-10-09.json').exists())
 
     def test_saved_prediction_is_immutable(self):
         with tempfile.TemporaryDirectory() as d:
