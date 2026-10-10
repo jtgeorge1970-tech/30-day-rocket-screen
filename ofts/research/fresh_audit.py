@@ -66,6 +66,7 @@ def audit_symbol(symbol, target, yf, calendar, expected):
         eligibility=eligibility_status(symbol,latest,closes[-1])["state"],
         swing_health=health["state"],viability=viability["state"],
         three_clear_cycles=clear_cycles["state"],three_clear_details=clear_cycles,
+        clean_cycle_v10=score_clear_cycles(clear_cycles,eligibility_status(symbol,latest,closes[-1])["state"]),
         entry_state=entry["state"],entry_5d_pct=entry.get("return_5_sessions_pct"),
         entry_20d_pct=entry.get("return_20_sessions_pct"),
         w30=window_stats(bars,30),w60=window_stats(bars,60),
@@ -96,7 +97,8 @@ def main():
     import yfinance as yf
     import pandas_market_calendars as pmc
     ap=argparse.ArgumentParser()
-    ap.add_argument("--research-file",default="ofts-output/v06_opportunity_research_ranked.csv")
+    ap.add_argument("--research-file",default="ofts-output/v09_full_universe_clear_cycle_pass.csv")
+    ap.add_argument("--limit",type=int,default=40)
     ap.add_argument("--output",default="ofts-output/fresh_oscillator_audit.json")
     args=ap.parse_args()
     with open(args.research_file,newline="") as f:
@@ -104,7 +106,7 @@ def main():
     # All active research names, plus prior known high-scoring false-positive controls.
     # Controls do not enter the production ranking just by being audited.
     controls="XPRO CLW CSPI PAHC HRI VSAT ATEX AVIR CAT WRD".split()
-    names=list(dict.fromkeys([r["symbol"] for r in research]+controls))
+    names=list(dict.fromkeys([r["symbol"] for r in research[:args.limit]]+controls))
     now=datetime.now(timezone.utc)
     calendar=pmc.get_calendar("NYSE")
     schedule=calendar.schedule(start_date=(now-timedelta(days=20)).date(),end_date=now.date())
@@ -132,7 +134,7 @@ def main():
                   key=lambda row:row["quality_v06"],reverse=True)
     for i,row in enumerate(ranked,1):row["fresh_research_rank"]=i
     out=dict(version="v0.8-fresh-independent-audit",target_session=target,
-             research_symbols=[r["symbol"] for r in research],
+             research_symbols=[r["symbol"] for r in research[:args.limit]],
              controls=controls,source="yfinance, independent fresh provider requests",
              data_errors=sum("error" in r for r in results),
              current_research_keepers=len(ranked),fresh_research_ranked=[r["symbol"] for r in ranked],
@@ -158,6 +160,8 @@ def main():
     with open(pathlib.Path(args.output).with_name("fresh_oscillator_keepers.csv"),"w",newline="") as f:
         keys=["fresh_research_rank","symbol","asof","close","quality_v06","score_v23","three_clear_cycles","viability","entry_state","eligibility","current_keeper_status"]
         w=csv.DictWriter(f,fieldnames=keys,extrasaction="ignore");w.writeheader();w.writerows(ranked)
+    fresh_clear=sorted((r for r in results if r.get("three_clear_cycles")=="THREE_CLEAR_CYCLES" and r.get("eligibility")!="INELIGIBLE"),key=lambda r:(-r["clean_cycle_v10"]["score"],r["symbol"]))
+    print("FRESH_V10_CLEAN_CYCLE_RANKED",json.dumps([{"rank":i+1,"symbol":r["symbol"],"score":r["clean_cycle_v10"]["score"],"asof":r["asof"],"close":r["close"],"entry":r["entry_state"],"viability":r["viability"],"legacy_health":r["swing_health"],"cycles":r["three_clear_details"]["cycles"]} for i,r in enumerate(fresh_clear)]),flush=True)
     print("THREE_CLEAR_CYCLE_AUDIT",json.dumps([{"symbol":r["symbol"],"state":r.get("three_clear_cycles"),"keeper":r["current_keeper_status"],"three_cycles":r.get("three_clear_details",{}).get("cycles",[])} for r in results]),flush=True)
     print("FRESH_RESEARCH_KEEPERS",json.dumps([{"rank":r["fresh_research_rank"],"symbol":r["symbol"],"score":r["quality_v06"],"viability":r["viability"],"entry":r["entry_state"]} for r in ranked]),flush=True)
     print("FRESH_AUDIT_SUMMARY",json.dumps({"target":target,"total":len(names),
