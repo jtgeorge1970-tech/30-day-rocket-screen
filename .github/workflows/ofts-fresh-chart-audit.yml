@@ -5,6 +5,8 @@ on:
     paths:
       - 'ofts/research/fresh_audit.py'
       - 'ofts/test_fresh_audit.py'
+      - 'ofts/research/three_clear_cycles_v09.py'
+      - 'ofts/test_three_clear_cycles_v09.py'
       - '.github/workflows/ofts-fresh-chart-audit.yml'
   schedule:
     - cron: '45 22 * * 1-5'
@@ -22,7 +24,7 @@ jobs:
       - name: Install own data feed and exchange calendar
         run: python -m pip install yfinance pandas pandas_market_calendars
       - name: Verify chart audit regression tests
-        run: python -m unittest ofts.test_fresh_audit -v
+        run: python -m unittest ofts.test_fresh_audit ofts.test_three_clear_cycles_v09 -v
       - name: Restore full-universe research cache for candidate identification only
         uses: actions/cache/restore@v4
         with:
