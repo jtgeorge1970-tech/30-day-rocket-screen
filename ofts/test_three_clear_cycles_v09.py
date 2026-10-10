@@ -57,7 +57,7 @@ class ThreeClearCycleTests(unittest.TestCase):
     def test_shrinking_up_swings_veto_before_ranking(self):
         knots=[(0,10),(10,11.1),(20,10.1),(30,11.2),(40,10.2),
                (50,11.3),(60,10.3),(70,11.4),(80,10.4),
-               (90,11.5),(100,10.5),(110,11.1),(125,10.4)]
+               (90,11.0),(100,10.3),(110,11.6),(125,10.6)]
         r=three_clear_cycles(series_from_knots(knots))
         self.assertEqual(r["qualifying_last_three"],3)
         self.assertEqual(r["state"],"REJECT_UPSWING_DETERIORATION")
