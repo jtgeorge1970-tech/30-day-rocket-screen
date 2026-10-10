@@ -8,6 +8,9 @@ Cycle fingerprints saved: 97/125
 Signal states: BUY=1, SELL=0, NO_TRADE=124
 Cycle ledger: pending entries=1; open positions=0; closed trades=0; SPY pairs=0
 Cycle-speed report card: AWAITING_CLOSED_FORWARD_TRADES; closed forward trades=0; groups=[]
+Score scale: theoretical 0-100; observed 10.884-62.584; validated BUY threshold=NONE
+Score distribution: {'BELOW_40': 9, '40_TO_49_999': 37, '50_TO_59_999': 40, '60_TO_69_999': 11, '70_TO_79_999': 0, '80_TO_89_999': 0, '90_TO_100': 0}
+System actionability gate: RESEARCH_ONLY_NO_GO; OUT_OF_SAMPLE_PREDICTIVE_VALIDATION_NOT_VERIFIED
 Production approval: NO. These are quality scores, not BUY signals.
 Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.
 Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.
