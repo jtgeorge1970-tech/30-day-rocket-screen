@@ -1,6 +1,7 @@
 """Deterministic, restart-safe accounting for frozen OFTS research signals."""
 from datetime import datetime, timezone
 import json
+from statistics import median
 
 
 def _load(path, default):
@@ -35,6 +36,56 @@ def active_ledger_symbols(state):
     ledger = _load(state / 'cycle_ledger.json', {})
     return sorted({p['symbol'] for p in ledger.get('positions', [])
                    if p.get('status') in {'PENDING_ENTRY', 'OPEN', 'OPEN_PENDING_EXIT'}})
+
+
+def _cycle_class(trade):
+    sessions = (trade.get('entry_cycle') or {}).get('cycle_sessions')
+    if sessions is None:
+        return 'UNKNOWN'
+    if sessions <= 10:
+        return 'FAST_1_TO_10'
+    if sessions <= 25:
+        return 'MEDIUM_11_TO_25'
+    return 'SLOW_OVER_25'
+
+
+def build_cycle_report_card(ledger):
+    """Compare cycle speeds fairly without treating research states as advice."""
+    trades = [trade for trade in ledger.get('trades', []) if trade.get('status') == 'CLOSED']
+    groups = {}
+    for label in sorted({_cycle_class(trade) for trade in trades}):
+        group = [trade for trade in trades if _cycle_class(trade) == label]
+        returns = [float(trade['net_assumed_return_pct']) for trade in group]
+        holds = [int(trade['holding_sessions']) for trade in group]
+        captures = [float(trade['captured_observed_swing_pct']) for trade in group
+                    if trade.get('captured_observed_swing_pct') is not None]
+        missed = [float(trade['missed_observed_swing_pct']) for trade in group
+                  if trade.get('missed_observed_swing_pct') is not None]
+        excess = [float(trade['excess_gross_pct']) for trade in group
+                  if trade.get('excess_gross_pct') is not None]
+        total_sessions = sum(holds)
+        groups[label] = dict(
+            trades=len(group), positive_net_trades=sum(value > 0 for value in returns),
+            net_win_rate_pct=100 * sum(value > 0 for value in returns) / len(group),
+            mean_net_return_pct=sum(returns) / len(group),
+            median_net_return_pct=median(returns),
+            total_holding_sessions=total_sessions,
+            capital_time_efficiency_pct_per_20_sessions=(
+                20 * sum(returns) / total_sessions if total_sessions else None),
+            average_captured_observed_swing_pct=(
+                sum(captures) / len(captures) if captures else None),
+            average_missed_observed_swing_pct=(
+                sum(missed) / len(missed) if missed else None),
+            benchmark_pairs=len(excess),
+            average_excess_gross_pct=sum(excess) / len(excess) if excess else None,
+            review_trades=sum('review' in trade for trade in group))
+    return dict(
+        status='READY' if trades else 'AWAITING_CLOSED_FORWARD_TRADES',
+        production_approved=False,
+        methodology=('Cycle classes use the point-in-time entry fingerprint. Capital-time efficiency '
+                     'is total net percentage return divided by total holding sessions, scaled to 20 sessions; '
+                     'it is descriptive, not an annualized or portfolio return.'),
+        closed_trades=len(trades), groups=groups)
 
 
 def rebuild_cycle_ledger(state, histories, schedule, roundtrip_cost_pct=0.20):
@@ -151,4 +202,5 @@ def rebuild_cycle_ledger(state, histories, schedule, roundtrip_cost_pct=0.20):
             benchmark_pairs=sum('benchmark_price_return_pct' in t for t in trades),
             review_trades=sum('review' in t for t in trades)))
     _save(state / 'cycle_ledger.json', ledger)
+    _save(state / 'cycle_report_card.json', build_cycle_report_card(ledger))
     return ledger
