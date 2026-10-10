@@ -8,33 +8,33 @@ Production approval: NO. These are quality scores, not BUY signals.
 Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.
 Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.
 
-| Symbol | Score | Classification |
-|---|---:|---|
-| AKAM | 62.584 | CANDIDATE |
-| WULF | 62.154 | CANDIDATE |
-| FUBO | 61.675 | CANDIDATE |
-| SPGI | 61.624 | CANDIDATE |
-| SFM | 60.946 | CANDIDATE |
-| CSIQ | 60.765 | CANDIDATE |
-| XPRO | 60.556 | CANDIDATE |
-| MESO | 60.506 | CANDIDATE |
-| CHTR | 60.500 | CANDIDATE |
-| EPOW | 60.482 | CANDIDATE |
-| HLIT | 60.440 | CANDIDATE |
-| NYAX | 59.939 | CANDIDATE |
-| JACK | 59.553 | CANDIDATE |
-| TBLA | 59.542 | CANDIDATE |
-| WFG | 59.391 | REJECT_CANDIDATE_GATE |
-| ATGL | 59.058 | CANDIDATE |
-| FMC | 58.873 | CANDIDATE |
-| NX | 58.802 | CANDIDATE |
-| LE | 58.526 | CANDIDATE |
-| SRAD | 58.359 | CANDIDATE |
-| OWLT | 58.302 | CANDIDATE |
-| IDR | 58.294 | CANDIDATE |
-| BE | 58.108 | CANDIDATE |
-| HNRG | 57.976 | CANDIDATE |
-| MBLY | 57.385 | CANDIDATE |
+| Symbol | Score | Classification | Cycle sessions | Median swing | Confidence |
+|---|---:|---|---:|---:|---|
+| AKAM | 62.584 | CANDIDATE | n/a | n/a | n/a |
+| WULF | 62.154 | CANDIDATE | n/a | n/a | n/a |
+| FUBO | 61.675 | CANDIDATE | n/a | n/a | n/a |
+| SPGI | 61.624 | CANDIDATE | n/a | n/a | n/a |
+| SFM | 60.946 | CANDIDATE | n/a | n/a | n/a |
+| CSIQ | 60.765 | CANDIDATE | n/a | n/a | n/a |
+| XPRO | 60.556 | CANDIDATE | n/a | n/a | n/a |
+| MESO | 60.506 | CANDIDATE | n/a | n/a | n/a |
+| CHTR | 60.500 | CANDIDATE | n/a | n/a | n/a |
+| EPOW | 60.482 | CANDIDATE | n/a | n/a | n/a |
+| HLIT | 60.440 | CANDIDATE | n/a | n/a | n/a |
+| NYAX | 59.939 | CANDIDATE | n/a | n/a | n/a |
+| JACK | 59.553 | CANDIDATE | n/a | n/a | n/a |
+| TBLA | 59.542 | CANDIDATE | n/a | n/a | n/a |
+| WFG | 59.391 | REJECT_CANDIDATE_GATE | n/a | n/a | n/a |
+| ATGL | 59.058 | CANDIDATE | n/a | n/a | n/a |
+| FMC | 58.873 | CANDIDATE | n/a | n/a | n/a |
+| NX | 58.802 | CANDIDATE | n/a | n/a | n/a |
+| LE | 58.526 | CANDIDATE | n/a | n/a | n/a |
+| SRAD | 58.359 | CANDIDATE | n/a | n/a | n/a |
+| OWLT | 58.302 | CANDIDATE | n/a | n/a | n/a |
+| IDR | 58.294 | CANDIDATE | n/a | n/a | n/a |
+| BE | 58.108 | CANDIDATE | n/a | n/a | n/a |
+| HNRG | 57.976 | CANDIDATE | n/a | n/a | n/a |
+| MBLY | 57.385 | CANDIDATE | n/a | n/a | n/a |
 
 ## Mature outcomes by score and horizon
 ```json
