@@ -52,6 +52,9 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
     up_average = sum(up_values)/3 if len(up_values)==3 else None
     up_median = median(up_values) if len(up_values)==3 else None
     latest_up_age = len(prices)-1-recent_up[-1]['end_index'] if recent_up else None
+    repeatability = ('STABLE_3_OF_3' if len(up_values)==3 and up_pass_count==3
+                     else 'WATCH_2_OF_3' if len(up_values)==3 and up_pass_count==2 and up_values[-1]>=MIN_REPEATED_UP_PCT
+                     else 'UNSTABLE' if len(up_values)==3 else 'INSUFFICIENT')
     up_trend = ('SHRINKING' if len(up_values)==3 and up_values[0]>up_values[1]>up_values[2]
                 else 'GROWING' if len(up_values)==3 and up_values[0]<up_values[1]<up_values[2]
                 else 'MIXED' if len(up_values)==3 else 'INSUFFICIENT')
@@ -90,6 +93,7 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
                 last_up_pct=up_values[-1] if up_values else None,
                 repeated_up_min_pct=MIN_REPEATED_UP_PCT,
                 repeated_up_pass_count=up_pass_count,
+                recent_up_repeatability=repeatability,
                 repeated_up_required=MIN_CONFIRMED_UP_LEGS,
                 up_progression=up_trend,
                 latest_confirmed_up_age_sessions=latest_up_age,
