@@ -42,6 +42,18 @@ class ThreeClearCycleTests(unittest.TestCase):
         p=self.good()
         for i in range(105,111):p[i]*=1.7
         self.assertNotEqual(three_clear_cycles(p)["state"],"THREE_CLEAR_CYCLES")
+    def test_choppy_between_peaks_and_valleys_rejected(self):
+        p=self.good()
+        for i in range(1,len(p)-1):
+            if i%2==0:p[i]+=0.18
+            else:p[i]-=0.18
+        r=three_clear_cycles(p)
+        self.assertEqual(r["state"],"REJECT_CHOPPY_SWINGS")
+        self.assertLess(r["median_leg_path_efficiency"],0.60)
+    def test_clean_path_efficiency_passes(self):
+        r=three_clear_cycles(self.good())
+        self.assertEqual(r["state"],"THREE_CLEAR_CYCLES")
+        self.assertGreaterEqual(r["median_leg_path_efficiency"],0.60)
     def test_insufficient(self):
         self.assertEqual(three_clear_cycles([10.0]*100)["state"],"INSUFFICIENT")
 
