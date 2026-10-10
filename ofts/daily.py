@@ -9,8 +9,10 @@ import math
 import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from statistics import median
 
 from ofts.research.v23_replacement import evaluate
+from ofts.research.candidate_components import detect_turns
 
 ROOT = Path(__file__).resolve().parents[1]
 WATCH = 'HNRG CHTR FUBO EPOW WULF HLIT JACK TGS SPGI CSIQ XPRO SFM DTIL TBLA FWRG NYAX OWLT SRAD ATGL FMC LE MESO NX MBLY IDR'.split()
@@ -34,6 +36,27 @@ def snapshot_is_qualified(snapshot, minimum=MIN_FRESH_COHORT):
 def load_qualified_snapshots(predictions):
     return [s for p in sorted(predictions.glob('*.json'))
             if snapshot_is_qualified(s := load_json(p, {}))]
+
+
+def cycle_fingerprint(closes, threshold, structural):
+    """Point-in-time natural-cycle description; never reads bars after as-of."""
+    turns = detect_turns(closes, threshold)
+    peaks = [p[0] for p in turns if p[1] == 'H']
+    troughs = [p[0] for p in turns if p[1] == 'L']
+    intervals = ([b-a for a, b in zip(peaks, peaks[1:])] +
+                 [b-a for a, b in zip(troughs, troughs[1:])])
+    swing_pcts = [100 * abs(b[2] / a[2] - 1) for a, b in zip(turns, turns[1:])]
+    components = structural['components']
+    timing = (components['peak_timing'] + components['trough_timing']) / 2
+    amplitude = components['amplitude']
+    completed_cycles = len(intervals)
+    confidence = ('HIGH' if completed_cycles >= 4 and min(timing, amplitude) >= 60 else
+                  'MEDIUM' if completed_cycles >= 2 and min(timing, amplitude) >= 40 else 'LOW')
+    return dict(cycle_sessions=median(intervals) if intervals else None,
+                median_swing_pct=median(swing_pcts) if swing_pcts else None,
+                completed_cycle_intervals=completed_cycles,
+                confirmed_turns=len(turns), timing_consistency=timing,
+                amplitude_consistency=amplitude, confidence=confidence)
 
 
 def atomic(path, data):
@@ -252,8 +275,11 @@ def main():
             else:
                 try:
                     # Existing evaluate implementation remains byte-for-byte unchanged.
-                    result = evaluate(*[[float(r[k]) for r in bars] for k in ('high', 'low', 'close')])
+                    series = [[float(r[k]) for r in bars] for k in ('high', 'low', 'close')]
+                    result = evaluate(*series)
                     row.update(score=result.get('candidate_score'), classification=result['status'])
+                    if result.get('candidate_score') is not None:
+                        row['cycle'] = cycle_fingerprint(series[2], result['threshold_pct'], result['structural'])
                 except (ValueError, TypeError, KeyError) as exc:
                     row.update(classification='DATA_ERROR', error=str(exc))
         rows.append(row)
@@ -315,8 +341,12 @@ def main():
              'Production approval: NO. These are quality scores, not BUY signals.',
              'Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.',
              'Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.', '',
-             '| Symbol | Score | Classification |', '|---|---:|---|']
-    lines += [f'| {r["symbol"]} | {r["score"]:.3f} | {r["classification"]} |' for r in ranked[:25]]
+             '| Symbol | Score | Classification | Cycle sessions | Median swing | Confidence |',
+             '|---|---:|---|---:|---:|---|']
+    lines += [f'| {r["symbol"]} | {r["score"]:.3f} | {r["classification"]} | '
+              f'{r.get("cycle", {}).get("cycle_sessions") or "n/a"} | '
+              f'{r.get("cycle", {}).get("median_swing_pct") or "n/a"} | '
+              f'{r.get("cycle", {}).get("confidence", "n/a")} |' for r in ranked[:25]]
     lines += ['', '## Mature outcomes by score and horizon', '```json', json.dumps(summaries, indent=2), '```']
     lines += ['', '## Refresh failures'] + [f'- {s}: {audit[s]["error"]}' for s in control['retry']]
     atomic(state / 'REPORT.md', ('\n'.join(lines) + '\n').encode())
