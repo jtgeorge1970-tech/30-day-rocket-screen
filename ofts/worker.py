@@ -191,13 +191,12 @@ with (OUT/'v09_full_universe_clear_cycle_pass.csv').open('w',newline='') as fh:
     w.writeheader()
     for i,row in enumerate(clear_pass,1):
         w.writerow({'research_rank':i,**row})
-# Keeper requires independent three-cycle quality, recent viability, acceptable
-# trend and known security-type gates. Entry is a separate WATCH vs REVIEW.
+# v0.10 research keepers are determined by NEW clear-cycle evidence only.
+# Legacy viability and swing-health labels remain visible BENCHMARKS, not
+# disqualifying gates. Independently confirmed security ineligibility remains a veto.
+# This is a RESEARCH list, never a verified BUY or entry signal.
 keepers=[row for row in clear_pass
-    if row.get('viability_state')=='REVIEW'
-    and row.get('swing_state') not in
-        ('DOWNTREND','DOWNTREND_WEAK_BOUNCE','DECAYING','IRREGULAR','INSUFFICIENT')
-    and row.get('opportunity_v06_eligibility')!='INELIGIBLE']
+    if row.get('opportunity_v06_eligibility')!='INELIGIBLE']
 with (OUT/'v09_full_universe_keepers.csv').open('w',newline='') as fh:
     w=csv.DictWriter(fh,fieldnames=['research_rank']+clear_fields,extrasaction='ignore')
     w.writeheader()
@@ -208,7 +207,14 @@ report={'version':CLEAR_VERSION,'ranking_version':RANK_VERSION,'universe':len(re
     'history_latest_dates':sorted({groups[x['symbol']][-1].get('date','') for x in results if groups.get(x['symbol'])})[-5:],
     'clear_states':dict(sorted(clear_states.items())),
     'three_clear_pass':len(clear_pass),'keepers':len(keepers),
+    'legacy_filters_applied_to_keeper_rank':False,
     'keeper_symbols':[x['symbol'] for x in keepers],
+    'keepers_top50':[{'rank':i+1,'symbol':x['symbol'],
+        'new_score_out_of_100':x['clear_v10_score'],
+        'eligibility':x.get('opportunity_v06_eligibility'),
+        'legacy_viability_benchmark':x.get('viability_state'),
+        'legacy_swing_benchmark':x.get('swing_state')}
+        for i,x in enumerate(keepers[:50])],
     'clear_pass_top50':[{'rank':i+1,'symbol':x['symbol'],
         'new_clean_cycle_score_out_of_100':x.get('clear_v10_score'),
         'new_components':json.loads(x['clear_v10_json'])['components'],
