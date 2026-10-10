@@ -22,7 +22,7 @@ class TestEntryDiagnostic(unittest.TestCase):
         self.assertEqual(r['state'],'STALE_DATA')
         self.assertFalse(r['entry_confirmed'])
     def test_unconfirmed_trough(self):
-        c=[9.0]*10+[10.0]*10+[9.2]*10
+        c=[9.0]*10+[9.6]*10+[9.2]*10
         r=entry_diagnostic(c,dates(len(c)),today=date(2026,10,10))
         self.assertEqual(r['state'],'UNCONFIRMED_TROUGH_WAIT')
     def test_no_future_dates(self):
