@@ -40,7 +40,7 @@ class ThreeClearCycleTests(unittest.TestCase):
         self.assertEqual(three_clear_cycles(p)["state"],"THREE_CLEAR_CYCLES")
     def test_one_giant_rally_among_three_cycles_is_outlier(self):
         p=self.good()
-        for i in range(21,41):p[i]*=1.7
+        for i in range(105,111):p[i]*=1.7
         self.assertNotEqual(three_clear_cycles(p)["state"],"THREE_CLEAR_CYCLES")
     def test_insufficient(self):
         self.assertEqual(three_clear_cycles([10.0]*100)["state"],"INSUFFICIENT")
