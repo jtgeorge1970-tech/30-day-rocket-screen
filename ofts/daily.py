@@ -303,6 +303,7 @@ def main():
                     row['signal'] = current_signal_state(series[2], result.get('threshold_pct', 6), result['status'])
                 except (ValueError, TypeError, KeyError) as exc:
                     row.update(classification='DATA_ERROR', error=str(exc))
+        row.setdefault('signal', dict(state='NO_TRADE', reason=row['classification']))
         rows.append(row)
     model_hash = hashlib.sha256(b''.join((ROOT / p).read_bytes() for p in
                                ['ofts/research/v23_replacement.py', 'ofts/research/candidate_components.py'])).hexdigest()
