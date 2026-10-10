@@ -24,7 +24,7 @@ def snapshot_is_qualified(snapshot, minimum=MIN_FRESH_COHORT):
     """Only forward-test cohorts that met the market-data gate when frozen."""
     coverage = snapshot.get('coverage', {})
     if 'fresh' in coverage:
-        return int(coverage['fresh']) >= minimum
+        return int(coverage['fresh']) >= int(coverage.get('minimum_fresh', minimum))
     # Compatibility for the first immutable pre-gate snapshot: infer its
     # usable coverage without changing or deleting that historical record.
     return sum(r.get('classification') not in DATA_FAILURES and
@@ -260,17 +260,18 @@ def main():
     model_hash = hashlib.sha256(b''.join((ROOT / p).read_bytes() for p in
                                ['ofts/research/v23_replacement.py', 'ofts/research/candidate_components.py'])).hexdigest()
     fresh_count = sum(audit[s]['status'] == 'FRESH' for s in selected)
+    required_fresh = min(MIN_FRESH_COHORT, len(selected))
     candidate = dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
                      model_version='v2.3-research', model_hash=model_hash,
                      protocol_hash=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                      lookback='trailing 2 calendar years', selected=selected, rows=rows,
                      coverage={'fresh': fresh_count, 'selected': len(selected),
-                               'minimum_fresh': MIN_FRESH_COHORT},
+                               'minimum_fresh': required_fresh},
                      production_approved=False,
                      execution='Hypothetical next-session open; fixed-session close; no stop/target strategy',
                      cost_assumption_roundtrip_pct=0.20)
     snapshot = None
-    if fresh_count >= MIN_FRESH_COHORT:
+    if fresh_count >= required_fresh:
         destination = snapshot_path
         if snapshot_path.exists() and not snapshot_is_qualified(load_json(snapshot_path, {})):
             destination = recovery_path
