@@ -69,6 +69,24 @@ def audit_symbol(symbol, target, yf, calendar, expected):
         w126=window_stats(bars,126),w252=window_stats(bars,252),
         verified_trade_candidate=False)
 
+def keeper_status(row):
+    if "error" in row:return "DATA_ERROR"
+    if row["viability"]!="REVIEW":return "REJECT_OSCILLATION_HEALTH"
+    w30=row.get("w30",{})
+    w60=row.get("w60",{})
+    if w30.get("status")!="MEASURED" or w60.get("status")!="MEASURED":
+        return "INSUFFICIENT_RECENT_CHART"
+    if w30.get("confirmed_up_legs",0)<2 or w60.get("confirmed_up_legs",0)<3:
+        return "REJECT_RECENT_REPEATABILITY"
+    if w60.get("completed_peak_intervals",0)<2 or w60.get("completed_trough_intervals",0)<2:
+        return "REJECT_RECENT_CADENCE"
+    if row.get("swing_health") in ("DOWNTREND","DOWNTREND_WEAK_BOUNCE","DECAYING","IRREGULAR","INSUFFICIENT"):
+        return "WATCH_TREND_OR_SWING_HEALTH"
+    if row.get("entry_state") in ("BREAKDOWN_NO_TRADE","FALLING_WAIT","STALE_DATA"):
+        return "WATCH_ENTRY_NOT_READY"
+    if row.get("quality_v06") is None:return "INSUFFICIENT_QUALITY"
+    return "RESEARCH_KEEPER_NOT_VERIFIED_BUY"
+
 def main():
     import yfinance as yf
     import pandas_market_calendars as pmc
@@ -101,17 +119,10 @@ def main():
         else:
             results.append(dict(symbol=symbol,status="DATA_ERROR",error=last_error,verified_trade_candidate=False))
             print("FRESH_AUDIT_ERROR",symbol,last_error,flush=True)
-    # A large historical score must not outrank a failing current health gate.
-    # Eligibility remains separate and is never imputed from price history.
+    # Fail closed on missing recent repeatability. A single 30-session surge is not
+    # a 30-60 day repeatable oscillator, regardless of a high historical score.
     for row in results:
-        if "error" in row: row["current_keeper_status"]="DATA_ERROR"
-        elif row["viability"] in ("DISSIPATING","FADING","CYCLE_TIMING","TOO_SMALL","TOO_SMALL_UPSIDE","STALE_SWINGS","STALE_UPSIDE","FOOLS_GOLD"):
-            row["current_keeper_status"]="REJECT_OSCILLATION_HEALTH"
-        elif row["entry_state"] in ("BREAKDOWN_NO_TRADE","FALLING_WAIT","STALE_DATA"):
-            row["current_keeper_status"]="WATCH_ENTRY_NOT_READY"
-        elif row["quality_v06"] is None:
-            row["current_keeper_status"]="INSUFFICIENT_QUALITY"
-        else: row["current_keeper_status"]="RESEARCH_KEEPER_NOT_VERIFIED_BUY"
+        row["current_keeper_status"]=keeper_status(row)
     ranked=sorted((row for row in results if row["current_keeper_status"]=="RESEARCH_KEEPER_NOT_VERIFIED_BUY"),
                   key=lambda row:row["quality_v06"],reverse=True)
     for i,row in enumerate(ranked,1):row["fresh_research_rank"]=i
