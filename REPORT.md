@@ -25,7 +25,6 @@ Overlapping observations are not independent trades. No portfolio win rate or dr
 | NYAX | 59.939 | CANDIDATE | 22.5 | 16.554543782118735 | MEDIUM |
 | JACK | 59.553 | CANDIDATE | 17.0 | 16.114495600631717 | MEDIUM |
 | TBLA | 59.542 | CANDIDATE | 36 | 15.339884291443905 | MEDIUM |
-| WFG | 59.391 | REJECT_CANDIDATE_GATE | 40 | 11.249472019045292 | LOW |
 | ATGL | 59.058 | CANDIDATE | 20.5 | 32.103798759905985 | MEDIUM |
 | FMC | 58.873 | CANDIDATE | 31.0 | 19.540904882576815 | MEDIUM |
 | NX | 58.802 | CANDIDATE | 19.0 | 15.254241530183666 | MEDIUM |
@@ -36,6 +35,7 @@ Overlapping observations are not independent trades. No portfolio win rate or dr
 | BE | 58.108 | CANDIDATE | 19.0 | 27.627506419367187 | MEDIUM |
 | HNRG | 57.976 | CANDIDATE | 31 | 23.701651305606916 | MEDIUM |
 | MBLY | 57.385 | CANDIDATE | 24.5 | 23.560907650300255 | MEDIUM |
+| CGNX | 56.788 | CANDIDATE | 23.0 | 12.662819640488854 | LOW |
 
 ## Mature outcomes by score and horizon
 ```json
