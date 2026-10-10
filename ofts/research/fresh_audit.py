@@ -13,6 +13,7 @@ from ofts.research.opportunity_v06 import opportunity_partial,eligibility_status
 from ofts.research.entry_diagnostic_v07 import entry_diagnostic
 from ofts.research.v23_replacement import evaluate
 from ofts.research.three_clear_cycles_v09 import three_clear_cycles
+from ofts.research.clear_cycle_rank_v10 import score_clear_cycles
 
 def window_stats(bars, sessions):
     window=bars[-sessions:]
