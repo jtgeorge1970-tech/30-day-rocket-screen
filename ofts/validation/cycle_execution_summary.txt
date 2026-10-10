@@ -1,0 +1,17 @@
+OFTS CYCLE EXECUTION AUDIT — RESEARCH ONLY
+Training-selected symbols: 6
+Chronological nonoverlapping cycle trades: 24
+Clean trades excluding possible split windows: 24
+Positive net trades: 12/24
+Net win rate pct: 50.000
+Mean net cycle return pct: 13.252
+Median net cycle return pct: -0.825
+Mean captured ideal swing pct: -48.268
+Median holding sessions: 22.000
+Mean fixed 12pct stop return pct: 13.369
+Mean trailing 12pct stop return pct: 3.580
+Entry: next session open after confirmed low reversal.
+Exit: next session open after later confirmed high reversal.
+Chronological 70/30 split; 20-session training embargo; no overlapping trades per symbol.
+SPY benchmark: not available in this historical cohort; forward daily audits retain SPY comparison.
+Production approval: NO
