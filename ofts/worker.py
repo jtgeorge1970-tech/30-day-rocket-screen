@@ -6,6 +6,7 @@ from ofts.research.v23_replacement import evaluate
 from ofts.research.security_regimes import post_identity_bars
 from ofts.research.swing_health import recent_swing_health
 from ofts.research.recent_viability import recent_swing_viability
+from ofts.research.opportunity_v06 import opportunity_partial, VERSION as OPPORTUNITY_VERSION
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/"ofts-output"
 OUT.mkdir(exist_ok=True)
@@ -52,6 +53,11 @@ for ix in range(5502):
                            amplitude_ratio=health["recent_to_prior_amplitude_ratio"],
                            swing_health_json=json.dumps(health,sort_keys=True))
                 viability=recent_swing_viability(series[2],score["threshold_pct"])
+                opportunity=opportunity_partial(viability,health)
+                row.update(opportunity_v06_score=opportunity.get("measured_score"),
+                           opportunity_v06_status=opportunity["status"],
+                           opportunity_v06_eligibility=opportunity.get("eligibility_status","PENDING_ELIGIBILITY"),
+                           opportunity_v06_json=json.dumps(opportunity,sort_keys=True))
                 row.update(viability_state=viability["state"],
                            viability_entry=viability["proposed_entry"],
                            viability_reason=viability["reason"],
@@ -92,7 +98,8 @@ fields=["run","symbol","bars","raw_bars","regime_start","status","score","versio
         "peak_cycle_median","trough_cycle_median","cycle_timing_pass",
         "prior_three_up_pct","prior_peak_intervals","prior_trough_intervals",
         "up_amplitude_ratio","cadence_ratio","recent_vs_prior_state","up_progression","historical_mean_swing_pct","recent_capture_net_pct",
-        "combined_research_entry","viability_json"]
+        "combined_research_entry","viability_json",
+        "opportunity_v06_score","opportunity_v06_status","opportunity_v06_eligibility","opportunity_v06_json"]
 with (OUT/"v23_research_universe.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=fields,extrasaction="ignore");w.writeheader();w.writerows(results)
 ranked=sorted((r for r in results if isinstance(r["score"],(int,float))),key=lambda r:r["score"],reverse=True)
@@ -105,7 +112,8 @@ with (OUT/"v23_research_ranked.csv").open("w",newline="") as fh:
             "peak_intervals","trough_intervals","peak_cycle_median","trough_cycle_median","cycle_timing_pass",
             "prior_three_up_pct","prior_peak_intervals","prior_trough_intervals",
             "up_amplitude_ratio","cadence_ratio","recent_vs_prior_state","up_progression",
-            "historical_mean_swing_pct","recent_capture_net_pct","combined_research_entry"],extrasaction="ignore")
+            "historical_mean_swing_pct","recent_capture_net_pct","combined_research_entry",
+            "opportunity_v06_score","opportunity_v06_status","opportunity_v06_eligibility"],extrasaction="ignore")
     w.writeheader()
     for rank,r in enumerate(ranked,1):
         w.writerow({"rank":rank,**r})
@@ -121,6 +129,26 @@ with (OUT/"v23_research_recent_viability_shortlist.csv").open("w",newline="") as
     w.writeheader()
     for rank,r in enumerate(viable,1):
         w.writerow({"research_rank":rank,**r})
+# Experimental v0.6 opportunity ranking is the primary research review order.
+# Original v2.3 score and frozen cohorts remain unchanged for benchmarking.
+opportunity_ranked=sorted(
+    (r for r in viable if isinstance(r.get("opportunity_v06_score"),(int,float))),
+    key=lambda r:(-r["opportunity_v06_score"],r["symbol"]))
+opportunity_fields=["opportunity_rank","symbol","opportunity_v06_score",
+    "opportunity_v06_status","opportunity_v06_eligibility","score","status",
+    "swing_state","viability_state","last_three_up_pct","peak_intervals",
+    "trough_intervals","up_amplitude_ratio","cadence_ratio",
+    "combined_research_entry","opportunity_v06_json"]
+with (OUT/"v06_opportunity_research_ranked.csv").open("w",newline="") as fh:
+    w=csv.DictWriter(fh,fieldnames=opportunity_fields,extrasaction="ignore")
+    w.writeheader()
+    for rank,r in enumerate(opportunity_ranked,1):
+        w.writerow({"opportunity_rank":rank,**r})
+print("V06_OPPORTUNITY_RESEARCH_TOP",json.dumps([
+    {"rank":i+1,"symbol":r["symbol"],"score_out_of_80":r["opportunity_v06_score"],
+     "old_v23_score":round(r["score"],3),"eligibility":r["opportunity_v06_eligibility"]}
+    for i,r in enumerate(opportunity_ranked[:25])]))
+print("V06_VERIFIED_ELIGIBLE",0,"market_cap_and_liquidity_data_not_present_in_OHLCV")
 print("RECENT_VIABILITY_SHORTLIST",json.dumps([
     {"rank":i+1,"symbol":r["symbol"],"score":round(r["score"],3),
      "last_three_swing_pct":r.get("recent_three_swing_pct"),
@@ -142,7 +170,8 @@ print("RECENT_VIABILITY_COUNTS",json.dumps({
     for state in sorted({r.get("viability_state") for r in ranked})}))
 print("TOP_RESEARCH_RANKINGS",json.dumps([{"rank":i+1,"symbol":r["symbol"],"score":round(r["score"],3),"status":r["status"],"bars":r["bars"],"swing_state":r.get("swing_state"),"swing_entry":r.get("swing_entry"),"viability":r.get("viability_state"),"combined_entry":r.get("combined_research_entry") } for i,r in enumerate(ranked[:25])]))
 status={"universe":5502,"rows_written":len(results),"candidate_scores":sum(isinstance(r["score"],(int,float)) for r in results),"version":"v2.3-research","production_approved":False,"history_symbols":len(groups),"experimental_recent_viability_review":len(viable),
-        "experimental_only":True}
+        "experimental_only":True,"v06_opportunity_research_ranked":len(opportunity_ranked),
+        "v06_verified_eligible":0,"v06_version":OPPORTUNITY_VERSION}
 (OUT/"status.json").write_text(json.dumps(status,indent=2)+"\n")
 print(json.dumps(status))
 if not status["candidate_scores"]: raise SystemExit("NO_RESEARCH_SCORES_FROM_AVAILABLE_HISTORY")
