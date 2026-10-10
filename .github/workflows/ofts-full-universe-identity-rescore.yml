@@ -95,8 +95,10 @@ jobs:
           assert all(x['clear_v09_state']=='THREE_CLEAR_CYCLES' for x in v09_pass)
           assert all(x['clear_v10_score'] for x in v09_pass)
           assert all(float(a['clear_v10_score'])>=float(b['clear_v10_score']) for a,b in zip(v09_pass,v09_pass[1:])), 'V10_RANK_ORDER_INVALID'
-          assert all(x['clear_v09_state']=='THREE_CLEAR_CYCLES' and x['viability_state']=='REVIEW' for x in v09_keepers)
+          assert all(x['clear_v09_state']=='THREE_CLEAR_CYCLES' and x['opportunity_v06_eligibility']!='INELIGIBLE' for x in v09_keepers)
           assert all(x['symbol'] in {y['symbol'] for y in v09_pass} for x in v09_keepers)
+          assert all(float(a['clear_v10_score'])>=float(b['clear_v10_score']) for a,b in zip(v09_keepers,v09_keepers[1:])), 'KEEPERS_NOT_NEW_SCORE_SORTED'
+          assert len(v09_keepers)==sum(x['opportunity_v06_eligibility']!='INELIGIBLE' for x in v09_pass), 'LEGACY_RULES_STILL_VETOING_NEW_KEEPERS'
           print('V09_FULL_UNIVERSE_CHECK',json.dumps({'universe':len(v09),'three_clear_pass':len(v09_pass),'keepers':len(v09_keepers),'keeper_symbols':[x['symbol'] for x in v09_keepers]}))
           report = {
             'universe': len(rows),
