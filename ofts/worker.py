@@ -9,6 +9,7 @@ from ofts.research.recent_viability import recent_swing_viability
 from ofts.research.opportunity_v06 import opportunity_partial, eligibility_status, VERSION as OPPORTUNITY_VERSION
 from ofts.research.entry_diagnostic_v07 import entry_diagnostic, VERSION as ENTRY_VERSION
 from ofts.research.three_clear_cycles_v09 import three_clear_cycles, VERSION as CLEAR_VERSION
+from ofts.research.clear_cycle_rank_v10 import score_clear_cycles, VERSION as RANK_VERSION
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/"ofts-output"
 OUT.mkdir(exist_ok=True)
@@ -68,6 +69,8 @@ for ix in range(5502):
                            entry_v07_position=entry.get('position_in_prior20_band'),
                            entry_v07_json=json.dumps(entry,sort_keys=True))
                 eligible=eligibility_status(sym,data[-1].get('date',''),series[2][-1])
+                new_rank=score_clear_cycles(clear,eligible['state'])
+                row.update(clear_v10_score=new_rank['score'],clear_v10_json=json.dumps(new_rank,sort_keys=True))
                 opportunity['eligibility_status']=eligible['state']
                 opportunity['eligibility_evidence']=eligible
                 row.update(opportunity_v06_score=opportunity.get("measured_score"),
@@ -117,7 +120,7 @@ fields=["run","symbol","bars","raw_bars","regime_start","status","score","versio
         "combined_research_entry","viability_json",
         "opportunity_v06_score","opportunity_v06_status","opportunity_v06_eligibility","opportunity_v06_json",
         "entry_v07_state","entry_v07_asof","entry_v07_close","entry_v07_return5","entry_v07_position","entry_v07_json",
-        "clear_v09_state","clear_v09_reason","clear_v09_cycles","clear_v09_worst_efficiency","clear_v09_median_efficiency","clear_v09_json"]
+        "clear_v09_state","clear_v09_reason","clear_v09_cycles","clear_v09_worst_efficiency","clear_v09_median_efficiency","clear_v09_json","clear_v10_score","clear_v10_json"]
 with (OUT/"v23_research_universe.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=fields,extrasaction="ignore");w.writeheader();w.writerows(results)
 ranked=sorted((r for r in results if isinstance(r["score"],(int,float))),key=lambda r:r["score"],reverse=True)
@@ -173,12 +176,13 @@ for row in results:
     clear_states[row.get('clear_v09_state') or row['status']]+=1
 clear_pass=sorted((row for row in results
     if row.get('clear_v09_state')=='THREE_CLEAR_CYCLES'),
-    key=lambda row:(-float(row['opportunity_v06_score']) if isinstance(row.get('opportunity_v06_score'),(int,float)) else 9999,row['symbol']))
+    key=lambda row:(-float(row['clear_v10_score']) if isinstance(row.get('clear_v10_score'),(int,float)) else 9999,row['symbol']))
 clear_fields=['symbol','bars','status','score','opportunity_v06_score',
     'opportunity_v06_eligibility','viability_state','swing_state',
     'entry_v07_state','entry_v07_asof','entry_v07_close',
     'clear_v09_state','clear_v09_reason','clear_v09_cycles',
-    'clear_v09_worst_efficiency','clear_v09_median_efficiency','clear_v09_json']
+    'clear_v09_worst_efficiency','clear_v09_median_efficiency','clear_v09_json',
+    'clear_v10_score','clear_v10_json']
 with (OUT/'v09_full_universe_cycle_audit.csv').open('w',newline='') as fh:
     w=csv.DictWriter(fh,fieldnames=clear_fields,extrasaction='ignore')
     w.writeheader();w.writerows(results)
@@ -199,13 +203,15 @@ with (OUT/'v09_full_universe_keepers.csv').open('w',newline='') as fh:
     w.writeheader()
     for i,row in enumerate(keepers,1):
         w.writerow({'research_rank':i,**row})
-report={'version':CLEAR_VERSION,'universe':len(results),
+report={'version':CLEAR_VERSION,'ranking_version':RANK_VERSION,'universe':len(results),
     'scoreable':sum(isinstance(x.get('score'),(int,float)) for x in results),
     'history_latest_dates':sorted({groups[x['symbol']][-1].get('date','') for x in results if groups.get(x['symbol'])})[-5:],
     'clear_states':dict(sorted(clear_states.items())),
     'three_clear_pass':len(clear_pass),'keepers':len(keepers),
     'keeper_symbols':[x['symbol'] for x in keepers],
     'clear_pass_top50':[{'rank':i+1,'symbol':x['symbol'],
+        'new_clean_cycle_score_out_of_100':x.get('clear_v10_score'),
+        'new_components':json.loads(x['clear_v10_json'])['components'],
         'opportunity_score_out_of_80':x.get('opportunity_v06_score'),
         'old_v23_score':x.get('score'),
         'viability':x.get('viability_state'),
