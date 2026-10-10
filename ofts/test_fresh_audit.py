@@ -1,5 +1,6 @@
 import unittest
 from ofts.research.fresh_audit import window_stats,keeper_status,entry_priority
+from ofts.research.liquidity_gate import liquidity_gate
 
 def bars(values):
     return [{"date":f"2026-01-{i+1:02d}","open":x,"high":x*1.01,
@@ -26,7 +27,8 @@ class TestChartShape(unittest.TestCase):
     def test_old_health_not_hard_veto(self):
         row=dict(viability="DISSIPATING",swing_health="IRREGULAR",
                  three_clear_cycles="THREE_CLEAR_CYCLES",
-                 clean_cycle_v10={"score":70.0},eligibility="PENDING_ELIGIBILITY")
+                 clean_cycle_v10={"score":70.0},eligibility="PENDING_ELIGIBILITY",
+                 liquidity_state="LIQUIDITY_HISTORY_PASS_SPREAD_UNVERIFIED")
         self.assertEqual(keeper_status(row),"RESEARCH_KEEPER_NOT_VERIFIED_BUY")
     def test_new_gate_and_known_ineligibility_veto(self):
         row=dict(three_clear_cycles="REJECT_BIG_LOSS",
@@ -43,6 +45,22 @@ class TestChartShape(unittest.TestCase):
         self.assertEqual(entry_priority(row),"REVERSAL_REVIEW_NOT_BUY")
         row["entry_state"]="UNCONFIRMED_TROUGH_WAIT"
         self.assertEqual(entry_priority(row),"TROUGH_WATCH_NOT_BUY")
+    def test_thin_trading_never_becomes_keeper(self):
+        row=dict(three_clear_cycles="THREE_CLEAR_CYCLES",
+                 clean_cycle_v10={"score":85},eligibility="PENDING_ELIGIBILITY",
+                 liquidity_state="REJECT_LOW_LIQUIDITY")
+        self.assertEqual(keeper_status(row),"REJECT_LOW_LIQUIDITY")
+    def test_missing_liquidity_fails_closed(self):
+        row=dict(three_clear_cycles="THREE_CLEAR_CYCLES",
+                 clean_cycle_v10={"score":85},eligibility="PENDING_ELIGIBILITY")
+        self.assertEqual(keeper_status(row),"LIQUIDITY_UNVERIFIED")
+    def test_volume_and_spread_gate(self):
+        liquid=[dict(close=25,volume=100000) for _ in range(20)]
+        thin=[dict(close=65,volume=100) for _ in range(20)]
+        self.assertEqual(liquidity_gate(thin)["state"],"REJECT_LOW_LIQUIDITY")
+        self.assertEqual(liquidity_gate(liquid)["state"],"LIQUIDITY_HISTORY_PASS_SPREAD_UNVERIFIED")
+        self.assertEqual(liquidity_gate(liquid,bid=24,ask=26)["state"],"REJECT_WIDE_SPREAD")
+        self.assertEqual(liquidity_gate(liquid,bid=24.95,ask=25.05)["state"],"LIQUIDITY_PASS")
     def test_insufficient_window(self):
         self.assertEqual(window_stats(bars([10.0]*20),30)["status"],"INSUFFICIENT")
 
