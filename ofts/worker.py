@@ -57,6 +57,10 @@ for ix in range(5502):
                            viability_reason=viability["reason"],
                            recent_three_swing_pct=viability.get("last_three_median_swing_pct"),
                            recent_two_up_pct=viability.get("recent_up_median_pct"),
+                           last_three_up_pct=json.dumps(viability.get("last_three_up_pct",[])),
+                           last_up_pct=viability.get("last_up_pct"),
+                           repeated_up_pass_count=viability.get("repeated_up_pass_count"),
+                           up_progression=viability.get("up_progression"),
                            historical_mean_swing_pct=viability.get("historical_mean_swing_pct"),
                            recent_capture_net_pct=viability.get("hypothetical_net_capture_pct"),
                            viability_json=json.dumps(viability,sort_keys=True),
@@ -71,7 +75,8 @@ fields=["run","symbol","bars","raw_bars","regime_start","status","score","versio
         "swing_state","swing_entry","swing_reason","high_progression","low_progression",
         "recent_swing_pct","amplitude_ratio","swing_health_json",
         "viability_state","viability_entry","viability_reason","recent_three_swing_pct",
-        "recent_two_up_pct","historical_mean_swing_pct","recent_capture_net_pct",
+        "recent_two_up_pct","last_three_up_pct","last_up_pct",
+        "repeated_up_pass_count","up_progression","historical_mean_swing_pct","recent_capture_net_pct",
         "combined_research_entry","viability_json"]
 with (OUT/"v23_research_universe.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=fields,extrasaction="ignore");w.writeheader();w.writerows(results)
@@ -81,6 +86,7 @@ with (OUT/"v23_research_ranked.csv").open("w",newline="") as fh:
             "swing_state","swing_entry","swing_reason","high_progression","low_progression",
             "recent_swing_pct","amplitude_ratio","viability_state","viability_entry",
             "viability_reason","recent_three_swing_pct","recent_two_up_pct",
+            "last_three_up_pct","last_up_pct","repeated_up_pass_count","up_progression",
             "historical_mean_swing_pct","recent_capture_net_pct","combined_research_entry"],extrasaction="ignore")
     w.writeheader()
     for rank,r in enumerate(ranked,1):
@@ -89,6 +95,7 @@ viable=[r for r in ranked if r.get("combined_research_entry")=="REVIEW"]
 with (OUT/"v23_research_recent_viability_shortlist.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=["research_rank","symbol","score","status",
          "swing_state","viability_state","recent_three_swing_pct","recent_two_up_pct",
+         "last_three_up_pct","last_up_pct","repeated_up_pass_count","up_progression",
          "historical_mean_swing_pct","recent_capture_net_pct",
          "combined_research_entry"],extrasaction="ignore")
     w.writeheader()
@@ -97,7 +104,9 @@ with (OUT/"v23_research_recent_viability_shortlist.csv").open("w",newline="") as
 print("RECENT_VIABILITY_SHORTLIST",json.dumps([
     {"rank":i+1,"symbol":r["symbol"],"score":round(r["score"],3),
      "last_three_swing_pct":r.get("recent_three_swing_pct"),
-     "last_two_up_pct":r.get("recent_two_up_pct"),
+     "last_three_up_pct":r.get("last_three_up_pct"),
+     "repeated_up_pass_count":r.get("repeated_up_pass_count"),
+     "last_up_pct":r.get("last_up_pct"),
      "state":r.get("viability_state")} for i,r in enumerate(viable[:25])]))
 print("RECENT_VIABILITY_COUNTS",json.dumps({
     state:sum(r.get("viability_state")==state for r in ranked)
