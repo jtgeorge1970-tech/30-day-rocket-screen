@@ -65,9 +65,14 @@ jobs:
           assert all(r['opportunity_v06_eligibility']=='PENDING_ELIGIBILITY' for r in v06), 'UNVERIFIED_ELIGIBILITY_WAS_PASSED'
           assert all(float(a['opportunity_v06_score']) >= float(b['opportunity_v06_score']) for a,b in zip(v06,v06[1:])), 'V06_WRONG_ORDER'
           assert v06[0]['symbol']=='CTOS', 'V06_EXPECTED_CONTROL_CTOS'
-          assert 'INTS' not in [r['symbol'] for r in v06], 'KNOWN_SMALL_CAP_INTS_NOT_EXCLUDED'
+          # Cached OHLC can predate dated cap evidence; never leak 2026-10-09
+          # knowledge backward into an earlier historical snapshot.
           ints=next(r for r in rows if r['symbol']=='INTS')
-          assert ints['opportunity_v06_eligibility']=='INELIGIBLE', 'INTS_EVIDENCE_GATE_MISSING'
+          if ints['opportunity_v06_eligibility']=='INELIGIBLE':
+              assert 'INTS' not in [r['symbol'] for r in v06], 'INELIGIBLE_INTS_NOT_EXCLUDED'
+          else:
+              assert ints['opportunity_v06_eligibility']=='PENDING_ELIGIBILITY', 'INTS_INVALID_ASOF_ELIGIBILITY'
+              print('INTS_ASOF_EVIDENCE_PENDING: cached bars predate cap snapshot; not verified eligible')
           report = {
             'universe': len(rows),
             'scores': len(ranked),
