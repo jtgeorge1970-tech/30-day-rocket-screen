@@ -7,7 +7,8 @@ import contextlib
 import io
 import json
 import pandas as pd
-from ofts.cycle_ledger import rebuild_cycle_ledger, active_ledger_symbols, load_complete_signal_snapshots
+from ofts.cycle_ledger import (rebuild_cycle_ledger, active_ledger_symbols,
+                               load_complete_signal_snapshots, build_cycle_report_card)
 from ofts.daily import (save_history, read_history, merge_history, refresh,
                         frozen_snapshot, outcomes, completed_session, market_schedule,
                         snapshot_is_qualified, load_qualified_snapshots,
@@ -217,6 +218,22 @@ class CycleLedgerTests(unittest.TestCase):
             self.assertAlmostEqual(trade['net_assumed_return_pct'], 7.8)
             self.assertAlmostEqual(trade['benchmark_price_return_pct'], 1)
             self.assertIn('captured_observed_swing_pct', trade)
+
+    def test_cycle_speed_report_card_uses_capital_time_not_raw_gain_alone(self):
+        trades = [
+            dict(status='CLOSED', net_assumed_return_pct=5, holding_sessions=5,
+                 entry_cycle={'cycle_sessions': 7}, captured_observed_swing_pct=50,
+                 missed_observed_swing_pct=5, excess_gross_pct=2),
+            dict(status='CLOSED', net_assumed_return_pct=10, holding_sessions=20,
+                 entry_cycle={'cycle_sessions': 30}, captured_observed_swing_pct=60,
+                 missed_observed_swing_pct=7, excess_gross_pct=3)]
+        card = build_cycle_report_card({'trades': trades})
+        self.assertEqual(card['status'], 'READY')
+        self.assertEqual(
+            card['groups']['FAST_1_TO_10']['capital_time_efficiency_pct_per_20_sessions'], 20)
+        self.assertEqual(
+            card['groups']['SLOW_OVER_25']['capital_time_efficiency_pct_per_20_sessions'], 10)
+        self.assertFalse(card['production_approved'])
 
     def test_complete_recovery_signal_snapshot_wins_without_rewriting_original(self):
         with tempfile.TemporaryDirectory() as d:
