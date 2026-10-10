@@ -18,6 +18,9 @@ def entry_diagnostic(closes, dates, *, today=None):
         age=(now-date.fromisoformat(asof)).days
     except ValueError:
         return dict(version=VERSION,state="INVALID_ASOF_DATE",entry_points=None,entry_confirmed=False)
+    # Weekday approximation; exchange holidays need a real session calendar.
+    trading_lag=sum((date.fromordinal(k).weekday()<5)
+                    for k in range(date.fromisoformat(asof).toordinal()+1,now.toordinal()+1)) if age>=0 else None
     last=prices[-1]
     five=100*(last/prices[-6]-1)
     twenty=100*(last/prices[-21]-1)
@@ -28,7 +31,7 @@ def entry_diagnostic(closes, dates, *, today=None):
     two_day_recovery=prices[-1]>prices[-2]>prices[-3]
     broke_support=last<prior20low
     # An unconfirmed selloff must never be described as a confirmed trough.
-    if age<0 or age>5:
+    if age<0 or trading_lag>1:
         state="STALE_DATA"
     elif broke_support:
         state="BREAKDOWN_NO_TRADE"
@@ -47,7 +50,7 @@ def entry_diagnostic(closes, dates, *, today=None):
     # No numeric entry score until as-of freshness and trade execution are validated.
     return dict(version=VERSION,state=state,entry_points=None,
                 entry_confirmed=(state=="REVERSAL_REVIEW"),
-                asof_date=asof,calendar_age_days=age,close=last,
+                asof_date=asof,calendar_age_days=age,trading_session_lag=trading_lag,close=last,
                 return_5_sessions_pct=round(five,3),
                 return_20_sessions_pct=round(twenty,3),
                 prior_20_close_low=round(prior20low,4),
