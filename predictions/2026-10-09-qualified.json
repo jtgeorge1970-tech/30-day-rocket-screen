@@ -1,0 +1,1020 @@
+{
+  "asof": "2026-10-09",
+  "recorded_at": "2026-10-10T06:55:07.723271+00:00",
+  "model_version": "v2.3-research",
+  "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
+  "protocol_hash": "576d2e79ea04b3b7f901b1208355b04a4b6e8d753153f9e17fb9da201646c50b",
+  "lookback": "trailing 2 calendar years",
+  "selected": [
+    "HNRG",
+    "CHTR",
+    "FUBO",
+    "EPOW",
+    "WULF",
+    "HLIT",
+    "JACK",
+    "TGS",
+    "SPGI",
+    "CSIQ",
+    "XPRO",
+    "SFM",
+    "DTIL",
+    "TBLA",
+    "FWRG",
+    "NYAX",
+    "OWLT",
+    "SRAD",
+    "ATGL",
+    "FMC",
+    "LE",
+    "MESO",
+    "NX",
+    "MBLY",
+    "IDR",
+    "MPLX",
+    "AUC",
+    "CEPV",
+    "DXLG",
+    "FXNC",
+    "ICMB",
+    "LRE",
+    "AXIL",
+    "PROP",
+    "RNTX",
+    "SOS",
+    "VFS",
+    "ROLR",
+    "CHRW",
+    "TMO",
+    "NUTX",
+    "BIRK",
+    "CREX",
+    "FHN",
+    "HPK",
+    "KVUE",
+    "MSA",
+    "ORA",
+    "RDDT",
+    "SNWV",
+    "TRT",
+    "WFG",
+    "CTSH",
+    "ARGX",
+    "LAND",
+    "BROS",
+    "LPTH",
+    "Q",
+    "AKAM",
+    "CNXC",
+    "HLNE",
+    "PENG",
+    "TKO",
+    "CECO",
+    "CULP",
+    "CR",
+    "ARCL",
+    "CATL",
+    "DMAA",
+    "AKO.A",
+    "HTCO",
+    "LGO",
+    "NDRA",
+    "PMA",
+    "VBIO",
+    "SLSN",
+    "UCFI",
+    "ZDAI",
+    "ATOS",
+    "RVSB",
+    "ABT",
+    "BE",
+    "CLPT",
+    "FBLA",
+    "GTX",
+    "KEY",
+    "MMSI",
+    "OLMA",
+    "QFIN",
+    "STE",
+    "TORO",
+    "WAL",
+    "ORI",
+    "BCS",
+    "ICUI",
+    "USAR",
+    "WNC",
+    "KE",
+    "IBTA",
+    "CIVB",
+    "HE",
+    "OCFC",
+    "STNE",
+    "DLHC",
+    "BGSF",
+    "MVST",
+    "AMPG",
+    "BTCT",
+    "DARE",
+    "FE",
+    "HDL",
+    "KTTA",
+    "MYSZ",
+    "PDSB",
+    "LESL",
+    "SHFS",
+    "TPVG",
+    "YDES",
+    "EROC",
+    "OPAL",
+    "GIB",
+    "AYA",
+    "CGNX",
+    "ESLT",
+    "GPCR"
+  ],
+  "rows": [
+    {
+      "symbol": "HNRG",
+      "score": 57.97566941017489,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "CHTR",
+      "score": 60.500394587264864,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "FUBO",
+      "score": 61.6753387048074,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "EPOW",
+      "score": 60.48157958161268,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "WULF",
+      "score": 62.15436765514018,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "HLIT",
+      "score": 60.44005348095671,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "JACK",
+      "score": 59.55332205530077,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "TGS",
+      "score": 55.24657634747561,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "SPGI",
+      "score": 61.62365773881015,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "CSIQ",
+      "score": 60.76487349379884,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "XPRO",
+      "score": 60.556065101496955,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "SFM",
+      "score": 60.94610579092183,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "DTIL",
+      "score": 53.34170313854882,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "TBLA",
+      "score": 59.54166512206817,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "FWRG",
+      "score": 56.49311362845759,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "NYAX",
+      "score": 59.93941920424872,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "OWLT",
+      "score": 58.30179832403924,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "SRAD",
+      "score": 58.358945826455,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ATGL",
+      "score": 59.057727483904,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "FMC",
+      "score": 58.87288655994917,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "LE",
+      "score": 58.525725592427385,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "MESO",
+      "score": 60.50629758701244,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "NX",
+      "score": 58.80213566040386,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "MBLY",
+      "score": 57.385456786409435,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "IDR",
+      "score": 58.29387699023748,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "MPLX",
+      "score": 47.42423262506644,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "AUC",
+      "score": 45.176050164223966,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "CEPV",
+      "score": 14.493880206822663,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 234
+    },
+    {
+      "symbol": "DXLG",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "FXNC",
+      "score": 55.66524096541002,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ICMB",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "LRE",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "AXIL",
+      "score": 46.752524510038505,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "PROP",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "RNTX",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "SOS",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "VFS",
+      "score": 49.778011976752694,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ROLR",
+      "score": 48.1099968078441,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 492
+    },
+    {
+      "symbol": "CHRW",
+      "score": 55.52542937216573,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "TMO",
+      "score": 39.61903985709575,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "NUTX",
+      "score": 41.332796839125066,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "BIRK",
+      "score": 45.16889191373725,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "CREX",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "FHN",
+      "score": 45.134256044879926,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "HPK",
+      "score": 53.526797177579226,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "KVUE",
+      "score": 41.16966586195229,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "MSA",
+      "score": 37.68171038896223,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ORA",
+      "score": 47.382375241334685,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "RDDT",
+      "score": 54.05508213199086,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "SNWV",
+      "score": 43.702461716267415,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 495
+    },
+    {
+      "symbol": "TRT",
+      "score": 35.82653528300854,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "WFG",
+      "score": 59.391248681250886,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "CTSH",
+      "score": 51.091336480392215,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ARGX",
+      "score": 49.83961367610289,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "LAND",
+      "score": 47.4086746537788,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "BROS",
+      "score": 43.97779145113935,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "LPTH",
+      "score": 50.955675876036416,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "Q",
+      "score": 54.90932869580688,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 240
+    },
+    {
+      "symbol": "AKAM",
+      "score": 62.584482993236065,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "CNXC",
+      "score": 49.63066397935878,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "HLNE",
+      "score": 44.96378504491233,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "PENG",
+      "score": 47.215586230874194,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "TKO",
+      "score": 57.10737803369017,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "CECO",
+      "score": 43.15566480293337,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "CULP",
+      "score": 50.709665023806565,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "CR",
+      "score": 48.711485895938566,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ARCL",
+      "score": null,
+      "classification": "INSUFFICIENT_HISTORY",
+      "asof": "2026-10-09",
+      "bars": 93
+    },
+    {
+      "symbol": "CATL",
+      "score": null,
+      "classification": "INSUFFICIENT_HISTORY",
+      "asof": "2026-10-09",
+      "bars": 17
+    },
+    {
+      "symbol": "DMAA",
+      "score": 10.884069079004723,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 409
+    },
+    {
+      "symbol": "AKO.A",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": null,
+      "bars": 0
+    },
+    {
+      "symbol": "HTCO",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "LGO",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "NDRA",
+      "score": 50.6362040796771,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "PMA",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 470
+    },
+    {
+      "symbol": "VBIO",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "SLSN",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "UCFI",
+      "score": 42.0894529670192,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ZDAI",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ATOS",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "RVSB",
+      "score": 49.17064869228067,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ABT",
+      "score": 52.462409325181746,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "BE",
+      "score": 58.1077282027693,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "CLPT",
+      "score": 46.67481720100182,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "FBLA",
+      "score": 40.00733800136462,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 492
+    },
+    {
+      "symbol": "GTX",
+      "score": 46.244718787771156,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "KEY",
+      "score": 51.541724382828946,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "MMSI",
+      "score": 40.53399657293865,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "OLMA",
+      "score": 41.17972363306923,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "QFIN",
+      "score": 50.944784141348755,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "STE",
+      "score": 49.916318215367326,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "TORO",
+      "score": 40.777076452837605,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "WAL",
+      "score": 43.24228062214084,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ORI",
+      "score": 46.65925262132842,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "BCS",
+      "score": 44.48185464468271,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ICUI",
+      "score": 44.906306670103724,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "USAR",
+      "score": 52.882941334423194,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "WNC",
+      "score": 49.69057875109969,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "KE",
+      "score": 51.71807232353562,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "IBTA",
+      "score": 52.2558444806924,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "CIVB",
+      "score": 43.90668136366107,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "HE",
+      "score": 36.966249861348,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "OCFC",
+      "score": 47.9995859652285,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "STNE",
+      "score": 52.821213149409296,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "DLHC",
+      "score": 39.706641636454876,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "BGSF",
+      "score": 39.66351293224211,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "MVST",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "AMPG",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "BTCT",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "DARE",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "FE",
+      "score": 39.3054497116859,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "HDL",
+      "score": 49.832688186977535,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "KTTA",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "MYSZ",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "PDSB",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "LESL",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "SHFS",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "TPVG",
+      "score": 51.09109475670866,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "YDES",
+      "score": 44.6109488168825,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 283
+    },
+    {
+      "symbol": "EROC",
+      "score": null,
+      "classification": "INSUFFICIENT_HISTORY",
+      "asof": "2026-10-09",
+      "bars": 85
+    },
+    {
+      "symbol": "OPAL",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "GIB",
+      "score": 53.68006889384912,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "AYA",
+      "score": 52.83599647729061,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "CGNX",
+      "score": 56.788245080896935,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "ESLT",
+      "score": 54.2883484959485,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    },
+    {
+      "symbol": "GPCR",
+      "score": 50.29164225229685,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501
+    }
+  ],
+  "coverage": {
+    "fresh": 124,
+    "selected": 125,
+    "minimum_fresh": 100
+  },
+  "production_approved": false,
+  "execution": "Hypothetical next-session open; fixed-session close; no stop/target strategy",
+  "cost_assumption_roundtrip_pct": 0.2
+}
