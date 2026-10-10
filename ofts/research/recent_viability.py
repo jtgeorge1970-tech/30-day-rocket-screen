@@ -49,6 +49,8 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
     recent_up = up[-3:]
     up_values = [l['amplitude_pct'] for l in recent_up]
     up_pass_count = sum(p >= MIN_REPEATED_UP_PCT for p in up_values)
+    up_average = sum(up_values)/3 if len(up_values)==3 else None
+    up_median = median(up_values) if len(up_values)==3 else None
     latest_up_age = len(prices)-1-recent_up[-1]['end_index'] if recent_up else None
     up_trend = ('SHRINKING' if len(up_values)==3 and up_values[0]>up_values[1]>up_values[2]
                 else 'GROWING' if len(up_values)==3 and up_values[0]<up_values[1]<up_values[2]
@@ -83,6 +85,8 @@ def recent_swing_viability(closes, major_threshold_pct, lookback=252):
                 last_three_completed_legs=recent,
                 last_three_up_legs=recent_up,
                 last_three_up_pct=up_values,
+                last_three_up_average_pct=up_average,
+                last_three_up_median_pct=up_median,
                 last_up_pct=up_values[-1] if up_values else None,
                 repeated_up_min_pct=MIN_REPEATED_UP_PCT,
                 repeated_up_pass_count=up_pass_count,
