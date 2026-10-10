@@ -203,8 +203,9 @@ class CycleLedgerTests(unittest.TestCase):
             (state / 'signals/2026-01-06.json').write_text(
                 json.dumps(self.signal_snapshot('2026-01-06', 'SELL')))
             histories = {
-                'ABC': [bar('2026-01-05', 100), bar('2026-01-06', 105),
-                        bar('2026-01-07', 108)],
+                'ABC': [dict(bar('2026-01-05', 100), open=100),
+                        dict(bar('2026-01-06', 105), open=105),
+                        dict(bar('2026-01-07', 108), open=108)],
                 'SPY': [dict(bar('2026-01-05', 500), open=500),
                         dict(bar('2026-01-07', 505), open=505)]}
             closed = rebuild_cycle_ledger(state, histories, schedule)
