@@ -38,3 +38,11 @@ Current blockers: (1) DATA INTEGRITY: IQMX full-universe rank #1 / 77.597 used 3
 - Examples: SCYX #1 67.197 **STABLE_RANGE / REVIEW**; HNRG #2 65.889 **DOWNTREND / REVIEW** (lower highs and lower lows); MIR #3 64.881 **IRREGULAR / experimental NO_TRADE**; CHTR #5 63.990 **IRREGULAR / experimental NO_TRADE**; HLIT #21 61.809 **STABLE_RANGE / REVIEW**.
 - All new swing-health classifications are **experimental**, NOT an official BUY/SELL decision, not proof of profitability. Unchanged v2.3 research scores, immutable prior cohorts and original cycle ledger preserved.
 - Next: verify daily workflow test/persistence, then prospectively audit avoided losing entries and **missed profitable swings** with benchmark and fixed-horizon outcomes before any production promotion.
+
+## Recent oscillation timing / cycle-clock hard gate (2026-10-10)
+
+- User requirement: **do not qualify three 5% swings if they occur months apart**. Earlier OFTS had historical peak/trough timing components and cycle fingerprints but **no recent same-side interval gate** in the v0.3 economic viability shortlist.
+- Implemented research challenger **v0.4**: last 3 peak-to-peak AND trough-to-trough trading-session gaps, median 10–40, every gap 8–45, relative MAD <=0.35; 3 confirmed recent UP swings >=5%, amplitude viability and prior swing-health checks retained. No change to frozen v2.3 score or production BUY.
+- Verified 5,502-universe run **38047336873** (success), 3,977 numeric scores, **842** cycle-timing primary rejects, **16** combined experimental REVIEW names vs 237 under v0.3. **22 tests passed** in equivalent preceding run **38047328236**.
+- Saved all 16 symbols, original scores, three UP amplitudes, three peak and trough intervals in `ofts/validation/recent_cycle_timing_v04_2026-10-10.md`.
+- Remaining: independent market-session daily snapshot of new fields; test alternate 10–20/30/40/50 session bands on embargoed chronological outcomes, avoided losers/missed winners, SPY and transaction costs. **Not validated as profitable**.
