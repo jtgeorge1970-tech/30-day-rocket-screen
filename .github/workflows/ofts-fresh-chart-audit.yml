@@ -59,5 +59,6 @@ jobs:
           path: |
             ofts-output/fresh_oscillator_audit.json
             ofts-output/fresh_oscillator_audit.csv
+            ofts-output/fresh_oscillator_keepers.csv
           if-no-files-found: warn
           retention-days: 90
