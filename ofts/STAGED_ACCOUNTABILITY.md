@@ -29,3 +29,12 @@ Current blockers: (1) DATA INTEGRITY: IQMX full-universe rank #1 / 77.597 used 3
 - Frozen 2026-10-09 predictions remain immutable. No revised full-universe rank is yet certified; 77.597 must not be reused as valid.
 - Verified full-universe rescore: run 38046200050, 5,502 symbols, 3,977 numeric research scores; IQMX excluded (68 of 340 raw bars after July 2), provisional new #1 SCYX 67.197. Full Top 25: `ofts/validation/full_universe_identity_rescore_2026-10-10.md`.
 - Next: verify daily persistence, extend identity registry to other corporate-action/ticker-change cases, then test predictive power against untouched holdouts.
+
+## Recent-swing decay / lower-high-and-low structural-risk challenger (2026-10-10)
+
+- User required a separate test for **last several completed swing amplitudes and cadence** to detect fading oscillation, and for **two successive lower highs and lower lows** to flag downside structural weakness without automatically discarding profitable downward swings.
+- Code committed: `ofts/research/swing_health.py`, worker and daily integration, `ofts/test_swing_health.py`, daily and universe CI checks. SSOT locked under last-four-swings section.
+- Verified 5,502-universe run 38046622126, **3,977** scored, all scored symbols assigned experimental swing health. Counts: **2,291 INSUFFICIENT**, **637 IRREGULAR**, **109 DECAYING**, **103 DOWNTREND**, **15 DOWNTREND_WEAK_BOUNCE**, **725 STABLE_RANGE**, **97 STABLE_UPTREND**. Saved Top 25 and high/low flags: `ofts/validation/swing_health_v01_2026-10-10.md`.
+- Examples: SCYX #1 67.197 **STABLE_RANGE / REVIEW**; HNRG #2 65.889 **DOWNTREND / REVIEW** (lower highs and lower lows); MIR #3 64.881 **IRREGULAR / experimental NO_TRADE**; CHTR #5 63.990 **IRREGULAR / experimental NO_TRADE**; HLIT #21 61.809 **STABLE_RANGE / REVIEW**.
+- All new swing-health classifications are **experimental**, NOT an official BUY/SELL decision, not proof of profitability. Unchanged v2.3 research scores, immutable prior cohorts and original cycle ledger preserved.
+- Next: verify daily workflow test/persistence, then prospectively audit avoided losing entries and **missed profitable swings** with benchmark and fixed-horizon outcomes before any production promotion.
