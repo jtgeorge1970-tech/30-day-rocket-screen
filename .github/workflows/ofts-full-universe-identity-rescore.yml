@@ -5,6 +5,7 @@ on:
     paths:
       - 'ofts/worker.py'
       - 'ofts/research/security_regimes.py'
+      - 'ofts/research/swing_health.py'
       - '.github/workflows/ofts-full-universe-identity-rescore.yml'
 permissions:
   contents: read
@@ -47,11 +48,15 @@ jobs:
           assert iqmx['status'] == 'INSUFFICIENT_POST_REGIME_HISTORY', iqmx
           assert iqmx['score'] == '', iqmx
           assert all(r['symbol'] != 'IQMX' for r in ranked), 'INVALID_IQMX_LEADER_RETAINED'
+          assert all(r['swing_state'] and r['swing_entry'] and r['swing_reason'] for r in ranked), 'MISSING_SWING_HEALTH_DIAGNOSTIC'
           report = {
             'universe': len(rows),
             'scores': len(ranked),
             'identity_boundary_iqmx': iqmx,
             'top25': ranked[:25],
+            'swing_health_experimental': True,
+            'swing_states': {state: sum(r['swing_state'] == state for r in ranked)
+                             for state in sorted({r['swing_state'] for r in ranked})},
             'research_only': True,
             'production_approved': False,
             'history_provenance': 'restored original full-universe GitHub Actions cache',
@@ -63,7 +68,7 @@ jobs:
               f.write('IQMX excluded: '+iqmx['status']+'; post-event bars '+iqmx['bars']+' of '+iqmx['raw_bars']+' raw.\n\n')
               f.write('Top 10 research rankings (not BUY signals):\n\n')
               for r in ranked[:10]:
-                  f.write('- '+r['rank']+' '+r['symbol']+' '+r['score']+' ('+r['status']+')\n')
+                  f.write('- '+r['rank']+' '+r['symbol']+' '+r['score']+' ('+r['status']+'), swing health '+r['swing_state']+', proposed '+r['swing_entry']+'\n')
           PY
       - uses: actions/upload-artifact@v4
         if: always()
