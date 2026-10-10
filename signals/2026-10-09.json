@@ -1,0 +1,2400 @@
+{
+  "asof": "2026-10-09",
+  "recorded_at": "2026-10-10T08:23:37.320572+00:00",
+  "execution": "Hypothetical next-session open",
+  "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
+  "rows": [
+    {
+      "symbol": "HNRG",
+      "score": 57.97566941017489,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 31,
+        "median_swing_pct": 23.701651305606916,
+        "completed_cycle_intervals": 29,
+        "confirmed_turns": 31,
+        "timing_consistency": 55.875,
+        "amplitude_consistency": 65.73394874929926,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 477
+      }
+    },
+    {
+      "symbol": "CHTR",
+      "score": 60.500394587264864,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 41.5,
+        "median_swing_pct": 15.790322759136277,
+        "completed_cycle_intervals": 22,
+        "confirmed_turns": 24,
+        "timing_consistency": 69.73670731707317,
+        "amplitude_consistency": 63.82249663573187,
+        "confidence": "HIGH"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 474
+      }
+    },
+    {
+      "symbol": "FUBO",
+      "score": 61.6753387048074,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 21.0,
+        "median_swing_pct": 24.122807873668826,
+        "completed_cycle_intervals": 34,
+        "confirmed_turns": 36,
+        "timing_consistency": 64.28281818181819,
+        "amplitude_consistency": 65.25960192486427,
+        "confidence": "HIGH"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 481
+      }
+    },
+    {
+      "symbol": "EPOW",
+      "score": 60.48157958161268,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 29,
+        "median_swing_pct": 30.18182482727739,
+        "completed_cycle_intervals": 29,
+        "confirmed_turns": 31,
+        "timing_consistency": 76.9529087875417,
+        "amplitude_consistency": 50.172266530283174,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 494
+      }
+    },
+    {
+      "symbol": "WULF",
+      "score": 62.15436765514018,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 16.0,
+        "median_swing_pct": 23.27008961238993,
+        "completed_cycle_intervals": 48,
+        "confirmed_turns": 50,
+        "timing_consistency": 55.9853125,
+        "amplitude_consistency": 61.227521381210025,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 486
+      }
+    },
+    {
+      "symbol": "HLIT",
+      "score": 60.44005348095671,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 26,
+        "median_swing_pct": 16.864592326455977,
+        "completed_cycle_intervals": 33,
+        "confirmed_turns": 35,
+        "timing_consistency": 64.22824884792627,
+        "amplitude_consistency": 39.05937301315048,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 492
+      }
+    },
+    {
+      "symbol": "JACK",
+      "score": 59.55332205530077,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 17.0,
+        "median_swing_pct": 16.114495600631717,
+        "completed_cycle_intervals": 46,
+        "confirmed_turns": 48,
+        "timing_consistency": 43.37291666666667,
+        "amplitude_consistency": 56.88758206483755,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 459
+      }
+    },
+    {
+      "symbol": "TGS",
+      "score": 55.24657634747561,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 17,
+        "median_swing_pct": 13.508517603594573,
+        "completed_cycle_intervals": 43,
+        "confirmed_turns": 45,
+        "timing_consistency": 33.077083333333334,
+        "amplitude_consistency": 57.22567637697487,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 494
+      }
+    },
+    {
+      "symbol": "SPGI",
+      "score": 61.62365773881015,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 34,
+        "median_swing_pct": 11.294072696684227,
+        "completed_cycle_intervals": 19,
+        "confirmed_turns": 21,
+        "timing_consistency": 77.10691176470587,
+        "amplitude_consistency": 61.103642187312005,
+        "confidence": "HIGH"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 475
+      }
+    },
+    {
+      "symbol": "CSIQ",
+      "score": 60.76487349379884,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 16.0,
+        "median_swing_pct": 19.64125251397967,
+        "completed_cycle_intervals": 56,
+        "confirmed_turns": 58,
+        "timing_consistency": 61.03603415559772,
+        "amplitude_consistency": 52.66951020585413,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 491
+      }
+    },
+    {
+      "symbol": "XPRO",
+      "score": 60.556065101496955,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 20,
+        "median_swing_pct": 14.95875149963658,
+        "completed_cycle_intervals": 33,
+        "confirmed_turns": 35,
+        "timing_consistency": 61.441538461538464,
+        "amplitude_consistency": 74.45878301359389,
+        "confidence": "HIGH"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 464
+      }
+    },
+    {
+      "symbol": "SFM",
+      "score": 60.94610579092183,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 23.5,
+        "median_swing_pct": 14.357597616056061,
+        "completed_cycle_intervals": 28,
+        "confirmed_turns": 30,
+        "timing_consistency": 55.56446399345336,
+        "amplitude_consistency": 52.31286380646824,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 469
+      }
+    },
+    {
+      "symbol": "DTIL",
+      "score": 53.34170313854882,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 24.0,
+        "median_swing_pct": 24.697335415560694,
+        "completed_cycle_intervals": 32,
+        "confirmed_turns": 34,
+        "timing_consistency": 59.84625,
+        "amplitude_consistency": 44.99169816336044,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 466
+      }
+    },
+    {
+      "symbol": "TBLA",
+      "score": 59.54166512206817,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 36,
+        "median_swing_pct": 15.339884291443905,
+        "completed_cycle_intervals": 25,
+        "confirmed_turns": 27,
+        "timing_consistency": 51.377096774193554,
+        "amplitude_consistency": 66.12272046903271,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 495
+      }
+    },
+    {
+      "symbol": "FWRG",
+      "score": 56.49311362845759,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 22.5,
+        "median_swing_pct": 18.911634570078363,
+        "completed_cycle_intervals": 30,
+        "confirmed_turns": 32,
+        "timing_consistency": 34.69500000000001,
+        "amplitude_consistency": 55.55233523412115,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 467
+      }
+    },
+    {
+      "symbol": "NYAX",
+      "score": 59.93941920424872,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 22.5,
+        "median_swing_pct": 16.554543782118735,
+        "completed_cycle_intervals": 32,
+        "confirmed_turns": 34,
+        "timing_consistency": 53.850441176470596,
+        "amplitude_consistency": 58.07733826235171,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 496
+      }
+    },
+    {
+      "symbol": "OWLT",
+      "score": 58.30179832403924,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 26.5,
+        "median_swing_pct": 24.373580961358044,
+        "completed_cycle_intervals": 32,
+        "confirmed_turns": 34,
+        "timing_consistency": 54.3461448275862,
+        "amplitude_consistency": 55.20091369074975,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 487
+      }
+    },
+    {
+      "symbol": "SRAD",
+      "score": 58.358945826455,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 26.5,
+        "median_swing_pct": 18.07909903391367,
+        "completed_cycle_intervals": 24,
+        "confirmed_turns": 26,
+        "timing_consistency": 38.43268267581475,
+        "amplitude_consistency": 52.61604604962458,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 487
+      }
+    },
+    {
+      "symbol": "ATGL",
+      "score": 59.057727483904,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 20.5,
+        "median_swing_pct": 32.103798759905985,
+        "completed_cycle_intervals": 42,
+        "confirmed_turns": 44,
+        "timing_consistency": 47.3677,
+        "amplitude_consistency": 52.473282752543625,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 489
+      }
+    },
+    {
+      "symbol": "FMC",
+      "score": 58.87288655994917,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 31.0,
+        "median_swing_pct": 19.540904882576815,
+        "completed_cycle_intervals": 26,
+        "confirmed_turns": 28,
+        "timing_consistency": 54.30780172413793,
+        "amplitude_consistency": 67.81728269542697,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 474
+      }
+    },
+    {
+      "symbol": "LE",
+      "score": 58.525725592427385,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 16.5,
+        "median_swing_pct": 15.218698827146337,
+        "completed_cycle_intervals": 48,
+        "confirmed_turns": 50,
+        "timing_consistency": 52.82636363636364,
+        "amplitude_consistency": 60.79185099839863,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 456
+      }
+    },
+    {
+      "symbol": "MESO",
+      "score": 60.50629758701244,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 15.0,
+        "median_swing_pct": 15.176852613530635,
+        "completed_cycle_intervals": 60,
+        "confirmed_turns": 62,
+        "timing_consistency": 55.522,
+        "amplitude_consistency": 49.700389403931425,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 487
+      }
+    },
+    {
+      "symbol": "NX",
+      "score": 58.80213566040386,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 19.0,
+        "median_swing_pct": 15.254241530183666,
+        "completed_cycle_intervals": 38,
+        "confirmed_turns": 40,
+        "timing_consistency": 53.18105263157895,
+        "amplitude_consistency": 57.84944690266036,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 476
+      }
+    },
+    {
+      "symbol": "MBLY",
+      "score": 57.385456786409435,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 24.5,
+        "median_swing_pct": 23.560907650300255,
+        "completed_cycle_intervals": 30,
+        "confirmed_turns": 32,
+        "timing_consistency": 57.99300000000001,
+        "amplitude_consistency": 55.10796004344527,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 462
+      }
+    },
+    {
+      "symbol": "IDR",
+      "score": 58.29387699023748,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 20,
+        "median_swing_pct": 21.74980470035519,
+        "completed_cycle_intervals": 45,
+        "confirmed_turns": 47,
+        "timing_consistency": 46.88010695187166,
+        "amplitude_consistency": 51.515475336420494,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 487
+      }
+    },
+    {
+      "symbol": "MPLX",
+      "score": 47.42423262506644,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 72.0,
+        "median_swing_pct": 12.055552447283713,
+        "completed_cycle_intervals": 12,
+        "confirmed_turns": 14,
+        "timing_consistency": 63.84129153605016,
+        "amplitude_consistency": 59.19477334888719,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "AUC",
+      "score": 45.176050164223966,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 20,
+        "median_swing_pct": 30.651765599950814,
+        "completed_cycle_intervals": 41,
+        "confirmed_turns": 43,
+        "timing_consistency": 21.987000000000002,
+        "amplitude_consistency": 53.724529920460554,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 486
+      }
+    },
+    {
+      "symbol": "CEPV",
+      "score": 14.493880206822663,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 234,
+      "cycle": {
+        "cycle_sessions": null,
+        "median_swing_pct": null,
+        "completed_cycle_intervals": 0,
+        "confirmed_turns": 0,
+        "timing_consistency": 0.0,
+        "amplitude_consistency": 0.0,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "DXLG",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "FXNC",
+      "score": 55.66524096541002,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 44.5,
+        "median_swing_pct": 13.945945533546244,
+        "completed_cycle_intervals": 18,
+        "confirmed_turns": 20,
+        "timing_consistency": 74.83546822742474,
+        "amplitude_consistency": 55.70409310996614,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 452
+      }
+    },
+    {
+      "symbol": "ICMB",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "LRE",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "AXIL",
+      "score": 46.752524510038505,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 14,
+        "median_swing_pct": 17.936502676697913,
+        "completed_cycle_intervals": 59,
+        "confirmed_turns": 61,
+        "timing_consistency": 11.59311111111112,
+        "amplitude_consistency": 44.60423534457997,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 486
+      }
+    },
+    {
+      "symbol": "PROP",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "RNTX",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "SOS",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "VFS",
+      "score": 49.778011976752694,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 19.0,
+        "median_swing_pct": 12.923079270582939,
+        "completed_cycle_intervals": 34,
+        "confirmed_turns": 36,
+        "timing_consistency": 40.28416666666667,
+        "amplitude_consistency": 46.98810000191924,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 486
+      }
+    },
+    {
+      "symbol": "ROLR",
+      "score": 48.1099968078441,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 492,
+      "cycle": {
+        "cycle_sessions": 14,
+        "median_swing_pct": 27.610048233059615,
+        "completed_cycle_intervals": 51,
+        "confirmed_turns": 53,
+        "timing_consistency": 8.573000000000004,
+        "amplitude_consistency": 38.93336902013823,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 473
+      }
+    },
+    {
+      "symbol": "CHRW",
+      "score": 55.52542937216573,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 33,
+        "median_swing_pct": 12.220767745218492,
+        "completed_cycle_intervals": 25,
+        "confirmed_turns": 27,
+        "timing_consistency": 54.98165847665847,
+        "amplitude_consistency": 49.41790316262964,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "TMO",
+      "score": 39.61903985709575,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 36.5,
+        "median_swing_pct": 11.428272041688947,
+        "completed_cycle_intervals": 18,
+        "confirmed_turns": 20,
+        "timing_consistency": 39.986688555347094,
+        "amplitude_consistency": 46.54492928534788,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "NUTX",
+      "score": 41.332796839125066,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 14,
+        "median_swing_pct": 25.823951400439633,
+        "completed_cycle_intervals": 51,
+        "confirmed_turns": 53,
+        "timing_consistency": 29.886896551724142,
+        "amplitude_consistency": 35.069771229016766,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 458
+      }
+    },
+    {
+      "symbol": "BIRK",
+      "score": 45.16889191373725,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 24.0,
+        "median_swing_pct": 13.475775058594374,
+        "completed_cycle_intervals": 30,
+        "confirmed_turns": 32,
+        "timing_consistency": 30.12902173913044,
+        "amplitude_consistency": 40.987792351168714,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 482
+      }
+    },
+    {
+      "symbol": "CREX",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "FHN",
+      "score": 45.134256044879926,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 44.0,
+        "median_swing_pct": 14.895432034404244,
+        "completed_cycle_intervals": 18,
+        "confirmed_turns": 20,
+        "timing_consistency": 52.377786377708986,
+        "amplitude_consistency": 58.51785101448171,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "HPK",
+      "score": 53.526797177579226,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 19.5,
+        "median_swing_pct": 21.255059517288288,
+        "completed_cycle_intervals": 34,
+        "confirmed_turns": 36,
+        "timing_consistency": 41.313750000000006,
+        "amplitude_consistency": 49.04382232464876,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 490
+      }
+    },
+    {
+      "symbol": "KVUE",
+      "score": 41.16966586195229,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 57.0,
+        "median_swing_pct": 13.789871370267193,
+        "completed_cycle_intervals": 14,
+        "confirmed_turns": 16,
+        "timing_consistency": 39.14598824621095,
+        "amplitude_consistency": 50.60494070211351,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 431
+      }
+    },
+    {
+      "symbol": "MSA",
+      "score": 37.68171038896223,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 59,
+        "median_swing_pct": 13.805561426062813,
+        "completed_cycle_intervals": 11,
+        "confirmed_turns": 13,
+        "timing_consistency": 51.80875052528365,
+        "amplitude_consistency": 22.890853767019014,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 456
+      }
+    },
+    {
+      "symbol": "ORA",
+      "score": 47.382375241334685,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 54.5,
+        "median_swing_pct": 20.05243113046905,
+        "completed_cycle_intervals": 14,
+        "confirmed_turns": 16,
+        "timing_consistency": 57.13938181818182,
+        "amplitude_consistency": 33.87549123166793,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 484
+      }
+    },
+    {
+      "symbol": "RDDT",
+      "score": 54.05508213199086,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 20,
+        "median_swing_pct": 18.767799496188317,
+        "completed_cycle_intervals": 43,
+        "confirmed_turns": 45,
+        "timing_consistency": 31.75333333333334,
+        "amplitude_consistency": 46.77894163450297,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 493
+      }
+    },
+    {
+      "symbol": "SNWV",
+      "score": 43.702461716267415,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 495,
+      "cycle": {
+        "cycle_sessions": 36,
+        "median_swing_pct": 33.620501500177156,
+        "completed_cycle_intervals": 19,
+        "confirmed_turns": 21,
+        "timing_consistency": 29.63021739130435,
+        "amplitude_consistency": 46.57707545592352,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 473
+      }
+    },
+    {
+      "symbol": "TRT",
+      "score": 35.82653528300854,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 24.5,
+        "median_swing_pct": 28.351646324759415,
+        "completed_cycle_intervals": 22,
+        "confirmed_turns": 24,
+        "timing_consistency": 0.0,
+        "amplitude_consistency": 39.50587600686176,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 488
+      }
+    },
+    {
+      "symbol": "WFG",
+      "score": 59.391248681250886,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 40,
+        "median_swing_pct": 11.249472019045292,
+        "completed_cycle_intervals": 19,
+        "confirmed_turns": 21,
+        "timing_consistency": 36.741472795497195,
+        "amplitude_consistency": 76.76007479810126,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "CTSH",
+      "score": 51.091336480392215,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 55,
+        "median_swing_pct": 19.7862094079177,
+        "completed_cycle_intervals": 17,
+        "confirmed_turns": 19,
+        "timing_consistency": 66.32738983050848,
+        "amplitude_consistency": 26.528799392039314,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 491
+      }
+    },
+    {
+      "symbol": "ARGX",
+      "score": 49.83961367610289,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 31.5,
+        "median_swing_pct": 14.26647144677573,
+        "completed_cycle_intervals": 24,
+        "confirmed_turns": 26,
+        "timing_consistency": 56.457061958694204,
+        "amplitude_consistency": 40.865331910116666,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "LAND",
+      "score": 47.4086746537788,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 67.0,
+        "median_swing_pct": 16.504850673333138,
+        "completed_cycle_intervals": 12,
+        "confirmed_turns": 14,
+        "timing_consistency": 68.97312565081569,
+        "amplitude_consistency": 53.110325845340654,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 452
+      }
+    },
+    {
+      "symbol": "BROS",
+      "score": 43.97779145113935,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 19.0,
+        "median_swing_pct": 16.71937382270221,
+        "completed_cycle_intervals": 38,
+        "confirmed_turns": 40,
+        "timing_consistency": 36.05745614035088,
+        "amplitude_consistency": 44.23918622418997,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 467
+      }
+    },
+    {
+      "symbol": "LPTH",
+      "score": 50.955675876036416,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 15,
+        "median_swing_pct": 21.167167209469884,
+        "completed_cycle_intervals": 57,
+        "confirmed_turns": 59,
+        "timing_consistency": 23.399,
+        "amplitude_consistency": 49.382801298981796,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 495
+      }
+    },
+    {
+      "symbol": "Q",
+      "score": 54.90932869580688,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 240,
+      "cycle": {
+        "cycle_sessions": 24,
+        "median_swing_pct": 15.322381877267254,
+        "completed_cycle_intervals": 19,
+        "confirmed_turns": 21,
+        "timing_consistency": 53.93091707317073,
+        "amplitude_consistency": 51.42055491288304,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 221
+      }
+    },
+    {
+      "symbol": "AKAM",
+      "score": 62.584482993236065,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 32,
+        "median_swing_pct": 18.113510469596545,
+        "completed_cycle_intervals": 19,
+        "confirmed_turns": 21,
+        "timing_consistency": 58.812262032085556,
+        "amplitude_consistency": 64.36303381232338,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 488
+      }
+    },
+    {
+      "symbol": "CNXC",
+      "score": 49.63066397935878,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 41,
+        "median_swing_pct": 30.00243667476613,
+        "completed_cycle_intervals": 17,
+        "confirmed_turns": 19,
+        "timing_consistency": 51.67419133317547,
+        "amplitude_consistency": 72.39246950187653,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 475
+      }
+    },
+    {
+      "symbol": "HLNE",
+      "score": 44.96378504491233,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 23.0,
+        "median_swing_pct": 16.13106992422835,
+        "completed_cycle_intervals": 28,
+        "confirmed_turns": 30,
+        "timing_consistency": 31.968334022323273,
+        "amplitude_consistency": 49.047981037826816,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 472
+      }
+    },
+    {
+      "symbol": "PENG",
+      "score": 47.215586230874194,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 41.0,
+        "median_swing_pct": 27.546956383918776,
+        "completed_cycle_intervals": 18,
+        "confirmed_turns": 20,
+        "timing_consistency": 28.3768115942029,
+        "amplitude_consistency": 54.81429360684275,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 481
+      }
+    },
+    {
+      "symbol": "TKO",
+      "score": 57.10737803369017,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 31,
+        "median_swing_pct": 12.445791339772926,
+        "completed_cycle_intervals": 25,
+        "confirmed_turns": 27,
+        "timing_consistency": 40.57774675972084,
+        "amplitude_consistency": 56.578186180233146,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "CECO",
+      "score": 43.15566480293337,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 39,
+        "median_swing_pct": 23.20905003807588,
+        "completed_cycle_intervals": 19,
+        "confirmed_turns": 21,
+        "timing_consistency": 28.891051369863014,
+        "amplitude_consistency": 36.88792743184018,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 497
+      }
+    },
+    {
+      "symbol": "CULP",
+      "score": 50.709665023806565,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 50.0,
+        "median_swing_pct": 21.367528218129507,
+        "completed_cycle_intervals": 16,
+        "confirmed_turns": 18,
+        "timing_consistency": 71.3021485148515,
+        "amplitude_consistency": 59.02642212202427,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 464
+      }
+    },
+    {
+      "symbol": "CR",
+      "score": 48.711485895938566,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 37.5,
+        "median_swing_pct": 12.784474955364134,
+        "completed_cycle_intervals": 24,
+        "confirmed_turns": 26,
+        "timing_consistency": 42.35223783783783,
+        "amplitude_consistency": 49.18009108948197,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "ARCL",
+      "score": null,
+      "classification": "INSUFFICIENT_HISTORY",
+      "asof": "2026-10-09",
+      "bars": 93
+    },
+    {
+      "symbol": "CATL",
+      "score": null,
+      "classification": "INSUFFICIENT_HISTORY",
+      "asof": "2026-10-09",
+      "bars": 17
+    },
+    {
+      "symbol": "DMAA",
+      "score": 10.884069079004723,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 409,
+      "cycle": {
+        "cycle_sessions": null,
+        "median_swing_pct": null,
+        "completed_cycle_intervals": 0,
+        "confirmed_turns": 1,
+        "timing_consistency": 0.0,
+        "amplitude_consistency": 0.0,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "AKO.A",
+      "score": null,
+      "classification": "STALE_DATA",
+      "asof": null,
+      "bars": 0
+    },
+    {
+      "symbol": "HTCO",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "LGO",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "NDRA",
+      "score": 50.6362040796771,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 24,
+        "median_swing_pct": 39.4389272448575,
+        "completed_cycle_intervals": 33,
+        "confirmed_turns": 35,
+        "timing_consistency": 32.87908653846154,
+        "amplitude_consistency": 54.36794555870752,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 483
+      }
+    },
+    {
+      "symbol": "PMA",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 470,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "VBIO",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "SLSN",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "UCFI",
+      "score": 42.0894529670192,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 5,
+        "median_swing_pct": 16.60941722417215,
+        "completed_cycle_intervals": 23,
+        "confirmed_turns": 25,
+        "timing_consistency": 40.696,
+        "amplitude_consistency": 41.545909300562144,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "ZDAI",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "ATOS",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "RVSB",
+      "score": 49.17064869228067,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 32,
+        "median_swing_pct": 10.945204237752154,
+        "completed_cycle_intervals": 21,
+        "confirmed_turns": 23,
+        "timing_consistency": 66.62545454545455,
+        "amplitude_consistency": 54.06472274011842,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 464
+      }
+    },
+    {
+      "symbol": "ABT",
+      "score": 52.462409325181746,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 71,
+        "median_swing_pct": 13.04634314676954,
+        "completed_cycle_intervals": 11,
+        "confirmed_turns": 13,
+        "timing_consistency": 75.50452693125442,
+        "amplitude_consistency": 47.71567463864774,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "BE",
+      "score": 58.1077282027693,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 19.0,
+        "median_swing_pct": 27.627506419367187,
+        "completed_cycle_intervals": 38,
+        "confirmed_turns": 40,
+        "timing_consistency": 62.15468421052633,
+        "amplitude_consistency": 53.73278073431802,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 466
+      }
+    },
+    {
+      "symbol": "CLPT",
+      "score": 46.67481720100182,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 38.5,
+        "median_swing_pct": 28.21249259926839,
+        "completed_cycle_intervals": 20,
+        "confirmed_turns": 22,
+        "timing_consistency": 32.65441228070176,
+        "amplitude_consistency": 56.056432569177716,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 487
+      }
+    },
+    {
+      "symbol": "FBLA",
+      "score": 40.00733800136462,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 492,
+      "cycle": {
+        "cycle_sessions": 51,
+        "median_swing_pct": 9.848742052427529,
+        "completed_cycle_intervals": 9,
+        "confirmed_turns": 11,
+        "timing_consistency": 52.47988883742474,
+        "amplitude_consistency": 50.5483463333863,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "GTX",
+      "score": 46.244718787771156,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 29.0,
+        "median_swing_pct": 11.058825324563415,
+        "completed_cycle_intervals": 30,
+        "confirmed_turns": 32,
+        "timing_consistency": 25.870000000000005,
+        "amplitude_consistency": 49.495738388036,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 489
+      }
+    },
+    {
+      "symbol": "KEY",
+      "score": 51.541724382828946,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 46.0,
+        "median_swing_pct": 16.274412177003107,
+        "completed_cycle_intervals": 16,
+        "confirmed_turns": 18,
+        "timing_consistency": 70.4089017760058,
+        "amplitude_consistency": 62.09140671961537,
+        "confidence": "HIGH"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 440
+      }
+    },
+    {
+      "symbol": "MMSI",
+      "score": 40.53399657293865,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 37.0,
+        "median_swing_pct": 12.116471689172359,
+        "completed_cycle_intervals": 20,
+        "confirmed_turns": 22,
+        "timing_consistency": 29.2528338028169,
+        "amplitude_consistency": 60.8270549358022,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 464
+      }
+    },
+    {
+      "symbol": "OLMA",
+      "score": 41.17972363306923,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 39.5,
+        "median_swing_pct": 32.7827186940648,
+        "completed_cycle_intervals": 22,
+        "confirmed_turns": 24,
+        "timing_consistency": 51.865587837837836,
+        "amplitude_consistency": 38.37594009951783,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 432
+      }
+    },
+    {
+      "symbol": "QFIN",
+      "score": 50.944784141348755,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 28.0,
+        "median_swing_pct": 15.37217334126828,
+        "completed_cycle_intervals": 30,
+        "confirmed_turns": 32,
+        "timing_consistency": 54.9925,
+        "amplitude_consistency": 54.91233579646563,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 451
+      }
+    },
+    {
+      "symbol": "STE",
+      "score": 49.916318215367326,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 50,
+        "median_swing_pct": 11.06552140013315,
+        "completed_cycle_intervals": 15,
+        "confirmed_turns": 17,
+        "timing_consistency": 72.26191284779051,
+        "amplitude_consistency": 55.31327470303553,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 457
+      }
+    },
+    {
+      "symbol": "TORO",
+      "score": 40.777076452837605,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 61,
+        "median_swing_pct": 38.530903908948666,
+        "completed_cycle_intervals": 15,
+        "confirmed_turns": 17,
+        "timing_consistency": 54.67828058429703,
+        "amplitude_consistency": 38.553112781291134,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 479
+      }
+    },
+    {
+      "symbol": "WAL",
+      "score": 43.24228062214084,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 24.0,
+        "median_swing_pct": 12.429454753547597,
+        "completed_cycle_intervals": 30,
+        "confirmed_turns": 32,
+        "timing_consistency": 25.589204545454546,
+        "amplitude_consistency": 41.470859000883664,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "ORI",
+      "score": 46.65925262132842,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 47.0,
+        "median_swing_pct": 13.313947131403236,
+        "completed_cycle_intervals": 16,
+        "confirmed_turns": 18,
+        "timing_consistency": 50.768909637799226,
+        "amplitude_consistency": 56.62082386110689,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 449
+      }
+    },
+    {
+      "symbol": "BCS",
+      "score": 44.48185464468271,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 39.0,
+        "median_swing_pct": 11.500814201377118,
+        "completed_cycle_intervals": 18,
+        "confirmed_turns": 20,
+        "timing_consistency": 46.37115384615385,
+        "amplitude_consistency": 44.15728096859418,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "ICUI",
+      "score": 44.906306670103724,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 21.5,
+        "median_swing_pct": 11.424792581353305,
+        "completed_cycle_intervals": 32,
+        "confirmed_turns": 34,
+        "timing_consistency": 49.35217391304348,
+        "amplitude_consistency": 49.32995027946221,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 485
+      }
+    },
+    {
+      "symbol": "USAR",
+      "score": 52.882941334423194,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 14.5,
+        "median_swing_pct": 23.827489511638532,
+        "completed_cycle_intervals": 60,
+        "confirmed_turns": 62,
+        "timing_consistency": 39.02209677419356,
+        "amplitude_consistency": 44.544733336333174,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 487
+      }
+    },
+    {
+      "symbol": "WNC",
+      "score": 49.69057875109969,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 22.5,
+        "median_swing_pct": 18.169114641712703,
+        "completed_cycle_intervals": 34,
+        "confirmed_turns": 36,
+        "timing_consistency": 30.704565217391313,
+        "amplitude_consistency": 53.6356331545545,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 489
+      }
+    },
+    {
+      "symbol": "KE",
+      "score": 51.71807232353562,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 19,
+        "median_swing_pct": 11.183978761042052,
+        "completed_cycle_intervals": 43,
+        "confirmed_turns": 45,
+        "timing_consistency": 33.283,
+        "amplitude_consistency": 56.1485135953005,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 481
+      }
+    },
+    {
+      "symbol": "IBTA",
+      "score": 52.2558444806924,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 30,
+        "median_swing_pct": 20.69809709130424,
+        "completed_cycle_intervals": 27,
+        "confirmed_turns": 29,
+        "timing_consistency": 61.280312499999994,
+        "amplitude_consistency": 60.142302211165045,
+        "confidence": "HIGH"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 451
+      }
+    },
+    {
+      "symbol": "CIVB",
+      "score": 43.90668136366107,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 48.5,
+        "median_swing_pct": 15.2573513782303,
+        "completed_cycle_intervals": 16,
+        "confirmed_turns": 18,
+        "timing_consistency": 70.97786274509804,
+        "amplitude_consistency": 33.53531001288839,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 448
+      }
+    },
+    {
+      "symbol": "HE",
+      "score": 36.966249861348,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 34.5,
+        "median_swing_pct": 10.560143087923768,
+        "completed_cycle_intervals": 28,
+        "confirmed_turns": 30,
+        "timing_consistency": 30.01391304347826,
+        "amplitude_consistency": 45.50854432454153,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "OCFC",
+      "score": 47.9995859652285,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 36.0,
+        "median_swing_pct": 11.251429827144065,
+        "completed_cycle_intervals": 24,
+        "confirmed_turns": 26,
+        "timing_consistency": 58.77548333333333,
+        "amplitude_consistency": 57.429618099427884,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 440
+      }
+    },
+    {
+      "symbol": "STNE",
+      "score": 52.821213149409296,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 37.0,
+        "median_swing_pct": 20.209976884870905,
+        "completed_cycle_intervals": 22,
+        "confirmed_turns": 24,
+        "timing_consistency": 52.009219512195116,
+        "amplitude_consistency": 52.287982093012666,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 489
+      }
+    },
+    {
+      "symbol": "DLHC",
+      "score": 39.706641636454876,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 53.5,
+        "median_swing_pct": 16.28615135014224,
+        "completed_cycle_intervals": 12,
+        "confirmed_turns": 14,
+        "timing_consistency": 14.354931413928256,
+        "amplitude_consistency": 49.47075532955224,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "BGSF",
+      "score": 39.66351293224211,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 18,
+        "median_swing_pct": 15.509891423595285,
+        "completed_cycle_intervals": 35,
+        "confirmed_turns": 37,
+        "timing_consistency": 19.36736842105264,
+        "amplitude_consistency": 42.24020023368239,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 452
+      }
+    },
+    {
+      "symbol": "MVST",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "AMPG",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "BTCT",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "DARE",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "FE",
+      "score": 39.3054497116859,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 50,
+        "median_swing_pct": 12.44087125038304,
+        "completed_cycle_intervals": 13,
+        "confirmed_turns": 15,
+        "timing_consistency": 34.75803571428572,
+        "amplitude_consistency": 48.03249346230232,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "HDL",
+      "score": 49.832688186977535,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 21.5,
+        "median_swing_pct": 12.253575467560296,
+        "completed_cycle_intervals": 36,
+        "confirmed_turns": 38,
+        "timing_consistency": 29.633693379790948,
+        "amplitude_consistency": 54.27664288646782,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "L",
+        "last_pivot_index": 494
+      }
+    },
+    {
+      "symbol": "KTTA",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "MYSZ",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "PDSB",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "LESL",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "SHFS",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "TPVG",
+      "score": 51.09109475670866,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 36.0,
+        "median_swing_pct": 18.19406860851207,
+        "completed_cycle_intervals": 22,
+        "confirmed_turns": 24,
+        "timing_consistency": 53.12531578947369,
+        "amplitude_consistency": 40.01262760645251,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 463
+      }
+    },
+    {
+      "symbol": "YDES",
+      "score": 44.6109488168825,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 283,
+      "cycle": {
+        "cycle_sessions": 12.0,
+        "median_swing_pct": 32.359922854719535,
+        "completed_cycle_intervals": 28,
+        "confirmed_turns": 30,
+        "timing_consistency": 20.73545454545455,
+        "amplitude_consistency": 38.27560540117212,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "BUY",
+        "reason": "NEW_CONFIRMED_REVERSAL",
+        "pivot_type": "L",
+        "pivot_index": 281,
+        "confirmation_index": 282,
+        "confirmation_lag_bars": 1
+      }
+    },
+    {
+      "symbol": "EROC",
+      "score": null,
+      "classification": "INSUFFICIENT_HISTORY",
+      "asof": "2026-10-09",
+      "bars": 85
+    },
+    {
+      "symbol": "OPAL",
+      "score": null,
+      "classification": "REJECT_PRICE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_PRICE"
+      }
+    },
+    {
+      "symbol": "GIB",
+      "score": 53.68006889384912,
+      "classification": "REJECT_CANDIDATE_GATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 33,
+        "median_swing_pct": 12.695570203953643,
+        "completed_cycle_intervals": 17,
+        "confirmed_turns": 19,
+        "timing_consistency": 71.6696159317212,
+        "amplitude_consistency": 42.87419493720468,
+        "confidence": "MEDIUM"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "REJECT_CANDIDATE_GATE"
+      }
+    },
+    {
+      "symbol": "AYA",
+      "score": 52.83599647729061,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 17,
+        "median_swing_pct": 19.224058941718823,
+        "completed_cycle_intervals": 49,
+        "confirmed_turns": 51,
+        "timing_consistency": 40.431250000000006,
+        "amplitude_consistency": 34.838238074866034,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 487
+      }
+    },
+    {
+      "symbol": "CGNX",
+      "score": 56.788245080896935,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 23.0,
+        "median_swing_pct": 12.662819640488854,
+        "completed_cycle_intervals": 38,
+        "confirmed_turns": 40,
+        "timing_consistency": 38.22500000000001,
+        "amplitude_consistency": 57.559707523762185,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 497
+      }
+    },
+    {
+      "symbol": "ESLT",
+      "score": 54.2883484959485,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 17.0,
+        "median_swing_pct": 11.93638097425005,
+        "completed_cycle_intervals": 34,
+        "confirmed_turns": 36,
+        "timing_consistency": 34.59117647058824,
+        "amplitude_consistency": 49.956778684114276,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 486
+      }
+    },
+    {
+      "symbol": "GPCR",
+      "score": 50.29164225229685,
+      "classification": "CANDIDATE",
+      "asof": "2026-10-09",
+      "bars": 501,
+      "cycle": {
+        "cycle_sessions": 31.5,
+        "median_swing_pct": 27.534565199238813,
+        "completed_cycle_intervals": 22,
+        "confirmed_turns": 24,
+        "timing_consistency": 66.07216300940439,
+        "amplitude_consistency": 30.6126372060872,
+        "confidence": "LOW"
+      },
+      "signal": {
+        "state": "NO_TRADE",
+        "reason": "NO_NEW_CONFIRMED_TURN",
+        "last_pivot_type": "H",
+        "last_pivot_index": 460
+      }
+    }
+  ],
+  "production_approved": false,
+  "note": "Close-confirmed research states; not brokerage instructions"
+}
