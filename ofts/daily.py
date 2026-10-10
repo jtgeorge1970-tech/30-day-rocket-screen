@@ -16,6 +16,24 @@ ROOT = Path(__file__).resolve().parents[1]
 WATCH = 'HNRG CHTR FUBO EPOW WULF HLIT JACK TGS SPGI CSIQ XPRO SFM DTIL TBLA FWRG NYAX OWLT SRAD ATGL FMC LE MESO NX MBLY IDR'.split()
 HORIZONS = (5, 10, 20, 30, 60)
 FIELDS = ['date', 'open', 'high', 'low', 'close', 'volume', 'split']
+MIN_FRESH_COHORT = 100
+DATA_FAILURES = {'STALE_DATA', 'DATA_ERROR', 'INSUFFICIENT_HISTORY'}
+
+
+def snapshot_is_qualified(snapshot, minimum=MIN_FRESH_COHORT):
+    """Only forward-test cohorts that met the market-data gate when frozen."""
+    coverage = snapshot.get('coverage', {})
+    if 'fresh' in coverage:
+        return int(coverage['fresh']) >= minimum
+    # Compatibility for the first immutable pre-gate snapshot: infer its
+    # usable coverage without changing or deleting that historical record.
+    return sum(r.get('classification') not in DATA_FAILURES and
+               r.get('asof') == snapshot.get('asof') for r in snapshot.get('rows', [])) >= minimum
+
+
+def load_qualified_snapshots(predictions):
+    return [s for p in sorted(predictions.glob('*.json'))
+            if snapshot_is_qualified(s := load_json(p, {}))]
 
 
 def atomic(path, data):
@@ -204,11 +222,14 @@ def main():
     assert len(universe) == len(set(universe)) == 5502
     control = load_json(state / 'control.json', dict(cursor=0, retry=[], last_session=None))
     snapshot_path = state / 'predictions' / (target + '.json')
-    previous = load_json(snapshot_path, None)
+    recovery_path = state / 'predictions' / (target + '-qualified.json')
+    # Preserve the first attempt forever. If that attempt failed coverage, a
+    # later pre-entry recovery becomes a separate immutable qualified cohort.
+    previous = load_json(recovery_path, None) or load_json(snapshot_path, None)
     cursor = control['cursor']
     rotation = [universe[((cursor + i) * 137) % len(universe)] for i in range(args.batch_size)]
     selected = previous['selected'] if previous else list(dict.fromkeys(WATCH + rotation + control['retry']))
-    snapshots = [load_json(p, {}) for p in sorted((state / 'predictions').glob('*.json'))]
+    snapshots = load_qualified_snapshots(state / 'predictions')
     dates = [str(d.date()) for d in schedule.index]
     pending = {r['symbol'] for s in snapshots if s['asof'] in dates and dates.index(target) - dates.index(s['asof']) <= 65 for r in s['rows']}
     refresh_symbols = list(dict.fromkeys(selected + sorted(pending) + ['SPY']))
@@ -238,15 +259,23 @@ def main():
         rows.append(row)
     model_hash = hashlib.sha256(b''.join((ROOT / p).read_bytes() for p in
                                ['ofts/research/v23_replacement.py', 'ofts/research/candidate_components.py'])).hexdigest()
-    snapshot = frozen_snapshot(snapshot_path, dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
-                               model_version='v2.3-research', model_hash=model_hash,
-                               protocol_hash=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-                               lookback='trailing 2 calendar years',
-                               selected=selected, rows=rows, production_approved=False,
-                               execution='Hypothetical next-session open; fixed-session close; no stop/target strategy',
-                               cost_assumption_roundtrip_pct=0.20))
-    if not previous:
-        snapshots.append(snapshot)
+    fresh_count = sum(audit[s]['status'] == 'FRESH' for s in selected)
+    candidate = dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
+                     model_version='v2.3-research', model_hash=model_hash,
+                     protocol_hash=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                     lookback='trailing 2 calendar years', selected=selected, rows=rows,
+                     coverage={'fresh': fresh_count, 'selected': len(selected),
+                               'minimum_fresh': MIN_FRESH_COHORT},
+                     production_approved=False,
+                     execution='Hypothetical next-session open; fixed-session close; no stop/target strategy',
+                     cost_assumption_roundtrip_pct=0.20)
+    snapshot = None
+    if fresh_count >= MIN_FRESH_COHORT:
+        destination = snapshot_path
+        if snapshot_path.exists() and not snapshot_is_qualified(load_json(snapshot_path, {})):
+            destination = recovery_path
+        snapshot = frozen_snapshot(destination, candidate)
+    snapshots = load_qualified_snapshots(state / 'predictions')
     histories = {s: read_history(state, s) for s in set(refresh_symbols) | {r['symbol'] for s in snapshots for r in s['rows']}}
     results = [r for s in snapshots for r in outcomes(s, histories, schedule)]
     save_json(state / 'outcomes.json', results)
@@ -275,11 +304,13 @@ def main():
                         benchmark_pairs=len(excess), average_excess_pct=sum(excess) / len(excess) if excess else None,
                         worst_adverse_excursion_pct=min(r['adverse_excursion_pct'] for r in group)))
     save_json(state / 'validation_summary.json', summaries)
-    ranked = sorted((r for r in snapshot['rows'] if r['score'] is not None), key=lambda r: r['score'], reverse=True)
+    report_rows = snapshot['rows'] if snapshot else rows
+    ranked = sorted((r for r in report_rows if r['score'] is not None), key=lambda r: r['score'], reverse=True)
     counts = {status: sum(r['status'] == status for r in results) for status in sorted({r['status'] for r in results})}
     lines = ['# OFTS daily research', '', f'Market session: {target}',
              f'Selected: {len(selected)}; refreshed: {sum(audit[s]["status"] == "FRESH" for s in selected)}; refresh errors: {len(control["retry"])}',
-             f'Dated prediction cohorts saved: {len(snapshots)}; outcome counts: {counts}',
+             f'Qualified prediction cohorts saved: {len(snapshots)}; current coverage: {fresh_count}/{len(selected)}',
+             f'Outcome counts: {counts}',
              'Production approval: NO. These are quality scores, not BUY signals.',
              'Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.',
              'Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.', '',
