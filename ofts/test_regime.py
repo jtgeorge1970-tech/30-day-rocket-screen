@@ -56,7 +56,7 @@ class SecurityIdentityTests(unittest.TestCase):
             return pd.DataFrame(values, index=dates, columns=columns)
         with tempfile.TemporaryDirectory() as tmp:
             state = Path(tmp)
-            with patch.object(sys, 'argv', ['daily', '--state', tmp, '--batch-size', '0']), \
+            with patch.object(sys, 'argv', ['daily', '--state', tmp, '--batch-size', '1']), \
                  patch.object(daily, 'WATCH', ['IQMX']), \
                  patch.object(daily, 'market_schedule', return_value=schedule), \
                  patch.object(daily, 'completed_session', return_value=target), \
