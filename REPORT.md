@@ -7,6 +7,7 @@ Outcome counts: {'INELIGIBLE_DATA': 20, 'PENDING': 605}
 Cycle fingerprints saved: 97/125
 Signal states: BUY=1, SELL=0, NO_TRADE=124
 Cycle ledger: pending entries=1; open positions=0; closed trades=0; SPY pairs=0
+Cycle-speed report card: AWAITING_CLOSED_FORWARD_TRADES; closed forward trades=0; groups=[]
 Production approval: NO. These are quality scores, not BUY signals.
 Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.
 Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.
