@@ -13,7 +13,7 @@ from statistics import median
 
 from ofts.research.v23_replacement import evaluate
 from ofts.research.candidate_components import detect_turns
-from ofts.cycle_ledger import active_ledger_symbols, rebuild_cycle_ledger
+from ofts.cycle_ledger import active_ledger_symbols, rebuild_cycle_ledger, build_cycle_report_card
 
 ROOT = Path(__file__).resolve().parents[1]
 WATCH = 'HNRG CHTR FUBO EPOW WULF HLIT JACK TGS SPGI CSIQ XPRO SFM DTIL TBLA FWRG NYAX OWLT SRAD ATGL FMC LE MESO NX MBLY IDR'.split()
@@ -351,6 +351,7 @@ def main():
     results = [r for s in snapshots for r in outcomes(s, histories, schedule)]
     save_json(state / 'outcomes.json', results)
     cycle_ledger = rebuild_cycle_ledger(state, histories, schedule)
+    cycle_card = build_cycle_report_card(cycle_ledger)
     # Cursor advances only once per session; failed symbols remain in retry queue.
     if control['last_session'] != target:
         control['cursor'] = (cursor + args.batch_size) % len(universe)
@@ -391,6 +392,9 @@ def main():
              f'open positions={cycle_ledger["summary"]["open_positions"]}; '
              f'closed trades={cycle_ledger["summary"]["closed_trades"]}; '
              f'SPY pairs={cycle_ledger["summary"]["benchmark_pairs"]}',
+             f'Cycle-speed report card: {cycle_card["status"]}; '
+             f'closed forward trades={cycle_card["closed_trades"]}; '
+             f'groups={list(cycle_card["groups"])}',
              'Production approval: NO. These are quality scores, not BUY signals.',
              'Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.',
              'Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.', '',
