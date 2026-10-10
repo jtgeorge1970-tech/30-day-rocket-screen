@@ -61,6 +61,11 @@ for ix in range(5502):
                            last_up_pct=viability.get("last_up_pct"),
                            repeated_up_pass_count=viability.get("repeated_up_pass_count"),
                            recent_up_repeatability=viability.get("recent_up_repeatability"),
+                           peak_intervals=json.dumps(viability.get("last_three_peak_to_peak_sessions",[])),
+                           trough_intervals=json.dumps(viability.get("last_three_trough_to_trough_sessions",[])),
+                           peak_cycle_median=viability.get("peak_cycle_median_sessions"),
+                           trough_cycle_median=viability.get("trough_cycle_median_sessions"),
+                           cycle_timing_pass=viability.get("cycle_timing_pass"),
                            up_progression=viability.get("up_progression"),
                            historical_mean_swing_pct=viability.get("historical_mean_swing_pct"),
                            recent_capture_net_pct=viability.get("hypothetical_net_capture_pct"),
@@ -77,7 +82,8 @@ fields=["run","symbol","bars","raw_bars","regime_start","status","score","versio
         "recent_swing_pct","amplitude_ratio","swing_health_json",
         "viability_state","viability_entry","viability_reason","recent_three_swing_pct",
         "recent_two_up_pct","last_three_up_pct","last_up_pct",
-        "repeated_up_pass_count","recent_up_repeatability","up_progression","historical_mean_swing_pct","recent_capture_net_pct",
+        "repeated_up_pass_count","recent_up_repeatability","peak_intervals","trough_intervals",
+        "peak_cycle_median","trough_cycle_median","cycle_timing_pass","up_progression","historical_mean_swing_pct","recent_capture_net_pct",
         "combined_research_entry","viability_json"]
 with (OUT/"v23_research_universe.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=fields,extrasaction="ignore");w.writeheader();w.writerows(results)
@@ -87,7 +93,8 @@ with (OUT/"v23_research_ranked.csv").open("w",newline="") as fh:
             "swing_state","swing_entry","swing_reason","high_progression","low_progression",
             "recent_swing_pct","amplitude_ratio","viability_state","viability_entry",
             "viability_reason","recent_three_swing_pct","recent_two_up_pct",
-            "last_three_up_pct","last_up_pct","repeated_up_pass_count","recent_up_repeatability","up_progression",
+            "last_three_up_pct","last_up_pct","repeated_up_pass_count","recent_up_repeatability",
+            "peak_intervals","trough_intervals","peak_cycle_median","trough_cycle_median","cycle_timing_pass","up_progression",
             "historical_mean_swing_pct","recent_capture_net_pct","combined_research_entry"],extrasaction="ignore")
     w.writeheader()
     for rank,r in enumerate(ranked,1):
@@ -96,7 +103,8 @@ viable=[r for r in ranked if r.get("combined_research_entry")=="REVIEW"]
 with (OUT/"v23_research_recent_viability_shortlist.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=["research_rank","symbol","score","status",
          "swing_state","viability_state","recent_three_swing_pct","recent_two_up_pct",
-         "last_three_up_pct","last_up_pct","repeated_up_pass_count","recent_up_repeatability","up_progression",
+         "last_three_up_pct","last_up_pct","repeated_up_pass_count","recent_up_repeatability",
+         "peak_intervals","trough_intervals","peak_cycle_median","trough_cycle_median","cycle_timing_pass","up_progression",
          "historical_mean_swing_pct","recent_capture_net_pct",
          "combined_research_entry"],extrasaction="ignore")
     w.writeheader()
@@ -108,6 +116,8 @@ print("RECENT_VIABILITY_SHORTLIST",json.dumps([
      "last_three_up_pct":r.get("last_three_up_pct"),
      "repeated_up_pass_count":r.get("repeated_up_pass_count"),
      "recent_up_repeatability":r.get("recent_up_repeatability"),
+     "peak_intervals":r.get("peak_intervals"),"trough_intervals":r.get("trough_intervals"),
+     "cycle_timing_pass":r.get("cycle_timing_pass"),
      "last_up_pct":r.get("last_up_pct"),
      "state":r.get("viability_state")} for i,r in enumerate(viable[:25])]))
 print("RECENT_VIABILITY_COUNTS",json.dumps({
