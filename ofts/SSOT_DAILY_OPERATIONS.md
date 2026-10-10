@@ -196,3 +196,13 @@ User-identified issue: Three qualifying 5% upward swings six months apart are **
 Cutoffs are experimental: test 10–20, 10–30, 10–40, and 10–50 session cycle ranges, stability cutoffs, forward capture, rejected winners and avoided losers on chronologically held-out cohorts before promoting. All original scores and frozen prior cohorts remain unchanged. No research `REVIEW` is an authorized BUY.
 
 Implementation: `ofts/research/recent_viability.py` v0.4, regression tests, full-universe `ofts/worker.py` output, prospective `ofts/daily.py` snapshots and reports.
+
+### Experimental v0.5 — adjacent three cycles versus preceding three (2026-10-10)
+
+Chart challenge XPRO: one-year chart has many pronounced oscillations, but the most recent ones appear smaller and/or farther apart. Historical v2.3 quality (XPRO 60.623) and v0.4 passing three 5% rising legs + absolute 10–40-session cadence do NOT prove the oscillator remains as strong now.
+
+Compare **three latest completed UP legs** with the **immediately preceding three UP legs**, using median amplitude ratio `recent/prior`. Compare last three **peak-to-peak** intervals with preceding three and last three **trough-to-trough** intervals with preceding three; median the two spacing ratios. Use only confirmed point-in-time pivots; retain actual six UP amplitudes and six peak/trough intervals in full-universe and daily reports. **Never use full-history average as the sole comparator.**
+
+Provisional independent `NO_TRADE` dissipation veto if recent median UP amplitude is <**70%** of preceding-three median, OR recent combined peak/trough cadence >**150%** of preceding-three, OR UP amplitude <**85%** AND cadence >**130%** simultaneously. If any preceding group has <3 confirmed observations, `INSUFFICIENT_COMPARISON / NO_TRADE`; never silently pass missing history. Keep all existing 5% 3-of-3, cycle 10–40, fading, swing-health, freshness and net-capture gates; never rewrite original frozen scores/signals. This is an **experimental challenger**, not a verified predictive threshold or production BUY.
+
+Audit XPRO against **actual underlying cached OHLC**, not screenshots alone. Save its six UP amplitudes and six peak/trough intervals, actual pass/fail reasons, chart observations vs calculated facts, and impact on 5,502-universe research shortlist. Test 0.6/0.7/0.8 amplitude and 1.25/1.5/1.75 cadence alternatives on untouched chronological holdouts with missed winners, avoided losses, costs, SPY and full 5/10/20/30/60-day outcomes before threshold promotion.
