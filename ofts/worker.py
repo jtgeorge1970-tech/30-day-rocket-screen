@@ -8,6 +8,7 @@ from ofts.research.swing_health import recent_swing_health
 from ofts.research.recent_viability import recent_swing_viability
 from ofts.research.opportunity_v06 import opportunity_partial, eligibility_status, VERSION as OPPORTUNITY_VERSION
 from ofts.research.entry_diagnostic_v07 import entry_diagnostic, VERSION as ENTRY_VERSION
+from ofts.research.three_clear_cycles_v09 import three_clear_cycles, VERSION as CLEAR_VERSION
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 OUT=ROOT/"ofts-output"
 OUT.mkdir(exist_ok=True)
@@ -53,6 +54,12 @@ for ix in range(5502):
                            recent_swing_pct=health["recent_median_amplitude_pct"],
                            amplitude_ratio=health["recent_to_prior_amplitude_ratio"],
                            swing_health_json=json.dumps(health,sort_keys=True))
+                clear=three_clear_cycles(series[2])
+                row.update(clear_v09_state=clear['state'],clear_v09_reason=clear['reason'],
+                           clear_v09_cycles=clear.get('completed_cycles'),
+                           clear_v09_worst_efficiency=clear.get('worst_leg_path_efficiency'),
+                           clear_v09_median_efficiency=clear.get('median_leg_path_efficiency'),
+                           clear_v09_json=json.dumps(clear,sort_keys=True))
                 viability=recent_swing_viability(series[2],score["threshold_pct"])
                 opportunity=opportunity_partial(viability,health)
                 entry=entry_diagnostic(series[2],[b.get('date','') for b in data])
@@ -109,7 +116,8 @@ fields=["run","symbol","bars","raw_bars","regime_start","status","score","versio
         "up_amplitude_ratio","cadence_ratio","recent_vs_prior_state","up_progression","historical_mean_swing_pct","recent_capture_net_pct",
         "combined_research_entry","viability_json",
         "opportunity_v06_score","opportunity_v06_status","opportunity_v06_eligibility","opportunity_v06_json",
-        "entry_v07_state","entry_v07_asof","entry_v07_close","entry_v07_return5","entry_v07_position","entry_v07_json"]
+        "entry_v07_state","entry_v07_asof","entry_v07_close","entry_v07_return5","entry_v07_position","entry_v07_json",
+        "clear_v09_state","clear_v09_reason","clear_v09_cycles","clear_v09_worst_efficiency","clear_v09_median_efficiency","clear_v09_json"]
 with (OUT/"v23_research_universe.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=fields,extrasaction="ignore");w.writeheader();w.writerows(results)
 ranked=sorted((r for r in results if isinstance(r["score"],(int,float))),key=lambda r:r["score"],reverse=True)
@@ -157,6 +165,63 @@ with (OUT/"v06_opportunity_research_ranked.csv").open("w",newline="") as fh:
     w.writeheader()
     for rank,r in enumerate(opportunity_ranked,1):
         w.writerow({"opportunity_rank":rank,**r})
+# v0.9b independent FULL-UNIVERSE three-cycle audit. This does NOT inherit the
+# old 16-stock shortlist. All 5,502 symbols are considered, with all 3,977
+# scoreable symbols independently checked. Frozen benchmark outputs untouched.
+clear_states=defaultdict(int)
+for row in results:
+    clear_states[row.get('clear_v09_state') or row['status']]+=1
+clear_pass=sorted((row for row in results
+    if row.get('clear_v09_state')=='THREE_CLEAR_CYCLES'),
+    key=lambda row:(-float(row['opportunity_v06_score']) if isinstance(row.get('opportunity_v06_score'),(int,float)) else 9999,row['symbol']))
+clear_fields=['symbol','bars','status','score','opportunity_v06_score',
+    'opportunity_v06_eligibility','viability_state','swing_state',
+    'entry_v07_state','entry_v07_asof','entry_v07_close',
+    'clear_v09_state','clear_v09_reason','clear_v09_cycles',
+    'clear_v09_worst_efficiency','clear_v09_median_efficiency','clear_v09_json']
+with (OUT/'v09_full_universe_cycle_audit.csv').open('w',newline='') as fh:
+    w=csv.DictWriter(fh,fieldnames=clear_fields,extrasaction='ignore')
+    w.writeheader();w.writerows(results)
+with (OUT/'v09_full_universe_clear_cycle_pass.csv').open('w',newline='') as fh:
+    w=csv.DictWriter(fh,fieldnames=['research_rank']+clear_fields,extrasaction='ignore')
+    w.writeheader()
+    for i,row in enumerate(clear_pass,1):
+        w.writerow({'research_rank':i,**row})
+# Keeper requires independent three-cycle quality, recent viability, acceptable
+# trend and known security-type gates. Entry is a separate WATCH vs REVIEW.
+keepers=[row for row in clear_pass
+    if row.get('viability_state')=='REVIEW'
+    and row.get('swing_state') not in
+        ('DOWNTREND','DOWNTREND_WEAK_BOUNCE','DECAYING','IRREGULAR','INSUFFICIENT')
+    and row.get('opportunity_v06_eligibility')!='INELIGIBLE']
+with (OUT/'v09_full_universe_keepers.csv').open('w',newline='') as fh:
+    w=csv.DictWriter(fh,fieldnames=['research_rank']+clear_fields,extrasaction='ignore')
+    w.writeheader()
+    for i,row in enumerate(keepers,1):
+        w.writerow({'research_rank':i,**row})
+report={'version':CLEAR_VERSION,'universe':len(results),
+    'scoreable':sum(isinstance(x.get('score'),(int,float)) for x in results),
+    'history_latest_dates':sorted({groups[x['symbol']][-1].get('date','') for x in results if groups.get(x['symbol'])})[-5:],
+    'clear_states':dict(sorted(clear_states.items())),
+    'three_clear_pass':len(clear_pass),'keepers':len(keepers),
+    'keeper_symbols':[x['symbol'] for x in keepers],
+    'clear_pass_top50':[{'rank':i+1,'symbol':x['symbol'],
+        'opportunity_score_out_of_80':x.get('opportunity_v06_score'),
+        'old_v23_score':x.get('score'),
+        'viability':x.get('viability_state'),
+        'swing_health':x.get('swing_state'),
+        'entry':x.get('entry_v07_state'),
+        'eligibility':x.get('opportunity_v06_eligibility'),
+        'cycles':json.loads(x['clear_v09_json'])['cycles'],
+        'median_efficiency':x.get('clear_v09_median_efficiency')}
+        for i,x in enumerate(clear_pass[:50])],
+    'production_approved':False,
+    'caution':'Cached historical research bars; not verified current prices or BUY signals'}
+(OUT/'v09_full_universe_report.json').write_text(json.dumps(report,indent=2)+'\n')
+print('V09_FULL_UNIVERSE_AUDIT',json.dumps({'scoreable':report['scoreable'],
+    'states':report['clear_states'],'pass':len(clear_pass),'keepers':len(keepers),
+    'keeper_symbols':report['keeper_symbols'],
+    'top20':report['clear_pass_top50'][:20]}),flush=True)
 print("V06_OPPORTUNITY_RESEARCH_TOP",json.dumps([
     {"rank":i+1,"symbol":r["symbol"],"score_out_of_80":r["opportunity_v06_score"],
      "old_v23_score":round(r["score"],3),"eligibility":r["opportunity_v06_eligibility"]}
