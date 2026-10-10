@@ -14,6 +14,7 @@ from statistics import median
 from ofts.research.v23_replacement import evaluate
 from ofts.research.candidate_components import detect_turns
 from ofts.research.security_regimes import post_identity_bars
+from ofts.research.swing_health import recent_swing_health
 from ofts.cycle_ledger import active_ledger_symbols, rebuild_cycle_ledger, build_cycle_report_card
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -335,6 +336,9 @@ def main():
                     row.update(score=result.get('candidate_score'), classification=result['status'])
                     if result.get('candidate_score') is not None:
                         row['cycle'] = cycle_fingerprint(series[2], result['threshold_pct'], result['structural'])
+                        # Experimental diagnostic; original BUY/SELL research
+                        # signal and v2.3 score remain unchanged.
+                        row['swing_health'] = recent_swing_health(series[2], result['threshold_pct'])
                     row['signal'] = current_signal_state(series[2], result.get('threshold_pct', 6), result['status'])
             except (ValueError, TypeError, KeyError) as exc:
                 row.update(classification='DATA_ERROR', error=str(exc))
@@ -342,7 +346,7 @@ def main():
         rows.append(row)
     model_hash = hashlib.sha256(b''.join((ROOT / p).read_bytes() for p in
                                ['ofts/research/v23_replacement.py', 'ofts/research/candidate_components.py',
-                                 'ofts/research/security_regimes.py'])).hexdigest()
+                                 'ofts/research/security_regimes.py', 'ofts/research/swing_health.py'])).hexdigest()
     fresh_count = sum(audit[s]['status'] == 'FRESH' for s in selected)
     required_fresh = min(MIN_FRESH_COHORT, len(selected))
     candidate = dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
@@ -433,12 +437,21 @@ def main():
              f'System actionability gate: {score_status["system_actionability_gate"]}; '
              f'{score_status["gate_reason"]}',
              'Production approval: NO. These are quality scores, not BUY signals.',
+             'Experimental swing-health v0.1: last-four-leg stability and'
+             ' lower-high/lower-low deterioration (NOT validated for trading).',
+             f'Experimental swing-health NO_TRADE={sum(r.get("swing_health", {}).get("proposed_entry") == "NO_TRADE" for r in report_rows)}; '
+             f'REVIEW={sum(r.get("swing_health", {}).get("proposed_entry") == "REVIEW" for r in report_rows)}; '
+             f'INSUFFICIENT={sum(r.get("swing_health", {}).get("state") == "INSUFFICIENT" for r in report_rows)}',
              'Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.',
              'Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.', '',
-             '| Symbol | Score | Classification | Signal | Cycle sessions | Median swing | Confidence |',
-             '|---|---:|---|---|---:|---:|---|']
+             '| Symbol | Score | Classification | Legacy signal | Swing health | Proposed entry | Highs | Lows | Cycle sessions | Median swing | Confidence |',
+             '|---|---:|---|---|---|---|---|---|---:|---:|---|']
     lines += [f'| {r["symbol"]} | {r["score"]:.3f} | {r["classification"]} | '
               f'{r.get("signal", {}).get("state", "NO_TRADE")} | '
+              f'{r.get("swing_health", {}).get("state", "n/a")} | '
+              f'{r.get("swing_health", {}).get("proposed_entry", "n/a")} | '
+              f'{r.get("swing_health", {}).get("high_progression", "n/a")} | '
+              f'{r.get("swing_health", {}).get("low_progression", "n/a")} | '
               f'{r.get("cycle", {}).get("cycle_sessions") or "n/a"} | '
               f'{r.get("cycle", {}).get("median_swing_pct") or "n/a"} | '
               f'{r.get("cycle", {}).get("confidence", "n/a")} |' for r in ranked[:25]]
