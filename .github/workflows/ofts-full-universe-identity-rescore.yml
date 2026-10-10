@@ -54,12 +54,20 @@ jobs:
           assert iqmx['score'] == '', iqmx
           assert all(r['symbol'] != 'IQMX' for r in ranked), 'INVALID_IQMX_LEADER_RETAINED'
           assert all(r['swing_state'] and r['swing_entry'] and r['swing_reason'] for r in ranked), 'MISSING_SWING_HEALTH_DIAGNOSTIC'
+          assert all(r['viability_state'] and r['viability_entry'] and r['viability_reason'] for r in ranked), 'MISSING_RECENT_VIABILITY_DIAGNOSTIC'
+          shortlist=list(csv.DictReader((root/'v23_research_recent_viability_shortlist.csv').open()))
+          assert all(r['combined_research_entry']=='REVIEW' and r['status']=='CANDIDATE' for r in shortlist), 'INVALID_REVIEW_SHORTLIST'
           report = {
             'universe': len(rows),
             'scores': len(ranked),
             'identity_boundary_iqmx': iqmx,
             'top25': ranked[:25],
             'swing_health_experimental': True,
+            'recent_viability_experimental': True,
+            'experimental_review_shortlist_count': len(shortlist),
+            'experimental_review_shortlist_top25': shortlist[:25],
+            'recent_viability_states': {state: sum(r['viability_state'] == state for r in ranked)
+                                        for state in sorted({r['viability_state'] for r in ranked})},
             'swing_states': {state: sum(r['swing_state'] == state for r in ranked)
                              for state in sorted({r['swing_state'] for r in ranked})},
             'research_only': True,
@@ -73,7 +81,8 @@ jobs:
               f.write('IQMX excluded: '+iqmx['status']+'; post-event bars '+iqmx['bars']+' of '+iqmx['raw_bars']+' raw.\n\n')
               f.write('Top 10 research rankings (not BUY signals):\n\n')
               for r in ranked[:10]:
-                  f.write('- '+r['rank']+' '+r['symbol']+' '+r['score']+' ('+r['status']+'), swing health '+r['swing_state']+', proposed '+r['swing_entry']+'\n')
+                  f.write('- '+r['rank']+' '+r['symbol']+' '+r['score']+' ('+r['status']+'), swing '+r['swing_state']+', viability '+r['viability_state']+', combined '+r['combined_research_entry']+'\n')
+              f.write('\nExperimental recent-swing review shortlist (NOT BUY): '+str(len(shortlist))+'\n')
           PY
       - uses: actions/upload-artifact@v4
         if: always()
@@ -82,6 +91,7 @@ jobs:
           path: |
             ofts-output/v23_research_universe.csv
             ofts-output/v23_research_ranked.csv
+            ofts-output/v23_research_recent_viability_shortlist.csv
             ofts-output/status.json
             ofts-output/identity_rescore_report.json
           if-no-files-found: warn
