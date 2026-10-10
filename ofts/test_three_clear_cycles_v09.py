@@ -31,9 +31,17 @@ class ThreeClearCycleTests(unittest.TestCase):
         self.assertEqual(r["state"],"REJECT_BIG_LOSS")
     def test_drawdown_veto(self):
         p=self.good()
-        p[:15]=[15.0]*15
+        p[70:85]=[15.0]*15
         r=three_clear_cycles(p)
         self.assertEqual(r["state"],"REJECT_BIG_LOSS")
+    def test_old_loss_does_not_veto_recent_clean_cycles(self):
+        p=self.good()
+        p[:15]=[15.0]*15
+        self.assertEqual(three_clear_cycles(p)["state"],"THREE_CLEAR_CYCLES")
+    def test_one_giant_rally_among_three_cycles_is_outlier(self):
+        p=self.good()
+        for i in range(21,41):p[i]*=1.7
+        self.assertNotEqual(three_clear_cycles(p)["state"],"THREE_CLEAR_CYCLES")
     def test_insufficient(self):
         self.assertEqual(three_clear_cycles([10.0]*100)["state"],"INSUFFICIENT")
 
