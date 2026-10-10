@@ -57,6 +57,38 @@ class RecentViabilityTests(unittest.TestCase):
         self.assertGreaterEqual(result['confirmed_minor_legs'],6)
         self.assertEqual(result['state'],'TOO_SMALL')
 
+    def test_two_of_three_up_swings_is_watch_not_buy(self):
+        # Earlier stable 10% legs; last three UP swings 10%, 4%, 10%.
+        # Last three completed overall legs are not tiny, but repeatability fails.
+        p=series([100,110,100,110,100,110,100,104,100,110,100])
+        r=recent_swing_viability(p,6)
+        self.assertEqual(r['repeated_up_pass_count'],2)
+        self.assertEqual(r['state'],'WATCH')
+        self.assertEqual(r['proposed_entry'],'NO_TRADE')
+
+    def test_latest_up_under_five_kills_even_if_mean_high(self):
+        p=series([100,115,100,115,100,115,100,115,100,104,100])
+        r=recent_swing_viability(p,6)
+        self.assertEqual(r['repeated_up_pass_count'],2)
+        self.assertLess(r['last_up_pct'],5)
+        self.assertEqual(r['state'],'TOO_SMALL_UPSIDE')
+        self.assertEqual(r['proposed_entry'],'NO_TRADE')
+
+    def test_three_up_swings_repeated_but_net_hurdle_still_matters(self):
+        p=series([100,105.1,100,105.1,100,105.1,100,105.1,100,105.1,100])
+        r=recent_swing_viability(p,6)
+        self.assertEqual(r['repeated_up_pass_count'],3)
+        self.assertEqual(r['state'],'TOO_SMALL_UPSIDE')
+        self.assertLess(r['hypothetical_net_capture_pct'],2.5)
+
+    def test_three_strong_up_swings_pass_as_research_only(self):
+        p=series([100,108,100,108,100,108,100,108,100,108,100])
+        r=recent_swing_viability(p,6)
+        self.assertEqual(r['repeated_up_pass_count'],3)
+        self.assertEqual([round(x,1) for x in r['last_three_up_pct']],[8,8,8])
+        self.assertEqual(r['state'],'REVIEW')
+        self.assertFalse(r['production_approved'])
+
     def test_frozen_asof_result_reproducible(self):
         prices=series([100,115,100,115,100,115,100,115,100,115,100])
         before=recent_swing_viability(prices[:-6],6)
