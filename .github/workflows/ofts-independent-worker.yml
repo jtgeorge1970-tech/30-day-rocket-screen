@@ -50,6 +50,20 @@ jobs:
         id: daily
         if: github.ref == 'refs/heads/main'
         run: python -m ofts.daily --state ofts-state --batch-size 100
+      - name: Verify minimum fresh-market-data coverage
+        if: steps.daily.outcome == 'success'
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          audit=json.loads(Path('ofts-state/refresh.json').read_text())['symbols']
+          eligible={s:v for s,v in audit.items() if s != 'SPY'}
+          fresh=sum(v['status']=='FRESH' for v in eligible.values())
+          total=len(eligible)
+          print(f'FRESH_DATA_COVERAGE {fresh}/{total}',flush=True)
+          if total < 125 or fresh < 100:
+              raise SystemExit('INSUFFICIENT_FRESH_DATA: fail cycle, preserve audit and retry next scheduled run')
+          PY
       - name: Persist results and verify remote commit
         if: always() && steps.daily.outcome != 'skipped'
         run: |
