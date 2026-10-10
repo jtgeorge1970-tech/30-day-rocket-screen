@@ -73,3 +73,12 @@ Continue routine refresh, recovery, persistence and reporting without waiting
 for Joseph to remind the assistant. If access or data prevents a required step,
 report the precise blocker and preserve all prior evidence. Never silently
 substitute stale data, invent scores, mix versions, or reset progress.
+
+
+## LOCKED — ASSISTANT-OWNED AUTOMATION CAPACITY AND PROACTIVE REPORTING (2026-10-09)
+
+- The assistant owns the task/automation slots used to supervise OFTS and other assistant-operated projects. Never ask the user to choose which task to pause, remove, or replace when task capacity is full.
+- Reuse, consolidate, or reconfigure an existing assistant-owned automation where possible. Handle task-slot housekeeping without user intervention; do not disable unrelated essential tasks merely to create a duplicate.
+- Proactively deliver verified OFTS progress and material blockers without waiting for the user to chase results. Include stage checklist, dated selection and scores, counts, post-audit results, precise failures, corrective actions and direct evidence links. Deduplicate unchanged reports.
+- A GitHub green check is not evidence of trading profitability or complete validation. Keep immutable forward predictions and score/cycle-based audits as acceptance gates.
+- If a task-capacity error occurs, do not ask the user to manage slots; inspect existing tasks and update a relevant one.
