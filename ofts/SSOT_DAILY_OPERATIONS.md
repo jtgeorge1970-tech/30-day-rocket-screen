@@ -82,3 +82,13 @@ substitute stale data, invent scores, mix versions, or reset progress.
 - Proactively deliver verified OFTS progress and material blockers without waiting for the user to chase results. Include stage checklist, dated selection and scores, counts, post-audit results, precise failures, corrective actions and direct evidence links. Deduplicate unchanged reports.
 - A GitHub green check is not evidence of trading profitability or complete validation. Keep immutable forward predictions and score/cycle-based audits as acceptance gates.
 - If a task-capacity error occurs, do not ask the user to manage slots; inspect existing tasks and update a relevant one.
+
+## LOCKED — POINT-IN-TIME SIGNALS AND CYCLE AUDITS (2026-10-10)
+
+- Save one explicit research state for every selected symbol after the completed-session close: BUY, SELL, or NO_TRADE with a reason. Missing labels fail the completeness gate.
+- A BUY or SELL state may be created only when the latest pivot becomes confirmed using bars available by that close. Hypothetical execution is the next session open; never use the eventual pivot date as an executable price.
+- Preserve partial or failed signal snapshots. A repaired same-session snapshot must use a separate immutable qualified file rather than overwrite history.
+- Cycle profitability is measured from next-open BUY execution to next-open execution after a later confirmed SELL state. Record holding sessions, gross return, 0.20% assumed round-trip cost, adverse/risk-rule outcomes, and captured percentage of the available pivot swing.
+- Keep fixed 5/10/20/30/60-session audits and cycle BUY-to-SELL audits separate. Neither may replace the other.
+- Compare fixed forward outcomes with same-period SPY. If benchmark history is unavailable for an older research cohort, disclose the missing comparison instead of estimating it.
+- Historical simulation, a positive mean, or a green workflow does not authorize a production trade. Report sample size, median, outlier dependence, losses, and confidence alongside any average gain.
