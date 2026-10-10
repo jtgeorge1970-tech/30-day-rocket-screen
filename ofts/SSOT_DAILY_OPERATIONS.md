@@ -124,3 +124,17 @@ Trigger: user-supplied YDES brokerage charts as of 2026-10-09 showing +16.23% on
 - There is currently no validated numeric BUY threshold. A quality score measures historical oscillation structure; BUY/SELL/NO_TRADE is a separate point-in-time reversal state.
 - The daily report must show the actual observed score range and distribution, state that the validated BUY threshold is NONE, and keep the system actionability gate at RESEARCH_ONLY_NO_GO until Stage 8 out-of-sample predictive validation passes.
 - Never convert a research score or research BUY state into a production recommendation merely because it is the highest available result. If the evidence gate fails, say plainly that OFTS is not ready to select production winners.
+
+## LOCKED — VERIFIED IQMX SPAC/SECURITY IDENTITY BREAK (2026-10-10)
+
+Evidence: Nasdaq announced IQM Quantum Computers ADS began trading under IQMX on **2026-07-02** after the RAAQ business combination:
+https://www.nasdaq.com/press-release/iqm-quantum-computers-and-real-asset-acquisition-corp-complete-combination-trading
+The full-universe worker run 38008125845 reported **IQMX 340 bars, 77.597 score, rank #1**. It is impossible for 340 daily IQMX post-combination bars to exist between July 2 and the Oct 9 scoring date. Historical bars must be treated as spanning different security regimes until audited. Do not claim they all belong to the current operating-company ADS.
+
+**Effective immediately:** IQMX historical oscillation scores blending pre-2026-07-02 and post-2026-07-02 bars are INVALID for current ranking. Do not present 77.597 as a valid candidate score or production BUY. Source of the old result remains preserved for audit. The existing October 9 immutable snapshots are NOT rewritten.
+
+- New code: `ofts/research/security_regimes.py` records verified event boundaries and excludes predecessor bars from both full-universe research and future daily candidate scoring.
+- Apply the same >=180 usable daily bars gate **after** identity-boundary filtering. If too few, mark `INSUFFICIENT_POST_REGIME_HISTORY`, numeric score null, NO_TRADE; retain raw count, post-event count, effective date and source. Do not fabricate older operating-company history.
+- All new candidate rankings must include a security-identity/merger/corporate-action integrity audit, not just a symbol match. The current dated boundary registry is **not comprehensive**; other SPAC, IPO, ADR, ticker-reuse and major structural-event histories may remain contaminated. Broaden verified coverage systematically.
+- Version new model snapshots with identity-gate source; do not retrospectively reclassify frozen observations, and compare old/new cohort results separately.
+- Full-universe rankings must be rerun on the original saved history or fresh audited history, with proof of identity gating, before declaring an authoritative new #1. Until then, **NO VALIDATED OVERALL LEADER**.
