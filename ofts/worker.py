@@ -66,6 +66,12 @@ for ix in range(5502):
                            peak_cycle_median=viability.get("peak_cycle_median_sessions"),
                            trough_cycle_median=viability.get("trough_cycle_median_sessions"),
                            cycle_timing_pass=viability.get("cycle_timing_pass"),
+                           prior_three_up_pct=json.dumps(viability.get("preceding_three_up_pct",[])),
+                           prior_peak_intervals=json.dumps(viability.get("preceding_three_peak_to_peak_sessions",[])),
+                           prior_trough_intervals=json.dumps(viability.get("preceding_three_trough_to_trough_sessions",[])),
+                           up_amplitude_ratio=viability.get("recent_vs_prior_up_ratio"),
+                           cadence_ratio=viability.get("recent_vs_prior_cadence_ratio"),
+                           recent_vs_prior_state=viability.get("recent_vs_prior_state"),
                            up_progression=viability.get("up_progression"),
                            historical_mean_swing_pct=viability.get("historical_mean_swing_pct"),
                            recent_capture_net_pct=viability.get("hypothetical_net_capture_pct"),
@@ -83,7 +89,9 @@ fields=["run","symbol","bars","raw_bars","regime_start","status","score","versio
         "viability_state","viability_entry","viability_reason","recent_three_swing_pct",
         "recent_two_up_pct","last_three_up_pct","last_up_pct",
         "repeated_up_pass_count","recent_up_repeatability","peak_intervals","trough_intervals",
-        "peak_cycle_median","trough_cycle_median","cycle_timing_pass","up_progression","historical_mean_swing_pct","recent_capture_net_pct",
+        "peak_cycle_median","trough_cycle_median","cycle_timing_pass",
+        "prior_three_up_pct","prior_peak_intervals","prior_trough_intervals",
+        "up_amplitude_ratio","cadence_ratio","recent_vs_prior_state","up_progression","historical_mean_swing_pct","recent_capture_net_pct",
         "combined_research_entry","viability_json"]
 with (OUT/"v23_research_universe.csv").open("w",newline="") as fh:
     w=csv.DictWriter(fh,fieldnames=fields,extrasaction="ignore");w.writeheader();w.writerows(results)
@@ -94,7 +102,9 @@ with (OUT/"v23_research_ranked.csv").open("w",newline="") as fh:
             "recent_swing_pct","amplitude_ratio","viability_state","viability_entry",
             "viability_reason","recent_three_swing_pct","recent_two_up_pct",
             "last_three_up_pct","last_up_pct","repeated_up_pass_count","recent_up_repeatability",
-            "peak_intervals","trough_intervals","peak_cycle_median","trough_cycle_median","cycle_timing_pass","up_progression",
+            "peak_intervals","trough_intervals","peak_cycle_median","trough_cycle_median","cycle_timing_pass",
+            "prior_three_up_pct","prior_peak_intervals","prior_trough_intervals",
+            "up_amplitude_ratio","cadence_ratio","recent_vs_prior_state","up_progression",
             "historical_mean_swing_pct","recent_capture_net_pct","combined_research_entry"],extrasaction="ignore")
     w.writeheader()
     for rank,r in enumerate(ranked,1):
@@ -118,6 +128,12 @@ print("RECENT_VIABILITY_SHORTLIST",json.dumps([
      "recent_up_repeatability":r.get("recent_up_repeatability"),
      "peak_intervals":r.get("peak_intervals"),"trough_intervals":r.get("trough_intervals"),
      "cycle_timing_pass":r.get("cycle_timing_pass"),
+     "prior_three_up_pct":r.get("prior_three_up_pct"),
+     "prior_peak_intervals":r.get("prior_peak_intervals"),
+     "prior_trough_intervals":r.get("prior_trough_intervals"),
+     "up_amplitude_ratio":r.get("up_amplitude_ratio"),
+     "cadence_ratio":r.get("cadence_ratio"),
+     "recent_vs_prior_state":r.get("recent_vs_prior_state"),
      "last_up_pct":r.get("last_up_pct"),
      "state":r.get("viability_state")} for i,r in enumerate(viable[:25])]))
 print("RECENT_VIABILITY_COUNTS",json.dumps({
