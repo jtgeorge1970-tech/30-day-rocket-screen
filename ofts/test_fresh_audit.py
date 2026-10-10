@@ -21,6 +21,7 @@ class TestChartShape(unittest.TestCase):
     def test_evi_single_spike_and_downtrend_never_keeper(self):
         evi=dict(symbol="EVI",viability="REVIEW",swing_health="DOWNTREND",
                  entry_state="MID_CYCLE_WAIT",quality_v06=52.9703,
+                 three_clear_cycles="THREE_CLEAR_CYCLES",
                  w30=dict(status="MEASURED",confirmed_up_legs=1),
                  w60=dict(status="MEASURED",confirmed_up_legs=3,
                           completed_peak_intervals=3,completed_trough_intervals=2))
@@ -28,8 +29,13 @@ class TestChartShape(unittest.TestCase):
         evi["w30"]["confirmed_up_legs"]=3
         self.assertEqual(keeper_status(evi),"WATCH_TREND_OR_SWING_HEALTH")
     def test_failing_health_vetoes_big_score(self):
-        self.assertEqual(keeper_status(dict(viability="DISSIPATING",quality_v06=79.99)),
+        self.assertEqual(keeper_status(dict(viability="DISSIPATING",three_clear_cycles="THREE_CLEAR_CYCLES",quality_v06=79.99)),
                          "REJECT_OSCILLATION_HEALTH")
+    def test_three_clear_gate_blocks_historical_score(self):
+        self.assertEqual(keeper_status(dict(three_clear_cycles="REJECT_BIG_LOSS",quality_v06=79.99)),
+                         "REJECT_BIG_LOSS")
+        self.assertEqual(keeper_status(dict(three_clear_cycles="REJECT_TOO_FEW_CYCLES",quality_v06=79.99)),
+                         "REJECT_NO_THREE_CLEAR_5PCT_CYCLES")
     def test_insufficient_window(self):
         self.assertEqual(window_stats(bars([10.0]*20),30)["status"],"INSUFFICIENT")
 
