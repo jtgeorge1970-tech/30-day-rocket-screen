@@ -9,7 +9,8 @@ import json
 import pandas as pd
 from ofts.daily import (save_history, read_history, merge_history, refresh,
                         frozen_snapshot, outcomes, completed_session, market_schedule,
-                        snapshot_is_qualified, load_qualified_snapshots)
+                        snapshot_is_qualified, load_qualified_snapshots,
+                        cycle_fingerprint)
 
 
 def bar(date, close=100, split=0):
@@ -60,6 +61,20 @@ class PersistenceTests(unittest.TestCase):
             frozen_snapshot(predictions / '2026-10-09-qualified.json', recovered)
             self.assertEqual(load_qualified_snapshots(predictions), [recovered])
             self.assertTrue((predictions / '2026-10-09.json').exists())
+
+    def test_cycle_fingerprint_is_point_in_time_and_describes_cadence(self):
+        import math
+        closes = [100 + 15 * math.sin(i / 8) for i in range(260)]
+        highs = [c + 2 for c in closes]
+        lows = [c - 2 for c in closes]
+        result = __import__('ofts.research.v23_replacement', fromlist=['evaluate']).evaluate(highs, lows, closes)
+        fp = cycle_fingerprint(closes, result['threshold_pct'], result['structural'])
+        self.assertGreater(fp['cycle_sessions'], 0)
+        self.assertGreaterEqual(fp['completed_cycle_intervals'], 4)
+        self.assertGreater(fp['median_swing_pct'], 0)
+        # Repeating the same as-of slice must be deterministic; later bars are
+        # never supplied to the function and cannot rewrite the fingerprint.
+        self.assertEqual(fp, cycle_fingerprint(closes, result['threshold_pct'], result['structural']))
 
     def test_saved_prediction_is_immutable(self):
         with tempfile.TemporaryDirectory() as d:
