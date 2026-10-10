@@ -1,5 +1,5 @@
 import unittest
-from ofts.research.fresh_audit import window_stats
+from ofts.research.fresh_audit import window_stats,keeper_status
 
 def bars(values):
     return [{"date":f"2026-01-{i+1:02d}","open":x,"high":x*1.01,
@@ -18,6 +18,18 @@ class TestChartShape(unittest.TestCase):
         w=window_stats(b,30)
         self.assertEqual(w["confirmed_up_legs"],0)
         self.assertIsNone(w["up_median_pct"])
+    def test_evi_single_spike_and_downtrend_never_keeper(self):
+        evi=dict(symbol="EVI",viability="REVIEW",swing_health="DOWNTREND",
+                 entry_state="MID_CYCLE_WAIT",quality_v06=52.9703,
+                 w30=dict(status="MEASURED",confirmed_up_legs=1),
+                 w60=dict(status="MEASURED",confirmed_up_legs=3,
+                          completed_peak_intervals=3,completed_trough_intervals=2))
+        self.assertEqual(keeper_status(evi),"REJECT_RECENT_REPEATABILITY")
+        evi["w30"]["confirmed_up_legs"]=3
+        self.assertEqual(keeper_status(evi),"WATCH_TREND_OR_SWING_HEALTH")
+    def test_failing_health_vetoes_big_score(self):
+        self.assertEqual(keeper_status(dict(viability="DISSIPATING",quality_v06=79.99)),
+                         "REJECT_OSCILLATION_HEALTH")
     def test_insufficient_window(self):
         self.assertEqual(window_stats(bars([10.0]*20),30)["status"],"INSUFFICIENT")
 
