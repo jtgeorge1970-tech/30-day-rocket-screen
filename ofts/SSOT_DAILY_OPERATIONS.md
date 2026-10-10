@@ -95,3 +95,14 @@ substitute stale data, invent scores, mix versions, or reset progress.
 - Rebuild the permanent cycle ledger deterministically from immutable signal snapshots on every run. A signal is not filled until its next-session opening bar exists; restarts must not duplicate positions or trades.
 - Keep pending and open-position symbols in the refresh queue until a later frozen SELL can be executed. Record SPY open-to-open return, excess return, adverse excursion, observed ordered swing, captured swing, and missed swing for each completed trade.
 - Compare fast (1–10 sessions), medium (11–25), and slow (>25) entry-cycle classes separately. Alongside raw net return, report capital-time efficiency as total net percentage return divided by total holding sessions and scaled to 20 sessions; label it descriptive, not annualized or a portfolio return.
+
+## LOCKED — CHART-CHALLENGE / RANKING ROBUSTNESS AUDIT (2026-10-10)
+
+Trigger: manual review of 2026-10-09 #1 research-quality symbol AKAM (62.584, 32-session estimated cycle, 18.11% median pivot swing, MEDIUM confidence, NO_TRADE). User-supplied 1Y/1M/intraday charts show an irregular large price jump, extended decline and one-day rebound; chart observation is not an independently computed historical test.
+
+- Never equate the top **quality** rank with a current BUY. Keep separate fields: historical oscillation quality, recent repeatability/regime stability, and point-in-time entry readiness.
+- Current v2.3 research formula blends 75% full-history quality and 25% last-90-bar quality; this can reward stale or discontinuous historical patterns. Treat this as a hypothesis to test, not a proven AKAM-specific cause.
+- Add an independent, **non-retroactive** ranking robustness audit for each top-25 name: count recent complete peak-to-peak and trough-to-trough cycles, compare recent vs older cadence/amplitude, quantify largest-event/outlier dependence, distinguish abrupt one-off repricing from repeated turns, measure confirmed-entry lag and missed swing, and flag regime breaks. Mark insufficient evidence rather than inventing cycles.
+- Audit ranking stability and outcomes on frozen future cohorts, with separate fast/medium/slow groups and missed-opportunity controls. Record failures and rejected candidates. No cherry-picking of only visually attractive winners.
+- Any new score weights or hard gates must be versioned as an experimental challenger, backtested chronologically against untouched holdouts, and never silently overwrite frozen v2.3 scores. Do not present any challenger as production approved until it demonstrates forward net performance.
+- For AKAM as of 2026-10-09, current saved signal is NO_TRADE; no automatic purchase recommendation is authorized.
