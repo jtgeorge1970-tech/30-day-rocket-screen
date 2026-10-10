@@ -116,3 +116,11 @@ Trigger: user-supplied YDES brokerage charts as of 2026-10-09 showing +16.23% on
 - Audit next-session opening gaps, next-open fill price, slippage sensitivity, maximum adverse excursion, and whether entry occurred after most of the rebound. Include failures, missed entries and stopped-out outcomes.
 - Test any candidate BUY rejection thresholds prospectively and on chronological untouched holdouts before adoption. A hard-coded retrospective filter chosen after seeing YDES is prohibited.
 - Research BUY is NOT a production recommendation or brokerage authorization. Current forward cycle ledger must remain intact.
+
+
+## LOCKED — SCORE INTERPRETATION AND ACTIONABILITY GATE (2026-10-10)
+
+- The v2.3 research quality score has a mathematical 0–100 scale because each component is clamped to 0–100 and the component weights sum to 1. A theoretical ceiling is not evidence that 80, 60, 40, or any other cutoff predicts profit.
+- There is currently no validated numeric BUY threshold. A quality score measures historical oscillation structure; BUY/SELL/NO_TRADE is a separate point-in-time reversal state.
+- The daily report must show the actual observed score range and distribution, state that the validated BUY threshold is NONE, and keep the system actionability gate at RESEARCH_ONLY_NO_GO until Stage 8 out-of-sample predictive validation passes.
+- Never convert a research score or research BUY state into a production recommendation merely because it is the highest available result. If the evidence gate fails, say plainly that OFTS is not ready to select production winners.
