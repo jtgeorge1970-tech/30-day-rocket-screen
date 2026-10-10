@@ -7,6 +7,7 @@ import contextlib
 import io
 import json
 import pandas as pd
+from ofts.cycle_ledger import rebuild_cycle_ledger, active_ledger_symbols, load_complete_signal_snapshots
 from ofts.daily import (save_history, read_history, merge_history, refresh,
                         frozen_snapshot, outcomes, completed_session, market_schedule,
                         snapshot_is_qualified, load_qualified_snapshots,
@@ -180,6 +181,53 @@ class OutcomeTests(unittest.TestCase):
         self.assertEqual(outcomes(self.snapshot, {'ABC': history}, self.schedule)[0]['status'], 'CORPORATE_ACTION_REVIEW')
         history.pop(2)
         self.assertEqual(outcomes(self.snapshot, {'ABC': history}, self.schedule)[0]['status'], 'MISSING_SESSIONS')
+
+
+class CycleLedgerTests(unittest.TestCase):
+    def signal_snapshot(self, asof, signal):
+        return dict(asof=asof, model_hash='frozen', rows=[
+            dict(symbol='ABC', score=60, classification='CANDIDATE',
+                 cycle={'cycle_sessions': 5}, signal={'state': signal})])
+
+    def test_pending_next_open_then_close_is_restart_safe_and_benchmarked(self):
+        with tempfile.TemporaryDirectory() as d:
+            state = Path(d)
+            (state / 'signals').mkdir()
+            (state / 'signals/2026-01-02.json').write_text(
+                json.dumps(self.signal_snapshot('2026-01-02', 'BUY')))
+            schedule = pd.DataFrame(index=pd.to_datetime(
+                ['2026-01-02', '2026-01-05', '2026-01-06', '2026-01-07']))
+            pending = rebuild_cycle_ledger(state, {'ABC': [], 'SPY': []}, schedule)
+            self.assertEqual(pending['summary']['pending_entries'], 1)
+            self.assertEqual(active_ledger_symbols(state), ['ABC'])
+            (state / 'signals/2026-01-06.json').write_text(
+                json.dumps(self.signal_snapshot('2026-01-06', 'SELL')))
+            histories = {
+                'ABC': [bar('2026-01-05', 100), bar('2026-01-06', 105),
+                        bar('2026-01-07', 108)],
+                'SPY': [dict(bar('2026-01-05', 500), open=500),
+                        dict(bar('2026-01-07', 505), open=505)]}
+            closed = rebuild_cycle_ledger(state, histories, schedule)
+            restarted = rebuild_cycle_ledger(state, histories, schedule)
+            self.assertEqual(closed['summary'], restarted['summary'])
+            self.assertEqual(closed['summary']['closed_trades'], 1)
+            trade = closed['trades'][0]
+            self.assertAlmostEqual(trade['gross_return_pct'], 8)
+            self.assertAlmostEqual(trade['net_assumed_return_pct'], 7.8)
+            self.assertAlmostEqual(trade['benchmark_price_return_pct'], 1)
+            self.assertIn('captured_observed_swing_pct', trade)
+
+    def test_complete_recovery_signal_snapshot_wins_without_rewriting_original(self):
+        with tempfile.TemporaryDirectory() as d:
+            signals = Path(d)
+            original = self.signal_snapshot('2026-01-02', 'NO_TRADE')
+            original['rows'][0].pop('signal')
+            recovered = self.signal_snapshot('2026-01-02', 'BUY')
+            (signals / '2026-01-02.json').write_text(json.dumps(original))
+            (signals / '2026-01-02-qualified.json').write_text(json.dumps(recovered))
+            loaded = load_complete_signal_snapshots(signals)
+            self.assertEqual(len(loaded), 1)
+            self.assertEqual(loaded[0]['rows'][0]['signal']['state'], 'BUY')
 
 if __name__ == '__main__':
     unittest.main()
