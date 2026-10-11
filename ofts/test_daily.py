@@ -13,7 +13,8 @@ from ofts.daily import (save_history, read_history, merge_history, refresh,
                         frozen_snapshot, outcomes, completed_session, market_schedule,
                         snapshot_is_qualified, load_qualified_snapshots,
                         cycle_fingerprint, current_signal_state,
-                        signal_snapshot_complete, score_interpretation)
+                        signal_snapshot_complete, score_interpretation,
+                        freshness_gate, rolling_watchlist)
 
 
 def bar(date, close=100, split=0):
@@ -21,6 +22,23 @@ def bar(date, close=100, split=0):
 
 
 class PersistenceTests(unittest.TestCase):
+    def test_required_watchlist_and_benchmark_override_bulk_coverage(self):
+        selected = [f'S{i}' for i in range(125)]
+        audit = {s: {'status': 'FRESH'} for s in selected + ['SPY']}
+        self.assertTrue(freshness_gate(audit, selected[:25], selected)['passed'])
+        audit['S0']['status'] = 'ERROR'
+        self.assertFalse(freshness_gate(audit, selected[:25], selected)['passed'])
+        audit['S0']['status'] = 'FRESH'
+        audit['SPY']['status'] = 'ERROR'
+        self.assertFalse(freshness_gate(audit, selected[:25], selected)['passed'])
+
+    def test_watchlist_rolls_only_from_earlier_frozen_quality_cohort(self):
+        prior = dict(asof='2026-10-09', recorded_at='2026-10-10T01:00:00+00:00', rows=[
+            dict(symbol='NEW', score=65, classification='CANDIDATE'),
+            dict(symbol='REJECTED', score=90, classification='REJECT_CANDIDATE_GATE')])
+        self.assertEqual(rolling_watchlist([prior], '2026-10-12')[0], 'NEW')
+        self.assertNotIn('NEW', rolling_watchlist([prior], '2026-10-09'))
+
     def test_restart_and_new_day_merge_deduplicates(self):
         with tempfile.TemporaryDirectory() as d:
             state = Path(d)
@@ -140,8 +158,12 @@ class PersistenceTests(unittest.TestCase):
                 daily.main()
                 self.assertEqual(prediction.read_bytes(), original)
                 self.assertEqual(json.loads((state / 'control.json').read_text())['cursor'], 1)
+                (state / 'cycle_ledger.json').write_text(json.dumps({'positions': [
+                    {'symbol': 'OFFBATCH', 'status': 'OPEN'}]}))
                 target[0] = '2026-10-08'
                 daily.main()
+                next_signals = json.loads((state / 'signals/2026-10-08.json').read_text())
+                self.assertIn('OFFBATCH', [r['symbol'] for r in next_signals['rows']])
                 self.assertEqual(prediction.read_bytes(), original)
                 self.assertEqual(json.loads((state / 'control.json').read_text())['cursor'], 2)
                 self.assertEqual(len(list((state / 'predictions').glob('*.json'))), 2)
@@ -172,6 +194,14 @@ class OutcomeTests(unittest.TestCase):
         self.assertTrue(all(r['status'] == 'PENDING' for r in result))
         self.assertTrue(all('net_assumed_return_pct' not in r for r in result))
 
+    def test_due_missing_endpoints_are_errors_and_future_bars_cannot_mature_early(self):
+        result = outcomes(self.snapshot, {'ABC': []}, self.schedule, self.future[4])
+        self.assertEqual(result[0]['status'], 'MISSING_SESSIONS')
+        self.assertEqual(result[1]['status'], 'PENDING')
+        result = outcomes(self.snapshot, {'ABC': [bar(d) for d in self.future]},
+                          self.schedule, '2026-09-01')
+        self.assertTrue(all(r['status'] == 'PENDING' for r in result))
+
     def test_next_open_costs_and_benchmark(self):
         history = [bar(d, 110) for d in self.future[:5]]
         result = outcomes(self.snapshot, {'ABC': history, 'SPY': [bar(d, 102) for d in self.future[:5]]}, self.schedule)
@@ -196,7 +226,7 @@ class OutcomeTests(unittest.TestCase):
 
 class CycleLedgerTests(unittest.TestCase):
     def signal_snapshot(self, asof, signal):
-        return dict(asof=asof, model_hash='frozen', rows=[
+        return dict(asof=asof, recorded_at=asof+'T23:00:00+00:00', model_hash='frozen', rows=[
             dict(symbol='ABC', score=60, classification='CANDIDATE',
                  cycle={'cycle_sessions': 5}, signal={'state': signal})])
 
@@ -208,6 +238,8 @@ class CycleLedgerTests(unittest.TestCase):
                 json.dumps(self.signal_snapshot('2026-01-02', 'BUY')))
             schedule = pd.DataFrame(index=pd.to_datetime(
                 ['2026-01-02', '2026-01-05', '2026-01-06', '2026-01-07']))
+            schedule['market_open'] = pd.to_datetime([
+                date.strftime('%Y-%m-%d')+'T14:30:00Z' for date in schedule.index])
             pending = rebuild_cycle_ledger(state, {'ABC': [], 'SPY': []}, schedule)
             self.assertEqual(pending['summary']['pending_entries'], 1)
             self.assertEqual(active_ledger_symbols(state), ['ABC'])
@@ -228,6 +260,22 @@ class CycleLedgerTests(unittest.TestCase):
             self.assertAlmostEqual(trade['net_assumed_return_pct'], 7.8)
             self.assertAlmostEqual(trade['benchmark_price_return_pct'], 1)
             self.assertIn('captured_observed_swing_pct', trade)
+            # The exit day's 99 low is below prior lows but must not be observed.
+            histories['ABC'][-1]['low'] = 1
+            repeat = rebuild_cycle_ledger(state, histories, schedule)
+            self.assertEqual(repeat['trades'][0]['adverse_excursion_pct'], trade['adverse_excursion_pct'])
+            late = self.signal_snapshot('2026-01-02', 'BUY')
+            late['recorded_at'] = '2026-01-05T15:00:00+00:00'
+            (state / 'signals/2026-01-02.json').write_text(json.dumps(late))
+            excluded = rebuild_cycle_ledger(state, histories, schedule)
+            self.assertEqual(excluded['summary']['closed_trades'], 0)
+            self.assertEqual(excluded['exceptions'][0]['reason'], 'MISSING_OR_LATE_RECORDING_TIMESTAMP')
+
+    def test_corporate_action_review_never_enters_profit_average(self):
+        card = build_cycle_report_card({'trades': [dict(status='CLOSED', review='CORPORATE_ACTION',
+                                                       net_assumed_return_pct=900)]})
+        self.assertEqual(card['closed_trades'], 0)
+        self.assertEqual(card['excluded_review_trades'], 1)
 
     def test_cycle_speed_report_card_uses_capital_time_not_raw_gain_alone(self):
         trades = [

@@ -233,7 +233,26 @@ def refresh(state, symbols, target, downloader):
     return audit
 
 
-def outcomes(snapshot, histories, schedule):
+def freshness_gate(audit, watchlist, selected):
+    required = list(dict.fromkeys(list(watchlist) + ['SPY']))
+    missing = [s for s in required if audit.get(s, {}).get('status') != 'FRESH']
+    fresh = sum(audit.get(s, {}).get('status') == 'FRESH' for s in selected)
+    return dict(passed=not missing and fresh >= min(MIN_FRESH_COHORT, len(selected)),
+                required_stale=missing, fresh=fresh, selected=len(selected))
+
+
+def rolling_watchlist(snapshots, target):
+    prior = [s for s in snapshots if s['asof'] < target]
+    if not prior:
+        return list(WATCH)
+    latest = max(prior, key=lambda s: (s['asof'], s['recorded_at']))
+    ranked = sorted((r for r in latest['rows'] if r.get('score') is not None
+                     and r['classification'] == 'CANDIDATE'),
+                    key=lambda r: (-r['score'], r['symbol']))
+    return list(dict.fromkeys([r['symbol'] for r in ranked] + WATCH))[:25]
+
+
+def outcomes(snapshot, histories, schedule, observed_through=None):
     dates = [str(d.date()) for d in schedule.index]
     start = dates.index(snapshot['asof']) + 1
     recorded = datetime.fromisoformat(snapshot['recorded_at'])
@@ -254,6 +273,8 @@ def outcomes(snapshot, histories, schedule):
                 row['status'] = 'NOT_PROSPECTIVE_RECORDED_AFTER_ENTRY'
             elif prediction['classification'] in DATA_FAILURES:
                 row['status'] = 'INELIGIBLE_DATA'
+            elif observed_through is not None and end_date > observed_through:
+                pass
             elif end_date in bars and entry_date in bars:
                 interval = [bars.get(d) for d in dates[start:start + horizon]]
                 if any(r is None for r in interval):
@@ -270,6 +291,8 @@ def outcomes(snapshot, histories, schedule):
                         benchmark_return = 100 * (float(benchmark[end_date]['close']) / float(benchmark[entry_date]['open']) - 1)
                         row.update(benchmark_price_return_pct=benchmark_return,
                                    excess_gross_pct=gross - benchmark_return)
+            elif observed_through is not None and end_date <= observed_through:
+                row['status'] = 'MISSING_SESSIONS'
             output.append(row)
     return output
 
@@ -301,19 +324,21 @@ def main():
     previous = load_json(recovery_path, None) or load_json(snapshot_path, None)
     cursor = control['cursor']
     rotation = [universe[((cursor + i) * 137) % len(universe)] for i in range(args.batch_size)]
-    selected = previous['selected'] if previous else list(dict.fromkeys(WATCH + rotation + control['retry']))
     snapshots = load_qualified_snapshots(state / 'predictions')
+    watchlist = previous.get('watchlist', WATCH) if previous else rolling_watchlist(snapshots, target)
+    selected = previous['selected'] if previous else list(dict.fromkeys(watchlist + rotation + control['retry']))
     dates = [str(d.date()) for d in schedule.index]
     pending = {r['symbol'] for s in snapshots if s['asof'] in dates and dates.index(target) - dates.index(s['asof']) <= 65 for r in s['rows']}
-    refresh_symbols = list(dict.fromkeys(selected + sorted(pending) + active_ledger_symbols(state) + ['SPY']))
+    refresh_symbols = list(dict.fromkeys(selected + control['retry'] + sorted(pending) + active_ledger_symbols(state) + ['SPY']))
     import yfinance as yf
     import pandas as pd
     audit = refresh(state, refresh_symbols, target, yf.download)
     attempt = dict(asof=target, recorded_at=now.isoformat(), symbols=audit)
     save_json(state / 'refresh.json', attempt)
-    save_json(state / 'attempts' / (now.strftime('%Y%m%dT%H%M%S%fZ') + '.json'), attempt)
     rows = []
-    for symbol in selected:
+    # Open/pending cycles must keep receiving SELL checks after batch rotation.
+    signal_symbols = list(dict.fromkeys(selected + active_ledger_symbols(state)))
+    for symbol in signal_symbols:
         bars = read_history(state, symbol)
         cutoff = str((pd.Timestamp(target) - pd.DateOffset(years=2)).date())
         bars = [r for r in bars if r['date'] >= cutoff]
@@ -351,6 +376,8 @@ def main():
                 row.update(classification='DATA_ERROR', error=str(exc))
         row.setdefault('signal', dict(state='NO_TRADE', reason=row['classification']))
         rows.append(row)
+    signal_rows = rows
+    rows = [r for r in signal_rows if r['symbol'] in selected]
     model_hash = hashlib.sha256(b''.join((ROOT / p).read_bytes() for p in
                                ['ofts/research/v23_replacement.py', 'ofts/research/candidate_components.py',
                                  'ofts/research/security_regimes.py', 'ofts/research/swing_health.py',
@@ -360,12 +387,19 @@ def main():
     candidate = dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
                      model_version='v2.3-research', model_hash=model_hash,
                      protocol_hash=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-                     lookback='trailing 2 calendar years', selected=selected, rows=rows,
+                     lookback='trailing 2 calendar years', selected=selected, watchlist=watchlist, rows=rows,
                      coverage={'fresh': fresh_count, 'selected': len(selected),
                                'minimum_fresh': required_fresh},
                      production_approved=False,
                      execution='Hypothetical next-session open; fixed-session close; no stop/target strategy',
                      cost_assumption_roundtrip_pct=0.20)
+    gate = freshness_gate(audit, watchlist, selected)
+    candidate['operational_freshness_gate'] = gate
+    attempt.update(candidate=candidate, operational_freshness_gate=gate)
+    save_json(state / 'attempts' / (now.strftime('%Y%m%dT%H%M%S%fZ') + '.json'), attempt)
+    save_json(state / 'freshness_gate.json', gate)
+    # Preserve even failed first attempts, without rewriting any existing cohort.
+    frozen_snapshot(snapshot_path, candidate)
     snapshot = None
     if fresh_count >= required_fresh:
         destination = snapshot_path
@@ -383,21 +417,21 @@ def main():
                  note='Point-in-time research fingerprints; not production BUY/SELL signals'))
         signal_candidate = dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
                                 execution='Hypothetical next-session open', model_hash=model_hash,
-                                rows=rows, production_approved=False,
+                                rows=signal_rows, production_approved=False,
                                 note='Close-confirmed research states; not brokerage instructions')
         signal_path = state / 'signals' / (target + '.json')
         if signal_path.exists() and not signal_snapshot_complete(load_json(signal_path, {})):
             signal_path = state / 'signals' / (target + '-qualified.json')
         signal_snapshot = frozen_snapshot(signal_path, signal_candidate)
     histories = {s: read_history(state, s) for s in set(refresh_symbols) | {r['symbol'] for s in snapshots for r in s['rows']}}
-    results = [r for s in snapshots for r in outcomes(s, histories, schedule)]
+    results = [r for s in snapshots for r in outcomes(s, histories, schedule, target)]
     save_json(state / 'outcomes.json', results)
     cycle_ledger = rebuild_cycle_ledger(state, histories, schedule)
     cycle_card = build_cycle_report_card(cycle_ledger)
     # Cursor advances only once per session; failed symbols remain in retry queue.
     if control['last_session'] != target:
         control['cursor'] = (cursor + args.batch_size) % len(universe)
-    control.update(last_session=target, retry=[s for s in selected if audit[s]['status'] != 'FRESH'])
+    control.update(last_session=target, retry=[s for s in refresh_symbols if audit[s]['status'] != 'FRESH'])
     save_json(state / 'control.json', control)
     mature = [r for r in results if r['status'] == 'MATURE']
     summaries = []
@@ -439,7 +473,7 @@ def main():
              f'closed forward trades={cycle_card["closed_trades"]}; '
              f'groups={list(cycle_card["groups"])}',
              f'Score scale: theoretical 0-100; observed '
-             f'{score_status["observed_min"]:.3f}-{score_status["observed_max"]:.3f}; '
+             f'{score_status["observed_min"]}-{score_status["observed_max"]}; '
              f'validated BUY threshold=NONE',
              f'Score distribution: {score_status["distribution"]}',
              f'System actionability gate: {score_status["system_actionability_gate"]}; '
@@ -515,8 +549,8 @@ def main():
     if os.environ.get('GITHUB_STEP_SUMMARY'):
         with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as f:
             f.write('\n'.join(lines) + '\n')
-    if not any(audit[s]['status'] == 'FRESH' for s in selected):
-        raise SystemExit('NO_FRESH_SYMBOLS; state saved, run failed')
+    if not gate['passed']:
+        raise SystemExit('FRESHNESS_GATE_FAILED; partial evidence saved: ' + json.dumps(gate))
 
 
 if __name__ == '__main__':

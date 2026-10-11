@@ -51,7 +51,8 @@ def _cycle_class(trade):
 
 def build_cycle_report_card(ledger):
     """Compare cycle speeds fairly without treating research states as advice."""
-    trades = [trade for trade in ledger.get('trades', []) if trade.get('status') == 'CLOSED']
+    trades = [trade for trade in ledger.get('trades', [])
+              if trade.get('status') == 'CLOSED' and not trade.get('review')]
     groups = {}
     for label in sorted({_cycle_class(trade) for trade in trades}):
         group = [trade for trade in trades if _cycle_class(trade) == label]
@@ -85,7 +86,8 @@ def build_cycle_report_card(ledger):
         methodology=('Cycle classes use the point-in-time entry fingerprint. Capital-time efficiency '
                      'is total net percentage return divided by total holding sessions, scaled to 20 sessions; '
                      'it is descriptive, not an annualized or portfolio return.'),
-        closed_trades=len(trades), groups=groups)
+        closed_trades=len(trades), excluded_review_trades=sum(
+            bool(t.get('review')) for t in ledger.get('trades', [])), groups=groups)
 
 
 def rebuild_cycle_ledger(state, histories, schedule, roundtrip_cost_pct=0.20):
@@ -107,6 +109,16 @@ def rebuild_cycle_ledger(state, histories, schedule, roundtrip_cost_pct=0.20):
             exceptions.append(dict(signal_date=signal_date, reason='NO_NEXT_SESSION_IN_CALENDAR'))
             continue
         execution_date = dates[date_index[signal_date] + 1]
+        try:
+            recorded = datetime.fromisoformat(snapshot['recorded_at'])
+            opening = schedule.iloc[date_index[execution_date]].market_open.to_pydatetime()
+            timely = recorded < opening
+        except (KeyError, AttributeError, ValueError, TypeError):
+            timely = False
+        if not timely:
+            exceptions.append(dict(signal_date=signal_date,
+                                   reason='MISSING_OR_LATE_RECORDING_TIMESTAMP'))
+            continue
         for row in sorted(snapshot['rows'], key=lambda item: item['symbol']):
             signal = row['signal']['state']
             if signal == 'NO_TRADE':
@@ -166,8 +178,9 @@ def rebuild_cycle_ledger(state, histories, schedule, roundtrip_cost_pct=0.20):
             if any(bar is None for bar in interval):
                 trade['review'] = 'MISSING_SESSIONS'
             else:
-                lows = [float(bar['low']) for bar in interval]
-                highs = [float(bar['high']) for bar in interval]
+                # Exit occurs at the open: later exit-day highs/lows are not held.
+                lows = [float(bar['low']) for bar in interval[:-1]] + [exit_open]
+                highs = [float(bar['high']) for bar in interval[:-1]] + [exit_open]
                 trade['adverse_excursion_pct'] = 100 * (min(lows) / entry_open - 1)
                 trade['best_high_return_pct'] = 100 * (max(highs) / entry_open - 1)
                 best_swing = max(

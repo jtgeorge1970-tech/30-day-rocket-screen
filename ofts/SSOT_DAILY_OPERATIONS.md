@@ -1,5 +1,27 @@
 # OFTS daily operation and persistence SSOT
 
+## Operational accounting repair (2026-10-11 UTC / October 10 Mexico)
+
+Daily completion requires all 25 watchlist symbols and SPY fresh, plus the
+existing minimum-100 coverage gate. The next session's operational watchlist
+rolls from the previous frozen v2.3 candidate quality ranks; the same-session
+selection remains immutable and the stride-137 rotation advances once only.
+All refresh failures, including pending-position symbols and SPY, remain in
+the retry queue. Open/pending cycle symbols continue to receive signal scoring
+after rotation. First failed snapshots and each scored attempt are retained.
+
+The saved-evidence audit (`python -m ofts.audit_saved --state ofts-state`)
+recomputes observed outcomes without new predictions, verifies immutable file
+hashes and unchanged cursor, and saves horizon/score-band counts and unavailable
+metrics explicitly. Due but missing endpoint bars are errors, not forever
+pending. Future-dated bars cannot mature a horizon before its completed session.
+Cycle accounting excludes missing/late recording timestamps and excludes
+corporate-action/missing-session review trades from profit averages. Risk
+measurements end at the exit open, excluding later exit-day price movements.
+These are operational/accounting repairs; research formulas, selection gates,
+and historical frozen evidence remain unchanged. The rolling v2.3 baseline
+watchlist is distinct from the experimental clean-cycle keeper ranking.
+
 Locked by Joseph's instructions on 2026-10-09: make OFTS functional, score
 stocks each market day, save and reuse the data, and validate predictions
 across many stocks. Joseph independently chose his HLIT purchase; it is not

@@ -3,6 +3,8 @@ on:
   push:
     paths:
       - 'ofts/daily.py'
+      - 'ofts/audit_saved.py'
+      - 'ofts/cycle_ledger.py'
       - 'ofts/test_daily.py'
       - 'ofts/test_regime.py'
       - 'ofts/test_swing_health.py'
@@ -62,14 +64,14 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          audit=json.loads(Path('ofts-state/refresh.json').read_text())['symbols']
-          eligible={s:v for s,v in audit.items() if s != 'SPY'}
-          fresh=sum(v['status']=='FRESH' for v in eligible.values())
-          total=len(eligible)
-          print(f'FRESH_DATA_COVERAGE {fresh}/{total}',flush=True)
-          if total < 125 or fresh < 100:
+          gate=json.loads(Path('ofts-state/freshness_gate.json').read_text())
+          print('FRESH_DATA_GATE',gate,flush=True)
+          if not gate['passed']:
               raise SystemExit('INSUFFICIENT_FRESH_DATA: fail cycle, preserve audit and retry next scheduled run')
           PY
+      - name: Recompute and audit saved evidence
+        if: always() && steps.daily.outcome != 'skipped'
+        run: python -m ofts.audit_saved --state ofts-state
       - name: Persist results and verify remote commit
         if: always() && steps.daily.outcome != 'skipped'
         run: |
@@ -96,5 +98,10 @@ jobs:
             ofts-state/outcomes.json
             ofts-state/validation_summary.json
             ofts-state/predictions/
+            ofts-state/AUDIT_REPORT.md
+            ofts-state/latest_audit.json
+            ofts-state/freshness_gate.json
+            ofts-state/cycle_ledger.json
+            ofts-state/cycle_report_card.json
           if-no-files-found: warn
           retention-days: 90
