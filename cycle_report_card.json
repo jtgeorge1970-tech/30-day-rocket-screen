@@ -3,5 +3,6 @@
   "production_approved": false,
   "methodology": "Cycle classes use the point-in-time entry fingerprint. Capital-time efficiency is total net percentage return divided by total holding sessions, scaled to 20 sessions; it is descriptive, not an annualized or portfolio return.",
   "closed_trades": 0,
+  "excluded_review_trades": 0,
   "groups": {}
 }
