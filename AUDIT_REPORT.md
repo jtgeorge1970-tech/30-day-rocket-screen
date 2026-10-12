@@ -1,6 +1,6 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-11T01:43:00.967439+00:00
+Audit UTC: 2026-10-12T01:13:24.190397+00:00
 Market as-of: 2026-10-09; qualified cohorts: 1; cohort rows: 125; attempts retained: 49.
 Outcome counts: {'PENDING': 605, 'INELIGIBLE_DATA': 20}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 124, 'selected': 125}.
