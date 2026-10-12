@@ -1,11 +1,45 @@
 {
-  "generated_at": "2026-10-12T01:13:24.839152+00:00",
+  "generated_at": "2026-10-12T23:30:19.771247+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
     {
-      "symbol": "YDES",
+      "symbol": "SPGI",
       "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-12",
+      "planned_entry_date": "2026-10-13",
+      "entry_score": 61.1945146345261,
+      "cycle": {
+        "cycle_sessions": 34.5,
+        "median_swing_pct": 11.399714480696755,
+        "completed_cycle_intervals": 20,
+        "confirmed_turns": 22,
+        "timing_consistency": 74.33734896661367,
+        "amplitude_consistency": 62.63493570663585,
+        "confidence": "HIGH"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
+      "symbol": "SRAD",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-12",
+      "planned_entry_date": "2026-10-13",
+      "entry_score": 56.69949392688849,
+      "cycle": {
+        "cycle_sessions": 26,
+        "median_swing_pct": 16.53954916634129,
+        "completed_cycle_intervals": 25,
+        "confirmed_turns": 27,
+        "timing_consistency": 37.75877358490567,
+        "amplitude_consistency": 56.05857622686228,
+        "confidence": "LOW"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
+      "symbol": "YDES",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-09",
       "planned_entry_date": "2026-10-12",
       "entry_score": 44.6109488168825,
@@ -18,15 +52,36 @@
         "amplitude_consistency": 38.27560540117212,
         "confidence": "LOW"
       },
-      "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6"
+      "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
+      "entry_date": "2026-10-12",
+      "entry_open": 7.010000228881836
     }
   ],
   "trades": [],
-  "exceptions": [],
+  "exceptions": [
+    {
+      "symbol": "HLIT",
+      "signal_date": "2026-10-12",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "PRLB",
+      "signal_date": "2026-10-12",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "VPG",
+      "signal_date": "2026-10-12",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
+    }
+  ],
   "summary": {
-    "complete_signal_cohorts": 1,
-    "pending_entries": 1,
-    "open_positions": 0,
+    "complete_signal_cohorts": 2,
+    "pending_entries": 2,
+    "open_positions": 1,
     "closed_trades": 0,
     "benchmark_pairs": 0,
     "review_trades": 0

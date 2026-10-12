@@ -1,21 +1,24 @@
 {
-  "recorded_at": "2026-10-12T01:13:24.190397+00:00",
-  "market_asof": "2026-10-09",
-  "qualified_cohorts": 1,
-  "all_prediction_files": 2,
-  "attempts": 49,
-  "cohort_rows": 125,
+  "recorded_at": "2026-10-12T23:30:19.022782+00:00",
+  "market_asof": "2026-10-12",
+  "qualified_cohorts": 2,
+  "all_prediction_files": 3,
+  "attempts": 50,
+  "cohort_rows": 250,
   "outcome_counts": {
-    "PENDING": 605,
-    "INELIGIBLE_DATA": 20
+    "PENDING": 1170,
+    "INELIGIBLE_DATA": 80
   },
   "outcome_recompute_matches_saved": true,
   "immutable_evidence_sha256": {
     "predictions/2026-10-09-qualified.json": "bdced460806f99e975313ec3b32953073c84c76a069d2578562eef7bac135dcb",
     "predictions/2026-10-09.json": "1ffb6338b38b8ad63008e343a422e13ea734536d57c02fc57e1c422e1966c052",
+    "predictions/2026-10-12.json": "c0d458d35869dd55d9f525f6eb412f311183aa931ad61858b8cc11045e3aca51",
     "signals/2026-10-09-qualified.json": "3b40ea3da1975073b3b3739b4bf427e24d5ea35fa85d49bbc047cb978f7b9053",
     "signals/2026-10-09.json": "8436c531b1afa83066eaf135c6b4fd3c7d1d96c3eed68a7091f167f9618204db",
+    "signals/2026-10-12.json": "2d228eb3ebd97a3b2ddaad167e36e9d2ebe2d5674878dc988396048e036f6116",
     "fingerprints/2026-10-09.json": "8759ad024a7172a502441fb124b86ef08fa3a84763c776b07b7f50ec4ddb16e1",
+    "fingerprints/2026-10-12.json": "b08045ec7a3bb9cffa3ae6bb566ce76984a1680124bbf45f085ece9dc85bc9b8",
     "attempts/20261010T012256172464Z.json": "8622f72ce6ca8643e3f1eff2de2c0cd82986b7d520f276189ded173e01386f3d",
     "attempts/20261010T013547333786Z.json": "84012c7ba9c29509796cd2176d99c514ac8b15e4d3585c6e499991c697254e2c",
     "attempts/20261010T015444698482Z.json": "5f88f74f204a4bad8f58f113a5d20fd18d4939d7b94b3b8cb35e9d9af17ff82f",
@@ -64,25 +67,39 @@
     "attempts/20261010T122840417157Z.json": "1c3c4d6cbb153a51894d8ccae6598c3c93d08f680a4818cf55a20ebf985915ec",
     "attempts/20261010T125814360496Z.json": "a5a2c2459d1f5a09828db458c1d6e9556cbd41b9118e3876f1d91ffbbf9ffd62",
     "attempts/20261010T131116807992Z.json": "4e3708b0454aa9874add74907765ba17d2a26735cbc4bf96da7bf78013f803f7",
-    "attempts/20261011T014213816831Z.json": "5a9ca5be46fc4acdbbbc5564fb206dc2b8bd1b06f43adf11c011db3905f90a48"
+    "attempts/20261011T014213816831Z.json": "5a9ca5be46fc4acdbbbc5564fb206dc2b8bd1b06f43adf11c011db3905f90a48",
+    "attempts/20261012T232921228907Z.json": "3e35b985001855c130240dbe1258e9dd18594a4f1cbf5b4c2e98820314f7b118"
   },
   "control_unchanged": {
-    "cursor": 100,
+    "cursor": 200,
     "retry": [
-      "AKO.A"
+      "THC",
+      "AKO.B",
+      "GTN.A",
+      "EPM",
+      "ASPN",
+      "ONCH",
+      "SAC",
+      "SWX",
+      "AKO.A",
+      "AXIL",
+      "LESL",
+      "ORA",
+      "Q",
+      "UCFI"
     ],
-    "last_session": "2026-10-09"
+    "last_session": "2026-10-12"
   },
   "freshness_gate": {
     "passed": true,
     "required_stale": [],
-    "fresh": 124,
+    "fresh": 116,
     "selected": 125
   },
   "cycle_summary": {
-    "complete_signal_cohorts": 1,
-    "pending_entries": 1,
-    "open_positions": 0,
+    "complete_signal_cohorts": 2,
+    "pending_entries": 2,
+    "open_positions": 1,
     "closed_trades": 0,
     "benchmark_pairs": 0,
     "review_trades": 0
@@ -522,6 +539,451 @@
       "statuses": {
         "PENDING": 24,
         "INELIGIBLE_DATA": 4
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 5,
+      "score_band": "<40",
+      "observations": 11,
+      "statuses": {
+        "PENDING": 11
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 5,
+      "score_band": "40-<60",
+      "observations": 70,
+      "statuses": {
+        "PENDING": 70
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 5,
+      "score_band": "60-<80",
+      "observations": 11,
+      "statuses": {
+        "PENDING": 11
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 5,
+      "score_band": "80-100",
+      "observations": 0,
+      "statuses": {},
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 5,
+      "score_band": "UNSCORED",
+      "observations": 33,
+      "statuses": {
+        "INELIGIBLE_DATA": 12,
+        "PENDING": 21
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 10,
+      "score_band": "<40",
+      "observations": 11,
+      "statuses": {
+        "PENDING": 11
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 10,
+      "score_band": "40-<60",
+      "observations": 70,
+      "statuses": {
+        "PENDING": 70
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 10,
+      "score_band": "60-<80",
+      "observations": 11,
+      "statuses": {
+        "PENDING": 11
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 10,
+      "score_band": "80-100",
+      "observations": 0,
+      "statuses": {},
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 10,
+      "score_band": "UNSCORED",
+      "observations": 33,
+      "statuses": {
+        "INELIGIBLE_DATA": 12,
+        "PENDING": 21
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 20,
+      "score_band": "<40",
+      "observations": 11,
+      "statuses": {
+        "PENDING": 11
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 20,
+      "score_band": "40-<60",
+      "observations": 70,
+      "statuses": {
+        "PENDING": 70
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 20,
+      "score_band": "60-<80",
+      "observations": 11,
+      "statuses": {
+        "PENDING": 11
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 20,
+      "score_band": "80-100",
+      "observations": 0,
+      "statuses": {},
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 20,
+      "score_band": "UNSCORED",
+      "observations": 33,
+      "statuses": {
+        "INELIGIBLE_DATA": 12,
+        "PENDING": 21
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 30,
+      "score_band": "<40",
+      "observations": 11,
+      "statuses": {
+        "PENDING": 11
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 30,
+      "score_band": "40-<60",
+      "observations": 70,
+      "statuses": {
+        "PENDING": 70
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 30,
+      "score_band": "60-<80",
+      "observations": 11,
+      "statuses": {
+        "PENDING": 11
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 30,
+      "score_band": "80-100",
+      "observations": 0,
+      "statuses": {},
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 30,
+      "score_band": "UNSCORED",
+      "observations": 33,
+      "statuses": {
+        "INELIGIBLE_DATA": 12,
+        "PENDING": 21
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 60,
+      "score_band": "<40",
+      "observations": 11,
+      "statuses": {
+        "PENDING": 11
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 60,
+      "score_band": "40-<60",
+      "observations": 70,
+      "statuses": {
+        "PENDING": 70
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 60,
+      "score_band": "60-<80",
+      "observations": 11,
+      "statuses": {
+        "PENDING": 11
+      },
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 60,
+      "score_band": "80-100",
+      "observations": 0,
+      "statuses": {},
+      "mature": 0,
+      "positive": 0,
+      "nonpositive": 0,
+      "average_net_pct": null,
+      "average_positive_pct": null,
+      "average_nonpositive_pct": null,
+      "benchmark_pairs": 0,
+      "average_excess_gross_pct": null,
+      "worst_adverse_excursion_pct": null
+    },
+    {
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "horizon": 60,
+      "score_band": "UNSCORED",
+      "observations": 33,
+      "statuses": {
+        "INELIGIBLE_DATA": 12,
+        "PENDING": 21
       },
       "mature": 0,
       "positive": 0,

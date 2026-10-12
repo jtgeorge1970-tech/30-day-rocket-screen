@@ -1,420 +1,750 @@
 {
-  "asof": "2026-10-09",
-  "recorded_at": "2026-10-11T01:42:13.816831+00:00",
+  "asof": "2026-10-12",
+  "recorded_at": "2026-10-12T23:29:21.228907+00:00",
   "symbols": {
-    "HNRG": {
+    "AKAM": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "CHTR": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "FUBO": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "EPOW": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
     "WULF": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "HLIT": {
+    "FUBO": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "JACK": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "TGS": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
     "SPGI": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "CSIQ": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "XPRO": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
     "SFM": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "DTIL": {
+    "CSIQ": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "TBLA": {
+    "XPRO": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "FWRG": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "NYAX": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "OWLT": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "SRAD": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "ATGL": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "FMC": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "LE": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
     "MESO": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CHTR": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "EPOW": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HLIT": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "NYAX": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "JACK": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TBLA": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ATGL": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "FMC": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
     "NX": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "MBLY": {
+    "LE": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "SRAD": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "OWLT": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
     "IDR": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "MPLX": {
+    "BE": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "AUC": {
+    "HNRG": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "CEPV": {
+    "MBLY": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 234
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "DXLG": {
+    "CGNX": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "FXNC": {
+    "ISTR": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "ICMB": {
+    "MGA": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "LRE": {
+    "NWG": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "AXIL": {
+    "PRLB": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "PROP": {
+    "THC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-09",
+      "bars": 499
+    },
+    "VPG": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "RNTX": {
+    "ZWS": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "SOS": {
+    "DB": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "VFS": {
+    "GIL": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "ROLR": {
+    "SONO": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 492
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "CHRW": {
+    "FTNT": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "TMO": {
+    "MFG": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "NUTX": {
+    "NAK": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "BIRK": {
+    "CALM": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "CREX": {
+    "GNSS": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "FHN": {
+    "NAVN": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 238
     },
-    "HPK": {
+    "SPIR": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "KVUE": {
+    "HLI": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "MSA": {
+    "CSPI": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "ORA": {
+    "COCH": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "RDDT": {
+    "AKO.B": {
+      "status": "ERROR",
+      "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
+      "latest_date": null,
+      "bars": 0
+    },
+    "BOT": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 107
     },
-    "SNWV": {
+    "CSHR": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 495
+      "latest_date": "2026-10-12",
+      "bars": 134
     },
-    "TRT": {
+    "EXFY": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "WFG": {
+    "GTN.A": {
+      "status": "ERROR",
+      "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
+      "latest_date": null,
+      "bars": 0
+    },
+    "JSPR": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "CTSH": {
+    "MRLN": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 466
     },
-    "ARGX": {
+    "OTLK": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "LAND": {
+    "GJS": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "BROS": {
+    "SCYX": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "LPTH": {
+    "TII": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "Q": {
+    "XLAB": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 240
+      "latest_date": "2026-10-12",
+      "bars": 288
     },
-    "AKAM": {
+    "LAD": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "CNXC": {
+    "MP": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "HLNE": {
+    "EPM": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-09",
+      "bars": 499
+    },
+    "ASUR": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "PENG": {
+    "CBSH": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "TKO": {
+    "ECO": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "CECO": {
+    "GEHC": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "CULP": {
+    "INN": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "CR": {
+    "MBX": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "ARCL": {
+    "NSP": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 93
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "CATL": {
+    "PLUS": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 17
+      "latest_date": "2026-10-12",
+      "bars": 500
     },
-    "DMAA": {
+    "SCHW": {
       "status": "FRESH",
       "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "TCPC": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "VCTR": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "YSWY": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 120
+    },
+    "ASPN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
       "latest_date": "2026-10-09",
-      "bars": 409
+      "bars": 499
+    },
+    "EFXT": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "POR": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "KWR": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BSRR": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "RBA": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BATRK": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "EXPE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "LXFR": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "SELF": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AMG": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "FEBO": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "VEON": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AENT": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BIRD": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CODX": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "EONR": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "GP": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "IRIX": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ELTK": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ONCH": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-09",
+      "bars": 271
+    },
+    "RDAC": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 466
+    },
+    "SAC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-09",
+      "bars": 179
+    },
+    "TACH": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 343
+    },
+    "WRAP": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CVLG": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ICE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AIMD": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AP": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BZFD": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "DOCN": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "FTI": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "IMCR": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "LUMN": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "NKE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "PHG": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "RVTY": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "SWX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-09",
+      "bars": 499
+    },
+    "UPWK": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "WWW": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CB": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "COGT": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "NEXT": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "PPLI": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "MNSB": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "IE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ARQ": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ECBK": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "KN": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "RNXT": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "VRCA": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BTQ": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 262
     },
     "AKO.A": {
       "status": "ERROR",
@@ -422,341 +752,605 @@
       "latest_date": null,
       "bars": 0
     },
-    "HTCO": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "LGO": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "NDRA": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "PMA": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 470
-    },
-    "VBIO": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "SLSN": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "UCFI": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "ZDAI": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "ATOS": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "RVSB": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
     "ABT": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "BE": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "CLPT": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "FBLA": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 492
-    },
-    "GTX": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "KEY": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "MMSI": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "OLMA": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "QFIN": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "STE": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "TORO": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "WAL": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "ORI": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "BCS": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "ICUI": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "USAR": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "WNC": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "KE": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "IBTA": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "CIVB": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "HE": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "OCFC": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "STNE": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "DLHC": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "BGSF": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "MVST": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
     "AMPG": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "BTCT": {
+    "ARCL": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 94
     },
-    "DARE": {
+    "ARGX": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "FE": {
+    "ATOS": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "HDL": {
+    "AUC": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "KTTA": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "MYSZ": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "PDSB": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "LESL": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "SHFS": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "TPVG": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "YDES": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 283
-    },
-    "EROC": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 85
-    },
-    "OPAL": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
-    },
-    "GIB": {
-      "status": "FRESH",
-      "error": "",
+    "AXIL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
       "latest_date": "2026-10-09",
       "bars": 501
     },
     "AYA": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
-    "CGNX": {
+    "BCS": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "BGSF": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "BIRK": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "BROS": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "BTCT": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CATL": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 18
+    },
+    "CECO": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CEPV": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 235
+    },
+    "CHRW": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CIVB": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CLPT": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CNXC": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CR": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CREX": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CTSH": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CULP": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "DARE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "DLHC": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "DMAA": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 410
+    },
+    "DTIL": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "DXLG": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "EROC": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 86
     },
     "ESLT": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "FBLA": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 493
+    },
+    "FE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "FHN": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "FWRG": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "FXNC": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "GIB": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
     "GPCR": {
       "status": "FRESH",
       "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "GTX": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HDL": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HLNE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HPK": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HTCO": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "IBTA": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ICMB": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ICUI": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "KE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "KEY": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "KTTA": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "KVUE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "LAND": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "LESL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
       "latest_date": "2026-10-09",
       "bars": 501
+    },
+    "LGO": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "LPTH": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "LRE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "MMSI": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "MPLX": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "MSA": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "MVST": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "MYSZ": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "NDRA": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "NUTX": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "OCFC": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "OLMA": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "OPAL": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ORA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-09",
+      "bars": 501
+    },
+    "ORI": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "PDSB": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "PENG": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "PMA": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 471
+    },
+    "PROP": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "Q": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-09",
+      "bars": 240
+    },
+    "QFIN": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "RDDT": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "RNTX": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ROLR": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 493
+    },
+    "RVSB": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "SHFS": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "SLSN": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "SNWV": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 496
+    },
+    "SOS": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "STE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "STNE": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TGS": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TKO": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TMO": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TORO": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TPVG": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TRT": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "UCFI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-09",
+      "bars": 501
+    },
+    "USAR": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "VBIO": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "VFS": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "WAL": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "WFG": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "WNC": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "YDES": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 284
+    },
+    "ZDAI": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-12",
+      "bars": 502
     },
     "SPY": {
       "status": "FRESH",
       "error": "",
-      "latest_date": "2026-10-09",
-      "bars": 501
+      "latest_date": "2026-10-12",
+      "bars": 502
     }
   }
 }

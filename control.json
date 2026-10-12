@@ -1,7 +1,20 @@
 {
-  "cursor": 100,
+  "cursor": 200,
   "retry": [
-    "AKO.A"
+    "THC",
+    "AKO.B",
+    "GTN.A",
+    "EPM",
+    "ASPN",
+    "ONCH",
+    "SAC",
+    "SWX",
+    "AKO.A",
+    "AXIL",
+    "LESL",
+    "ORA",
+    "Q",
+    "UCFI"
   ],
-  "last_session": "2026-10-09"
+  "last_session": "2026-10-12"
 }

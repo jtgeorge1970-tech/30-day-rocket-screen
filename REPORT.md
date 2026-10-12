@@ -1,54 +1,54 @@
 # OFTS daily research
 
-Market session: 2026-10-09
-Selected: 125; refreshed: 124; refresh errors: 1
-Qualified prediction cohorts saved: 1; current coverage: 124/125
-Outcome counts: {'INELIGIBLE_DATA': 20, 'PENDING': 605}
-Cycle fingerprints saved: 97/125
-Signal states: BUY=1, SELL=0, NO_TRADE=124
-Cycle ledger: pending entries=1; open positions=0; closed trades=0; SPY pairs=0
+Market session: 2026-10-12
+Selected: 125; refreshed: 116; refresh errors: 14
+Qualified prediction cohorts saved: 2; current coverage: 116/125
+Outcome counts: {'INELIGIBLE_DATA': 80, 'PENDING': 1170}
+Cycle fingerprints saved: 93/126
+Signal states: BUY=2, SELL=3, NO_TRADE=121
+Cycle ledger: pending entries=2; open positions=1; closed trades=0; SPY pairs=0
 Cycle-speed report card: AWAITING_CLOSED_FORWARD_TRADES; closed forward trades=0; groups=[]
-Score scale: theoretical 0-100; observed 10.884069079004723-62.584482993236065; validated BUY threshold=NONE
-Score distribution: {'BELOW_40': 9, '40_TO_49_999': 37, '50_TO_59_999': 40, '60_TO_69_999': 11, '70_TO_79_999': 0, '80_TO_89_999': 0, '90_TO_100': 0}
+Score scale: theoretical 0-100; observed 12.679901321656114-72.9667877123091; validated BUY threshold=NONE
+Score distribution: {'BELOW_40': 11, '40_TO_49_999': 37, '50_TO_59_999': 34, '60_TO_69_999': 10, '70_TO_79_999': 1, '80_TO_89_999': 0, '90_TO_100': 0}
 System actionability gate: RESEARCH_ONLY_NO_GO; OUT_OF_SAMPLE_PREDICTIVE_VALIDATION_NOT_VERIFIED
 Production approval: NO. These are quality scores, not BUY signals.
 Experimental recent viability v0.5: last three minor swings, last three UP legs, old-outlier dominance, peak/trough spacing 10-40 sessions, adjacent 3-vs-3 amplitude/cadence, and hypothetical capture after costs; NOT validated.
-Experimental viable REVIEW=0; viability NO_TRADE=0
+Experimental viable REVIEW=0; viability NO_TRADE=93
 Experimental swing-health v0.1: last-four-leg stability and lower-high/lower-low deterioration (NOT validated for trading).
-Experimental swing-health NO_TRADE=0; REVIEW=0; INSUFFICIENT=0
+Experimental swing-health NO_TRADE=69; REVIEW=24; INSUFFICIENT=44
 Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.
 Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.
 
 | Symbol | Score | Classification | Legacy signal | Swing health | Last 3 swings | Last 3 UP % | Prior 3 UP % | UP ratio | >=5% count | Repeatability | Peak gaps | Prior peak gaps | Trough gaps | Prior trough gaps | Cadence ratio | Comparison | Cycle timing | Latest UP % | Old avg | Viability | Experimental review | Highs | Lows | Cycle sessions | Median swing | Confidence |
 |---|---:|---|---|---:|---|---:|---|---:|---:|---|---|---|---|---:|---:|---|
-| AKAM | 62.584 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 32 | 18.113510469596545 | MEDIUM |
-| WULF | 62.154 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 16.0 | 23.27008961238993 | MEDIUM |
-| FUBO | 61.675 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 21.0 | 24.122807873668826 | HIGH |
-| SPGI | 61.624 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 34 | 11.294072696684227 | HIGH |
-| SFM | 60.946 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 23.5 | 14.357597616056061 | MEDIUM |
-| CSIQ | 60.765 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 16.0 | 19.64125251397967 | MEDIUM |
-| XPRO | 60.556 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 20 | 14.95875149963658 | HIGH |
-| MESO | 60.506 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 15.0 | 15.176852613530635 | MEDIUM |
-| CHTR | 60.500 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 41.5 | 15.790322759136277 | HIGH |
-| EPOW | 60.482 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 29 | 30.18182482727739 | MEDIUM |
-| HLIT | 60.440 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 26 | 16.864592326455977 | LOW |
-| NYAX | 59.939 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 22.5 | 16.554543782118735 | MEDIUM |
-| JACK | 59.553 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 17.0 | 16.114495600631717 | MEDIUM |
-| TBLA | 59.542 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 36 | 15.339884291443905 | MEDIUM |
-| ATGL | 59.058 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 20.5 | 32.103798759905985 | MEDIUM |
-| FMC | 58.873 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 31.0 | 19.540904882576815 | MEDIUM |
-| NX | 58.802 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 19.0 | 15.254241530183666 | MEDIUM |
-| LE | 58.526 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 16.5 | 15.218698827146337 | MEDIUM |
-| SRAD | 58.359 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 26.5 | 18.07909903391367 | LOW |
-| OWLT | 58.302 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 26.5 | 24.373580961358044 | MEDIUM |
-| IDR | 58.294 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 20 | 21.74980470035519 | MEDIUM |
-| BE | 58.108 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 19.0 | 27.627506419367187 | MEDIUM |
-| HNRG | 57.976 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 31 | 23.701651305606916 | MEDIUM |
-| MBLY | 57.385 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 24.5 | 23.560907650300255 | MEDIUM |
-| CGNX | 56.788 | CANDIDATE | NO_TRADE | n/a | n/a | [] | [] | n/a | n/a | n/a | [] | [] | [] | [] | n/a | n/a | n/a | n/a | n/a | n/a | NO_TRADE | n/a | n/a | 23.0 | 12.662819640488854 | LOW |
+| SCYX | 72.967 | CANDIDATE | NO_TRADE | STABLE_RANGE | 18.248174589685128 | [17.88, 18.25, 22.32] | [12.56, 3.98, 51.26] | 1.4532190612379912 | 3 | STABLE_3_OF_3 | [16, 18, 7] | [6, 5, 10] | [12, 24, 7] | [13, 6, 5] | 2.333333333333333 | DISSIPATING | False | 22.323463527984643 | 14.685959054150258 | CYCLE_TIMING | NO_TRADE | MIXED | MIXED | 28 | 29.142655552503307 | HIGH |
+| AKAM | 62.253 | CANDIDATE | NO_TRADE | DOWNTREND | 13.361407576511365 | [5.39, 13.36, 6.0] | [14.84, 13.34, 5.28] | 0.4493567985845546 | 3 | STABLE_3_OF_3 | [8, 10, 12] | [10, 7, 10] | [7, 9, 16] | [9, 7, 11] | 1.0 | DISSIPATING | False | 5.996031051408424 | 12.005786686082951 | CYCLE_TIMING | NO_TRADE | FALLING | FALLING | 32 | 18.113510469596545 | MEDIUM |
+| WULF | 62.127 | CANDIDATE | NO_TRADE | DOWNTREND | 15.186249033482547 | [3.72, 20.43, 4.66] | [6.13, 6.52, 21.91] | 0.7145565045690201 | 1 | UNSTABLE | [3, 6, 9] | [3, 5, 7] | [6, 3, 11] | [4, 3, 6] | 1.35 | DISSIPATING | False | 4.662159266830668 | 13.503867880208967 | TOO_SMALL_UPSIDE | NO_TRADE | FALLING | FALLING | 16.0 | 23.27008961238993 | MEDIUM |
+| FUBO | 61.624 | CANDIDATE | NO_TRADE | IRREGULAR | 8.468683359655271 | [10.83, 4.04, 8.47] | [24.1, 21.8, 14.75] | 0.38843602032248625 | 2 | WATCH_2_OF_3 | [6, 5, 13] | [6, 14, 7] | [8, 6, 12] | [4, 5, 15] | 1.2285714285714286 | DISSIPATING | False | 8.468683359655271 | 14.470862534099032 | WATCH | NO_TRADE | RISING | RISING | 21.0 | 24.122807873668826 | HIGH |
+| NYAX | 61.365 | CANDIDATE | NO_TRADE | STABLE_RANGE | 3.486522899411859 | [5.29, 2.94, 16.75] | [7.24, 3.44, 16.98] | 0.7307811318654659 | 2 | WATCH_2_OF_3 | [5, 12, 10] | [4, 4, 5] | [4, 12, 5] | [5, 4, 4] | 1.875 | DISSIPATING | False | 16.748766621516097 | 8.895610123038773 | TOO_SMALL | NO_TRADE | MIXED | FALLING | 22.0 | 16.07010530360006 | MEDIUM |
+| SPGI | 61.195 | CANDIDATE | BUY | STABLE_RANGE | 4.370988740285164 | [4.3, 7.88, 4.37] | [19.63, 6.24, 4.72] | 0.7000410382722665 | 1 | UNSTABLE | [13, 11, 4] | [12, 8, 7] | [7, 12, 21] | [10, 9, 10] | 1.2875 | STABLE_OR_MIXED | False | 4.370988740285164 | 6.760535107497501 | TOO_SMALL_UPSIDE | NO_TRADE | MIXED | MIXED | 34.5 | 11.399714480696755 | HIGH |
+| EPOW | 60.507 | CANDIDATE | NO_TRADE | IRREGULAR | 26.36363774291737 | [18.2, 12.76, 16.09] | [3.53, 5.2, 38.27] | 3.0946265883592563 | 3 | STABLE_3_OF_3 | [12, 16, 7] | [2, 6, 7] | [18, 6, 6] | [5, 5, 13] | 1.6 | DISSIPATING | False | 16.094990492194093 | 15.19985787070616 | CYCLE_TIMING | NO_TRADE | FALLING | MIXED | 29 | 30.18182482727739 | MEDIUM |
+| CHTR | 60.480 | CANDIDATE | NO_TRADE | IRREGULAR | 8.872959098490352 | [3.57, 8.74, 8.87] | [4.2, 5.81, 4.99] | 1.750303479370837 | 2 | WATCH_2_OF_3 | [3, 3, 6] | [2, 4, 4] | [5, 3, 5] | [3, 3, 3] | 1.2083333333333335 | STABLE_OR_MIXED | False | 8.872959098490352 | 9.714338952897803 | WATCH | NO_TRADE | RISING | FALLING | 41.5 | 15.790322759136277 | HIGH |
+| CSIQ | 60.463 | CANDIDATE | NO_TRADE | STABLE_RANGE | 10.844530769358895 | [12.49, 3.79, 10.84] | [4.48, 22.77, 7.06] | 1.5370037203984408 | 2 | WATCH_2_OF_3 | [13, 9, 6] | [5, 9, 11] | [9, 11, 8] | [7, 6, 17] | 1.1428571428571428 | STABLE_OR_MIXED | False | 10.844530769358895 | 13.937030315116095 | WATCH | NO_TRADE | MIXED | FALLING | 16.0 | 19.64125251397967 | MEDIUM |
+| SFM | 60.233 | CANDIDATE | NO_TRADE | STABLE_RANGE | 6.176983024445004 | [3.35, 4.0, 6.18] | [3.38, 20.85, 10.78] | 0.37128625462705217 | 1 | UNSTABLE | [7, 5, 12] | [10, 11, 17] | [9, 5, 11] | [11, 6, 20] | 0.7272727272727273 | DISSIPATING | False | 6.176983024445004 | 8.81084078825197 | TOO_SMALL_UPSIDE | NO_TRADE | FALLING | MIXED | 23.5 | 14.357597616056061 | MEDIUM |
+| MESO | 60.228 | CANDIDATE | NO_TRADE | DECAYING | 8.473438053657812 | [4.97, 10.48, 2.55] | [19.41, 11.73, 9.25] | 0.4236461694111572 | 1 | UNSTABLE | [6, 11, 5] | [8, 7, 5] | [10, 8, 6] | [10, 6, 6] | 1.0952380952380951 | DISSIPATING | False | 2.5517233486833213 | 10.269919239607212 | TOO_SMALL_UPSIDE | NO_TRADE | MIXED | MIXED | 14 | 14.497427314401833 | MEDIUM |
+| LE | 59.977 | CANDIDATE | NO_TRADE | IRREGULAR | 6.355515022028269 | [9.24, 3.85, 6.36] | [6.72, 8.48, 8.77] | 0.7498158939105862 | 2 | WATCH_2_OF_3 | [8, 8, 23] | [3, 7, 4] | [13, 22, 7] | [3, 7, 5] | 2.3 | DISSIPATING | False | 6.355515022028269 | 10.136087045001327 | FADING | NO_TRADE | MIXED | MIXED | 15.5 | 14.143920732548064 | MEDIUM |
+| JACK | 59.562 | CANDIDATE | NO_TRADE | STABLE_RANGE | 4.900454587176961 | [6.46, 4.9, 3.59] | [8.0, 7.41, 3.84] | 0.6613624251323725 | 1 | UNSTABLE | [4, 15, 9] | [5, 8, 5] | [5, 10, 13] | [10, 10, 5] | 1.4 | DISSIPATING | False | 3.58890352503225 | 12.511960973357255 | TOO_SMALL_UPSIDE | NO_TRADE | MIXED | MIXED | 17.0 | 16.114495600631717 | MEDIUM |
+| TBLA | 59.491 | CANDIDATE | NO_TRADE | IRREGULAR | 8.66872971319943 | [6.03, 5.39, 8.67] | [5.59, 7.69, 4.38] | 1.0784736023049406 | 3 | STABLE_3_OF_3 | [14, 6, 18] | [4, 4, 4] | [8, 11, 17] | [6, 3, 5] | 2.85 | DISSIPATING | False | 8.66872971319943 | 10.104077479133856 | CYCLE_TIMING | NO_TRADE | FALLING | FALLING | 36 | 15.339884291443905 | MEDIUM |
+| UPWK | 59.144 | CANDIDATE | NO_TRADE | STABLE_RANGE | 3.477217704403046 | [12.21, 5.83, 3.35] | [5.68, 4.35, 3.59] | 1.3383869632021148 | 2 | UNSTABLE | [13, 7, 14] | [5, 4, 3] | [16, 11, 6] | [4, 3, 4] | 3.0 | DISSIPATING | False | 3.345730705997907 | 9.066583034118008 | TOO_SMALL_UPSIDE | NO_TRADE | MIXED | FALLING | 21 | 12.523296244299864 | LOW |
+| ATGL | 58.917 | CANDIDATE | NO_TRADE | DOWNTREND | 18.05337701770615 | [7.23, 32.71, 4.02] | [26.35, 6.07, 10.12] | 0.7148936237129719 | 2 | UNSTABLE | [13, 5, 4] | [13, 7, 7] | [16, 3, 7] | [12, 9, 3] | 0.746031746031746 | STABLE_OR_MIXED | False | 4.022989398228738 | 20.35871411235122 | TOO_SMALL_UPSIDE | NO_TRADE | FALLING | FALLING | 20.5 | 32.103798759905985 | MEDIUM |
+| IDR | 58.813 | CANDIDATE | NO_TRADE | DECAYING | 10.857146126883377 | [10.2, 8.71, 10.86] | [7.85, 5.3, 26.26] | 1.298941982505622 | 3 | STABLE_3_OF_3 | [7, 6, 17] | [6, 6, 7] | [12, 2, 18] | [5, 7, 2] | 1.7833333333333332 | DISSIPATING | False | 10.857146126883377 | 14.033013564309094 | CYCLE_TIMING | NO_TRADE | FALLING | MIXED | 20.5 | 21.830314697985244 | MEDIUM |
+| FMC | 58.430 | CANDIDATE | NO_TRADE | IRREGULAR | 7.7014289635198185 | [25.05, 4.76, 7.7] | [18.18, 4.05, 11.46] | 0.6718833662205911 | 2 | WATCH_2_OF_3 | [7, 13, 11] | [6, 4, 13] | [7, 15, 10] | [11, 3, 11] | 1.371212121212121 | DISSIPATING | False | 7.7014289635198185 | 10.964606223816496 | WATCH | NO_TRADE | MIXED | MIXED | 31.0 | 19.540904882576815 | MEDIUM |
+| HNRG | 57.947 | CANDIDATE | NO_TRADE | INSUFFICIENT | 6.2271091957821545 | [5.86, 9.79, 6.23] | [5.33, 19.56, 9.88] | 0.6300853380945274 | 3 | STABLE_3_OF_3 | [7, 13, 2] | [5, 21, 13] | [13, 3, 2] | [7, 17, 16] | 0.3629807692307692 | DISSIPATING | False | 6.2271091957821545 | 11.640881531590411 | FADING | NO_TRADE | MIXED | INSUFFICIENT | 31 | 23.701651305606916 | MEDIUM |
+| NX | 57.906 | CANDIDATE | NO_TRADE | IRREGULAR | 10.719456356803702 | [3.94, 3.5, 24.01] | [16.0, 10.14, 23.41] | 0.24632007297763078 | 1 | UNSTABLE | [2, 6, 12] | [11, 8, 8] | [7, 6, 10] | [13, 8, 8] | 0.8125 | DISSIPATING | False | 24.012983174791636 | 12.005356962757592 | TOO_SMALL_UPSIDE | NO_TRADE | RISING | RISING | 19 | 15.438840711288748 | MEDIUM |
+| XPRO | 57.676 | CANDIDATE | NO_TRADE | STABLE_RANGE | 7.274897040709439 | [29.6, 5.13, 6.34] | [10.14, 12.83, 19.33] | 0.49408149118241457 | 3 | STABLE_3_OF_3 | [24, 10, 22] | [2, 15, 11] | [20, 24, 5] | [12, 7, 17] | 1.8333333333333335 | DISSIPATING | False | 6.341153905976538 | 9.71371293705722 | CYCLE_TIMING | NO_TRADE | MIXED | MIXED | 20 | 14.679304479127564 | MEDIUM |
+| CSPI | 57.551 | CANDIDATE | NO_TRADE | DOWNTREND | 4.381445136076789 | [11.66, 3.19, 5.39] | [10.89, 3.83, 6.87] | 0.7846670083413646 | 2 | WATCH_2_OF_3 | [13, 16, 10] | [10, 13, 10] | [13, 23, 2] | [6, 15, 7] | 1.5785714285714287 | DISSIPATING | False | 5.3908368093605 | 8.723483619371704 | TOO_SMALL | NO_TRADE | FALLING | FALLING | 26.5 | 21.638325563049264 | MEDIUM |
+| MBLY | 57.471 | CANDIDATE | NO_TRADE | INSUFFICIENT | 5.5190485162688985 | [16.84, 5.52, 3.13] | [28.37, 10.39, 12.85] | 0.4294507202349541 | 2 | UNSTABLE | [14, 28, 6] | [12, 6, 10] | [5, 38, 6] | [9, 9, 11] | 1.0333333333333332 | DISSIPATING | False | 3.1292520007860425 | 12.032284268321913 | TOO_SMALL_UPSIDE | NO_TRADE | FALLING | INSUFFICIENT | 24.5 | 23.560907650300255 | MEDIUM |
+| CGNX | 57.050 | CANDIDATE | NO_TRADE | DECAYING | 8.198943107482936 | [7.14, 4.8, 14.99] | [23.69, 9.77, 7.57] | 0.7305443220811839 | 2 | WATCH_2_OF_3 | [10, 6, 11] | [17, 9, 8] | [8, 7, 10] | [10, 8, 7] | 1.0555555555555556 | STABLE_OR_MIXED | False | 14.991330323755392 | 9.98925370697519 | WATCH | NO_TRADE | MIXED | FALLING | 21.5 | 12.662819640488854 | LOW |
+| SRAD | 56.699 | CANDIDATE | BUY | DECAYING | 12.211225329086496 | [3.89, 8.12, 12.21] | [3.69, 4.69, 11.99] | 1.7313914934001728 | 2 | WATCH_2_OF_3 | [6, 15, 5] | [8, 7, 12] | [8, 12, 7] | [3, 8, 13] | 0.875 | STABLE_OR_MIXED | False | 12.211225329086496 | 11.067195094250499 | WATCH | NO_TRADE | FALLING | FALLING | 26 | 16.53954916634129 | LOW |
 
 ## Experimental recent-swing review shortlist (NOT BUY signals)
-Count: 0 of 78 scored CANDIDATE names
+Count: 0 of 67 scored CANDIDATE names
 | Symbol | Quality score | Last 3 swings % | Last 3 UP % | Prior 3 UP % | UP ratio | >=5% count | Peak gaps | Prior peak gaps | Trough gaps | Prior trough gaps | Cadence ratio | Historical avg % |
 |---|---:|---:|---|---|---:|---:|---|---|---|---|---:|---:|
 
@@ -60,4 +60,17 @@ Count: 0 of 78 scored CANDIDATE names
 ## Identity-boundary exclusions (current processing; prior snapshots immutable)
 
 ## Refresh failures
+- THC: ValueError: LATEST_SESSION_MISSING
+- AKO.B: ValueError: EMPTY_PROVIDER_RESPONSE
+- GTN.A: ValueError: EMPTY_PROVIDER_RESPONSE
+- EPM: ValueError: LATEST_SESSION_MISSING
+- ASPN: ValueError: LATEST_SESSION_MISSING
+- ONCH: ValueError: LATEST_SESSION_MISSING
+- SAC: ValueError: LATEST_SESSION_MISSING
+- SWX: ValueError: LATEST_SESSION_MISSING
 - AKO.A: ValueError: EMPTY_PROVIDER_RESPONSE
+- AXIL: ValueError: LATEST_SESSION_MISSING
+- LESL: ValueError: LATEST_SESSION_MISSING
+- ORA: ValueError: LATEST_SESSION_MISSING
+- Q: ValueError: LATEST_SESSION_MISSING
+- UCFI: ValueError: LATEST_SESSION_MISSING
