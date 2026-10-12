@@ -269,10 +269,12 @@ def outcomes(snapshot, histories, schedule, observed_through=None):
                        score=prediction.get('score'), classification=prediction['classification'],
                        model_hash=snapshot['model_hash'], status='PENDING', entry_date=entry_date,
                        end_date=end_date)
-            if not timely:
-                row['status'] = 'NOT_PROSPECTIVE_RECORDED_AFTER_ENTRY'
-            elif prediction['classification'] in DATA_FAILURES:
+            # Data-ineligible rows never become valid prospective observations,
+            # even when a historical cohort is reconstructed after entry.
+            if prediction['classification'] in DATA_FAILURES:
                 row['status'] = 'INELIGIBLE_DATA'
+            elif not timely:
+                row['status'] = 'NOT_PROSPECTIVE_RECORDED_AFTER_ENTRY'
             elif observed_through is not None and end_date > observed_through:
                 pass
             elif end_date in bars and entry_date in bars:
