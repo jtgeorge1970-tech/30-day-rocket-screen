@@ -16,7 +16,9 @@ on:
       - '.github/workflows/ofts-independent-worker.yml'
   workflow_dispatch:
   schedule:
-    - cron: '30 22 * * 1-5'
+    # Use an off-round minute to reduce scheduled-run congestion; workflow-file
+    # changes also trigger an immediate recovery run through the push path.
+    - cron: '37 22 * * 1-5'
 permissions:
   contents: write
 concurrency:
