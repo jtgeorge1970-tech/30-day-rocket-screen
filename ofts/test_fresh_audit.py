@@ -1,5 +1,5 @@
 import unittest
-from ofts.research.fresh_audit import window_stats,keeper_status,entry_priority
+from ofts.research.fresh_audit import window_stats,keeper_status,entry_priority,failed_refresh_record
 from ofts.research.liquidity_gate import liquidity_gate
 
 def bars(values):
@@ -50,6 +50,13 @@ class TestChartShape(unittest.TestCase):
                  clean_cycle_v10={"score":85},eligibility="PENDING_ELIGIBILITY",
                  liquidity_state="REJECT_LOW_LIQUIDITY")
         self.assertEqual(keeper_status(row),"REJECT_LOW_LIQUIDITY")
+    def test_stale_target_is_explicit_fail_closed_reject(self):
+        row=failed_refresh_record("DIT",
+            "ValueError: STALE_OR_MISSING_TARGET expected=2026-10-12 got=2026-10-09")
+        self.assertEqual(row["status"],"REJECT_STALE_TARGET_DATA")
+        self.assertNotIn("error",row)
+        self.assertEqual(keeper_status(row),"REJECT_STALE_TARGET_DATA")
+
     def test_missing_liquidity_fails_closed(self):
         row=dict(three_clear_cycles="THREE_CLEAR_CYCLES",
                  clean_cycle_v10={"score":85},eligibility="PENDING_ELIGIBILITY")

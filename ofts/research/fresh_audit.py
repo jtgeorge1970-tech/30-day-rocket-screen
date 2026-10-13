@@ -77,8 +77,18 @@ def audit_symbol(symbol, target, yf, calendar, expected):
         w126=window_stats(bars,126),w252=window_stats(bars,252),
         verified_trade_candidate=False)
 
+def failed_refresh_record(symbol, last_error):
+    """Fail closed without treating a symbol-specific stale bar as infrastructure failure."""
+    if "STALE_OR_MISSING_TARGET" in last_error:
+        return dict(symbol=symbol, status="REJECT_STALE_TARGET_DATA",
+                    reason=last_error, verified_trade_candidate=False)
+    return dict(symbol=symbol, status="DATA_ERROR", error=last_error,
+                verified_trade_candidate=False)
+
 def keeper_status(row):
     """Current research keeper: NEW three-cycle gate, never old health veto."""
+    if row.get("status") == "REJECT_STALE_TARGET_DATA":
+        return "REJECT_STALE_TARGET_DATA"
     if "error" in row:return "DATA_ERROR"
     if row.get("eligibility")=="INELIGIBLE":return "INELIGIBLE"
     if row.get("three_clear_cycles")!="THREE_CLEAR_CYCLES":
@@ -132,8 +142,12 @@ def main():
             except Exception as e:
                 last_error=f"{type(e).__name__}: {e}"
         else:
-            results.append(dict(symbol=symbol,status="DATA_ERROR",error=last_error,verified_trade_candidate=False))
-            print("FRESH_AUDIT_ERROR",symbol,last_error,flush=True)
+            record=failed_refresh_record(symbol,last_error)
+            results.append(record)
+            label=("FRESH_AUDIT_STALE_REJECT"
+                   if record["status"]=="REJECT_STALE_TARGET_DATA"
+                   else "FRESH_AUDIT_ERROR")
+            print(label,symbol,last_error,flush=True)
     # Fail closed on missing recent repeatability. A single 30-session surge is not
     # a 30-60 day repeatable oscillator, regardless of a high historical score.
     for row in results:
@@ -149,6 +163,7 @@ def main():
              research_symbols=[r["symbol"] for r in research[:args.limit]],
              controls=controls,source="yfinance, independent fresh provider requests",
              data_errors=sum("error" in r for r in results),
+             stale_target_rejects=sum(r.get("status")=="REJECT_STALE_TARGET_DATA" for r in results),
              current_research_keepers=len(ranked),fresh_research_ranked=[r["symbol"] for r in ranked],
              no_chase_count=sum(r["entry_priority"]=="NO_CHASE" for r in ranked),
              non_chase_research_watchlist=[r["symbol"] for r in non_chase],
@@ -193,7 +208,9 @@ def main():
     print("THREE_CLEAR_CYCLE_AUDIT",json.dumps([{"symbol":r["symbol"],"state":r.get("three_clear_cycles"),"keeper":r["current_keeper_status"],"three_cycles":r.get("three_clear_details",{}).get("cycles",[])} for r in results]),flush=True)
     print("FRESH_RESEARCH_KEEPERS",json.dumps([{"rank":r["fresh_research_rank"],"symbol":r["symbol"],"score":r["clean_cycle_v10"]["score"],"viability_benchmark":r["viability"],"entry":r["entry_state"]} for r in ranked]),flush=True)
     print("FRESH_AUDIT_SUMMARY",json.dumps({"target":target,"total":len(names),
-        "fresh":len(names)-out["data_errors"],"errors":out["data_errors"]}),flush=True)
+        "fresh":len(names)-out["data_errors"]-out["stale_target_rejects"],
+        "stale_target_rejects":out["stale_target_rejects"],
+        "errors":out["data_errors"]}),flush=True)
     # Never silently pass a missing data feed.
     if out["data_errors"]:raise SystemExit("FRESH_AUDIT_INCOMPLETE")
 if __name__=="__main__":main()
