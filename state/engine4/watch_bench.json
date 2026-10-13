@@ -1,14 +1,14 @@
 {
-  "target_date_et": "2026-10-09",
-  "generated_at_et": "2026-10-09T09:55:15.622479-04:00",
+  "target_date_et": "2026-10-13",
+  "generated_at_et": "2026-10-13T09:25:10.000375-04:00",
   "bench_cap": 25,
   "bench_cap_is_quota": false,
   "max_watch_sessions": null,
   "watch_expiry_policy": "score_and_mandatory_gates_only",
   "general_admission_score": 85.0,
   "top3_admission_score": 80.0,
-  "competition_universe_count": 1,
-  "freshly_scored_count": 1,
+  "competition_universe_count": 0,
+  "freshly_scored_count": 0,
   "naturally_watch_qualified_count": 0,
   "retained_by_top25_bench_cap": 0,
   "hot_count": 0,
@@ -18,13 +18,6 @@
   "additions": [],
   "promotions": [],
   "demotions": [],
-  "removals": [
-    {
-      "ticker": "LW",
-      "reason": "below_current_B_grade",
-      "current_score": 30.934,
-      "continuation_drawdown_pct": 0.4282199848127721
-    }
-  ],
+  "removals": [],
   "candidates": []
 }
