@@ -1,9 +1,9 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-14T00:05:33.859952+00:00
-Market as-of: 2026-10-13; qualified cohorts: 2; cohort rows: 250; attempts retained: 51.
+Audit UTC: 2026-10-14T00:09:46.808051+00:00
+Market as-of: 2026-10-13; qualified cohorts: 2; cohort rows: 250; attempts retained: 52.
 Outcome counts: {'PENDING': 1170, 'INELIGIBLE_DATA': 80}.
-Saved-data freshness gate: {'passed': False, 'required_stale': ['AKAM', 'WULF', 'FUBO', 'SPGI', 'SFM', 'CSIQ', 'XPRO', 'MESO', 'CHTR', 'EPOW', 'HLIT', 'NYAX', 'JACK', 'TBLA', 'ATGL', 'FMC', 'NX', 'LE', 'SRAD', 'OWLT', 'IDR', 'BE', 'HNRG', 'MBLY', 'CGNX', 'SPY'], 'fresh': 1, 'selected': 125}.
+Saved-data freshness gate: {'passed': False, 'required_stale': ['AKAM', 'WULF', 'FUBO', 'SPGI', 'SFM', 'CSIQ', 'XPRO', 'MESO', 'CHTR', 'EPOW', 'HLIT', 'NYAX', 'JACK', 'TBLA', 'ATGL', 'FMC', 'NX', 'LE', 'SRAD', 'OWLT', 'IDR', 'BE', 'HNRG', 'MBLY', 'CGNX', 'SPY'], 'fresh': 2, 'selected': 125}.
 Cycle ledger: {'complete_signal_cohorts': 2, 'pending_entries': 2, 'open_positions': 1, 'closed_trades': 0, 'benchmark_pairs': 0, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
 Hypothetical next-open entry, price returns excluding dividends, 0.20% round-trip costs.
@@ -190,7 +190,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - ABT: ValueError: LATEST_SESSION_MISSING
 - AENT: ValueError: LATEST_SESSION_MISSING
 - AIMD: ValueError: LATEST_SESSION_MISSING
-- AMG: ValueError: LATEST_SESSION_MISSING
 - AMPG: ValueError: LATEST_SESSION_MISSING
 - AP: ValueError: LATEST_SESSION_MISSING
 - ARCL: ValueError: LATEST_SESSION_MISSING

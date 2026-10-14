@@ -1,7 +1,7 @@
 # OFTS daily research
 
 Market session: 2026-10-13
-Selected: 138; refreshed: 2; refresh errors: 320
+Selected: 138; refreshed: 2; refresh errors: 319
 Qualified prediction cohorts saved: 2; current coverage: 2/138
 Outcome counts: {'INELIGIBLE_DATA': 80, 'PENDING': 1170}
 Cycle fingerprints saved: 2/138
@@ -174,7 +174,6 @@ Count: 0 of 0 scored CANDIDATE names
 - ABT: ValueError: LATEST_SESSION_MISSING
 - AENT: ValueError: LATEST_SESSION_MISSING
 - AIMD: ValueError: LATEST_SESSION_MISSING
-- AMG: ValueError: LATEST_SESSION_MISSING
 - AMPG: ValueError: LATEST_SESSION_MISSING
 - AP: ValueError: LATEST_SESSION_MISSING
 - ARCL: ValueError: LATEST_SESSION_MISSING

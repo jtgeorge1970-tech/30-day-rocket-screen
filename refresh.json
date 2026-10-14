@@ -1,6 +1,6 @@
 {
   "asof": "2026-10-13",
-  "recorded_at": "2026-10-14T00:03:01.645973+00:00",
+  "recorded_at": "2026-10-14T00:07:10.267272+00:00",
   "symbols": {
     "SCYX": {
       "status": "ERROR",
@@ -849,10 +849,10 @@
       "bars": 500
     },
     "AMG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "AMPG": {
       "status": "ERROR",
@@ -985,12 +985,6 @@
       "error": "ValueError: LATEST_SESSION_MISSING",
       "latest_date": "2026-10-12",
       "bars": 500
-    },
-    "CATL": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-13",
-      "bars": 19
     },
     "CB": {
       "status": "ERROR",
@@ -1231,12 +1225,6 @@
       "error": "ValueError: LATEST_SESSION_MISSING",
       "latest_date": "2026-10-12",
       "bars": 502
-    },
-    "FXNC": {
-      "status": "FRESH",
-      "error": "",
-      "latest_date": "2026-10-13",
-      "bars": 503
     },
     "GEHC": {
       "status": "ERROR",
@@ -1945,6 +1933,18 @@
       "error": "ValueError: LATEST_SESSION_MISSING",
       "latest_date": "2026-10-12",
       "bars": 502
+    },
+    "CATL": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-13",
+      "bars": 19
+    },
+    "FXNC": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-13",
+      "bars": 503
     }
   }
 }
