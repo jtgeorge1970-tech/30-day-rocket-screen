@@ -18,6 +18,7 @@ on:
   schedule:
     # Use an off-round minute to reduce scheduled-run congestion; workflow-file
     # changes also trigger an immediate recovery run through the push path.
+    # Recovery trigger: 2026-10-14 UTC after the 2026-10-13 schedule did not start.
     - cron: '37 22 * * 1-5'
 permissions:
   contents: write
