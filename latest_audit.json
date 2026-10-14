@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-10-14T00:09:46.808051+00:00",
+  "recorded_at": "2026-10-14T01:12:21.749458+00:00",
   "market_asof": "2026-10-13",
   "qualified_cohorts": 2,
   "all_prediction_files": 4,
-  "attempts": 52,
+  "attempts": 53,
   "cohort_rows": 250,
   "outcome_counts": {
     "PENDING": 1170,
@@ -71,7 +71,8 @@
     "attempts/20261011T014213816831Z.json": "5a9ca5be46fc4acdbbbc5564fb206dc2b8bd1b06f43adf11c011db3905f90a48",
     "attempts/20261012T232921228907Z.json": "3e35b985001855c130240dbe1258e9dd18594a4f1cbf5b4c2e98820314f7b118",
     "attempts/20261014T000301645973Z.json": "dad8344aa2bfcd6bce97be93552e6d1505de049a8a83ad54d6abce59b68d42a3",
-    "attempts/20261014T000710267272Z.json": "a11aaddcf40fc658e4c289b96e3382c9bdfebeed470eabeae2e127b3e9beaa9d"
+    "attempts/20261014T000710267272Z.json": "a11aaddcf40fc658e4c289b96e3382c9bdfebeed470eabeae2e127b3e9beaa9d",
+    "attempts/20261014T011005214743Z.json": "9d686cd54bf3f29628bf766aa06cb45fd3350f447084d2deb245431d805cd7fd"
   },
   "control_unchanged": {
     "cursor": 300,
@@ -401,35 +402,35 @@
   "freshness_gate": {
     "passed": false,
     "required_stale": [
+      "SCYX",
       "AKAM",
       "WULF",
       "FUBO",
-      "SPGI",
-      "SFM",
-      "CSIQ",
-      "XPRO",
-      "MESO",
-      "CHTR",
-      "EPOW",
-      "HLIT",
       "NYAX",
+      "SPGI",
+      "EPOW",
+      "CHTR",
+      "CSIQ",
+      "SFM",
+      "MESO",
+      "LE",
       "JACK",
       "TBLA",
+      "UPWK",
       "ATGL",
-      "FMC",
-      "NX",
-      "LE",
-      "SRAD",
-      "OWLT",
       "IDR",
-      "BE",
+      "FMC",
       "HNRG",
+      "NX",
+      "XPRO",
+      "CSPI",
       "MBLY",
       "CGNX",
+      "SRAD",
       "SPY"
     ],
     "fresh": 2,
-    "selected": 125
+    "selected": 138
   },
   "cycle_summary": {
     "complete_signal_cohorts": 2,

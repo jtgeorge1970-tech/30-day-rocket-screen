@@ -1,0 +1,3899 @@
+{
+  "asof": "2026-10-13",
+  "recorded_at": "2026-10-14T01:10:05.214743+00:00",
+  "symbols": {
+    "SCYX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AKAM": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "WULF": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "FUBO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "NYAX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "SPGI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "EPOW": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CHTR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CSIQ": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "SFM": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "MESO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "LE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "JACK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TBLA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "UPWK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ATGL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "IDR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "FMC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HNRG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "NX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "XPRO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CSPI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "MBLY": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CGNX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "SRAD": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "OCS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ABVC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BDMD": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CINT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ELBM": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "GIX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 143
+    },
+    "INKT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "MCAH": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 79
+    },
+    "QSEA": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-13",
+      "bars": 358
+    },
+    "CETX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "STKH": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "WBUY": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "COP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "EYPT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "IDT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ALH": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 253
+    },
+    "BR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "DAKT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "FORR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "HWC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "LKQ": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "NAMS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "PBYI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "RMR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "STAG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "UAA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "WPM": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "FIX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BLLN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 233
+    },
+    "MH": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 307
+    },
+    "DDD": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CTMX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "EOSE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AORT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "DFH": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "JYNT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "QLYS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "USOI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "NRXP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ITRN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AIIR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 326
+    },
+    "AVD": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CGTL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 469
+    },
+    "DYOR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 225
+    },
+    "GASS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "IFBD": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "LUCK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "NRSN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "PSIG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ARTL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "SPPL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "VIVO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AGRO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CLMB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "TRLV": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AEVA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BLDP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CRWD": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "FINW": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "HQY": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "LARK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "MSGS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ORMP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "RERE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "SOLS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 246
+    },
+    "TS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "WHD": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CVRX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ATRO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "LFCR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "LION": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ATS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CQP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ALLE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "COLB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "HOMB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "PI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "TMCI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "DERM": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "DOLE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ROCK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ASBP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CCG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "DRDB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 425
+    },
+    "FOIL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 43
+    },
+    "HUBC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "LIME": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 72
+    },
+    "NEWP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "PMN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ACXP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "SMJF": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 214
+    },
+    "UP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ZJK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BCRX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "SHOP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ACGL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BELFB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CMDB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 364
+    },
+    "FCEL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "THC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AKO.B": {
+      "status": "ERROR",
+      "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
+      "latest_date": null,
+      "bars": 0
+    },
+    "GTN.A": {
+      "status": "ERROR",
+      "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
+      "latest_date": null,
+      "bars": 0
+    },
+    "EPM": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ASPN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ONCH": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 272
+    },
+    "SAC": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-13",
+      "bars": 181
+    },
+    "SWX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AKO.A": {
+      "status": "ERROR",
+      "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
+      "latest_date": null,
+      "bars": 0
+    },
+    "AXIL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "LESL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ORA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "Q": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 241
+    },
+    "UCFI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ABT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "AENT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AIMD": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "AMPG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "AP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ARCL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 94
+    },
+    "ARGX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ARQ": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ASUR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ATOS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "AUC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "AYA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "BATRK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BCS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "BE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "BGSF": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "BIRD": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BIRK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "BOT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 107
+    },
+    "BROS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "BSRR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "BTCT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "BTQ": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 262
+    },
+    "BZFD": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CALM": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CBSH": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CECO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CEPV": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 235
+    },
+    "CHRW": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CIVB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CLPT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CNXC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "COCH": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CODX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "COGT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "CR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CREX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CSHR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 134
+    },
+    "CTSH": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CULP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "CVLG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "DARE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "DB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "DLHC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "DMAA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 410
+    },
+    "DOCN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "DTIL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "DXLG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ECBK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ECO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "EFXT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ELTK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "EONR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "EROC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 86
+    },
+    "ESLT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "EXFY": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "EXPE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "FBLA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 493
+    },
+    "FE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "FEBO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "FHN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "FTI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "FTNT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "FWRG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "GEHC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "GIB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "GIL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "GJS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "GNSS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "GP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "GPCR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "GTX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HDL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HLI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "HLIT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HLNE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HPK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "HTCO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "IBTA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ICE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ICMB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ICUI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "IE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "IMCR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "INN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "IRIX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ISTR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "JSPR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "KE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "KEY": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "KN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "KTTA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "KVUE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "KWR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "LAD": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "LAND": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "LGO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "LPTH": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "LRE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "LUMN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "LXFR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "MBX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "MFG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "MGA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "MMSI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "MNSB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "MP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "MPLX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "MRLN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 466
+    },
+    "MSA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "MVST": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "MYSZ": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "NAK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "NAVN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 238
+    },
+    "NDRA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "NEXT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "NKE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "NSP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "NUTX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "NWG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "OCFC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "OLMA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "OPAL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ORI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "OTLK": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "OWLT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "PDSB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "PENG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "PHG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "PLUS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "PMA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 471
+    },
+    "POR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "PPLI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "PRLB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "PROP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "QFIN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "RBA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "RDAC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 466
+    },
+    "RDDT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "RNTX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "RNXT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "ROLR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 493
+    },
+    "RVSB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "RVTY": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "SCHW": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "SELF": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "SHFS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "SLSN": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "SNWV": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 496
+    },
+    "SONO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "SOS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "SPIR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "STE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "STNE": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TACH": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 343
+    },
+    "TCPC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "TGS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TII": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "TKO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TMO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TORO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TPVG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "TRT": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "USAR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "VBIO": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "VCTR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "VEON": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "VFS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "VPG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "VRCA": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "WAL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "WFG": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "WNC": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "WRAP": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "WWW": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "XLAB": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 288
+    },
+    "YDES": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 284
+    },
+    "YSWY": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 120
+    },
+    "ZDAI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "ZWS": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 500
+    },
+    "SPY": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING",
+      "latest_date": "2026-10-12",
+      "bars": 502
+    },
+    "AMG": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-13",
+      "bars": 501
+    },
+    "CATL": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-13",
+      "bars": 19
+    },
+    "FXNC": {
+      "status": "FRESH",
+      "error": "",
+      "latest_date": "2026-10-13",
+      "bars": 503
+    }
+  },
+  "candidate": {
+    "asof": "2026-10-13",
+    "recorded_at": "2026-10-14T01:12:21.305797+00:00",
+    "model_version": "v2.3-research",
+    "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+    "protocol_hash": "b155bf39ed9fb42e826b0765ce200f27480c121a119c7b04488fc1f21697919c",
+    "lookback": "trailing 2 calendar years",
+    "selected": [
+      "SCYX",
+      "AKAM",
+      "WULF",
+      "FUBO",
+      "NYAX",
+      "SPGI",
+      "EPOW",
+      "CHTR",
+      "CSIQ",
+      "SFM",
+      "MESO",
+      "LE",
+      "JACK",
+      "TBLA",
+      "UPWK",
+      "ATGL",
+      "IDR",
+      "FMC",
+      "HNRG",
+      "NX",
+      "XPRO",
+      "CSPI",
+      "MBLY",
+      "CGNX",
+      "SRAD",
+      "OCS",
+      "ABVC",
+      "BDMD",
+      "CINT",
+      "ELBM",
+      "GIX",
+      "INKT",
+      "MCAH",
+      "QSEA",
+      "CETX",
+      "STKH",
+      "WBUY",
+      "COP",
+      "EYPT",
+      "IDT",
+      "ALH",
+      "BR",
+      "DAKT",
+      "FORR",
+      "HWC",
+      "LKQ",
+      "NAMS",
+      "PBYI",
+      "RMR",
+      "STAG",
+      "UAA",
+      "WPM",
+      "FIX",
+      "BLLN",
+      "MH",
+      "DDD",
+      "CTMX",
+      "EOSE",
+      "AORT",
+      "DFH",
+      "JYNT",
+      "QLYS",
+      "USOI",
+      "NRXP",
+      "ITRN",
+      "AIIR",
+      "AVD",
+      "CGTL",
+      "DYOR",
+      "GASS",
+      "IFBD",
+      "LUCK",
+      "NRSN",
+      "PSIG",
+      "ARTL",
+      "SPPL",
+      "VIVO",
+      "AGRO",
+      "CLMB",
+      "TRLV",
+      "AEVA",
+      "BLDP",
+      "CRWD",
+      "FINW",
+      "HQY",
+      "LARK",
+      "MSGS",
+      "ORMP",
+      "RERE",
+      "SOLS",
+      "TS",
+      "WHD",
+      "CVRX",
+      "ATRO",
+      "LFCR",
+      "LION",
+      "ATS",
+      "CQP",
+      "ALLE",
+      "COLB",
+      "HOMB",
+      "PI",
+      "TMCI",
+      "DERM",
+      "DOLE",
+      "ROCK",
+      "ASBP",
+      "CCG",
+      "DRDB",
+      "FOIL",
+      "HUBC",
+      "LIME",
+      "NEWP",
+      "PMN",
+      "ACXP",
+      "SMJF",
+      "UP",
+      "ZJK",
+      "BCRX",
+      "SHOP",
+      "ACGL",
+      "BELFB",
+      "CMDB",
+      "FCEL",
+      "THC",
+      "AKO.B",
+      "GTN.A",
+      "EPM",
+      "ASPN",
+      "ONCH",
+      "SAC",
+      "SWX",
+      "AKO.A",
+      "AXIL",
+      "LESL",
+      "ORA",
+      "Q",
+      "UCFI"
+    ],
+    "watchlist": [
+      "SCYX",
+      "AKAM",
+      "WULF",
+      "FUBO",
+      "NYAX",
+      "SPGI",
+      "EPOW",
+      "CHTR",
+      "CSIQ",
+      "SFM",
+      "MESO",
+      "LE",
+      "JACK",
+      "TBLA",
+      "UPWK",
+      "ATGL",
+      "IDR",
+      "FMC",
+      "HNRG",
+      "NX",
+      "XPRO",
+      "CSPI",
+      "MBLY",
+      "CGNX",
+      "SRAD"
+    ],
+    "rows": [
+      {
+        "symbol": "SCYX",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "AKAM",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "WULF",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "FUBO",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "NYAX",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "SPGI",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "EPOW",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CHTR",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CSIQ",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "SFM",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "MESO",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "LE",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "JACK",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "TBLA",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "UPWK",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ATGL",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "IDR",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "FMC",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "HNRG",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "NX",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "XPRO",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CSPI",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "MBLY",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CGNX",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "SRAD",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "OCS",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ABVC",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "BDMD",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CINT",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ELBM",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "GIX",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 143,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "INKT",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "MCAH",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 79,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "QSEA",
+        "score": 11.82909756380363,
+        "classification": "REJECT_CANDIDATE_GATE",
+        "asof": "2026-10-13",
+        "bars": 358,
+        "cycle": {
+          "cycle_sessions": null,
+          "median_swing_pct": null,
+          "completed_cycle_intervals": 0,
+          "confirmed_turns": 1,
+          "timing_consistency": 0.0,
+          "amplitude_consistency": 0.0,
+          "confidence": "LOW"
+        },
+        "swing_health": {
+          "version": "swing-health-v0.1-experimental",
+          "state": "INSUFFICIENT",
+          "proposed_entry": "NO_TRADE",
+          "reason": "NEED_3_HIGHS_3_LOWS_4_LEGS",
+          "production_approved": false,
+          "confirmed_turns_recent": 0,
+          "recent_completed_legs": 0,
+          "last_four_legs": [],
+          "recent_median_amplitude_pct": null,
+          "prior_four_median_amplitude_pct": null,
+          "recent_to_prior_amplitude_ratio": null,
+          "recent_amplitude_relative_mad": null,
+          "recent_duration_relative_mad": null,
+          "last_three_highs": [],
+          "last_three_lows": [],
+          "high_progression": "INSUFFICIENT",
+          "low_progression": "INSUFFICIENT",
+          "downward_structure": false,
+          "weak_recovery": false,
+          "decaying": false,
+          "irregular": false
+        },
+        "recent_viability": {
+          "version": "recent-viability-v0.5-experimental",
+          "state": "INSUFFICIENT",
+          "reason": "NEED_THREE_RECENT_AND_THREE_EARLIER_LEGS",
+          "proposed_entry": "NO_TRADE",
+          "production_approved": false,
+          "micro_pivot_threshold_pct": 2.5,
+          "confirmed_minor_pivots": 1,
+          "confirmed_minor_legs": 0,
+          "last_three_peak_to_peak_sessions": [],
+          "preceding_three_peak_to_peak_sessions": [],
+          "preceding_three_trough_to_trough_sessions": [],
+          "preceding_three_up_pct": [],
+          "recent_vs_prior_up_ratio": null,
+          "recent_vs_prior_peak_spacing_ratio": null,
+          "recent_vs_prior_trough_spacing_ratio": null,
+          "recent_vs_prior_cadence_ratio": null,
+          "recent_vs_prior_sufficient": false,
+          "recent_vs_prior_state": "INSUFFICIENT",
+          "recent_combined_dissipation": false,
+          "last_three_trough_to_trough_sessions": [],
+          "peak_cycle_median_sessions": null,
+          "trough_cycle_median_sessions": null,
+          "peak_cycle_relative_mad": null,
+          "trough_cycle_relative_mad": null,
+          "preferred_cycle_range_sessions": [
+            10,
+            40
+          ],
+          "cycle_timing_pass": false,
+          "last_three_completed_legs": [],
+          "last_three_up_legs": [],
+          "last_three_up_pct": [],
+          "last_three_up_average_pct": null,
+          "last_three_up_median_pct": null,
+          "last_up_pct": null,
+          "repeated_up_min_pct": 5.0,
+          "repeated_up_pass_count": 0,
+          "recent_up_repeatability": "INSUFFICIENT",
+          "repeated_up_required": 3,
+          "up_progression": "INSUFFICIENT",
+          "latest_confirmed_up_age_sessions": null,
+          "last_three_median_swing_pct": null,
+          "earlier_median_swing_pct": null,
+          "historical_mean_swing_pct": null,
+          "historical_median_swing_pct": null,
+          "recent_to_earlier_ratio": null,
+          "largest_two_swing_share": null,
+          "recent_up_median_pct": null,
+          "hypothetical_net_capture_pct": null,
+          "assumed_capture_fraction": 0.5,
+          "assumed_round_trip_cost_pct": 0.2,
+          "minimum_gross_upside_pct": 5.4,
+          "last_confirmed_pivot_age_sessions": 250,
+          "outlier_foolsgold": false,
+          "recent_shrinking": false
+        },
+        "experimental_research_entry": "NO_TRADE",
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "REJECT_CANDIDATE_GATE"
+        }
+      },
+      {
+        "symbol": "CETX",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "STKH",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "WBUY",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "COP",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "EYPT",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "IDT",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ALH",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 253,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "BR",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "DAKT",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "FORR",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "HWC",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "LKQ",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "NAMS",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "PBYI",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "RMR",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "STAG",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "UAA",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "WPM",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "FIX",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "BLLN",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 233,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "MH",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 307,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "DDD",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CTMX",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "EOSE",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "AORT",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "DFH",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "JYNT",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "QLYS",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "USOI",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "NRXP",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ITRN",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "AIIR",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 326,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "AVD",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CGTL",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 469,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "DYOR",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 225,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "GASS",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "IFBD",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "LUCK",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "NRSN",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "PSIG",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ARTL",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "SPPL",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "VIVO",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "AGRO",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CLMB",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "TRLV",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "AEVA",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "BLDP",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CRWD",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "FINW",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "HQY",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "LARK",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "MSGS",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ORMP",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "RERE",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "SOLS",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 246,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "TS",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "WHD",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CVRX",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ATRO",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "LFCR",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "LION",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ATS",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CQP",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ALLE",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "COLB",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "HOMB",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "PI",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "TMCI",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "DERM",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "DOLE",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ROCK",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ASBP",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CCG",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "DRDB",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 425,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "FOIL",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 43,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "HUBC",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "LIME",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 72,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "NEWP",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "PMN",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ACXP",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "SMJF",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 214,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "UP",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ZJK",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "BCRX",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "SHOP",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ACGL",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "BELFB",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "CMDB",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 364,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "FCEL",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "THC",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "AKO.B",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": null,
+        "bars": 0,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "GTN.A",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": null,
+        "bars": 0,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "EPM",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ASPN",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ONCH",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 272,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "SAC",
+        "score": 13.986097427779804,
+        "classification": "REJECT_CANDIDATE_GATE",
+        "asof": "2026-10-13",
+        "bars": 181,
+        "cycle": {
+          "cycle_sessions": null,
+          "median_swing_pct": null,
+          "completed_cycle_intervals": 0,
+          "confirmed_turns": 0,
+          "timing_consistency": 0.0,
+          "amplitude_consistency": 0.0,
+          "confidence": "LOW"
+        },
+        "swing_health": {
+          "version": "swing-health-v0.1-experimental",
+          "state": "INSUFFICIENT",
+          "proposed_entry": "NO_TRADE",
+          "reason": "NEED_3_HIGHS_3_LOWS_4_LEGS",
+          "production_approved": false,
+          "confirmed_turns_recent": 0,
+          "recent_completed_legs": 0,
+          "last_four_legs": [],
+          "recent_median_amplitude_pct": null,
+          "prior_four_median_amplitude_pct": null,
+          "recent_to_prior_amplitude_ratio": null,
+          "recent_amplitude_relative_mad": null,
+          "recent_duration_relative_mad": null,
+          "last_three_highs": [],
+          "last_three_lows": [],
+          "high_progression": "INSUFFICIENT",
+          "low_progression": "INSUFFICIENT",
+          "downward_structure": false,
+          "weak_recovery": false,
+          "decaying": false,
+          "irregular": false
+        },
+        "recent_viability": {
+          "version": "recent-viability-v0.5-experimental",
+          "state": "INSUFFICIENT",
+          "reason": "NEED_THREE_RECENT_AND_THREE_EARLIER_LEGS",
+          "proposed_entry": "NO_TRADE",
+          "production_approved": false,
+          "micro_pivot_threshold_pct": 2.5,
+          "confirmed_minor_pivots": 1,
+          "confirmed_minor_legs": 0,
+          "last_three_peak_to_peak_sessions": [],
+          "preceding_three_peak_to_peak_sessions": [],
+          "preceding_three_trough_to_trough_sessions": [],
+          "preceding_three_up_pct": [],
+          "recent_vs_prior_up_ratio": null,
+          "recent_vs_prior_peak_spacing_ratio": null,
+          "recent_vs_prior_trough_spacing_ratio": null,
+          "recent_vs_prior_cadence_ratio": null,
+          "recent_vs_prior_sufficient": false,
+          "recent_vs_prior_state": "INSUFFICIENT",
+          "recent_combined_dissipation": false,
+          "last_three_trough_to_trough_sessions": [],
+          "peak_cycle_median_sessions": null,
+          "trough_cycle_median_sessions": null,
+          "peak_cycle_relative_mad": null,
+          "trough_cycle_relative_mad": null,
+          "preferred_cycle_range_sessions": [
+            10,
+            40
+          ],
+          "cycle_timing_pass": false,
+          "last_three_completed_legs": [],
+          "last_three_up_legs": [],
+          "last_three_up_pct": [],
+          "last_three_up_average_pct": null,
+          "last_three_up_median_pct": null,
+          "last_up_pct": null,
+          "repeated_up_min_pct": 5.0,
+          "repeated_up_pass_count": 0,
+          "recent_up_repeatability": "INSUFFICIENT",
+          "repeated_up_required": 3,
+          "up_progression": "INSUFFICIENT",
+          "latest_confirmed_up_age_sessions": null,
+          "last_three_median_swing_pct": null,
+          "earlier_median_swing_pct": null,
+          "historical_mean_swing_pct": null,
+          "historical_median_swing_pct": null,
+          "recent_to_earlier_ratio": null,
+          "largest_two_swing_share": null,
+          "recent_up_median_pct": null,
+          "hypothetical_net_capture_pct": null,
+          "assumed_capture_fraction": 0.5,
+          "assumed_round_trip_cost_pct": 0.2,
+          "minimum_gross_upside_pct": 5.4,
+          "last_confirmed_pivot_age_sessions": 179,
+          "outlier_foolsgold": false,
+          "recent_shrinking": false
+        },
+        "experimental_research_entry": "NO_TRADE",
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "REJECT_CANDIDATE_GATE"
+        }
+      },
+      {
+        "symbol": "SWX",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "AKO.A",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": null,
+        "bars": 0,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "AXIL",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "LESL",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "ORA",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "Q",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 241,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      },
+      {
+        "symbol": "UCFI",
+        "score": null,
+        "classification": "STALE_DATA",
+        "asof": "2026-10-12",
+        "bars": 500,
+        "signal": {
+          "state": "NO_TRADE",
+          "reason": "STALE_DATA"
+        }
+      }
+    ],
+    "coverage": {
+      "fresh": 2,
+      "selected": 138,
+      "minimum_fresh": 100
+    },
+    "production_approved": false,
+    "execution": "Hypothetical next-session open; fixed-session close; no stop/target strategy",
+    "cost_assumption_roundtrip_pct": 0.2,
+    "operational_freshness_gate": {
+      "passed": false,
+      "required_stale": [
+        "SCYX",
+        "AKAM",
+        "WULF",
+        "FUBO",
+        "NYAX",
+        "SPGI",
+        "EPOW",
+        "CHTR",
+        "CSIQ",
+        "SFM",
+        "MESO",
+        "LE",
+        "JACK",
+        "TBLA",
+        "UPWK",
+        "ATGL",
+        "IDR",
+        "FMC",
+        "HNRG",
+        "NX",
+        "XPRO",
+        "CSPI",
+        "MBLY",
+        "CGNX",
+        "SRAD",
+        "SPY"
+      ],
+      "fresh": 2,
+      "selected": 138
+    }
+  },
+  "operational_freshness_gate": {
+    "passed": false,
+    "required_stale": [
+      "SCYX",
+      "AKAM",
+      "WULF",
+      "FUBO",
+      "NYAX",
+      "SPGI",
+      "EPOW",
+      "CHTR",
+      "CSIQ",
+      "SFM",
+      "MESO",
+      "LE",
+      "JACK",
+      "TBLA",
+      "UPWK",
+      "ATGL",
+      "IDR",
+      "FMC",
+      "HNRG",
+      "NX",
+      "XPRO",
+      "CSPI",
+      "MBLY",
+      "CGNX",
+      "SRAD",
+      "SPY"
+    ],
+    "fresh": 2,
+    "selected": 138
+  }
+}
