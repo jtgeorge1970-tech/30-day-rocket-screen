@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-14T15:27:42.716212+00:00",
+  "generated_at": "2026-10-14T21:31:44.914501+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
     {
       "symbol": "CQP",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-13",
       "planned_entry_date": "2026-10-14",
       "entry_score": 51.6307668591609,
@@ -18,11 +18,13 @@
         "amplitude_consistency": 64.22326193685987,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-14",
+      "entry_open": 65.0
     },
     {
       "symbol": "PSIG",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-13",
       "planned_entry_date": "2026-10-14",
       "entry_score": 46.471843583702665,
@@ -35,11 +37,13 @@
         "amplitude_consistency": 39.59371674823213,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-14",
+      "entry_open": 4.239999771118164
     },
     {
       "symbol": "RERE",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-13",
       "planned_entry_date": "2026-10-14",
       "entry_score": 62.27205803946234,
@@ -52,7 +56,9 @@
         "amplitude_consistency": 60.008091916868445,
         "confidence": "MEDIUM"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-14",
+      "entry_open": 3.9200000762939453
     },
     {
       "symbol": "SPGI",
@@ -131,12 +137,24 @@
       "signal_date": "2026-10-12",
       "signal": "SELL",
       "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "ACDC",
+      "signal_date": "2026-10-14",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "CSIQ",
+      "signal_date": "2026-10-14",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
     }
   ],
   "summary": {
-    "complete_signal_cohorts": 3,
-    "pending_entries": 3,
-    "open_positions": 3,
+    "complete_signal_cohorts": 4,
+    "pending_entries": 0,
+    "open_positions": 6,
     "closed_trades": 0,
     "benchmark_pairs": 0,
     "review_trades": 0

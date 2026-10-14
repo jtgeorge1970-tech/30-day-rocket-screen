@@ -1,5 +1,25 @@
 {
-  "cursor": 300,
-  "retry": [],
-  "last_session": "2026-10-13"
+  "cursor": 400,
+  "retry": [
+    "WBD",
+    "QNCX",
+    "BWIV",
+    "YHNA",
+    "GWH",
+    "PAAC",
+    "AKO.B",
+    "AP",
+    "CEPV",
+    "CMDB",
+    "DMAA",
+    "DYOR",
+    "FOIL",
+    "GIX",
+    "HDL",
+    "LESL",
+    "MCAH",
+    "ROLR",
+    "UCFI"
+  ],
+  "last_session": "2026-10-14"
 }

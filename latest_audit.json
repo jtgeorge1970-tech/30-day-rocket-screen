@@ -1,13 +1,13 @@
 {
-  "recorded_at": "2026-10-14T15:27:41.831525+00:00",
-  "market_asof": "2026-10-13",
-  "qualified_cohorts": 3,
-  "all_prediction_files": 5,
-  "attempts": 59,
-  "cohort_rows": 388,
+  "recorded_at": "2026-10-14T21:31:44.139770+00:00",
+  "market_asof": "2026-10-14",
+  "qualified_cohorts": 4,
+  "all_prediction_files": 6,
+  "attempts": 60,
+  "cohort_rows": 513,
   "outcome_counts": {
-    "PENDING": 1825,
-    "INELIGIBLE_DATA": 115
+    "PENDING": 2410,
+    "INELIGIBLE_DATA": 155
   },
   "outcome_recompute_matches_saved": true,
   "immutable_evidence_sha256": {
@@ -16,13 +16,16 @@
     "predictions/2026-10-12.json": "c0d458d35869dd55d9f525f6eb412f311183aa931ad61858b8cc11045e3aca51",
     "predictions/2026-10-13-qualified.json": "243a744982361a4d5bb0d8b40a3d2903b78e008b765732695d7893ec22554c9e",
     "predictions/2026-10-13.json": "1967f88baf2a85348472469674a4d9f43243f1082ff38a06d1c965039cbc214a",
+    "predictions/2026-10-14.json": "1905d45fa18e1fc2c5f50c73285f984e69061a2ea0709c6631417a302a000dce",
     "signals/2026-10-09-qualified.json": "3b40ea3da1975073b3b3739b4bf427e24d5ea35fa85d49bbc047cb978f7b9053",
     "signals/2026-10-09.json": "8436c531b1afa83066eaf135c6b4fd3c7d1d96c3eed68a7091f167f9618204db",
     "signals/2026-10-12.json": "2d228eb3ebd97a3b2ddaad167e36e9d2ebe2d5674878dc988396048e036f6116",
     "signals/2026-10-13.json": "88321ab6a8fe1dfce6b14f39b4cd3d7e92730da646c1f88acf46c4c9143f2c56",
+    "signals/2026-10-14.json": "05fd922843d70cc1e5c206ec67bbd2641687e032d1958ffcf7ecd4477286cdc1",
     "fingerprints/2026-10-09.json": "8759ad024a7172a502441fb124b86ef08fa3a84763c776b07b7f50ec4ddb16e1",
     "fingerprints/2026-10-12.json": "b08045ec7a3bb9cffa3ae6bb566ce76984a1680124bbf45f085ece9dc85bc9b8",
     "fingerprints/2026-10-13.json": "788e18cf32d21e40cfc854db79c3e325de8d9159d001fabe39ad70fc439b4aaa",
+    "fingerprints/2026-10-14.json": "8eec8434e3424941cef7b95337af496e2c60d614e432ae99ec8f0235d24f4a85",
     "attempts/20261010T012256172464Z.json": "8622f72ce6ca8643e3f1eff2de2c0cd82986b7d520f276189ded173e01386f3d",
     "attempts/20261010T013547333786Z.json": "84012c7ba9c29509796cd2176d99c514ac8b15e4d3585c6e499991c697254e2c",
     "attempts/20261010T015444698482Z.json": "5f88f74f204a4bad8f58f113a5d20fd18d4939d7b94b3b8cb35e9d9af17ff82f",
@@ -81,23 +84,44 @@
     "attempts/20261014T021322930151Z.json": "29773fd384336630e6e8bac2cbfd1c095cef5cb327fb9e3849b1dca1e6452261",
     "attempts/20261014T063903514220Z.json": "5645dc0ded53f737a64e4d3b05f9b826741dbd27114d3e27dbd778a49e844384",
     "attempts/20261014T090000763842Z.json": "c237fcd9ba735eed371f4b95cb23809f89662edd0067f361a067be7593a015b8",
-    "attempts/20261014T152549471489Z.json": "ab06287844d00328b1ac7f1d7be797f85c1aab331043dd548ba54889f08c60e0"
+    "attempts/20261014T152549471489Z.json": "ab06287844d00328b1ac7f1d7be797f85c1aab331043dd548ba54889f08c60e0",
+    "attempts/20261014T212927279489Z.json": "0ff9d51e66071ad0e32bd54273bba05b9a6dcc14bd2431449d8a28a0f16d4d1a"
   },
   "control_unchanged": {
-    "cursor": 300,
-    "retry": [],
-    "last_session": "2026-10-13"
+    "cursor": 400,
+    "retry": [
+      "WBD",
+      "QNCX",
+      "BWIV",
+      "YHNA",
+      "GWH",
+      "PAAC",
+      "AKO.B",
+      "AP",
+      "CEPV",
+      "CMDB",
+      "DMAA",
+      "DYOR",
+      "FOIL",
+      "GIX",
+      "HDL",
+      "LESL",
+      "MCAH",
+      "ROLR",
+      "UCFI"
+    ],
+    "last_session": "2026-10-14"
   },
   "freshness_gate": {
     "passed": true,
     "required_stale": [],
-    "fresh": 138,
-    "selected": 138
+    "fresh": 119,
+    "selected": 125
   },
   "cycle_summary": {
-    "complete_signal_cohorts": 3,
-    "pending_entries": 3,
-    "open_positions": 3,
+    "complete_signal_cohorts": 4,
+    "pending_entries": 0,
+    "open_positions": 6,
     "closed_trades": 0,
     "benchmark_pairs": 0,
     "review_trades": 0
@@ -552,9 +576,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 5,
       "score_band": "<40",
-      "observations": 27,
+      "observations": 41,
       "statuses": {
-        "PENDING": 27
+        "PENDING": 41
       },
       "mature": 0,
       "positive": 0,
@@ -570,9 +594,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 5,
       "score_band": "40-<60",
-      "observations": 151,
+      "observations": 222,
       "statuses": {
-        "PENDING": 151
+        "PENDING": 222
       },
       "mature": 0,
       "positive": 0,
@@ -588,9 +612,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 5,
       "score_band": "60-<80",
-      "observations": 24,
+      "observations": 36,
       "statuses": {
-        "PENDING": 24
+        "PENDING": 36
       },
       "mature": 0,
       "positive": 0,
@@ -622,10 +646,10 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 5,
       "score_band": "UNSCORED",
-      "observations": 61,
+      "observations": 89,
       "statuses": {
-        "INELIGIBLE_DATA": 19,
-        "PENDING": 42
+        "INELIGIBLE_DATA": 27,
+        "PENDING": 62
       },
       "mature": 0,
       "positive": 0,
@@ -641,9 +665,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 10,
       "score_band": "<40",
-      "observations": 27,
+      "observations": 41,
       "statuses": {
-        "PENDING": 27
+        "PENDING": 41
       },
       "mature": 0,
       "positive": 0,
@@ -659,9 +683,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 10,
       "score_band": "40-<60",
-      "observations": 151,
+      "observations": 222,
       "statuses": {
-        "PENDING": 151
+        "PENDING": 222
       },
       "mature": 0,
       "positive": 0,
@@ -677,9 +701,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 10,
       "score_band": "60-<80",
-      "observations": 24,
+      "observations": 36,
       "statuses": {
-        "PENDING": 24
+        "PENDING": 36
       },
       "mature": 0,
       "positive": 0,
@@ -711,10 +735,10 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 10,
       "score_band": "UNSCORED",
-      "observations": 61,
+      "observations": 89,
       "statuses": {
-        "INELIGIBLE_DATA": 19,
-        "PENDING": 42
+        "INELIGIBLE_DATA": 27,
+        "PENDING": 62
       },
       "mature": 0,
       "positive": 0,
@@ -730,9 +754,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 20,
       "score_band": "<40",
-      "observations": 27,
+      "observations": 41,
       "statuses": {
-        "PENDING": 27
+        "PENDING": 41
       },
       "mature": 0,
       "positive": 0,
@@ -748,9 +772,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 20,
       "score_band": "40-<60",
-      "observations": 151,
+      "observations": 222,
       "statuses": {
-        "PENDING": 151
+        "PENDING": 222
       },
       "mature": 0,
       "positive": 0,
@@ -766,9 +790,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 20,
       "score_band": "60-<80",
-      "observations": 24,
+      "observations": 36,
       "statuses": {
-        "PENDING": 24
+        "PENDING": 36
       },
       "mature": 0,
       "positive": 0,
@@ -800,10 +824,10 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 20,
       "score_band": "UNSCORED",
-      "observations": 61,
+      "observations": 89,
       "statuses": {
-        "INELIGIBLE_DATA": 19,
-        "PENDING": 42
+        "INELIGIBLE_DATA": 27,
+        "PENDING": 62
       },
       "mature": 0,
       "positive": 0,
@@ -819,9 +843,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 30,
       "score_band": "<40",
-      "observations": 27,
+      "observations": 41,
       "statuses": {
-        "PENDING": 27
+        "PENDING": 41
       },
       "mature": 0,
       "positive": 0,
@@ -837,9 +861,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 30,
       "score_band": "40-<60",
-      "observations": 151,
+      "observations": 222,
       "statuses": {
-        "PENDING": 151
+        "PENDING": 222
       },
       "mature": 0,
       "positive": 0,
@@ -855,9 +879,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 30,
       "score_band": "60-<80",
-      "observations": 24,
+      "observations": 36,
       "statuses": {
-        "PENDING": 24
+        "PENDING": 36
       },
       "mature": 0,
       "positive": 0,
@@ -889,10 +913,10 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 30,
       "score_band": "UNSCORED",
-      "observations": 61,
+      "observations": 89,
       "statuses": {
-        "INELIGIBLE_DATA": 19,
-        "PENDING": 42
+        "INELIGIBLE_DATA": 27,
+        "PENDING": 62
       },
       "mature": 0,
       "positive": 0,
@@ -908,9 +932,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 60,
       "score_band": "<40",
-      "observations": 27,
+      "observations": 41,
       "statuses": {
-        "PENDING": 27
+        "PENDING": 41
       },
       "mature": 0,
       "positive": 0,
@@ -926,9 +950,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 60,
       "score_band": "40-<60",
-      "observations": 151,
+      "observations": 222,
       "statuses": {
-        "PENDING": 151
+        "PENDING": 222
       },
       "mature": 0,
       "positive": 0,
@@ -944,9 +968,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 60,
       "score_band": "60-<80",
-      "observations": 24,
+      "observations": 36,
       "statuses": {
-        "PENDING": 24
+        "PENDING": 36
       },
       "mature": 0,
       "positive": 0,
@@ -978,10 +1002,10 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 60,
       "score_band": "UNSCORED",
-      "observations": 61,
+      "observations": 89,
       "statuses": {
-        "INELIGIBLE_DATA": 19,
-        "PENDING": 42
+        "INELIGIBLE_DATA": 27,
+        "PENDING": 62
       },
       "mature": 0,
       "positive": 0,
