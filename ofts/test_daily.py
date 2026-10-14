@@ -96,6 +96,50 @@ class PersistenceTests(unittest.TestCase):
             self.assertEqual(audit['ABC']['status'], 'FRESH')
             self.assertEqual(provider.call_count, 2)
 
+    def test_delayed_daily_recovers_only_with_complete_timezone_verified_intraday(self):
+        with tempfile.TemporaryDirectory() as d:
+            index = pd.date_range('2026-10-13 09:30', '2026-10-13 15:45',
+                                  freq='15min', tz='America/New_York')
+            intraday = pd.DataFrame(
+                {'Open': [100.] * 26, 'High': [101.] * 26,
+                 'Low': [99.] * 26, 'Close': [100.] * 25 + [100.5],
+                 'Volume': [1000.] * 26, 'Stock Splits': [0.] * 26},
+                index=index)
+            daily = pd.DataFrame(
+                {'Open': [100.], 'High': [101.], 'Low': [99.],
+                 'Close': [100.], 'Volume': [1000.], 'Stock Splits': [0.]},
+                index=pd.to_datetime(['2026-10-12']))
+            provider = Mock(side_effect=lambda ticker, **kwargs:
+                            intraday if kwargs.get('interval') == '15m' else daily)
+            audit = refresh(Path(d), ['ABC'], '2026-10-13', provider)
+            self.assertEqual(audit['ABC']['status'], 'FRESH')
+            self.assertEqual(audit['ABC']['source'], 'COMPLETE_VERIFIED_15M')
+            self.assertEqual(provider.call_count, 3)
+            self.assertEqual(read_history(Path(d), 'ABC')[-1]['date'], '2026-10-13')
+            self.assertEqual(read_history(Path(d), 'ABC')[-1]['volume'], 26000.)
+
+    def test_intraday_repair_rejects_gaps_and_preserves_old_history(self):
+        with tempfile.TemporaryDirectory() as d:
+            state = Path(d)
+            save_history(state, 'ABC', [bar('2026-10-12')])
+            times = pd.date_range('2026-10-13 09:30', '2026-10-13 15:45',
+                                  freq='15min', tz='America/New_York')[:-1]
+            incomplete = pd.DataFrame(
+                {'Open': [100.] * 25, 'High': [101.] * 25,
+                 'Low': [99.] * 25, 'Close': [100.] * 25,
+                 'Volume': [1000.] * 25, 'Stock Splits': [0.] * 25},
+                index=times)
+            daily = pd.DataFrame(
+                {'Open': [100.], 'High': [101.], 'Low': [99.],
+                 'Close': [100.], 'Volume': [1000.], 'Stock Splits': [0.]},
+                index=pd.to_datetime(['2026-10-12']))
+            provider = Mock(side_effect=lambda ticker, **kwargs:
+                            incomplete if kwargs.get('interval') == '15m' else daily)
+            audit = refresh(state, ['ABC'], '2026-10-13', provider)
+            self.assertEqual(audit['ABC']['status'], 'ERROR')
+            self.assertIn('INTRADAY_SESSION_INCOMPLETE', audit['ABC']['error'])
+            self.assertEqual(read_history(state, 'ABC')[-1]['date'], '2026-10-12')
+
     def test_failed_coverage_is_preserved_but_not_used_as_forward_cohort(self):
         with tempfile.TemporaryDirectory() as d:
             predictions = Path(d)
