@@ -1,7 +1,7 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-14T01:12:21.749458+00:00
-Market as-of: 2026-10-13; qualified cohorts: 2; cohort rows: 250; attempts retained: 53.
+Audit UTC: 2026-10-14T01:25:10.405195+00:00
+Market as-of: 2026-10-13; qualified cohorts: 2; cohort rows: 250; attempts retained: 54.
 Outcome counts: {'PENDING': 1170, 'INELIGIBLE_DATA': 80}.
 Saved-data freshness gate: {'passed': False, 'required_stale': ['SCYX', 'AKAM', 'WULF', 'FUBO', 'NYAX', 'SPGI', 'EPOW', 'CHTR', 'CSIQ', 'SFM', 'MESO', 'LE', 'JACK', 'TBLA', 'UPWK', 'ATGL', 'IDR', 'FMC', 'HNRG', 'NX', 'XPRO', 'CSPI', 'MBLY', 'CGNX', 'SRAD', 'SPY'], 'fresh': 2, 'selected': 138}.
 Cycle ledger: {'complete_signal_cohorts': 2, 'pending_entries': 2, 'open_positions': 1, 'closed_trades': 0, 'benchmark_pairs': 0, 'review_trades': 0}.
