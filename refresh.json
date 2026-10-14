@@ -1,1948 +1,2272 @@
 {
   "asof": "2026-10-13",
-  "recorded_at": "2026-10-14T01:22:33.642395+00:00",
+  "recorded_at": "2026-10-14T02:07:15.034913+00:00",
   "symbols": {
     "SCYX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "AKAM": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "WULF": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "FUBO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "NYAX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "SPGI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "EPOW": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "CHTR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "CSIQ": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "SFM": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "MESO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "LE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "JACK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "TBLA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "UPWK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ATGL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "IDR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "FMC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "HNRG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "NX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "XPRO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "CSPI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "MBLY": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "CGNX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "SRAD": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "OCS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ABVC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "BDMD": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CINT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ELBM": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "GIX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 143
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 144
     },
     "INKT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "MCAH": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 79
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 80
     },
     "QSEA": {
       "status": "FRESH",
       "error": "",
+      "source": "DAILY_PROVIDER",
       "latest_date": "2026-10-13",
       "bars": 358
     },
     "CETX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "STKH": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "WBUY": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "COP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "EYPT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "IDT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ALH": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 253
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 254
     },
     "BR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "DAKT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "FORR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "HWC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "LKQ": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "NAMS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "PBYI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "RMR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "STAG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "UAA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "WPM": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "FIX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "BLLN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 233
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 234
     },
     "MH": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 307
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 308
     },
     "DDD": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CTMX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "EOSE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "AORT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "DFH": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "JYNT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "QLYS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "USOI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "NRXP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ITRN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "AIIR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 326
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 327
     },
     "AVD": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CGTL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 469
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 470
     },
     "DYOR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 225
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 226
     },
     "GASS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "IFBD": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "LUCK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "NRSN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "PSIG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ARTL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "SPPL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "VIVO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "AGRO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CLMB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "TRLV": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "AEVA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "BLDP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CRWD": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "FINW": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "HQY": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "LARK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "MSGS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ORMP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "RERE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "SOLS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 246
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 247
     },
     "TS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "WHD": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CVRX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ATRO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "LFCR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "LION": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ATS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CQP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ALLE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "COLB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "HOMB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "PI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "TMCI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "DERM": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "DOLE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ROCK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ASBP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CCG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "DRDB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 425
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 426
     },
     "FOIL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 43
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 44
     },
     "HUBC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "LIME": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 72
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 73
     },
     "NEWP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "PMN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ACXP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "SMJF": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 214
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 215
     },
     "UP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ZJK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "BCRX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "SHOP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ACGL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "BELFB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CMDB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 364
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 365
     },
     "FCEL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "THC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "AKO.B": {
       "status": "ERROR",
       "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
+      "source": "UNVERIFIED",
       "latest_date": null,
       "bars": 0
     },
     "GTN.A": {
       "status": "ERROR",
       "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
+      "source": "UNVERIFIED",
       "latest_date": null,
       "bars": 0
     },
     "EPM": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ASPN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ONCH": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 272
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 273
     },
     "SAC": {
       "status": "FRESH",
       "error": "",
+      "source": "DAILY_PROVIDER",
       "latest_date": "2026-10-13",
       "bars": 181
     },
     "SWX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "AKO.A": {
       "status": "ERROR",
       "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
+      "source": "UNVERIFIED",
       "latest_date": null,
       "bars": 0
     },
     "AXIL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "LESL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "ORA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "Q": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 241
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 242
     },
     "UCFI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "ABT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "AENT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "AIMD": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "AMPG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "AP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ARCL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 94
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 95
     },
     "ARGX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "ARQ": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ASUR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ATOS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "AUC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "AYA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "BATRK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "BCS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "BE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "BGSF": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "BIRD": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "BIRK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "BOT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 107
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 108
     },
     "BROS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "BSRR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "BTCT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "BTQ": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 262
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 263
     },
     "BZFD": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CALM": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CBSH": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CECO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "CEPV": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 235
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 236
     },
     "CHRW": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "CIVB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "CLPT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "CNXC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "COCH": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CODX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "COGT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "CR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "CREX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "CSHR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 134
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 135
     },
     "CTSH": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "CULP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "CVLG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "DARE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "DB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "DLHC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "DMAA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 410
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 411
     },
     "DOCN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "DTIL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "DXLG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "ECBK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ECO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "EFXT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ELTK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "EONR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "EROC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 86
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 87
     },
     "ESLT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "EXFY": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "EXPE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "FBLA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 493
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 494
     },
     "FE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "FEBO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "FHN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "FTI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "FTNT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "FWRG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "GEHC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "GIB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "GIL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "GJS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "GNSS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "GP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "GPCR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "GTX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "HDL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "HE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "HLI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "HLIT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "HLNE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "HPK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "HTCO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "IBTA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "ICE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ICMB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "ICUI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "IE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "IMCR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "INN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "IRIX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ISTR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "JSPR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "KE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "KEY": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "KN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "KTTA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "KVUE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "KWR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "LAD": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "LAND": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "LGO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "LPTH": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "LRE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "LUMN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "LXFR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "MBX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "MFG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "MGA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "MMSI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "MNSB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "MP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "MPLX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "MRLN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 466
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 467
     },
     "MSA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "MVST": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "MYSZ": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "NAK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "NAVN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 238
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 239
     },
     "NDRA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "NEXT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "NKE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "NSP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "NUTX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "NWG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "OCFC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "OLMA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "OPAL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "ORI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "OTLK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "OWLT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "PDSB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "PENG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "PHG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "PLUS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "PMA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 471
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 472
     },
     "POR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "PPLI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "PRLB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "PROP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "QFIN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "RBA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "RDAC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 466
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 467
     },
     "RDDT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "RNTX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "RNXT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "ROLR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 493
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 494
     },
     "RVSB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "RVTY": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "SCHW": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "SELF": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "SHFS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "SLSN": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "SNWV": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 496
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 497
     },
     "SONO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "SOS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "SPIR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "STE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "STNE": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "TACH": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 343
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 344
     },
     "TCPC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "TGS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "TII": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "TKO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "TMO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "TORO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "TPVG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "TRT": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "USAR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "VBIO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "VCTR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "VEON": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "VFS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "VPG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "VRCA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "WAL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "WFG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "WNC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "WRAP": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "WWW": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "XLAB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 288
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 289
     },
     "YDES": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 284
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 285
     },
     "YSWY": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 120
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 121
     },
     "ZDAI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "ZWS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 500
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 501
     },
     "SPY": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING",
-      "latest_date": "2026-10-12",
-      "bars": 502
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "latest_date": "2026-10-13",
+      "bars": 503
     },
     "AMG": {
       "status": "FRESH",
       "error": "",
+      "source": "DAILY_PROVIDER",
       "latest_date": "2026-10-13",
       "bars": 501
     },
     "CATL": {
       "status": "FRESH",
       "error": "",
+      "source": "DAILY_PROVIDER",
       "latest_date": "2026-10-13",
       "bars": 19
     },
     "FXNC": {
       "status": "FRESH",
       "error": "",
+      "source": "DAILY_PROVIDER",
       "latest_date": "2026-10-13",
       "bars": 503
     }

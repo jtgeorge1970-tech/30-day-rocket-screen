@@ -1,11 +1,62 @@
 {
-  "generated_at": "2026-10-14T01:25:11.384508+00:00",
+  "generated_at": "2026-10-14T02:08:34.510123+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
     {
-      "symbol": "SPGI",
+      "symbol": "CQP",
       "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-13",
+      "planned_entry_date": "2026-10-14",
+      "entry_score": 51.6307668591609,
+      "cycle": {
+        "cycle_sessions": 26,
+        "median_swing_pct": 11.519618932577348,
+        "completed_cycle_intervals": 25,
+        "confirmed_turns": 27,
+        "timing_consistency": 39.8962077294686,
+        "amplitude_consistency": 64.22326193685987,
+        "confidence": "LOW"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
+      "symbol": "PSIG",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-13",
+      "planned_entry_date": "2026-10-14",
+      "entry_score": 46.471843583702665,
+      "cycle": {
+        "cycle_sessions": 15.5,
+        "median_swing_pct": 22.20496608125527,
+        "completed_cycle_intervals": 54,
+        "confirmed_turns": 56,
+        "timing_consistency": 29.25136842105264,
+        "amplitude_consistency": 39.59371674823213,
+        "confidence": "LOW"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
+      "symbol": "RERE",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-13",
+      "planned_entry_date": "2026-10-14",
+      "entry_score": 62.27205803946234,
+      "cycle": {
+        "cycle_sessions": 13.5,
+        "median_swing_pct": 12.918659905009022,
+        "completed_cycle_intervals": 54,
+        "confirmed_turns": 56,
+        "timing_consistency": 41.836461538461535,
+        "amplitude_consistency": 60.008091916868445,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
+      "symbol": "SPGI",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-12",
       "planned_entry_date": "2026-10-13",
       "entry_score": 61.1945146345261,
@@ -18,11 +69,13 @@
         "amplitude_consistency": 62.63493570663585,
         "confidence": "HIGH"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-13",
+      "entry_open": 414.1300048828125
     },
     {
       "symbol": "SRAD",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-12",
       "planned_entry_date": "2026-10-13",
       "entry_score": 56.69949392688849,
@@ -35,7 +88,9 @@
         "amplitude_consistency": 56.05857622686228,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-13",
+      "entry_open": 12.779999732971191
     },
     {
       "symbol": "YDES",
@@ -79,9 +134,9 @@
     }
   ],
   "summary": {
-    "complete_signal_cohorts": 2,
-    "pending_entries": 2,
-    "open_positions": 1,
+    "complete_signal_cohorts": 3,
+    "pending_entries": 3,
+    "open_positions": 3,
     "closed_trades": 0,
     "benchmark_pairs": 0,
     "review_trades": 0
