@@ -116,7 +116,7 @@ class PersistenceTests(unittest.TestCase):
             self.assertEqual(audit['ABC']['source'], 'COMPLETE_VERIFIED_15M')
             self.assertEqual(provider.call_count, 3)
             self.assertEqual(read_history(Path(d), 'ABC')[-1]['date'], '2026-10-13')
-            self.assertEqual(read_history(Path(d), 'ABC')[-1]['volume'], 26000.)
+            self.assertEqual(float(read_history(Path(d), 'ABC')[-1]['volume']), 26000.)
 
     def test_intraday_repair_rejects_gaps_and_preserves_old_history(self):
         with tempfile.TemporaryDirectory() as d:

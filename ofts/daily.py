@@ -219,7 +219,9 @@ def verified_intraday_target_bar(downloader, symbol, target):
         raise ValueError('INTRADAY_SESSION_INCOMPLETE')
     if 'Stock Splits' not in day:
         raise ValueError('INTRADAY_SPLIT_STATUS_UNAVAILABLE')
-    splits = pd.to_numeric(day['Stock Splits'], errors='coerce').fillna(0)
+    splits = pd.to_numeric(day['Stock Splits'], errors='coerce')
+    if splits.isna().any():
+        raise ValueError('INTRADAY_SPLIT_STATUS_UNKNOWN')
     if (splits != 0).any():
         raise ValueError('INTRADAY_SPLIT_REQUIRES_DAILY_ACTION_AUDIT')
     values = {}
