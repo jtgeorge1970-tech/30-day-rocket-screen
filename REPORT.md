@@ -1,8 +1,8 @@
 # OFTS daily research
 
 Market session: 2026-10-13
-Selected: 138; refreshed: 135; refresh errors: 3
-Qualified prediction cohorts saved: 3; current coverage: 135/138
+Selected: 138; refreshed: 138; refresh errors: 0
+Qualified prediction cohorts saved: 3; current coverage: 138/138
 Outcome counts: {'INELIGIBLE_DATA': 115, 'PENDING': 1825}
 Cycle fingerprints saved: 111/139
 Signal states: BUY=3, SELL=0, NO_TRADE=136
@@ -60,6 +60,3 @@ Count: 0 of 89 scored CANDIDATE names
 ## Identity-boundary exclusions (current processing; prior snapshots immutable)
 
 ## Refresh failures
-- AKO.B: ValueError: EMPTY_PROVIDER_RESPONSE
-- GTN.A: ValueError: EMPTY_PROVIDER_RESPONSE
-- AKO.A: ValueError: EMPTY_PROVIDER_RESPONSE

@@ -1,9 +1,9 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-14T02:08:33.339376+00:00
-Market as-of: 2026-10-13; qualified cohorts: 3; cohort rows: 388; attempts retained: 55.
+Audit UTC: 2026-10-14T02:15:04.286066+00:00
+Market as-of: 2026-10-13; qualified cohorts: 3; cohort rows: 388; attempts retained: 56.
 Outcome counts: {'PENDING': 1825, 'INELIGIBLE_DATA': 115}.
-Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 135, 'selected': 138}.
+Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 138, 'selected': 138}.
 Cycle ledger: {'complete_signal_cohorts': 3, 'pending_entries': 3, 'open_positions': 3, 'closed_trades': 0, 'benchmark_pairs': 0, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
 Hypothetical next-open entry, price returns excluding dividends, 0.20% round-trip costs.
@@ -51,8 +51,5 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 | LFCR | 57.537 | CANDIDATE |
 
 ## Source failures
-- AKO.B: ValueError: EMPTY_PROVIDER_RESPONSE
-- GTN.A: ValueError: EMPTY_PROVIDER_RESPONSE
-- AKO.A: ValueError: EMPTY_PROVIDER_RESPONSE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

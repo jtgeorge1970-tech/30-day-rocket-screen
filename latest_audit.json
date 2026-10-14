@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-10-14T02:08:33.339376+00:00",
+  "recorded_at": "2026-10-14T02:15:04.286066+00:00",
   "market_asof": "2026-10-13",
   "qualified_cohorts": 3,
   "all_prediction_files": 5,
-  "attempts": 55,
+  "attempts": 56,
   "cohort_rows": 388,
   "outcome_counts": {
     "PENDING": 1825,
@@ -77,21 +77,18 @@
     "attempts/20261014T000710267272Z.json": "a11aaddcf40fc658e4c289b96e3382c9bdfebeed470eabeae2e127b3e9beaa9d",
     "attempts/20261014T011005214743Z.json": "9d686cd54bf3f29628bf766aa06cb45fd3350f447084d2deb245431d805cd7fd",
     "attempts/20261014T012233642395Z.json": "cb884d6492dd78a32554905c6f38b6f0dc131d4993c28b3928271d5be7173078",
-    "attempts/20261014T020715034913Z.json": "7db3938bec7958f08ea423ce481aa63f3c8e66900b460f91baffe6ecd1bd51c1"
+    "attempts/20261014T020715034913Z.json": "7db3938bec7958f08ea423ce481aa63f3c8e66900b460f91baffe6ecd1bd51c1",
+    "attempts/20261014T021322930151Z.json": "29773fd384336630e6e8bac2cbfd1c095cef5cb327fb9e3849b1dca1e6452261"
   },
   "control_unchanged": {
     "cursor": 300,
-    "retry": [
-      "AKO.B",
-      "GTN.A",
-      "AKO.A"
-    ],
+    "retry": [],
     "last_session": "2026-10-13"
   },
   "freshness_gate": {
     "passed": true,
     "required_stale": [],
-    "fresh": 135,
+    "fresh": 138,
     "selected": 138
   },
   "cycle_summary": {

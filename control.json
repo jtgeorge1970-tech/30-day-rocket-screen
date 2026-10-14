@@ -1,9 +1,5 @@
 {
   "cursor": 300,
-  "retry": [
-    "AKO.B",
-    "GTN.A",
-    "AKO.A"
-  ],
+  "retry": [],
   "last_session": "2026-10-13"
 }
