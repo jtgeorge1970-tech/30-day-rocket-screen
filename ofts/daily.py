@@ -198,7 +198,7 @@ def provider_rows(frame, symbol):
 
 
 
-def verified_intraday_target_bar(downloader, symbol, target):
+def verified_intraday_target_bar(downloader, provider_ticker, target):
     """Recover one regular-session daily bar ONLY from all verified 15m slices."""
     import pandas as pd
     frame = downloader(symbol, interval='15m', period='5d', auto_adjust=False,
@@ -246,6 +246,7 @@ def verified_intraday_target_bar(downloader, symbol, target):
 def refresh(state, symbols, target, downloader):
     audit = {}
     for symbol in symbols:
+        provider_ticker = symbol.replace('.', '-')  # Yahoo uses dashed class-share symbols.
         old = read_history(state, symbol)
         error = ''
         new = []
@@ -258,7 +259,7 @@ def refresh(state, symbols, target, downloader):
                     kwargs['end'] = str(datetime.fromisoformat(target).date() + timedelta(days=1))
                 else:
                     kwargs['period'] = '2y'
-                new = provider_rows(downloader(symbol, **kwargs), symbol)
+                new = provider_rows(downloader(provider_ticker, **kwargs), provider_ticker)
                 if not new:
                     raise ValueError('EMPTY_PROVIDER_RESPONSE')
                 merged = merge_history(old, new, target)
@@ -290,6 +291,7 @@ def refresh(state, symbols, target, downloader):
         current = read_history(state, symbol)
         audit[symbol] = dict(status='ERROR' if error else 'FRESH', error=error,
                               source=source if not error else 'UNVERIFIED',
+                              provider_ticker=provider_ticker,
                              latest_date=current[-1]['date'] if current else None,
                              bars=len(current))
         print('REFRESH', symbol, audit[symbol]['status'], audit[symbol]['latest_date'], flush=True)

@@ -140,6 +140,19 @@ class PersistenceTests(unittest.TestCase):
             self.assertIn('INTRADAY_SESSION_INCOMPLETE', audit['ABC']['error'])
             self.assertEqual(read_history(state, 'ABC')[-1]['date'], '2026-10-12')
 
+    def test_yahoo_class_share_alias_does_not_change_ledger_identity(self):
+        with tempfile.TemporaryDirectory() as d:
+            cols = pd.MultiIndex.from_product([['AKO-B'],
+                ['Open', 'High', 'Low', 'Close', 'Volume', 'Stock Splits']])
+            frame = pd.DataFrame([[25., 26., 24., 25.5, 1000., 0.]],
+                columns=cols, index=pd.to_datetime(['2026-10-13']))
+            provider = Mock(return_value=frame)
+            audit = refresh(Path(d), ['AKO.B'], '2026-10-13', provider)
+            self.assertEqual(audit['AKO.B']['status'], 'FRESH')
+            self.assertEqual(audit['AKO.B']['provider_ticker'], 'AKO-B')
+            self.assertEqual(provider.call_args.args[0], 'AKO-B')
+            self.assertEqual(read_history(Path(d), 'AKO.B')[-1]['date'], '2026-10-13')
+
     def test_failed_coverage_is_preserved_but_not_used_as_forward_cohort(self):
         with tempfile.TemporaryDirectory() as d:
             predictions = Path(d)
