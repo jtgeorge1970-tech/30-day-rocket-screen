@@ -20,6 +20,8 @@ on:
     # changes also trigger an immediate recovery run through the push path.
     # Recovery trigger: 2026-10-14 UTC after the 2026-10-13 schedule did not start.
     - cron: '37 22 * * 1-5'
+    # Later provider-availability retry for the same Mon-Fri market session.
+    - cron: '37 1 * * 2-6'
 permissions:
   contents: write
 concurrency:
