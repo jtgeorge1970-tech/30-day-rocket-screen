@@ -22,6 +22,8 @@ on:
     - cron: '37 22 * * 1-5'
     # Later provider-availability retry for the same Mon-Fri market session.
     - cron: '37 1 * * 2-6'
+    # Additional pre-next-open repair opportunities if the data vendor remains late.
+    - cron: '37 3,10 * * 2-6'
 permissions:
   contents: write
 concurrency:
