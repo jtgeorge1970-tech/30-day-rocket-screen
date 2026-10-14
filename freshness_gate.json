@@ -1,6 +1,33 @@
 {
-  "passed": true,
-  "required_stale": [],
-  "fresh": 116,
-  "selected": 125
+  "passed": false,
+  "required_stale": [
+    "SCYX",
+    "AKAM",
+    "WULF",
+    "FUBO",
+    "NYAX",
+    "SPGI",
+    "EPOW",
+    "CHTR",
+    "CSIQ",
+    "SFM",
+    "MESO",
+    "LE",
+    "JACK",
+    "TBLA",
+    "UPWK",
+    "ATGL",
+    "IDR",
+    "FMC",
+    "HNRG",
+    "NX",
+    "XPRO",
+    "CSPI",
+    "MBLY",
+    "CGNX",
+    "SRAD",
+    "SPY"
+  ],
+  "fresh": 2,
+  "selected": 138
 }
