@@ -197,6 +197,50 @@ def provider_rows(frame, symbol):
     return rows
 
 
+
+def verified_intraday_target_bar(downloader, symbol, target):
+    """Recover one regular-session daily bar ONLY from all verified 15m slices."""
+    import pandas as pd
+    frame = downloader(symbol, interval='15m', period='5d', auto_adjust=False,
+                       actions=True, prepost=False, progress=False,
+                       threads=False, timeout=20, group_by='ticker')
+    if frame is None or frame.empty:
+        raise ValueError('INTRADAY_EMPTY')
+    if getattr(frame.columns, 'nlevels', 1) > 1:
+        frame = frame[symbol]
+    if frame.index.tz is None:
+        raise ValueError('INTRADAY_TIMEZONE_UNVERIFIABLE')
+    frame = frame.tz_convert('America/New_York')
+    expected = pd.date_range(start=f'{target} 09:30', end=f'{target} 15:45',
+                             freq='15min', tz='America/New_York')
+    day = frame.loc[frame.index.normalize() == expected[0].normalize()]
+    # Fail closed on early closes, missing 15m bars, duplicates or off-session rows.
+    if len(day) != 26 or not day.index.equals(expected):
+        raise ValueError('INTRADAY_SESSION_INCOMPLETE')
+    if 'Stock Splits' not in day:
+        raise ValueError('INTRADAY_SPLIT_STATUS_UNAVAILABLE')
+    splits = pd.to_numeric(day['Stock Splits'], errors='coerce').fillna(0)
+    if (splits != 0).any():
+        raise ValueError('INTRADAY_SPLIT_REQUIRES_DAILY_ACTION_AUDIT')
+    values = {}
+    for name in ('Open', 'High', 'Low', 'Close', 'Volume'):
+        if name not in day:
+            raise ValueError('INTRADAY_MISSING_' + name.upper())
+        series = pd.to_numeric(day[name], errors='coerce')
+        if not series.map(math.isfinite).all():
+            raise ValueError('INTRADAY_NONFINITE_' + name.upper())
+        values[name] = series
+    o = float(values['Open'].iloc[0])
+    h = float(values['High'].max())
+    l = float(values['Low'].min())
+    c = float(values['Close'].iloc[-1])
+    volume = float(values['Volume'].sum())
+    if min(o, h, l, c) <= 0 or volume <= 0 or h < max(o, c) or l > min(o, c):
+        raise ValueError('INTRADAY_INVALID_OHLCV')
+    return dict(date=target, open=o, high=h, low=l, close=c,
+                volume=volume, split=0.0)
+
+
 def refresh(state, symbols, target, downloader):
     audit = {}
     for symbol in symbols:
@@ -223,6 +267,19 @@ def refresh(state, symbols, target, downloader):
                 break
             except Exception as exc:
                 error = type(exc).__name__ + ': ' + str(exc)[:180]
+        source = 'DAILY_PROVIDER'
+        # Recover missing daily session only from a complete verified intraday session.
+        if error == 'ValueError: LATEST_SESSION_MISSING':
+            try:
+                intraday = verified_intraday_target_bar(downloader, symbol, target)
+                merged = merge_history(old, new + [intraday], target)
+                if not merged or merged[-1]['date'] != target:
+                    raise ValueError('INTRADAY_MERGE_FAILED')
+                save_history(state, symbol, merged)
+                error = ''
+                source = 'COMPLETE_VERIFIED_15M'
+            except Exception as exc:
+                error += ' | 15m: ' + type(exc).__name__ + ': ' + str(exc)[:100]
         # Preserve valid partial downloads but never count a failed refresh as success.
         if error and new:
             merged = merge_history(old, new, target)
@@ -230,6 +287,7 @@ def refresh(state, symbols, target, downloader):
                 save_history(state, symbol, merged)
         current = read_history(state, symbol)
         audit[symbol] = dict(status='ERROR' if error else 'FRESH', error=error,
+                              source=source if not error else 'UNVERIFIED',
                              latest_date=current[-1]['date'] if current else None,
                              bars=len(current))
         print('REFRESH', symbol, audit[symbol]['status'], audit[symbol]['latest_date'], flush=True)
