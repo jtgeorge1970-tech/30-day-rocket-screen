@@ -87,7 +87,21 @@ jobs:
           git -C ofts-state add --all
           if ! git -C ofts-state diff --cached --quiet; then
             git -C ofts-state commit -m "OFTS dated research state $GITHUB_RUN_ID [skip ci]"
-            git -C ofts-state push origin HEAD:refs/heads/ofts-daily-state
+            # GitHub occasionally rejects a ref transaction transiently.
+            # Retry without force; an actual concurrent/invalid update still fails.
+            pushed=false
+            for delay in 0 8 20 40; do
+              if [ "$delay" -gt 0 ]; then sleep "$delay"; fi
+              if git -C ofts-state push origin HEAD:refs/heads/ofts-daily-state; then
+                pushed=true
+                break
+              fi
+              echo "OFTS durable state push failed; retry after backoff ${delay}s" >&2
+            done
+            if [ "$pushed" != true ]; then
+              echo "OFTS_REMOTE_SAVE_RETRY_EXHAUSTED" >&2
+              exit 1
+            fi
           fi
           local_sha=$(git -C ofts-state rev-parse HEAD)
           remote_sha=$(git ls-remote --heads origin refs/heads/ofts-daily-state | cut -f1)

@@ -198,7 +198,7 @@ def provider_rows(frame, symbol):
 
 
 
-def verified_intraday_target_bar(downloader, provider_ticker, target):
+def verified_intraday_target_bar(downloader, symbol, target):
     """Recover one regular-session daily bar ONLY from all verified 15m slices."""
     import pandas as pd
     frame = downloader(symbol, interval='15m', period='5d', auto_adjust=False,
