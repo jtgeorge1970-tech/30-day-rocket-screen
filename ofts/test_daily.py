@@ -15,6 +15,7 @@ from ofts.daily import (save_history, read_history, merge_history, refresh,
                         cycle_fingerprint, current_signal_state,
                         signal_snapshot_complete, score_interpretation,
                         freshness_gate, rolling_watchlist)
+from ofts.audit_saved import saved_refresh_gate
 
 
 def bar(date, close=100, split=0):
@@ -22,6 +23,32 @@ def bar(date, close=100, split=0):
 
 
 class PersistenceTests(unittest.TestCase):
+    def test_failed_operational_gate_cannot_qualify_bulk_fresh_cohort(self):
+        snapshot = dict(coverage={'fresh': 124}, rows=[],
+                        operational_freshness_gate={'passed': False})
+        self.assertFalse(snapshot_is_qualified(snapshot))
+        snapshot['operational_freshness_gate']['passed'] = True
+        self.assertTrue(snapshot_is_qualified(snapshot))
+
+    def test_audit_uses_failed_current_selection_not_prior_success(self):
+        with tempfile.TemporaryDirectory() as d:
+            state = Path(d)
+            selected = [f'S{i}' for i in range(138)]
+            frozen_snapshot(state / 'predictions/2026-10-13.json',
+                            dict(selected=selected, watchlist=selected[:25]))
+            refresh = dict(asof='2026-10-13', symbols={
+                s: {'status': 'FRESH'} for s in selected + ['SPY']})
+            refresh['symbols']['S0']['status'] = 'ERROR'
+            gate = saved_refresh_gate(state, refresh, '2026-10-13')
+            self.assertEqual(gate['selected'], 138)
+            self.assertEqual(gate['fresh'], 137)
+            self.assertEqual(gate['required_stale'], ['S0'])
+            self.assertFalse(gate['passed'])
+            self.assertFalse(saved_refresh_gate(state, refresh, '2026-10-14')['passed'])
+            refresh['asof'] = '2026-10-12'
+            self.assertEqual(saved_refresh_gate(state, refresh, '2026-10-13')['reason'],
+                             'SAVED_REFRESH_NOT_LATEST_COMPLETED_SESSION')
+
     def test_required_watchlist_and_benchmark_override_bulk_coverage(self):
         selected = [f'S{i}' for i in range(125)]
         audit = {s: {'status': 'FRESH'} for s in selected + ['SPY']}

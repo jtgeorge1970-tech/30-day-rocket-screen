@@ -1,5 +1,15 @@
 # OFTS daily operation and persistence SSOT
 
+## Failed-session audit consistency (2026-10-14 UTC)
+
+Saved-data freshness audits must use the attempted session's immutable selection
+and watchlist, including a failed snapshot, not the last qualified session's
+denominator. An explicitly failed operational freshness gate disqualifies a
+new cohort even when bulk coverage exceeds 100. New signal/fingerprint admission
+also requires the full watchlist plus SPY gate. Legacy snapshots without this
+field retain compatibility accounting. No scoring formulas or frozen evidence
+are changed by this operational correction.
+
 ## Operational accounting repair (2026-10-11 UTC / October 10 Mexico)
 
 Daily completion requires all 25 watchlist symbols and SPY fresh, plus the

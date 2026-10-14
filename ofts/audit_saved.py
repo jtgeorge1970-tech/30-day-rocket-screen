@@ -24,6 +24,21 @@ def evidence_hashes(state):
             for p in sorted((state / directory).glob('*.json'))}
 
 
+def saved_refresh_gate(state, refresh, target):
+    # Audit the attempted session, including a failed first snapshot; never
+    # substitute the last successful cohort's selection or watchlist.
+    snapshot = (load_json(state / 'predictions' / (target + '-qualified.json'), None)
+                or load_json(state / 'predictions' / (target + '.json'), None))
+    if snapshot is None:
+        return dict(passed=False, reason='MISSING_SESSION_SELECTION',
+                    required_stale=[], fresh=0, selected=0)
+    gate = freshness_gate(refresh.get('symbols', {}),
+                          snapshot.get('watchlist', WATCH), snapshot['selected'])
+    if refresh.get('asof') != target:
+        gate.update(passed=False, reason='SAVED_REFRESH_NOT_LATEST_COMPLETED_SESSION')
+    return gate
+
+
 def audit_saved(state, now=None):
     now = now or datetime.now(timezone.utc)
     # Fail closed: a missing restore must never bootstrap an empty audit.
@@ -63,11 +78,7 @@ def audit_saved(state, now=None):
                     worst_adverse_excursion_pct=min((r['adverse_excursion_pct'] for r in mature), default=None)))
     latest = max(snapshots, key=lambda s: (s['asof'], s['recorded_at'])) if snapshots else None
     refresh = load_json(state / 'refresh.json', {})
-    gate = freshness_gate(refresh.get('symbols', {}),
-                          latest.get('watchlist', WATCH) if latest else WATCH,
-                          latest['selected'] if latest else [])
-    if refresh.get('asof') != target:
-        gate.update(passed=False, reason='SAVED_REFRESH_NOT_LATEST_COMPLETED_SESSION')
+    gate = saved_refresh_gate(state, refresh, target)
     if before != evidence_hashes(state):
         raise AssertionError('IMMUTABLE_EVIDENCE_CHANGED')
     if control != json.loads((state / 'control.json').read_text()):

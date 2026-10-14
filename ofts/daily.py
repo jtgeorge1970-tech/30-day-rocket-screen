@@ -28,6 +28,9 @@ DATA_FAILURES = {'STALE_DATA', 'DATA_ERROR', 'INSUFFICIENT_HISTORY', 'INSUFFICIE
 
 def snapshot_is_qualified(snapshot, minimum=MIN_FRESH_COHORT):
     """Only forward-test cohorts that met the market-data gate when frozen."""
+    if ('operational_freshness_gate' in snapshot
+            and not snapshot['operational_freshness_gate'].get('passed', False)):
+        return False
     coverage = snapshot.get('coverage', {})
     if 'fresh' in coverage:
         return int(coverage['fresh']) >= int(coverage.get('minimum_fresh', minimum))
@@ -403,7 +406,7 @@ def main():
     # Preserve even failed first attempts, without rewriting any existing cohort.
     frozen_snapshot(snapshot_path, candidate)
     snapshot = None
-    if fresh_count >= required_fresh:
+    if gate['passed']:
         destination = snapshot_path
         if snapshot_path.exists() and not snapshot_is_qualified(load_json(snapshot_path, {})):
             destination = recovery_path
@@ -411,7 +414,7 @@ def main():
     snapshots = load_qualified_snapshots(state / 'predictions')
     fingerprint_snapshot = None
     signal_snapshot = None
-    if fresh_count >= required_fresh:
+    if gate['passed']:
         fingerprint_snapshot = frozen_snapshot(
             state / 'fingerprints' / (target + '.json'),
             dict(asof=target, recorded_at=datetime.now(timezone.utc).isoformat(),
