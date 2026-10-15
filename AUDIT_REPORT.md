@@ -1,7 +1,7 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-14T21:31:44.139770+00:00
-Market as-of: 2026-10-14; qualified cohorts: 4; cohort rows: 513; attempts retained: 60.
+Audit UTC: 2026-10-15T00:50:49.004594+00:00
+Market as-of: 2026-10-14; qualified cohorts: 4; cohort rows: 513; attempts retained: 61.
 Outcome counts: {'PENDING': 2410, 'INELIGIBLE_DATA': 155}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 119, 'selected': 125}.
 Cycle ledger: {'complete_signal_cohorts': 4, 'pending_entries': 0, 'open_positions': 6, 'closed_trades': 0, 'benchmark_pairs': 0, 'review_trades': 0}.
@@ -57,8 +57,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - YHNA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - GWH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - PAAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- AKO.B: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- AP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - CEPV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - CMDB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - DMAA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE

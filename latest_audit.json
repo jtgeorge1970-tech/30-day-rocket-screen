@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-10-14T21:31:44.139770+00:00",
+  "recorded_at": "2026-10-15T00:50:49.004594+00:00",
   "market_asof": "2026-10-14",
   "qualified_cohorts": 4,
   "all_prediction_files": 6,
-  "attempts": 60,
+  "attempts": 61,
   "cohort_rows": 513,
   "outcome_counts": {
     "PENDING": 2410,
@@ -85,7 +85,8 @@
     "attempts/20261014T063903514220Z.json": "5645dc0ded53f737a64e4d3b05f9b826741dbd27114d3e27dbd778a49e844384",
     "attempts/20261014T090000763842Z.json": "c237fcd9ba735eed371f4b95cb23809f89662edd0067f361a067be7593a015b8",
     "attempts/20261014T152549471489Z.json": "ab06287844d00328b1ac7f1d7be797f85c1aab331043dd548ba54889f08c60e0",
-    "attempts/20261014T212927279489Z.json": "0ff9d51e66071ad0e32bd54273bba05b9a6dcc14bd2431449d8a28a0f16d4d1a"
+    "attempts/20261014T212927279489Z.json": "0ff9d51e66071ad0e32bd54273bba05b9a6dcc14bd2431449d8a28a0f16d4d1a",
+    "attempts/20261015T004926681628Z.json": "b67679ba01fc60e6b30c86a60a5aa4a0737c71f1d7812b101a7cf441df5bab74"
   },
   "control_unchanged": {
     "cursor": 400,
@@ -96,8 +97,6 @@
       "YHNA",
       "GWH",
       "PAAC",
-      "AKO.B",
-      "AP",
       "CEPV",
       "CMDB",
       "DMAA",

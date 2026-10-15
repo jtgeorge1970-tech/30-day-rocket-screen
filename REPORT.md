@@ -1,7 +1,7 @@
 # OFTS daily research
 
 Market session: 2026-10-14
-Selected: 125; refreshed: 119; refresh errors: 19
+Selected: 125; refreshed: 119; refresh errors: 17
 Qualified prediction cohorts saved: 4; current coverage: 119/125
 Outcome counts: {'INELIGIBLE_DATA': 155, 'PENDING': 2410}
 Cycle fingerprints saved: 100/128
@@ -66,8 +66,6 @@ Count: 0 of 84 scored CANDIDATE names
 - YHNA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - GWH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - PAAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- AKO.B: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- AP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - CEPV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - CMDB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - DMAA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
