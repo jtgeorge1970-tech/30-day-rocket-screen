@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-10-15T00:50:49.004594+00:00",
+  "recorded_at": "2026-10-15T06:23:14.447662+00:00",
   "market_asof": "2026-10-14",
   "qualified_cohorts": 4,
   "all_prediction_files": 6,
-  "attempts": 61,
+  "attempts": 62,
   "cohort_rows": 513,
   "outcome_counts": {
     "PENDING": 2410,
@@ -86,35 +86,20 @@
     "attempts/20261014T090000763842Z.json": "c237fcd9ba735eed371f4b95cb23809f89662edd0067f361a067be7593a015b8",
     "attempts/20261014T152549471489Z.json": "ab06287844d00328b1ac7f1d7be797f85c1aab331043dd548ba54889f08c60e0",
     "attempts/20261014T212927279489Z.json": "0ff9d51e66071ad0e32bd54273bba05b9a6dcc14bd2431449d8a28a0f16d4d1a",
-    "attempts/20261015T004926681628Z.json": "b67679ba01fc60e6b30c86a60a5aa4a0737c71f1d7812b101a7cf441df5bab74"
+    "attempts/20261015T004926681628Z.json": "b67679ba01fc60e6b30c86a60a5aa4a0737c71f1d7812b101a7cf441df5bab74",
+    "attempts/20261015T062202030224Z.json": "1135ff5e950581f90c07996db40037f02fe5b8a91bdbe88667be7b72ac4dfe41"
   },
   "control_unchanged": {
     "cursor": 400,
     "retry": [
-      "WBD",
-      "QNCX",
-      "BWIV",
-      "YHNA",
-      "GWH",
-      "PAAC",
-      "CEPV",
-      "CMDB",
-      "DMAA",
-      "DYOR",
-      "FOIL",
-      "GIX",
-      "HDL",
-      "LESL",
-      "MCAH",
-      "ROLR",
-      "UCFI"
+      "WBD"
     ],
     "last_session": "2026-10-14"
   },
   "freshness_gate": {
     "passed": true,
     "required_stale": [],
-    "fresh": 119,
+    "fresh": 124,
     "selected": 125
   },
   "cycle_summary": {

@@ -1,23 +1,7 @@
 {
   "cursor": 400,
   "retry": [
-    "WBD",
-    "QNCX",
-    "BWIV",
-    "YHNA",
-    "GWH",
-    "PAAC",
-    "CEPV",
-    "CMDB",
-    "DMAA",
-    "DYOR",
-    "FOIL",
-    "GIX",
-    "HDL",
-    "LESL",
-    "MCAH",
-    "ROLR",
-    "UCFI"
+    "WBD"
   ],
   "last_session": "2026-10-14"
 }
