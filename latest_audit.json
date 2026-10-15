@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-10-15T21:12:52.402665+00:00",
+  "recorded_at": "2026-10-15T23:38:53.464427+00:00",
   "market_asof": "2026-10-15",
   "qualified_cohorts": 5,
   "all_prediction_files": 7,
-  "attempts": 65,
+  "attempts": 66,
   "cohort_rows": 639,
   "outcome_counts": {
     "PENDING": 2985,
@@ -93,7 +93,8 @@
     "attempts/20261015T062202030224Z.json": "1135ff5e950581f90c07996db40037f02fe5b8a91bdbe88667be7b72ac4dfe41",
     "attempts/20261015T083408648754Z.json": "d138ccc701ad9b92792a7089cd1b2b139e55258862137bd023be5b422eb42442",
     "attempts/20261015T151912199257Z.json": "4c21f216cac5ca660fa79fbcff01ee3f346ef48c7048113af30522cfc5c1f672",
-    "attempts/20261015T211045549243Z.json": "59c489cb589e1c195f510a123c3a2a24086e36f93a42b69022e0f3f51de255c4"
+    "attempts/20261015T211045549243Z.json": "59c489cb589e1c195f510a123c3a2a24086e36f93a42b69022e0f3f51de255c4",
+    "attempts/20261015T233656686374Z.json": "8a106fa55b6c7862f0fd9a1e7da18cde4bed1fa223ca9d1ebf2bfc9fa057cda4"
   },
   "control_unchanged": {
     "cursor": 500,
@@ -115,7 +116,6 @@
       "HDL",
       "KCHV",
       "LESL",
-      "NTHI",
       "QNCX",
       "QSEA",
       "SIMA",

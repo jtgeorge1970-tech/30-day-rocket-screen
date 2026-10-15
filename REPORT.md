@@ -1,7 +1,7 @@
 # OFTS daily research
 
 Market session: 2026-10-15
-Selected: 126; refreshed: 120; refresh errors: 24
+Selected: 126; refreshed: 120; refresh errors: 23
 Qualified prediction cohorts saved: 5; current coverage: 120/126
 Outcome counts: {'INELIGIBLE_DATA': 210, 'PENDING': 2985}
 Cycle fingerprints saved: 96/129
@@ -77,7 +77,6 @@ Count: 0 of 76 scored CANDIDATE names
 - HDL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - KCHV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - LESL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- NTHI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - QNCX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - QSEA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - SIMA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE

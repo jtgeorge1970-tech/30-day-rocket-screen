@@ -1,7 +1,7 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-15T21:12:52.402665+00:00
-Market as-of: 2026-10-15; qualified cohorts: 5; cohort rows: 639; attempts retained: 65.
+Audit UTC: 2026-10-15T23:38:53.464427+00:00
+Market as-of: 2026-10-15; qualified cohorts: 5; cohort rows: 639; attempts retained: 66.
 Outcome counts: {'PENDING': 2985, 'INELIGIBLE_DATA': 210}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 120, 'selected': 126}.
 Cycle ledger: {'complete_signal_cohorts': 5, 'pending_entries': 4, 'open_positions': 6, 'closed_trades': 0, 'benchmark_pairs': 0, 'review_trades': 0}.
@@ -68,7 +68,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - HDL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - KCHV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - LESL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- NTHI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - QNCX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - QSEA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - SIMA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
