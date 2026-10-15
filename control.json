@@ -1,7 +1,30 @@
 {
-  "cursor": 400,
+  "cursor": 500,
   "retry": [
-    "WBD"
+    "AFJK",
+    "SAGU",
+    "TAP.A",
+    "NBR",
+    "BRT",
+    "WBD",
+    "AKO.A",
+    "AKO.B",
+    "BREZ",
+    "BWIV",
+    "CODX",
+    "GIX",
+    "GTN.A",
+    "GWH",
+    "HDL",
+    "KCHV",
+    "LESL",
+    "NTHI",
+    "QNCX",
+    "QSEA",
+    "SIMA",
+    "TPVG",
+    "UCFI",
+    "YHNA"
   ],
-  "last_session": "2026-10-14"
+  "last_session": "2026-10-15"
 }
