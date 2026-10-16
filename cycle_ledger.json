@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-16T15:01:58.480391+00:00",
+  "generated_at": "2026-10-16T20:39:55.281752+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
     {
       "symbol": "BETR",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-15",
       "planned_entry_date": "2026-10-16",
       "entry_score": 48.77296493155529,
@@ -18,7 +18,9 @@
         "amplitude_consistency": 48.26923377572185,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-16",
+      "entry_open": 10.680000305175781
     },
     {
       "symbol": "CQP",
@@ -41,7 +43,7 @@
     },
     {
       "symbol": "MF",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-15",
       "planned_entry_date": "2026-10-16",
       "entry_score": 42.284608731359256,
@@ -54,11 +56,13 @@
         "amplitude_consistency": 53.45351964524183,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-16",
+      "entry_open": 10.255000114440918
     },
     {
       "symbol": "MH",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-15",
       "planned_entry_date": "2026-10-16",
       "entry_score": 60.88540129679268,
@@ -71,7 +75,9 @@
         "amplitude_consistency": 62.5240553289059,
         "confidence": "MEDIUM"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-16",
+      "entry_open": 14.470000267028809
     },
     {
       "symbol": "PSIG",
@@ -94,7 +100,7 @@
     },
     {
       "symbol": "PTLE",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-15",
       "planned_entry_date": "2026-10-16",
       "entry_score": 36.30039029022032,
@@ -107,7 +113,9 @@
         "amplitude_consistency": 27.455949796740555,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-16",
+      "entry_open": 8.949999809265137
     },
     {
       "symbol": "RERE",
@@ -223,12 +231,18 @@
       "signal_date": "2026-10-15",
       "signal": "SELL",
       "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "SKIN",
+      "signal_date": "2026-10-16",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
     }
   ],
   "summary": {
-    "complete_signal_cohorts": 5,
-    "pending_entries": 4,
-    "open_positions": 6,
+    "complete_signal_cohorts": 6,
+    "pending_entries": 0,
+    "open_positions": 10,
     "closed_trades": 0,
     "benchmark_pairs": 0,
     "review_trades": 0

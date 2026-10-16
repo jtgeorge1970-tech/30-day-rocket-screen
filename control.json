@@ -1,7 +1,30 @@
 {
-  "cursor": 500,
+  "cursor": 600,
   "retry": [
-    "WBD"
+    "EXOD",
+    "SLP",
+    "HCI",
+    "WBD",
+    "AKO.A",
+    "BREZ",
+    "BRT",
+    "CQP",
+    "DYOR",
+    "GCGR",
+    "GTN.A",
+    "GWH",
+    "LESL",
+    "MCAH",
+    "ONCH",
+    "QNCX",
+    "QSEA",
+    "SAC",
+    "SAGU",
+    "TAP.A",
+    "TGS",
+    "TRNR",
+    "UCFI",
+    "YHNA"
   ],
-  "last_session": "2026-10-15"
+  "last_session": "2026-10-16"
 }
