@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-10-16T00:45:05.930392+00:00",
+  "recorded_at": "2026-10-16T02:20:45.582838+00:00",
   "market_asof": "2026-10-15",
   "qualified_cohorts": 5,
   "all_prediction_files": 7,
-  "attempts": 67,
+  "attempts": 68,
   "cohort_rows": 639,
   "outcome_counts": {
     "PENDING": 2985,
@@ -95,35 +95,20 @@
     "attempts/20261015T151912199257Z.json": "4c21f216cac5ca660fa79fbcff01ee3f346ef48c7048113af30522cfc5c1f672",
     "attempts/20261015T211045549243Z.json": "59c489cb589e1c195f510a123c3a2a24086e36f93a42b69022e0f3f51de255c4",
     "attempts/20261015T233656686374Z.json": "8a106fa55b6c7862f0fd9a1e7da18cde4bed1fa223ca9d1ebf2bfc9fa057cda4",
-    "attempts/20261016T004254441372Z.json": "d2b621516da99e19c792ad04f83069746e340805353a29e8696693affe0ccfa5"
+    "attempts/20261016T004254441372Z.json": "d2b621516da99e19c792ad04f83069746e340805353a29e8696693affe0ccfa5",
+    "attempts/20261016T021852865535Z.json": "bf3b92cc04619878efe4a9d79b9c26dda824ebebabc50511feea87551859e786"
   },
   "control_unchanged": {
     "cursor": 500,
     "retry": [
-      "AFJK",
-      "SAGU",
-      "WBD",
-      "BREZ",
-      "BWIV",
-      "CODX",
-      "GIX",
-      "GWH",
-      "HDL",
-      "KCHV",
-      "LESL",
-      "QNCX",
-      "QSEA",
-      "SIMA",
-      "TPVG",
-      "UCFI",
-      "YHNA"
+      "WBD"
     ],
     "last_session": "2026-10-15"
   },
   "freshness_gate": {
     "passed": true,
     "required_stale": [],
-    "fresh": 123,
+    "fresh": 125,
     "selected": 126
   },
   "cycle_summary": {
