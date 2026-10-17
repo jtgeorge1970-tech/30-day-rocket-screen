@@ -1,9 +1,9 @@
 # OFTS daily research
 
 Market session: 2026-10-16
-Selected: 126; refreshed: 122; refresh errors: 24
-Qualified prediction cohorts saved: 6; current coverage: 122/126
-Outcome counts: {'INELIGIBLE_DATA': 250, 'MATURE': 118, 'MISSING_SESSIONS': 3, 'PENDING': 3454}
+Selected: 126; refreshed: 124; refresh errors: 2
+Qualified prediction cohorts saved: 6; current coverage: 124/126
+Outcome counts: {'INELIGIBLE_DATA': 250, 'MATURE': 121, 'PENDING': 3454}
 Cycle fingerprints saved: 106/133
 Signal states: BUY=0, SELL=1, NO_TRADE=132
 Cycle ledger: pending entries=0; open positions=10; closed trades=0; SPY pairs=0
@@ -61,24 +61,24 @@ Count: 0 of 93 scored CANDIDATE names
     "score_band": "0-40",
     "observations": 9,
     "positive_net_pct": 22.22222222222222,
-    "average_net_pct": -2.410209942413636,
+    "average_net_pct": -2.4042649451013145,
     "average_positive_pct": 3.535550998543635,
-    "average_nonpositive_pct": -4.108998782687142,
+    "average_nonpositive_pct": -4.101355214714158,
     "benchmark_pairs": 9,
-    "average_excess_pct": -0.22376561201029965,
+    "average_excess_pct": -0.21011657038036496,
     "worst_adverse_excursion_pct": -13.595710342333245
   },
   {
     "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
     "horizon": 5,
     "score_band": "40-60",
-    "observations": 75,
-    "positive_net_pct": 38.666666666666664,
-    "average_net_pct": -3.6848306665266652,
-    "average_positive_pct": 4.514460403453504,
-    "average_nonpositive_pct": -8.853948949775036,
-    "benchmark_pairs": 75,
-    "average_excess_pct": -1.498386336123331,
+    "observations": 77,
+    "positive_net_pct": 38.96103896103896,
+    "average_net_pct": -3.572760627165922,
+    "average_positive_pct": 4.412636113262518,
+    "average_nonpositive_pct": -8.669822376375567,
+    "benchmark_pairs": 77,
+    "average_excess_pct": -1.3786122524449742,
     "worst_adverse_excursion_pct": -40.99756998687247
   },
   {
@@ -87,11 +87,11 @@ Count: 0 of 93 scored CANDIDATE names
     "score_band": "60-80",
     "observations": 11,
     "positive_net_pct": 18.181818181818183,
-    "average_net_pct": -6.105127488803292,
+    "average_net_pct": -6.120536161300652,
     "average_positive_pct": 5.132624031052579,
-    "average_nonpositive_pct": -8.602405604326819,
+    "average_nonpositive_pct": -8.621238426268038,
     "benchmark_pairs": 11,
-    "average_excess_pct": -3.9186831583999564,
+    "average_excess_pct": -3.9263877865797028,
     "worst_adverse_excursion_pct": -24.34210416242579
   }
 ]
@@ -100,27 +100,5 @@ Count: 0 of 93 scored CANDIDATE names
 ## Identity-boundary exclusions (current processing; prior snapshots immutable)
 
 ## Refresh failures
-- EXOD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- HCI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- AKO.A: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- BREZ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- BRT: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- CQP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- DYOR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- GCGR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- GTN.A: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- GWH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- LESL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- MCAH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- ONCH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- QNCX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- QSEA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SAGU: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- TAP.A: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- TGS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- TRNR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- UCFI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- YHNA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY

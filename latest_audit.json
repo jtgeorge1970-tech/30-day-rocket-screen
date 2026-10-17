@@ -1,14 +1,13 @@
 {
-  "recorded_at": "2026-10-17T00:47:54.729469+00:00",
+  "recorded_at": "2026-10-17T06:06:50.864541+00:00",
   "market_asof": "2026-10-16",
   "qualified_cohorts": 6,
   "all_prediction_files": 8,
-  "attempts": 73,
+  "attempts": 74,
   "cohort_rows": 765,
   "outcome_counts": {
-    "MATURE": 118,
+    "MATURE": 121,
     "PENDING": 3454,
-    "MISSING_SESSIONS": 3,
     "INELIGIBLE_DATA": 250
   },
   "outcome_recompute_matches_saved": true,
@@ -106,42 +105,21 @@
     "attempts/20261016T082829503325Z.json": "77f787474de28c8dffc9df62ef0591b98b8827c18da860488fe42f81990b9ff6",
     "attempts/20261016T145927846125Z.json": "b805745efcb448658028a80c71bca43d621af9995cdd498ecc9dfaa7b055d5a4",
     "attempts/20261016T203631633992Z.json": "6ced24617c4ffbc1dc3e7a0d37d92eaf5f5b2b5ba7326c602fe3fdc6f5b4ffd8",
-    "attempts/20261017T004508695794Z.json": "ba93db90ae830b52f392c36aa633ed105717904b85c295129f07d4262b54bdb2"
+    "attempts/20261017T004508695794Z.json": "ba93db90ae830b52f392c36aa633ed105717904b85c295129f07d4262b54bdb2",
+    "attempts/20261017T060437839447Z.json": "81bf4cad18b711150d540048d5532f13f1a6ccd1933ecacf16f3e3104ee69f55"
   },
   "control_unchanged": {
     "cursor": 600,
     "retry": [
-      "EXOD",
       "SLP",
-      "HCI",
-      "WBD",
-      "AKO.A",
-      "BREZ",
-      "BRT",
-      "CQP",
-      "DYOR",
-      "GCGR",
-      "GTN.A",
-      "GWH",
-      "LESL",
-      "MCAH",
-      "ONCH",
-      "QNCX",
-      "QSEA",
-      "SAC",
-      "SAGU",
-      "TAP.A",
-      "TGS",
-      "TRNR",
-      "UCFI",
-      "YHNA"
+      "WBD"
     ],
     "last_session": "2026-10-16"
   },
   "freshness_gate": {
     "passed": true,
     "required_stale": [],
-    "fresh": 122,
+    "fresh": 124,
     "selected": 126
   },
   "cycle_summary": {
@@ -164,11 +142,11 @@
       "mature": 9,
       "positive": 2,
       "nonpositive": 7,
-      "average_net_pct": -2.410209942413636,
+      "average_net_pct": -2.4042649451013145,
       "average_positive_pct": 3.535550998543635,
-      "average_nonpositive_pct": -4.108998782687142,
+      "average_nonpositive_pct": -4.101355214714158,
       "benchmark_pairs": 9,
-      "average_excess_gross_pct": -0.22376561201029965,
+      "average_excess_gross_pct": -0.21011657038036496,
       "worst_adverse_excursion_pct": -13.595710342333245
     },
     {
@@ -177,17 +155,16 @@
       "score_band": "40-<60",
       "observations": 77,
       "statuses": {
-        "MATURE": 75,
-        "MISSING_SESSIONS": 2
+        "MATURE": 77
       },
-      "mature": 75,
-      "positive": 29,
-      "nonpositive": 46,
-      "average_net_pct": -3.6848306665266652,
-      "average_positive_pct": 4.514460403453504,
-      "average_nonpositive_pct": -8.853948949775036,
-      "benchmark_pairs": 75,
-      "average_excess_gross_pct": -1.498386336123331,
+      "mature": 77,
+      "positive": 30,
+      "nonpositive": 47,
+      "average_net_pct": -3.572760627165922,
+      "average_positive_pct": 4.412636113262518,
+      "average_nonpositive_pct": -8.669822376375567,
+      "benchmark_pairs": 77,
+      "average_excess_gross_pct": -1.3786122524449742,
       "worst_adverse_excursion_pct": -40.99756998687247
     },
     {
@@ -201,11 +178,11 @@
       "mature": 11,
       "positive": 2,
       "nonpositive": 9,
-      "average_net_pct": -6.105127488803292,
+      "average_net_pct": -6.120536161300652,
       "average_positive_pct": 5.132624031052579,
-      "average_nonpositive_pct": -8.602405604326819,
+      "average_nonpositive_pct": -8.621238426268038,
       "benchmark_pairs": 11,
-      "average_excess_gross_pct": -3.9186831583999564,
+      "average_excess_gross_pct": -3.9263877865797028,
       "worst_adverse_excursion_pct": -24.34210416242579
     },
     {
@@ -230,19 +207,18 @@
       "score_band": "UNSCORED",
       "observations": 28,
       "statuses": {
-        "MATURE": 23,
-        "INELIGIBLE_DATA": 4,
-        "MISSING_SESSIONS": 1
+        "MATURE": 24,
+        "INELIGIBLE_DATA": 4
       },
-      "mature": 23,
-      "positive": 2,
+      "mature": 24,
+      "positive": 3,
       "nonpositive": 21,
-      "average_net_pct": -13.673307493403925,
-      "average_positive_pct": 17.892688537860145,
-      "average_nonpositive_pct": -16.67959282971479,
-      "benchmark_pairs": 23,
-      "average_excess_gross_pct": -11.48686316300059,
-      "worst_adverse_excursion_pct": -68.76190363333605
+      "average_net_pct": -10.194661074340397,
+      "average_positive_pct": 34.8227173819535,
+      "average_nonpositive_pct": -16.625715139525237,
+      "benchmark_pairs": 24,
+      "average_excess_gross_pct": -8.000512699619444,
+      "worst_adverse_excursion_pct": -68.80952348852372
     },
     {
       "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",

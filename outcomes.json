@@ -12,8 +12,8 @@
     "gross_price_return_pct": -14.77437967093932,
     "net_assumed_return_pct": -14.974379670939319,
     "adverse_excursion_pct": -16.593884795863023,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -12.787935340535984
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -12.78023129621837
   },
   {
     "symbol": "HNRG",
@@ -72,8 +72,8 @@
     "gross_price_return_pct": 5.875000586876511,
     "net_assumed_return_pct": 5.675000586876511,
     "adverse_excursion_pct": -2.2788487947904112,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 7.861444917279847
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 7.86914896159746
   },
   {
     "symbol": "CHTR",
@@ -129,11 +129,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": -9.435028272940071,
-    "net_assumed_return_pct": -9.63502827294007,
+    "gross_price_return_pct": -9.604523670411035,
+    "net_assumed_return_pct": -9.804523670411035,
     "adverse_excursion_pct": -11.299439929188882,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -7.448583942536735
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -7.610375295690085
   },
   {
     "symbol": "FUBO",
@@ -192,8 +192,8 @@
     "gross_price_return_pct": -10.119045380494418,
     "net_assumed_return_pct": -10.319045380494417,
     "adverse_excursion_pct": -22.470235106980763,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -8.132601050091083
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -8.124897005773468
   },
   {
     "symbol": "EPOW",
@@ -252,8 +252,8 @@
     "gross_price_return_pct": -14.619882714792832,
     "net_assumed_return_pct": -14.819882714792831,
     "adverse_excursion_pct": -24.34210416242579,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -12.633438384389496
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -12.625734340071881
   },
   {
     "symbol": "WULF",
@@ -312,8 +312,8 @@
     "gross_price_return_pct": -2.5524218762972284,
     "net_assumed_return_pct": -2.7524218762972286,
     "adverse_excursion_pct": -11.668191936992468,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -0.565977545893892
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -0.5582735015762785
   },
   {
     "symbol": "HLIT",
@@ -372,8 +372,8 @@
     "gross_price_return_pct": -3.0230717873237944,
     "net_assumed_return_pct": -3.2230717873237946,
     "adverse_excursion_pct": -8.034998406749317,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -1.036627456920458
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -1.0289234126028446
   },
   {
     "symbol": "JACK",
@@ -426,9 +426,14 @@
     "score": 55.24657634747561,
     "classification": "CANDIDATE",
     "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
-    "status": "MISSING_SESSIONS",
+    "status": "MATURE",
     "entry_date": "2026-10-12",
-    "end_date": "2026-10-16"
+    "end_date": "2026-10-16",
+    "gross_price_return_pct": 1.6336059558539562,
+    "net_assumed_return_pct": 1.4336059558539562,
+    "adverse_excursion_pct": -1.0112731652729856,
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 3.627754330574906
   },
   {
     "symbol": "TGS",
@@ -487,8 +492,8 @@
     "gross_price_return_pct": 4.790247475228648,
     "net_assumed_return_pct": 4.590247475228648,
     "adverse_excursion_pct": -1.0121936332888715,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 6.776691805631985
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 6.784395849949599
   },
   {
     "symbol": "SPGI",
@@ -547,8 +552,8 @@
     "gross_price_return_pct": -12.175466852176386,
     "net_assumed_return_pct": -12.375466852176386,
     "adverse_excursion_pct": -12.623096130541189,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -10.189022521773051
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -10.181318477455436
   },
   {
     "symbol": "CSIQ",
@@ -607,8 +612,8 @@
     "gross_price_return_pct": -0.615008487466695,
     "net_assumed_return_pct": -0.815008487466695,
     "adverse_excursion_pct": -7.3800725238222125,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 1.3714358429366413
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 1.3791398872542548
   },
   {
     "symbol": "XPRO",
@@ -667,8 +672,8 @@
     "gross_price_return_pct": 0.015331349074454437,
     "net_assumed_return_pct": -0.18466865092554557,
     "adverse_excursion_pct": -3.6048507452206002,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 2.001775679477791
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 2.0094797237954043
   },
   {
     "symbol": "SFM",
@@ -726,9 +731,9 @@
     "end_date": "2026-10-16",
     "gross_price_return_pct": -14.008942650916111,
     "net_assumed_return_pct": -14.20894265091611,
-    "adverse_excursion_pct": -14.605067265306937,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -12.022498320512774
+    "adverse_excursion_pct": -14.754101972087618,
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -12.014794276195161
   },
   {
     "symbol": "DTIL",
@@ -787,8 +792,8 @@
     "gross_price_return_pct": 0.0,
     "net_assumed_return_pct": -0.2,
     "adverse_excursion_pct": -2.3255860695907793,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 1.9864443304033363
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 1.9941483747209499
   },
   {
     "symbol": "TBLA",
@@ -847,8 +852,8 @@
     "gross_price_return_pct": 10.181817141446192,
     "net_assumed_return_pct": 9.981817141446193,
     "adverse_excursion_pct": -1.1818192221901613,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 12.16826147184953
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 12.175965516167143
   },
   {
     "symbol": "FWRG",
@@ -907,8 +912,8 @@
     "gross_price_return_pct": 1.1461328410969696,
     "net_assumed_return_pct": 0.9461328410969696,
     "adverse_excursion_pct": -6.391884019075,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 3.132577171500306
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 3.1402812158179194
   },
   {
     "symbol": "NYAX",
@@ -967,8 +972,8 @@
     "gross_price_return_pct": -12.366735962254827,
     "net_assumed_return_pct": -12.566735962254826,
     "adverse_excursion_pct": -12.366735962254827,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -10.380291631851492
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -10.372587587533877
   },
   {
     "symbol": "OWLT",
@@ -1027,8 +1032,8 @@
     "gross_price_return_pct": -4.643714446234382,
     "net_assumed_return_pct": -4.843714446234382,
     "adverse_excursion_pct": -8.8070412165983,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -2.6572701158310457
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -2.649566071513432
   },
   {
     "symbol": "SRAD",
@@ -1087,8 +1092,8 @@
     "gross_price_return_pct": 8.888891008165146,
     "net_assumed_return_pct": 8.688891008165147,
     "adverse_excursion_pct": -11.111111111111116,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 10.875335338568483
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 10.883039382886096
   },
   {
     "symbol": "ATGL",
@@ -1147,8 +1152,8 @@
     "gross_price_return_pct": -31.143556404555127,
     "net_assumed_return_pct": -31.343556404555127,
     "adverse_excursion_pct": -40.99756998687247,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -29.15711207415179
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -29.149408029834177
   },
   {
     "symbol": "FMC",
@@ -1207,8 +1212,8 @@
     "gross_price_return_pct": -5.197304562170335,
     "net_assumed_return_pct": -5.397304562170335,
     "adverse_excursion_pct": -6.737254473618148,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -3.2108602317669988
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -3.2031561874493852
   },
   {
     "symbol": "LE",
@@ -1267,8 +1272,8 @@
     "gross_price_return_pct": -8.223915080147858,
     "net_assumed_return_pct": -8.423915080147857,
     "adverse_excursion_pct": -10.573605103047246,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -6.237470749744522
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -6.229766705426908
   },
   {
     "symbol": "MESO",
@@ -1327,8 +1332,8 @@
     "gross_price_return_pct": 4.5957915185505405,
     "net_assumed_return_pct": 4.39579151855054,
     "adverse_excursion_pct": -0.9966794601252715,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 6.582235848953877
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 6.58993989327149
   },
   {
     "symbol": "NX",
@@ -1387,8 +1392,8 @@
     "gross_price_return_pct": 1.1204471316808462,
     "net_assumed_return_pct": 0.9204471316808462,
     "adverse_excursion_pct": -5.042012092563841,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 3.1068914620841825
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 3.114595506401796
   },
   {
     "symbol": "MBLY",
@@ -1447,8 +1452,8 @@
     "gross_price_return_pct": -5.173915365467896,
     "net_assumed_return_pct": -5.373915365467896,
     "adverse_excursion_pct": -12.826090273649793,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -3.1874710350645596
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -3.179766990746946
   },
   {
     "symbol": "IDR",
@@ -1507,8 +1512,8 @@
     "gross_price_return_pct": 3.267045743178487,
     "net_assumed_return_pct": 3.067045743178487,
     "adverse_excursion_pct": -0.1242892315403421,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 5.2534900735818235
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 5.2611941178994375
   },
   {
     "symbol": "MPLX",
@@ -1567,8 +1572,8 @@
     "gross_price_return_pct": -5.639918033660152,
     "net_assumed_return_pct": -5.839918033660152,
     "adverse_excursion_pct": -12.906729930508998,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -3.6534737032568154
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -3.645769658939202
   },
   {
     "symbol": "AUC",
@@ -1627,8 +1632,8 @@
     "gross_price_return_pct": -0.09794543432392055,
     "net_assumed_return_pct": -0.29794543432392057,
     "adverse_excursion_pct": -0.09794543432392055,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 1.8884988960794158
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 1.8962029403970293
   },
   {
     "symbol": "CEPV",
@@ -1684,11 +1689,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": 16.923081272922946,
-    "net_assumed_return_pct": 16.723081272922947,
+    "gross_price_return_pct": 17.948724414705296,
+    "net_assumed_return_pct": 17.748724414705297,
     "adverse_excursion_pct": -5.128200425668883,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 18.909525603326284
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 19.942872789426247
   },
   {
     "symbol": "DXLG",
@@ -1747,8 +1752,8 @@
     "gross_price_return_pct": 0.9218113416715745,
     "net_assumed_return_pct": 0.7218113416715746,
     "adverse_excursion_pct": -0.9559599791513551,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 2.908255672074911
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 2.9159597163925244
   },
   {
     "symbol": "FXNC",
@@ -1804,11 +1809,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": -4.593831904213164,
-    "net_assumed_return_pct": -4.793831904213164,
-    "adverse_excursion_pct": -7.212880079793427,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -2.6073875738098273
+    "gross_price_return_pct": -4.6218477573793715,
+    "net_assumed_return_pct": -4.821847757379372,
+    "adverse_excursion_pct": -7.14285714285714,
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -2.6276993826584216
   },
   {
     "symbol": "ICMB",
@@ -1867,8 +1872,8 @@
     "gross_price_return_pct": -5.502180332736561,
     "net_assumed_return_pct": -5.702180332736561,
     "adverse_excursion_pct": -7.423584241302095,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -3.5157360023332247
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -3.508031958015611
   },
   {
     "symbol": "LRE",
@@ -1927,8 +1932,8 @@
     "gross_price_return_pct": -11.793215061798945,
     "net_assumed_return_pct": -11.993215061798944,
     "adverse_excursion_pct": -12.762519459616396,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -9.80677073139561
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -9.799066687077994
   },
   {
     "symbol": "AXIL",
@@ -1984,11 +1989,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": -20.67441822748819,
-    "net_assumed_return_pct": -20.87441822748819,
-    "adverse_excursion_pct": -20.906980299833535,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -18.687973897084852
+    "gross_price_return_pct": -20.697677900108992,
+    "net_assumed_return_pct": -20.89767790010899,
+    "adverse_excursion_pct": -20.930233041681802,
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -18.703529525388042
   },
   {
     "symbol": "PROP",
@@ -2044,11 +2049,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": -23.337657379488697,
-    "net_assumed_return_pct": -23.537657379488696,
+    "gross_price_return_pct": -23.37662488458373,
+    "net_assumed_return_pct": -23.57662488458373,
     "adverse_excursion_pct": -29.87012534624881,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -21.35121304908536
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -21.38247650986278
   },
   {
     "symbol": "RNTX",
@@ -2104,11 +2109,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": -24.607144191404984,
-    "net_assumed_return_pct": -24.807144191404984,
+    "gross_price_return_pct": -24.642859081528613,
+    "net_assumed_return_pct": -24.842859081528612,
     "adverse_excursion_pct": -32.14285828325213,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -22.620699861001647
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -22.648710706807663
   },
   {
     "symbol": "SOS",
@@ -2167,8 +2172,8 @@
     "gross_price_return_pct": 1.960782480441492,
     "net_assumed_return_pct": 1.760782480441492,
     "adverse_excursion_pct": -1.960782480441492,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 3.9472268108448283
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 3.954930855162442
   },
   {
     "symbol": "VFS",
@@ -2227,8 +2232,8 @@
     "gross_price_return_pct": 7.777775658501529,
     "net_assumed_return_pct": 7.577775658501529,
     "adverse_excursion_pct": -0.33333036634657365,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 9.764219988904866
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 9.77192403322248
   },
   {
     "symbol": "ROLR",
@@ -2286,9 +2291,9 @@
     "end_date": "2026-10-16",
     "gross_price_return_pct": -0.4567183096751193,
     "net_assumed_return_pct": -0.6567183096751192,
-    "adverse_excursion_pct": -5.116675886039834,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 1.529726020728217
+    "adverse_excursion_pct": -5.138094595124332,
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 1.5374300650458306
   },
   {
     "symbol": "CHRW",
@@ -2347,8 +2352,8 @@
     "gross_price_return_pct": 4.9860810530703015,
     "net_assumed_return_pct": 4.786081053070301,
     "adverse_excursion_pct": -0.7196842215530852,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 6.972525383473638
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 6.980229427791251
   },
   {
     "symbol": "TMO",
@@ -2407,8 +2412,8 @@
     "gross_price_return_pct": -9.73905678803737,
     "net_assumed_return_pct": -9.93905678803737,
     "adverse_excursion_pct": -11.291104668872865,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -7.752612457634034
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -7.74490841331642
   },
   {
     "symbol": "NUTX",
@@ -2467,8 +2472,8 @@
     "gross_price_return_pct": 0.38551971741376256,
     "net_assumed_return_pct": 0.18551971741376255,
     "adverse_excursion_pct": -1.8238483280042184,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 2.371964047817099
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 2.3796680921347124
   },
   {
     "symbol": "BIRK",
@@ -2527,8 +2532,8 @@
     "gross_price_return_pct": -11.157023653486785,
     "net_assumed_return_pct": -11.357023653486785,
     "adverse_excursion_pct": -11.570246386874917,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -9.170579323083448
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -9.162875278765835
   },
   {
     "symbol": "CREX",
@@ -2587,8 +2592,8 @@
     "gross_price_return_pct": -0.9523862210825129,
     "net_assumed_return_pct": -1.1523862210825129,
     "adverse_excursion_pct": -3.6796552702725305,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 1.0340581093208234
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 1.041762153638437
   },
   {
     "symbol": "FHN",
@@ -2647,8 +2652,8 @@
     "gross_price_return_pct": 9.213254217195278,
     "net_assumed_return_pct": 9.013254217195279,
     "adverse_excursion_pct": -1.9668693932143433,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 11.199698547598615
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 11.207402591916228
   },
   {
     "symbol": "HPK",
@@ -2707,8 +2712,8 @@
     "gross_price_return_pct": 7.078142756514083,
     "net_assumed_return_pct": 6.878142756514083,
     "adverse_excursion_pct": -0.9909356657564872,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 9.06458708691742
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 9.072291131235033
   },
   {
     "symbol": "KVUE",
@@ -2767,8 +2772,8 @@
     "gross_price_return_pct": -0.7098091090222858,
     "net_assumed_return_pct": -0.9098091090222857,
     "adverse_excursion_pct": -1.402982728113733,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 1.2766352213810506
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 1.284339265698664
   },
   {
     "symbol": "MSA",
@@ -2827,8 +2832,8 @@
     "gross_price_return_pct": 0.4385958138544366,
     "net_assumed_return_pct": 0.23859581385443657,
     "adverse_excursion_pct": -1.506968472204273,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 2.425040144257773
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 2.4327441885753864
   },
   {
     "symbol": "ORA",
@@ -2887,8 +2892,8 @@
     "gross_price_return_pct": -2.958355927532419,
     "net_assumed_return_pct": -3.158355927532419,
     "adverse_excursion_pct": -9.564947155653503,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -0.9719115971290826
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -0.9642075528114691
   },
   {
     "symbol": "RDDT",
@@ -2947,8 +2952,8 @@
     "gross_price_return_pct": -13.58884606399986,
     "net_assumed_return_pct": -13.78884606399986,
     "adverse_excursion_pct": -14.285709538704062,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -11.602401733596523
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -11.59469768927891
   },
   {
     "symbol": "SNWV",
@@ -3007,8 +3012,8 @@
     "gross_price_return_pct": -11.98568976753549,
     "net_assumed_return_pct": -12.18568976753549,
     "adverse_excursion_pct": -13.595710342333245,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -9.999245437132153
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -9.99154139281454
   },
   {
     "symbol": "TRT",
@@ -3067,8 +3072,8 @@
     "gross_price_return_pct": 2.0917952206593426,
     "net_assumed_return_pct": 1.8917952206593427,
     "adverse_excursion_pct": -1.8264099493215724,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 4.078239551062679
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 4.085943595380293
   },
   {
     "symbol": "WFG",
@@ -3127,8 +3132,8 @@
     "gross_price_return_pct": 10.51045820802825,
     "net_assumed_return_pct": 10.310458208028251,
     "adverse_excursion_pct": -0.585771504805177,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 12.496902538431588
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 12.5046065827492
   },
   {
     "symbol": "CTSH",
@@ -3187,8 +3192,8 @@
     "gross_price_return_pct": -1.5847082492018938,
     "net_assumed_return_pct": -1.7847082492018937,
     "adverse_excursion_pct": -4.066900859763168,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 0.40173608120144255
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 0.40944012551905606
   },
   {
     "symbol": "ARGX",
@@ -3247,8 +3252,8 @@
     "gross_price_return_pct": -1.9027516326632021,
     "net_assumed_return_pct": -2.1027516326632023,
     "adverse_excursion_pct": -2.114162880112558,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 0.08369269774013421
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 0.09139674205774773
   },
   {
     "symbol": "LAND",
@@ -3307,8 +3312,8 @@
     "gross_price_return_pct": 7.692303853502858,
     "net_assumed_return_pct": 7.492303853502857,
     "adverse_excursion_pct": -4.474104773820997,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 9.678748183906194
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 9.686452228223807
   },
   {
     "symbol": "BROS",
@@ -3367,8 +3372,8 @@
     "gross_price_return_pct": -19.87448210050151,
     "net_assumed_return_pct": -20.07448210050151,
     "adverse_excursion_pct": -22.280339935000516,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -17.888037770098173
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -17.88033372578056
   },
   {
     "symbol": "LPTH",
@@ -3427,8 +3432,8 @@
     "gross_price_return_pct": -7.9984040328954675,
     "net_assumed_return_pct": -8.198404032895468,
     "adverse_excursion_pct": -8.213718442126329,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -6.011959702492131
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -6.004255658174518
   },
   {
     "symbol": "Q",
@@ -3487,8 +3492,8 @@
     "gross_price_return_pct": -17.896213123700345,
     "net_assumed_return_pct": -18.096213123700345,
     "adverse_excursion_pct": -19.43898445943295,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -15.909768793297008
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -15.902064748979395
   },
   {
     "symbol": "AKAM",
@@ -3547,8 +3552,8 @@
     "gross_price_return_pct": 7.564650726993549,
     "net_assumed_return_pct": 7.364650726993549,
     "adverse_excursion_pct": -2.1806273152643385,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 9.551095057396886
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 9.558799101714499
   },
   {
     "symbol": "CNXC",
@@ -3607,8 +3612,8 @@
     "gross_price_return_pct": -4.682045473892382,
     "net_assumed_return_pct": -4.882045473892382,
     "adverse_excursion_pct": -7.191943871257478,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -2.6956011434890454
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -2.687897099171432
   },
   {
     "symbol": "HLNE",
@@ -3667,8 +3672,8 @@
     "gross_price_return_pct": -24.570672686867255,
     "net_assumed_return_pct": -24.770672686867254,
     "adverse_excursion_pct": -24.834869458736264,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -22.584228356463917
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -22.576524312146304
   },
   {
     "symbol": "PENG",
@@ -3727,8 +3732,8 @@
     "gross_price_return_pct": -1.7962098334016297,
     "net_assumed_return_pct": -1.9962098334016296,
     "adverse_excursion_pct": -4.359022020179582,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 0.1902344970017067
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 0.1979385413193202
   },
   {
     "symbol": "TKO",
@@ -3787,8 +3792,8 @@
     "gross_price_return_pct": -13.694461096821797,
     "net_assumed_return_pct": -13.894461096821797,
     "adverse_excursion_pct": -14.576995820317773,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -11.70801676641846
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -11.700312722100847
   },
   {
     "symbol": "CECO",
@@ -3847,8 +3852,8 @@
     "gross_price_return_pct": 1.0869554654186597,
     "net_assumed_return_pct": 0.8869554654186598,
     "adverse_excursion_pct": -0.27173886635466493,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 3.073399795821996
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 3.0811038401396096
   },
   {
     "symbol": "CULP",
@@ -3907,8 +3912,8 @@
     "gross_price_return_pct": 0.9415909638876174,
     "net_assumed_return_pct": 0.7415909638876175,
     "adverse_excursion_pct": -1.6674067452362218,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 2.9280352942909538
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 2.9357393386085673
   },
   {
     "symbol": "CR",
@@ -4077,8 +4082,8 @@
     "gross_price_return_pct": 0.18432722014933844,
     "net_assumed_return_pct": -0.015672779850661567,
     "adverse_excursion_pct": -0.04608400244351385,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 2.170771550552675
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 2.1784755948702883
   },
   {
     "symbol": "DMAA",
@@ -4192,8 +4197,8 @@
     "gross_price_return_pct": -22.137402635126012,
     "net_assumed_return_pct": -22.33740263512601,
     "adverse_excursion_pct": -31.29770874275508,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -20.150958304722675
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -20.14325426040506
   },
   {
     "symbol": "HTCO",
@@ -4249,11 +4254,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": -2.97826263995834,
-    "net_assumed_return_pct": -3.1782626399583402,
+    "gross_price_return_pct": -2.1739174096029212,
+    "net_assumed_return_pct": -2.3739174096029214,
     "adverse_excursion_pct": -13.043478542555032,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -0.9918183095550037
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -0.17976903488197138
   },
   {
     "symbol": "LGO",
@@ -4312,8 +4317,8 @@
     "gross_price_return_pct": -16.106200157330942,
     "net_assumed_return_pct": -16.30620015733094,
     "adverse_excursion_pct": -16.283186916196247,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -14.119755826927605
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -14.112051782609992
   },
   {
     "symbol": "NDRA",
@@ -4372,8 +4377,8 @@
     "gross_price_return_pct": -0.7999992370605447,
     "net_assumed_return_pct": -0.9999992370605446,
     "adverse_excursion_pct": -3.9999961853027344,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 1.1864450933427917
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 1.1941491376604052
   },
   {
     "symbol": "PMA",
@@ -4432,8 +4437,8 @@
     "gross_price_return_pct": -44.28571379914573,
     "net_assumed_return_pct": -44.485713799145735,
     "adverse_excursion_pct": -47.14285406125632,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -42.299269468742395
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -42.29156542442478
   },
   {
     "symbol": "VBIO",
@@ -4492,8 +4497,8 @@
     "gross_price_return_pct": -11.764706569834438,
     "net_assumed_return_pct": -11.964706569834437,
     "adverse_excursion_pct": -15.686271530717432,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -9.7782622394311
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -9.770558195113487
   },
   {
     "symbol": "SLSN",
@@ -4546,9 +4551,14 @@
     "score": 42.0894529670192,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
-    "status": "MISSING_SESSIONS",
+    "status": "MATURE",
     "entry_date": "2026-10-12",
-    "end_date": "2026-10-16"
+    "end_date": "2026-10-16",
+    "gross_price_return_pct": 0.0,
+    "net_assumed_return_pct": -0.2,
+    "adverse_excursion_pct": 0.0,
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 1.9941483747209499
   },
   {
     "symbol": "UCFI",
@@ -4607,8 +4617,8 @@
     "gross_price_return_pct": 0.0,
     "net_assumed_return_pct": -0.2,
     "adverse_excursion_pct": -2.255645836920439,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 1.9864443304033363
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 1.9941483747209499
   },
   {
     "symbol": "ZDAI",
@@ -4667,8 +4677,8 @@
     "gross_price_return_pct": 19.262295802797347,
     "net_assumed_return_pct": 19.062295802797347,
     "adverse_excursion_pct": -5.737709082829157,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 21.248740133200684
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 21.256444177518297
   },
   {
     "symbol": "ATOS",
@@ -4727,8 +4737,8 @@
     "gross_price_return_pct": 0.33500806749393597,
     "net_assumed_return_pct": 0.13500806749393596,
     "adverse_excursion_pct": -0.1675000401357929,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 2.3214523978972723
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 2.329156442214886
   },
   {
     "symbol": "RVSB",
@@ -4787,8 +4797,8 @@
     "gross_price_return_pct": 4.889999389648447,
     "net_assumed_return_pct": 4.689999389648447,
     "adverse_excursion_pct": -0.22000122070312544,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 6.876443720051784
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 6.884147764369397
   },
   {
     "symbol": "ABT",
@@ -4847,8 +4857,8 @@
     "gross_price_return_pct": -19.620089219556657,
     "net_assumed_return_pct": -19.820089219556657,
     "adverse_excursion_pct": -21.868301453345275,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -17.63364488915332
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -17.625940844835707
   },
   {
     "symbol": "BE",
@@ -4907,8 +4917,8 @@
     "gross_price_return_pct": -12.536163983426851,
     "net_assumed_return_pct": -12.73616398342685,
     "adverse_excursion_pct": -13.21118515600852,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -10.549719653023516
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -10.542015608705901
   },
   {
     "symbol": "CLPT",
@@ -4967,8 +4977,8 @@
     "gross_price_return_pct": -1.9093060289627872,
     "net_assumed_return_pct": -2.1093060289627874,
     "adverse_excursion_pct": -2.237470136508579,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 0.07713830144054912
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 0.08484234575816263
   },
   {
     "symbol": "FBLA",
@@ -5027,8 +5037,8 @@
     "gross_price_return_pct": -6.7175579298890735,
     "net_assumed_return_pct": -6.917557929889074,
     "adverse_excursion_pct": -8.816798877954879,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -4.731113599485737
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -4.723409555168123
   },
   {
     "symbol": "GTX",
@@ -5087,8 +5097,8 @@
     "gross_price_return_pct": -0.09995231151873618,
     "net_assumed_return_pct": -0.2999523115187362,
     "adverse_excursion_pct": -2.7985979986851595,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 1.8864920188846002
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 1.8941960632022137
   },
   {
     "symbol": "KEY",
@@ -5147,8 +5157,8 @@
     "gross_price_return_pct": 1.7683917802393312,
     "net_assumed_return_pct": 1.5683917802393312,
     "adverse_excursion_pct": -1.254989680515084,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 3.7548361106426675
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 3.762540154960281
   },
   {
     "symbol": "MMSI",
@@ -5207,8 +5217,8 @@
     "gross_price_return_pct": -15.315316089338783,
     "net_assumed_return_pct": -15.515316089338782,
     "adverse_excursion_pct": -16.60231615211928,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -13.328871758935446
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -13.321167714617832
   },
   {
     "symbol": "OLMA",
@@ -5267,8 +5277,8 @@
     "gross_price_return_pct": -7.428570182955996,
     "net_assumed_return_pct": -7.628570182955996,
     "adverse_excursion_pct": -9.142856208645567,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -5.4421258525526595
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -5.4344218082350455
   },
   {
     "symbol": "QFIN",
@@ -5327,8 +5337,8 @@
     "gross_price_return_pct": 3.0404032743586606,
     "net_assumed_return_pct": 2.8404032743586605,
     "adverse_excursion_pct": -1.0736230759160303,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 5.026847604761997
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 5.03455164907961
   },
   {
     "symbol": "STE",
@@ -5387,8 +5397,8 @@
     "gross_price_return_pct": -5.909095982874613,
     "net_assumed_return_pct": -6.109095982874613,
     "adverse_excursion_pct": -17.04545417600427,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -3.9226516524712762
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -3.9149476081536627
   },
   {
     "symbol": "TORO",
@@ -5447,8 +5457,8 @@
     "gross_price_return_pct": -0.09385853191957727,
     "net_assumed_return_pct": -0.2938585319195773,
     "adverse_excursion_pct": -4.397960175338989,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 1.892585798483759
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 1.9002898428013726
   },
   {
     "symbol": "WAL",
@@ -5504,11 +5514,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": 3.60596041705894,
-    "net_assumed_return_pct": 3.4059604170589397,
+    "gross_price_return_pct": 3.632086158928849,
+    "net_assumed_return_pct": 3.4320861589288487,
     "adverse_excursion_pct": -1.489416482900996,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 5.592404747462276
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 5.626234533649798
   },
   {
     "symbol": "ORI",
@@ -5567,8 +5577,8 @@
     "gross_price_return_pct": -1.2564948402831067,
     "net_assumed_return_pct": -1.4564948402831066,
     "adverse_excursion_pct": -2.1230492752942864,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 0.7299494901202297
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 0.7376535344378432
   },
   {
     "symbol": "BCS",
@@ -5627,8 +5637,8 @@
     "gross_price_return_pct": 2.040950261581287,
     "net_assumed_return_pct": 1.840950261581287,
     "adverse_excursion_pct": -0.1439903172171797,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 4.027394591984623
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 4.035098636302237
   },
   {
     "symbol": "ICUI",
@@ -5687,8 +5697,8 @@
     "gross_price_return_pct": -14.793855623575414,
     "net_assumed_return_pct": -14.993855623575413,
     "adverse_excursion_pct": -20.61439138501343,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -12.807411293172077
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -12.799707248854464
   },
   {
     "symbol": "USAR",
@@ -5747,8 +5757,8 @@
     "gross_price_return_pct": -5.06913039847764,
     "net_assumed_return_pct": -5.26913039847764,
     "adverse_excursion_pct": -5.06913039847764,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -3.0826860680743033
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -3.07498202375669
   },
   {
     "symbol": "WNC",
@@ -5807,8 +5817,8 @@
     "gross_price_return_pct": -9.738216563096191,
     "net_assumed_return_pct": -9.93821656309619,
     "adverse_excursion_pct": -10.64572173707069,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -7.751772232692855
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -7.744068188375241
   },
   {
     "symbol": "KE",
@@ -5867,8 +5877,8 @@
     "gross_price_return_pct": 11.515147904433043,
     "net_assumed_return_pct": 11.315147904433044,
     "adverse_excursion_pct": -2.342659749112086,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 13.50159223483638
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 13.509296279153993
   },
   {
     "symbol": "IBTA",
@@ -5927,8 +5937,8 @@
     "gross_price_return_pct": 1.6660376243839092,
     "net_assumed_return_pct": 1.4660376243839093,
     "adverse_excursion_pct": -0.9844764497691338,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 3.6524819547872456
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 3.660185999104859
   },
   {
     "symbol": "CIVB",
@@ -5987,8 +5997,8 @@
     "gross_price_return_pct": -1.9428580147879515,
     "net_assumed_return_pct": -2.1428580147879517,
     "adverse_excursion_pct": -6.285716465541292,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 0.04358631561538484
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 0.05129035993299835
   },
   {
     "symbol": "HE",
@@ -6047,8 +6057,8 @@
     "gross_price_return_pct": -1.677021437058035,
     "net_assumed_return_pct": -1.877021437058035,
     "adverse_excursion_pct": -2.7329225070331975,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 0.3094228933453014
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 0.3171269376629149
   },
   {
     "symbol": "OCFC",
@@ -6107,8 +6117,8 @@
     "gross_price_return_pct": -9.324757930388671,
     "net_assumed_return_pct": -9.52475793038867,
     "adverse_excursion_pct": -10.771698103805615,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -7.338313599985335
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -7.330609555667721
   },
   {
     "symbol": "STNE",
@@ -6167,8 +6177,8 @@
     "gross_price_return_pct": -6.175771689011567,
     "net_assumed_return_pct": -6.375771689011567,
     "adverse_excursion_pct": -6.4133011515447365,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -4.189327358608231
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -4.181623314290617
   },
   {
     "symbol": "DLHC",
@@ -6224,11 +6234,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": -6.635244684278119,
-    "net_assumed_return_pct": -6.835244684278119,
+    "gross_price_return_pct": -6.581739708467227,
+    "net_assumed_return_pct": -6.781739708467227,
     "adverse_excursion_pct": -7.855623833596592,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -4.648800353874782
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -4.587591333746277
   },
   {
     "symbol": "BGSF",
@@ -6284,11 +6294,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": -9.087721620790434,
-    "net_assumed_return_pct": -9.287721620790434,
+    "gross_price_return_pct": -9.12280470600636,
+    "net_assumed_return_pct": -9.322804706006359,
     "adverse_excursion_pct": -10.52631633983976,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -7.101277290387098
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -7.128656331285409
   },
   {
     "symbol": "MVST",
@@ -6347,8 +6357,8 @@
     "gross_price_return_pct": -15.547697196601817,
     "net_assumed_return_pct": -15.747697196601816,
     "adverse_excursion_pct": -16.25441874728304,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -13.56125286619848
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -13.553548821880867
   },
   {
     "symbol": "AMPG",
@@ -6404,11 +6414,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": -24.123713430708072,
-    "net_assumed_return_pct": -24.32371343070807,
+    "gross_price_return_pct": -23.7113414731564,
+    "net_assumed_return_pct": -23.911341473156398,
     "adverse_excursion_pct": -25.773195116106162,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -22.137269100304735
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -21.717193098435448
   },
   {
     "symbol": "BTCT",
@@ -6464,11 +6474,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": -5.896099348095474,
-    "net_assumed_return_pct": -6.096099348095474,
-    "adverse_excursion_pct": -7.4545441034129745,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -3.9096550176921374
+    "gross_price_return_pct": -5.844150415498572,
+    "net_assumed_return_pct": -6.044150415498573,
+    "adverse_excursion_pct": -7.402595170816085,
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -3.8500020407776225
   },
   {
     "symbol": "DARE",
@@ -6527,8 +6537,8 @@
     "gross_price_return_pct": 2.485020944016969,
     "net_assumed_return_pct": 2.285020944016969,
     "adverse_excursion_pct": -1.1315693920267988,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 4.471465274420305
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 4.4791693187379185
   },
   {
     "symbol": "FE",
@@ -6587,8 +6597,8 @@
     "gross_price_return_pct": -7.259529559921729,
     "net_assumed_return_pct": -7.459529559921729,
     "adverse_excursion_pct": -7.259529559921729,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -5.273085229518393
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -5.265381185200779
   },
   {
     "symbol": "HDL",
@@ -6647,8 +6657,8 @@
     "gross_price_return_pct": -9.871245650763461,
     "net_assumed_return_pct": -10.07124565076346,
     "adverse_excursion_pct": -17.811160074608136,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -7.884801320360125
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -7.877097276042511
   },
   {
     "symbol": "KTTA",
@@ -6706,9 +6716,9 @@
     "end_date": "2026-10-16",
     "gross_price_return_pct": -10.236220250711215,
     "net_assumed_return_pct": -10.436220250711214,
-    "adverse_excursion_pct": -11.811021922119346,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -8.24977592030788
+    "adverse_excursion_pct": -12.598422757823414,
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -8.242071875990264
   },
   {
     "symbol": "MYSZ",
@@ -6766,9 +6776,9 @@
     "end_date": "2026-10-16",
     "gross_price_return_pct": -23.90572495984814,
     "net_assumed_return_pct": -24.10572495984814,
-    "adverse_excursion_pct": -26.57239258982219,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -21.919280629444803
+    "adverse_excursion_pct": -26.599325058683476,
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -21.91157658512719
   },
   {
     "symbol": "PDSB",
@@ -6821,9 +6831,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
-    "status": "MISSING_SESSIONS",
+    "status": "MATURE",
     "entry_date": "2026-10-12",
-    "end_date": "2026-10-16"
+    "end_date": "2026-10-16",
+    "gross_price_return_pct": 67.85713192835787,
+    "net_assumed_return_pct": 67.65713192835787,
+    "adverse_excursion_pct": -42.85714190681374,
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 69.85128030307882
   },
   {
     "symbol": "LESL",
@@ -6879,11 +6894,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-12",
     "end_date": "2026-10-16",
-    "gross_price_return_pct": -65.73809249945771,
-    "net_assumed_return_pct": -65.93809249945771,
-    "adverse_excursion_pct": -68.76190363333605,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -63.75164816905437
+    "gross_price_return_pct": -65.7142861197595,
+    "net_assumed_return_pct": -65.91428611975951,
+    "adverse_excursion_pct": -68.80952348852372,
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -63.720137745038556
   },
   {
     "symbol": "SHFS",
@@ -6942,8 +6957,8 @@
     "gross_price_return_pct": -4.9462368678792945,
     "net_assumed_return_pct": -5.146236867879295,
     "adverse_excursion_pct": -5.591402656977607,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -2.959792537475958
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -2.9520884931583447
   },
   {
     "symbol": "TPVG",
@@ -7002,8 +7017,8 @@
     "gross_price_return_pct": -15.549217075585698,
     "net_assumed_return_pct": -15.749217075585698,
     "adverse_excursion_pct": -16.975749192097755,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -13.562772745182361
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -13.555068700864748
   },
   {
     "symbol": "YDES",
@@ -7117,8 +7132,8 @@
     "gross_price_return_pct": -9.826593897090829,
     "net_assumed_return_pct": -10.026593897090828,
     "adverse_excursion_pct": -11.560696270444392,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -7.840149566687493
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -7.832445522369879
   },
   {
     "symbol": "OPAL",
@@ -7177,8 +7192,8 @@
     "gross_price_return_pct": 6.702569615117215,
     "net_assumed_return_pct": 6.502569615117215,
     "adverse_excursion_pct": -0.08501850482245388,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 8.689013945520552
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 8.696717989838165
   },
   {
     "symbol": "GIB",
@@ -7237,8 +7252,8 @@
     "gross_price_return_pct": -0.5963468053189924,
     "net_assumed_return_pct": -0.7963468053189924,
     "adverse_excursion_pct": -7.417069611542826,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 1.390097525084344
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 1.3978015694019574
   },
   {
     "symbol": "AYA",
@@ -7297,8 +7312,8 @@
     "gross_price_return_pct": -14.056030021096822,
     "net_assumed_return_pct": -14.256030021096821,
     "adverse_excursion_pct": -15.440943664535933,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -12.069585690693486
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -12.061881646375872
   },
   {
     "symbol": "CGNX",
@@ -7357,8 +7372,8 @@
     "gross_price_return_pct": 14.291121557636233,
     "net_assumed_return_pct": 14.091121557636233,
     "adverse_excursion_pct": -1.5567996253139205,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": 16.277565888039568
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": 16.28526993235718
   },
   {
     "symbol": "ESLT",
@@ -7417,8 +7432,8 @@
     "gross_price_return_pct": -16.514851787302753,
     "net_assumed_return_pct": -16.714851787302752,
     "adverse_excursion_pct": -17.92079056843673,
-    "benchmark_price_return_pct": -1.9864443304033363,
-    "excess_gross_pct": -14.528407456899416
+    "benchmark_price_return_pct": -1.9941483747209499,
+    "excess_gross_pct": -14.520703412581803
   },
   {
     "symbol": "GPCR",

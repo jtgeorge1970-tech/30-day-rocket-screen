@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-17T00:47:56.401693+00:00",
+  "generated_at": "2026-10-17T06:06:52.614061+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -58,7 +58,7 @@
       },
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-16",
-      "entry_open": 10.255000114440918
+      "entry_open": 10.65999984741211
     },
     {
       "symbol": "MH",
