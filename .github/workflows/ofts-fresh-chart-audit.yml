@@ -9,8 +9,8 @@ on:
       - 'ofts/test_three_clear_cycles_v09.py'
       - '.github/workflows/ofts-fresh-chart-audit.yml'
   schedule:
-    # Recovery trigger: 2026-10-16 20:42 UTC for the completed-session independent audit.
-    - cron: '45 22 * * 1-5'
+    # Run after the provider's next-day publication window. Tue-Sat processes the prior completed NYSE session.
+    - cron: '45 4 * * 2-6'
 permissions:
   contents: read
 jobs:
