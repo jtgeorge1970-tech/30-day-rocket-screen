@@ -37,5 +37,44 @@
     "benchmark_pairs": 11,
     "average_excess_pct": -3.9263877865797028,
     "worst_adverse_excursion_pct": -24.34210416242579
+  },
+  {
+    "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+    "horizon": 5,
+    "score_band": "0-40",
+    "observations": 7,
+    "positive_net_pct": 14.285714285714286,
+    "average_net_pct": -3.278340865207786,
+    "average_positive_pct": 1.7008872732320326,
+    "average_nonpositive_pct": -4.108212221614423,
+    "benchmark_pairs": 7,
+    "average_excess_pct": -1.6889811956930418,
+    "worst_adverse_excursion_pct": -11.560105423793154
+  },
+  {
+    "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+    "horizon": 5,
+    "score_band": "40-60",
+    "observations": 55,
+    "positive_net_pct": 36.36363636363637,
+    "average_net_pct": -3.6275710918941457,
+    "average_positive_pct": 3.0337491856093615,
+    "average_nonpositive_pct": -7.434039821896151,
+    "benchmark_pairs": 55,
+    "average_excess_pct": -2.038211422379402,
+    "worst_adverse_excursion_pct": -41.84652498923972
+  },
+  {
+    "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+    "horizon": 5,
+    "score_band": "60-80",
+    "observations": 8,
+    "positive_net_pct": 25.0,
+    "average_net_pct": -6.152035624119877,
+    "average_positive_pct": 3.955043679506809,
+    "average_nonpositive_pct": -9.521062058662105,
+    "benchmark_pairs": 8,
+    "average_excess_pct": -4.562675954605131,
+    "worst_adverse_excursion_pct": -18.632074180865377
   }
 ]
