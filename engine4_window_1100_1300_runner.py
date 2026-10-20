@@ -44,7 +44,7 @@ def ref(date_et):
     return datetime.combine(date_et, time(13,0), tzinfo=core.ET)
 
 def window_metrics(frame, date_et):
-    w=slice_window(frame,date_et,WINDOW_START,WINDOW_END)
+    w=slice_window(frame,date_et,WINDOW_START,WINDOW_END,inclusive='left')
     if w.empty or "Close" not in w or "Volume" not in w: return None
     c=pd.to_numeric(w["Close"],errors="coerce").dropna()
     v=pd.to_numeric(w["Volume"],errors="coerce").fillna(0)
