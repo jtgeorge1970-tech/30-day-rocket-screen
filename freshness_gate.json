@@ -1,14 +1,6 @@
 {
-  "passed": false,
-  "required_stale": [
-    "SCYX",
-    "NYAX",
-    "CCS",
-    "INTJ",
-    "ATGL",
-    "LFCR",
-    "EPM"
-  ],
-  "fresh": 72,
+  "passed": true,
+  "required_stale": [],
+  "fresh": 123,
   "selected": 126
 }

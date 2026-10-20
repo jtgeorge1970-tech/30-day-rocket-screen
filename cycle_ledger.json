@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-20T01:19:47.279225+00:00",
+  "generated_at": "2026-10-20T06:34:29.001703+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -40,6 +40,23 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-14",
       "entry_open": 65.0
+    },
+    {
+      "symbol": "LYEL",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-19",
+      "planned_entry_date": "2026-10-20",
+      "entry_score": 44.51312097830109,
+      "cycle": {
+        "cycle_sessions": 29.5,
+        "median_swing_pct": 30.177815361677474,
+        "completed_cycle_intervals": 30,
+        "confirmed_turns": 32,
+        "timing_consistency": 43.167,
+        "amplitude_consistency": 36.7865224657743,
+        "confidence": "LOW"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
     },
     {
       "symbol": "MF",
@@ -240,8 +257,8 @@
     }
   ],
   "summary": {
-    "complete_signal_cohorts": 6,
-    "pending_entries": 0,
+    "complete_signal_cohorts": 7,
+    "pending_entries": 1,
     "open_positions": 10,
     "closed_trades": 0,
     "benchmark_pairs": 0,
