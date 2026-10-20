@@ -1,5 +1,5 @@
-mode=live_today
-acceptance_date_et=2026-09-29
+mode=acceptance_replay
+acceptance_date_et=2026-10-20
 certification_force=false
-requested_at=2026-09-29T12:05:57.375Z
-request=launch_owner_retry_2026-09-29_after_0805
+requested_at=2026-10-20T20:15:00Z
+request=historical-replay-2026-10-20-user-authorized
