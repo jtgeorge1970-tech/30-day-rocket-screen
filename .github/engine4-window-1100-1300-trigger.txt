@@ -1,0 +1,6 @@
+ready=true
+mode=historical_intraday_window
+date_et=2026-10-20
+window_start_et=11:00
+window_end_et=13:00
+isolate=true
