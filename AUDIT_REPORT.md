@@ -1,7 +1,7 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-20T08:52:48.132045+00:00
-Market as-of: 2026-10-19; qualified cohorts: 7; cohort rows: 891; attempts retained: 79.
+Audit UTC: 2026-10-20T15:24:21.881822+00:00
+Market as-of: 2026-10-19; qualified cohorts: 7; cohort rows: 891; attempts retained: 80.
 Outcome counts: {'MATURE': 233, 'PENDING': 3906, 'INELIGIBLE_DATA': 315, 'CORPORATE_ACTION_REVIEW': 1}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 123, 'selected': 126}.
 Cycle ledger: {'complete_signal_cohorts': 7, 'pending_entries': 1, 'open_positions': 10, 'closed_trades': 0, 'benchmark_pairs': 0, 'review_trades': 0}.
@@ -54,5 +54,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- CECO: ValueError: EMPTY_PROVIDER_RESPONSE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

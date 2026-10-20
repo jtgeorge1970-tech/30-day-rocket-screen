@@ -3,7 +3,8 @@
   "retry": [
     "SB.PRC",
     "SLP",
-    "WBD"
+    "WBD",
+    "CECO"
   ],
   "last_session": "2026-10-19"
 }

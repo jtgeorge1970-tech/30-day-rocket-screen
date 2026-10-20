@@ -1,6 +1,6 @@
 {
   "asof": "2026-10-19",
-  "recorded_at": "2026-10-20T08:50:53.557721+00:00",
+  "recorded_at": "2026-10-20T15:21:11.822003+00:00",
   "symbols": {
     "SCYX": {
       "status": "FRESH",
@@ -1875,9 +1875,9 @@
       "bars": 502
     },
     "CECO": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
+      "status": "ERROR",
+      "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
+      "source": "UNVERIFIED",
       "provider_ticker": "CECO",
       "latest_date": "2026-10-19",
       "bars": 507
