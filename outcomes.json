@@ -23166,9 +23166,14 @@
     "score": 64.06132890468938,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -4.419190672487295,
+    "net_assumed_return_pct": -4.619190672487295,
+    "adverse_excursion_pct": -10.732321924803745,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -5.311853231112907
   },
   {
     "symbol": "SCYX",
@@ -23221,9 +23226,14 @@
     "score": 62.81645795007344,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -5.147195649292636,
+    "net_assumed_return_pct": -5.347195649292636,
+    "adverse_excursion_pct": -6.4414395357376915,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -6.039858207918248
   },
   {
     "symbol": "FIX",
@@ -23276,9 +23286,14 @@
     "score": 62.14432324367151,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 16.529684485338535,
+    "net_assumed_return_pct": 16.329684485338536,
+    "adverse_excursion_pct": -5.479446924626719,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 15.637021926712922
   },
   {
     "symbol": "WULF",
@@ -23331,9 +23346,14 @@
     "score": 62.25396734864941,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -0.7556667801907446,
+    "net_assumed_return_pct": -0.9556667801907446,
+    "adverse_excursion_pct": -3.0226731262687045,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -1.6483293388163567
   },
   {
     "symbol": "RERE",
@@ -23386,9 +23406,14 @@
     "score": 61.892688529216024,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 1.3472515463721413,
+    "net_assumed_return_pct": 1.1472515463721413,
+    "adverse_excursion_pct": -3.379366954691232,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 0.4545889877465292
   },
   {
     "symbol": "AKAM",
@@ -23441,9 +23466,14 @@
     "score": 61.68293750489326,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -2.8656123036804426,
+    "net_assumed_return_pct": -3.065612303680443,
+    "adverse_excursion_pct": -8.102763874477237,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -3.7582748623060547
   },
   {
     "symbol": "CSIQ",
@@ -23496,9 +23526,14 @@
     "score": 61.65493848756478,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 10.076130800212614,
+    "net_assumed_return_pct": 9.876130800212614,
+    "adverse_excursion_pct": -0.24630678622346025,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 9.183468241587
   },
   {
     "symbol": "NYAX",
@@ -23551,9 +23586,14 @@
     "score": 61.611792987957294,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -1.3365694142840279,
+    "net_assumed_return_pct": -1.5365694142840278,
+    "adverse_excursion_pct": -4.617249802428336,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -2.22923197290964
   },
   {
     "symbol": "FUBO",
@@ -23606,9 +23646,14 @@
     "score": 61.199939631024264,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 7.380661631722418,
+    "net_assumed_return_pct": 7.180661631722418,
+    "adverse_excursion_pct": -0.35134774997386264,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 6.487999073096806
   },
   {
     "symbol": "SPGI",
@@ -23661,9 +23706,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 5.594408800680317,
+    "net_assumed_return_pct": 5.394408800680317,
+    "adverse_excursion_pct": -4.895100406320296,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 4.701746242054705
   },
   {
     "symbol": "DDD",
@@ -23716,9 +23766,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 17.62589980501992,
+    "net_assumed_return_pct": 17.42589980501992,
+    "adverse_excursion_pct": -5.395678363042034,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 16.733237246394307
   },
   {
     "symbol": "EPOW",
@@ -23771,9 +23826,14 @@
     "score": 60.41354002679347,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 0.24299265068268294,
+    "net_assumed_return_pct": 0.04299265068268293,
+    "adverse_excursion_pct": -3.4734565520954996,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -0.6496699079429291
   },
   {
     "symbol": "CHTR",
@@ -23826,9 +23886,14 @@
     "score": 58.30086440269569,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -5.383484316523934,
+    "net_assumed_return_pct": -5.5834843165239345,
+    "adverse_excursion_pct": -12.31563439981922,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -6.276146875149546
   },
   {
     "symbol": "MESO",
@@ -23881,9 +23946,14 @@
     "score": 56.01422340443642,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -2.732798123848512,
+    "net_assumed_return_pct": -2.9327981238485124,
+    "adverse_excursion_pct": -3.0364391423070236,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -3.6254606824741242
   },
   {
     "symbol": "LE",
@@ -23936,9 +24006,14 @@
     "score": 59.95375736391955,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -6.112048639010381,
+    "net_assumed_return_pct": -6.312048639010381,
+    "adverse_excursion_pct": -6.960948331171101,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -7.004711197635993
   },
   {
     "symbol": "JACK",
@@ -23991,9 +24066,14 @@
     "score": 59.333633104113034,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 8.520181865262932,
+    "net_assumed_return_pct": 8.320181865262933,
+    "adverse_excursion_pct": 0.0,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 7.62751930663732
   },
   {
     "symbol": "MH",
@@ -24046,9 +24126,14 @@
     "score": 59.37662083080117,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 74.99999187209407,
+    "net_assumed_return_pct": 74.79999187209407,
+    "adverse_excursion_pct": -2.7272700672307915,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 74.10732931346845
   },
   {
     "symbol": "ATGL",
@@ -24101,9 +24186,14 @@
     "score": 46.185409887372494,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 3.590488836504413,
+    "net_assumed_return_pct": 3.390488836504413,
+    "adverse_excursion_pct": -2.6686129457605956,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 2.697826277878801
   },
   {
     "symbol": "IDR",
@@ -24156,9 +24246,14 @@
     "score": 58.80467041158706,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 2.534130800374279,
+    "net_assumed_return_pct": 2.334130800374279,
+    "adverse_excursion_pct": -1.7918076184323617,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 1.641468241748667
   },
   {
     "symbol": "Q",
@@ -24211,9 +24306,14 @@
     "score": 58.58167046794132,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 1.6216200542241266,
+    "net_assumed_return_pct": 1.4216200542241266,
+    "adverse_excursion_pct": -1.351350045186761,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 0.7289574955985145
   },
   {
     "symbol": "EPM",
@@ -24266,9 +24366,14 @@
     "score": 57.14150181270512,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -0.664013138668107,
+    "net_assumed_return_pct": -0.8640131386681069,
+    "adverse_excursion_pct": -2.3904422332062913,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -1.556675697293719
   },
   {
     "symbol": "CSPI",
@@ -24321,9 +24426,14 @@
     "score": 58.12220666321615,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -0.5918048264312747,
+    "net_assumed_return_pct": -0.7918048264312747,
+    "adverse_excursion_pct": -3.0804287511237094,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -1.4844673850568868
   },
   {
     "symbol": "SFM",
@@ -24376,9 +24486,14 @@
     "score": 62.297747704071085,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 8.26340029411834,
+    "net_assumed_return_pct": 8.06340029411834,
+    "adverse_excursion_pct": -2.775980360588637,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 7.370737735492727
   },
   {
     "symbol": "XPRO",
@@ -24431,9 +24546,14 @@
     "score": 55.24165175497682,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 0.886958578358521,
+    "net_assumed_return_pct": 0.686958578358521,
+    "adverse_excursion_pct": -7.826083639393677,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -0.005703980267091069
   },
   {
     "symbol": "AXIL",
@@ -24486,9 +24606,14 @@
     "score": 57.524372071538785,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -1.086959177630653,
+    "net_assumed_return_pct": -1.286959177630653,
+    "adverse_excursion_pct": -1.2422348291186713,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -1.9796217362562651
   },
   {
     "symbol": "LFCR",
@@ -24541,9 +24666,14 @@
     "score": 46.872013088508155,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 4.7696341182962065,
+    "net_assumed_return_pct": 4.569634118296206,
+    "adverse_excursion_pct": -0.2163064570868789,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 3.8769715596705945
   },
   {
     "symbol": "GXO",
@@ -24596,9 +24726,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -8.18182103890026,
+    "net_assumed_return_pct": -8.38182103890026,
+    "adverse_excursion_pct": -15.136366212663521,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -9.074483597525873
   },
   {
     "symbol": "KLRS",
@@ -24651,9 +24786,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -2.75230180553947,
+    "net_assumed_return_pct": -2.95230180553947,
+    "adverse_excursion_pct": -7.3394532537190305,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -3.644964364165082
   },
   {
     "symbol": "MNTK",
@@ -24706,9 +24846,14 @@
     "score": 46.18968581874254,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 8.021972655328913,
+    "net_assumed_return_pct": 7.821972655328913,
+    "adverse_excursion_pct": -3.956050497367336,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 7.129310096703301
   },
   {
     "symbol": "OMDA",
@@ -24761,9 +24906,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -8.888889085118167,
+    "net_assumed_return_pct": -9.088889085118167,
+    "adverse_excursion_pct": -25.18518721288774,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -9.781551643743779
   },
   {
     "symbol": "QSI",
@@ -24816,9 +24966,14 @@
     "score": 53.49173679229551,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 1.5715479751025496,
+    "net_assumed_return_pct": 1.3715479751025497,
+    "adverse_excursion_pct": -1.100084213621777,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 0.6788854164769376
   },
   {
     "symbol": "SKWD",
@@ -24871,9 +25026,14 @@
     "score": 53.89376730234165,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -6.185561232921977,
+    "net_assumed_return_pct": -6.385561232921977,
+    "adverse_excursion_pct": -7.899481152003207,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -7.078223791547589
   },
   {
     "symbol": "TR",
@@ -24981,9 +25141,14 @@
     "score": 55.293185824878776,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 1.07580758579775,
+    "net_assumed_return_pct": 0.8758075857977501,
+    "adverse_excursion_pct": -1.8513926841801087,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 0.183145027172138
   },
   {
     "symbol": "PLOW",
@@ -25036,9 +25201,14 @@
     "score": 51.387435302602405,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 7.224959707652623,
+    "net_assumed_return_pct": 7.024959707652623,
+    "adverse_excursion_pct": -1.0673243939548605,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 6.332297149027011
   },
   {
     "symbol": "AMBQ",
@@ -25091,9 +25261,14 @@
     "score": 42.68704789704617,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 14.095148133251524,
+    "net_assumed_return_pct": 13.895148133251524,
+    "adverse_excursion_pct": -0.8557768852386793,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 13.20248557462591
   },
   {
     "symbol": "INTA",
@@ -25146,9 +25321,14 @@
     "score": 51.34728852980039,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -0.7425676548133309,
+    "net_assumed_return_pct": -0.9425676548133308,
+    "adverse_excursion_pct": -1.8564368413834242,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -1.635230213438943
   },
   {
     "symbol": "VNDA",
@@ -25201,9 +25381,14 @@
     "score": 42.651993940845564,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -3.004742833190044,
+    "net_assumed_return_pct": -3.204742833190044,
+    "adverse_excursion_pct": -3.162880842587623,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -3.897405391815656
   },
   {
     "symbol": "RYN",
@@ -25256,9 +25441,14 @@
     "score": 48.49571767994902,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 9.64554372317965,
+    "net_assumed_return_pct": 9.44554372317965,
+    "adverse_excursion_pct": -0.05011963371911454,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 8.752881164554037
   },
   {
     "symbol": "NOW",
@@ -25311,9 +25501,14 @@
     "score": 30.681426464771835,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 2.7529998563775804,
+    "net_assumed_return_pct": 2.55299985637758,
+    "adverse_excursion_pct": -0.267651143159664,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 1.8603372977519683
   },
   {
     "symbol": "ABCB",
@@ -25366,9 +25561,14 @@
     "score": 47.72096130381344,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -3.841282511175381,
+    "net_assumed_return_pct": -4.041282511175381,
+    "adverse_excursion_pct": -4.6010980498749525,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -4.733945069800994
   },
   {
     "symbol": "CMCL",
@@ -25421,9 +25621,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -3.24675023083254,
+    "net_assumed_return_pct": -3.4467502308325404,
+    "adverse_excursion_pct": -3.8961002769990483,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -4.139412789458152
   },
   {
     "symbol": "HFFG",
@@ -25476,9 +25681,14 @@
     "score": 48.89130735116976,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 3.122588470570409,
+    "net_assumed_return_pct": 2.9225884705704086,
+    "adverse_excursion_pct": -1.079416657212029,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 2.2299259119447967
   },
   {
     "symbol": "OGC",
@@ -25531,9 +25741,14 @@
     "score": 51.640339872561825,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 3.605314191804898,
+    "net_assumed_return_pct": 3.405314191804898,
+    "adverse_excursion_pct": -2.9886108303924575,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 2.712651633179286
   },
   {
     "symbol": "TECX",
@@ -25586,9 +25801,14 @@
     "score": 47.2438888857741,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 2.41387747906161,
+    "net_assumed_return_pct": 2.21387747906161,
+    "adverse_excursion_pct": -2.3133064446897222,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 1.5212149204359982
   },
   {
     "symbol": "AA",
@@ -25641,9 +25861,14 @@
     "score": 50.228484172173445,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 0.9242179694104902,
+    "net_assumed_return_pct": 0.7242179694104902,
+    "adverse_excursion_pct": -7.208870193816241,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 0.03155541078487811
   },
   {
     "symbol": "BOOM",
@@ -25751,9 +25976,14 @@
     "score": 40.383656926495064,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 0.2671477103153519,
+    "net_assumed_return_pct": 0.06714771031535188,
+    "adverse_excursion_pct": -7.925195244230654,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -0.6255148483102602
   },
   {
     "symbol": "ANL",
@@ -25861,9 +26091,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -0.8955264046345723,
+    "net_assumed_return_pct": -1.0955264046345723,
+    "adverse_excursion_pct": -10.074630351129176,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -1.7881889632601844
   },
   {
     "symbol": "DCGO",
@@ -25916,9 +26151,14 @@
     "score": 44.269918092875685,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 2.2388097764902914,
+    "net_assumed_return_pct": 2.0388097764902913,
+    "adverse_excursion_pct": -0.3109405304588031,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 1.3461472178646794
   },
   {
     "symbol": "FGBI",
@@ -25971,9 +26211,14 @@
     "score": 48.83227503893866,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -7.906979942012171,
+    "net_assumed_return_pct": -8.10697994201217,
+    "adverse_excursion_pct": -8.837211571750569,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -8.799642500637784
   },
   {
     "symbol": "HHS",
@@ -26026,9 +26271,14 @@
     "score": 44.70689117580559,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 20.2941187607788,
+    "net_assumed_return_pct": 20.0941187607788,
+    "adverse_excursion_pct": 0.0,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 19.401456202153188
   },
   {
     "symbol": "KZIA",
@@ -26081,9 +26331,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 0.0,
+    "net_assumed_return_pct": -0.2,
+    "adverse_excursion_pct": -7.563027651344701,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -0.8926625586256121
   },
   {
     "symbol": "NAII",
@@ -26136,9 +26391,14 @@
     "score": 51.857823253656704,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -24.109016770772783,
+    "net_assumed_return_pct": -24.309016770772782,
+    "adverse_excursion_pct": -24.109016770772783,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -25.001679329398396
   },
   {
     "symbol": "PFAI",
@@ -26191,9 +26451,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -40.115606824890236,
+    "net_assumed_return_pct": -40.31560682489024,
+    "adverse_excursion_pct": -46.5895945313118,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -41.008269383515845
   },
   {
     "symbol": "LNAI",
@@ -26246,7 +26511,7 @@
     "score": 13.92184175966413,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MISSING_SESSIONS",
     "entry_date": "2026-10-15",
     "end_date": "2026-10-21"
   },
@@ -26301,9 +26566,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -10.495001077651978,
+    "net_assumed_return_pct": -10.695001077651977,
+    "adverse_excursion_pct": -14.999997615814209,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -11.38766363627759
   },
   {
     "symbol": "TRNR",
@@ -26411,9 +26681,14 @@
     "score": 57.56581789714518,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -1.4319795217220932,
+    "net_assumed_return_pct": -1.6319795217220932,
+    "adverse_excursion_pct": -6.205250284309882,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -2.3246420803477053
   },
   {
     "symbol": "ACDC",
@@ -26466,9 +26741,14 @@
     "score": 51.245237461104146,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 3.4752355393231182,
+    "net_assumed_return_pct": 3.275235539323118,
+    "adverse_excursion_pct": -0.9556959875251736,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 2.582572980697506
   },
   {
     "symbol": "PAX",
@@ -26521,9 +26801,14 @@
     "score": 51.42790733559236,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 6.555961210877559,
+    "net_assumed_return_pct": 6.355961210877559,
+    "adverse_excursion_pct": -1.5318987681716467,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 5.663298652251947
   },
   {
     "symbol": "MSCI",
@@ -26576,9 +26861,14 @@
     "score": 52.82576136740224,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -4.430202597611554,
+    "net_assumed_return_pct": -4.630202597611555,
+    "adverse_excursion_pct": -5.195425631525319,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -5.3228651562371665
   },
   {
     "symbol": "BABA",
@@ -26631,9 +26921,14 @@
     "score": 56.40903373468451,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 5.711969647963699,
+    "net_assumed_return_pct": 5.511969647963699,
+    "adverse_excursion_pct": -1.0760550809925995,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 4.819307089338087
   },
   {
     "symbol": "CHKP",
@@ -26686,9 +26981,14 @@
     "score": 42.605009548535776,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 5.918366645220896,
+    "net_assumed_return_pct": 5.718366645220896,
+    "adverse_excursion_pct": -1.5646227566027848,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 5.025704086595284
   },
   {
     "symbol": "ESTA",
@@ -26741,9 +27041,14 @@
     "score": 48.536405460430444,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 0.26041433836032635,
+    "net_assumed_return_pct": 0.060414338360326336,
+    "adverse_excursion_pct": -1.562502587007053,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -0.6322482202652857
   },
   {
     "symbol": "GPRK",
@@ -26796,9 +27101,14 @@
     "score": 33.50697073701601,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -0.35663951526988535,
+    "net_assumed_return_pct": -0.5566395152698853,
+    "adverse_excursion_pct": -4.419585541411708,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -1.2493020738954974
   },
   {
     "symbol": "J",
@@ -26851,9 +27161,14 @@
     "score": 50.52382473834239,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 4.670908458807643,
+    "net_assumed_return_pct": 4.470908458807643,
+    "adverse_excursion_pct": -1.8577514789544725,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 3.778245900182031
   },
   {
     "symbol": "MGTX",
@@ -26906,9 +27221,14 @@
     "score": 42.38992698756229,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 1.8406999995212558,
+    "net_assumed_return_pct": 1.640699999521256,
+    "adverse_excursion_pct": -0.4685388004704527,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 0.9480374408956438
   },
   {
     "symbol": "NWSA",
@@ -26961,9 +27281,14 @@
     "score": 45.34900272936436,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 4.2105286273269815,
+    "net_assumed_return_pct": 4.010528627326981,
+    "adverse_excursion_pct": 0.0,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 3.3178660687013695
   },
   {
     "symbol": "PRTS",
@@ -27016,9 +27341,14 @@
     "score": 36.15482044905308,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 1.9929669591528976,
+    "net_assumed_return_pct": 1.7929669591528976,
+    "adverse_excursion_pct": -5.15826018941784,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 1.1003044005272855
   },
   {
     "symbol": "SGHT",
@@ -27071,9 +27401,14 @@
     "score": 23.78467969182998,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -7.301172584213667,
+    "net_assumed_return_pct": -7.501172584213667,
+    "adverse_excursion_pct": -8.996089313650424,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -8.19383514283928
   },
   {
     "symbol": "THRM",
@@ -27126,9 +27461,14 @@
     "score": 47.43753477744325,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -3.1023382827141233,
+    "net_assumed_return_pct": -3.3023382827141234,
+    "adverse_excursion_pct": -4.533704904114688,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -3.9950008413397353
   },
   {
     "symbol": "VSEC",
@@ -27181,9 +27521,14 @@
     "score": 50.931703002003665,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 3.442623630001873,
+    "net_assumed_return_pct": 3.242623630001873,
+    "adverse_excursion_pct": -1.1475359986654832,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 2.549961071376261
   },
   {
     "symbol": "SWIM",
@@ -27236,9 +27581,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -12.547534135555916,
+    "net_assumed_return_pct": -12.747534135555915,
+    "adverse_excursion_pct": -12.927761893279133,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -13.440196694181527
   },
   {
     "symbol": "SHIM",
@@ -27291,9 +27641,14 @@
     "score": 47.09356007169004,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 1.9999980926513672,
+    "net_assumed_return_pct": 1.7999980926513672,
+    "adverse_excursion_pct": -0.2499997615814209,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 1.1073355340257551
   },
   {
     "symbol": "GOOS",
@@ -27346,9 +27701,14 @@
     "score": 42.38470171283622,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 2.3719165171234735,
+    "net_assumed_return_pct": 2.1719165171234733,
+    "adverse_excursion_pct": -0.28462744857464806,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 1.4792539584978615
   },
   {
     "symbol": "STRO",
@@ -27401,9 +27761,14 @@
     "score": 39.00796203762475,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 0.40700454232407424,
+    "net_assumed_return_pct": 0.20700454232407423,
+    "adverse_excursion_pct": -3.256036338592594,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -0.4856580163015378
   },
   {
     "symbol": "ETR",
@@ -27456,9 +27821,14 @@
     "score": 38.22221536078238,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -2.765949848497673,
+    "net_assumed_return_pct": -2.965949848497673,
+    "adverse_excursion_pct": -2.9787206844054115,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -3.658612407123285
   },
   {
     "symbol": "ASLE",
@@ -27511,9 +27881,14 @@
     "score": 53.008762926626744,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 5.119981976795818,
+    "net_assumed_return_pct": 4.9199819767958175,
+    "adverse_excursion_pct": -0.19234208086249538,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 4.227319418170206
   },
   {
     "symbol": "SIG",
@@ -27566,9 +27941,14 @@
     "score": 48.45843522783659,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 3.5418045974953127,
+    "net_assumed_return_pct": 3.3418045974953126,
+    "adverse_excursion_pct": -0.5212910352832334,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 2.6491420388697007
   },
   {
     "symbol": "CASY",
@@ -27621,9 +28001,14 @@
     "score": 51.426095223314796,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 0.8321821742861113,
+    "net_assumed_return_pct": 0.6321821742861113,
+    "adverse_excursion_pct": -0.5295652274292628,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -0.06048038433950076
   },
   {
     "symbol": "GOLF",
@@ -27676,9 +28061,14 @@
     "score": 35.895646804152875,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 0.23529950310201553,
+    "net_assumed_return_pct": 0.03529950310201552,
+    "adverse_excursion_pct": -3.588238884420958,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -0.6573630555235965
   },
   {
     "symbol": "NEO",
@@ -27731,9 +28121,14 @@
     "score": 56.75581412693865,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -0.17007191644904385,
+    "net_assumed_return_pct": -0.37007191644904386,
+    "adverse_excursion_pct": -2.8061217456067378,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -1.062734475074656
   },
   {
     "symbol": "SRAD",
@@ -27786,7 +28181,7 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "CORPORATE_ACTION_REVIEW",
     "entry_date": "2026-10-15",
     "end_date": "2026-10-21"
   },
@@ -27841,9 +28236,14 @@
     "score": 55.61263048397022,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 1.4703310640347578,
+    "net_assumed_return_pct": 1.2703310640347578,
+    "adverse_excursion_pct": 0.0,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 0.5776685054091457
   },
   {
     "symbol": "ALV",
@@ -27951,9 +28351,14 @@
     "score": 50.57809883624585,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -8.14814906388479,
+    "net_assumed_return_pct": -8.34814906388479,
+    "adverse_excursion_pct": -14.62962866483567,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -9.040811622510404
   },
   {
     "symbol": "ALGS",
@@ -28061,9 +28466,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -7.855264862653644,
+    "net_assumed_return_pct": -8.055264862653644,
+    "adverse_excursion_pct": -14.17105152947089,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -8.747927421279256
   },
   {
     "symbol": "CTOR",
@@ -28116,9 +28526,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 8.780491265564216,
+    "net_assumed_return_pct": 8.580491265564216,
+    "adverse_excursion_pct": -1.4634132725648952,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 7.8878287069386035
   },
   {
     "symbol": "FABC",
@@ -28226,7 +28641,7 @@
     "score": 11.235538634532235,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MISSING_SESSIONS",
     "entry_date": "2026-10-15",
     "end_date": "2026-10-21"
   },
@@ -28281,9 +28696,14 @@
     "score": 51.562900560162355,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 0.19880221923607166,
+    "net_assumed_return_pct": -0.0011977807639283466,
+    "adverse_excursion_pct": 0.0,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -0.6938603393895404
   },
   {
     "symbol": "MSGM",
@@ -28391,9 +28811,14 @@
     "score": 49.28416689050612,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -12.377846393662628,
+    "net_assumed_return_pct": -12.577846393662627,
+    "adverse_excursion_pct": -14.983714923442392,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -13.270508952288239
   },
   {
     "symbol": "JEM",
@@ -28446,9 +28871,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -64.80000071525573,
+    "net_assumed_return_pct": -65.00000071525574,
+    "adverse_excursion_pct": -67.99999895691873,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -65.69266327388135
   },
   {
     "symbol": "SDST",
@@ -28501,9 +28931,14 @@
     "score": 13.899567265688235,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -0.09774463005824963,
+    "net_assumed_return_pct": -0.29774463005824964,
+    "adverse_excursion_pct": -0.29325253483475366,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -0.9904071886838617
   },
   {
     "symbol": "TLNC",
@@ -28556,9 +28991,14 @@
     "score": 36.499448434239824,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 7.329842311072454,
+    "net_assumed_return_pct": 7.129842311072454,
+    "adverse_excursion_pct": -5.497383293635394,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 6.437179752446842
   },
   {
     "symbol": "XPON",
@@ -28611,9 +29051,14 @@
     "score": 60.616580411906675,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 3.6899790887614525,
+    "net_assumed_return_pct": 3.4899790887614524,
+    "adverse_excursion_pct": -2.290806768162379,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 2.7973165301358405
   },
   {
     "symbol": "BXC",
@@ -28666,9 +29111,14 @@
     "score": 45.797109802206606,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 4.42062849244087,
+    "net_assumed_return_pct": 4.22062849244087,
+    "adverse_excursion_pct": -1.7414616447911424,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 3.527965933815258
   },
   {
     "symbol": "NCLH",
@@ -28721,9 +29171,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 11.392401434102805,
+    "net_assumed_return_pct": 11.192401434102806,
+    "adverse_excursion_pct": -3.1645614030057834,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 10.499738875477192
   },
   {
     "symbol": "PCSA",
@@ -28776,9 +29231,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 45.26315921561541,
+    "net_assumed_return_pct": 45.06315921561541,
+    "adverse_excursion_pct": 0.0,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 44.3704966569898
   },
   {
     "symbol": "ATNM",
@@ -28831,9 +29291,14 @@
     "score": 50.29917885109184,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -2.698720607012328,
+    "net_assumed_return_pct": -2.8987206070123284,
+    "adverse_excursion_pct": -4.759565030904566,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -3.5913831656379402
   },
   {
     "symbol": "CCEC",
@@ -28886,9 +29351,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 3.9999961853027344,
+    "net_assumed_return_pct": 3.799996185302734,
+    "adverse_excursion_pct": -3.50000262260437,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 3.1073336266771223
   },
   {
     "symbol": "EGHT",
@@ -28941,9 +29411,14 @@
     "score": 41.61573987700754,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 3.709677841115089,
+    "net_assumed_return_pct": 3.5096778411150886,
+    "adverse_excursion_pct": -2.4193487604002417,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 2.8170152824894767
   },
   {
     "symbol": "GENI",
@@ -28996,9 +29471,14 @@
     "score": 59.07534691074072,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -0.49834235719935505,
+    "net_assumed_return_pct": -0.698342357199355,
+    "adverse_excursion_pct": -5.315617486299839,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -1.391004915824967
   },
   {
     "symbol": "INTJ",
@@ -29051,9 +29531,14 @@
     "score": 56.24130390305256,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 10.261540917411516,
+    "net_assumed_return_pct": 10.061540917411516,
+    "adverse_excursion_pct": -0.3001273128612203,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 9.368878358785903
   },
   {
     "symbol": "MCHP",
@@ -29106,9 +29591,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 9.022556458369202,
+    "net_assumed_return_pct": 8.822556458369203,
+    "adverse_excursion_pct": 0.0,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 8.129893899743589
   },
   {
     "symbol": "NTHI",
@@ -29161,9 +29651,14 @@
     "score": 47.55535108957932,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 7.385727036439693,
+    "net_assumed_return_pct": 7.185727036439693,
+    "adverse_excursion_pct": 0.0,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 6.493064477814081
   },
   {
     "symbol": "POOL",
@@ -29216,9 +29711,14 @@
     "score": 49.1334526934149,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 0.19694556258613716,
+    "net_assumed_return_pct": -0.003054437413862854,
+    "adverse_excursion_pct": -3.1675698268654573,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -0.6957169960394749
   },
   {
     "symbol": "SCSC",
@@ -29271,9 +29771,14 @@
     "score": 52.20543845674392,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -1.0585262449678834,
+    "net_assumed_return_pct": -1.2585262449678833,
+    "adverse_excursion_pct": -4.331433364448712,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -1.9511888035934954
   },
   {
     "symbol": "TDW",
@@ -29326,9 +29831,14 @@
     "score": 44.08441062020452,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -0.4647518718167154,
+    "net_assumed_return_pct": -0.6647518718167154,
+    "adverse_excursion_pct": -8.907820543164435,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -1.3574144304423275
   },
   {
     "symbol": "VG",
@@ -29381,9 +29891,14 @@
     "score": 47.003626693446265,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -1.3663108261795065,
+    "net_assumed_return_pct": -1.5663108261795065,
+    "adverse_excursion_pct": -3.147699246679758,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -2.2589733848051186
   },
   {
     "symbol": "ZD",
@@ -29436,9 +29951,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -1.923075159625831,
+    "net_assumed_return_pct": -2.1230751596258313,
+    "adverse_excursion_pct": -3.846150319251662,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -2.815737718251443
   },
   {
     "symbol": "TELO",
@@ -29491,9 +30011,14 @@
     "score": 39.273845687300216,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 3.6836923015489242,
+    "net_assumed_return_pct": 3.483692301548924,
+    "adverse_excursion_pct": -0.9529201994168179,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 2.791029742923312
   },
   {
     "symbol": "EMBJ",
@@ -29546,9 +30071,14 @@
     "score": 53.714346301892654,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -6.479219927082392,
+    "net_assumed_return_pct": -6.679219927082392,
+    "adverse_excursion_pct": -8.801958926251363,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -7.371882485708004
   },
   {
     "symbol": "PUMP",
@@ -29601,9 +30131,14 @@
     "score": 52.22329945569939,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -4.362460093188403,
+    "net_assumed_return_pct": -4.562460093188403,
+    "adverse_excursion_pct": -5.469898622040992,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -5.255122651814015
   },
   {
     "symbol": "AXSM",
@@ -29656,9 +30191,14 @@
     "score": 44.02828580022846,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -1.7041703550268794,
+    "net_assumed_return_pct": -1.9041703550268794,
+    "adverse_excursion_pct": -2.7747442540133282,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -2.5968329136524915
   },
   {
     "symbol": "GLNG",
@@ -29711,9 +30251,14 @@
     "score": 37.6809673025529,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 4.0577078726200755,
+    "net_assumed_return_pct": 3.8577078726200753,
+    "adverse_excursion_pct": -0.4283192939404823,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 3.1650453139944634
   },
   {
     "symbol": "RUSHA",
@@ -29766,9 +30311,14 @@
     "score": 34.0662895314973,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -4.651554144839986,
+    "net_assumed_return_pct": -4.851554144839986,
+    "adverse_excursion_pct": -5.172121000533291,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -5.544216703465598
   },
   {
     "symbol": "BJRI",
@@ -29821,9 +30371,14 @@
     "score": 53.999932211626366,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 1.5499973297119052,
+    "net_assumed_return_pct": 1.3499973297119052,
+    "adverse_excursion_pct": -1.22500419616699,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 0.6573347710862931
   },
   {
     "symbol": "FNF",
@@ -29876,9 +30431,14 @@
     "score": 47.58703737116663,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": -0.9929910511707551,
+    "net_assumed_return_pct": -1.192991051170755,
+    "adverse_excursion_pct": -3.2710358985945653,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": -1.8856536097963672
   },
   {
     "symbol": "MAT",
@@ -29931,9 +30491,14 @@
     "score": 56.88126522543545,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 2.325577563851988,
+    "net_assumed_return_pct": 2.125577563851988,
+    "adverse_excursion_pct": -3.720932973552049,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 1.4329150052263762
   },
   {
     "symbol": "SGRY",
@@ -29986,9 +30551,14 @@
     "score": 46.70694702950286,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "PENDING",
+    "status": "MATURE",
     "entry_date": "2026-10-15",
-    "end_date": "2026-10-21"
+    "end_date": "2026-10-21",
+    "gross_price_return_pct": 4.464283855864237,
+    "net_assumed_return_pct": 4.264283855864237,
+    "adverse_excursion_pct": -2.6785665290966265,
+    "benchmark_price_return_pct": 0.8926625586256121,
+    "excess_gross_pct": 3.571621297238625
   },
   {
     "symbol": "HAFN",

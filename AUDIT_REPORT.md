@@ -1,17 +1,17 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-21T15:37:14.308694+00:00
-Market as-of: 2026-10-20; qualified cohorts: 8; cohort rows: 1020; attempts retained: 84.
-Outcome counts: {'MATURE': 364, 'PENDING': 4370, 'INELIGIBLE_DATA': 365, 'CORPORATE_ACTION_REVIEW': 1}.
-Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 125, 'selected': 129}.
-Cycle ledger: {'complete_signal_cohorts': 8, 'pending_entries': 4, 'open_positions': 11, 'closed_trades': 0, 'benchmark_pairs': 0, 'review_trades': 0}.
+Audit UTC: 2026-10-21T23:08:51.159208+00:00
+Market as-of: 2026-10-21; qualified cohorts: 8; cohort rows: 1020; attempts retained: 85.
+Outcome counts: {'MATURE': 478, 'PENDING': 4253, 'INELIGIBLE_DATA': 365, 'CORPORATE_ACTION_REVIEW': 2, 'MISSING_SESSIONS': 2}.
+Saved-data freshness gate: {'passed': False, 'required_stale': ['CCS'], 'fresh': 120, 'selected': 129}.
+Cycle ledger: {'complete_signal_cohorts': 8, 'pending_entries': 0, 'open_positions': 15, 'closed_trades': 0, 'benchmark_pairs': 0, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
 Hypothetical next-open entry, price returns excluding dividends, 0.20% round-trip costs.
 Rejected candidates are controls. Overlapping horizons are not independent trades.
 
 | Horizon (sessions) | Mature | Pending | Data-ineligible | Other errors | First exit date |
 |---|---:|---:|---:|---:|---|
-| 5 | 364 | 582 | 73 | 1 | 2026-10-16 |
+| 5 | 478 | 465 | 73 | 4 | 2026-10-16 |
 | 10 | 0 | 947 | 73 | 0 | 2026-10-23 |
 | 20 | 0 | 947 | 73 | 0 | 2026-11-06 |
 | 30 | 0 | 947 | 73 | 0 | 2026-11-20 |
@@ -51,9 +51,53 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 | SFM | 54.859 | CANDIDATE |
 
 ## Source failures
+- CCS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- NCO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- ARCI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- GS.PRA: ValueError: EMPTY_PROVIDER_RESPONSE
+- TRGS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - NVNI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- ACGC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- AEON: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- AFJK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- AKO.A: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- APWC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- ARCL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- BRKH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- BRT: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- BWIV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- CEPV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- CQP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- DYOR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- ELTK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- FEBO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- FTRA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- GIX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- GROV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- GWH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- IBTA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- JACS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- KCHV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- KOP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- KWR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- LESL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- LIVE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- MPTI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- PONO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- QNCX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- RMCO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SENEB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SIMA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SOS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SSEA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SVCC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- TAP.A: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- UCFI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- WFG: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- YHNA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

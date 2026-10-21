@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-21T15:37:15.844441+00:00",
+  "generated_at": "2026-10-21T23:08:52.406654+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
     {
       "symbol": "ATGL",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-20",
       "planned_entry_date": "2026-10-21",
       "entry_score": 59.95639283864132,
@@ -18,7 +18,9 @@
         "amplitude_consistency": 52.966789652478695,
         "confidence": "MEDIUM"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-21",
+      "entry_open": 7.289999961853027
     },
     {
       "symbol": "BETR",
@@ -41,7 +43,7 @@
     },
     {
       "symbol": "CHPT",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-20",
       "planned_entry_date": "2026-10-21",
       "entry_score": 59.162340324335744,
@@ -54,7 +56,9 @@
         "amplitude_consistency": 58.22081718873784,
         "confidence": "MEDIUM"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-21",
+      "entry_open": 8.050000190734863
     },
     {
       "symbol": "CQP",
@@ -134,7 +138,7 @@
     },
     {
       "symbol": "NYAX",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-20",
       "planned_entry_date": "2026-10-21",
       "entry_score": 60.47626748430303,
@@ -147,7 +151,9 @@
         "amplitude_consistency": 59.74082708065431,
         "confidence": "MEDIUM"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-21",
+      "entry_open": 49.72999954223633
     },
     {
       "symbol": "PSIG",
@@ -208,7 +214,7 @@
     },
     {
       "symbol": "SON",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-20",
       "planned_entry_date": "2026-10-21",
       "entry_score": 54.02930475985331,
@@ -221,7 +227,9 @@
         "amplitude_consistency": 52.783038279624286,
         "confidence": "MEDIUM"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-21",
+      "entry_open": 50.540000915527344
     },
     {
       "symbol": "SPGI",
@@ -328,8 +336,8 @@
   ],
   "summary": {
     "complete_signal_cohorts": 8,
-    "pending_entries": 4,
-    "open_positions": 11,
+    "pending_entries": 0,
+    "open_positions": 15,
     "closed_trades": 0,
     "benchmark_pairs": 0,
     "review_trades": 0
