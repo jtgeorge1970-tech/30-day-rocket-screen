@@ -1,5 +1,12 @@
 # GOLDEN RULES — GOVERNING ALL WORK WITH JOSEPH
 
+> **Engine V2 notice (2026-09-02):** For all new-candidate selection and entry
+> decisions, `QUALITY_LOSER_SSOT.md` supersedes the legacy three-lens selection,
+> permissive catalyst, and Crown Jewel weighting sections below. Position
+> lifecycle, disaster-stop, independent-clock, ledger, and Golden Rule sections
+> remain active. This notice prevents the old hot-runner logic from silently
+> re-entering V2.
+
 These rules are mandatory and take priority over speed, convenience, inference, reconstruction, or shortcuts.
 
 ## Golden Rule #1 — NEVER GUESS OR ASSUME
