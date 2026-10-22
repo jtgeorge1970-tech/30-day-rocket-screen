@@ -1,16 +1,15 @@
 {
-  "recorded_at": "2026-10-22T00:56:38.647908+00:00",
+  "recorded_at": "2026-10-22T06:34:41.453627+00:00",
   "market_asof": "2026-10-21",
-  "qualified_cohorts": 8,
-  "all_prediction_files": 13,
-  "attempts": 86,
-  "cohort_rows": 1020,
+  "qualified_cohorts": 9,
+  "all_prediction_files": 14,
+  "attempts": 87,
+  "cohort_rows": 1149,
   "outcome_counts": {
-    "MATURE": 478,
-    "PENDING": 4253,
-    "INELIGIBLE_DATA": 365,
-    "CORPORATE_ACTION_REVIEW": 2,
-    "MISSING_SESSIONS": 2
+    "MATURE": 480,
+    "PENDING": 4833,
+    "INELIGIBLE_DATA": 430,
+    "CORPORATE_ACTION_REVIEW": 2
   },
   "outcome_recompute_matches_saved": true,
   "immutable_evidence_sha256": {
@@ -26,6 +25,7 @@
     "predictions/2026-10-19.json": "4ce908ac66a58c9746cf2e270dc999eb21c13daae7fcd9e78d2c2b9296f48d28",
     "predictions/2026-10-20-qualified.json": "4509315ba7ef9722dd6057f03625971d6b215756f4381e8fbc1cdd582186a4e5",
     "predictions/2026-10-20.json": "860e9b4fafff62b70db2e8467ca08a088e035e35999843f7f1b858a6715e600c",
+    "predictions/2026-10-21-qualified.json": "37883612361e8b1b2cc183243588c5daa325e061b2592caf82248287e6c512af",
     "predictions/2026-10-21.json": "206bd287495a5df667726d5cf16ce55a289d0bcbeb67a4709d34efadc7b6a104",
     "signals/2026-10-09-qualified.json": "3b40ea3da1975073b3b3739b4bf427e24d5ea35fa85d49bbc047cb978f7b9053",
     "signals/2026-10-09.json": "8436c531b1afa83066eaf135c6b4fd3c7d1d96c3eed68a7091f167f9618204db",
@@ -36,6 +36,7 @@
     "signals/2026-10-16.json": "18cdd4c621845a0892b1cfd37bcaf9ba87de080b0ff33bc2a61209a27ee7d7b8",
     "signals/2026-10-19.json": "8ef5635abce9af114db8c4947dc8452375f595f35b2320122ba2602edf73758f",
     "signals/2026-10-20.json": "494bb4115ebcf629937ae2f936b0a3962df5f33e585564d26e15d0959fd092b9",
+    "signals/2026-10-21.json": "238186e0f7eae45373b65a6866deb7bc51659a0d200831a9401c6181e31ee91a",
     "fingerprints/2026-10-09.json": "8759ad024a7172a502441fb124b86ef08fa3a84763c776b07b7f50ec4ddb16e1",
     "fingerprints/2026-10-12.json": "b08045ec7a3bb9cffa3ae6bb566ce76984a1680124bbf45f085ece9dc85bc9b8",
     "fingerprints/2026-10-13.json": "788e18cf32d21e40cfc854db79c3e325de8d9159d001fabe39ad70fc439b4aaa",
@@ -44,6 +45,7 @@
     "fingerprints/2026-10-16.json": "4a9441d5986a55e84249f059c10052d496d1eb2ed7900b77cc4699b2231f1ee7",
     "fingerprints/2026-10-19.json": "74012b4b0c77ba86c2f720a861963220abfb232acdd3996fe7bf84c94dced612",
     "fingerprints/2026-10-20.json": "87734074d6e894e51f3a6580720e183304a00d422be1cc863f2b6fb1150f5330",
+    "fingerprints/2026-10-21.json": "f027fbf15072e74d98f5acf4d5a7e9f652c5b99f2c6d0f557eb6095ebc82f0af",
     "attempts/20261010T012256172464Z.json": "8622f72ce6ca8643e3f1eff2de2c0cd82986b7d520f276189ded173e01386f3d",
     "attempts/20261010T013547333786Z.json": "84012c7ba9c29509796cd2176d99c514ac8b15e4d3585c6e499991c697254e2c",
     "attempts/20261010T015444698482Z.json": "5f88f74f204a4bad8f58f113a5d20fd18d4939d7b94b3b8cb35e9d9af17ff82f",
@@ -129,73 +131,29 @@
     "attempts/20261021T085104076742Z.json": "20eaaede33ed24f1c03d146739c883e57f065a7c895320f207ee157e7a74d8f4",
     "attempts/20261021T153321782993Z.json": "5d6395717a86477bed0c026dda6a8b13db1484c4038a080f55b6a47d54d19c18",
     "attempts/20261021T230404515118Z.json": "6c591d9111a3b59dd86a511ee81c63448d258ce0e4c794de3c73aeb9ec2c0359",
-    "attempts/20261022T005230401247Z.json": "58de6f5ade94688d2354d6536c452a6c20f1893ca366643d9f30fea7ad295ef4"
+    "attempts/20261022T005230401247Z.json": "58de6f5ade94688d2354d6536c452a6c20f1893ca366643d9f30fea7ad295ef4",
+    "attempts/20261022T063231819928Z.json": "9ed3de9a932616ba3d891dc737c781ff10454e51c15fc56b83e06d23e929d0e2"
   },
   "control_unchanged": {
     "cursor": 900,
     "retry": [
-      "CCS",
-      "NCO",
-      "ARCI",
       "GS.PRA",
-      "TRGS",
       "NVNI",
       "SB.PRC",
       "SLP",
-      "WBD",
-      "ACGC",
-      "AEON",
-      "AFJK",
-      "AKO.A",
-      "APWC",
-      "ARCL",
-      "BRKH",
-      "BRT",
-      "BWIV",
-      "CEPV",
-      "CQP",
-      "DYOR",
-      "ELTK",
-      "FEBO",
-      "FTRA",
-      "GIX",
-      "GROV",
-      "GWH",
-      "IBTA",
-      "JACS",
-      "KCHV",
-      "KOP",
-      "KWR",
-      "LESL",
-      "LIVE",
-      "MPTI",
-      "PONO",
-      "QNCX",
-      "RMCO",
-      "SAC",
-      "SENEB",
-      "SIMA",
-      "SOS",
-      "SSEA",
-      "SVCC",
-      "TAP.A",
-      "UCFI",
-      "WFG",
-      "YHNA"
+      "WBD"
     ],
     "last_session": "2026-10-21"
   },
   "freshness_gate": {
-    "passed": false,
-    "required_stale": [
-      "CCS"
-    ],
-    "fresh": 120,
+    "passed": true,
+    "required_stale": [],
+    "fresh": 124,
     "selected": 129
   },
   "cycle_summary": {
-    "complete_signal_cohorts": 8,
-    "pending_entries": 0,
+    "complete_signal_cohorts": 9,
+    "pending_entries": 1,
     "open_positions": 15,
     "closed_trades": 0,
     "benchmark_pairs": 0,
@@ -651,49 +609,48 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 5,
       "score_band": "<40",
-      "observations": 88,
+      "observations": 105,
       "statuses": {
-        "MATURE": 39,
-        "MISSING_SESSIONS": 2,
-        "PENDING": 47
+        "MATURE": 41,
+        "PENDING": 64
       },
-      "mature": 39,
-      "positive": 16,
-      "nonpositive": 23,
-      "average_net_pct": -1.0009757949410232,
-      "average_positive_pct": 2.94570305981641,
-      "average_nonpositive_pct": -3.7464915199896707,
-      "benchmark_pairs": 39,
-      "average_excess_gross_pct": -0.3708255874696462,
+      "mature": 41,
+      "positive": 17,
+      "nonpositive": 24,
+      "average_net_pct": -0.9349019916851885,
+      "average_positive_pct": 2.8145789853258543,
+      "average_nonpositive_pct": -3.590784350401343,
+      "benchmark_pairs": 41,
+      "average_excess_gross_pct": -0.3692792362185428,
       "worst_adverse_excursion_pct": -38.48314347132903
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 5,
       "score_band": "40-<60",
-      "observations": 508,
+      "observations": 578,
       "statuses": {
         "MATURE": 222,
-        "PENDING": 286
+        "PENDING": 356
       },
       "mature": 222,
       "positive": 104,
       "nonpositive": 118,
-      "average_net_pct": -0.9384176906135513,
-      "average_positive_pct": 5.266285250775748,
-      "average_nonpositive_pct": -6.4069694355668325,
+      "average_net_pct": -0.9382762713764522,
+      "average_positive_pct": 5.26618123348418,
+      "average_nonpositive_pct": -6.406611699389214,
       "benchmark_pairs": 222,
-      "average_excess_gross_pct": -0.3070047670666109,
+      "average_excess_gross_pct": -0.3068633478295118,
       "worst_adverse_excursion_pct": -86.84210490198016
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 5,
       "score_band": "60-<80",
-      "observations": 71,
+      "observations": 79,
       "statuses": {
         "MATURE": 36,
-        "PENDING": 35
+        "PENDING": 43
       },
       "mature": 36,
       "positive": 16,
@@ -725,30 +682,30 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 5,
       "score_band": "UNSCORED",
-      "observations": 228,
+      "observations": 262,
       "statuses": {
-        "INELIGIBLE_DATA": 69,
+        "INELIGIBLE_DATA": 82,
         "MATURE": 60,
         "CORPORATE_ACTION_REVIEW": 2,
-        "PENDING": 97
+        "PENDING": 118
       },
       "mature": 60,
       "positive": 13,
       "nonpositive": 47,
-      "average_net_pct": -1.5909417237447196,
+      "average_net_pct": -1.57586202938937,
       "average_positive_pct": 42.55210262746555,
-      "average_nonpositive_pct": -13.800719948547568,
+      "average_nonpositive_pct": -13.78146927490244,
       "benchmark_pairs": 60,
-      "average_excess_gross_pct": -0.9428016116936284,
+      "average_excess_gross_pct": -0.9277219173382782,
       "worst_adverse_excursion_pct": -67.99999895691873
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 10,
       "score_band": "<40",
-      "observations": 88,
+      "observations": 105,
       "statuses": {
-        "PENDING": 88
+        "PENDING": 105
       },
       "mature": 0,
       "positive": 0,
@@ -764,9 +721,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 10,
       "score_band": "40-<60",
-      "observations": 508,
+      "observations": 578,
       "statuses": {
-        "PENDING": 508
+        "PENDING": 578
       },
       "mature": 0,
       "positive": 0,
@@ -782,9 +739,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 10,
       "score_band": "60-<80",
-      "observations": 71,
+      "observations": 79,
       "statuses": {
-        "PENDING": 71
+        "PENDING": 79
       },
       "mature": 0,
       "positive": 0,
@@ -816,10 +773,10 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 10,
       "score_band": "UNSCORED",
-      "observations": 228,
+      "observations": 262,
       "statuses": {
-        "INELIGIBLE_DATA": 69,
-        "PENDING": 159
+        "INELIGIBLE_DATA": 82,
+        "PENDING": 180
       },
       "mature": 0,
       "positive": 0,
@@ -835,9 +792,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 20,
       "score_band": "<40",
-      "observations": 88,
+      "observations": 105,
       "statuses": {
-        "PENDING": 88
+        "PENDING": 105
       },
       "mature": 0,
       "positive": 0,
@@ -853,9 +810,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 20,
       "score_band": "40-<60",
-      "observations": 508,
+      "observations": 578,
       "statuses": {
-        "PENDING": 508
+        "PENDING": 578
       },
       "mature": 0,
       "positive": 0,
@@ -871,9 +828,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 20,
       "score_band": "60-<80",
-      "observations": 71,
+      "observations": 79,
       "statuses": {
-        "PENDING": 71
+        "PENDING": 79
       },
       "mature": 0,
       "positive": 0,
@@ -905,10 +862,10 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 20,
       "score_band": "UNSCORED",
-      "observations": 228,
+      "observations": 262,
       "statuses": {
-        "INELIGIBLE_DATA": 69,
-        "PENDING": 159
+        "INELIGIBLE_DATA": 82,
+        "PENDING": 180
       },
       "mature": 0,
       "positive": 0,
@@ -924,9 +881,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 30,
       "score_band": "<40",
-      "observations": 88,
+      "observations": 105,
       "statuses": {
-        "PENDING": 88
+        "PENDING": 105
       },
       "mature": 0,
       "positive": 0,
@@ -942,9 +899,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 30,
       "score_band": "40-<60",
-      "observations": 508,
+      "observations": 578,
       "statuses": {
-        "PENDING": 508
+        "PENDING": 578
       },
       "mature": 0,
       "positive": 0,
@@ -960,9 +917,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 30,
       "score_band": "60-<80",
-      "observations": 71,
+      "observations": 79,
       "statuses": {
-        "PENDING": 71
+        "PENDING": 79
       },
       "mature": 0,
       "positive": 0,
@@ -994,10 +951,10 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 30,
       "score_band": "UNSCORED",
-      "observations": 228,
+      "observations": 262,
       "statuses": {
-        "INELIGIBLE_DATA": 69,
-        "PENDING": 159
+        "INELIGIBLE_DATA": 82,
+        "PENDING": 180
       },
       "mature": 0,
       "positive": 0,
@@ -1013,9 +970,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 60,
       "score_band": "<40",
-      "observations": 88,
+      "observations": 105,
       "statuses": {
-        "PENDING": 88
+        "PENDING": 105
       },
       "mature": 0,
       "positive": 0,
@@ -1031,9 +988,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 60,
       "score_band": "40-<60",
-      "observations": 508,
+      "observations": 578,
       "statuses": {
-        "PENDING": 508
+        "PENDING": 578
       },
       "mature": 0,
       "positive": 0,
@@ -1049,9 +1006,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 60,
       "score_band": "60-<80",
-      "observations": 71,
+      "observations": 79,
       "statuses": {
-        "PENDING": 71
+        "PENDING": 79
       },
       "mature": 0,
       "positive": 0,
@@ -1083,10 +1040,10 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 60,
       "score_band": "UNSCORED",
-      "observations": 228,
+      "observations": 262,
       "statuses": {
-        "INELIGIBLE_DATA": 69,
-        "PENDING": 159
+        "INELIGIBLE_DATA": 82,
+        "PENDING": 180
       },
       "mature": 0,
       "positive": 0,

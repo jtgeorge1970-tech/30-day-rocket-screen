@@ -1,21 +1,21 @@
 # OFTS daily research
 
 Market session: 2026-10-21
-Selected: 129; refreshed: 120; refresh errors: 48
-Qualified prediction cohorts saved: 8; current coverage: 120/129
-Outcome counts: {'CORPORATE_ACTION_REVIEW': 2, 'INELIGIBLE_DATA': 365, 'MATURE': 478, 'MISSING_SESSIONS': 2, 'PENDING': 4253}
-Cycle fingerprints saved: 94/129
-Signal states: BUY=0, SELL=0, NO_TRADE=129
-Cycle ledger: pending entries=0; open positions=15; closed trades=0; SPY pairs=0
+Selected: 129; refreshed: 124; refresh errors: 5
+Qualified prediction cohorts saved: 9; current coverage: 124/129
+Outcome counts: {'CORPORATE_ACTION_REVIEW': 2, 'INELIGIBLE_DATA': 430, 'MATURE': 480, 'PENDING': 4833}
+Cycle fingerprints saved: 104/138
+Signal states: BUY=1, SELL=0, NO_TRADE=137
+Cycle ledger: pending entries=1; open positions=15; closed trades=0; SPY pairs=0
 Cycle-speed report card: AWAITING_CLOSED_FORWARD_TRADES; closed forward trades=0; groups=[]
 Score scale: theoretical 0-100; observed 10.938289701919537-62.6355613204075; validated BUY threshold=NONE
-Score distribution: {'BELOW_40': 17, '40_TO_49_999': 30, '50_TO_59_999': 39, '60_TO_69_999': 8, '70_TO_79_999': 0, '80_TO_89_999': 0, '90_TO_100': 0}
+Score distribution: {'BELOW_40': 18, '40_TO_49_999': 35, '50_TO_59_999': 43, '60_TO_69_999': 8, '70_TO_79_999': 0, '80_TO_89_999': 0, '90_TO_100': 0}
 System actionability gate: RESEARCH_ONLY_NO_GO; OUT_OF_SAMPLE_PREDICTIVE_VALIDATION_NOT_VERIFIED
 Production approval: NO. These are quality scores, not BUY signals.
 Experimental recent viability v0.5: last three minor swings, last three UP legs, old-outlier dominance, peak/trough spacing 10-40 sessions, adjacent 3-vs-3 amplitude/cadence, and hypothetical capture after costs; NOT validated.
-Experimental viable REVIEW=0; viability NO_TRADE=94
+Experimental viable REVIEW=0; viability NO_TRADE=104
 Experimental swing-health v0.1: last-four-leg stability and lower-high/lower-low deterioration (NOT validated for trading).
-Experimental swing-health NO_TRADE=66; REVIEW=28; INSUFFICIENT=49
+Experimental swing-health NO_TRADE=74; REVIEW=30; INSUFFICIENT=54
 Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.
 Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.
 
@@ -38,6 +38,7 @@ Overlapping observations are not independent trades. No portfolio win rate or dr
 | XPRO | 58.533 | CANDIDATE | NO_TRADE | INSUFFICIENT | 5.530544348093702 | [5.13, 6.34, 5.53] | [12.83, 19.33, 29.6] | 0.2861190423872202 | 3 | STABLE_3_OF_3 | [10, 22, 6] | [15, 11, 24] | [24, 5, 6] | [7, 17, 20] | 0.5098039215686274 | DISSIPATING | False | 5.530544348093702 | 9.382411968260694 | FADING | NO_TRADE | RISING | INSUFFICIENT | 20 | 14.95875149963658 | MEDIUM |
 | GLW | 57.855 | CANDIDATE | NO_TRADE | IRREGULAR | 11.227968443843794 | [16.88, 11.23, 11.47] | [6.14, 9.25, 4.98] | 1.8685319181458309 | 3 | STABLE_3_OF_3 | [8, 9, 10] | [3, 3, 8] | [7, 8, 9] | [8, 3, 7] | 2.071428571428571 | DISSIPATING | False | 11.465139720745743 | 13.10492409609871 | CYCLE_TIMING | NO_TRADE | MIXED | MIXED | 21.0 | 17.2972972972973 | MEDIUM |
 | ACDC | 57.800 | CANDIDATE | NO_TRADE | DECAYING | 15.521332757663542 | [9.82, 6.82, 15.52] | [24.31, 8.78, 13.85] | 0.7088552038191496 | 3 | STABLE_3_OF_3 | [8, 7, 12] | [7, 5, 4] | [2, 12, 9] | [7, 9, 4] | 1.442857142857143 | DISSIPATING | False | 15.521332757663542 | 13.130965719535242 | CYCLE_TIMING | NO_TRADE | MIXED | MIXED | 22.5 | 23.767799004313883 | MEDIUM |
+| CCS | 57.706 | CANDIDATE | NO_TRADE | INSUFFICIENT | 3.672368935275061 | [4.17, 7.24, 3.08] | [11.68, 6.09, 3.48] | 0.6840910734443489 | 1 | UNSTABLE | [4, 27, 17] | [8, 6, 2] | [22, 24, 3] | [8, 4, 2] | 4.166666666666667 | DISSIPATING | False | 3.0803486105271283 | 9.259704177987752 | TOO_SMALL_UPSIDE | NO_TRADE | INSUFFICIENT | INSUFFICIENT | 34 | 16.172723350139588 | HIGH |
 | LFCR | 57.650 | CANDIDATE | NO_TRADE | IRREGULAR | 8.695655679332305 | [3.91, 8.7, 56.9] | [3.65, 6.16, 7.97] | 1.4106287244879654 | 2 | WATCH_2_OF_3 | [7, 6, 5] | [2, 11, 5] | [5, 4, 8] | [8, 6, 10] | 0.9125 | STABLE_OR_MIXED | False | 56.904772663333205 | 11.036121615140166 | WATCH | NO_TRADE | FALLING | MIXED | 12 | 11.617739999739435 | LOW |
 | VIRC | 57.374 | CANDIDATE | NO_TRADE | STABLE_RANGE | 4.461537874661969 | [2.95, 9.51, 4.46] | [5.46, 3.06, 10.32] | 0.817019921083376 | 1 | UNSTABLE | [2, 9, 9] | [8, 9, 7] | [4, 9, 14] | [7, 6, 6] | 1.3125 | DISSIPATING | False | 4.461537874661969 | 7.014878853125926 | TOO_SMALL_UPSIDE | NO_TRADE | MIXED | MIXED | 20.0 | 11.659188733927506 | MEDIUM |
 | EPM | 57.342 | CANDIDATE | NO_TRADE | IRREGULAR | 5.7377058257448095 | [12.28, 6.34, 2.81] | [10.19, 9.43, 6.29] | 0.6720088429954724 | 2 | UNSTABLE | [14, 6, 2] | [10, 19, 2] | [14, 3, 5] | [18, 10, 5] | 0.55 | DISSIPATING | False | 2.8089928274849907 | 8.661247242968178 | TOO_SMALL_UPSIDE | NO_TRADE | MIXED | MIXED | 26 | 12.982888675563604 | LOW |
@@ -45,10 +46,9 @@ Overlapping observations are not independent trades. No portfolio win rate or dr
 | FERG | 57.003 | CANDIDATE | NO_TRADE | INSUFFICIENT | 6.08606780511507 | [16.61, 4.34, 6.09] | [4.85, 5.97, 3.36] | 1.2544730128010313 | 2 | WATCH_2_OF_3 | [10, 19, 15] | [7, 12, 9] | [24, 11, 14] | [13, 9, 6] | 1.6111111111111112 | DISSIPATING | True | 6.08606780511507 | 7.199537507927916 | WATCH | NO_TRADE | INSUFFICIENT | INSUFFICIENT | 43 | 15.39008433659906 | MEDIUM |
 | TT | 56.965 | CANDIDATE | NO_TRADE | INSUFFICIENT | 9.003021530039701 | [9.92, 2.73, 13.36] | [6.14, 2.78, 3.24] | 3.0596823841665097 | 2 | WATCH_2_OF_3 | [11, 11, 33] | [3, 3, 18] | [15, 18, 21] | [3, 15, 8] | 2.958333333333333 | DISSIPATING | True | 13.358475163215644 | 7.080122938478253 | WATCH | NO_TRADE | INSUFFICIENT | FALLING | 41.0 | 12.549158572299103 | MEDIUM |
 | CRNC | 56.829 | CANDIDATE | NO_TRADE | STABLE_RANGE | 6.468299119393417 | [4.55, 3.82, 6.47] | [18.11, 6.64, 12.68] | 0.3584280762422222 | 1 | UNSTABLE | [4, 4, 3] | [9, 8, 15] | [4, 2, 7] | [9, 9, 12] | 0.4444444444444444 | DISSIPATING | False | 6.468299119393417 | 11.663782328572237 | TOO_SMALL_UPSIDE | NO_TRADE | FALLING | MIXED | 14 | 19.601070079276095 | MEDIUM |
-| SGRY | 56.503 | CANDIDATE | NO_TRADE | DOWNTREND | 9.93873437611683 | [3.01, 19.25, 3.45] | [6.9, 6.76, 6.65] | 0.5101038434633243 | 1 | UNSTABLE | [7, 7, 4] | [5, 9, 7] | [8, 4, 5] | [9, 7, 6] | 0.8571428571428572 | DISSIPATING | False | 3.4507026598581403 | 8.416599194524157 | TOO_SMALL_UPSIDE | NO_TRADE | FALLING | FALLING | 39.5 | 18.51484965277759 | MEDIUM |
 
 ## Experimental recent-swing review shortlist (NOT BUY signals)
-Count: 0 of 71 scored CANDIDATE names
+Count: 0 of 81 scored CANDIDATE names
 | Symbol | Quality score | Last 3 swings % | Last 3 UP % | Prior 3 UP % | UP ratio | >=5% count | Peak gaps | Prior peak gaps | Trough gaps | Prior trough gaps | Cadence ratio | Historical avg % |
 |---|---:|---:|---|---|---:|---:|---|---|---|---|---:|---:|
 
@@ -98,13 +98,13 @@ Count: 0 of 71 scored CANDIDATE names
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 5,
     "score_band": "0-40",
-    "observations": 39,
-    "positive_net_pct": 41.02564102564103,
-    "average_net_pct": -1.0009757949410232,
-    "average_positive_pct": 2.94570305981641,
-    "average_nonpositive_pct": -3.7464915199896707,
-    "benchmark_pairs": 39,
-    "average_excess_pct": -0.3708255874696462,
+    "observations": 41,
+    "positive_net_pct": 41.46341463414634,
+    "average_net_pct": -0.9349019916851885,
+    "average_positive_pct": 2.8145789853258543,
+    "average_nonpositive_pct": -3.590784350401343,
+    "benchmark_pairs": 41,
+    "average_excess_pct": -0.3692792362185428,
     "worst_adverse_excursion_pct": -38.48314347132903
   },
   {
@@ -113,11 +113,11 @@ Count: 0 of 71 scored CANDIDATE names
     "score_band": "40-60",
     "observations": 222,
     "positive_net_pct": 46.846846846846844,
-    "average_net_pct": -0.9384176906135513,
-    "average_positive_pct": 5.266285250775748,
-    "average_nonpositive_pct": -6.4069694355668325,
+    "average_net_pct": -0.9382762713764522,
+    "average_positive_pct": 5.26618123348418,
+    "average_nonpositive_pct": -6.406611699389214,
     "benchmark_pairs": 222,
-    "average_excess_pct": -0.3070047670666109,
+    "average_excess_pct": -0.3068633478295118,
     "worst_adverse_excursion_pct": -86.84210490198016
   },
   {
@@ -139,51 +139,8 @@ Count: 0 of 71 scored CANDIDATE names
 ## Identity-boundary exclusions (current processing; prior snapshots immutable)
 
 ## Refresh failures
-- CCS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- NCO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- ARCI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - GS.PRA: ValueError: EMPTY_PROVIDER_RESPONSE
-- TRGS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - NVNI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- ACGC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- AEON: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- AFJK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- AKO.A: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- APWC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- ARCL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- BRKH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- BRT: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- BWIV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- CEPV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- CQP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- DYOR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- ELTK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- FEBO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- FTRA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- GIX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- GROV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- GWH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- IBTA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- JACS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- KCHV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- KOP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- KWR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- LESL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- LIVE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- MPTI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- PONO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- QNCX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- RMCO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SENEB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SIMA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SOS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SSEA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SVCC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- TAP.A: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- UCFI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- WFG: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- YHNA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY

@@ -1,8 +1,6 @@
 {
-  "passed": false,
-  "required_stale": [
-    "CCS"
-  ],
-  "fresh": 120,
+  "passed": true,
+  "required_stale": [],
+  "fresh": 124,
   "selected": 129
 }

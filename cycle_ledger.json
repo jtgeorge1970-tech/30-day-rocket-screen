@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T00:56:40.660640+00:00",
+  "generated_at": "2026-10-22T06:34:43.680549+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -20,7 +20,24 @@
       },
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-21",
-      "entry_open": 7.289999961853027
+      "entry_open": 7.269999980926514
+    },
+    {
+      "symbol": "AVNT",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-21",
+      "planned_entry_date": "2026-10-22",
+      "entry_score": 52.55839222466992,
+      "cycle": {
+        "cycle_sessions": 41,
+        "median_swing_pct": 17.81282858538571,
+        "completed_cycle_intervals": 21,
+        "confirmed_turns": 23,
+        "timing_consistency": 61.88054750402577,
+        "amplitude_consistency": 48.73645636585644,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
     },
     {
       "symbol": "BETR",
@@ -153,7 +170,7 @@
       },
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-21",
-      "entry_open": 49.72999954223633
+      "entry_open": 49.75
     },
     {
       "symbol": "PSIG",
@@ -335,8 +352,8 @@
     }
   ],
   "summary": {
-    "complete_signal_cohorts": 8,
-    "pending_entries": 0,
+    "complete_signal_cohorts": 9,
+    "pending_entries": 1,
     "open_positions": 15,
     "closed_trades": 0,
     "benchmark_pairs": 0,
