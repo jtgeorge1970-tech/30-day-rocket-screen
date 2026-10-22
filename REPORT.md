@@ -1,8 +1,8 @@
 # OFTS daily research
 
 Market session: 2026-10-21
-Selected: 129; refreshed: 124; refresh errors: 5
-Qualified prediction cohorts saved: 9; current coverage: 124/129
+Selected: 129; refreshed: 123; refresh errors: 6
+Qualified prediction cohorts saved: 9; current coverage: 123/129
 Outcome counts: {'CORPORATE_ACTION_REVIEW': 2, 'INELIGIBLE_DATA': 430, 'MATURE': 480, 'PENDING': 4833}
 Cycle fingerprints saved: 104/138
 Signal states: BUY=1, SELL=0, NO_TRADE=137
@@ -140,6 +140,7 @@ Count: 0 of 81 scored CANDIDATE names
 
 ## Refresh failures
 - GS.PRA: ValueError: EMPTY_PROVIDER_RESPONSE
+- HCAI: ValueError: EMPTY_PROVIDER_RESPONSE
 - NVNI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY

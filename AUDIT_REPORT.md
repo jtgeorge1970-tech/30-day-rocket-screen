@@ -1,9 +1,9 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-22T08:57:39.833763+00:00
-Market as-of: 2026-10-21; qualified cohorts: 9; cohort rows: 1149; attempts retained: 88.
+Audit UTC: 2026-10-22T15:37:09.323729+00:00
+Market as-of: 2026-10-21; qualified cohorts: 9; cohort rows: 1149; attempts retained: 89.
 Outcome counts: {'MATURE': 480, 'PENDING': 4833, 'INELIGIBLE_DATA': 430, 'CORPORATE_ACTION_REVIEW': 2}.
-Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 124, 'selected': 129}.
+Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 123, 'selected': 129}.
 Cycle ledger: {'complete_signal_cohorts': 9, 'pending_entries': 1, 'open_positions': 15, 'closed_trades': 0, 'benchmark_pairs': 0, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
 Hypothetical next-open entry, price returns excluding dividends, 0.20% round-trip costs.
@@ -52,6 +52,7 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 
 ## Source failures
 - GS.PRA: ValueError: EMPTY_PROVIDER_RESPONSE
+- HCAI: ValueError: EMPTY_PROVIDER_RESPONSE
 - NVNI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY

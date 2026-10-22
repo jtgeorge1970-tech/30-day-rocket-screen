@@ -1,6 +1,6 @@
 {
   "asof": "2026-10-21",
-  "recorded_at": "2026-10-22T08:53:43.584719+00:00",
+  "recorded_at": "2026-10-22T15:34:26.279316+00:00",
   "symbols": {
     "SCYX": {
       "status": "FRESH",
@@ -587,9 +587,9 @@
       "bars": 285
     },
     "HCAI": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
+      "status": "ERROR",
+      "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
+      "source": "UNVERIFIED",
       "provider_ticker": "HCAI",
       "latest_date": "2026-10-21",
       "bars": 430

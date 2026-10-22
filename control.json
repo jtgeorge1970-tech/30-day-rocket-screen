@@ -2,6 +2,7 @@
   "cursor": 900,
   "retry": [
     "GS.PRA",
+    "HCAI",
     "NVNI",
     "SB.PRC",
     "SLP",
