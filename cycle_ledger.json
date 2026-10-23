@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T15:37:11.517905+00:00",
+  "generated_at": "2026-10-23T01:04:49.228127+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -24,7 +24,7 @@
     },
     {
       "symbol": "AVNT",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-21",
       "planned_entry_date": "2026-10-22",
       "entry_score": 52.55839222466992,
@@ -37,7 +37,9 @@
         "amplitude_consistency": 48.73645636585644,
         "confidence": "MEDIUM"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-22",
+      "entry_open": 40.2400016784668
     },
     {
       "symbol": "BETR",
@@ -353,8 +355,8 @@
   ],
   "summary": {
     "complete_signal_cohorts": 9,
-    "pending_entries": 1,
-    "open_positions": 15,
+    "pending_entries": 0,
+    "open_positions": 16,
     "closed_trades": 0,
     "benchmark_pairs": 0,
     "review_trades": 0
