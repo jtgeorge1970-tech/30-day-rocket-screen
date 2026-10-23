@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-10-23T06:29:56.595377+00:00",
+  "recorded_at": "2026-10-23T08:53:12.028344+00:00",
   "market_asof": "2026-10-22",
   "qualified_cohorts": 10,
   "all_prediction_files": 16,
-  "attempts": 91,
+  "attempts": 92,
   "cohort_rows": 1280,
   "outcome_counts": {
     "MATURE": 595,
@@ -140,7 +140,8 @@
     "attempts/20261022T085343584719Z.json": "ca47637b0bfe97d0d83a3b5683173f06cefc5163fe60d4cc276e08e3c908c7f6",
     "attempts/20261022T153426279316Z.json": "52d748ddba257f3306d70291376291245f18618fd1b5ff4133633c8baf64034b",
     "attempts/20261023T005450372872Z.json": "25e987d02eab842cb2836e588953f7fd9b1aaf2dc135b64770ebeab16abdf70d",
-    "attempts/20261023T062647879821Z.json": "2041dc24a71299860ce0ff38caede358d2b3449f6d7d60d9bfc824334b67f403"
+    "attempts/20261023T062647879821Z.json": "2041dc24a71299860ce0ff38caede358d2b3449f6d7d60d9bfc824334b67f403",
+    "attempts/20261023T084848534626Z.json": "5ce815ce9769f0d484049883c41367a9ddd3fc317689a4a1310be9dbcc0b7240"
   },
   "control_unchanged": {
     "cursor": 1000,
