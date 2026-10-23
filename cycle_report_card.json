@@ -1,8 +1,23 @@
 {
-  "status": "AWAITING_CLOSED_FORWARD_TRADES",
+  "status": "READY",
   "production_approved": false,
   "methodology": "Cycle classes use the point-in-time entry fingerprint. Capital-time efficiency is total net percentage return divided by total holding sessions, scaled to 20 sessions; it is descriptive, not an annualized or portfolio return.",
-  "closed_trades": 0,
+  "closed_trades": 1,
   "excluded_review_trades": 0,
-  "groups": {}
+  "groups": {
+    "MEDIUM_11_TO_25": {
+      "trades": 1,
+      "positive_net_trades": 0,
+      "net_win_rate_pct": 0.0,
+      "mean_net_return_pct": -39.14436419310857,
+      "median_net_return_pct": -39.14436419310857,
+      "total_holding_sessions": 9,
+      "capital_time_efficiency_pct_per_20_sessions": -86.98747598468572,
+      "average_captured_observed_swing_pct": -85.51276536116956,
+      "average_missed_observed_swing_pct": 45.54216441092056,
+      "benchmark_pairs": 1,
+      "average_excess_gross_pct": -36.519541715293556,
+      "review_trades": 0
+    }
+  }
 }
