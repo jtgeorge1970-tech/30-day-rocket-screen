@@ -1,10 +1,6 @@
 {
-  "passed": false,
-  "required_stale": [
-    "SCYX",
-    "NYAX",
-    "VIRC"
-  ],
-  "fresh": 88,
+  "passed": true,
+  "required_stale": [],
+  "fresh": 126,
   "selected": 131
 }

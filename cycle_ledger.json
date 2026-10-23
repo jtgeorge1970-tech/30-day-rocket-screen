@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T01:04:49.228127+00:00",
+  "generated_at": "2026-10-23T06:29:58.893451+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -61,6 +61,40 @@
       "entry_open": 10.680000305175781
     },
     {
+      "symbol": "BX",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-22",
+      "planned_entry_date": "2026-10-23",
+      "entry_score": 53.76682437159168,
+      "cycle": {
+        "cycle_sessions": 42,
+        "median_swing_pct": 18.215177956119454,
+        "completed_cycle_intervals": 21,
+        "confirmed_turns": 23,
+        "timing_consistency": 59.94920833333334,
+        "amplitude_consistency": 49.88032932253035,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
+      "symbol": "CCS",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-22",
+      "planned_entry_date": "2026-10-23",
+      "entry_score": 56.74657747281878,
+      "cycle": {
+        "cycle_sessions": 34.5,
+        "median_swing_pct": 17.292267882239752,
+        "completed_cycle_intervals": 22,
+        "confirmed_turns": 24,
+        "timing_consistency": 68.7595,
+        "amplitude_consistency": 55.50657962920439,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
       "symbol": "CHPT",
       "status": "OPEN",
       "entry_signal_date": "2026-10-20",
@@ -99,6 +133,40 @@
       "entry_open": 65.0
     },
     {
+      "symbol": "EBC",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-22",
+      "planned_entry_date": "2026-10-23",
+      "entry_score": 41.767033177529605,
+      "cycle": {
+        "cycle_sessions": 39,
+        "median_swing_pct": 11.357629820557225,
+        "completed_cycle_intervals": 25,
+        "confirmed_turns": 27,
+        "timing_consistency": 46.02815789473685,
+        "amplitude_consistency": 45.87493438780776,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
+      "symbol": "KIM",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-22",
+      "planned_entry_date": "2026-10-23",
+      "entry_score": 43.11008767619985,
+      "cycle": {
+        "cycle_sessions": 49,
+        "median_swing_pct": 10.810057880606172,
+        "completed_cycle_intervals": 15,
+        "confirmed_turns": 17,
+        "timing_consistency": 48.27015217391305,
+        "amplitude_consistency": 48.382710735432354,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
       "symbol": "LYEL",
       "status": "OPEN",
       "entry_signal_date": "2026-10-19",
@@ -116,6 +184,23 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-20",
       "entry_open": 8.739999771118164
+    },
+    {
+      "symbol": "MATV",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-22",
+      "planned_entry_date": "2026-10-23",
+      "entry_score": 47.28463604173659,
+      "cycle": {
+        "cycle_sessions": 20,
+        "median_swing_pct": 18.077062961585987,
+        "completed_cycle_intervals": 35,
+        "confirmed_turns": 37,
+        "timing_consistency": 37.700270270270266,
+        "amplitude_consistency": 49.66674266982365,
+        "confidence": "LOW"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
     },
     {
       "symbol": "MF",
@@ -173,6 +258,23 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-21",
       "entry_open": 49.75
+    },
+    {
+      "symbol": "PFSI",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-22",
+      "planned_entry_date": "2026-10-23",
+      "entry_score": 50.675352912547034,
+      "cycle": {
+        "cycle_sessions": 46,
+        "median_swing_pct": 13.146601935244195,
+        "completed_cycle_intervals": 17,
+        "confirmed_turns": 19,
+        "timing_consistency": 71.5539252564729,
+        "amplitude_consistency": 59.164722722685234,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
     },
     {
       "symbol": "PSIG",
@@ -289,8 +391,25 @@
       "entry_open": 12.779999732971191
     },
     {
+      "symbol": "TBBK",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-22",
+      "planned_entry_date": "2026-10-23",
+      "entry_score": 44.703723332982676,
+      "cycle": {
+        "cycle_sessions": 23.0,
+        "median_swing_pct": 11.283183522308772,
+        "completed_cycle_intervals": 38,
+        "confirmed_turns": 40,
+        "timing_consistency": 37.704789473684215,
+        "amplitude_consistency": 44.29352798720466,
+        "confidence": "LOW"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
       "symbol": "YDES",
-      "status": "OPEN",
+      "status": "OPEN_PENDING_EXIT",
       "entry_signal_date": "2026-10-09",
       "planned_entry_date": "2026-10-12",
       "entry_score": 44.6109488168825,
@@ -305,7 +424,9 @@
       },
       "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
       "entry_date": "2026-10-12",
-      "entry_open": 7.010000228881836
+      "entry_open": 7.010000228881836,
+      "exit_signal_date": "2026-10-22",
+      "planned_exit_date": "2026-10-23"
     }
   ],
   "trades": [],
@@ -351,11 +472,17 @@
       "signal_date": "2026-10-16",
       "signal": "SELL",
       "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "HCAI",
+      "signal_date": "2026-10-22",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
     }
   ],
   "summary": {
-    "complete_signal_cohorts": 9,
-    "pending_entries": 0,
+    "complete_signal_cohorts": 10,
+    "pending_entries": 7,
     "open_positions": 16,
     "closed_trades": 0,
     "benchmark_pairs": 0,
