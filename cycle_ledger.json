@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T01:05:00.457674+00:00",
+  "generated_at": "2026-10-24T06:26:09.264834+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -469,8 +469,8 @@
       "observed_ordered_swing_pct": 45.54216441092056,
       "captured_observed_swing_pct": -85.51276536116956,
       "missed_observed_swing_pct": 45.54216441092056,
-      "benchmark_price_return_pct": -2.424822477815014,
-      "excess_gross_pct": -36.519541715293556
+      "benchmark_price_return_pct": -2.4243052174640844,
+      "excess_gross_pct": -36.52005897564449
     }
   ],
   "exceptions": [
