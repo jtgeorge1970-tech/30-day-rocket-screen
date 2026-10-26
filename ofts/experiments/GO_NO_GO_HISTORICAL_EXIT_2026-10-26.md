@@ -23,6 +23,10 @@ Three largest original net winners: STX +137.112%, STX +108.870%, AXTI +94.001%.
 
 Original leave-one-symbol-out means (percent): omit AEHR +19.711, AXTI +11.381, HOOD +14.381, PLTR +17.568, ROCK +14.532, STX +2.733. The positive mean is concentrated in a few unusually large winners. These are not independent estimates of generalization.
 
+### Six-symbol cluster sensitivity (new)
+
+To avoid treating repeated trades from the same symbol as independent, enumerate all **46,656** possible six-draw bootstrap samples with replacement from the six historical symbol clusters (including all trades from each sampled symbol). For the original exit rule, the resulting distribution of sample mean returns has 2.5th percentile **-3.500%**, median **+12.227%**, and 97.5th percentile **+37.544%**; **8.779%** of these cluster-resampled means are nonpositive. The range includes zero despite the +13.252% raw trade-weighted mean. This is only a *sensitivity diagnostic*: six training-selected symbols are far too few to claim a population confidence interval or infer future profitability.
+
 ## GO/NO-GO interpretation
 
 This historical comparison is **new robustness analysis of existing evidence**, not a new unseen chronological holdout. The 12% fixed stop dramatically reduced the simulated worst loss but **did not improve mean returns** and reduced the fraction of winners. The 12% trailing stop reduced severe losses but also removed much of the upside. Neither rule is approved. No parameter tuning or production rule changes were performed.
