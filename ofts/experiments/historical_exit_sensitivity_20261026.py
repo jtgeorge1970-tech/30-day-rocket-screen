@@ -40,5 +40,26 @@ for key in ("fixed_12pct_net","trailing_12pct_net"):
 for symbol in sorted({r["symbol"] for r in rows}):
     keep=[float(r["net_20bp_pct"]) for r in rows if r["symbol"]!=symbol]
     print("leave_one_symbol_out",symbol, len(keep),round(statistics.mean(keep),6))
+
+# Exhaustive cluster-resampling sensitivity: 6 symbol clusters, 6 draws with replacement.
+# Not a valid proof of population confidence with only six selected symbols.
+symbols=sorted({r["symbol"] for r in rows})
+clusters=[[float(r["net_20bp_pct"]) for r in rows if r["symbol"]==symbol] for symbol in symbols]
+means=[]
+for code in range(6**6):
+    selected=[]
+    index=code
+    for _ in range(6):
+        selected.extend(clusters[index % 6])
+        index //= 6
+    means.append(statistics.mean(selected))
+means.sort()
+print("symbol_cluster_resampling",{
+    "combinations":len(means),
+    "p2_5_pct":round(means[int((len(means)-1)*.025)],6),
+    "median_pct":round(means[int((len(means)-1)*.5)],6),
+    "p97_5_pct":round(means[int((len(means)-1)*.975)],6),
+    "fraction_nonpositive":round(sum(x<=0 for x in means)/len(means),6),
+})
 print("WARNING: TRAINING-SELECTED historical symbols; reused sample, not independent holdout.")
 print("No same-stock passive benchmark, SPY/IWM pairing, verified execution, or portfolio drawdown.")
