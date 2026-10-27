@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-26T23:06:43.683155+00:00",
+  "generated_at": "2026-10-27T01:40:19.683891+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -489,7 +489,7 @@
       },
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-26",
-      "entry_open": 5.065000057220459
+      "entry_open": 4.960000038146973
     }
   ],
   "trades": [
