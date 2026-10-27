@@ -16,6 +16,20 @@ Seven-calendar-day cooldown blocks five original trades: AEHR 2026-03-11 (-13.86
 
 **Prospective concern:** In the separate frozen October 2026 hypothetical ledger, YDES closed at -39.144% net on October 23 and was hypothetically reentered on October 26 (three calendar days later). A seven-day cooldown would have blocked that *reentry*, but its subsequent outcome is not yet known. This is a hypothesis, not validated protection.
 
+
+## Chronological stress split (still not independent holdout)
+
+As a separate diagnostic, order the 24 trades by entry date and split the first 16 opportunities (through the sixteenth entry) from the last eight (starting with the April 17, 2026 PLTR entry). Retain cooldown state from earlier accepted trades across the split. Report mean net return per **original opportunity**, assigning 0% to blocked entries (not a portfolio return):
+
+| Calendar-day cooldown | First 16 opportunities | Last 8 opportunities |
+|---|---:|---:|
+| 0 days | +27.983% | **-16.210%** |
+| 7 days | +28.849% | **-6.648%** |
+| 14 days | +11.861% | **-8.467%** |
+| 30 days | +11.861% | **-6.462%** |
+
+The seven-day cooldown improves the latter segment relative to unchanged baseline but the latter segment **remains substantially negative**. These eight observations are not untouched holdout evidence because the six symbols were training-selected, the experiment was proposed after reviewing earlier results, and there is no liquidity, SPY/IWM, same-stock passive, or portfolio drawdown control. No GO.
+
 ## Decision
 These training-selected, post-hoc results are **not a basis for GO**. The original mean is concentrated in three extreme winners. Require a prespecified cooldown rule tested chronologically on unseen symbols/dates with realistic fills, identical trade opportunities, same-stock passive controls, SPY/IWM, tail risk and drawdowns. Preserve unchanged baseline and do not deploy any experimental rule.
 
