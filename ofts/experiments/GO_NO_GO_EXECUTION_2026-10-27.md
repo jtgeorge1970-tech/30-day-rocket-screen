@@ -1,0 +1,26 @@
+# OFTS execution feasibility audit — 2026-10-27 (research only)
+
+**Finding: the fixed 0.20% round-trip cost assumption is not validated by observed opening-market quotes, particularly for DNTH and YDES. No brokerage trades were placed.**
+
+## Independent market-data check
+Retrieved on 2026-10-27 after the NYSE close from connected Alpaca historical **SIP** stock bars and level-1 bid/ask quotes. Source signal: immutable `signals/2026-10-26.json` on `ofts-daily-state`. The three frozen BUY signals are AKAM score 60.651, DNTH score 41.898, NET score 47.328. These were rejected by a separate unvalidated experimental viability filter. These are research signals, not production entries.
+
+Full-session October 27 SIP open/close bars and *first observed 09:35 ET SIP quote*:
+
+| Symbol | SIP open | SIP close | Open-to-close (not OFTS 5d result) | First 09:35 bid / ask | Ask premium over open | Median sampled 09:35+ quoted spread |
+|---|---:|---:|---:|---|---:|---:|
+| AKAM | $98.10 | $99.59 | +1.519% | $99.03 / $99.23 | +1.152% | 0.263% |
+| DNTH | $79.55 | $79.52 | -0.038% | $77.51 / $80.28 | +0.918% | **2.510%** |
+| NET | $331.95 | $327.80 | -1.250% | $332.00 / $333.87 | +0.578% | **0.539%** |
+
+YDES, which lost 39.144% in its first completed hypothetical trade and then reentered on October 26, had only **47,166 SIP shares traded on October 27**. Its 09:35-09:40 SIP quote sample (12 observations) had median quoted spread **9.302%**; first quote was at 09:37:15 ET, $4.92 bid / $5.10 ask. This is a strong liquidity warning, not an executable fill guarantee.
+
+SPY October 27 SIP open $767.34, close $769.66 (**+0.302%**); IWM open $277.96, close $280.18 (**+0.799%**). These are same-day reference returns, **not** matched five-session benchmark returns.
+
+## Method and limitations
+The first 09:35 ask is a **quote**, not an executed trade. It is five minutes after the opening auction; the difference from the daily opening trade reflects both price movement and execution conditions, so it must not be labeled pure slippage. A market-on-open order submitted before 09:30 might receive the official opening-auction price, subject to broker/order constraints; the research ledger assumes that fill but has not demonstrated it. Quoted spread measures ask-minus-bid relative to midpoint, not actual round-trip realized trading cost. Quote medians were computed over returned 09:35-09:40 samples, capped at 300 quotes per symbol (AKAM 300, DNTH 64, NET 300, YDES 12); for high-activity names the cap covers only the earliest part of the window. Quote conditions and depth vary. No portfolio orders, order-book depth beyond level 1, fill simulator, or complete market-impact model were available. Daily open/close returns are not completed OFTS trades or predictive validation.
+
+## Decision
+**NO-GO remains.** The observed SIP quotes show the research assumption of universal 0.20% round-trip cost is unsafe without symbol-specific fill/slippage controls. Before GO: prespecify MOO vs delayed entry, minimum dollar volume and maximum spread, model fills conservatively using actual SIP quotes and trade prints, verify matched same-stock and SPY/IWM horizon controls, and test unseen signals without selecting thresholds based on these results. Preserve immutable daily state; do not change production scoring.
+
+Captured source sample: `ofts/experiments/ofts_execution_quotes_2026-10-27.csv`.
