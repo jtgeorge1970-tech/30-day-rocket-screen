@@ -17,6 +17,11 @@ YDES, which lost 39.144% in its first completed hypothetical trade and then reen
 
 SPY October 27 SIP open $767.34, close $769.66 (**+0.302%**); IWM open $277.96, close $280.18 (**+0.799%**). These are same-day reference returns, **not** matched five-session benchmark returns.
 
+
+### One-day entry-price sensitivity (illustration only)
+
+If all three October 26 research BUYs were marked at the October 27 close (rather than waiting for a SELL), then applying a flat 0.20 percentage-point cost gives an **equal-weight average -0.123%** using the SIP daily opening price, versus **-1.001%** using the first observed 09:35 ask for each symbol. By symbol, open-price vs 09:35-ask marks are AKAM +1.319% vs +0.163%, DNTH -0.238% vs -1.147%, NET -1.450% vs -2.018%. The 0.878 percentage-point difference is **not a pure slippage estimate**: it includes five minutes of price movement, an observed quote instead of a fill, and a closing-price mark rather than a sell-side executable quote. It demonstrates entry-timing sensitivity only; the OFTS strategy did not exit these positions at the close, and the experiment is not a completed trade or portfolio backtest.
+
 ## Method and limitations
 The first 09:35 ask is a **quote**, not an executed trade. It is five minutes after the opening auction; the difference from the daily opening trade reflects both price movement and execution conditions, so it must not be labeled pure slippage. A market-on-open order submitted before 09:30 might receive the official opening-auction price, subject to broker/order constraints; the research ledger assumes that fill but has not demonstrated it. Quoted spread measures ask-minus-bid relative to midpoint, not actual round-trip realized trading cost. Quote medians were computed over returned 09:35-09:40 samples, capped at 300 quotes per symbol (AKAM 300, DNTH 64, NET 300, YDES 12); for high-activity names the cap covers only the earliest part of the window. Quote conditions and depth vary. No portfolio orders, order-book depth beyond level 1, fill simulator, or complete market-impact model were available. Daily open/close returns are not completed OFTS trades or predictive validation.
 
