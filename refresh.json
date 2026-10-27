@@ -1,6 +1,6 @@
 {
   "asof": "2026-10-26",
-  "recorded_at": "2026-10-27T06:47:03.261541+00:00",
+  "recorded_at": "2026-10-27T09:18:48.754761+00:00",
   "symbols": {
     "SCYX": {
       "status": "FRESH",
@@ -1041,14 +1041,6 @@
       "provider_ticker": "WBD",
       "latest_date": null,
       "bars": 0
-    },
-    "LEO": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "LEO",
-      "latest_date": "2026-10-26",
-      "bars": 504
     },
     "AA": {
       "status": "FRESH",
@@ -5569,6 +5561,14 @@
       "provider_ticker": "LEE",
       "latest_date": "2026-10-26",
       "bars": 502
+    },
+    "LEO": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "LEO",
+      "latest_date": "2026-10-26",
+      "bars": 504
     },
     "LESL": {
       "status": "FRESH",
