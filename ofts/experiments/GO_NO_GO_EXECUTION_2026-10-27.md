@@ -30,6 +30,13 @@ Independently sampled 15:55-16:00 ET SIP quotes on October 27. Median sampled qu
 ## Method and limitations
 The first 09:35 ask is a **quote**, not an executed trade. It is five minutes after the opening auction; the difference from the daily opening trade reflects both price movement and execution conditions, so it must not be labeled pure slippage. A market-on-open order submitted before 09:30 might receive the official opening-auction price, subject to broker/order constraints; the research ledger assumes that fill but has not demonstrated it. Quoted spread measures ask-minus-bid relative to midpoint, not actual round-trip realized trading cost. Quote medians were computed over returned 09:35-09:40 samples, capped at 300 quotes per symbol (AKAM 300, DNTH 64, NET 300, YDES 12); for high-activity names the cap covers only the earliest part of the window. Quote conditions and depth vary. No portfolio orders, order-book depth beyond level 1, fill simulator, or complete market-impact model were available. Daily open/close returns are not completed OFTS trades or predictive validation.
 
+
+### Cross-provider opening-price audit after the qualified October 27 run
+
+The recovered October 27 OFTS ledger now contains hypothetical entries at AKAM **$98.269997**, DNTH **$79.550003**, NET **$331.950012**. Independent Alpaca SIP official daily opens were AKAM **$98.10**, DNTH **$79.55**, NET **$331.95**. DNTH and NET agree to displayed precision, but AKAM differs by **+0.1733%** (OFTS ledger relative to SIP). This discrepancy alone is comparable to the model's entire 0.20% assumed round-trip cost. No cause has been verified: provider session-opening conventions, corporate-action adjustment, data errors, or differing eligible trade prints remain possibilities. Do not silently substitute one provider for the other or call either an executable fill. YDES's October 26 ledger entry of $4.96 matches the independent October 26 SIP open of $4.96.
+
+The six new October 27 BUY signals are **pending next-open entries for October 28**, not October 27 fills. The October 27 three fills above belong to BUYs signaled October 26. This separation is essential to avoid look-ahead bias.
+
 ## Decision
 **NO-GO remains.** The observed SIP quotes show the research assumption of universal 0.20% round-trip cost is unsafe without symbol-specific fill/slippage controls. Before GO: prespecify MOO vs delayed entry, minimum dollar volume and maximum spread, model fills conservatively using actual SIP quotes and trade prints, verify matched same-stock and SPY/IWM horizon controls, and test unseen signals without selecting thresholds based on these results. Preserve immutable daily state; do not change production scoring.
 
