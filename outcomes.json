@@ -10944,11 +10944,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-13",
     "end_date": "2026-10-19",
-    "gross_price_return_pct": -2.2421591385142436,
-    "net_assumed_return_pct": -2.442159138514244,
+    "gross_price_return_pct": 877.5784264338837,
+    "net_assumed_return_pct": 877.3784264338836,
     "adverse_excursion_pct": -8.81913492548707,
     "benchmark_price_return_pct": -1.3970779853766602,
-    "excess_gross_pct": -0.8450811531375835
+    "excess_gross_pct": 878.9755044192603
   },
   {
     "symbol": "COCH",
@@ -48894,11 +48894,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-20",
     "end_date": "2026-10-26",
-    "gross_price_return_pct": -24.05555616263988,
-    "net_assumed_return_pct": -24.25555616263988,
-    "adverse_excursion_pct": -26.870374362409688,
+    "gross_price_return_pct": -23.3425913326371,
+    "net_assumed_return_pct": -23.542591332637098,
+    "adverse_excursion_pct": -26.870373851804843,
     "benchmark_price_return_pct": -0.0639790880509361,
-    "excess_gross_pct": -23.991577074588946
+    "excess_gross_pct": -23.278612244586164
   },
   {
     "symbol": "PARA",
