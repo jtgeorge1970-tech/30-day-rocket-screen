@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-27T23:20:52.179636+00:00",
+  "generated_at": "2026-10-28T01:45:11.946377+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -37,7 +37,7 @@
       },
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-27",
-      "entry_open": 98.2699966430664
+      "entry_open": 98.0999984741211
     },
     {
       "symbol": "AOMR",
