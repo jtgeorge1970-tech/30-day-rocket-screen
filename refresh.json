@@ -1,6 +1,6 @@
 {
   "asof": "2026-10-27",
-  "recorded_at": "2026-10-28T07:18:47.027694+00:00",
+  "recorded_at": "2026-10-28T09:59:13.155370+00:00",
   "symbols": {
     "SCYX": {
       "status": "FRESH",
@@ -1041,14 +1041,6 @@
       "provider_ticker": "WBD",
       "latest_date": null,
       "bars": 0
-    },
-    "NMI": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "NMI",
-      "latest_date": "2026-10-27",
-      "bars": 506
     },
     "AA": {
       "status": "FRESH",
@@ -6969,6 +6961,14 @@
       "provider_ticker": "NLY",
       "latest_date": "2026-10-27",
       "bars": 509
+    },
+    "NMI": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "NMI",
+      "latest_date": "2026-10-27",
+      "bars": 506
     },
     "NN": {
       "status": "FRESH",
