@@ -1,0 +1,8 @@
+{
+  "date_et": "2026-10-28",
+  "checked_at_et": "2026-10-28T09:00:26.108423-04:00",
+  "supervisor_run_id": "40692535394",
+  "runs_seen": [],
+  "decision": "hardened_live_runner_triggered",
+  "trigger_commit_sha": "d0aa4d19e8feea4ad2f390891b8ecda4ee67b5b7"
+}
