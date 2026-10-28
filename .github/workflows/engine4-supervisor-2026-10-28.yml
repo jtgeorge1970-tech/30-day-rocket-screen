@@ -1,0 +1,94 @@
+name: Engine 4 Supervisor Duplicate-Safe Rescue 2026-10-28
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/engine4-supervisor-2026-10-28.yml'
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: engine4-supervisor-2026-10-28
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Inspect current-day runs and conditionally launch existing hardened runner
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import os, json, base64, time, urllib.request, urllib.error
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          repo=os.environ['GITHUB_REPOSITORY']
+          token=os.environ['GH_TOKEN']
+          base='https://api.github.com/repos/'+repo
+          def api(path, method='GET', data=None):
+              body=None if data is None else json.dumps(data).encode()
+              req=urllib.request.Request(base+path,data=body,method=method,headers={
+                  'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json',
+                  'X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=35) as response:
+                  raw=response.read()
+                  return json.loads(raw) if raw else {}
+          def today_runs():
+              rs=api('/actions/runs?per_page=100&created=2026-10-28')['workflow_runs']
+              selected=[]
+              for r in rs:
+                  path=(r.get('path') or '').lower()
+                  name=(r.get('name') or '').lower()
+                  if 'supervisor' in path or 'historical' in path or 'historical' in name: continue
+                  if 'engine4' in path or 'engine 4' in name:
+                      selected.append(r)
+              return selected
+          now=datetime.now(ZoneInfo('America/New_York'))
+          result={'date_et':'2026-10-28','checked_at_et':now.isoformat(),
+                  'supervisor_run_id':os.environ['GITHUB_RUN_ID']}
+          if now.date().isoformat()!='2026-10-28' or (now.hour*60+now.minute)<540:
+              result['decision']='outside_2026_10_28_0900_et_window'
+          else:
+              runs=today_runs()
+              result['runs_seen']=[{'id':r['id'],'name':r.get('name'),'path':r.get('path'),
+                  'status':r.get('status'),'conclusion':r.get('conclusion'),'html_url':r.get('html_url')} for r in runs]
+              active=[r for r in runs if r.get('status')!='completed']
+              successful=[]
+              for r in runs:
+                  if r.get('status')=='completed' and r.get('conclusion')=='success':
+                      arts=api('/actions/runs/'+str(r['id'])+'/artifacts?per_page=100').get('artifacts',[])
+                      if any('stage2' in a.get('name','').lower() or 'complete' in a.get('name','').lower() for a in arts):
+                          successful.append(r)
+              if active:
+                  result['decision']='existing_active_engine4_preserved'
+                  result['selected_run_id']=active[0]['id']
+              elif successful:
+                  result['decision']='existing_successful_engine4_with_stage2_artifact_preserved'
+                  result['selected_run_id']=successful[0]['id']
+              else:
+                  path='/.github/engine4-manual-v2-trigger.txt'
+                  f=api('/contents'+path)
+                  stamp=datetime.now(ZoneInfo('America/New_York'))
+                  request='supervisor-guard-live-2026-10-28-'+stamp.strftime('%H%M%S')
+                  txt=('ready=true\npurpose=hardened-live-manual-runner\nmode=live_today\n'
+                       'engine_date_et=2026-10-28\nrequested_at='+stamp.astimezone(ZoneInfo('UTC')).isoformat().replace('+00:00','Z')+
+                       '\nrequest='+request+'\npurge_run_ids=\n')
+                  commit=api('/contents'+path,'PUT',{'message':'Engine 4 duplicate-safe supervisor rescue 2026-10-28 09:00 ET',
+                      'content':base64.b64encode(txt.encode()).decode(),'sha':f['sha'],'branch':'main'})
+                  result['decision']='hardened_live_runner_triggered'
+                  result['trigger_commit_sha']=commit['commit']['sha']
+                  for _ in range(25):
+                      time.sleep(3)
+                      new=[r for r in today_runs() if r.get('head_sha')==commit['commit']['sha'] and
+                           'engine4-manual-v2' in (r.get('path') or '').lower()]
+                      if new:
+                          result['selected_run_id']=new[0]['id']
+                          result['selected_run_url']=new[0].get('html_url')
+                          break
+          status_path='/state/engine4/supervisor_2026-10-28.json'
+          encoded=base64.b64encode((json.dumps(result,indent=2)+'\n').encode()).decode()
+          api('/contents'+status_path,'PUT',{'message':'Record Engine 4 2026-10-28 duplicate-safe supervisor inspection',
+              'content':encoded,'branch':'main'})
+          print(json.dumps(result,indent=2))
+          PY
