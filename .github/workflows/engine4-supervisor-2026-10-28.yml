@@ -5,7 +5,7 @@ on:
     paths:
       - '.github/workflows/engine4-supervisor-2026-10-28.yml'
 permissions:
-  actions: read
+  actions: write
   contents: write
 concurrency:
   group: engine4-supervisor-2026-10-28
@@ -78,6 +78,8 @@ jobs:
                       'content':base64.b64encode(txt.encode()).decode(),'sha':f['sha'],'branch':'main'})
                   result['decision']='hardened_live_runner_triggered'
                   result['trigger_commit_sha']=commit['commit']['sha']
+                  api('/actions/workflows/engine4-manual-v2.yml/dispatches','POST',{'ref':'main'})
+                  result['workflow_dispatch_requested']=True
                   for _ in range(25):
                       time.sleep(3)
                       new=[r for r in today_runs() if r.get('head_sha')==commit['commit']['sha'] and
