@@ -90,7 +90,12 @@ jobs:
                           break
           status_path='/state/engine4/supervisor_2026-10-28.json'
           encoded=base64.b64encode((json.dumps(result,indent=2)+'\n').encode()).decode()
-          api('/contents'+status_path,'PUT',{'message':'Record Engine 4 2026-10-28 duplicate-safe supervisor inspection',
-              'content':encoded,'branch':'main'})
+          payload={'message':'Record Engine 4 2026-10-28 duplicate-safe supervisor inspection',
+              'content':encoded,'branch':'main'}
+          try:
+              payload['sha']=api('/contents'+status_path)['sha']
+          except urllib.error.HTTPError as exc:
+              if exc.code!=404: raise
+          api('/contents'+status_path,'PUT',payload)
           print(json.dumps(result,indent=2))
           PY
