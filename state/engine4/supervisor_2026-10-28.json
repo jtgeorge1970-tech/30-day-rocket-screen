@@ -1,8 +1,17 @@
 {
   "date_et": "2026-10-28",
-  "checked_at_et": "2026-10-28T09:00:26.108423-04:00",
-  "supervisor_run_id": "40692535394",
-  "runs_seen": [],
-  "decision": "hardened_live_runner_triggered",
-  "trigger_commit_sha": "d0aa4d19e8feea4ad2f390891b8ecda4ee67b5b7"
+  "checked_at_et": "2026-10-28T09:02:46.285988-04:00",
+  "supervisor_run_id": "40692884623",
+  "runs_seen": [
+    {
+      "id": 40692864502,
+      "name": "Engine 4 Manual V2 Hardened",
+      "path": ".github/workflows/engine4-manual-v2.yml",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/jtgeorge1970-tech/30-day-rocket-screen/actions/runs/40692864502"
+    }
+  ],
+  "decision": "existing_active_engine4_preserved",
+  "selected_run_id": 40692864502
 }
