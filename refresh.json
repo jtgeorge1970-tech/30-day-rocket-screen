@@ -1,6 +1,6 @@
 {
   "asof": "2026-10-27",
-  "recorded_at": "2026-10-28T01:39:26.131048+00:00",
+  "recorded_at": "2026-10-28T07:18:47.027694+00:00",
   "symbols": {
     "SCYX": {
       "status": "FRESH",
@@ -1042,453 +1042,13 @@
       "latest_date": null,
       "bars": 0
     },
-    "ACGC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "ACGC",
-      "latest_date": "2026-10-27",
-      "bars": 106
-    },
-    "AGL": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "AGL",
-      "latest_date": "2026-10-27",
-      "bars": 506
-    },
-    "AKO.A": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "AKO-A",
-      "latest_date": "2026-10-27",
-      "bars": 511
-    },
-    "AKO.B": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "AKO-B",
-      "latest_date": "2026-10-27",
-      "bars": 511
-    },
-    "ARCL": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "ARCL",
-      "latest_date": "2026-10-27",
-      "bars": 105
-    },
-    "ATNM": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "ATNM",
-      "latest_date": "2026-10-27",
-      "bars": 510
-    },
-    "BARK": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "BARK",
-      "latest_date": "2026-10-27",
-      "bars": 503
-    },
-    "BRKH": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "BRKH",
-      "latest_date": "2026-10-27",
-      "bars": 75
-    },
-    "DYOR": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "DYOR",
-      "latest_date": "2026-10-27",
-      "bars": 236
-    },
-    "ELTK": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "ELTK",
-      "latest_date": "2026-10-27",
-      "bars": 511
-    },
-    "EQBK": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "EQBK",
-      "latest_date": "2026-10-27",
-      "bars": 508
-    },
-    "EURK": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "EURK",
-      "latest_date": "2026-10-27",
-      "bars": 505
-    },
-    "FDSB": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "FDSB",
-      "latest_date": "2026-10-27",
-      "bars": 508
-    },
-    "FOIL": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "FOIL",
-      "latest_date": "2026-10-27",
-      "bars": 54
-    },
-    "FRMEP": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "FRMEP",
-      "latest_date": "2026-10-27",
-      "bars": 501
-    },
-    "FTRA": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "FTRA",
-      "latest_date": "2026-10-27",
-      "bars": 66
-    },
-    "FVAV": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "FVAV",
-      "latest_date": "2026-10-27",
-      "bars": 169
-    },
-    "FXAC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "FXAC",
-      "latest_date": "2026-10-27",
-      "bars": 80
-    },
-    "GIC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "GIC",
-      "latest_date": "2026-10-27",
-      "bars": 506
-    },
-    "GSIW": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "GSIW",
-      "latest_date": "2026-10-27",
-      "bars": 505
-    },
-    "GWH": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "GWH",
-      "latest_date": "2026-10-27",
-      "bars": 72
-    },
-    "HCMA": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "HCMA",
-      "latest_date": "2026-10-27",
-      "bars": 277
-    },
-    "INAC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "INAC",
-      "latest_date": "2026-10-27",
-      "bars": 314
-    },
-    "IRHO": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "IRHO",
-      "latest_date": "2026-10-27",
-      "bars": 182
-    },
-    "JONE": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "JONE",
-      "latest_date": "2026-10-27",
-      "bars": 38
-    },
-    "KRSP": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "KRSP",
-      "latest_date": "2026-10-27",
-      "bars": 232
-    },
-    "LESL": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "LESL",
-      "latest_date": "2026-10-27",
-      "bars": 513
-    },
-    "LGCY": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "LGCY",
-      "latest_date": "2026-10-27",
-      "bars": 506
-    },
-    "LPBB": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "LPBB",
-      "latest_date": "2026-10-27",
-      "bars": 478
-    },
-    "LWAC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "LWAC",
-      "latest_date": "2026-10-27",
-      "bars": 302
-    },
-    "MCAH": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "MCAH",
-      "latest_date": "2026-10-27",
-      "bars": 90
-    },
-    "MSA": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "MSA",
-      "latest_date": "2026-10-27",
-      "bars": 513
-    },
-    "MSGS": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "MSGS",
-      "latest_date": "2026-10-27",
-      "bars": 511
-    },
-    "NCO": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "NCO",
-      "latest_date": "2026-10-27",
-      "bars": 62
-    },
     "NMI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
       "provider_ticker": "NMI",
-      "latest_date": "2026-10-26",
-      "bars": 505
-    },
-    "ODC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "ODC",
-      "latest_date": "2026-10-27",
-      "bars": 501
-    },
-    "PAAC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "PAAC",
-      "latest_date": "2026-10-27",
-      "bars": 143
-    },
-    "PLUN": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "PLUN",
-      "latest_date": "2026-10-27",
-      "bars": 91
-    },
-    "PONO": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "PONO",
-      "latest_date": "2026-10-27",
-      "bars": 122
-    },
-    "QNCX": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "QNCX",
-      "latest_date": "2026-10-27",
-      "bars": 510
-    },
-    "QSEA": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "QSEA",
-      "latest_date": "2026-10-27",
-      "bars": 368
-    },
-    "RHLD": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "RHLD",
-      "latest_date": "2026-10-27",
-      "bars": 422
-    },
-    "SENEB": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "SENEB",
       "latest_date": "2026-10-27",
       "bars": 506
-    },
-    "SFBS": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "SFBS",
-      "latest_date": "2026-10-27",
-      "bars": 501
-    },
-    "SMHI": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "SMHI",
-      "latest_date": "2026-10-27",
-      "bars": 506
-    },
-    "SPRU": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "SPRU",
-      "latest_date": "2026-10-27",
-      "bars": 506
-    },
-    "SSEA": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "SSEA",
-      "latest_date": "2026-10-27",
-      "bars": 269
-    },
-    "SYNX": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "SYNX",
-      "latest_date": "2026-10-27",
-      "bars": 504
-    },
-    "TCI": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "TCI",
-      "latest_date": "2026-10-27",
-      "bars": 506
-    },
-    "TDWD": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "TDWD",
-      "latest_date": "2026-10-27",
-      "bars": 223
-    },
-    "THEO": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "THEO",
-      "latest_date": "2026-10-27",
-      "bars": 52
-    },
-    "TLNC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "TLNC",
-      "latest_date": "2026-10-27",
-      "bars": 265
-    },
-    "TRGS": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "TRGS",
-      "latest_date": "2026-10-27",
-      "bars": 133
-    },
-    "UCFI": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "UCFI",
-      "latest_date": "2026-10-27",
-      "bars": 513
-    },
-    "WLII": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "WLII",
-      "latest_date": "2026-10-27",
-      "bars": 143
-    },
-    "WPAC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "WPAC",
-      "latest_date": "2026-10-27",
-      "bars": 171
     },
     "AA": {
       "status": "FRESH",
@@ -1545,6 +1105,14 @@
       "provider_ticker": "ABVC",
       "latest_date": "2026-10-27",
       "bars": 511
+    },
+    "ACGC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "ACGC",
+      "latest_date": "2026-10-27",
+      "bars": 106
     },
     "ACGL": {
       "status": "FRESH",
@@ -1674,6 +1242,14 @@
       "latest_date": "2026-10-27",
       "bars": 509
     },
+    "AGL": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "AGL",
+      "latest_date": "2026-10-27",
+      "bars": 506
+    },
     "AGPU": {
       "status": "FRESH",
       "error": "",
@@ -1761,6 +1337,22 @@
       "provider_ticker": "AIT",
       "latest_date": "2026-10-27",
       "bars": 508
+    },
+    "AKO.A": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "AKO-A",
+      "latest_date": "2026-10-27",
+      "bars": 511
+    },
+    "AKO.B": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "AKO-B",
+      "latest_date": "2026-10-27",
+      "bars": 511
     },
     "ALGS": {
       "status": "FRESH",
@@ -2026,6 +1618,14 @@
       "latest_date": "2026-10-27",
       "bars": 157
     },
+    "ARCL": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "ARCL",
+      "latest_date": "2026-10-27",
+      "bars": 105
+    },
     "ARES": {
       "status": "FRESH",
       "error": "",
@@ -2177,6 +1777,14 @@
       "provider_ticker": "ATLX",
       "latest_date": "2026-10-27",
       "bars": 506
+    },
+    "ATNM": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "ATNM",
+      "latest_date": "2026-10-27",
+      "bars": 510
     },
     "ATOS": {
       "status": "FRESH",
@@ -2345,6 +1953,14 @@
       "provider_ticker": "BAND",
       "latest_date": "2026-10-27",
       "bars": 501
+    },
+    "BARK": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "BARK",
+      "latest_date": "2026-10-27",
+      "bars": 503
     },
     "BATRK": {
       "status": "FRESH",
@@ -2705,6 +2321,14 @@
       "provider_ticker": "BREZ",
       "latest_date": "2026-10-27",
       "bars": 96
+    },
+    "BRKH": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "BRKH",
+      "latest_date": "2026-10-27",
+      "bars": 75
     },
     "BROS": {
       "status": "FRESH",
@@ -4026,6 +3650,14 @@
       "latest_date": "2026-10-27",
       "bars": 513
     },
+    "DYOR": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "DYOR",
+      "latest_date": "2026-10-27",
+      "bars": 236
+    },
     "EBC": {
       "status": "FRESH",
       "error": "",
@@ -4138,6 +3770,14 @@
       "latest_date": "2026-10-27",
       "bars": 98
     },
+    "ELTK": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "ELTK",
+      "latest_date": "2026-10-27",
+      "bars": 511
+    },
     "ELVR": {
       "status": "FRESH",
       "error": "",
@@ -4226,6 +3866,14 @@
       "latest_date": "2026-10-27",
       "bars": 506
     },
+    "EQBK": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "EQBK",
+      "latest_date": "2026-10-27",
+      "bars": 508
+    },
     "EQPT": {
       "status": "FRESH",
       "error": "",
@@ -4289,6 +3937,14 @@
       "provider_ticker": "ETRA",
       "latest_date": "2026-10-27",
       "bars": 28
+    },
+    "EURK": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "EURK",
+      "latest_date": "2026-10-27",
+      "bars": 505
     },
     "EVEX": {
       "status": "FRESH",
@@ -4409,6 +4065,14 @@
       "provider_ticker": "FCN",
       "latest_date": "2026-10-27",
       "bars": 506
+    },
+    "FDSB": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "FDSB",
+      "latest_date": "2026-10-27",
+      "bars": 508
     },
     "FDX": {
       "status": "FRESH",
@@ -4610,6 +4274,14 @@
       "latest_date": "2026-10-27",
       "bars": 501
     },
+    "FOIL": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "FOIL",
+      "latest_date": "2026-10-27",
+      "bars": 54
+    },
     "FOR": {
       "status": "FRESH",
       "error": "",
@@ -4641,6 +4313,14 @@
       "provider_ticker": "FRHC",
       "latest_date": "2026-10-27",
       "bars": 506
+    },
+    "FRMEP": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "FRMEP",
+      "latest_date": "2026-10-27",
+      "bars": 501
     },
     "FRMM": {
       "status": "FRESH",
@@ -4706,6 +4386,14 @@
       "latest_date": "2026-10-27",
       "bars": 511
     },
+    "FTRA": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "FTRA",
+      "latest_date": "2026-10-27",
+      "bars": 66
+    },
     "FULC": {
       "status": "FRESH",
       "error": "",
@@ -4713,6 +4401,14 @@
       "provider_ticker": "FULC",
       "latest_date": "2026-10-27",
       "bars": 509
+    },
+    "FVAV": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "FVAV",
+      "latest_date": "2026-10-27",
+      "bars": 169
     },
     "FWDI": {
       "status": "FRESH",
@@ -4729,6 +4425,14 @@
       "provider_ticker": "FWRG",
       "latest_date": "2026-10-27",
       "bars": 513
+    },
+    "FXAC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "FXAC",
+      "latest_date": "2026-10-27",
+      "bars": 80
     },
     "FXNC": {
       "status": "FRESH",
@@ -4849,6 +4553,14 @@
       "provider_ticker": "GIB",
       "latest_date": "2026-10-27",
       "bars": 513
+    },
+    "GIC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "GIC",
+      "latest_date": "2026-10-27",
+      "bars": 506
     },
     "GIGM": {
       "status": "FRESH",
@@ -5058,6 +4770,14 @@
       "latest_date": "2026-10-27",
       "bars": 508
     },
+    "GSIW": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "GSIW",
+      "latest_date": "2026-10-27",
+      "bars": 505
+    },
     "GTERA": {
       "status": "FRESH",
       "error": "",
@@ -5089,6 +4809,14 @@
       "provider_ticker": "GTX",
       "latest_date": "2026-10-27",
       "bars": 513
+    },
+    "GWH": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "GWH",
+      "latest_date": "2026-10-27",
+      "bars": 72
     },
     "GXO": {
       "status": "FRESH",
@@ -5161,6 +4889,14 @@
       "provider_ticker": "HCI",
       "latest_date": "2026-10-27",
       "bars": 508
+    },
+    "HCMA": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "HCMA",
+      "latest_date": "2026-10-27",
+      "bars": 277
     },
     "HDB": {
       "status": "FRESH",
@@ -5610,6 +5346,14 @@
       "latest_date": "2026-10-27",
       "bars": 509
     },
+    "INAC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "INAC",
+      "latest_date": "2026-10-27",
+      "bars": 314
+    },
     "INBX": {
       "status": "FRESH",
       "error": "",
@@ -5745,6 +5489,14 @@
       "provider_ticker": "IR",
       "latest_date": "2026-10-27",
       "bars": 509
+    },
+    "IRHO": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "IRHO",
+      "latest_date": "2026-10-27",
+      "bars": 182
     },
     "IRIX": {
       "status": "FRESH",
@@ -5889,6 +5641,14 @@
       "provider_ticker": "JOB",
       "latest_date": "2026-10-27",
       "bars": 506
+    },
+    "JONE": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "JONE",
+      "latest_date": "2026-10-27",
+      "bars": 38
     },
     "JSPR": {
       "status": "FRESH",
@@ -6058,6 +5818,14 @@
       "latest_date": "2026-10-27",
       "bars": 505
     },
+    "KRSP": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "KRSP",
+      "latest_date": "2026-10-27",
+      "bars": 232
+    },
     "KRT": {
       "status": "FRESH",
       "error": "",
@@ -6210,6 +5978,14 @@
       "latest_date": "2026-10-27",
       "bars": 505
     },
+    "LESL": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "LESL",
+      "latest_date": "2026-10-27",
+      "bars": 513
+    },
     "LFUS": {
       "status": "FRESH",
       "error": "",
@@ -6225,6 +6001,14 @@
       "provider_ticker": "LFWD",
       "latest_date": "2026-10-27",
       "bars": 503
+    },
+    "LGCY": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "LGCY",
+      "latest_date": "2026-10-27",
+      "bars": 506
     },
     "LGND": {
       "status": "FRESH",
@@ -6330,6 +6114,14 @@
       "latest_date": "2026-10-27",
       "bars": 506
     },
+    "LPBB": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "LPBB",
+      "latest_date": "2026-10-27",
+      "bars": 478
+    },
     "LPL": {
       "status": "FRESH",
       "error": "",
@@ -6409,6 +6201,14 @@
       "provider_ticker": "LUMN",
       "latest_date": "2026-10-27",
       "bars": 511
+    },
+    "LWAC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "LWAC",
+      "latest_date": "2026-10-27",
+      "bars": 302
     },
     "LWAY": {
       "status": "FRESH",
@@ -6513,6 +6313,14 @@
       "provider_ticker": "MBX",
       "latest_date": "2026-10-27",
       "bars": 511
+    },
+    "MCAH": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "MCAH",
+      "latest_date": "2026-10-27",
+      "bars": 90
     },
     "MCHP": {
       "status": "FRESH",
@@ -6842,6 +6650,14 @@
       "latest_date": "2026-10-27",
       "bars": 501
     },
+    "MSA": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "MSA",
+      "latest_date": "2026-10-27",
+      "bars": 513
+    },
     "MSCI": {
       "status": "FRESH",
       "error": "",
@@ -6857,6 +6673,14 @@
       "provider_ticker": "MSGM",
       "latest_date": "2026-10-27",
       "bars": 510
+    },
+    "MSGS": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "MSGS",
+      "latest_date": "2026-10-27",
+      "bars": 511
     },
     "MSN": {
       "status": "FRESH",
@@ -7017,6 +6841,14 @@
       "provider_ticker": "NCLH",
       "latest_date": "2026-10-27",
       "bars": 510
+    },
+    "NCO": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "NCO",
+      "latest_date": "2026-10-27",
+      "bars": 62
     },
     "NCTY": {
       "status": "FRESH",
@@ -7394,6 +7226,14 @@
       "latest_date": "2026-10-27",
       "bars": 511
     },
+    "ODC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "ODC",
+      "latest_date": "2026-10-27",
+      "bars": 501
+    },
     "OEC": {
       "status": "FRESH",
       "error": "",
@@ -7641,6 +7481,14 @@
       "provider_ticker": "OWLT",
       "latest_date": "2026-10-27",
       "bars": 513
+    },
+    "PAAC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "PAAC",
+      "latest_date": "2026-10-27",
+      "bars": 143
     },
     "PAG": {
       "status": "FRESH",
@@ -7906,6 +7754,14 @@
       "latest_date": "2026-10-27",
       "bars": 501
     },
+    "PLUN": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "PLUN",
+      "latest_date": "2026-10-27",
+      "bars": 91
+    },
     "PLUS": {
       "status": "FRESH",
       "error": "",
@@ -7961,6 +7817,14 @@
       "provider_ticker": "POET",
       "latest_date": "2026-10-27",
       "bars": 501
+    },
+    "PONO": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "PONO",
+      "latest_date": "2026-10-27",
+      "bars": 122
     },
     "POOL": {
       "status": "FRESH",
@@ -8210,6 +8074,22 @@
       "latest_date": "2026-10-27",
       "bars": 511
     },
+    "QNCX": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "QNCX",
+      "latest_date": "2026-10-27",
+      "bars": 510
+    },
+    "QSEA": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "QSEA",
+      "latest_date": "2026-10-27",
+      "bars": 368
+    },
     "QSI": {
       "status": "FRESH",
       "error": "",
@@ -8393,6 +8273,14 @@
       "provider_ticker": "RHI",
       "latest_date": "2026-10-27",
       "bars": 505
+    },
+    "RHLD": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "RHLD",
+      "latest_date": "2026-10-27",
+      "bars": 422
     },
     "RKDA": {
       "status": "FRESH",
@@ -8754,6 +8642,14 @@
       "latest_date": "2026-10-27",
       "bars": 511
     },
+    "SENEB": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "SENEB",
+      "latest_date": "2026-10-27",
+      "bars": 506
+    },
     "SFBC": {
       "status": "FRESH",
       "error": "",
@@ -8761,6 +8657,14 @@
       "provider_ticker": "SFBC",
       "latest_date": "2026-10-27",
       "bars": 505
+    },
+    "SFBS": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "SFBS",
+      "latest_date": "2026-10-27",
+      "bars": 501
     },
     "SFM": {
       "status": "FRESH",
@@ -8930,6 +8834,14 @@
       "latest_date": "2026-10-27",
       "bars": 513
     },
+    "SMHI": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "SMHI",
+      "latest_date": "2026-10-27",
+      "bars": 506
+    },
     "SMID": {
       "status": "FRESH",
       "error": "",
@@ -9082,6 +8994,14 @@
       "latest_date": "2026-10-27",
       "bars": 511
     },
+    "SPRU": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "SPRU",
+      "latest_date": "2026-10-27",
+      "bars": 506
+    },
     "SPWR": {
       "status": "FRESH",
       "error": "",
@@ -9121,6 +9041,14 @@
       "provider_ticker": "SRXH",
       "latest_date": "2026-10-27",
       "bars": 503
+    },
+    "SSEA": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "SSEA",
+      "latest_date": "2026-10-27",
+      "bars": 269
     },
     "SSTI": {
       "status": "FRESH",
@@ -9290,6 +9218,14 @@
       "latest_date": "2026-10-27",
       "bars": 509
     },
+    "SYNX": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "SYNX",
+      "latest_date": "2026-10-27",
+      "bars": 504
+    },
     "SYPR": {
       "status": "FRESH",
       "error": "",
@@ -9346,6 +9282,14 @@
       "latest_date": "2026-10-27",
       "bars": 503
     },
+    "TCI": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "TCI",
+      "latest_date": "2026-10-27",
+      "bars": 506
+    },
     "TCMD": {
       "status": "FRESH",
       "error": "",
@@ -9385,6 +9329,14 @@
       "provider_ticker": "TDW",
       "latest_date": "2026-10-27",
       "bars": 510
+    },
+    "TDWD": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "TDWD",
+      "latest_date": "2026-10-27",
+      "bars": 223
     },
     "TECX": {
       "status": "FRESH",
@@ -9466,6 +9418,14 @@
       "latest_date": "2026-10-27",
       "bars": 511
     },
+    "THEO": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "THEO",
+      "latest_date": "2026-10-27",
+      "bars": 52
+    },
     "THRM": {
       "status": "FRESH",
       "error": "",
@@ -9513,6 +9473,14 @@
       "provider_ticker": "TLK",
       "latest_date": "2026-10-27",
       "bars": 508
+    },
+    "TLNC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "TLNC",
+      "latest_date": "2026-10-27",
+      "bars": 265
     },
     "TMCI": {
       "status": "FRESH",
@@ -9617,6 +9585,14 @@
       "provider_ticker": "TREX",
       "latest_date": "2026-10-27",
       "bars": 508
+    },
+    "TRGS": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "TRGS",
+      "latest_date": "2026-10-27",
+      "bars": 133
     },
     "TRLV": {
       "status": "FRESH",
@@ -9769,6 +9745,14 @@
       "provider_ticker": "UBER",
       "latest_date": "2026-10-27",
       "bars": 503
+    },
+    "UCFI": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "UCFI",
+      "latest_date": "2026-10-27",
+      "bars": 513
     },
     "UEC": {
       "status": "FRESH",
@@ -10194,6 +10178,14 @@
       "latest_date": "2026-10-27",
       "bars": 506
     },
+    "WLII": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "WLII",
+      "latest_date": "2026-10-27",
+      "bars": 143
+    },
     "WLTH": {
       "status": "FRESH",
       "error": "",
@@ -10217,6 +10209,14 @@
       "provider_ticker": "WNC",
       "latest_date": "2026-10-27",
       "bars": 513
+    },
+    "WPAC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "WPAC",
+      "latest_date": "2026-10-27",
+      "bars": 171
     },
     "WPM": {
       "status": "FRESH",

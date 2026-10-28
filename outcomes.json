@@ -49544,11 +49544,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-20",
     "end_date": "2026-10-26",
-    "gross_price_return_pct": -23.3425913326371,
-    "net_assumed_return_pct": -23.542591332637098,
-    "adverse_excursion_pct": -26.870373851804843,
+    "gross_price_return_pct": 666.5740697508978,
+    "net_assumed_return_pct": 666.3740697508978,
+    "adverse_excursion_pct": -22.03703942858133,
     "benchmark_price_return_pct": -0.0639790880509361,
-    "excess_gross_pct": -23.278612244586164
+    "excess_gross_pct": 666.6380488389487
   },
   {
     "symbol": "PARA",
@@ -60621,9 +60621,14 @@
     "score": 37.458839531535844,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "MISSING_SESSIONS",
+    "status": "MATURE",
     "entry_date": "2026-10-21",
-    "end_date": "2026-10-27"
+    "end_date": "2026-10-27",
+    "gross_price_return_pct": -0.42553152634362545,
+    "net_assumed_return_pct": -0.6255315263436254,
+    "adverse_excursion_pct": -3.085106102359292,
+    "benchmark_price_return_pct": -0.1958076428139388,
+    "excess_gross_pct": -0.22972388352968665
   },
   {
     "symbol": "NMI",
@@ -62174,11 +62179,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-21",
     "end_date": "2026-10-27",
-    "gross_price_return_pct": 5.189994639448803,
-    "net_assumed_return_pct": 4.989994639448803,
+    "gross_price_return_pct": 5.097314111949336,
+    "net_assumed_return_pct": 4.897314111949336,
     "adverse_excursion_pct": -3.45227452209117,
     "benchmark_price_return_pct": -0.1958076428139388,
-    "excess_gross_pct": 5.385802282262741
+    "excess_gross_pct": 5.293121754763275
   },
   {
     "symbol": "ADEA",

@@ -1,9 +1,9 @@
 # OFTS daily research
 
 Market session: 2026-10-27
-Selected: 130; refreshed: 123; refresh errors: 8
+Selected: 130; refreshed: 123; refresh errors: 7
 Qualified prediction cohorts saved: 13; current coverage: 123/130
-Outcome counts: {'CORPORATE_ACTION_REVIEW': 5, 'INELIGIBLE_DATA': 730, 'MATURE': 1306, 'MISSING_SESSIONS': 1, 'PENDING': 6308}
+Outcome counts: {'CORPORATE_ACTION_REVIEW': 5, 'INELIGIBLE_DATA': 730, 'MATURE': 1307, 'PENDING': 6308}
 Cycle fingerprints saved: 109/150
 Signal states: BUY=6, SELL=2, NO_TRADE=142
 Cycle ledger: pending entries=6; open positions=26; closed trades=1; SPY pairs=1
@@ -137,13 +137,13 @@ Count: 0 of 91 scored CANDIDATE names
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 5,
     "score_band": "0-40",
-    "observations": 87,
-    "positive_net_pct": 43.67816091954023,
-    "average_net_pct": -1.6787421760582086,
+    "observations": 88,
+    "positive_net_pct": 43.18181818181818,
+    "average_net_pct": -1.6667738732205428,
     "average_positive_pct": 3.12218785157421,
-    "average_nonpositive_pct": -5.401912401569064,
-    "benchmark_pairs": 87,
-    "average_excess_pct": -0.9845332231692424,
+    "average_nonpositive_pct": -5.306384784064554,
+    "benchmark_pairs": 88,
+    "average_excess_pct": -0.9759558443097021,
     "worst_adverse_excursion_pct": -55.257270184399786
   },
   {
@@ -152,11 +152,11 @@ Count: 0 of 91 scored CANDIDATE names
     "score_band": "40-60",
     "observations": 508,
     "positive_net_pct": 52.16535433070866,
-    "average_net_pct": 0.6437642727482458,
-    "average_positive_pct": 6.8243658503529385,
+    "average_net_pct": 0.6435818307649791,
+    "average_positive_pct": 6.824016112513318,
     "average_nonpositive_pct": -6.096397941512012,
     "benchmark_pairs": 508,
-    "average_excess_pct": 1.3829989457082528,
+    "average_excess_pct": 1.3828165037249862,
     "worst_adverse_excursion_pct": -86.84210490198016
   },
   {
@@ -224,4 +224,3 @@ Count: 0 of 91 scored CANDIDATE names
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- NMI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE

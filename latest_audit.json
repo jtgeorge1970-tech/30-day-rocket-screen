@@ -1,16 +1,15 @@
 {
-  "recorded_at": "2026-10-28T01:45:08.982155+00:00",
+  "recorded_at": "2026-10-28T07:24:32.277037+00:00",
   "market_asof": "2026-10-27",
   "qualified_cohorts": 13,
   "all_prediction_files": 19,
-  "attempts": 105,
+  "attempts": 106,
   "cohort_rows": 1670,
   "outcome_counts": {
-    "MATURE": 1306,
+    "MATURE": 1307,
     "PENDING": 6308,
     "INELIGIBLE_DATA": 730,
-    "CORPORATE_ACTION_REVIEW": 5,
-    "MISSING_SESSIONS": 1
+    "CORPORATE_ACTION_REVIEW": 5
   },
   "outcome_recompute_matches_saved": true,
   "immutable_evidence_sha256": {
@@ -164,7 +163,8 @@
     "attempts/20261027T091848754761Z.json": "12bdee30a6b3a89a5bb2d7b90109efdb97c0510af28f0870bc9966b4c682f7aa",
     "attempts/20261027T155928681998Z.json": "5c1e4d8f539c562330af4c1dc2ba730a749f5f82142cc8092ab5a8818a74f561",
     "attempts/20261027T230955240494Z.json": "f43fe38559dcc7d3bb72b5c778e143f7a7ee5011f71ba46db2d7a8b2389648ef",
-    "attempts/20261028T013926131048Z.json": "e4b4bf651e7a0018c6bab59702f88f8444f638314fbe4b3b0af429bd5f44809c"
+    "attempts/20261028T013926131048Z.json": "e4b4bf651e7a0018c6bab59702f88f8444f638314fbe4b3b0af429bd5f44809c",
+    "attempts/20261028T071847027694Z.json": "a68ff4defb9ba44d924e5ce033b9cbedbe997f5fdd05fd70d335ce1d777ab1f7"
   },
   "control_unchanged": {
     "cursor": 1300,
@@ -175,8 +175,7 @@
       "NVNI",
       "SB.PRC",
       "SLP",
-      "WBD",
-      "NMI"
+      "WBD"
     ],
     "last_session": "2026-10-27"
   },
@@ -646,18 +645,17 @@
       "score_band": "<40",
       "observations": 147,
       "statuses": {
-        "MATURE": 87,
-        "MISSING_SESSIONS": 1,
+        "MATURE": 88,
         "PENDING": 59
       },
-      "mature": 87,
+      "mature": 88,
       "positive": 38,
-      "nonpositive": 49,
-      "average_net_pct": -1.6787421760582086,
+      "nonpositive": 50,
+      "average_net_pct": -1.6667738732205428,
       "average_positive_pct": 3.12218785157421,
-      "average_nonpositive_pct": -5.401912401569064,
-      "benchmark_pairs": 87,
-      "average_excess_gross_pct": -0.9845332231692424,
+      "average_nonpositive_pct": -5.306384784064554,
+      "benchmark_pairs": 88,
+      "average_excess_gross_pct": -0.9759558443097021,
       "worst_adverse_excursion_pct": -55.257270184399786
     },
     {
@@ -672,11 +670,11 @@
       "mature": 508,
       "positive": 265,
       "nonpositive": 243,
-      "average_net_pct": 0.6437642727482458,
-      "average_positive_pct": 6.8243658503529385,
+      "average_net_pct": 0.6435818307649791,
+      "average_positive_pct": 6.824016112513318,
       "average_nonpositive_pct": -6.096397941512012,
       "benchmark_pairs": 508,
-      "average_excess_gross_pct": 1.3829989457082528,
+      "average_excess_gross_pct": 1.3828165037249862,
       "worst_adverse_excursion_pct": -86.84210490198016
     },
     {
@@ -726,13 +724,13 @@
         "PENDING": 111
       },
       "mature": 157,
-      "positive": 39,
-      "nonpositive": 118,
-      "average_net_pct": 1.104156076563989,
-      "average_positive_pct": 42.5393828155314,
-      "average_nonpositive_pct": -12.590537506654057,
+      "positive": 40,
+      "nonpositive": 117,
+      "average_net_pct": 5.498529714038735,
+      "average_positive_pct": 58.13524998891554,
+      "average_nonpositive_pct": -12.496930208996082,
       "benchmark_pairs": 157,
-      "average_excess_gross_pct": 1.796300985086008,
+      "average_excess_gross_pct": 6.190674622560749,
       "worst_adverse_excursion_pct": -67.99999895691873
     },
     {
