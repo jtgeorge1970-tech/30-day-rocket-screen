@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T17:07:55.317916+00:00",
+  "generated_at": "2026-10-29T23:10:18.234089+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -157,7 +157,7 @@
     },
     {
       "symbol": "CCS",
-      "status": "OPEN",
+      "status": "OPEN_PENDING_EXIT",
       "entry_signal_date": "2026-10-22",
       "planned_entry_date": "2026-10-23",
       "entry_score": 56.74657747281878,
@@ -172,7 +172,9 @@
       },
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-23",
-      "entry_open": 56.630001068115234
+      "entry_open": 56.630001068115234,
+      "exit_signal_date": "2026-10-29",
+      "planned_exit_date": "2026-10-30"
     },
     {
       "symbol": "CHPT",
@@ -252,7 +254,7 @@
     },
     {
       "symbol": "ESP",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-28",
       "planned_entry_date": "2026-10-29",
       "entry_score": 43.369811502725504,
@@ -265,7 +267,9 @@
         "amplitude_consistency": 48.9538759390475,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-29",
+      "entry_open": 53.59000015258789
     },
     {
       "symbol": "KIM",
@@ -382,6 +386,23 @@
       "entry_open": 14.470000267028809
     },
     {
+      "symbol": "MIRM",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-29",
+      "planned_entry_date": "2026-10-30",
+      "entry_score": 32.219544907731915,
+      "cycle": {
+        "cycle_sessions": 41,
+        "median_swing_pct": 19.44847024532632,
+        "completed_cycle_intervals": 17,
+        "confirmed_turns": 19,
+        "timing_consistency": 16.242727272727276,
+        "amplitude_consistency": 43.301447708060536,
+        "confidence": "LOW"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
       "symbol": "NET",
       "status": "OPEN",
       "entry_signal_date": "2026-10-26",
@@ -478,7 +499,7 @@
     },
     {
       "symbol": "RELL",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-28",
       "planned_entry_date": "2026-10-29",
       "entry_score": 44.76696819801393,
@@ -491,7 +512,9 @@
         "amplitude_consistency": 59.840850801071255,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-29",
+      "entry_open": 20.979999542236328
     },
     {
       "symbol": "RERE",
@@ -777,12 +800,24 @@
       "signal_date": "2026-10-28",
       "signal": "SELL",
       "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "CRNC",
+      "signal_date": "2026-10-29",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "VNCE",
+      "signal_date": "2026-10-29",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
     }
   ],
   "summary": {
-    "complete_signal_cohorts": 14,
-    "pending_entries": 2,
-    "open_positions": 31,
+    "complete_signal_cohorts": 15,
+    "pending_entries": 1,
+    "open_positions": 33,
     "closed_trades": 2,
     "benchmark_pairs": 2,
     "review_trades": 0
