@@ -23,9 +23,22 @@ jobs:
           repo=os.environ['GITHUB_REPOSITORY']; token=os.environ['GH_TOKEN']
           def api(path,binary=False):
               req=urllib.request.Request('https://api.github.com/repos/'+repo+path,headers={'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'})
+              if binary:
+                  import urllib.error
+                  class NoRedirect(urllib.request.HTTPRedirectHandler):
+                      def redirect_request(self, req, fp, code, msg, headers, newurl):
+                          return None
+                  try:
+                      with urllib.request.build_opener(NoRedirect).open(req,timeout=50) as res:
+                          b=res.read()
+                  except urllib.error.HTTPError as exc:
+                      if exc.code not in (301,302,303,307,308) or not exc.headers.get('Location'):
+                          raise
+                      with urllib.request.urlopen(urllib.request.Request(exc.headers['Location']),timeout=50) as res:
+                          b=res.read()
+                  return b
               with urllib.request.urlopen(req,timeout=50) as res:
-                  b=res.read()
-              return b if binary else json.loads(b)
+                  return json.loads(res.read())
           allruns=api('/actions/runs?per_page=100')['workflow_runs']
           runs=[r for r in allruns if r.get('name')=='Engine 4 Manual V2 Hardened' and r.get('created_at','').startswith(date)]
           runs.sort(key=lambda r:r['created_at'],reverse=True)
