@@ -1,0 +1,194 @@
+{
+  "target_date_et": "2026-10-29",
+  "inspected_at_utc": "2026-10-29T13:02:56.743479+00:00",
+  "runs_seen": [
+    {
+      "id": 40870464050,
+      "status": "in_progress",
+      "conclusion": null,
+      "created_at": "2026-10-29T12:05:39Z",
+      "url": "https://github.com/jtgeorge1970-tech/30-day-rocket-screen/actions/runs/40870464050",
+      "head_sha": "54dcee9d63208027e06e3746801e0ad5ae5e4f3a"
+    }
+  ],
+  "selected_run_id": 40870464050,
+  "selected_run_url": "https://github.com/jtgeorge1970-tech/30-day-rocket-screen/actions/runs/40870464050",
+  "jobs": [
+    {
+      "id": 123435880885,
+      "status": "in_progress",
+      "conclusion": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Clean requested prior run outputs",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run pip install -r requirements.txt pytest",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Compile/test/provider proof",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Validate direct iPhone heartbeat secrets",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install direct 5-minute iPhone heartbeat helper",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Enforce live window and lock date",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "START notification",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Stage 1",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Stage 2",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Stage 2 qualification gate",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "End Engine 4 when Stage 2 has zero scores >=80",
+          "status": "completed",
+          "conclusion": "skipped"
+        },
+        {
+          "name": "Stage 3",
+          "status": "in_progress",
+          "conclusion": null
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Stage 3B conflict-safe",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Persist fresh Bench without changing the live checkout",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Stage 4",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Stage 5",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Verify and COMPLETE",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "FAILURE notification",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "pending",
+          "conclusion": null
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "pending",
+          "conclusion": null
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12897811265,
+      "name": "engine4-manual-v2-stage1-40870464050",
+      "size": 100093,
+      "expired": false
+    },
+    {
+      "id": 12897473494,
+      "name": "engine4-manual-v2-stage2-40870464050",
+      "size": 136959,
+      "expired": false
+    }
+  ],
+  "artifact_errors": [
+    {
+      "id": 12897473494,
+      "error": "HTTP Error 401: Server failed to authenticate the request. Please refer to the information in the www-authenticate header."
+    },
+    {
+      "id": 12897811265,
+      "error": "HTTP Error 401: Server failed to authenticate the request. Please refer to the information in the www-authenticate header."
+    }
+  ]
+}
