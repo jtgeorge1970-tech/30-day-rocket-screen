@@ -1,9 +1,9 @@
 # OFTS daily research
 
 Market session: 2026-10-28
-Selected: 132; refreshed: 121; refresh errors: 26
-Qualified prediction cohorts saved: 14; current coverage: 121/132
-Outcome counts: {'CORPORATE_ACTION_REVIEW': 7, 'INELIGIBLE_DATA': 815, 'MATURE': 1536, 'MISSING_SESSIONS': 2, 'PENDING': 6650}
+Selected: 132; refreshed: 122; refresh errors: 10
+Qualified prediction cohorts saved: 14; current coverage: 122/132
+Outcome counts: {'CORPORATE_ACTION_REVIEW': 7, 'INELIGIBLE_DATA': 815, 'MATURE': 1538, 'PENDING': 6650}
 Cycle fingerprints saved: 118/155
 Signal states: BUY=3, SELL=3, NO_TRADE=149
 Cycle ledger: pending entries=2; open positions=31; closed trades=2; SPY pairs=2
@@ -137,13 +137,13 @@ Count: 0 of 101 scored CANDIDATE names
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 5,
     "score_band": "0-40",
-    "observations": 103,
-    "positive_net_pct": 41.74757281553398,
-    "average_net_pct": -2.2963883924202557,
-    "average_positive_pct": 3.469574031279319,
-    "average_nonpositive_pct": -6.428661462738281,
-    "benchmark_pairs": 103,
-    "average_excess_pct": -1.7899248612307261,
+    "observations": 105,
+    "positive_net_pct": 41.904761904761905,
+    "average_net_pct": -2.2330653139334733,
+    "average_positive_pct": 3.4419961318473256,
+    "average_nonpositive_pct": -6.3265522584310965,
+    "benchmark_pairs": 105,
+    "average_excess_pct": -1.7472026662988336,
     "worst_adverse_excursion_pct": -81.83229896445631
   },
   {
@@ -220,7 +220,6 @@ Count: 0 of 101 scored CANDIDATE names
 - ACA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - QRVO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - PERF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- CET: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - GAM.PRB: ValueError: EMPTY_PROVIDER_RESPONSE
 - SPG.PRJ: ValueError: EMPTY_PROVIDER_RESPONSE
 - GS.PRA: ValueError: EMPTY_PROVIDER_RESPONSE
@@ -228,18 +227,3 @@ Count: 0 of 101 scored CANDIDATE names
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- ACGC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- BHAV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- BREZ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- BRKH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- BRTM: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- CAQ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- CLBR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- LEO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- LTGR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- MHNC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- NMI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- PAAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- QSEA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- TDWD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- UCFI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY

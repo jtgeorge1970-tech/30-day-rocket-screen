@@ -70311,9 +70311,14 @@
     "score": 10.938289701919537,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "MISSING_SESSIONS",
+    "status": "MATURE",
     "entry_date": "2026-10-22",
-    "end_date": "2026-10-28"
+    "end_date": "2026-10-28",
+    "gross_price_return_pct": 0.0,
+    "net_assumed_return_pct": -0.2,
+    "adverse_excursion_pct": 0.0,
+    "benchmark_price_return_pct": 0.7750828554421663,
+    "excess_gross_pct": -0.7750828554421663
   },
   {
     "symbol": "TDWD",
@@ -70486,9 +70491,14 @@
     "score": 30.01870885098186,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "MISSING_SESSIONS",
+    "status": "MATURE",
     "entry_date": "2026-10-22",
-    "end_date": "2026-10-28"
+    "end_date": "2026-10-28",
+    "gross_price_return_pct": 2.456146456271613,
+    "net_assumed_return_pct": 2.2561464562716127,
+    "adverse_excursion_pct": -0.8771879924703185,
+    "benchmark_price_return_pct": 0.7750828554421663,
+    "excess_gross_pct": 1.6810636008294466
   },
   {
     "symbol": "LEO",
