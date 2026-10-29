@@ -1,0 +1,95 @@
+name: Engine 4 Isolated Evidence Export
+on:
+  push:
+    branches: [main]
+    paths: ['.github/engine4-evidence-request.txt']
+permissions:
+  contents: write
+  actions: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read current-day live Engine 4 run and artifacts (no scoring changes)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import os,json,io,zipfile,urllib.request,datetime,csv,pathlib,time
+          date=pathlib.Path('.github/engine4-evidence-request.txt').read_text().strip()
+          assert datetime.date.fromisoformat(date)
+          repo=os.environ['GITHUB_REPOSITORY']; token=os.environ['GH_TOKEN']
+          def api(path,binary=False):
+              req=urllib.request.Request('https://api.github.com/repos/'+repo+path,headers={'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'})
+              with urllib.request.urlopen(req,timeout=50) as res:
+                  b=res.read()
+              return b if binary else json.loads(b)
+          allruns=api('/actions/runs?per_page=100')['workflow_runs']
+          runs=[r for r in allruns if r.get('name')=='Engine 4 Manual V2 Hardened' and r.get('created_at','').startswith(date)]
+          runs.sort(key=lambda r:r['created_at'],reverse=True)
+          out={'target_date_et':date,'inspected_at_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),
+               'runs_seen':[{'id':r['id'],'status':r['status'],'conclusion':r.get('conclusion'),'created_at':r['created_at'],'url':r['html_url'],'head_sha':r.get('head_sha')} for r in runs]}
+          if runs:
+              run=runs[0]; rid=run['id']; out['selected_run_id']=rid;out['selected_run_url']=run['html_url']
+              jobs=api(f'/actions/runs/{rid}/jobs?per_page=100')['jobs']
+              out['jobs']=[{'id':j['id'],'status':j['status'],'conclusion':j.get('conclusion'),
+                'steps':[{'name':s['name'],'status':s['status'],'conclusion':s.get('conclusion')} for s in j.get('steps',[])]} for j in jobs]
+              arts=api(f'/actions/runs/{rid}/artifacts?per_page=100')['artifacts']
+              out['artifacts']=[{'id':a['id'],'name':a['name'],'size':a['size_in_bytes'],'expired':a['expired']} for a in arts]
+              byname={}
+              for a in sorted(arts,key=lambda a:a['created_at'],reverse=True):
+                  if not a['name'].startswith('engine4-manual-v2-') or a['expired']:continue
+                  try:
+                      blob=api(f"/actions/artifacts/{a['id']}/zip",binary=True)
+                      z=zipfile.ZipFile(io.BytesIO(blob))
+                      for fn in z.namelist():
+                          base=fn.rsplit('/',1)[-1]
+                          if base in ('prescreen_report.json','prescreen_retained.csv','deep_ranked.json','top25_frozen.json','watch_bench_report.json','final_signals.json','timeline.json','stage_prescreen_report.md','stage_deep_report.md','stage_freeze_report.md') and base not in byname:
+                              byname[base]=z.read(fn).decode('utf-8-sig')
+                  except Exception as e:
+                      out.setdefault('artifact_errors',[]).append({'id':a['id'],'error':str(e)[:250]})
+              def getjson(name):
+                  if name not in byname:return None
+                  p=json.loads(byname[name])
+                  if str(p.get('target_date_et') or p.get('market_date_et') or '')!=date:
+                      out.setdefault('stale_artifacts',[]).append(name);return None
+                  return p
+              pre=getjson('prescreen_report.json')
+              if pre:
+                  keys=['baseline_eligible','trustworthy_observed','broad_qualified','nasdaq_premarket_enriched','nonzero_premarket_activity_count','strict_activity_count','retained_by_cap']
+                  out['stage1']={k:pre.get(k) for k in keys}
+                  if 'prescreen_retained.csv' in byname:
+                      rows=list(csv.DictReader(io.StringIO(byname['prescreen_retained.csv'])))
+                      out['stage1']['retained_symbols']=[r.get('ticker') or r.get('symbol') for r in rows]
+                      out['stage1']['retained_csv_count']=len(rows)
+              deep=getjson('deep_ranked.json')
+              if deep:
+                  keys=['selected_for_deep','analyzed_count','score80_count','launchpad_eligible_count','b_grade_count','a_grade_count']
+                  out['stage2']={k:deep.get(k) for k in keys}
+                  out['stage2']['ranked']=[{k:r.get(k) for k in ['ticker','score','premarket_grade','premarket_eligible','premarket_failures','premarket_deferred_checks','premarket_trade_ready','selection_bar_timestamp','spread_source','catalyst_source']} for r in deep.get('ranked',[])]
+              top=getjson('top25_frozen.json')
+              if top:
+                  out['stage3']={k:top.get(k) for k in ['actual_count','score80_count','launchpad_eligible_count','refresh_analyzed_count']}
+                  out['stage3']['candidates']=[{k:r.get(k) for k in ['ticker','score','premarket_grade','premarket_eligible','premarket_failures']} for r in top.get('candidates',[])]
+              bench=getjson('watch_bench_report.json')
+              if bench:out['stage3b']={'candidates':[{k:r.get(k) for k in ['ticker','score','premarket_grade','tier']} for r in bench.get('candidates',[])]}
+              if 'timeline.json' in byname:
+                  tl=getjson('timeline.json')
+                  if tl:out['timeline']=tl.get('events',[])[-30:]
+              for key in ['stage_prescreen_report.md','stage_deep_report.md','stage_freeze_report.md']:
+                  if key in byname:out[key]=byname[key][:9000]
+          dest=pathlib.Path('state/engine4/evidence_'+date+'.json');dest.parent.mkdir(parents=True,exist_ok=True)
+          dest.write_text(json.dumps(out,indent=2,default=str)+'\n')
+          print('Selected:',out.get('selected_run_id'),'Stage1:',bool(out.get('stage1')),'Stage2:',bool(out.get('stage2')),'Stage3:',bool(out.get('stage3')))
+          PY
+      - name: Publish isolated evidence for inspection
+        run: |
+          git config user.name engine4-evidence-bot
+          git config user.email actions@users.noreply.github.com
+          git add state/engine4/evidence_*.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Record Engine 4 current-day stage evidence"
+          git pull --rebase origin main
+          git push origin HEAD:main
