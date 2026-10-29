@@ -1,7 +1,7 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-29T10:28:31.186506+00:00
-Market as-of: 2026-10-28; qualified cohorts: 14; cohort rows: 1802; attempts retained: 112.
+Audit UTC: 2026-10-29T17:07:52.145609+00:00
+Market as-of: 2026-10-28; qualified cohorts: 14; cohort rows: 1802; attempts retained: 113.
 Outcome counts: {'MATURE': 1538, 'PENDING': 6650, 'INELIGIBLE_DATA': 815, 'CORPORATE_ACTION_REVIEW': 7}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 122, 'selected': 132}.
 Cycle ledger: {'complete_signal_cohorts': 14, 'pending_entries': 2, 'open_positions': 31, 'closed_trades': 2, 'benchmark_pairs': 2, 'review_trades': 0}.
@@ -51,9 +51,9 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 | VIRC | 56.419 | CANDIDATE |
 
 ## Source failures
-- ACA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- QRVO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- PERF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- ACA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- QRVO: ValueError: EMPTY_PROVIDER_RESPONSE
+- PERF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - GAM.PRB: ValueError: EMPTY_PROVIDER_RESPONSE
 - SPG.PRJ: ValueError: EMPTY_PROVIDER_RESPONSE
 - GS.PRA: ValueError: EMPTY_PROVIDER_RESPONSE
@@ -61,5 +61,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- IVF: ValueError: EMPTY_PROVIDER_RESPONSE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

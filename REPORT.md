@@ -1,7 +1,7 @@
 # OFTS daily research
 
 Market session: 2026-10-28
-Selected: 132; refreshed: 122; refresh errors: 10
+Selected: 132; refreshed: 122; refresh errors: 11
 Qualified prediction cohorts saved: 14; current coverage: 122/132
 Outcome counts: {'CORPORATE_ACTION_REVIEW': 7, 'INELIGIBLE_DATA': 815, 'MATURE': 1538, 'PENDING': 6650}
 Cycle fingerprints saved: 118/155
@@ -217,9 +217,9 @@ Count: 0 of 101 scored CANDIDATE names
 ## Identity-boundary exclusions (current processing; prior snapshots immutable)
 
 ## Refresh failures
-- ACA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- QRVO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- PERF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- ACA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- QRVO: ValueError: EMPTY_PROVIDER_RESPONSE
+- PERF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - GAM.PRB: ValueError: EMPTY_PROVIDER_RESPONSE
 - SPG.PRJ: ValueError: EMPTY_PROVIDER_RESPONSE
 - GS.PRA: ValueError: EMPTY_PROVIDER_RESPONSE
@@ -227,3 +227,4 @@ Count: 0 of 101 scored CANDIDATE names
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- IVF: ValueError: EMPTY_PROVIDER_RESPONSE
