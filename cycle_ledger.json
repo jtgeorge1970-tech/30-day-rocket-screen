@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-10-28T16:53:09.952915+00:00",
+  "generated_at": "2026-10-29T01:17:01.224875+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
     {
       "symbol": "ACDC",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-27",
       "planned_entry_date": "2026-10-28",
       "entry_score": 54.94349457164277,
@@ -18,7 +18,9 @@
         "amplitude_consistency": 52.402328358297034,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-28",
+      "entry_open": 4.610000133514404
     },
     {
       "symbol": "AKAM",
@@ -58,7 +60,7 @@
     },
     {
       "symbol": "ATEX",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-27",
       "planned_entry_date": "2026-10-28",
       "entry_score": 39.04855546701425,
@@ -71,7 +73,9 @@
         "amplitude_consistency": 39.57055443557238,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-28",
+      "entry_open": 86.33000183105469
     },
     {
       "symbol": "ATGL",
@@ -265,7 +269,7 @@
     },
     {
       "symbol": "LTRX",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-27",
       "planned_entry_date": "2026-10-28",
       "entry_score": 57.0843810548962,
@@ -278,7 +282,9 @@
         "amplitude_consistency": 38.07233811805835,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-28",
+      "entry_open": 6.300000190734863
     },
     {
       "symbol": "LYEL",
@@ -567,7 +573,7 @@
     },
     {
       "symbol": "XPRO",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-27",
       "planned_entry_date": "2026-10-28",
       "entry_score": 59.079667243346165,
@@ -580,7 +586,9 @@
         "amplitude_consistency": 74.45878301359389,
         "confidence": "MEDIUM"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-28",
+      "entry_open": 17.510000228881836
     },
     {
       "symbol": "YDES",
@@ -700,8 +708,8 @@
   ],
   "summary": {
     "complete_signal_cohorts": 13,
-    "pending_entries": 6,
-    "open_positions": 26,
+    "pending_entries": 2,
+    "open_positions": 30,
     "closed_trades": 1,
     "benchmark_pairs": 1,
     "review_trades": 0

@@ -1,6 +1,15 @@
 {
-  "passed": true,
-  "required_stale": [],
-  "fresh": 123,
-  "selected": 130
+  "passed": false,
+  "required_stale": [
+    "SCYX",
+    "MESO",
+    "WOR",
+    "ATGL",
+    "NYAX",
+    "CCS",
+    "VIRC",
+    "CCEL"
+  ],
+  "fresh": 79,
+  "selected": 132
 }
