@@ -1,9 +1,9 @@
 # OFTS daily research
 
 Market session: 2026-10-29
-Selected: 136; refreshed: 124; refresh errors: 13
-Qualified prediction cohorts saved: 15; current coverage: 124/136
-Outcome counts: {'CORPORATE_ACTION_REVIEW': 8, 'INELIGIBLE_DATA': 925, 'MATURE': 1766, 'MISSING_SESSIONS': 1, 'PENDING': 6990}
+Selected: 136; refreshed: 126; refresh errors: 10
+Qualified prediction cohorts saved: 15; current coverage: 126/136
+Outcome counts: {'CORPORATE_ACTION_REVIEW': 8, 'INELIGIBLE_DATA': 925, 'MATURE': 1767, 'PENDING': 6990}
 Cycle fingerprints saved: 115/162
 Signal states: BUY=1, SELL=3, NO_TRADE=158
 Cycle ledger: pending entries=1; open positions=33; closed trades=2; SPY pairs=2
@@ -150,13 +150,13 @@ Count: 0 of 96 scored CANDIDATE names
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 5,
     "score_band": "40-60",
-    "observations": 658,
-    "positive_net_pct": 55.775075987841944,
-    "average_net_pct": 1.20470921165907,
-    "average_positive_pct": 6.821103110742401,
+    "observations": 659,
+    "positive_net_pct": 55.84218512898331,
+    "average_net_pct": 1.2292701407781867,
+    "average_positive_pct": 6.8498239215859185,
     "average_nonpositive_pct": -5.878509210896193,
-    "benchmark_pairs": 658,
-    "average_excess_pct": 1.5872073527456927,
+    "benchmark_pairs": 659,
+    "average_excess_pct": 1.6096022824635448,
     "worst_adverse_excursion_pct": -86.84210490198016
   },
   {
@@ -217,8 +217,6 @@ Count: 0 of 96 scored CANDIDATE names
 ## Identity-boundary exclusions (current processing; prior snapshots immutable)
 
 ## Refresh failures
-- FUSB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - ACA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - QRVO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - PERF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
@@ -229,4 +227,3 @@ Count: 0 of 96 scored CANDIDATE names
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE

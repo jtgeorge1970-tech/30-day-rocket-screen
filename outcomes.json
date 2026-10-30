@@ -35084,11 +35084,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-16",
     "end_date": "2026-10-22",
-    "gross_price_return_pct": -10.420173656872,
-    "net_assumed_return_pct": -10.620173656872,
-    "adverse_excursion_pct": -11.09244389450119,
+    "gross_price_return_pct": 258.319305372512,
+    "net_assumed_return_pct": 258.11930537251203,
+    "adverse_excursion_pct": -10.924378839490611,
     "benchmark_price_return_pct": -1.2001407556411992,
-    "excess_gross_pct": -9.220032901230802
+    "excess_gross_pct": 259.5194461281532
   },
   {
     "symbol": "IVF",
@@ -35100,11 +35100,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-16",
     "end_date": "2026-10-29",
-    "gross_price_return_pct": -9.899168981063156,
-    "net_assumed_return_pct": -10.099168981063155,
-    "adverse_excursion_pct": -11.09244389450119,
+    "gross_price_return_pct": 262.5546208924388,
+    "net_assumed_return_pct": 262.3546208924388,
+    "adverse_excursion_pct": -10.924378839490611,
     "benchmark_price_return_pct": -0.5017853359648994,
-    "excess_gross_pct": -9.397383645098255
+    "excess_gross_pct": 263.05640622840366
   },
   {
     "symbol": "IVF",
@@ -74406,9 +74406,14 @@
     "score": 48.48892076934358,
     "classification": "CANDIDATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "MISSING_SESSIONS",
+    "status": "MATURE",
     "entry_date": "2026-10-23",
-    "end_date": "2026-10-29"
+    "end_date": "2026-10-29",
+    "gross_price_return_pct": 17.59036150115687,
+    "net_assumed_return_pct": 17.39036150115687,
+    "adverse_excursion_pct": -13.493979959741154,
+    "benchmark_price_return_pct": 1.2448954643466736,
+    "excess_gross_pct": 16.345466036810198
   },
   {
     "symbol": "ADIL",

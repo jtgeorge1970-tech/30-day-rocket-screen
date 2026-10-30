@@ -1,8 +1,6 @@
 {
   "cursor": 1500,
   "retry": [
-    "FUSB",
-    "RDIB",
     "ACA",
     "QRVO",
     "PERF",
@@ -12,8 +10,7 @@
     "NVNI",
     "SB.PRC",
     "SLP",
-    "WBD",
-    "ADIL"
+    "WBD"
   ],
   "last_session": "2026-10-29"
 }

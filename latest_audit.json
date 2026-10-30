@@ -1,16 +1,15 @@
 {
-  "recorded_at": "2026-10-30T02:11:41.459938+00:00",
+  "recorded_at": "2026-10-30T07:45:26.216241+00:00",
   "market_asof": "2026-10-29",
   "qualified_cohorts": 15,
   "all_prediction_files": 22,
-  "attempts": 115,
+  "attempts": 116,
   "cohort_rows": 1938,
   "outcome_counts": {
-    "MATURE": 1766,
+    "MATURE": 1767,
     "PENDING": 6990,
     "INELIGIBLE_DATA": 925,
-    "CORPORATE_ACTION_REVIEW": 8,
-    "MISSING_SESSIONS": 1
+    "CORPORATE_ACTION_REVIEW": 8
   },
   "outcome_recompute_matches_saved": true,
   "immutable_evidence_sha256": {
@@ -181,13 +180,12 @@
     "attempts/20261029T102228302562Z.json": "75f8915bdd8cb3e458f37f7305564e5cfd53c9b4b11524dbf81cf988b39ca2e3",
     "attempts/20261029T170345632726Z.json": "14e7333f8e0e9cafaa3c0998cdc9704ca2147d163ce3df2ae6bc61e534b19ce5",
     "attempts/20261029T230252938181Z.json": "b7c2a6f2ae6ab4562363e1cbefdf79b1958e87c371688c48afb2ad0086992dbd",
-    "attempts/20261030T020749324297Z.json": "4e9f6fc94fb65192cb84a9222cb3acfc5a5cb76830df91bc170236f3d61755cc"
+    "attempts/20261030T020749324297Z.json": "4e9f6fc94fb65192cb84a9222cb3acfc5a5cb76830df91bc170236f3d61755cc",
+    "attempts/20261030T074142816158Z.json": "2b9257c75b437a2cd2b81ce4c18a1fed6c644adbe98dbe1faa1122b3f901cbfe"
   },
   "control_unchanged": {
     "cursor": 1500,
     "retry": [
-      "FUSB",
-      "RDIB",
       "ACA",
       "QRVO",
       "PERF",
@@ -197,15 +195,14 @@
       "NVNI",
       "SB.PRC",
       "SLP",
-      "WBD",
-      "ADIL"
+      "WBD"
     ],
     "last_session": "2026-10-29"
   },
   "freshness_gate": {
     "passed": true,
     "required_stale": [],
-    "fresh": 124,
+    "fresh": 126,
     "selected": 136
   },
   "cycle_summary": {
@@ -688,18 +685,17 @@
       "score_band": "40-<60",
       "observations": 1021,
       "statuses": {
-        "MATURE": 658,
-        "MISSING_SESSIONS": 1,
+        "MATURE": 659,
         "PENDING": 362
       },
-      "mature": 658,
-      "positive": 367,
+      "mature": 659,
+      "positive": 368,
       "nonpositive": 291,
-      "average_net_pct": 1.20470921165907,
-      "average_positive_pct": 6.821103110742401,
+      "average_net_pct": 1.2292701407781867,
+      "average_positive_pct": 6.8498239215859185,
       "average_nonpositive_pct": -5.878509210896193,
-      "benchmark_pairs": 658,
-      "average_excess_gross_pct": 1.5872073527456927,
+      "benchmark_pairs": 659,
+      "average_excess_gross_pct": 1.6096022824635448,
       "worst_adverse_excursion_pct": -86.84210490198016
     },
     {
@@ -749,13 +745,13 @@
         "PENDING": 119
       },
       "mature": 193,
-      "positive": 53,
-      "nonpositive": 140,
-      "average_net_pct": 4.791193972913083,
-      "average_positive_pct": 50.95994126294706,
-      "average_nonpositive_pct": -12.686974644028357,
+      "positive": 54,
+      "nonpositive": 139,
+      "average_net_pct": 6.183626506744088,
+      "average_positive_pct": 54.796225783494556,
+      "average_nonpositive_pct": -12.701843715878404,
       "benchmark_pairs": 193,
-      "average_excess_gross_pct": 5.208016595190632,
+      "average_excess_gross_pct": 6.600449129021638,
       "worst_adverse_excursion_pct": -71.84465967916303
     },
     {
@@ -844,13 +840,13 @@
         "PENDING": 231
       },
       "mature": 81,
-      "positive": 27,
-      "nonpositive": 54,
-      "average_net_pct": -2.8090246779436847,
-      "average_positive_pct": 33.08522289023893,
-      "average_nonpositive_pct": -20.756148462034997,
+      "positive": 28,
+      "nonpositive": 53,
+      "average_net_pct": 0.5546023575316477,
+      "average_positive_pct": 41.27341567603179,
+      "average_nonpositive_pct": -20.95722354658163,
       "benchmark_pairs": 81,
-      "average_excess_gross_pct": -2.1210641618652186,
+      "average_excess_gross_pct": 1.242562873610113,
       "worst_adverse_excursion_pct": -90.00000037252902
     },
     {

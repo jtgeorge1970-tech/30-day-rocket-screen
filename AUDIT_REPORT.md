@@ -1,9 +1,9 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-30T02:11:41.459938+00:00
-Market as-of: 2026-10-29; qualified cohorts: 15; cohort rows: 1938; attempts retained: 115.
-Outcome counts: {'MATURE': 1766, 'PENDING': 6990, 'INELIGIBLE_DATA': 925, 'CORPORATE_ACTION_REVIEW': 8, 'MISSING_SESSIONS': 1}.
-Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 124, 'selected': 136}.
+Audit UTC: 2026-10-30T07:45:26.216241+00:00
+Market as-of: 2026-10-29; qualified cohorts: 15; cohort rows: 1938; attempts retained: 116.
+Outcome counts: {'MATURE': 1767, 'PENDING': 6990, 'INELIGIBLE_DATA': 925, 'CORPORATE_ACTION_REVIEW': 8}.
+Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 126, 'selected': 136}.
 Cycle ledger: {'complete_signal_cohorts': 15, 'pending_entries': 1, 'open_positions': 33, 'closed_trades': 2, 'benchmark_pairs': 2, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
 Hypothetical next-open entry, price returns excluding dividends, 0.20% round-trip costs.
@@ -11,7 +11,7 @@ Rejected candidates are controls. Overlapping horizons are not independent trade
 
 | Horizon (sessions) | Mature | Pending | Data-ineligible | Other errors | First exit date |
 |---|---:|---:|---:|---:|---|
-| 5 | 1173 | 575 | 185 | 5 | 2026-10-16 |
+| 5 | 1174 | 575 | 185 | 4 | 2026-10-16 |
 | 10 | 593 | 1156 | 185 | 4 | 2026-10-23 |
 | 20 | 0 | 1753 | 185 | 0 | 2026-11-06 |
 | 30 | 0 | 1753 | 185 | 0 | 2026-11-20 |
@@ -51,8 +51,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 | NBIS | 56.279 | CANDIDATE |
 
 ## Source failures
-- FUSB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - ACA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - QRVO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - PERF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
@@ -63,6 +61,5 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.
