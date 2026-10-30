@@ -1,6 +1,6 @@
 {
   "asof": "2026-10-29",
-  "recorded_at": "2026-10-30T10:25:02.793792+00:00",
+  "recorded_at": "2026-10-30T16:48:39.427050+00:00",
   "symbols": {
     "SCYX": {
       "status": "FRESH",
@@ -1012,7 +1012,7 @@
     },
     "QRVO": {
       "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
+      "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
       "source": "UNVERIFIED",
       "provider_ticker": "QRVO",
       "latest_date": "2026-10-05",
