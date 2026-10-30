@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T16:53:31.218905+00:00",
+  "generated_at": "2026-10-30T23:05:25.663588+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -154,27 +154,6 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-23",
       "entry_open": 116.8499984741211
-    },
-    {
-      "symbol": "CCS",
-      "status": "OPEN_PENDING_EXIT",
-      "entry_signal_date": "2026-10-22",
-      "planned_entry_date": "2026-10-23",
-      "entry_score": 56.74657747281878,
-      "cycle": {
-        "cycle_sessions": 34.5,
-        "median_swing_pct": 17.292267882239752,
-        "completed_cycle_intervals": 22,
-        "confirmed_turns": 24,
-        "timing_consistency": 68.7595,
-        "amplitude_consistency": 55.50657962920439,
-        "confidence": "MEDIUM"
-      },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-      "entry_date": "2026-10-23",
-      "entry_open": 56.630001068115234,
-      "exit_signal_date": "2026-10-29",
-      "planned_exit_date": "2026-10-30"
     },
     {
       "symbol": "CHPT",
@@ -368,7 +347,7 @@
     },
     {
       "symbol": "MH",
-      "status": "OPEN",
+      "status": "OPEN_PENDING_EXIT",
       "entry_signal_date": "2026-10-15",
       "planned_entry_date": "2026-10-16",
       "entry_score": 60.88540129679268,
@@ -383,11 +362,13 @@
       },
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-16",
-      "entry_open": 14.470000267028809
+      "entry_open": 14.470000267028809,
+      "exit_signal_date": "2026-10-30",
+      "planned_exit_date": "2026-11-02"
     },
     {
       "symbol": "MIRM",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-10-29",
       "planned_entry_date": "2026-10-30",
       "entry_score": 32.219544907731915,
@@ -400,7 +381,9 @@
         "amplitude_consistency": 43.301447708060536,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-10-30",
+      "entry_open": 85.20999908447266
     },
     {
       "symbol": "NET",
@@ -420,6 +403,23 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-27",
       "entry_open": 331.95001220703125
+    },
+    {
+      "symbol": "NIPG",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-30",
+      "planned_entry_date": "2026-11-02",
+      "entry_score": 45.06193872409918,
+      "cycle": {
+        "cycle_sessions": 29.5,
+        "median_swing_pct": 34.1818144827178,
+        "completed_cycle_intervals": 28,
+        "confirmed_turns": 30,
+        "timing_consistency": 30.085155822854027,
+        "amplitude_consistency": 43.79896752327955,
+        "confidence": "LOW"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
     },
     {
       "symbol": "NYAX",
@@ -593,6 +593,23 @@
       "entry_open": 12.779999732971191
     },
     {
+      "symbol": "TARS",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-10-30",
+      "planned_entry_date": "2026-11-02",
+      "entry_score": 57.90638496181327,
+      "cycle": {
+        "cycle_sessions": 32,
+        "median_swing_pct": 23.70560834640585,
+        "completed_cycle_intervals": 23,
+        "confirmed_turns": 25,
+        "timing_consistency": 55.16330645161291,
+        "amplitude_consistency": 73.35831682584374,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
       "symbol": "TBBK",
       "status": "OPEN",
       "entry_signal_date": "2026-10-22",
@@ -714,6 +731,38 @@
       "missed_observed_swing_pct": 56.39999389648438,
       "benchmark_price_return_pct": -0.23407966238853106,
       "excess_gross_pct": -23.405690883209807
+    },
+    {
+      "symbol": "CCS",
+      "status": "CLOSED",
+      "entry_signal_date": "2026-10-22",
+      "entry_date": "2026-10-23",
+      "entry_open": 56.630001068115234,
+      "exit_signal_date": "2026-10-29",
+      "exit_date": "2026-10-30",
+      "exit_open": 54.27000045776367,
+      "holding_sessions": 5,
+      "gross_return_pct": -4.167403436056672,
+      "net_assumed_return_pct": -4.367403436056672,
+      "roundtrip_cost_pct": 0.2,
+      "entry_score": 56.74657747281878,
+      "entry_cycle": {
+        "cycle_sessions": 34.5,
+        "median_swing_pct": 17.292267882239752,
+        "completed_cycle_intervals": 22,
+        "confirmed_turns": 24,
+        "timing_consistency": 68.7595,
+        "amplitude_consistency": 55.50657962920439,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "adverse_excursion_pct": -10.912944002495085,
+      "best_high_return_pct": 4.16740343605666,
+      "observed_ordered_swing_pct": 8.790877089246152,
+      "captured_observed_swing_pct": -47.40600276569265,
+      "missed_observed_swing_pct": 8.790877089246152,
+      "benchmark_price_return_pct": 0.19475989224913004,
+      "excess_gross_pct": -4.362163328305802
     }
   ],
   "exceptions": [
@@ -815,11 +864,11 @@
     }
   ],
   "summary": {
-    "complete_signal_cohorts": 15,
-    "pending_entries": 1,
+    "complete_signal_cohorts": 16,
+    "pending_entries": 2,
     "open_positions": 33,
-    "closed_trades": 2,
-    "benchmark_pairs": 2,
+    "closed_trades": 3,
+    "benchmark_pairs": 3,
     "review_trades": 0
   }
 }

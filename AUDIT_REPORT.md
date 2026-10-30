@@ -1,58 +1,62 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-30T16:53:27.697908+00:00
-Market as-of: 2026-10-29; qualified cohorts: 15; cohort rows: 1938; attempts retained: 118.
-Outcome counts: {'MATURE': 1767, 'PENDING': 6990, 'INELIGIBLE_DATA': 925, 'CORPORATE_ACTION_REVIEW': 8}.
-Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 126, 'selected': 136}.
-Cycle ledger: {'complete_signal_cohorts': 15, 'pending_entries': 1, 'open_positions': 33, 'closed_trades': 2, 'benchmark_pairs': 2, 'review_trades': 0}.
+Audit UTC: 2026-10-30T23:05:22.079815+00:00
+Market as-of: 2026-10-30; qualified cohorts: 16; cohort rows: 2073; attempts retained: 119.
+Outcome counts: {'MATURE': 1995, 'PENDING': 7346, 'INELIGIBLE_DATA': 1010, 'CORPORATE_ACTION_REVIEW': 9, 'MISSING_SESSIONS': 5}.
+Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 121, 'selected': 135}.
+Cycle ledger: {'complete_signal_cohorts': 16, 'pending_entries': 2, 'open_positions': 33, 'closed_trades': 3, 'benchmark_pairs': 3, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
 Hypothetical next-open entry, price returns excluding dividends, 0.20% round-trip costs.
 Rejected candidates are controls. Overlapping horizons are not independent trades.
 
 | Horizon (sessions) | Mature | Pending | Data-ineligible | Other errors | First exit date |
 |---|---:|---:|---:|---:|---|
-| 5 | 1174 | 575 | 185 | 4 | 2026-10-16 |
-| 10 | 593 | 1156 | 185 | 4 | 2026-10-23 |
-| 20 | 0 | 1753 | 185 | 0 | 2026-11-06 |
-| 30 | 0 | 1753 | 185 | 0 | 2026-11-20 |
-| 60 | 0 | 1753 | 185 | 0 | 2027-01-06 |
+| 5 | 1286 | 577 | 202 | 8 | 2026-10-16 |
+| 10 | 709 | 1156 | 202 | 6 | 2026-10-23 |
+| 20 | 0 | 1871 | 202 | 0 | 2026-11-06 |
+| 30 | 0 | 1871 | 202 | 0 | 2026-11-20 |
+| 60 | 0 | 1871 | 202 | 0 | 2027-01-06 |
 
 By model, horizon and score band: see latest_audit.json. Unavailable average gains/losses, net returns, adverse excursions and SPY comparisons are null, not zero.
 
 ## Frozen v2.3 baseline quality leaders (not current keepers or BUY recommendations)
-Cohort recorded: 2026-10-29T23:10:12.896708+00:00; model: a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b.
-Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, 'observed_min': 11.744188253821582, 'observed_max': 67.49615153894838, 'scored_rows': 89, 'distribution': {'BELOW_40': 14, '40_TO_49_999': 35, '50_TO_59_999': 32, '60_TO_69_999': 8, '70_TO_79_999': 0, '80_TO_89_999': 0, '90_TO_100': 0}, 'validated_buy_threshold': None, 'system_actionability_gate': 'RESEARCH_ONLY_NO_GO', 'gate_reason': 'OUT_OF_SAMPLE_PREDICTIVE_VALIDATION_NOT_VERIFIED'}.
+Cohort recorded: 2026-10-30T23:05:18.621149+00:00; model: a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b.
+Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, 'observed_min': 11.58497992944324, 'observed_max': 66.73869727478981, 'scored_rows': 99, 'distribution': {'BELOW_40': 11, '40_TO_49_999': 41, '50_TO_59_999': 39, '60_TO_69_999': 8, '70_TO_79_999': 0, '80_TO_89_999': 0, '90_TO_100': 0}, 'validated_buy_threshold': None, 'system_actionability_gate': 'RESEARCH_ONLY_NO_GO', 'gate_reason': 'OUT_OF_SAMPLE_PREDICTIVE_VALIDATION_NOT_VERIFIED'}.
 | Symbol | Frozen score | Frozen classification |
 |---|---:|---|
-| SCYX | 67.496 | CANDIDATE |
-| ASO | 64.407 | CANDIDATE |
-| MESO | 62.900 | CANDIDATE |
-| AKAM | 62.427 | CANDIDATE |
-| CRNC | 62.004 | CANDIDATE |
-| SPGI | 61.931 | CANDIDATE |
-| TT | 60.786 | CANDIDATE |
-| TARS | 60.106 | CANDIDATE |
-| LFCR | 59.773 | CANDIDATE |
-| NYAX | 59.678 | CANDIDATE |
-| FUBO | 59.475 | CANDIDATE |
-| EEFT | 59.357 | CANDIDATE |
-| PLBL | 59.049 | CANDIDATE |
-| XPRO | 59.008 | CANDIDATE |
-| ATGL | 58.886 | CANDIDATE |
-| GLW | 58.550 | CANDIDATE |
-| BRCB | 58.448 | CANDIDATE |
-| RYAN | 57.742 | CANDIDATE |
-| EPM | 57.533 | CANDIDATE |
-| LOMA | 57.183 | CANDIDATE |
-| FERG | 56.970 | CANDIDATE |
-| WOR | 56.862 | CANDIDATE |
-| METCB | 56.860 | CANDIDATE |
-| VIRC | 56.857 | CANDIDATE |
-| NBIS | 56.279 | CANDIDATE |
+| SCYX | 66.739 | CANDIDATE |
+| ASO | 63.005 | CANDIDATE |
+| CRNC | 62.626 | CANDIDATE |
+| AKAM | 62.339 | CANDIDATE |
+| EEFT | 62.063 | CANDIDATE |
+| SPGI | 61.808 | CANDIDATE |
+| TT | 60.524 | CANDIDATE |
+| ADXN | 60.410 | CANDIDATE |
+| MESO | 59.975 | CANDIDATE |
+| NYAX | 59.813 | CANDIDATE |
+| XPRO | 59.688 | CANDIDATE |
+| EE | 59.567 | CANDIDATE |
+| GLW | 59.292 | CANDIDATE |
+| ATGL | 59.027 | CANDIDATE |
+| PLBL | 59.018 | CANDIDATE |
+| FUBO | 58.549 | CANDIDATE |
+| BRCB | 58.409 | CANDIDATE |
+| EME | 58.130 | CANDIDATE |
+| TARS | 57.906 | CANDIDATE |
+| VST | 57.804 | CANDIDATE |
+| EPM | 57.494 | CANDIDATE |
+| BMBL | 57.354 | CANDIDATE |
+| LOMA | 57.140 | CANDIDATE |
+| METCB | 56.852 | CANDIDATE |
+| VIRC | 56.822 | CANDIDATE |
 
 ## Source failures
+- WHG: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- CCM: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- USB.PRH: ValueError: EMPTY_PROVIDER_RESPONSE
+- PGAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - ACA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- QRVO: ValueError: EMPTY_PROVIDER_RESPONSE
+- QRVO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - PERF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - GAM.PRB: ValueError: EMPTY_PROVIDER_RESPONSE
 - SPG.PRJ: ValueError: EMPTY_PROVIDER_RESPONSE
@@ -61,5 +65,74 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- AESP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- AIIA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- AKO.A: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- ARCI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- ARCL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- ATHE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- AVD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- BREZ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- BRKH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- BWIV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- CAQ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- CATL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- CCAQ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- COPL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- CTAA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- DYOR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- EXOD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- FOIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- FRMEP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- FTRA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- FVAV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- GJP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- GJS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- GSIW: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- GTERA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- GWH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- HDL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- HVMC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- IBTA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- JONE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- KCHV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- KNRX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- KRSP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- LEO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- LESL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- LNAI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- LTGR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- LWAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- MCAH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- MSGS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- NCO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- NOEM: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- NTIP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- OCLT: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- PONO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- QNCX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- QSEA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- RGNT: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- RNXT: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SDHI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SDST: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SEG: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SENEB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- SFBC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SOR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SSEA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- TAP.A: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- TCI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- TDWD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- TP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- TRGS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- TULP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- UCFI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- WLII: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- WPAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- YCY: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- YHNA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.
