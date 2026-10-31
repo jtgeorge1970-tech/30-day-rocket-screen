@@ -1,6 +1,6 @@
 {
   "asof": "2026-10-30",
-  "recorded_at": "2026-10-31T07:27:35.873824+00:00",
+  "recorded_at": "2026-10-31T09:55:31.757032+00:00",
   "symbols": {
     "SCYX": {
       "status": "FRESH",
@@ -1082,30 +1082,6 @@
       "latest_date": null,
       "bars": 0
     },
-    "ADIL": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "ADIL",
-      "latest_date": "2026-10-30",
-      "bars": 507
-    },
-    "FTRA": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "FTRA",
-      "latest_date": "2026-10-30",
-      "bars": 69
-    },
-    "LEO": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "LEO",
-      "latest_date": "2026-10-30",
-      "bars": 508
-    },
     "LNAI": {
       "status": "ERROR",
       "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
@@ -1113,14 +1089,6 @@
       "provider_ticker": "LNAI",
       "latest_date": "2026-10-29",
       "bars": 512
-    },
-    "SFBC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "SFBC",
-      "latest_date": "2026-10-30",
-      "bars": 508
     },
     "AA": {
       "status": "FRESH",
@@ -1265,6 +1233,14 @@
       "provider_ticker": "ADEA",
       "latest_date": "2026-10-30",
       "bars": 509
+    },
+    "ADIL": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "ADIL",
+      "latest_date": "2026-10-30",
+      "bars": 507
     },
     "ADPT": {
       "status": "FRESH",
@@ -5378,6 +5354,14 @@
       "latest_date": "2026-10-30",
       "bars": 514
     },
+    "FTRA": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "FTRA",
+      "latest_date": "2026-10-30",
+      "bars": 69
+    },
     "FTV": {
       "status": "FRESH",
       "error": "",
@@ -7329,6 +7313,14 @@
       "provider_ticker": "LEGH",
       "latest_date": "2026-10-30",
       "bars": 504
+    },
+    "LEO": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "LEO",
+      "latest_date": "2026-10-30",
+      "bars": 508
     },
     "LESL": {
       "status": "FRESH",
@@ -10657,6 +10649,14 @@
       "provider_ticker": "SERA",
       "latest_date": "2026-10-30",
       "bars": 502
+    },
+    "SFBC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "SFBC",
+      "latest_date": "2026-10-30",
+      "bars": 508
     },
     "SFBS": {
       "status": "FRESH",
