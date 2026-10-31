@@ -1,7 +1,7 @@
 # OFTS daily research
 
 Market session: 2026-10-30
-Selected: 135; refreshed: 124; refresh errors: 16
+Selected: 135; refreshed: 124; refresh errors: 12
 Qualified prediction cohorts saved: 16; current coverage: 124/135
 Outcome counts: {'CORPORATE_ACTION_REVIEW': 9, 'INELIGIBLE_DATA': 1010, 'MATURE': 2000, 'PENDING': 7346}
 Cycle fingerprints saved: 127/163
@@ -228,8 +228,4 @@ Count: 0 of 108 scored CANDIDATE names
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- FTRA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- LEO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - LNAI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SFBC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE

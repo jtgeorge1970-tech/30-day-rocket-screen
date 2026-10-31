@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-10-31T01:53:24.353431+00:00",
+  "recorded_at": "2026-10-31T07:34:04.725590+00:00",
   "market_asof": "2026-10-30",
   "qualified_cohorts": 16,
   "all_prediction_files": 23,
-  "attempts": 120,
+  "attempts": 121,
   "cohort_rows": 2073,
   "outcome_counts": {
     "MATURE": 2000,
@@ -188,7 +188,8 @@
     "attempts/20261030T102502793792Z.json": "ccf22f3eafb31f653514aad3c13d708ba678d2c861d2f0f32933463a102090d5",
     "attempts/20261030T164839427050Z.json": "7f9c54fef8323673716564a4670f848b28a8e2c1983be05c05c425a577ef99ab",
     "attempts/20261030T230029117149Z.json": "482a1af34a02dd32d9acedb14401fba60f27f909e4f9b483e84c45ac6399ae71",
-    "attempts/20261031T014628087545Z.json": "f887c90be0fef72965eae6a40fa9dacef0ed0e0a21e41f20ef238445df8cca22"
+    "attempts/20261031T014628087545Z.json": "f887c90be0fef72965eae6a40fa9dacef0ed0e0a21e41f20ef238445df8cca22",
+    "attempts/20261031T072735873824Z.json": "9559c73e1d769f1db82ab60208ad12b4e60ad254fe4e6ddfd965d3e9c336c471"
   },
   "control_unchanged": {
     "cursor": 1600,
@@ -204,11 +205,7 @@
       "SB.PRC",
       "SLP",
       "WBD",
-      "ADIL",
-      "FTRA",
-      "LEO",
-      "LNAI",
-      "SFBC"
+      "LNAI"
     ],
     "last_session": "2026-10-30"
   },
@@ -855,11 +852,11 @@
       "mature": 99,
       "positive": 30,
       "nonpositive": 69,
-      "average_net_pct": -1.8122961853062458,
-      "average_positive_pct": 41.526203784553246,
+      "average_net_pct": -1.8347052235835426,
+      "average_positive_pct": 41.45225395823817,
       "average_nonpositive_pct": -20.65512225915819,
       "benchmark_pairs": 99,
-      "average_excess_gross_pct": -0.9402915200601227,
+      "average_excess_gross_pct": -0.9627005583374196,
       "worst_adverse_excursion_pct": -90.00000037252902
     },
     {

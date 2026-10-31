@@ -35100,11 +35100,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-16",
     "end_date": "2026-10-29",
-    "gross_price_return_pct": 262.5546208924388,
-    "net_assumed_return_pct": 262.3546208924388,
+    "gross_price_return_pct": 260.3361261029864,
+    "net_assumed_return_pct": 260.1361261029864,
     "adverse_excursion_pct": -10.924378839490611,
     "benchmark_price_return_pct": -0.5017853359648994,
-    "excess_gross_pct": 263.05640622840366
+    "excess_gross_pct": 260.83791143895127
   },
   {
     "symbol": "IVF",

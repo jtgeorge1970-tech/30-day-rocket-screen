@@ -1,7 +1,7 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-10-31T01:53:24.353431+00:00
-Market as-of: 2026-10-30; qualified cohorts: 16; cohort rows: 2073; attempts retained: 120.
+Audit UTC: 2026-10-31T07:34:04.725590+00:00
+Market as-of: 2026-10-30; qualified cohorts: 16; cohort rows: 2073; attempts retained: 121.
 Outcome counts: {'MATURE': 2000, 'PENDING': 7346, 'INELIGIBLE_DATA': 1010, 'CORPORATE_ACTION_REVIEW': 9}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 124, 'selected': 135}.
 Cycle ledger: {'complete_signal_cohorts': 16, 'pending_entries': 2, 'open_positions': 33, 'closed_trades': 3, 'benchmark_pairs': 3, 'review_trades': 0}.
@@ -62,10 +62,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - SB.PRC: ValueError: EMPTY_PROVIDER_RESPONSE
 - SLP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- FTRA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- LEO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - LNAI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SFBC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.
