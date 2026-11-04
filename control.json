@@ -1,6 +1,7 @@
 {
-  "cursor": 1700,
+  "cursor": 1800,
   "retry": [
+    "ALL.PRI",
     "USB.PRH",
     "ACA",
     "QRVO",
@@ -13,7 +14,12 @@
     "SLP",
     "WBD",
     "LNAI",
-    "KVUE"
+    "KVUE",
+    "MHNC",
+    "NMI",
+    "PEBK",
+    "SAC",
+    "WHG"
   ],
-  "last_session": "2026-11-02"
+  "last_session": "2026-11-03"
 }
