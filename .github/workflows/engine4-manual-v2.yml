@@ -209,7 +209,7 @@ jobs:
           fi
       - name: Stage 5
         if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
-        run: /tmp/run_engine4_heartbeat.sh STAGE5 bash -lc 'set -euo pipefail; python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 300; python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"; python engine4_notify.py recovery'
+        run: /tmp/run_engine4_heartbeat.sh STAGE5 bash -lc 'set -euo pipefail; python engine4_recovery.py monitor --date "$ENGINE_DATE_ET" --interval-seconds 60; python engine4_stage_report.py recovery --date "$ENGINE_DATE_ET"; python engine4_notify.py recovery'
       - name: Verify and COMPLETE
         if: ${{ steps.stage2_gate.outputs.proceed == 'true' }}
         run: |
