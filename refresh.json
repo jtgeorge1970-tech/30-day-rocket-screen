@@ -1,6 +1,6 @@
 {
   "asof": "2026-11-03",
-  "recorded_at": "2026-11-04T07:57:05.381812+00:00",
+  "recorded_at": "2026-11-04T11:29:50.682854+00:00",
   "symbols": {
     "SCYX": {
       "status": "FRESH",
@@ -1105,46 +1105,6 @@
       "provider_ticker": "KVUE",
       "latest_date": "2026-10-30",
       "bars": 516
-    },
-    "MHNC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "MHNC",
-      "latest_date": "2026-11-03",
-      "bars": 506
-    },
-    "NMI": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "NMI",
-      "latest_date": "2026-11-03",
-      "bars": 511
-    },
-    "PEBK": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "PEBK",
-      "latest_date": "2026-11-03",
-      "bars": 501
-    },
-    "SAC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "SAC",
-      "latest_date": "2026-11-03",
-      "bars": 196
-    },
-    "WHG": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "WHG",
-      "latest_date": "2026-11-03",
-      "bars": 503
     },
     "A": {
       "status": "FRESH",
@@ -8818,6 +8778,14 @@
       "latest_date": "2026-11-03",
       "bars": 323
     },
+    "MHNC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "MHNC",
+      "latest_date": "2026-11-03",
+      "bars": 506
+    },
     "MHO": {
       "status": "FRESH",
       "error": "",
@@ -9545,6 +9513,14 @@
       "provider_ticker": "NLY",
       "latest_date": "2026-11-03",
       "bars": 514
+    },
+    "NMI": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "NMI",
+      "latest_date": "2026-11-03",
+      "bars": 511
     },
     "NMRK": {
       "status": "FRESH",
@@ -10473,6 +10449,14 @@
       "provider_ticker": "PDSB",
       "latest_date": "2026-11-03",
       "bars": 518
+    },
+    "PEBK": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "PEBK",
+      "latest_date": "2026-11-03",
+      "bars": 501
     },
     "PENG": {
       "status": "FRESH",
@@ -11689,6 +11673,14 @@
       "provider_ticker": "SAAQ",
       "latest_date": "2026-11-03",
       "bars": 158
+    },
+    "SAC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "SAC",
+      "latest_date": "2026-11-03",
+      "bars": 196
     },
     "SAFT": {
       "status": "FRESH",
@@ -14009,6 +14001,14 @@
       "provider_ticker": "WHD",
       "latest_date": "2026-11-03",
       "bars": 516
+    },
+    "WHG": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "WHG",
+      "latest_date": "2026-11-03",
+      "bars": 503
     },
     "WHWK": {
       "status": "FRESH",
