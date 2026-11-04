@@ -1,9 +1,9 @@
 # OFTS daily research
 
 Market session: 2026-11-03
-Selected: 138; refreshed: 124; refresh errors: 19
+Selected: 138; refreshed: 124; refresh errors: 14
 Qualified prediction cohorts saved: 18; current coverage: 124/138
-Outcome counts: {'CORPORATE_ACTION_REVIEW': 10, 'INELIGIBLE_DATA': 1205, 'MATURE': 2460, 'MISSING_SESSIONS': 1, 'PENDING': 8059}
+Outcome counts: {'CORPORATE_ACTION_REVIEW': 10, 'INELIGIBLE_DATA': 1205, 'MATURE': 2461, 'PENDING': 8059}
 Cycle fingerprints saved: 126/166
 Signal states: BUY=2, SELL=5, NO_TRADE=159
 Cycle ledger: pending entries=2; open positions=34; closed trades=6; SPY pairs=6
@@ -176,13 +176,13 @@ Count: 0 of 105 scored CANDIDATE names
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 10,
     "score_band": "0-40",
-    "observations": 87,
-    "positive_net_pct": 51.724137931034484,
-    "average_net_pct": -0.40105418346880567,
-    "average_positive_pct": 5.600604345687152,
+    "observations": 88,
+    "positive_net_pct": 52.27272727272727,
+    "average_net_pct": -0.3927249661078249,
+    "average_positive_pct": 5.486067663048247,
     "average_nonpositive_pct": -6.831402607564472,
-    "benchmark_pairs": 87,
-    "average_excess_pct": 0.8028421921652343,
+    "benchmark_pairs": 88,
+    "average_excess_pct": 0.8245487511820886,
     "worst_adverse_excursion_pct": -55.257270184399786
   },
   {
@@ -231,8 +231,3 @@ Count: 0 of 105 scored CANDIDATE names
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - LNAI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - KVUE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- MHNC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- NMI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- PEBK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- WHG: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE

@@ -1,8 +1,8 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-04T02:50:38.627446+00:00
-Market as-of: 2026-11-03; qualified cohorts: 18; cohort rows: 2347; attempts retained: 128.
-Outcome counts: {'MATURE': 2460, 'PENDING': 8059, 'INELIGIBLE_DATA': 1205, 'CORPORATE_ACTION_REVIEW': 10, 'MISSING_SESSIONS': 1}.
+Audit UTC: 2026-11-04T08:01:24.447062+00:00
+Market as-of: 2026-11-03; qualified cohorts: 18; cohort rows: 2347; attempts retained: 129.
+Outcome counts: {'MATURE': 2461, 'PENDING': 8059, 'INELIGIBLE_DATA': 1205, 'CORPORATE_ACTION_REVIEW': 10}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 124, 'selected': 138}.
 Cycle ledger: {'complete_signal_cohorts': 18, 'pending_entries': 2, 'open_positions': 34, 'closed_trades': 6, 'benchmark_pairs': 6, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
@@ -12,7 +12,7 @@ Rejected candidates are controls. Overlapping horizons are not independent trade
 | Horizon (sessions) | Mature | Pending | Data-ineligible | Other errors | First exit date |
 |---|---:|---:|---:|---:|---|
 | 5 | 1519 | 582 | 241 | 5 | 2026-10-16 |
-| 10 | 941 | 1159 | 241 | 6 | 2026-10-23 |
+| 10 | 942 | 1159 | 241 | 5 | 2026-10-23 |
 | 20 | 0 | 2106 | 241 | 0 | 2026-11-06 |
 | 30 | 0 | 2106 | 241 | 0 | 2026-11-20 |
 | 60 | 0 | 2106 | 241 | 0 | 2027-01-06 |
@@ -65,10 +65,5 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - LNAI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - KVUE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- MHNC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- NMI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- PEBK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- WHG: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.
