@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-11-05T08:37:00.872142+00:00",
+  "recorded_at": "2026-11-05T11:39:47.102430+00:00",
   "market_asof": "2026-11-04",
   "qualified_cohorts": 19,
   "all_prediction_files": 26,
-  "attempts": 132,
+  "attempts": 133,
   "cohort_rows": 2486,
   "outcome_counts": {
     "MATURE": 2691,
@@ -209,7 +209,8 @@
     "attempts/20261104T075705381812Z.json": "e515ba9b9800c401e1126a7e142733ef541b9f68b8a1ce8bd3b06bf992298eb2",
     "attempts/20261104T112950682854Z.json": "b9b2bf6e5c06ecb1de09c7f74d6b305d6b97608e2697c2b5193479bce65b4b3c",
     "attempts/20261105T024443596943Z.json": "35aaf29853529b36f740d5482e7e4cc25df32ef51378770d58b2d485197955bb",
-    "attempts/20261105T082521508091Z.json": "a93fceaa95a3c2dd9ed18b4ec2a0d12b08ab2d2e2b39489d8bec94f42adc2e42"
+    "attempts/20261105T082521508091Z.json": "a93fceaa95a3c2dd9ed18b4ec2a0d12b08ab2d2e2b39489d8bec94f42adc2e42",
+    "attempts/20261105T112644854566Z.json": "961ab09d84c2bfc6868317583b5c94e74d65be01ad5ae8c612c94c9e81915c29"
   },
   "control_unchanged": {
     "cursor": 1900,
@@ -781,11 +782,11 @@
       "mature": 286,
       "positive": 85,
       "nonpositive": 201,
-      "average_net_pct": 2.613021578783257,
+      "average_net_pct": 2.612787531461539,
       "average_positive_pct": 37.82451786449183,
-      "average_nonpositive_pct": -12.277412173879572,
+      "average_nonpositive_pct": -12.277745196436843,
       "benchmark_pairs": 286,
-      "average_excess_gross_pct": 3.405491716843564,
+      "average_excess_gross_pct": 3.4052576695218457,
       "worst_adverse_excursion_pct": -71.84465967916303
     },
     {

@@ -110339,11 +110339,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-29",
     "end_date": "2026-11-04",
-    "gross_price_return_pct": -21.55287259287393,
-    "net_assumed_return_pct": -21.752872592873928,
+    "gross_price_return_pct": -21.619810126885287,
+    "net_assumed_return_pct": -21.819810126885287,
     "adverse_excursion_pct": -33.73493725952677,
     "benchmark_price_return_pct": -0.257545041602969,
-    "excess_gross_pct": -21.295327551270958
+    "excess_gross_pct": -21.362265085282317
   },
   {
     "symbol": "EZGO",
