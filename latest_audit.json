@@ -1,16 +1,15 @@
 {
-  "recorded_at": "2026-11-05T02:51:13.400971+00:00",
+  "recorded_at": "2026-11-05T08:37:00.872142+00:00",
   "market_asof": "2026-11-04",
   "qualified_cohorts": 19,
   "all_prediction_files": 26,
-  "attempts": 131,
+  "attempts": 132,
   "cohort_rows": 2486,
   "outcome_counts": {
-    "MATURE": 2690,
+    "MATURE": 2691,
     "PENDING": 8418,
     "INELIGIBLE_DATA": 1310,
-    "CORPORATE_ACTION_REVIEW": 11,
-    "MISSING_SESSIONS": 1
+    "CORPORATE_ACTION_REVIEW": 11
   },
   "outcome_recompute_matches_saved": true,
   "immutable_evidence_sha256": {
@@ -209,7 +208,8 @@
     "attempts/20261104T024020425677Z.json": "8aa161bbbce27a9bd465bc8fe5b8d883f6aec5b6bd03096f06dfb0758bb12729",
     "attempts/20261104T075705381812Z.json": "e515ba9b9800c401e1126a7e142733ef541b9f68b8a1ce8bd3b06bf992298eb2",
     "attempts/20261104T112950682854Z.json": "b9b2bf6e5c06ecb1de09c7f74d6b305d6b97608e2697c2b5193479bce65b4b3c",
-    "attempts/20261105T024443596943Z.json": "35aaf29853529b36f740d5482e7e4cc25df32ef51378770d58b2d485197955bb"
+    "attempts/20261105T024443596943Z.json": "35aaf29853529b36f740d5482e7e4cc25df32ef51378770d58b2d485197955bb",
+    "attempts/20261105T082521508091Z.json": "a93fceaa95a3c2dd9ed18b4ec2a0d12b08ab2d2e2b39489d8bec94f42adc2e42"
   },
   "control_unchanged": {
     "cursor": 1900,
@@ -229,11 +229,7 @@
       "SLP",
       "WBD",
       "LNAI",
-      "KVUE",
-      "FNWD",
-      "LEO",
-      "PEBK",
-      "WHG"
+      "KVUE"
     ],
     "last_session": "2026-11-04"
   },
@@ -798,18 +794,17 @@
       "score_band": "<40",
       "observations": 213,
       "statuses": {
-        "MATURE": 104,
-        "MISSING_SESSIONS": 1,
+        "MATURE": 105,
         "PENDING": 108
       },
-      "mature": 104,
-      "positive": 52,
+      "mature": 105,
+      "positive": 53,
       "nonpositive": 52,
-      "average_net_pct": -1.345651418882307,
-      "average_positive_pct": 5.804187150620743,
+      "average_net_pct": -1.2812734216817059,
+      "average_positive_pct": 5.7968258513105555,
       "average_nonpositive_pct": -8.495489988385355,
-      "benchmark_pairs": 104,
-      "average_excess_gross_pct": -0.29371424883969455,
+      "benchmark_pairs": 105,
+      "average_excess_gross_pct": -0.2379967374472856,
       "worst_adverse_excursion_pct": -95.51242232978043
     },
     {

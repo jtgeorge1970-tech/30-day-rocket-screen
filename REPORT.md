@@ -1,9 +1,9 @@
 # OFTS daily research
 
 Market session: 2026-11-04
-Selected: 139; refreshed: 123; refresh errors: 20
+Selected: 139; refreshed: 123; refresh errors: 16
 Qualified prediction cohorts saved: 19; current coverage: 123/139
-Outcome counts: {'CORPORATE_ACTION_REVIEW': 11, 'INELIGIBLE_DATA': 1310, 'MATURE': 2690, 'MISSING_SESSIONS': 1, 'PENDING': 8418}
+Outcome counts: {'CORPORATE_ACTION_REVIEW': 11, 'INELIGIBLE_DATA': 1310, 'MATURE': 2691, 'PENDING': 8418}
 Cycle fingerprints saved: 123/170
 Signal states: BUY=5, SELL=5, NO_TRADE=160
 Cycle ledger: pending entries=5; open positions=32; closed trades=10; SPY pairs=10
@@ -176,13 +176,13 @@ Count: 0 of 105 scored CANDIDATE names
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 10,
     "score_band": "0-40",
-    "observations": 104,
-    "positive_net_pct": 50.0,
-    "average_net_pct": -1.345651418882307,
-    "average_positive_pct": 5.804187150620743,
+    "observations": 105,
+    "positive_net_pct": 50.476190476190474,
+    "average_net_pct": -1.2812734216817059,
+    "average_positive_pct": 5.7968258513105555,
     "average_nonpositive_pct": -8.495489988385355,
-    "benchmark_pairs": 104,
-    "average_excess_pct": -0.29371424883969455,
+    "benchmark_pairs": 105,
+    "average_excess_pct": -0.2379967374472856,
     "worst_adverse_excursion_pct": -95.51242232978043
   },
   {
@@ -233,7 +233,3 @@ Count: 0 of 105 scored CANDIDATE names
 - WBD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - LNAI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - KVUE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- FNWD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- LEO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- PEBK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- WHG: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE

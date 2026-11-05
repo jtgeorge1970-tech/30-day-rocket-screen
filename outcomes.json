@@ -73387,9 +73387,14 @@
     "score": 30.01870885098186,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "MISSING_SESSIONS",
+    "status": "MATURE",
     "entry_date": "2026-10-22",
-    "end_date": "2026-11-04"
+    "end_date": "2026-11-04",
+    "gross_price_return_pct": 5.614038287180789,
+    "net_assumed_return_pct": 5.414038287180789,
+    "adverse_excursion_pct": -0.8771879924703185,
+    "benchmark_price_return_pct": 0.05741383981754389,
+    "excess_gross_pct": 5.556624447363245
   },
   {
     "symbol": "LEO",

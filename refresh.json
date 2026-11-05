@@ -1,6 +1,6 @@
 {
   "asof": "2026-11-04",
-  "recorded_at": "2026-11-05T02:44:43.596943+00:00",
+  "recorded_at": "2026-11-05T08:25:21.508091+00:00",
   "symbols": {
     "AKAM": {
       "status": "FRESH",
@@ -1113,6 +1113,38 @@
       "provider_ticker": "KVUE",
       "latest_date": "2026-10-30",
       "bars": 516
+    },
+    "FNWD": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "FNWD",
+      "latest_date": "2026-11-04",
+      "bars": 507
+    },
+    "LEO": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "LEO",
+      "latest_date": "2026-11-04",
+      "bars": 511
+    },
+    "PEBK": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "PEBK",
+      "latest_date": "2026-11-04",
+      "bars": 502
+    },
+    "WHG": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "WHG",
+      "latest_date": "2026-11-04",
+      "bars": 504
     },
     "A": {
       "status": "FRESH",
@@ -6058,14 +6090,6 @@
       "latest_date": "2026-11-04",
       "bars": 507
     },
-    "FNWD": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "FNWD",
-      "latest_date": "2026-11-03",
-      "bars": 506
-    },
     "FOIL": {
       "status": "FRESH",
       "error": "",
@@ -8529,14 +8553,6 @@
       "provider_ticker": "LEGH",
       "latest_date": "2026-11-04",
       "bars": 507
-    },
-    "LEO": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "LEO",
-      "latest_date": "2026-11-03",
-      "bars": 510
     },
     "LESL": {
       "status": "FRESH",
@@ -11017,14 +11033,6 @@
       "provider_ticker": "PDSB",
       "latest_date": "2026-11-04",
       "bars": 519
-    },
-    "PEBK": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "PEBK",
-      "latest_date": "2026-11-03",
-      "bars": 501
     },
     "PEGA": {
       "status": "FRESH",
@@ -14777,14 +14785,6 @@
       "provider_ticker": "WHD",
       "latest_date": "2026-11-04",
       "bars": 517
-    },
-    "WHG": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "WHG",
-      "latest_date": "2026-11-03",
-      "bars": 503
     },
     "WHWK": {
       "status": "FRESH",
