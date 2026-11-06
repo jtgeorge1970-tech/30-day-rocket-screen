@@ -1,9 +1,9 @@
 # OFTS daily research
 
 Market session: 2026-11-05
-Selected: 140; refreshed: 121; refresh errors: 25
+Selected: 140; refreshed: 121; refresh errors: 22
 Qualified prediction cohorts saved: 20; current coverage: 121/140
-Outcome counts: {'CORPORATE_ACTION_REVIEW': 13, 'INELIGIBLE_DATA': 1435, 'MATURE': 2916, 'MISSING_SESSIONS': 2, 'PENDING': 8764}
+Outcome counts: {'CORPORATE_ACTION_REVIEW': 14, 'INELIGIBLE_DATA': 1435, 'MATURE': 2916, 'MISSING_SESSIONS': 1, 'PENDING': 8764}
 Cycle fingerprints saved: 131/173
 Signal states: BUY=0, SELL=17, NO_TRADE=156
 Cycle ledger: pending entries=0; open positions=33; closed trades=14; SPY pairs=14
@@ -152,11 +152,11 @@ Count: 0 of 109 scored CANDIDATE names
     "score_band": "40-60",
     "observations": 1021,
     "positive_net_pct": 52.59549461312439,
-    "average_net_pct": 0.7736797858827186,
+    "average_net_pct": 0.7737545533879383,
     "average_positive_pct": 6.94974541810678,
-    "average_nonpositive_pct": -6.078690554002245,
+    "average_nonpositive_pct": -6.078532831641027,
     "benchmark_pairs": 1021,
-    "average_excess_pct": 1.7184262563106882,
+    "average_excess_pct": 1.7185010238159082,
     "worst_adverse_excursion_pct": -86.84210490198016
   },
   {
@@ -238,7 +238,4 @@ Count: 0 of 109 scored CANDIDATE names
 - KVUE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- INM: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- LEO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SAGU: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - UHAL.B: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY

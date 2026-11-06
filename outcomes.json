@@ -110904,11 +110904,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-29",
     "end_date": "2026-11-04",
-    "gross_price_return_pct": -21.619810126885287,
-    "net_assumed_return_pct": -21.819810126885287,
+    "gross_price_return_pct": -21.552875252608274,
+    "net_assumed_return_pct": -21.752875252608273,
     "adverse_excursion_pct": -33.73493725952677,
     "benchmark_price_return_pct": -0.257545041602969,
-    "excess_gross_pct": -21.362265085282317
+    "excess_gross_pct": -21.295330211005304
   },
   {
     "symbol": "EZGO",
@@ -117661,7 +117661,7 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "MISSING_SESSIONS",
+    "status": "CORPORATE_ACTION_REVIEW",
     "entry_date": "2026-10-30",
     "end_date": "2026-11-05"
   },
@@ -119439,11 +119439,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-30",
     "end_date": "2026-11-05",
-    "gross_price_return_pct": -2.8244338050308238,
-    "net_assumed_return_pct": -3.024433805030824,
+    "gross_price_return_pct": -2.748096182201587,
+    "net_assumed_return_pct": -2.948096182201587,
     "adverse_excursion_pct": -4.083975461887757,
     "benchmark_price_return_pct": -3.727442893273847,
-    "excess_gross_pct": 0.9030090882430231
+    "excess_gross_pct": 0.9793467110722598
   },
   {
     "symbol": "KBDC",

@@ -1,8 +1,8 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-06T02:55:24.805527+00:00
-Market as-of: 2026-11-05; qualified cohorts: 20; cohort rows: 2626; attempts retained: 134.
-Outcome counts: {'MATURE': 2916, 'PENDING': 8764, 'INELIGIBLE_DATA': 1435, 'CORPORATE_ACTION_REVIEW': 13, 'MISSING_SESSIONS': 2}.
+Audit UTC: 2026-11-06T08:33:25.465122+00:00
+Market as-of: 2026-11-05; qualified cohorts: 20; cohort rows: 2626; attempts retained: 135.
+Outcome counts: {'MATURE': 2916, 'PENDING': 8764, 'INELIGIBLE_DATA': 1435, 'CORPORATE_ACTION_REVIEW': 14, 'MISSING_SESSIONS': 1}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 121, 'selected': 140}.
 Cycle ledger: {'complete_signal_cohorts': 20, 'pending_entries': 0, 'open_positions': 33, 'closed_trades': 14, 'benchmark_pairs': 14, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
@@ -72,9 +72,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - KVUE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- INM: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- LEO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SAGU: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - UHAL.B: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

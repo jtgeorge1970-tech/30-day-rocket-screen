@@ -1,16 +1,16 @@
 {
-  "recorded_at": "2026-11-06T02:55:24.805527+00:00",
+  "recorded_at": "2026-11-06T08:33:25.465122+00:00",
   "market_asof": "2026-11-05",
   "qualified_cohorts": 20,
   "all_prediction_files": 27,
-  "attempts": 134,
+  "attempts": 135,
   "cohort_rows": 2626,
   "outcome_counts": {
     "MATURE": 2916,
     "PENDING": 8764,
     "INELIGIBLE_DATA": 1435,
-    "CORPORATE_ACTION_REVIEW": 13,
-    "MISSING_SESSIONS": 2
+    "CORPORATE_ACTION_REVIEW": 14,
+    "MISSING_SESSIONS": 1
   },
   "outcome_recompute_matches_saved": true,
   "immutable_evidence_sha256": {
@@ -215,7 +215,8 @@
     "attempts/20261105T024443596943Z.json": "35aaf29853529b36f740d5482e7e4cc25df32ef51378770d58b2d485197955bb",
     "attempts/20261105T082521508091Z.json": "a93fceaa95a3c2dd9ed18b4ec2a0d12b08ab2d2e2b39489d8bec94f42adc2e42",
     "attempts/20261105T112644854566Z.json": "961ab09d84c2bfc6868317583b5c94e74d65be01ad5ae8c612c94c9e81915c29",
-    "attempts/20261106T024812387727Z.json": "9915c14479d04096f3d681cc18e9b22eabe17a42a31efae493f68e60037315c2"
+    "attempts/20261106T024812387727Z.json": "9915c14479d04096f3d681cc18e9b22eabe17a42a31efae493f68e60037315c2",
+    "attempts/20261106T082802286041Z.json": "79b150a3dcb9bf9288867c0ba3c5d60370531e76b8f2bd4b50247c892bad31e8"
   },
   "control_unchanged": {
     "cursor": 2000,
@@ -241,9 +242,6 @@
       "KVUE",
       "ADIL",
       "CCXI",
-      "INM",
-      "LEO",
-      "SAGU",
       "UHAL.B"
     ],
     "last_session": "2026-11-05"
@@ -740,11 +738,11 @@
       "mature": 1021,
       "positive": 537,
       "nonpositive": 484,
-      "average_net_pct": 0.7736797858827186,
+      "average_net_pct": 0.7737545533879383,
       "average_positive_pct": 6.94974541810678,
-      "average_nonpositive_pct": -6.078690554002245,
+      "average_nonpositive_pct": -6.078532831641027,
       "benchmark_pairs": 1021,
-      "average_excess_gross_pct": 1.7184262563106882,
+      "average_excess_gross_pct": 1.7185010238159082,
       "worst_adverse_excursion_pct": -86.84210490198016
     },
     {
@@ -790,18 +788,17 @@
       "statuses": {
         "INELIGIBLE_DATA": 283,
         "MATURE": 309,
-        "CORPORATE_ACTION_REVIEW": 5,
-        "MISSING_SESSIONS": 1,
+        "CORPORATE_ACTION_REVIEW": 6,
         "PENDING": 112
       },
       "mature": 309,
       "positive": 90,
       "nonpositive": 219,
-      "average_net_pct": 7.600097543979064,
+      "average_net_pct": 7.600314161695172,
       "average_positive_pct": 55.26221212079336,
-      "average_nonpositive_pct": -11.98707283005422,
+      "average_nonpositive_pct": -11.98676719135889,
       "benchmark_pairs": 309,
-      "average_excess_gross_pct": 8.625915168673387,
+      "average_excess_gross_pct": 8.626131786389493,
       "worst_adverse_excursion_pct": -71.84465967916303
     },
     {
