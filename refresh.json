@@ -1,6 +1,6 @@
 {
   "asof": "2026-11-05",
-  "recorded_at": "2026-11-06T08:28:02.286041+00:00",
+  "recorded_at": "2026-11-06T11:26:10.988546+00:00",
   "symbols": {
     "AKAM": {
       "status": "FRESH",
@@ -1138,37 +1138,13 @@
       "latest_date": "2026-11-04",
       "bars": 187
     },
-    "INM": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "INM",
-      "latest_date": "2026-11-05",
-      "bars": 506
-    },
-    "LEO": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "LEO",
-      "latest_date": "2026-11-05",
-      "bars": 512
-    },
-    "SAGU": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "SAGU",
-      "latest_date": "2026-11-05",
-      "bars": 116
-    },
     "UHAL.B": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
-      "source": "UNVERIFIED",
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
       "provider_ticker": "UHAL-B",
-      "latest_date": "2026-11-04",
-      "bars": 507
+      "latest_date": "2026-11-05",
+      "bars": 508
     },
     "A": {
       "status": "FRESH",
@@ -8034,6 +8010,14 @@
       "latest_date": "2026-11-05",
       "bars": 518
     },
+    "INM": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "INM",
+      "latest_date": "2026-11-05",
+      "bars": 506
+    },
     "INMB": {
       "status": "FRESH",
       "error": "",
@@ -8961,6 +8945,14 @@
       "provider_ticker": "LEGH",
       "latest_date": "2026-11-05",
       "bars": 508
+    },
+    "LEO": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "LEO",
+      "latest_date": "2026-11-05",
+      "bars": 512
     },
     "LESL": {
       "status": "FRESH",
@@ -12945,6 +12937,14 @@
       "provider_ticker": "SAFT",
       "latest_date": "2026-11-05",
       "bars": 508
+    },
+    "SAGU": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "SAGU",
+      "latest_date": "2026-11-05",
+      "bars": 116
     },
     "SAIC": {
       "status": "FRESH",

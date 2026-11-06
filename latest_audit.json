@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-11-06T08:33:25.465122+00:00",
+  "recorded_at": "2026-11-06T11:33:25.888491+00:00",
   "market_asof": "2026-11-05",
   "qualified_cohorts": 20,
   "all_prediction_files": 27,
-  "attempts": 135,
+  "attempts": 136,
   "cohort_rows": 2626,
   "outcome_counts": {
     "MATURE": 2916,
@@ -216,7 +216,8 @@
     "attempts/20261105T082521508091Z.json": "a93fceaa95a3c2dd9ed18b4ec2a0d12b08ab2d2e2b39489d8bec94f42adc2e42",
     "attempts/20261105T112644854566Z.json": "961ab09d84c2bfc6868317583b5c94e74d65be01ad5ae8c612c94c9e81915c29",
     "attempts/20261106T024812387727Z.json": "9915c14479d04096f3d681cc18e9b22eabe17a42a31efae493f68e60037315c2",
-    "attempts/20261106T082802286041Z.json": "79b150a3dcb9bf9288867c0ba3c5d60370531e76b8f2bd4b50247c892bad31e8"
+    "attempts/20261106T082802286041Z.json": "79b150a3dcb9bf9288867c0ba3c5d60370531e76b8f2bd4b50247c892bad31e8",
+    "attempts/20261106T112610988546Z.json": "5ac9172e3de19c5d7fab4d6c9d6227b98a49d4308323aceea2c93fbbed9f67d8"
   },
   "control_unchanged": {
     "cursor": 2000,
@@ -241,8 +242,7 @@
       "LNAI",
       "KVUE",
       "ADIL",
-      "CCXI",
-      "UHAL.B"
+      "CCXI"
     ],
     "last_session": "2026-11-05"
   },

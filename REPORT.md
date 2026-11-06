@@ -1,7 +1,7 @@
 # OFTS daily research
 
 Market session: 2026-11-05
-Selected: 140; refreshed: 121; refresh errors: 22
+Selected: 140; refreshed: 121; refresh errors: 21
 Qualified prediction cohorts saved: 20; current coverage: 121/140
 Outcome counts: {'CORPORATE_ACTION_REVIEW': 14, 'INELIGIBLE_DATA': 1435, 'MATURE': 2916, 'MISSING_SESSIONS': 1, 'PENDING': 8764}
 Cycle fingerprints saved: 131/173
@@ -238,4 +238,3 @@ Count: 0 of 109 scored CANDIDATE names
 - KVUE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- UHAL.B: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
