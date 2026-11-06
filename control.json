@@ -1,6 +1,9 @@
 {
-  "cursor": 1900,
+  "cursor": 2000,
   "retry": [
+    "INDV",
+    "VSME",
+    "MAMK",
     "MS.PRF",
     "PSKY",
     "ALL.PRI",
@@ -16,7 +19,13 @@
     "SLP",
     "WBD",
     "LNAI",
-    "KVUE"
+    "KVUE",
+    "ADIL",
+    "CCXI",
+    "INM",
+    "LEO",
+    "SAGU",
+    "UHAL.B"
   ],
-  "last_session": "2026-11-04"
+  "last_session": "2026-11-05"
 }
