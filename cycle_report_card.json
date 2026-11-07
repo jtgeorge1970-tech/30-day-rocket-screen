@@ -2,7 +2,7 @@
   "status": "READY",
   "production_approved": false,
   "methodology": "Cycle classes use the point-in-time entry fingerprint. Capital-time efficiency is total net percentage return divided by total holding sessions, scaled to 20 sessions; it is descriptive, not an annualized or portfolio return.",
-  "closed_trades": 18,
+  "closed_trades": 19,
   "excluded_review_trades": 0,
   "groups": {
     "MEDIUM_11_TO_25": {
@@ -20,17 +20,17 @@
       "review_trades": 0
     },
     "SLOW_OVER_25": {
-      "trades": 11,
+      "trades": 12,
       "positive_net_trades": 0,
       "net_win_rate_pct": 0.0,
-      "mean_net_return_pct": -9.82544802389409,
-      "median_net_return_pct": -9.961394209748974,
-      "total_holding_sessions": 64,
-      "capital_time_efficiency_pct_per_20_sessions": -33.77497758213593,
-      "average_captured_observed_swing_pct": -91.6784949096025,
-      "average_missed_observed_swing_pct": 10.779796945808025,
-      "benchmark_pairs": 11,
-      "average_excess_gross_pct": -7.885349175442898,
+      "mean_net_return_pct": -10.39208711825662,
+      "median_net_return_pct": -10.564898075106392,
+      "total_holding_sessions": 68,
+      "capital_time_efficiency_pct_per_20_sessions": -36.67795453502337,
+      "average_captured_observed_swing_pct": -89.13905241981104,
+      "average_missed_observed_swing_pct": 12.117826624764504,
+      "benchmark_pairs": 12,
+      "average_excess_gross_pct": -8.326735084579726,
       "review_trades": 0
     }
   }
