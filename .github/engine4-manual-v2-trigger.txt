@@ -1,7 +1,7 @@
 ready=true
 purpose=hardened-live-manual-runner
 mode=live_today
-engine_date_et=2026-11-06
-requested_at=2026-11-06T13:10:27Z
-request=engine4-full-run-owner-2026-11-06-2026-11-06T13:10:27Z
+engine_date_et=2026-11-09
+requested_at=2026-11-09T13:12:43Z
+request=engine4-full-run-owner-2026-11-09-2026-11-09T13:12:43Z
 purge_run_ids=
