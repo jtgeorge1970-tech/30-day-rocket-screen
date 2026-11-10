@@ -1,7 +1,7 @@
 # OFTS daily research
 
 Market session: 2026-11-09
-Selected: 146; refreshed: 124; refresh errors: 28
+Selected: 146; refreshed: 124; refresh errors: 22
 Qualified prediction cohorts saved: 22; current coverage: 124/146
 Outcome counts: {'CORPORATE_ACTION_REVIEW': 18, 'INELIGIBLE_DATA': 1680, 'MATURE': 3611, 'MISSING_SESSIONS': 2, 'PENDING': 9279}
 Cycle fingerprints saved: 129/174
@@ -191,11 +191,11 @@ Count: 0 of 109 scored CANDIDATE names
     "score_band": "40-60",
     "observations": 1172,
     "positive_net_pct": 51.5358361774744,
-    "average_net_pct": 0.39625515195826855,
+    "average_net_pct": 0.3962647539454357,
     "average_positive_pct": 6.827982874296948,
-    "average_nonpositive_pct": -6.443117285176522,
+    "average_nonpositive_pct": -6.443097472625537,
     "benchmark_pairs": 1172,
-    "average_excess_pct": 1.4625209842277123,
+    "average_excess_pct": 1.4625305862148794,
     "worst_adverse_excursion_pct": -86.84210490198016
   },
   {
@@ -317,9 +317,3 @@ Count: 0 of 109 scored CANDIDATE names
 - KVUE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- AAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- CLBR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- FTRA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SAGU: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- TCBI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE

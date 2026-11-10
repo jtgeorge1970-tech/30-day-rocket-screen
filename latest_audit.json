@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-11-10T04:24:05.155686+00:00",
+  "recorded_at": "2026-11-10T08:54:18.139066+00:00",
   "market_asof": "2026-11-09",
   "qualified_cohorts": 22,
   "all_prediction_files": 30,
-  "attempts": 140,
+  "attempts": 141,
   "cohort_rows": 2918,
   "outcome_counts": {
     "MATURE": 3611,
@@ -228,7 +228,8 @@
     "attempts/20261107T022006012140Z.json": "ac6b45f6bff44562d7fd43c73289a7c4e933eff5e96317ec381978ea5be9d290",
     "attempts/20261107T074305962637Z.json": "7ab126388324ace129a514f27f805cd39c2dffea266bb514a02d1f1a834d6226",
     "attempts/20261107T103829432828Z.json": "57db5a352664d13b61396f703e29a60877ba7c407b83faad72670e647c98eb70",
-    "attempts/20261110T041803927272Z.json": "d99146f293cbb4a6624bd20c82c890f5e80e9c4a2810cac14c6c515376e56539"
+    "attempts/20261110T041803927272Z.json": "d99146f293cbb4a6624bd20c82c890f5e80e9c4a2810cac14c6c515376e56539",
+    "attempts/20261110T084800474686Z.json": "fec93a7defd038449aee03ad28112446956734246b47ad881f7d714afc706598"
   },
   "control_unchanged": {
     "cursor": 2200,
@@ -254,13 +255,7 @@
       "LNAI",
       "KVUE",
       "ADIL",
-      "CCXI",
-      "AAC",
-      "CLBR",
-      "FTRA",
-      "RDIB",
-      "SAGU",
-      "TCBI"
+      "CCXI"
     ],
     "last_session": "2026-11-09"
   },
@@ -757,11 +752,11 @@
       "mature": 1172,
       "positive": 604,
       "nonpositive": 568,
-      "average_net_pct": 0.39625515195826855,
+      "average_net_pct": 0.3962647539454357,
       "average_positive_pct": 6.827982874296948,
-      "average_nonpositive_pct": -6.443117285176522,
+      "average_nonpositive_pct": -6.443097472625537,
       "benchmark_pairs": 1172,
-      "average_excess_gross_pct": 1.4625209842277123,
+      "average_excess_gross_pct": 1.4625305862148794,
       "worst_adverse_excursion_pct": -86.84210490198016
     },
     {

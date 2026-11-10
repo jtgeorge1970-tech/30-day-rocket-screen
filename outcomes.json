@@ -137644,11 +137644,11 @@
     "status": "MATURE",
     "entry_date": "2026-11-03",
     "end_date": "2026-11-09",
-    "gross_price_return_pct": -3.6566157745633987,
-    "net_assumed_return_pct": -3.856615774563399,
+    "gross_price_return_pct": -3.6453622456035006,
+    "net_assumed_return_pct": -3.845362245603501,
     "adverse_excursion_pct": -8.64086469678692,
     "benchmark_price_return_pct": -0.005311071483937724,
-    "excess_gross_pct": -3.651304703079461
+    "excess_gross_pct": -3.640051174119563
   },
   {
     "symbol": "PEBK",
