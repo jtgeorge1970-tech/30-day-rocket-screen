@@ -1,16 +1,16 @@
 {
-  "recorded_at": "2026-11-07T10:43:56.032586+00:00",
-  "market_asof": "2026-11-06",
-  "qualified_cohorts": 21,
-  "all_prediction_files": 29,
-  "attempts": 139,
-  "cohort_rows": 2772,
+  "recorded_at": "2026-11-10T04:24:05.155686+00:00",
+  "market_asof": "2026-11-09",
+  "qualified_cohorts": 22,
+  "all_prediction_files": 30,
+  "attempts": 140,
+  "cohort_rows": 2918,
   "outcome_counts": {
-    "MATURE": 3269,
-    "PENDING": 9009,
+    "MATURE": 3611,
+    "PENDING": 9279,
     "MISSING_SESSIONS": 2,
-    "INELIGIBLE_DATA": 1565,
-    "CORPORATE_ACTION_REVIEW": 15
+    "INELIGIBLE_DATA": 1680,
+    "CORPORATE_ACTION_REVIEW": 18
   },
   "outcome_recompute_matches_saved": true,
   "immutable_evidence_sha256": {
@@ -43,6 +43,7 @@
     "predictions/2026-11-05.json": "316b3465042980f9ac70690a180fdfe8108debdcff47c6658a0df276ae6ad981",
     "predictions/2026-11-06-qualified.json": "418f85877c231c327ed833d9e88f097ac511486299907bcbdacd81fe14b1dc8e",
     "predictions/2026-11-06.json": "fbf2f1bf07126d9c1bace2c781d0d7ab111c0d9a6f9508ee3b3035452496c447",
+    "predictions/2026-11-09.json": "8b52203fd992fcc8d92623a864b8cd1d2a06bbb63723d391546751ae51480698",
     "signals/2026-10-09-qualified.json": "3b40ea3da1975073b3b3739b4bf427e24d5ea35fa85d49bbc047cb978f7b9053",
     "signals/2026-10-09.json": "8436c531b1afa83066eaf135c6b4fd3c7d1d96c3eed68a7091f167f9618204db",
     "signals/2026-10-12.json": "2d228eb3ebd97a3b2ddaad167e36e9d2ebe2d5674878dc988396048e036f6116",
@@ -65,6 +66,7 @@
     "signals/2026-11-04.json": "c5cc8afdb6ff0c1afb3da1ced58c762c9d9120edf461b5a106c67c4b396eff12",
     "signals/2026-11-05.json": "0e2d39ea5ccf6f6da3988372618a76c90ccb3091d7fe40862897e60dc160de58",
     "signals/2026-11-06.json": "83f221c4c8b99974e8ceab8e437385dc27dfd9a9347f4872a09db7adb30aefbb",
+    "signals/2026-11-09.json": "8d3616111573f2a1185d86a327110a4765fc90d8a5f075866e02d197fad07941",
     "fingerprints/2026-10-09.json": "8759ad024a7172a502441fb124b86ef08fa3a84763c776b07b7f50ec4ddb16e1",
     "fingerprints/2026-10-12.json": "b08045ec7a3bb9cffa3ae6bb566ce76984a1680124bbf45f085ece9dc85bc9b8",
     "fingerprints/2026-10-13.json": "788e18cf32d21e40cfc854db79c3e325de8d9159d001fabe39ad70fc439b4aaa",
@@ -86,6 +88,7 @@
     "fingerprints/2026-11-04.json": "66a5870f9431500e32b064e5f9609517eda45dff9cfd051e834308683fe6de63",
     "fingerprints/2026-11-05.json": "fd4dc1bd9de602f5dc748938360cab5de3c3295020460c699185ef6cd703cbae",
     "fingerprints/2026-11-06.json": "6e75ec5d4db8679a936de620d943c7ab529cacd7663791106d92b56f7347f6f1",
+    "fingerprints/2026-11-09.json": "55fb50ce30cc86a72e196daab16e02e59e191cbf5ff7a239cc724fd90361813e",
     "attempts/20261010T012256172464Z.json": "8622f72ce6ca8643e3f1eff2de2c0cd82986b7d520f276189ded173e01386f3d",
     "attempts/20261010T013547333786Z.json": "84012c7ba9c29509796cd2176d99c514ac8b15e4d3585c6e499991c697254e2c",
     "attempts/20261010T015444698482Z.json": "5f88f74f204a4bad8f58f113a5d20fd18d4939d7b94b3b8cb35e9d9af17ff82f",
@@ -224,11 +227,13 @@
     "attempts/20261106T112610988546Z.json": "5ac9172e3de19c5d7fab4d6c9d6227b98a49d4308323aceea2c93fbbed9f67d8",
     "attempts/20261107T022006012140Z.json": "ac6b45f6bff44562d7fd43c73289a7c4e933eff5e96317ec381978ea5be9d290",
     "attempts/20261107T074305962637Z.json": "7ab126388324ace129a514f27f805cd39c2dffea266bb514a02d1f1a834d6226",
-    "attempts/20261107T103829432828Z.json": "57db5a352664d13b61396f703e29a60877ba7c407b83faad72670e647c98eb70"
+    "attempts/20261107T103829432828Z.json": "57db5a352664d13b61396f703e29a60877ba7c407b83faad72670e647c98eb70",
+    "attempts/20261110T041803927272Z.json": "d99146f293cbb4a6624bd20c82c890f5e80e9c4a2810cac14c6c515376e56539"
   },
   "control_unchanged": {
-    "cursor": 2100,
+    "cursor": 2200,
     "retry": [
+      "WFC.PRL",
       "INDV",
       "VSME",
       "MAMK",
@@ -249,22 +254,28 @@
       "LNAI",
       "KVUE",
       "ADIL",
-      "CCXI"
+      "CCXI",
+      "AAC",
+      "CLBR",
+      "FTRA",
+      "RDIB",
+      "SAGU",
+      "TCBI"
     ],
-    "last_session": "2026-11-06"
+    "last_session": "2026-11-09"
   },
   "freshness_gate": {
     "passed": true,
     "required_stale": [],
-    "fresh": 125,
+    "fresh": 124,
     "selected": 146
   },
   "cycle_summary": {
-    "complete_signal_cohorts": 21,
-    "pending_entries": 1,
+    "complete_signal_cohorts": 22,
+    "pending_entries": 6,
     "open_positions": 28,
-    "closed_trades": 19,
-    "benchmark_pairs": 19,
+    "closed_trades": 20,
+    "benchmark_pairs": 20,
     "review_trades": 0
   },
   "horizon_score_report_card": [
@@ -718,58 +729,58 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 5,
       "score_band": "<40",
-      "observations": 234,
+      "observations": 248,
       "statuses": {
-        "MATURE": 181,
+        "MATURE": 191,
         "CORPORATE_ACTION_REVIEW": 1,
-        "PENDING": 52
+        "PENDING": 56
       },
-      "mature": 181,
-      "positive": 79,
-      "nonpositive": 102,
-      "average_net_pct": -1.7643102872467775,
-      "average_positive_pct": 3.7497816688118157,
-      "average_nonpositive_pct": -6.0350285669392205,
-      "benchmark_pairs": 181,
-      "average_excess_gross_pct": -0.6835446672342157,
+      "mature": 191,
+      "positive": 84,
+      "nonpositive": 107,
+      "average_net_pct": -1.6561438097252945,
+      "average_positive_pct": 3.8559585265069427,
+      "average_nonpositive_pct": -5.983401718543127,
+      "benchmark_pairs": 191,
+      "average_excess_gross_pct": -0.6212135063896238,
       "worst_adverse_excursion_pct": -81.83229896445631
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 5,
       "score_band": "40-<60",
-      "observations": 1492,
+      "observations": 1572,
       "statuses": {
-        "MATURE": 1101,
-        "PENDING": 391
+        "MATURE": 1172,
+        "PENDING": 400
       },
-      "mature": 1101,
-      "positive": 568,
-      "nonpositive": 533,
-      "average_net_pct": 0.44051993574433446,
-      "average_positive_pct": 6.898582023656376,
-      "average_nonpositive_pct": -6.441617523794203,
-      "benchmark_pairs": 1101,
-      "average_excess_gross_pct": 1.5623060114431802,
+      "mature": 1172,
+      "positive": 604,
+      "nonpositive": 568,
+      "average_net_pct": 0.39625515195826855,
+      "average_positive_pct": 6.827982874296948,
+      "average_nonpositive_pct": -6.443117285176522,
+      "benchmark_pairs": 1172,
+      "average_excess_gross_pct": 1.4625209842277123,
       "worst_adverse_excursion_pct": -86.84210490198016
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 5,
       "score_band": "60-<80",
-      "observations": 166,
+      "observations": 173,
       "statuses": {
-        "MATURE": 133,
-        "PENDING": 33
+        "MATURE": 139,
+        "PENDING": 34
       },
-      "mature": 133,
-      "positive": 65,
-      "nonpositive": 68,
-      "average_net_pct": -0.7405022635418794,
-      "average_positive_pct": 4.81872940381158,
-      "average_nonpositive_pct": -6.054473710276804,
-      "benchmark_pairs": 133,
-      "average_excess_gross_pct": 0.32544128460461424,
+      "mature": 139,
+      "positive": 67,
+      "nonpositive": 72,
+      "average_net_pct": -0.7152030357903914,
+      "average_positive_pct": 4.991232756141428,
+      "average_nonpositive_pct": -6.025358564393613,
+      "benchmark_pairs": 139,
+      "average_excess_gross_pct": 0.3135909090469272,
       "worst_adverse_excursion_pct": -25.57142802647182
     },
     {
@@ -792,81 +803,81 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 5,
       "score_band": "UNSCORED",
-      "observations": 755,
+      "observations": 800,
       "statuses": {
-        "INELIGIBLE_DATA": 309,
-        "MATURE": 328,
+        "INELIGIBLE_DATA": 332,
+        "MATURE": 357,
         "CORPORATE_ACTION_REVIEW": 6,
-        "PENDING": 112
+        "PENDING": 105
       },
-      "mature": 328,
-      "positive": 98,
-      "nonpositive": 230,
-      "average_net_pct": 8.00495925352727,
-      "average_positive_pct": 54.63943150548913,
-      "average_nonpositive_pct": -11.865381097308664,
-      "benchmark_pairs": 328,
-      "average_excess_gross_pct": 9.167219841185632,
+      "mature": 357,
+      "positive": 107,
+      "nonpositive": 250,
+      "average_net_pct": 8.420760240999554,
+      "average_positive_pct": 54.83728580475812,
+      "average_nonpositive_pct": -11.44551270028912,
+      "benchmark_pairs": 357,
+      "average_excess_gross_pct": 9.5052854337866,
       "worst_adverse_excursion_pct": -71.84465967916303
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 10,
       "score_band": "<40",
-      "observations": 234,
+      "observations": 248,
       "statuses": {
-        "MATURE": 125,
+        "MATURE": 138,
         "CORPORATE_ACTION_REVIEW": 1,
-        "PENDING": 108
+        "PENDING": 109
       },
-      "mature": 125,
-      "positive": 61,
-      "nonpositive": 64,
-      "average_net_pct": -2.0642293706215575,
-      "average_positive_pct": 5.645963658401102,
-      "average_nonpositive_pct": -9.413007101408775,
-      "benchmark_pairs": 125,
-      "average_excess_gross_pct": -0.5897295326019614,
+      "mature": 138,
+      "positive": 66,
+      "nonpositive": 72,
+      "average_net_pct": -2.3806351421811525,
+      "average_positive_pct": 5.402469078051946,
+      "average_nonpositive_pct": -9.515147344061491,
+      "benchmark_pairs": 138,
+      "average_excess_gross_pct": -0.8463450944141697,
       "worst_adverse_excursion_pct": -95.51242232978043
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 10,
       "score_band": "40-<60",
-      "observations": 1492,
+      "observations": 1572,
       "statuses": {
-        "MATURE": 729,
+        "MATURE": 803,
         "CORPORATE_ACTION_REVIEW": 1,
         "MISSING_SESSIONS": 1,
-        "PENDING": 761
+        "PENDING": 767
       },
-      "mature": 729,
-      "positive": 385,
-      "nonpositive": 344,
-      "average_net_pct": 1.5752388418043788,
-      "average_positive_pct": 11.281197543754862,
-      "average_nonpositive_pct": -9.2875347054367,
-      "benchmark_pairs": 729,
-      "average_excess_gross_pct": 3.2374400468636084,
+      "mature": 803,
+      "positive": 427,
+      "nonpositive": 376,
+      "average_net_pct": 1.4087662179191487,
+      "average_positive_pct": 11.127469935456714,
+      "average_nonpositive_pct": -9.628165929390782,
+      "benchmark_pairs": 803,
+      "average_excess_gross_pct": 3.112159961233785,
       "worst_adverse_excursion_pct": -88.15789411768027
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 10,
       "score_band": "60-<80",
-      "observations": 166,
+      "observations": 173,
       "statuses": {
-        "MATURE": 94,
-        "PENDING": 72
+        "MATURE": 100,
+        "PENDING": 73
       },
-      "mature": 94,
-      "positive": 51,
-      "nonpositive": 43,
-      "average_net_pct": 1.5642601839871904,
-      "average_positive_pct": 8.30172035506545,
-      "average_nonpositive_pct": -6.426680949152145,
-      "benchmark_pairs": 94,
-      "average_excess_gross_pct": 3.010707009252754,
+      "mature": 100,
+      "positive": 54,
+      "nonpositive": 46,
+      "average_net_pct": 1.3262128480136315,
+      "average_positive_pct": 8.249599141338413,
+      "average_nonpositive_pct": -6.801240626758942,
+      "benchmark_pairs": 100,
+      "average_excess_gross_pct": 2.8124246184066193,
       "worst_adverse_excursion_pct": -30.81636301420778
     },
     {
@@ -889,76 +900,79 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 10,
       "score_band": "UNSCORED",
-      "observations": 755,
+      "observations": 800,
       "statuses": {
-        "INELIGIBLE_DATA": 309,
-        "MATURE": 216,
+        "INELIGIBLE_DATA": 332,
+        "MATURE": 239,
         "CORPORATE_ACTION_REVIEW": 6,
-        "PENDING": 224
+        "PENDING": 223
       },
-      "mature": 216,
-      "positive": 62,
-      "nonpositive": 154,
-      "average_net_pct": -2.0929524822969974,
-      "average_positive_pct": 40.46575640079554,
-      "average_nonpositive_pct": -19.226978136529045,
-      "benchmark_pairs": 216,
-      "average_excess_gross_pct": -0.40838657010338947,
+      "mature": 239,
+      "positive": 72,
+      "nonpositive": 167,
+      "average_net_pct": 10.490979620058422,
+      "average_positive_pct": 79.09068053136652,
+      "average_nonpositive_pct": -19.084939335715138,
+      "benchmark_pairs": 239,
+      "average_excess_gross_pct": 12.216409507005874,
       "worst_adverse_excursion_pct": -95.13765191824154
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 20,
       "score_band": "<40",
-      "observations": 234,
+      "observations": 248,
       "statuses": {
-        "PENDING": 234
+        "MATURE": 11,
+        "PENDING": 237
       },
-      "mature": 0,
-      "positive": 0,
-      "nonpositive": 0,
-      "average_net_pct": null,
-      "average_positive_pct": null,
-      "average_nonpositive_pct": null,
-      "benchmark_pairs": 0,
-      "average_excess_gross_pct": null,
-      "worst_adverse_excursion_pct": null
+      "mature": 11,
+      "positive": 5,
+      "nonpositive": 6,
+      "average_net_pct": -1.5186551812600266,
+      "average_positive_pct": 7.076969150427322,
+      "average_nonpositive_pct": -8.68167545766615,
+      "benchmark_pairs": 11,
+      "average_excess_gross_pct": 1.8524184239134867,
+      "worst_adverse_excursion_pct": -27.555383904883122
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 20,
       "score_band": "40-<60",
-      "observations": 1492,
+      "observations": 1572,
       "statuses": {
-        "PENDING": 1492
+        "MATURE": 70,
+        "PENDING": 1502
       },
-      "mature": 0,
-      "positive": 0,
-      "nonpositive": 0,
-      "average_net_pct": null,
-      "average_positive_pct": null,
-      "average_nonpositive_pct": null,
-      "benchmark_pairs": 0,
-      "average_excess_gross_pct": null,
-      "worst_adverse_excursion_pct": null
+      "mature": 70,
+      "positive": 31,
+      "nonpositive": 39,
+      "average_net_pct": -0.6005078442212174,
+      "average_positive_pct": 15.477329299553274,
+      "average_nonpositive_pct": -13.380327112349656,
+      "benchmark_pairs": 70,
+      "average_excess_gross_pct": 2.7705657609522962,
+      "worst_adverse_excursion_pct": -47.601920796091626
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 20,
       "score_band": "60-<80",
-      "observations": 166,
+      "observations": 173,
       "statuses": {
-        "PENDING": 166
+        "MATURE": 11,
+        "PENDING": 162
       },
-      "mature": 0,
-      "positive": 0,
-      "nonpositive": 0,
-      "average_net_pct": null,
-      "average_positive_pct": null,
-      "average_nonpositive_pct": null,
-      "benchmark_pairs": 0,
-      "average_excess_gross_pct": null,
-      "worst_adverse_excursion_pct": null
+      "mature": 11,
+      "positive": 4,
+      "nonpositive": 7,
+      "average_net_pct": -2.905613560476577,
+      "average_positive_pct": 10.227230662016517,
+      "average_nonpositive_pct": -10.410095973329774,
+      "benchmark_pairs": 11,
+      "average_excess_gross_pct": 0.46546004469693664,
+      "worst_adverse_excursion_pct": -26.782124919158147
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
@@ -980,28 +994,30 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 20,
       "score_band": "UNSCORED",
-      "observations": 755,
+      "observations": 800,
       "statuses": {
-        "INELIGIBLE_DATA": 309,
-        "PENDING": 446
+        "INELIGIBLE_DATA": 332,
+        "MATURE": 18,
+        "CORPORATE_ACTION_REVIEW": 3,
+        "PENDING": 447
       },
-      "mature": 0,
-      "positive": 0,
-      "nonpositive": 0,
-      "average_net_pct": null,
-      "average_positive_pct": null,
-      "average_nonpositive_pct": null,
-      "benchmark_pairs": 0,
-      "average_excess_gross_pct": null,
-      "worst_adverse_excursion_pct": null
+      "mature": 18,
+      "positive": 3,
+      "nonpositive": 15,
+      "average_net_pct": -21.042213503117242,
+      "average_positive_pct": 22.30561216398283,
+      "average_nonpositive_pct": -29.711778636537254,
+      "benchmark_pairs": 18,
+      "average_excess_gross_pct": -17.671139897943725,
+      "worst_adverse_excursion_pct": -80.2419352512826
     },
     {
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 30,
       "score_band": "<40",
-      "observations": 234,
+      "observations": 248,
       "statuses": {
-        "PENDING": 234
+        "PENDING": 248
       },
       "mature": 0,
       "positive": 0,
@@ -1017,9 +1033,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 30,
       "score_band": "40-<60",
-      "observations": 1492,
+      "observations": 1572,
       "statuses": {
-        "PENDING": 1492
+        "PENDING": 1572
       },
       "mature": 0,
       "positive": 0,
@@ -1035,9 +1051,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 30,
       "score_band": "60-<80",
-      "observations": 166,
+      "observations": 173,
       "statuses": {
-        "PENDING": 166
+        "PENDING": 173
       },
       "mature": 0,
       "positive": 0,
@@ -1069,10 +1085,10 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 30,
       "score_band": "UNSCORED",
-      "observations": 755,
+      "observations": 800,
       "statuses": {
-        "INELIGIBLE_DATA": 309,
-        "PENDING": 446
+        "INELIGIBLE_DATA": 332,
+        "PENDING": 468
       },
       "mature": 0,
       "positive": 0,
@@ -1088,9 +1104,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 60,
       "score_band": "<40",
-      "observations": 234,
+      "observations": 248,
       "statuses": {
-        "PENDING": 234
+        "PENDING": 248
       },
       "mature": 0,
       "positive": 0,
@@ -1106,9 +1122,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 60,
       "score_band": "40-<60",
-      "observations": 1492,
+      "observations": 1572,
       "statuses": {
-        "PENDING": 1492
+        "PENDING": 1572
       },
       "mature": 0,
       "positive": 0,
@@ -1124,9 +1140,9 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 60,
       "score_band": "60-<80",
-      "observations": 166,
+      "observations": 173,
       "statuses": {
-        "PENDING": 166
+        "PENDING": 173
       },
       "mature": 0,
       "positive": 0,
@@ -1158,10 +1174,10 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "horizon": 60,
       "score_band": "UNSCORED",
-      "observations": 755,
+      "observations": 800,
       "statuses": {
-        "INELIGIBLE_DATA": 309,
-        "PENDING": 446
+        "INELIGIBLE_DATA": 332,
+        "PENDING": 468
       },
       "mature": 0,
       "positive": 0,

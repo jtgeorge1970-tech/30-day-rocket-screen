@@ -1,6 +1,7 @@
 {
-  "cursor": 2100,
+  "cursor": 2200,
   "retry": [
+    "WFC.PRL",
     "INDV",
     "VSME",
     "MAMK",
@@ -21,7 +22,13 @@
     "LNAI",
     "KVUE",
     "ADIL",
-    "CCXI"
+    "CCXI",
+    "AAC",
+    "CLBR",
+    "FTRA",
+    "RDIB",
+    "SAGU",
+    "TCBI"
   ],
-  "last_session": "2026-11-06"
+  "last_session": "2026-11-09"
 }
