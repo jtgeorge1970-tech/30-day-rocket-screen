@@ -1,7 +1,7 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-11T08:25:05.777943+00:00
-Market as-of: 2026-11-10; qualified cohorts: 23; cohort rows: 3065; attempts retained: 144.
+Audit UTC: 2026-11-11T11:34:29.539593+00:00
+Market as-of: 2026-11-10; qualified cohorts: 23; cohort rows: 3065; attempts retained: 145.
 Outcome counts: {'MATURE': 3971, 'PENDING': 9525, 'MISSING_SESSIONS': 2, 'INELIGIBLE_DATA': 1805, 'CORPORATE_ACTION_REVIEW': 22}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 123, 'selected': 147}.
 Cycle ledger: {'complete_signal_cohorts': 23, 'pending_entries': 3, 'open_positions': 34, 'closed_trades': 20, 'benchmark_pairs': 20, 'review_trades': 0}.
@@ -75,7 +75,5 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - KVUE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- TCBI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

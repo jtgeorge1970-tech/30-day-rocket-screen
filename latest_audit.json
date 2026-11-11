@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-11-11T08:25:05.777943+00:00",
+  "recorded_at": "2026-11-11T11:34:29.539593+00:00",
   "market_asof": "2026-11-10",
   "qualified_cohorts": 23,
   "all_prediction_files": 32,
-  "attempts": 144,
+  "attempts": 145,
   "cohort_rows": 3065,
   "outcome_counts": {
     "MATURE": 3971,
@@ -236,7 +236,8 @@
     "attempts/20261110T084800474686Z.json": "fec93a7defd038449aee03ad28112446956734246b47ad881f7d714afc706598",
     "attempts/20261110T114051498140Z.json": "8c7239dbc272ef4b1f0dcee1b72cb61a18019e082b39506bed514432706cf460",
     "attempts/20261111T021313555116Z.json": "964a89ae5750a05d4fbf1fa8244f519906ed830c5bd23bf6d484bc2f34e3a36b",
-    "attempts/20261111T081821009013Z.json": "04e7d021c615d5775a39b08b50a67d5f7587980901ea6542ed1362c7ec450dd9"
+    "attempts/20261111T081821009013Z.json": "04e7d021c615d5775a39b08b50a67d5f7587980901ea6542ed1362c7ec450dd9",
+    "attempts/20261111T112501303496Z.json": "9e1aad6e56afa6e071092a09442b2b81c8d013df1040eda236fc031749dcc309"
   },
   "control_unchanged": {
     "cursor": 2300,
@@ -264,9 +265,7 @@
       "LNAI",
       "KVUE",
       "ADIL",
-      "CCXI",
-      "RDIB",
-      "TCBI"
+      "CCXI"
     ],
     "last_session": "2026-11-10"
   },
