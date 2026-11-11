@@ -1,0 +1,47 @@
+name: Engine 4 Sept 21 Replay Push
+
+on:
+  push:
+    branches:
+      - engine4-instant-replay
+    paths:
+      - '.github/engine4-replay-trigger.txt'
+
+concurrency:
+  group: engine4-instant-replay-push
+  cancel-in-progress: false
+
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    env:
+      REPLAY_DATE_ET: '2026-09-21'
+      ENGINE4_CONTEXT: 'INSTANT_REPLAY'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt pytest
+      - name: Verify locked Engine 4 and Replay feeder
+        run: |
+          python -m py_compile engine4_feed.py engine4_replay.py engine4_replay_snapshot.py engine4_pipeline.py
+          pytest -q test_engine4_*.py
+      - name: Replay preflight
+        run: python engine4_replay.py preflight --date "$REPLAY_DATE_ET"
+      - name: Run locked Engine 4 stages
+        run: python engine4_replay.py run --date "$REPLAY_DATE_ET"
+      - name: Upload replay artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-sept21-replay-${{ github.run_id }}
+          path: |
+            output/engine4/
+            output/engine4-replay/
+          if-no-files-found: error
+          retention-days: 30

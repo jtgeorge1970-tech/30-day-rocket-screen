@@ -1,0 +1,52 @@
+name: Engine 4 Instant Replay
+
+on:
+  workflow_dispatch:
+    inputs:
+      replay_date_et:
+        description: 'Historical Eastern market date (YYYY-MM-DD)'
+        required: true
+        default: '2026-09-16'
+        type: string
+
+# Replay has its own concurrency group. It does not count as, cancel, or block the
+# production AUTO/MANUAL daily cycle.
+concurrency:
+  group: engine4-instant-replay
+  cancel-in-progress: false
+
+jobs:
+  replay-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    env:
+      REPLAY_DATE_ET: ${{ inputs.replay_date_et }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt pytest
+
+      - name: Prove production Engine 4 tests remain green
+        run: |
+          python -m py_compile engine4_feed.py engine4_replay.py
+          pytest -q test_engine4_*.py
+
+      - name: Verify replay isolation and fail-closed data guards
+        run: python engine4_replay.py preflight --date "$REPLAY_DATE_ET"
+
+      - name: Upload replay-only artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: engine4-instant-replay-${{ inputs.replay_date_et }}-${{ github.run_id }}
+          path: output/engine4-replay/
+          if-no-files-found: error
+          retention-days: 30
