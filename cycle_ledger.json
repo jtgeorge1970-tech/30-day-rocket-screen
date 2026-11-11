@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T02:23:22.069638+00:00",
+  "generated_at": "2026-11-11T08:25:10.804633+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -40,6 +40,23 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-28",
       "entry_open": 7.349999904632568
+    },
+    {
+      "symbol": "ATGL",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-11-10",
+      "planned_entry_date": "2026-11-11",
+      "entry_score": 59.092283337677,
+      "cycle": {
+        "cycle_sessions": 21,
+        "median_swing_pct": 32.06849916938487,
+        "completed_cycle_intervals": 43,
+        "confirmed_turns": 45,
+        "timing_consistency": 42.83121951219512,
+        "amplitude_consistency": 55.33639746553385,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
     },
     {
       "symbol": "AUGO",
@@ -115,7 +132,7 @@
       },
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-11-10",
-      "entry_open": 6.130000114440918
+      "entry_open": 6.235000133514404
     },
     {
       "symbol": "BX",
@@ -173,6 +190,23 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-27",
       "entry_open": 79.55000305175781
+    },
+    {
+      "symbol": "DXC",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-11-10",
+      "planned_entry_date": "2026-11-11",
+      "entry_score": 64.65043286133141,
+      "cycle": {
+        "cycle_sessions": 33.5,
+        "median_swing_pct": 15.563380759378632,
+        "completed_cycle_intervals": 28,
+        "confirmed_turns": 30,
+        "timing_consistency": 67.7294776119403,
+        "amplitude_consistency": 71.69964097861299,
+        "confidence": "HIGH"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
     },
     {
       "symbol": "EBC",
@@ -306,6 +340,23 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-23",
       "entry_open": 23.65999984741211
+    },
+    {
+      "symbol": "LBTYB",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-11-10",
+      "planned_entry_date": "2026-11-11",
+      "entry_score": 63.634796243845265,
+      "cycle": {
+        "cycle_sessions": 25.5,
+        "median_swing_pct": 14.757276465457124,
+        "completed_cycle_intervals": 32,
+        "confirmed_turns": 34,
+        "timing_consistency": 54.77908496732027,
+        "amplitude_consistency": 67.5147540925129,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
     },
     {
       "symbol": "LTBR",
@@ -1508,11 +1559,35 @@
       "signal_date": "2026-11-09",
       "signal": "BUY",
       "reason": "POSITION_ALREADY_EXISTS"
+    },
+    {
+      "symbol": "CVR",
+      "signal_date": "2026-11-10",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "GIBO",
+      "signal_date": "2026-11-10",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "LINE",
+      "signal_date": "2026-11-10",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "RM",
+      "signal_date": "2026-11-10",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
     }
   ],
   "summary": {
-    "complete_signal_cohorts": 22,
-    "pending_entries": 0,
+    "complete_signal_cohorts": 23,
+    "pending_entries": 3,
     "open_positions": 34,
     "closed_trades": 20,
     "benchmark_pairs": 20,
