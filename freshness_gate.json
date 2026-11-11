@@ -1,6 +1,11 @@
 {
-  "passed": true,
-  "required_stale": [],
-  "fresh": 124,
-  "selected": 146
+  "passed": false,
+  "required_stale": [
+    "SCYX",
+    "METCB",
+    "PPHC",
+    "ATGL"
+  ],
+  "fresh": 93,
+  "selected": 147
 }

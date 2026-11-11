@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-10T11:49:23.945720+00:00",
+  "generated_at": "2026-11-11T02:23:22.069638+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -81,7 +81,7 @@
     },
     {
       "symbol": "BB",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-11-09",
       "planned_entry_date": "2026-11-10",
       "entry_score": 40.80590681860568,
@@ -94,11 +94,13 @@
         "amplitude_consistency": 26.152651499504607,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-11-10",
+      "entry_open": 9.029999732971191
     },
     {
       "symbol": "BTDR",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-11-09",
       "planned_entry_date": "2026-11-10",
       "entry_score": 53.59536386841599,
@@ -111,7 +113,9 @@
         "amplitude_consistency": 46.26438061017289,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-11-10",
+      "entry_open": 6.130000114440918
     },
     {
       "symbol": "BX",
@@ -248,7 +252,7 @@
     },
     {
       "symbol": "GORO",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-11-09",
       "planned_entry_date": "2026-11-10",
       "entry_score": 37.90855244645626,
@@ -261,11 +265,13 @@
         "amplitude_consistency": 42.34334195406824,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-11-10",
+      "entry_open": 3.2799999713897705
     },
     {
       "symbol": "HLIT",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-11-09",
       "planned_entry_date": "2026-11-10",
       "entry_score": 58.61003707191593,
@@ -278,7 +284,9 @@
         "amplitude_consistency": 63.57414169681945,
         "confidence": "HIGH"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-11-10",
+      "entry_open": 10.140000343322754
     },
     {
       "symbol": "KIM",
@@ -301,7 +309,7 @@
     },
     {
       "symbol": "LTBR",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-11-09",
       "planned_entry_date": "2026-11-10",
       "entry_score": 40.893901206203665,
@@ -314,7 +322,9 @@
         "amplitude_consistency": 56.905432586769564,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-11-10",
+      "entry_open": 4.670000076293945
     },
     {
       "symbol": "LYEL",
@@ -375,7 +385,7 @@
     },
     {
       "symbol": "NATR",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-11-09",
       "planned_entry_date": "2026-11-10",
       "entry_score": 43.55198022377589,
@@ -388,7 +398,9 @@
         "amplitude_consistency": 37.32626816087635,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-11-10",
+      "entry_open": 11.329999923706055
     },
     {
       "symbol": "NET",
@@ -1500,8 +1512,8 @@
   ],
   "summary": {
     "complete_signal_cohorts": 22,
-    "pending_entries": 6,
-    "open_positions": 28,
+    "pending_entries": 0,
+    "open_positions": 34,
     "closed_trades": 20,
     "benchmark_pairs": 20,
     "review_trades": 0
