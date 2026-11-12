@@ -1,14 +1,14 @@
 {
-  "recorded_at": "2026-11-12T03:25:22.622677+00:00",
+  "recorded_at": "2026-11-12T08:56:28.238177+00:00",
   "market_asof": "2026-11-11",
   "qualified_cohorts": 24,
   "all_prediction_files": 33,
-  "attempts": 146,
+  "attempts": 147,
   "cohort_rows": 3214,
   "outcome_counts": {
-    "MATURE": 4315,
+    "MATURE": 4316,
     "PENDING": 9775,
-    "MISSING_SESSIONS": 5,
+    "MISSING_SESSIONS": 4,
     "INELIGIBLE_DATA": 1950,
     "CORPORATE_ACTION_REVIEW": 25
   },
@@ -241,7 +241,8 @@
     "attempts/20261111T021313555116Z.json": "964a89ae5750a05d4fbf1fa8244f519906ed830c5bd23bf6d484bc2f34e3a36b",
     "attempts/20261111T081821009013Z.json": "04e7d021c615d5775a39b08b50a67d5f7587980901ea6542ed1362c7ec450dd9",
     "attempts/20261111T112501303496Z.json": "9e1aad6e56afa6e071092a09442b2b81c8d013df1040eda236fc031749dcc309",
-    "attempts/20261112T031934793725Z.json": "2d6d01750c22c9043c3cc52d9a2c5ed904b9d504da329809e0ac0db20d6dfb1c"
+    "attempts/20261112T031934793725Z.json": "2d6d01750c22c9043c3cc52d9a2c5ed904b9d504da329809e0ac0db20d6dfb1c",
+    "attempts/20261112T084810602920Z.json": "0ccd0d9a8fb12e6caf431935da304df0bd0fd73c00832dc3a733111f41ca86de"
   },
   "control_unchanged": {
     "cursor": 2400,
@@ -270,12 +271,7 @@
       "KVUE",
       "ADIL",
       "CCXI",
-      "ALDF",
-      "FRMEP",
-      "GNTA",
-      "MHNC",
-      "RDIB",
-      "TCBI"
+      "GNTA"
     ],
     "last_session": "2026-11-11"
   },
@@ -842,19 +838,18 @@
       "score_band": "<40",
       "observations": 285,
       "statuses": {
-        "MATURE": 155,
+        "MATURE": 156,
         "CORPORATE_ACTION_REVIEW": 1,
-        "MISSING_SESSIONS": 1,
         "PENDING": 128
       },
-      "mature": 155,
+      "mature": 156,
       "positive": 73,
-      "nonpositive": 82,
-      "average_net_pct": -2.1129199883470062,
+      "nonpositive": 83,
+      "average_net_pct": -2.1047443474977965,
       "average_positive_pct": 6.023781481297815,
-      "average_nonpositive_pct": -9.356568857664953,
-      "benchmark_pairs": 155,
-      "average_excess_gross_pct": -0.5132344176488013,
+      "average_nonpositive_pct": -9.25392971499273,
+      "benchmark_pairs": 156,
+      "average_excess_gross_pct": -0.5065435125311366,
       "worst_adverse_excursion_pct": -95.51242232978043
     },
     {

@@ -1,9 +1,9 @@
 # OFTS daily research
 
 Market session: 2026-11-11
-Selected: 149; refreshed: 125; refresh errors: 30
+Selected: 149; refreshed: 125; refresh errors: 25
 Qualified prediction cohorts saved: 24; current coverage: 125/149
-Outcome counts: {'CORPORATE_ACTION_REVIEW': 25, 'INELIGIBLE_DATA': 1950, 'MATURE': 4315, 'MISSING_SESSIONS': 5, 'PENDING': 9775}
+Outcome counts: {'CORPORATE_ACTION_REVIEW': 25, 'INELIGIBLE_DATA': 1950, 'MATURE': 4316, 'MISSING_SESSIONS': 4, 'PENDING': 9775}
 Cycle fingerprints saved: 134/181
 Signal states: BUY=5, SELL=2, NO_TRADE=174
 Cycle ledger: pending entries=2; open positions=37; closed trades=20; SPY pairs=20
@@ -215,13 +215,13 @@ Count: 0 of 104 scored CANDIDATE names
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 10,
     "score_band": "0-40",
-    "observations": 155,
-    "positive_net_pct": 47.096774193548384,
-    "average_net_pct": -2.1129199883470062,
+    "observations": 156,
+    "positive_net_pct": 46.794871794871796,
+    "average_net_pct": -2.1047443474977965,
     "average_positive_pct": 6.023781481297815,
-    "average_nonpositive_pct": -9.356568857664953,
-    "benchmark_pairs": 155,
-    "average_excess_pct": -0.5132344176488013,
+    "average_nonpositive_pct": -9.25392971499273,
+    "benchmark_pairs": 156,
+    "average_excess_pct": -0.5065435125311366,
     "worst_adverse_excursion_pct": -95.51242232978043
   },
   {
@@ -319,9 +319,4 @@ Count: 0 of 104 scored CANDIDATE names
 - KVUE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- ALDF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- FRMEP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - GNTA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- MHNC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- TCBI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE

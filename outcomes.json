@@ -115257,9 +115257,14 @@
     "score": 10.745352243166598,
     "classification": "REJECT_CANDIDATE_GATE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "MISSING_SESSIONS",
+    "status": "MATURE",
     "entry_date": "2026-10-29",
-    "end_date": "2026-11-11"
+    "end_date": "2026-11-11",
+    "gross_price_return_pct": -0.6375200158702521,
+    "net_assumed_return_pct": -0.837520015870252,
+    "adverse_excursion_pct": -18.032783467976866,
+    "benchmark_price_return_pct": -1.1680667965771274,
+    "excess_gross_pct": 0.5305467807068753
   },
   {
     "symbol": "ALDF",
