@@ -1,5 +1,5 @@
 {
-  "cursor": 2300,
+  "cursor": 2400,
   "retry": [
     "WALD",
     "LRHC",
@@ -24,7 +24,13 @@
     "LNAI",
     "KVUE",
     "ADIL",
-    "CCXI"
+    "CCXI",
+    "ALDF",
+    "FRMEP",
+    "GNTA",
+    "MHNC",
+    "RDIB",
+    "TCBI"
   ],
-  "last_session": "2026-11-10"
+  "last_session": "2026-11-11"
 }
