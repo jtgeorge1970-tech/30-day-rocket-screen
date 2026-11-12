@@ -1,6 +1,6 @@
 {
   "asof": "2026-11-11",
-  "recorded_at": "2026-11-12T08:48:10.602920+00:00",
+  "recorded_at": "2026-11-12T11:45:25.513664+00:00",
   "symbols": {
     "MWH": {
       "status": "FRESH",
@@ -1194,22 +1194,6 @@
       "latest_date": "2026-11-04",
       "bars": 187
     },
-    "ALDF": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "ALDF",
-      "latest_date": "2026-11-11",
-      "bars": 479
-    },
-    "FRMEP": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "FRMEP",
-      "latest_date": "2026-11-11",
-      "bars": 512
-    },
     "GNTA": {
       "status": "ERROR",
       "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
@@ -1217,30 +1201,6 @@
       "provider_ticker": "GNTA",
       "latest_date": "2026-11-10",
       "bars": 506
-    },
-    "MHNC": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "MHNC",
-      "latest_date": "2026-11-11",
-      "bars": 512
-    },
-    "RDIB": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "RDIB",
-      "latest_date": "2026-11-11",
-      "bars": 510
-    },
-    "TCBI": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "TCBI",
-      "latest_date": "2026-11-11",
-      "bars": 514
     },
     "A": {
       "status": "FRESH",
@@ -1865,6 +1825,14 @@
       "provider_ticker": "ALCO",
       "latest_date": "2026-11-11",
       "bars": 512
+    },
+    "ALDF": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "ALDF",
+      "latest_date": "2026-11-11",
+      "bars": 479
     },
     "ALDX": {
       "status": "FRESH",
@@ -7650,6 +7618,14 @@
       "latest_date": "2026-11-11",
       "bars": 517
     },
+    "FRMEP": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "FRMEP",
+      "latest_date": "2026-11-11",
+      "bars": 512
+    },
     "FRMI": {
       "status": "FRESH",
       "error": "",
@@ -11610,6 +11586,14 @@
       "latest_date": "2026-11-11",
       "bars": 502
     },
+    "MHNC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "MHNC",
+      "latest_date": "2026-11-11",
+      "bars": 512
+    },
     "MHO": {
       "status": "FRESH",
       "error": "",
@@ -14858,6 +14842,14 @@
       "latest_date": "2026-11-11",
       "bars": 517
     },
+    "RDIB": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "RDIB",
+      "latest_date": "2026-11-11",
+      "bars": 510
+    },
     "RDNT": {
       "status": "FRESH",
       "error": "",
@@ -16921,6 +16913,14 @@
       "provider_ticker": "TBLA",
       "latest_date": "2026-11-11",
       "bars": 524
+    },
+    "TCBI": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "TCBI",
+      "latest_date": "2026-11-11",
+      "bars": 514
     },
     "TCBK": {
       "status": "FRESH",
