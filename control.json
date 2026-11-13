@@ -1,6 +1,10 @@
 {
-  "cursor": 2400,
+  "cursor": 2500,
   "retry": [
+    "CBZ",
+    "MIMI",
+    "BZH",
+    "NATH",
     "WALD",
     "LRHC",
     "WFC.PRL",
@@ -25,7 +29,14 @@
     "KVUE",
     "ADIL",
     "CCXI",
-    "GNTA"
+    "GNTA",
+    "ALDF",
+    "CCU",
+    "CLBR",
+    "KNRX",
+    "RDIB",
+    "SAGU",
+    "VECA"
   ],
-  "last_session": "2026-11-11"
+  "last_session": "2026-11-12"
 }

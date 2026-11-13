@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T11:53:22.970971+00:00",
+  "generated_at": "2026-11-13T03:03:48.390248+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -195,7 +195,7 @@
     },
     {
       "symbol": "DUOT",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-11-11",
       "planned_entry_date": "2026-11-12",
       "entry_score": 61.14418502806281,
@@ -208,7 +208,9 @@
         "amplitude_consistency": 50.72317641464499,
         "confidence": "MEDIUM"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-11-12",
+      "entry_open": 5.269999980926514
     },
     {
       "symbol": "DXC",
@@ -534,29 +536,8 @@
       "entry_open": 12.279999732971191
     },
     {
-      "symbol": "PFSI",
-      "status": "OPEN_PENDING_EXIT",
-      "entry_signal_date": "2026-10-22",
-      "planned_entry_date": "2026-10-23",
-      "entry_score": 50.675352912547034,
-      "cycle": {
-        "cycle_sessions": 46,
-        "median_swing_pct": 13.146601935244195,
-        "completed_cycle_intervals": 17,
-        "confirmed_turns": 19,
-        "timing_consistency": 71.5539252564729,
-        "amplitude_consistency": 59.164722722685234,
-        "confidence": "MEDIUM"
-      },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-      "entry_date": "2026-10-23",
-      "entry_open": 62.869998931884766,
-      "exit_signal_date": "2026-11-11",
-      "planned_exit_date": "2026-11-12"
-    },
-    {
       "symbol": "POWI",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-11-11",
       "planned_entry_date": "2026-11-12",
       "entry_score": 45.06513376022349,
@@ -569,7 +550,9 @@
         "amplitude_consistency": 87.46254106561832,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-11-12",
+      "entry_open": 45.5
     },
     {
       "symbol": "PSIG",
@@ -630,7 +613,7 @@
     },
     {
       "symbol": "RERE",
-      "status": "OPEN",
+      "status": "OPEN_PENDING_EXIT",
       "entry_signal_date": "2026-10-13",
       "planned_entry_date": "2026-10-14",
       "entry_score": 62.27205803946234,
@@ -645,7 +628,9 @@
       },
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-14",
-      "entry_open": 3.9200000762939453
+      "entry_open": 3.9200000762939453,
+      "exit_signal_date": "2026-11-12",
+      "planned_exit_date": "2026-11-13"
     },
     {
       "symbol": "SON",
@@ -686,25 +671,38 @@
       "entry_open": 414.1300048828125
     },
     {
-      "symbol": "SRAD",
-      "status": "OPEN_PENDING_EXIT",
-      "entry_signal_date": "2026-10-12",
-      "planned_entry_date": "2026-10-13",
-      "entry_score": 56.69949392688849,
+      "symbol": "STRR",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-11-12",
+      "planned_entry_date": "2026-11-13",
+      "entry_score": 52.035927833555874,
       "cycle": {
-        "cycle_sessions": 26,
-        "median_swing_pct": 16.53954916634129,
-        "completed_cycle_intervals": 25,
-        "confirmed_turns": 27,
-        "timing_consistency": 37.75877358490567,
-        "amplitude_consistency": 56.05857622686228,
+        "cycle_sessions": 59,
+        "median_swing_pct": 17.00071011265359,
+        "completed_cycle_intervals": 17,
+        "confirmed_turns": 19,
+        "timing_consistency": 35.743003814367455,
+        "amplitude_consistency": 78.66254496090839,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-      "entry_date": "2026-10-13",
-      "entry_open": 12.779999732971191,
-      "exit_signal_date": "2026-11-11",
-      "planned_exit_date": "2026-11-12"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
+      "symbol": "SXC",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-11-12",
+      "planned_entry_date": "2026-11-13",
+      "entry_score": 55.4377994135181,
+      "cycle": {
+        "cycle_sessions": 63.5,
+        "median_swing_pct": 20.918368886084092,
+        "completed_cycle_intervals": 14,
+        "confirmed_turns": 16,
+        "timing_consistency": 68.03754202635166,
+        "amplitude_consistency": 53.7056533686816,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
     },
     {
       "symbol": "TARS",
@@ -1385,6 +1383,70 @@
       "missed_observed_swing_pct": 33.64857385916795,
       "benchmark_price_return_pct": -2.663166650438664,
       "excess_gross_pct": 22.62283930173208
+    },
+    {
+      "symbol": "PFSI",
+      "status": "CLOSED",
+      "entry_signal_date": "2026-10-22",
+      "entry_date": "2026-10-23",
+      "entry_open": 62.869998931884766,
+      "exit_signal_date": "2026-11-11",
+      "exit_date": "2026-11-12",
+      "exit_open": 62.68000030517578,
+      "holding_sessions": 14,
+      "gross_return_pct": -0.3022087322044231,
+      "net_assumed_return_pct": -0.5022087322044231,
+      "roundtrip_cost_pct": 0.2,
+      "entry_score": 50.675352912547034,
+      "entry_cycle": {
+        "cycle_sessions": 46,
+        "median_swing_pct": 13.146601935244195,
+        "completed_cycle_intervals": 17,
+        "confirmed_turns": 19,
+        "timing_consistency": 71.5539252564729,
+        "amplitude_consistency": 59.164722722685234,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "adverse_excursion_pct": -4.183230949737071,
+      "best_high_return_pct": 9.750280216732076,
+      "observed_ordered_swing_pct": 14.541829477844326,
+      "captured_observed_swing_pct": -2.0782029707119247,
+      "missed_observed_swing_pct": 14.541829477844326,
+      "benchmark_price_return_pct": -0.7790556329929421,
+      "excess_gross_pct": 0.476846900788519
+    },
+    {
+      "symbol": "SRAD",
+      "status": "CLOSED",
+      "entry_signal_date": "2026-10-12",
+      "entry_date": "2026-10-13",
+      "entry_open": 12.779999732971191,
+      "exit_signal_date": "2026-11-11",
+      "exit_date": "2026-11-12",
+      "exit_open": 13.239999771118164,
+      "holding_sessions": 22,
+      "gross_return_pct": 3.5993743956051594,
+      "net_assumed_return_pct": 3.399374395605159,
+      "roundtrip_cost_pct": 0.2,
+      "entry_score": 56.69949392688849,
+      "entry_cycle": {
+        "cycle_sessions": 26,
+        "median_swing_pct": 16.53954916634129,
+        "completed_cycle_intervals": 25,
+        "confirmed_turns": 27,
+        "timing_consistency": 37.75877358490567,
+        "amplitude_consistency": 56.05857622686228,
+        "confidence": "LOW"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "adverse_excursion_pct": -10.876364778493464,
+      "best_high_return_pct": 17.918622924107307,
+      "observed_ordered_swing_pct": 32.30903635274092,
+      "captured_observed_swing_pct": 11.140457289744603,
+      "missed_observed_swing_pct": 28.709661957135758,
+      "benchmark_price_return_pct": -3.0051258882442866,
+      "excess_gross_pct": 6.604500283849446
     }
   ],
   "exceptions": [
@@ -1645,14 +1707,26 @@
       "signal_date": "2026-11-11",
       "signal": "BUY",
       "reason": "POSITION_ALREADY_EXISTS"
+    },
+    {
+      "symbol": "COOK",
+      "signal_date": "2026-11-12",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "OMEX",
+      "signal_date": "2026-11-12",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
     }
   ],
   "summary": {
-    "complete_signal_cohorts": 24,
+    "complete_signal_cohorts": 25,
     "pending_entries": 2,
     "open_positions": 37,
-    "closed_trades": 20,
-    "benchmark_pairs": 20,
+    "closed_trades": 22,
+    "benchmark_pairs": 22,
     "review_trades": 0
   }
 }
