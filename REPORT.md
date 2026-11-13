@@ -1,9 +1,9 @@
 # OFTS daily research
 
 Market session: 2026-11-12
-Selected: 149; refreshed: 120; refresh errors: 31
+Selected: 149; refreshed: 120; refresh errors: 29
 Qualified prediction cohorts saved: 25; current coverage: 120/149
-Outcome counts: {'CORPORATE_ACTION_REVIEW': 30, 'INELIGIBLE_DATA': 2110, 'MATURE': 4654, 'MISSING_SESSIONS': 5, 'PENDING': 10016}
+Outcome counts: {'CORPORATE_ACTION_REVIEW': 30, 'INELIGIBLE_DATA': 2110, 'MATURE': 4655, 'MISSING_SESSIONS': 4, 'PENDING': 10016}
 Cycle fingerprints saved: 134/183
 Signal states: BUY=2, SELL=3, NO_TRADE=178
 Cycle ledger: pending entries=2; open positions=37; closed trades=22; SPY pairs=22
@@ -324,5 +324,3 @@ Count: 0 of 110 scored CANDIDATE names
 - ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - GNTA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- ALDF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- KNRX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE

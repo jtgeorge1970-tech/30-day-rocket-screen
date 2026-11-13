@@ -1,8 +1,8 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-13T08:52:05.841903+00:00
-Market as-of: 2026-11-12; qualified cohorts: 25; cohort rows: 3363; attempts retained: 150.
-Outcome counts: {'MATURE': 4654, 'PENDING': 10016, 'MISSING_SESSIONS': 5, 'INELIGIBLE_DATA': 2110, 'CORPORATE_ACTION_REVIEW': 30}.
+Audit UTC: 2026-11-13T11:36:22.995216+00:00
+Market as-of: 2026-11-12; qualified cohorts: 25; cohort rows: 3363; attempts retained: 151.
+Outcome counts: {'MATURE': 4655, 'PENDING': 10016, 'MISSING_SESSIONS': 4, 'INELIGIBLE_DATA': 2110, 'CORPORATE_ACTION_REVIEW': 30}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 120, 'selected': 149}.
 Cycle ledger: {'complete_signal_cohorts': 25, 'pending_entries': 2, 'open_positions': 37, 'closed_trades': 22, 'benchmark_pairs': 22, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
@@ -12,7 +12,7 @@ Rejected candidates are controls. Overlapping horizons are not independent trade
 | Horizon (sessions) | Mature | Pending | Data-ineligible | Other errors | First exit date |
 |---|---:|---:|---:|---:|---|
 | 5 | 2329 | 602 | 422 | 10 | 2026-10-16 |
-| 10 | 1737 | 1188 | 422 | 16 | 2026-10-23 |
+| 10 | 1738 | 1188 | 422 | 15 | 2026-10-23 |
 | 20 | 588 | 2344 | 422 | 9 | 2026-11-06 |
 | 30 | 0 | 2941 | 422 | 0 | 2026-11-20 |
 | 60 | 0 | 2941 | 422 | 0 | 2027-01-06 |
@@ -80,7 +80,5 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - GNTA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- ALDF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- KNRX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

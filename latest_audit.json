@@ -1,14 +1,14 @@
 {
-  "recorded_at": "2026-11-13T08:52:05.841903+00:00",
+  "recorded_at": "2026-11-13T11:36:22.995216+00:00",
   "market_asof": "2026-11-12",
   "qualified_cohorts": 25,
   "all_prediction_files": 34,
-  "attempts": 150,
+  "attempts": 151,
   "cohort_rows": 3363,
   "outcome_counts": {
-    "MATURE": 4654,
+    "MATURE": 4655,
     "PENDING": 10016,
-    "MISSING_SESSIONS": 5,
+    "MISSING_SESSIONS": 4,
     "INELIGIBLE_DATA": 2110,
     "CORPORATE_ACTION_REVIEW": 30
   },
@@ -248,7 +248,8 @@
     "attempts/20261112T084810602920Z.json": "0ccd0d9a8fb12e6caf431935da304df0bd0fd73c00832dc3a733111f41ca86de",
     "attempts/20261112T114525513664Z.json": "8a22d4cbaf1a5f286419696348143d1c774b0c3fa4f2c018ea3ad460e1b3a6bc",
     "attempts/20261113T025249766849Z.json": "5f555263ed1897056c6f99991b247a04301edc826d06369a5480ea00787ddd70",
-    "attempts/20261113T084204352293Z.json": "37ee87bc17689496a761278ffe984bda680c2003e7f41b05b41067faadccc8e7"
+    "attempts/20261113T084204352293Z.json": "37ee87bc17689496a761278ffe984bda680c2003e7f41b05b41067faadccc8e7",
+    "attempts/20261113T112845202139Z.json": "7f858a0f41e0eded4b218d9daa5ff8653e4b4756a0ca756f13f97ac593601e59"
   },
   "control_unchanged": {
     "cursor": 2500,
@@ -281,9 +282,7 @@
       "KVUE",
       "ADIL",
       "CCXI",
-      "GNTA",
-      "ALDF",
-      "KNRX"
+      "GNTA"
     ],
     "last_session": "2026-11-12"
   },
@@ -927,19 +926,18 @@
       "observations": 945,
       "statuses": {
         "INELIGIBLE_DATA": 418,
-        "MATURE": 302,
+        "MATURE": 303,
         "CORPORATE_ACTION_REVIEW": 12,
-        "MISSING_SESSIONS": 1,
         "PENDING": 212
       },
-      "mature": 302,
+      "mature": 303,
       "positive": 91,
-      "nonpositive": 211,
-      "average_net_pct": 17.204048650266927,
+      "nonpositive": 212,
+      "average_net_pct": 16.846903899581527,
       "average_positive_pct": 100.62962088662111,
-      "average_nonpositive_pct": -18.775700513279215,
-      "benchmark_pairs": 302,
-      "average_excess_gross_pct": 18.936010021864693,
+      "average_nonpositive_pct": -19.116432165610018,
+      "benchmark_pairs": 303,
+      "average_excess_gross_pct": 18.57565586613044,
       "worst_adverse_excursion_pct": -95.4878047805397
     },
     {
@@ -1031,11 +1029,11 @@
       "mature": 77,
       "positive": 14,
       "nonpositive": 63,
-      "average_net_pct": -12.363929712553547,
+      "average_net_pct": -12.36545762228189,
       "average_positive_pct": 57.79855846539393,
-      "average_nonpositive_pct": -27.955593752097432,
+      "average_nonpositive_pct": -27.957461197320963,
       "benchmark_pairs": 77,
-      "average_excess_gross_pct": -9.819647215067445,
+      "average_excess_gross_pct": -9.821175124795788,
       "worst_adverse_excursion_pct": -90.00000037252902
     },
     {

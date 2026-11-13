@@ -37431,11 +37431,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-16",
     "end_date": "2026-11-12",
-    "gross_price_return_pct": -38.82352879303138,
-    "net_assumed_return_pct": -39.02352879303138,
+    "gross_price_return_pct": -38.94117784211378,
+    "net_assumed_return_pct": -39.141177842113784,
     "adverse_excursion_pct": -44.99999868519168,
     "benchmark_price_return_pct": -2.0847337593470017,
-    "excess_gross_pct": -36.738795033684376
+    "excess_gross_pct": -36.85644408276678
   },
   {
     "symbol": "COSM",
@@ -121252,9 +121252,14 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "MISSING_SESSIONS",
+    "status": "MATURE",
     "entry_date": "2026-10-30",
-    "end_date": "2026-11-12"
+    "end_date": "2026-11-12",
+    "gross_price_return_pct": -90.81081080740934,
+    "net_assumed_return_pct": -91.01081080740934,
+    "adverse_excursion_pct": -92.1621623628489,
+    "benchmark_price_return_pct": -0.559511641795829,
+    "excess_gross_pct": -90.25129916561352
   },
   {
     "symbol": "KNRX",
