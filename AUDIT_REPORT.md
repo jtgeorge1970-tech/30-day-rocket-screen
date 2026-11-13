@@ -1,7 +1,7 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-13T03:03:45.226531+00:00
-Market as-of: 2026-11-12; qualified cohorts: 25; cohort rows: 3363; attempts retained: 149.
+Audit UTC: 2026-11-13T08:52:05.841903+00:00
+Market as-of: 2026-11-12; qualified cohorts: 25; cohort rows: 3363; attempts retained: 150.
 Outcome counts: {'MATURE': 4654, 'PENDING': 10016, 'MISSING_SESSIONS': 5, 'INELIGIBLE_DATA': 2110, 'CORPORATE_ACTION_REVIEW': 30}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 120, 'selected': 149}.
 Cycle ledger: {'complete_signal_cohorts': 25, 'pending_entries': 2, 'open_positions': 37, 'closed_trades': 22, 'benchmark_pairs': 22, 'review_trades': 0}.
@@ -81,11 +81,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - GNTA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - ALDF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- CCU: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- CLBR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - KNRX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SAGU: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- VECA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

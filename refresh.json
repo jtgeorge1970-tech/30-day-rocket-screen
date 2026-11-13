@@ -1,6 +1,6 @@
 {
   "asof": "2026-11-12",
-  "recorded_at": "2026-11-13T02:52:49.766849+00:00",
+  "recorded_at": "2026-11-13T08:42:04.352293+00:00",
   "symbols": {
     "MWH": {
       "status": "FRESH",
@@ -1194,6 +1194,62 @@
       "latest_date": "2026-11-10",
       "bars": 506
     },
+    "ALDF": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
+      "source": "UNVERIFIED",
+      "provider_ticker": "ALDF",
+      "latest_date": "2026-11-11",
+      "bars": 479
+    },
+    "CCU": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "CCU",
+      "latest_date": "2026-11-12",
+      "bars": 520
+    },
+    "CLBR": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "CLBR",
+      "latest_date": "2026-11-12",
+      "bars": 160
+    },
+    "KNRX": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
+      "source": "UNVERIFIED",
+      "provider_ticker": "KNRX",
+      "latest_date": "2026-11-11",
+      "bars": 283
+    },
+    "RDIB": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "RDIB",
+      "latest_date": "2026-11-12",
+      "bars": 511
+    },
+    "SAGU": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "SAGU",
+      "latest_date": "2026-11-12",
+      "bars": 121
+    },
+    "VECA": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "VECA",
+      "latest_date": "2026-11-12",
+      "bars": 124
+    },
     "A": {
       "status": "FRESH",
       "error": "",
@@ -1849,14 +1905,6 @@
       "provider_ticker": "ALCO",
       "latest_date": "2026-11-12",
       "bars": 513
-    },
-    "ALDF": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
-      "source": "UNVERIFIED",
-      "provider_ticker": "ALDF",
-      "latest_date": "2026-11-11",
-      "bars": 479
     },
     "ALDX": {
       "status": "FRESH",
@@ -4522,14 +4570,6 @@
       "latest_date": "2026-11-12",
       "bars": 520
     },
-    "CCU": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "CCU",
-      "latest_date": "2026-11-11",
-      "bars": 519
-    },
     "CDLX": {
       "status": "FRESH",
       "error": "",
@@ -4937,14 +4977,6 @@
       "provider_ticker": "CLAR",
       "latest_date": "2026-11-12",
       "bars": 507
-    },
-    "CLBR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "CLBR",
-      "latest_date": "2026-11-11",
-      "bars": 159
     },
     "CLBT": {
       "status": "FRESH",
@@ -10477,7 +10509,7 @@
     "KBDC": {
       "status": "FRESH",
       "error": "",
-      "source": "COMPLETE_VERIFIED_15M",
+      "source": "DAILY_PROVIDER",
       "provider_ticker": "KBDC",
       "latest_date": "2026-11-12",
       "bars": 511
@@ -10681,14 +10713,6 @@
       "provider_ticker": "KNDI",
       "latest_date": "2026-11-12",
       "bars": 522
-    },
-    "KNRX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "KNRX",
-      "latest_date": "2026-11-11",
-      "bars": 283
     },
     "KNSA": {
       "status": "FRESH",
@@ -15426,14 +15450,6 @@
       "latest_date": "2026-11-12",
       "bars": 518
     },
-    "RDIB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "RDIB",
-      "latest_date": "2026-11-11",
-      "bars": 510
-    },
     "RDNT": {
       "status": "FRESH",
       "error": "",
@@ -16065,14 +16081,6 @@
       "provider_ticker": "SAFT",
       "latest_date": "2026-11-12",
       "bars": 513
-    },
-    "SAGU": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "SAGU",
-      "latest_date": "2026-11-11",
-      "bars": 120
     },
     "SAIC": {
       "status": "FRESH",
@@ -18769,14 +18777,6 @@
       "provider_ticker": "VCYT",
       "latest_date": "2026-11-12",
       "bars": 502
-    },
-    "VECA": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "VECA",
-      "latest_date": "2026-11-11",
-      "bars": 123
     },
     "VEEE": {
       "status": "FRESH",

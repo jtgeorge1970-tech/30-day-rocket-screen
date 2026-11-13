@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-11-13T03:03:45.226531+00:00",
+  "recorded_at": "2026-11-13T08:52:05.841903+00:00",
   "market_asof": "2026-11-12",
   "qualified_cohorts": 25,
   "all_prediction_files": 34,
-  "attempts": 149,
+  "attempts": 150,
   "cohort_rows": 3363,
   "outcome_counts": {
     "MATURE": 4654,
@@ -247,7 +247,8 @@
     "attempts/20261112T031934793725Z.json": "2d6d01750c22c9043c3cc52d9a2c5ed904b9d504da329809e0ac0db20d6dfb1c",
     "attempts/20261112T084810602920Z.json": "0ccd0d9a8fb12e6caf431935da304df0bd0fd73c00832dc3a733111f41ca86de",
     "attempts/20261112T114525513664Z.json": "8a22d4cbaf1a5f286419696348143d1c774b0c3fa4f2c018ea3ad460e1b3a6bc",
-    "attempts/20261113T025249766849Z.json": "5f555263ed1897056c6f99991b247a04301edc826d06369a5480ea00787ddd70"
+    "attempts/20261113T025249766849Z.json": "5f555263ed1897056c6f99991b247a04301edc826d06369a5480ea00787ddd70",
+    "attempts/20261113T084204352293Z.json": "37ee87bc17689496a761278ffe984bda680c2003e7f41b05b41067faadccc8e7"
   },
   "control_unchanged": {
     "cursor": 2500,
@@ -282,12 +283,7 @@
       "CCXI",
       "GNTA",
       "ALDF",
-      "CCU",
-      "CLBR",
-      "KNRX",
-      "RDIB",
-      "SAGU",
-      "VECA"
+      "KNRX"
     ],
     "last_session": "2026-11-12"
   },
