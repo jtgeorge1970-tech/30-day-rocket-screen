@@ -131745,11 +131745,11 @@
     "status": "MATURE",
     "entry_date": "2026-11-02",
     "end_date": "2026-11-13",
-    "gross_price_return_pct": -82.33244031833291,
-    "net_assumed_return_pct": -82.53244031833292,
+    "gross_price_return_pct": -82.38069770863767,
+    "net_assumed_return_pct": -82.58069770863767,
     "adverse_excursion_pct": -84.18230641402224,
     "benchmark_price_return_pct": -0.6689073682520252,
-    "excess_gross_pct": -81.66353295008089
+    "excess_gross_pct": -81.71179034038565
   },
   {
     "symbol": "SITC",

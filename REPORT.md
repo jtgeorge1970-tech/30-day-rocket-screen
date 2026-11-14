@@ -1,7 +1,7 @@
 # OFTS daily research
 
 Market session: 2026-11-13
-Selected: 154; refreshed: 125; refresh errors: 33
+Selected: 154; refreshed: 125; refresh errors: 30
 Qualified prediction cohorts saved: 26; current coverage: 125/154
 Outcome counts: {'CORPORATE_ACTION_REVIEW': 31, 'INELIGIBLE_DATA': 2280, 'MATURE': 5010, 'MISSING_SESSIONS': 4, 'PENDING': 10260}
 Cycle fingerprints saved: 129/188
@@ -230,11 +230,11 @@ Count: 0 of 110 scored CANDIDATE names
     "score_band": "40-60",
     "observations": 1099,
     "positive_net_pct": 51.137397634212924,
-    "average_net_pct": 0.9045055849544441,
+    "average_net_pct": 0.9044616746811913,
     "average_positive_pct": 10.948377972065696,
-    "average_nonpositive_pct": -9.606958626510211,
+    "average_nonpositive_pct": -9.607048491296625,
     "benchmark_pairs": 1099,
-    "average_excess_pct": 2.553246654366977,
+    "average_excess_pct": 2.5532027440937246,
     "worst_adverse_excursion_pct": -88.15789411768027
   },
   {
@@ -324,7 +324,4 @@ Count: 0 of 110 scored CANDIDATE names
 - ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - GNTA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- ALDF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - INM: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- KAZR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- TCBI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY

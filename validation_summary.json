@@ -174,11 +174,11 @@
     "score_band": "40-60",
     "observations": 1099,
     "positive_net_pct": 51.137397634212924,
-    "average_net_pct": 0.9045055849544441,
+    "average_net_pct": 0.9044616746811913,
     "average_positive_pct": 10.948377972065696,
-    "average_nonpositive_pct": -9.606958626510211,
+    "average_nonpositive_pct": -9.607048491296625,
     "benchmark_pairs": 1099,
-    "average_excess_pct": 2.553246654366977,
+    "average_excess_pct": 2.5532027440937246,
     "worst_adverse_excursion_pct": -88.15789411768027
   },
   {
