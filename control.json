@@ -1,5 +1,5 @@
 {
-  "cursor": 2500,
+  "cursor": 2600,
   "retry": [
     "CBZ",
     "MIMI",
@@ -29,7 +29,15 @@
     "KVUE",
     "ADIL",
     "CCXI",
-    "GNTA"
+    "GNTA",
+    "ALDF",
+    "HUBC",
+    "INM",
+    "KAZR",
+    "MHNC",
+    "NMI",
+    "TCBI",
+    "TY"
   ],
-  "last_session": "2026-11-12"
+  "last_session": "2026-11-13"
 }
