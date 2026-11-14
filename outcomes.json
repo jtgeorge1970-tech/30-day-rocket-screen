@@ -37431,11 +37431,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-16",
     "end_date": "2026-11-12",
-    "gross_price_return_pct": -38.94117784211378,
-    "net_assumed_return_pct": -39.141177842113784,
+    "gross_price_return_pct": -38.82352879303138,
+    "net_assumed_return_pct": -39.02352879303138,
     "adverse_excursion_pct": -44.99999868519168,
     "benchmark_price_return_pct": -2.0847337593470017,
-    "excess_gross_pct": -36.85644408276678
+    "excess_gross_pct": -36.738795033684376
   },
   {
     "symbol": "COSM",

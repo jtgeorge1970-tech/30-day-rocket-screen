@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-11-14T02:49:03.179644+00:00",
+  "recorded_at": "2026-11-14T08:05:15.147069+00:00",
   "market_asof": "2026-11-13",
   "qualified_cohorts": 26,
   "all_prediction_files": 35,
-  "attempts": 152,
+  "attempts": 153,
   "cohort_rows": 3517,
   "outcome_counts": {
     "MATURE": 5010,
@@ -253,7 +253,8 @@
     "attempts/20261113T025249766849Z.json": "5f555263ed1897056c6f99991b247a04301edc826d06369a5480ea00787ddd70",
     "attempts/20261113T084204352293Z.json": "37ee87bc17689496a761278ffe984bda680c2003e7f41b05b41067faadccc8e7",
     "attempts/20261113T112845202139Z.json": "7f858a0f41e0eded4b218d9daa5ff8653e4b4756a0ca756f13f97ac593601e59",
-    "attempts/20261114T024024038206Z.json": "b8657edca8d5e3d1e071daa9c7a0aef971ccd3b6bea6982d557b1a4412c99e89"
+    "attempts/20261114T024024038206Z.json": "b8657edca8d5e3d1e071daa9c7a0aef971ccd3b6bea6982d557b1a4412c99e89",
+    "attempts/20261114T075747655648Z.json": "4c5e70dad99fe0923f899193ef4b83b277e0381343b26b3853bda38a23820c77"
   },
   "control_unchanged": {
     "cursor": 2600,
@@ -288,13 +289,9 @@
       "CCXI",
       "GNTA",
       "ALDF",
-      "HUBC",
       "INM",
       "KAZR",
-      "MHNC",
-      "NMI",
-      "TCBI",
-      "TY"
+      "TCBI"
     ],
     "last_session": "2026-11-13"
   },
@@ -1041,11 +1038,11 @@
       "mature": 95,
       "positive": 19,
       "nonpositive": 76,
-      "average_net_pct": -13.0176388772936,
+      "average_net_pct": -13.016400466250628,
       "average_positive_pct": 50.679682036865195,
-      "average_nonpositive_pct": -28.941969105833294,
+      "average_nonpositive_pct": -28.940421092029577,
       "benchmark_pairs": 95,
-      "average_excess_gross_pct": -10.5999484230601,
+      "average_excess_gross_pct": -10.598710012017127,
       "worst_adverse_excursion_pct": -90.39301324251217
     },
     {

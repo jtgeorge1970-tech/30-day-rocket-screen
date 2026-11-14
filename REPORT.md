@@ -1,7 +1,7 @@
 # OFTS daily research
 
 Market session: 2026-11-13
-Selected: 154; refreshed: 125; refresh errors: 37
+Selected: 154; refreshed: 125; refresh errors: 33
 Qualified prediction cohorts saved: 26; current coverage: 125/154
 Outcome counts: {'CORPORATE_ACTION_REVIEW': 31, 'INELIGIBLE_DATA': 2280, 'MATURE': 5010, 'MISSING_SESSIONS': 4, 'PENDING': 10260}
 Cycle fingerprints saved: 129/188
@@ -325,10 +325,6 @@ Count: 0 of 110 scored CANDIDATE names
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - GNTA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - ALDF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- HUBC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SPLIT_REQUIRES_DAILY_ACTION_AUDIT
 - INM: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - KAZR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- MHNC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- NMI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - TCBI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- TY: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
