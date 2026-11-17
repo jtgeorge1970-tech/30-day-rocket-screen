@@ -1,7 +1,7 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-17T09:48:11.300990+00:00
-Market as-of: 2026-11-16; qualified cohorts: 27; cohort rows: 3672; attempts retained: 156.
+Audit UTC: 2026-11-17T12:34:54.076278+00:00
+Market as-of: 2026-11-16; qualified cohorts: 27; cohort rows: 3672; attempts retained: 157.
 Outcome counts: {'MATURE': 5359, 'PENDING': 10503, 'MISSING_SESSIONS': 4, 'INELIGIBLE_DATA': 2460, 'CORPORATE_ACTION_REVIEW': 34}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 127, 'selected': 155}.
 Cycle ledger: {'complete_signal_cohorts': 27, 'pending_entries': 0, 'open_positions': 38, 'closed_trades': 24, 'benchmark_pairs': 24, 'review_trades': 0}.
