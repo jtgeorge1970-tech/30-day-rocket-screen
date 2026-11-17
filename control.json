@@ -1,5 +1,5 @@
 {
-  "cursor": 2600,
+  "cursor": 2700,
   "retry": [
     "CBZ",
     "MIMI",
@@ -9,7 +9,6 @@
     "LRHC",
     "WFC.PRL",
     "INDV",
-    "VSME",
     "MAMK",
     "MS.PRF",
     "PSKY",
@@ -30,7 +29,16 @@
     "ADIL",
     "CCXI",
     "GNTA",
-    "INM"
+    "INM",
+    "ALDF",
+    "BFS",
+    "EMBJ",
+    "KNRX",
+    "MGPI",
+    "MHNC",
+    "RDIB",
+    "TCBI",
+    "TGL"
   ],
-  "last_session": "2026-11-13"
+  "last_session": "2026-11-16"
 }
