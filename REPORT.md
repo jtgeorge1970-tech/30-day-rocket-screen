@@ -1,8 +1,8 @@
 # OFTS daily research
 
 Market session: 2026-11-16
-Selected: 155; refreshed: 126; refresh errors: 38
-Qualified prediction cohorts saved: 27; current coverage: 126/155
+Selected: 155; refreshed: 127; refresh errors: 32
+Qualified prediction cohorts saved: 27; current coverage: 127/155
 Outcome counts: {'CORPORATE_ACTION_REVIEW': 34, 'INELIGIBLE_DATA': 2460, 'MATURE': 5359, 'MISSING_SESSIONS': 4, 'PENDING': 10503}
 Cycle fingerprints saved: 129/190
 Signal states: BUY=0, SELL=11, NO_TRADE=179
@@ -323,13 +323,7 @@ Count: 0 of 107 scored CANDIDATE names
 - ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - GNTA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- INM: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - ALDF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- BFS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - EMBJ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SPLIT_REQUIRES_DAILY_ACTION_AUDIT
-- KNRX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - MGPI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- MHNC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- TCBI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - TGL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE

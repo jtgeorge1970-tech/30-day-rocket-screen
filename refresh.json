@@ -1,6 +1,6 @@
 {
   "asof": "2026-11-16",
-  "recorded_at": "2026-11-17T04:45:47.203008+00:00",
+  "recorded_at": "2026-11-17T09:42:30.746719+00:00",
   "symbols": {
     "MWH": {
       "status": "FRESH",
@@ -1235,12 +1235,84 @@
       "bars": 506
     },
     "INM": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "INM",
+      "latest_date": "2026-11-16",
+      "bars": 513
+    },
+    "ALDF": {
       "status": "ERROR",
       "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
       "source": "UNVERIFIED",
-      "provider_ticker": "INM",
-      "latest_date": "2026-11-12",
-      "bars": 511
+      "provider_ticker": "ALDF",
+      "latest_date": "2026-11-13",
+      "bars": 481
+    },
+    "BFS": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "BFS",
+      "latest_date": "2026-11-16",
+      "bars": 502
+    },
+    "EMBJ": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SPLIT_REQUIRES_DAILY_ACTION_AUDIT",
+      "source": "UNVERIFIED",
+      "provider_ticker": "EMBJ",
+      "latest_date": "2026-11-13",
+      "bars": 523
+    },
+    "KNRX": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "KNRX",
+      "latest_date": "2026-11-16",
+      "bars": 286
+    },
+    "MGPI": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
+      "source": "UNVERIFIED",
+      "provider_ticker": "MGPI",
+      "latest_date": "2026-11-13",
+      "bars": 514
+    },
+    "MHNC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "MHNC",
+      "latest_date": "2026-11-16",
+      "bars": 515
+    },
+    "RDIB": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "RDIB",
+      "latest_date": "2026-11-16",
+      "bars": 513
+    },
+    "TCBI": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "TCBI",
+      "latest_date": "2026-11-16",
+      "bars": 517
+    },
+    "TGL": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
+      "source": "UNVERIFIED",
+      "provider_ticker": "TGL",
+      "latest_date": "2026-11-13",
+      "bars": 516
     },
     "A": {
       "status": "FRESH",
@@ -1977,14 +2049,6 @@
       "provider_ticker": "ALCO",
       "latest_date": "2026-11-16",
       "bars": 515
-    },
-    "ALDF": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
-      "source": "UNVERIFIED",
-      "provider_ticker": "ALDF",
-      "latest_date": "2026-11-13",
-      "bars": 481
     },
     "ALDX": {
       "status": "FRESH",
@@ -3633,14 +3697,6 @@
       "provider_ticker": "BFLY",
       "latest_date": "2026-11-16",
       "bars": 508
-    },
-    "BFS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "BFS",
-      "latest_date": "2026-11-13",
-      "bars": 501
     },
     "BGDE": {
       "status": "FRESH",
@@ -7337,14 +7393,6 @@
       "provider_ticker": "EMBC",
       "latest_date": "2026-11-16",
       "bars": 509
-    },
-    "EMBJ": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SPLIT_REQUIRES_DAILY_ACTION_AUDIT",
-      "source": "UNVERIFIED",
-      "provider_ticker": "EMBJ",
-      "latest_date": "2026-11-13",
-      "bars": 523
     },
     "EME": {
       "status": "FRESH",
@@ -11498,14 +11546,6 @@
       "latest_date": "2026-11-16",
       "bars": 524
     },
-    "KNRX": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "KNRX",
-      "latest_date": "2026-11-13",
-      "bars": 285
-    },
     "KNSA": {
       "status": "FRESH",
       "error": "",
@@ -12890,14 +12930,6 @@
       "latest_date": "2026-11-16",
       "bars": 514
     },
-    "MGPI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
-      "source": "UNVERIFIED",
-      "provider_ticker": "MGPI",
-      "latest_date": "2026-11-13",
-      "bars": 514
-    },
     "MGRC": {
       "status": "FRESH",
       "error": "",
@@ -12945,14 +12977,6 @@
       "provider_ticker": "MHK",
       "latest_date": "2026-11-16",
       "bars": 503
-    },
-    "MHNC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "MHNC",
-      "latest_date": "2026-11-13",
-      "bars": 514
     },
     "MHO": {
       "status": "FRESH",
@@ -16634,14 +16658,6 @@
       "latest_date": "2026-11-16",
       "bars": 520
     },
-    "RDIB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "RDIB",
-      "latest_date": "2026-11-13",
-      "bars": 512
-    },
     "RDNT": {
       "status": "FRESH",
       "error": "",
@@ -18946,14 +18962,6 @@
       "latest_date": "2026-11-16",
       "bars": 527
     },
-    "TCBI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
-      "source": "UNVERIFIED",
-      "provider_ticker": "TCBI",
-      "latest_date": "2026-11-13",
-      "bars": 516
-    },
     "TCBK": {
       "status": "FRESH",
       "error": "",
@@ -19153,14 +19161,6 @@
       "provider_ticker": "TGHL",
       "latest_date": "2026-11-16",
       "bars": 307
-    },
-    "TGL": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "TGL",
-      "latest_date": "2026-11-13",
-      "bars": 516
     },
     "TGS": {
       "status": "FRESH",

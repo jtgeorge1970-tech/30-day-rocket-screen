@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-11-17T04:52:58.847929+00:00",
+  "recorded_at": "2026-11-17T09:48:11.300990+00:00",
   "market_asof": "2026-11-16",
   "qualified_cohorts": 27,
   "all_prediction_files": 36,
-  "attempts": 155,
+  "attempts": 156,
   "cohort_rows": 3672,
   "outcome_counts": {
     "MATURE": 5359,
@@ -259,7 +259,8 @@
     "attempts/20261114T024024038206Z.json": "b8657edca8d5e3d1e071daa9c7a0aef971ccd3b6bea6982d557b1a4412c99e89",
     "attempts/20261114T075747655648Z.json": "4c5e70dad99fe0923f899193ef4b83b277e0381343b26b3853bda38a23820c77",
     "attempts/20261114T105156430631Z.json": "ccfe41087217ce8148592ab80871b6bc39b5b1ad6699b9b5f955d2cfd28a12e2",
-    "attempts/20261117T044547203008Z.json": "2e27eace21598f5f75b473f54210adf8d884c18e53d88caa6d1b7764c5fad8f5"
+    "attempts/20261117T044547203008Z.json": "2e27eace21598f5f75b473f54210adf8d884c18e53d88caa6d1b7764c5fad8f5",
+    "attempts/20261117T094230746719Z.json": "9699fdf3279019e71d74f8ea4ef420c0100b3a675138cd0642635993ccfaa577"
   },
   "control_unchanged": {
     "cursor": 2700,
@@ -292,15 +293,9 @@
       "ADIL",
       "CCXI",
       "GNTA",
-      "INM",
       "ALDF",
-      "BFS",
       "EMBJ",
-      "KNRX",
       "MGPI",
-      "MHNC",
-      "RDIB",
-      "TCBI",
       "TGL"
     ],
     "last_session": "2026-11-16"
@@ -308,7 +303,7 @@
   "freshness_gate": {
     "passed": true,
     "required_stale": [],
-    "fresh": 126,
+    "fresh": 127,
     "selected": 155
   },
   "cycle_summary": {

@@ -1,9 +1,9 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-17T04:52:58.847929+00:00
-Market as-of: 2026-11-16; qualified cohorts: 27; cohort rows: 3672; attempts retained: 155.
+Audit UTC: 2026-11-17T09:48:11.300990+00:00
+Market as-of: 2026-11-16; qualified cohorts: 27; cohort rows: 3672; attempts retained: 156.
 Outcome counts: {'MATURE': 5359, 'PENDING': 10503, 'MISSING_SESSIONS': 4, 'INELIGIBLE_DATA': 2460, 'CORPORATE_ACTION_REVIEW': 34}.
-Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 126, 'selected': 155}.
+Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 127, 'selected': 155}.
 Cycle ledger: {'complete_signal_cohorts': 27, 'pending_entries': 0, 'open_positions': 38, 'closed_trades': 24, 'benchmark_pairs': 24, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
 Hypothetical next-open entry, price returns excluding dividends, 0.20% round-trip costs.
@@ -79,15 +79,9 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - ADIL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CCXI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - GNTA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- INM: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - ALDF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- BFS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - EMBJ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SPLIT_REQUIRES_DAILY_ACTION_AUDIT
-- KNRX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - MGPI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- MHNC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- TCBI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - TGL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.
