@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-11-18T04:00:01.210775+00:00",
+  "recorded_at": "2026-11-18T09:10:19.581205+00:00",
   "market_asof": "2026-11-17",
   "qualified_cohorts": 28,
   "all_prediction_files": 37,
-  "attempts": 158,
+  "attempts": 159,
   "cohort_rows": 3829,
   "outcome_counts": {
     "MATURE": 5718,
@@ -265,12 +265,12 @@
     "attempts/20261117T044547203008Z.json": "2e27eace21598f5f75b473f54210adf8d884c18e53d88caa6d1b7764c5fad8f5",
     "attempts/20261117T094230746719Z.json": "9699fdf3279019e71d74f8ea4ef420c0100b3a675138cd0642635993ccfaa577",
     "attempts/20261117T122309837076Z.json": "dd3db8d4ac747c7b4efed7048ce359264dd7c13af14e13cd58dc8fcd673d81ea",
-    "attempts/20261118T035056942215Z.json": "d1c4c8442b8e99abc4d27ce0f185122af4c3a9f2790e89f5f832265ea46115fc"
+    "attempts/20261118T035056942215Z.json": "d1c4c8442b8e99abc4d27ce0f185122af4c3a9f2790e89f5f832265ea46115fc",
+    "attempts/20261118T090210407670Z.json": "c7146ddd0d75e73fa99704c1c52075f1d1ce22215d75fcbf81c5ead5fea3a599"
   },
   "control_unchanged": {
     "cursor": 2800,
     "retry": [
-      "BIII",
       "ACVA",
       "CBZ",
       "MIMI",
@@ -302,15 +302,7 @@
       "GNTA",
       "ALDF",
       "MGPI",
-      "ACH",
-      "BFS",
-      "CLBR",
-      "INM",
       "ITGR",
-      "MHNC",
-      "RDIB",
-      "TCBI",
-      "UHAL.B",
       "VSME"
     ],
     "last_session": "2026-11-17"
@@ -318,7 +310,7 @@
   "freshness_gate": {
     "passed": true,
     "required_stale": [],
-    "fresh": 125,
+    "fresh": 126,
     "selected": 157
   },
   "cycle_summary": {

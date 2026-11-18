@@ -1,6 +1,6 @@
 {
   "asof": "2026-11-17",
-  "recorded_at": "2026-11-18T03:50:56.942215+00:00",
+  "recorded_at": "2026-11-18T09:02:10.407670+00:00",
   "symbols": {
     "MWH": {
       "status": "FRESH",
@@ -523,12 +523,12 @@
       "bars": 501
     },
     "BIII": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
       "provider_ticker": "BIII",
-      "latest_date": "2026-11-16",
-      "bars": 202
+      "latest_date": "2026-11-17",
+      "bars": 203
     },
     "SQNS": {
       "status": "FRESH",
@@ -1258,6 +1258,86 @@
       "latest_date": "2026-11-17",
       "bars": 517
     },
+    "ACH": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "ACH",
+      "latest_date": "2026-11-17",
+      "bars": 501
+    },
+    "BFS": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "BFS",
+      "latest_date": "2026-11-17",
+      "bars": 503
+    },
+    "CLBR": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "CLBR",
+      "latest_date": "2026-11-17",
+      "bars": 163
+    },
+    "INM": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "INM",
+      "latest_date": "2026-11-17",
+      "bars": 514
+    },
+    "ITGR": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
+      "source": "UNVERIFIED",
+      "provider_ticker": "ITGR",
+      "latest_date": "2026-11-16",
+      "bars": 504
+    },
+    "MHNC": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "MHNC",
+      "latest_date": "2026-11-17",
+      "bars": 516
+    },
+    "RDIB": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "RDIB",
+      "latest_date": "2026-11-17",
+      "bars": 514
+    },
+    "TCBI": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "TCBI",
+      "latest_date": "2026-11-17",
+      "bars": 518
+    },
+    "UHAL.B": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "UHAL-B",
+      "latest_date": "2026-11-17",
+      "bars": 516
+    },
+    "VSME": {
+      "status": "ERROR",
+      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
+      "source": "UNVERIFIED",
+      "provider_ticker": "VSME",
+      "latest_date": "2026-11-16",
+      "bars": 86
+    },
     "A": {
       "status": "FRESH",
       "error": "",
@@ -1449,14 +1529,6 @@
       "provider_ticker": "ACGL",
       "latest_date": "2026-11-17",
       "bars": 526
-    },
-    "ACH": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "ACH",
-      "latest_date": "2026-11-16",
-      "bars": 500
     },
     "ACHC": {
       "status": "FRESH",
@@ -3730,14 +3802,6 @@
       "latest_date": "2026-11-17",
       "bars": 501
     },
-    "BFS": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "BFS",
-      "latest_date": "2026-11-16",
-      "bars": 502
-    },
     "BGDE": {
       "status": "FRESH",
       "error": "",
@@ -5441,14 +5505,6 @@
       "provider_ticker": "CLAR",
       "latest_date": "2026-11-17",
       "bars": 510
-    },
-    "CLBR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "CLBR",
-      "latest_date": "2026-11-16",
-      "bars": 162
     },
     "CLBT": {
       "status": "FRESH",
@@ -11010,14 +11066,6 @@
       "latest_date": "2026-11-17",
       "bars": 471
     },
-    "INM": {
-      "status": "ERROR",
-      "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "INM",
-      "latest_date": "2026-11-16",
-      "bars": 513
-    },
     "INMB": {
       "status": "FRESH",
       "error": "",
@@ -11337,14 +11385,6 @@
       "provider_ticker": "ITG",
       "latest_date": "2026-11-17",
       "bars": 98
-    },
-    "ITGR": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "ITGR",
-      "latest_date": "2026-11-16",
-      "bars": 504
     },
     "ITOC": {
       "status": "FRESH",
@@ -13393,14 +13433,6 @@
       "provider_ticker": "MHK",
       "latest_date": "2026-11-17",
       "bars": 504
-    },
-    "MHNC": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "MHNC",
-      "latest_date": "2026-11-16",
-      "bars": 515
     },
     "MHO": {
       "status": "FRESH",
@@ -17234,14 +17266,6 @@
       "latest_date": "2026-11-17",
       "bars": 521
     },
-    "RDIB": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "RDIB",
-      "latest_date": "2026-11-16",
-      "bars": 513
-    },
     "RDNT": {
       "status": "FRESH",
       "error": "",
@@ -19650,14 +19674,6 @@
       "latest_date": "2026-11-17",
       "bars": 528
     },
-    "TCBI": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
-      "source": "UNVERIFIED",
-      "provider_ticker": "TCBI",
-      "latest_date": "2026-11-16",
-      "bars": 517
-    },
     "TCBK": {
       "status": "FRESH",
       "error": "",
@@ -20682,14 +20698,6 @@
       "latest_date": "2026-11-17",
       "bars": 511
     },
-    "UHAL.B": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
-      "source": "UNVERIFIED",
-      "provider_ticker": "UHAL-B",
-      "latest_date": "2026-11-16",
-      "bars": 515
-    },
     "UI": {
       "status": "FRESH",
       "error": "",
@@ -21337,14 +21345,6 @@
       "provider_ticker": "VSH",
       "latest_date": "2026-11-17",
       "bars": 503
-    },
-    "VSME": {
-      "status": "ERROR",
-      "error": "ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY",
-      "source": "UNVERIFIED",
-      "provider_ticker": "VSME",
-      "latest_date": "2026-11-16",
-      "bars": 86
     },
     "VST": {
       "status": "FRESH",

@@ -1,9 +1,9 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-18T04:00:01.210775+00:00
-Market as-of: 2026-11-17; qualified cohorts: 28; cohort rows: 3829; attempts retained: 158.
+Audit UTC: 2026-11-18T09:10:19.581205+00:00
+Market as-of: 2026-11-17; qualified cohorts: 28; cohort rows: 3829; attempts retained: 159.
 Outcome counts: {'MATURE': 5718, 'PENDING': 10758, 'MISSING_SESSIONS': 5, 'INELIGIBLE_DATA': 2630, 'CORPORATE_ACTION_REVIEW': 34}.
-Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 125, 'selected': 157}.
+Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 126, 'selected': 157}.
 Cycle ledger: {'complete_signal_cohorts': 28, 'pending_entries': 0, 'open_positions': 33, 'closed_trades': 29, 'benchmark_pairs': 29, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
 Hypothetical next-open entry, price returns excluding dividends, 0.20% round-trip costs.
@@ -51,7 +51,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 | ASO | 56.547 | CANDIDATE |
 
 ## Source failures
-- BIII: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - ACVA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CBZ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - MIMI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
@@ -83,15 +82,7 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - GNTA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - ALDF: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - MGPI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- ACH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- BFS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- CLBR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- INM: ValueError: EMPTY_PROVIDER_RESPONSE
 - ITGR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- MHNC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- TCBI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- UHAL.B: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - VSME: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

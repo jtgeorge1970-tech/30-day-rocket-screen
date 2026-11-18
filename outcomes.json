@@ -191591,7 +191591,7 @@
     "end_date": "2026-11-17",
     "gross_price_return_pct": -2.0352782389576163,
     "net_assumed_return_pct": -2.2352782389576165,
-    "adverse_excursion_pct": -2.4151951872493638,
+    "adverse_excursion_pct": -2.6865614783261993,
     "benchmark_price_return_pct": -3.2188141839963214,
     "excess_gross_pct": 1.183535945038705
   },
@@ -192011,7 +192011,7 @@
     "end_date": "2026-11-17",
     "gross_price_return_pct": -3.062114928626558,
     "net_assumed_return_pct": -3.2621149286265583,
-    "adverse_excursion_pct": -3.759117615713037,
+    "adverse_excursion_pct": -3.762032315791508,
     "benchmark_price_return_pct": -3.2188141839963214,
     "excess_gross_pct": 0.15669925536976326
   },
