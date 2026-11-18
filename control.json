@@ -1,6 +1,8 @@
 {
-  "cursor": 2700,
+  "cursor": 2800,
   "retry": [
+    "BIII",
+    "ACVA",
     "CBZ",
     "MIMI",
     "BZH",
@@ -30,9 +32,17 @@
     "CCXI",
     "GNTA",
     "ALDF",
-    "EMBJ",
     "MGPI",
-    "TGL"
+    "ACH",
+    "BFS",
+    "CLBR",
+    "INM",
+    "ITGR",
+    "MHNC",
+    "RDIB",
+    "TCBI",
+    "UHAL.B",
+    "VSME"
   ],
-  "last_session": "2026-11-16"
+  "last_session": "2026-11-17"
 }
