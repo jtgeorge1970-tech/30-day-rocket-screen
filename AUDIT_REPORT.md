@@ -1,54 +1,54 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-18T12:18:28.252229+00:00
-Market as-of: 2026-11-17; qualified cohorts: 28; cohort rows: 3829; attempts retained: 160.
-Outcome counts: {'MATURE': 5718, 'PENDING': 10758, 'MISSING_SESSIONS': 5, 'INELIGIBLE_DATA': 2630, 'CORPORATE_ACTION_REVIEW': 34}.
-Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 126, 'selected': 157}.
-Cycle ledger: {'complete_signal_cohorts': 28, 'pending_entries': 0, 'open_positions': 33, 'closed_trades': 29, 'benchmark_pairs': 29, 'review_trades': 0}.
+Audit UTC: 2026-11-19T04:00:36.828132+00:00
+Market as-of: 2026-11-18; qualified cohorts: 29; cohort rows: 3987; attempts retained: 161.
+Outcome counts: {'MATURE': 6067, 'PENDING': 10984, 'MISSING_SESSIONS': 7, 'INELIGIBLE_DATA': 2840, 'CORPORATE_ACTION_REVIEW': 37}.
+Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 125, 'selected': 158}.
+Cycle ledger: {'complete_signal_cohorts': 29, 'pending_entries': 2, 'open_positions': 28, 'closed_trades': 34, 'benchmark_pairs': 34, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
 Hypothetical next-open entry, price returns excluding dividends, 0.20% round-trip costs.
 Rejected candidates are controls. Overlapping horizons are not independent trades.
 
 | Horizon (sessions) | Mature | Pending | Data-ineligible | Other errors | First exit date |
 |---|---:|---:|---:|---:|---|
-| 5 | 2694 | 599 | 526 | 10 | 2026-10-16 |
-| 10 | 2089 | 1197 | 526 | 17 | 2026-10-23 |
-| 20 | 935 | 2356 | 526 | 12 | 2026-11-06 |
-| 30 | 0 | 3303 | 526 | 0 | 2026-11-20 |
-| 60 | 0 | 3303 | 526 | 0 | 2027-01-06 |
+| 5 | 2813 | 595 | 568 | 11 | 2026-10-16 |
+| 10 | 2205 | 1195 | 568 | 19 | 2026-10-23 |
+| 20 | 1049 | 2356 | 568 | 14 | 2026-11-06 |
+| 30 | 0 | 3419 | 568 | 0 | 2026-11-20 |
+| 60 | 0 | 3419 | 568 | 0 | 2027-01-06 |
 
 By model, horizon and score band: see latest_audit.json. Unavailable average gains/losses, net returns, adverse excursions and SPY comparisons are null, not zero.
 
 ## Frozen v2.3 baseline quality leaders (not current keepers or BUY recommendations)
-Cohort recorded: 2026-11-18T03:59:56.278439+00:00; model: a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b.
-Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, 'observed_min': 12.969752731266423, 'observed_max': 68.28982991323286, 'scored_rows': 102, 'distribution': {'BELOW_40': 13, '40_TO_49_999': 39, '50_TO_59_999': 40, '60_TO_69_999': 10, '70_TO_79_999': 0, '80_TO_89_999': 0, '90_TO_100': 0}, 'validated_buy_threshold': None, 'system_actionability_gate': 'RESEARCH_ONLY_NO_GO', 'gate_reason': 'OUT_OF_SAMPLE_PREDICTIVE_VALIDATION_NOT_VERIFIED'}.
+Cohort recorded: 2026-11-19T04:00:30.789982+00:00; model: a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b.
+Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, 'observed_min': 9.280062252891744, 'observed_max': 68.2503810873324, 'scored_rows': 92, 'distribution': {'BELOW_40': 14, '40_TO_49_999': 36, '50_TO_59_999': 32, '60_TO_69_999': 10, '70_TO_79_999': 0, '80_TO_89_999': 0, '90_TO_100': 0}, 'validated_buy_threshold': None, 'system_actionability_gate': 'RESEARCH_ONLY_NO_GO', 'gate_reason': 'OUT_OF_SAMPLE_PREDICTIVE_VALIDATION_NOT_VERIFIED'}.
 | Symbol | Frozen score | Frozen classification |
 |---|---:|---|
-| MWH | 68.290 | CANDIDATE |
-| S | 63.358 | CANDIDATE |
-| AKAM | 63.188 | CANDIDATE |
-| WRBY | 63.001 | CANDIDATE |
-| DXC | 62.373 | CANDIDATE |
-| CACC | 61.494 | CANDIDATE |
-| SPGI | 60.878 | CANDIDATE |
-| SKY | 60.809 | CANDIDATE |
-| TDY | 60.785 | CANDIDATE |
-| SGML | 60.191 | CANDIDATE |
-| TT | 59.984 | CANDIDATE |
-| ESNT | 59.494 | CANDIDATE |
-| METCB | 59.293 | CANDIDATE |
-| OBE | 59.083 | CANDIDATE |
-| HLIT | 58.528 | CANDIDATE |
-| ATGL | 58.364 | CANDIDATE |
-| ECG | 57.911 | CANDIDATE |
-| CRDO | 57.416 | CANDIDATE |
-| STRZ | 57.411 | CANDIDATE |
-| MESO | 57.247 | CANDIDATE |
-| TLN | 57.179 | CANDIDATE |
-| BFAM | 56.944 | CANDIDATE |
-| CD | 56.835 | CANDIDATE |
-| CCOI | 56.599 | CANDIDATE |
-| ASO | 56.547 | CANDIDATE |
+| MWH | 68.250 | CANDIDATE |
+| CACC | 65.847 | CANDIDATE |
+| S | 63.205 | CANDIDATE |
+| WRBY | 62.920 | CANDIDATE |
+| OBE | 62.718 | CANDIDATE |
+| PLAB | 61.872 | CANDIDATE |
+| SPGI | 60.926 | CANDIDATE |
+| TDY | 60.711 | CANDIDATE |
+| MIR | 60.646 | CANDIDATE |
+| SGML | 60.189 | CANDIDATE |
+| ESNT | 59.517 | CANDIDATE |
+| MESO | 59.288 | CANDIDATE |
+| METCB | 59.221 | CANDIDATE |
+| ATGL | 58.323 | CANDIDATE |
+| TT | 58.102 | CANDIDATE |
+| ECG | 57.910 | CANDIDATE |
+| XYL | 57.763 | CANDIDATE |
+| CRDO | 57.464 | CANDIDATE |
+| STRZ | 57.382 | CANDIDATE |
+| CLSK | 57.338 | CANDIDATE |
+| AKAM | 57.197 | CANDIDATE |
+| TLN | 57.164 | CANDIDATE |
+| HLIT | 57.015 | CANDIDATE |
+| BFAM | 56.948 | CANDIDATE |
+| CD | 56.773 | CANDIDATE |
 
 ## Source failures
 - ACVA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
@@ -84,5 +84,13 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - MGPI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - ITGR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - VSME: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- GNS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- IBO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- INM: ValueError: EMPTY_PROVIDER_RESPONSE
+- MKDW: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- MTAL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SPWR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SPLIT_REQUIRES_DAILY_ACTION_AUDIT
+- TCBI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

@@ -1,5 +1,5 @@
 {
-  "cursor": 2800,
+  "cursor": 2900,
   "retry": [
     "ACVA",
     "CBZ",
@@ -33,7 +33,15 @@
     "ALDF",
     "MGPI",
     "ITGR",
-    "VSME"
+    "VSME",
+    "GNS",
+    "IBO",
+    "INM",
+    "MKDW",
+    "MTAL",
+    "RDIB",
+    "SPWR",
+    "TCBI"
   ],
-  "last_session": "2026-11-17"
+  "last_session": "2026-11-18"
 }
