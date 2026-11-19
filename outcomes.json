@@ -78636,11 +78636,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-22",
     "end_date": "2026-11-18",
-    "gross_price_return_pct": 0.43859817901739095,
-    "net_assumed_return_pct": 0.23859817901739094,
+    "gross_price_return_pct": 0.35087687010102453,
+    "net_assumed_return_pct": 0.15087687010102452,
     "adverse_excursion_pct": -0.8771879924703185,
     "benchmark_price_return_pct": -4.719650187325697,
-    "excess_gross_pct": 5.158248366343088
+    "excess_gross_pct": 5.070527057426721
   },
   {
     "symbol": "LEO",

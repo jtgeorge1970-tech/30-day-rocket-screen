@@ -1,7 +1,7 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-19T04:00:36.828132+00:00
-Market as-of: 2026-11-18; qualified cohorts: 29; cohort rows: 3987; attempts retained: 161.
+Audit UTC: 2026-11-19T09:38:33.427716+00:00
+Market as-of: 2026-11-18; qualified cohorts: 29; cohort rows: 3987; attempts retained: 162.
 Outcome counts: {'MATURE': 6067, 'PENDING': 10984, 'MISSING_SESSIONS': 7, 'INELIGIBLE_DATA': 2840, 'CORPORATE_ACTION_REVIEW': 37}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 125, 'selected': 158}.
 Cycle ledger: {'complete_signal_cohorts': 29, 'pending_entries': 2, 'open_positions': 28, 'closed_trades': 34, 'benchmark_pairs': 34, 'review_trades': 0}.
@@ -84,13 +84,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - MGPI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - ITGR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - VSME: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- GNS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - IBO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- INM: ValueError: EMPTY_PROVIDER_RESPONSE
-- MKDW: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- MTAL: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SPWR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SPLIT_REQUIRES_DAILY_ACTION_AUDIT
-- TCBI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.
