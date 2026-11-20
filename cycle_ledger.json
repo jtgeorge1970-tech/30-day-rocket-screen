@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-19T12:12:39.425511+00:00",
+  "generated_at": "2026-11-20T03:57:04.267416+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -24,7 +24,7 @@
     },
     {
       "symbol": "AKAM",
-      "status": "PENDING_ENTRY",
+      "status": "OPEN",
       "entry_signal_date": "2026-11-18",
       "planned_entry_date": "2026-11-19",
       "entry_score": 57.19720014883287,
@@ -37,7 +37,9 @@
         "amplitude_consistency": 63.19376614259791,
         "confidence": "MEDIUM"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "entry_date": "2026-11-19",
+      "entry_open": 93.33999633789062
     },
     {
       "symbol": "AOMR",
@@ -340,27 +342,6 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-11-11",
       "entry_open": 11.8100004196167
-    },
-    {
-      "symbol": "MEOH",
-      "status": "OPEN_PENDING_EXIT",
-      "entry_signal_date": "2026-11-13",
-      "planned_entry_date": "2026-11-16",
-      "entry_score": 42.34863314455705,
-      "cycle": {
-        "cycle_sessions": 26,
-        "median_swing_pct": 16.071273409907384,
-        "completed_cycle_intervals": 29,
-        "confirmed_turns": 31,
-        "timing_consistency": 16.017883870967747,
-        "amplitude_consistency": 43.09674976588001,
-        "confidence": "LOW"
-      },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-      "entry_date": "2026-11-16",
-      "entry_open": 69.75,
-      "exit_signal_date": "2026-11-18",
-      "planned_exit_date": "2026-11-19"
     },
     {
       "symbol": "MIRM",
@@ -1660,6 +1641,38 @@
       "missed_observed_swing_pct": 11.330974140893744,
       "benchmark_price_return_pct": -5.65647338606129,
       "excess_gross_pct": 14.071706692659593
+    },
+    {
+      "symbol": "MEOH",
+      "status": "CLOSED",
+      "entry_signal_date": "2026-11-13",
+      "entry_date": "2026-11-16",
+      "entry_open": 69.75,
+      "exit_signal_date": "2026-11-18",
+      "exit_date": "2026-11-19",
+      "exit_open": 63.880001068115234,
+      "holding_sessions": 3,
+      "gross_return_pct": -8.415769077970992,
+      "net_assumed_return_pct": -8.615769077970992,
+      "roundtrip_cost_pct": 0.2,
+      "entry_score": 42.34863314455705,
+      "entry_cycle": {
+        "cycle_sessions": 26,
+        "median_swing_pct": 16.071273409907384,
+        "completed_cycle_intervals": 29,
+        "confirmed_turns": 31,
+        "timing_consistency": 16.017883870967747,
+        "amplitude_consistency": 43.09674976588001,
+        "confidence": "LOW"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "adverse_excursion_pct": -10.408599744133628,
+      "best_high_return_pct": 0.0,
+      "observed_ordered_swing_pct": 6.048959614450045,
+      "captured_observed_swing_pct": -139.1275461298667,
+      "missed_observed_swing_pct": 6.048959614450045,
+      "benchmark_price_return_pct": -1.6273979682683293,
+      "excess_gross_pct": -6.788371109702663
     }
   ],
   "exceptions": [
@@ -2044,10 +2057,10 @@
   ],
   "summary": {
     "complete_signal_cohorts": 29,
-    "pending_entries": 2,
+    "pending_entries": 1,
     "open_positions": 28,
-    "closed_trades": 34,
-    "benchmark_pairs": 34,
+    "closed_trades": 35,
+    "benchmark_pairs": 35,
     "review_trades": 0
   }
 }

@@ -1,6 +1,8 @@
 {
-  "passed": true,
-  "required_stale": [],
-  "fresh": 125,
-  "selected": 158
+  "passed": false,
+  "required_stale": [
+    "ATGL"
+  ],
+  "fresh": 99,
+  "selected": 159
 }
