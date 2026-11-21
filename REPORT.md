@@ -1,54 +1,54 @@
 # OFTS daily research
 
-Market session: 2026-11-19
-Selected: 159; refreshed: 122; refresh errors: 41
-Qualified prediction cohorts saved: 30; current coverage: 122/159
-Outcome counts: {'CORPORATE_ACTION_REVIEW': 40, 'INELIGIBLE_DATA': 3035, 'MATURE': 6409, 'MISSING_SESSIONS': 9, 'PENDING': 11237}
-Cycle fingerprints saved: 117/185
-Signal states: BUY=1, SELL=12, NO_TRADE=172
-Cycle ledger: pending entries=1; open positions=29; closed trades=35; SPY pairs=35
-Cycle-speed report card: READY; closed forward trades=35; groups=['MEDIUM_11_TO_25', 'SLOW_OVER_25']
-Score scale: theoretical 0-100; observed 8.950692912157539-69.26211444649539; validated BUY threshold=NONE
-Score distribution: {'BELOW_40': 19, '40_TO_49_999': 43, '50_TO_59_999': 46, '60_TO_69_999': 9, '70_TO_79_999': 0, '80_TO_89_999': 0, '90_TO_100': 0}
+Market session: 2026-11-20
+Selected: 166; refreshed: 124; refresh errors: 77
+Qualified prediction cohorts saved: 31; current coverage: 124/166
+Outcome counts: {'CORPORATE_ACTION_REVIEW': 42, 'INELIGIBLE_DATA': 3265, 'MATURE': 6878, 'MISSING_SESSIONS': 15, 'PENDING': 11360}
+Cycle fingerprints saved: 112/193
+Signal states: BUY=0, SELL=13, NO_TRADE=180
+Cycle ledger: pending entries=0; open positions=27; closed trades=38; SPY pairs=38
+Cycle-speed report card: READY; closed forward trades=38; groups=['MEDIUM_11_TO_25', 'SLOW_OVER_25']
+Score scale: theoretical 0-100; observed 10.474052168680252-67.93392659658588; validated BUY threshold=NONE
+Score distribution: {'BELOW_40': 18, '40_TO_49_999': 37, '50_TO_59_999': 45, '60_TO_69_999': 12, '70_TO_79_999': 0, '80_TO_89_999': 0, '90_TO_100': 0}
 System actionability gate: RESEARCH_ONLY_NO_GO; OUT_OF_SAMPLE_PREDICTIVE_VALIDATION_NOT_VERIFIED
 Production approval: NO. These are quality scores, not BUY signals.
 Experimental recent viability v0.5: last three minor swings, last three UP legs, old-outlier dominance, peak/trough spacing 10-40 sessions, adjacent 3-vs-3 amplitude/cadence, and hypothetical capture after costs; NOT validated.
-Experimental viable REVIEW=0; viability NO_TRADE=114
+Experimental viable REVIEW=0; viability NO_TRADE=108
 Experimental swing-health v0.1: last-four-leg stability and lower-high/lower-low deterioration (NOT validated for trading).
-Experimental swing-health NO_TRADE=85; REVIEW=32; INSUFFICIENT=76
+Experimental swing-health NO_TRADE=86; REVIEW=26; INSUFFICIENT=73
 Forward returns use next-session open, exclude dividends, and assume 0.20% round-trip costs.
 Overlapping observations are not independent trades. No portfolio win rate or drawdown claim.
 
 | Symbol | Score | Classification | Legacy signal | Swing health | Last 3 swings | Last 3 UP % | Prior 3 UP % | UP ratio | >=5% count | Repeatability | Peak gaps | Prior peak gaps | Trough gaps | Prior trough gaps | Cadence ratio | Comparison | Cycle timing | Latest UP % | Old avg | Viability | Experimental review | Highs | Lows | Cycle sessions | Median swing | Confidence |
 |---|---:|---|---|---:|---|---:|---|---:|---:|---|---|---|---|---:|---:|---|
-| CACC | 69.262 | CANDIDATE | SELL | IRREGULAR | 15.289628474476945 | [9.17, 7.15, 15.29] | [3.85, 7.2, 6.53] | 1.4054024701331038 | 3 | STABLE_3_OF_3 | [35, 5, 7] | [9, 13, 20] | [31, 17, 4] | [21, 8, 16] | 0.8004807692307692 | STABLE_OR_MIXED | False | 15.289628474476945 | 8.650515681118401 | CYCLE_TIMING | NO_TRADE | FALLING | FALLING | 42.0 | 15.896230949151457 | HIGH |
-| MWH | 68.323 | CANDIDATE | NO_TRADE | INSUFFICIENT | 11.152554385226521 | [11.38, 13.52, 15.21] | [18.33, 5.95, 9.76] | 1.385666278611575 | 3 | STABLE_3_OF_3 | [11, 17, 3] | [8, 17, 9] | [19, 5, 4] | [19, 5, 12] | 0.8194444444444445 | STABLE_OR_MIXED | False | 15.212715679159539 | 11.431672904891617 | CYCLE_TIMING | NO_TRADE | INSUFFICIENT | INSUFFICIENT | 47.5 | 35.23344052246027 | HIGH |
-| WRBY | 63.225 | CANDIDATE | SELL | IRREGULAR | 14.200592976461513 | [11.01, 41.9, 8.87] | [18.71, 12.65, 6.29] | 0.8703031911300206 | 3 | STABLE_3_OF_3 | [8, 11, 7] | [9, 3, 9] | [6, 13, 9] | [10, 6, 8] | 1.0069444444444444 | STABLE_OR_MIXED | False | 8.873453820565746 | 13.602505290606286 | CYCLE_TIMING | NO_TRADE | MIXED | FALLING | 33.0 | 27.91928135796663 | HIGH |
-| LBTYB | 63.092 | CANDIDATE | NO_TRADE | STABLE_RANGE | 6.909092989834864 | [4.07, 5.65, 6.91] | [4.67, 5.37, 3.68] | 1.2089660041389128 | 2 | WATCH_2_OF_3 | [2, 4, 22] | [3, 7, 16] | [2, 21, 5] | [6, 18, 2] | 0.7023809523809523 | STABLE_OR_MIXED | False | 6.909092989834864 | 9.485385965828954 | WATCH | NO_TRADE | MIXED | MIXED | 25 | 14.821865537105216 | MEDIUM |
-| OBE | 62.746 | CANDIDATE | NO_TRADE | STABLE_RANGE | 4.994571511853363 | [4.06, 4.99, 7.38] | [7.27, 13.97, 18.18] | 0.357473074980304 | 1 | UNSTABLE | [4, 10, 5] | [5, 10, 26] | [17, 9, 4] | [14, 3, 21] | 0.5714285714285714 | DISSIPATING | False | 7.383282327462348 | 12.923151746336721 | TOO_SMALL | NO_TRADE | MIXED | MIXED | 26 | 21.37633118736948 | HIGH |
-| PLAB | 61.886 | CANDIDATE | NO_TRADE | STABLE_RANGE | 13.087935012328856 | [5.12, 5.27, 13.45] | [20.26, 7.43, 15.94] | 0.3308430566166697 | 3 | STABLE_3_OF_3 | [13, 5, 10] | [19, 15, 18] | [24, 6, 8] | [12, 24, 8] | 0.6111111111111112 | DISSIPATING | False | 13.450981588924638 | 12.998387035976561 | TOO_SMALL_UPSIDE | NO_TRADE | MIXED | FALLING | 32 | 19.139999184949197 | HIGH |
-| EEFT | 61.636 | CANDIDATE | SELL | STABLE_RANGE | 12.004174664675238 | [8.32, 7.26, 20.57] | [7.81, 5.34, 3.77] | 1.5595416603754826 | 3 | STABLE_3_OF_3 | [8, 33, 10] | [4, 7, 8] | [9, 25, 14] | [6, 7, 6] | 1.880952380952381 | DISSIPATING | False | 20.572790289193634 | 8.14792255070462 | CYCLE_TIMING | NO_TRADE | MIXED | FALLING | 28 | 13.308085891713855 | HIGH |
-| SPGI | 60.850 | CANDIDATE | NO_TRADE | INSUFFICIENT | 14.272715050622754 | [7.88, 4.37, 24.7] | [6.24, 4.72, 4.3] | 1.6695164333270074 | 2 | WATCH_2_OF_3 | [11, 4, 43] | [8, 7, 13] | [7, 12, 21] | [10, 9, 10] | 1.2875 | STABLE_OR_MIXED | False | 24.70293218258719 | 7.606401588235964 | WATCH | NO_TRADE | MIXED | INSUFFICIENT | 35 | 12.362397606590037 | MEDIUM |
-| MIR | 60.657 | CANDIDATE | NO_TRADE | INSUFFICIENT | 13.718625199071877 | [17.71, 28.63, 13.72] | [5.44, 17.57, 7.22] | 2.453234001852276 | 3 | STABLE_3_OF_3 | [13, 17, 4] | [5, 15, 11] | [17, 9, 8] | [14, 10, 12] | 0.9659090909090909 | STABLE_OR_MIXED | False | 13.718625199071877 | 10.016863265553726 | CYCLE_TIMING | NO_TRADE | RISING | INSUFFICIENT | 29.0 | 17.569449678247494 | MEDIUM |
-| DXC | 59.580 | CANDIDATE | SELL | STABLE_RANGE | 15.46012038061787 | [12.68, 46.85, 11.1] | [4.81, 10.62, 10.68] | 1.1945535015094293 | 3 | STABLE_3_OF_3 | [13, 17, 11] | [8, 7, 6] | [14, 3, 22] | [3, 7, 9] | 1.9285714285714286 | DISSIPATING | False | 11.10305309356936 | 9.885319325062806 | CYCLE_TIMING | NO_TRADE | MIXED | MIXED | 29.0 | 15.364983182423341 | MEDIUM |
-| ESNT | 59.433 | CANDIDATE | NO_TRADE | INSUFFICIENT | 8.309903114311389 | [6.74, 8.31, 3.71] | [6.23, 3.06, 9.81] | 1.082920604364391 | 2 | UNSTABLE | [8, 11, 3] | [20, 6, 24] | [8, 7, 12] | [10, 17, 21] | 0.43529411764705883 | STABLE_OR_MIXED | False | 3.7060436752457626 | 7.460230654516392 | TOO_SMALL_UPSIDE | NO_TRADE | INSUFFICIENT | INSUFFICIENT | 53 | 12.641914967787642 | HIGH |
-| MESO | 59.294 | CANDIDATE | NO_TRADE | STABLE_RANGE | 7.364017811603918 | [5.0, 7.36, 27.61] | [9.25, 4.97, 10.48] | 0.795695967807193 | 2 | WATCH_2_OF_3 | [13, 8, 6] | [5, 6, 11] | [14, 9, 4] | [6, 6, 10] | 1.4166666666666665 | DISSIPATING | False | 27.60586658826034 | 11.54996911426539 | WATCH | NO_TRADE | FALLING | MIXED | 16.0 | 19.704195329980422 | MEDIUM |
-| METCB | 59.096 | CANDIDATE | NO_TRADE | INSUFFICIENT | 17.857141716747872 | [6.24, 18.52, 11.68] | [7.19, 4.68, 6.15] | 1.90102632967061 | 3 | STABLE_3_OF_3 | [6, 13, 12] | [4, 11, 6] | [3, 13, 11] | [8, 11, 6] | 1.6875 | DISSIPATING | False | 11.684784210781718 | 11.331022956850429 | CYCLE_TIMING | NO_TRADE | FALLING | INSUFFICIENT | 53 | 41.58882283911626 | HIGH |
-| LI | 58.618 | CANDIDATE | NO_TRADE | STABLE_RANGE | 7.544011309154186 | [9.92, 5.95, 13.6] | [4.71, 4.46, 3.23] | 2.221521569027974 | 3 | STABLE_3_OF_3 | [17, 5, 13] | [11, 4, 4] | [13, 8, 12] | [10, 6, 3] | 2.625 | DISSIPATING | False | 13.599275034578252 | 7.72053949442203 | CYCLE_TIMING | NO_TRADE | MIXED | MIXED | 27.5 | 13.731341432933164 | MEDIUM |
-| ATGL | 58.470 | CANDIDATE | NO_TRADE | STABLE_RANGE | 11.35190377120634 | [6.08, 18.17, 3.61] | [6.46, 11.36, 145.59] | 0.5348068156204089 | 2 | UNSTABLE | [4, 4, 4] | [9, 3, 9] | [11, 4, 4] | [9, 3, 2] | 0.8888888888888888 | DISSIPATING | False | 3.6088412157826433 | 19.221629202064108 | TOO_SMALL_UPSIDE | NO_TRADE | MIXED | MIXED | 21 | 32.06849916938487 | MEDIUM |
-| TT | 58.027 | CANDIDATE | NO_TRADE | STABLE_RANGE | 8.258798834697112 | [3.07, 3.63, 8.26] | [9.92, 2.73, 13.36] | 0.3663484686261195 | 1 | UNSTABLE | [6, 4, 11] | [11, 11, 33] | [21, 6, 9] | [8, 15, 18] | 0.5727272727272728 | DISSIPATING | False | 8.258798834697112 | 6.997958907642477 | TOO_SMALL_UPSIDE | NO_TRADE | MIXED | FALLING | 42.5 | 12.868832109870343 | HIGH |
-| HLIT | 57.887 | CANDIDATE | NO_TRADE | STABLE_RANGE | 9.296026534869107 | [6.82, 10.69, 7.46] | [21.57, 3.58, 3.36] | 2.084348856940502 | 3 | STABLE_3_OF_3 | [18, 9, 7] | [8, 8, 11] | [11, 7, 9] | [9, 8, 17] | 1.0625 | STABLE_OR_MIXED | False | 7.462686425532894 | 10.980983684828491 | CYCLE_TIMING | NO_TRADE | MIXED | FALLING | 46 | 18.52179327708091 | HIGH |
-| TLN | 57.884 | CANDIDATE | NO_TRADE | STABLE_RANGE | 11.490985450081748 | [6.39, 7.29, 22.28] | [10.91, 34.08, 6.38] | 0.6687327628073135 | 3 | STABLE_3_OF_3 | [12, 3, 7] | [18, 21, 4] | [11, 6, 3] | [19, 9, 17] | 0.3709150326797386 | DISSIPATING | False | 22.280017459847024 | 11.58604605181013 | CYCLE_TIMING | NO_TRADE | MIXED | MIXED | 33 | 23.56044601857301 | MEDIUM |
-| ECG | 57.847 | CANDIDATE | NO_TRADE | DOWNTREND | 23.012144681288472 | [13.86, 9.84, 23.01] | [6.42, 3.64, 21.53] | 2.156937540949749 | 3 | STABLE_3_OF_3 | [17, 3, 6] | [15, 3, 17] | [28, 5, 4] | [17, 5, 3] | 0.7 | STABLE_OR_MIXED | False | 23.012144681288472 | 10.58725910100091 | CYCLE_TIMING | NO_TRADE | FALLING | FALLING | 33 | 25.592558307926748 | MEDIUM |
-| XYL | 57.684 | CANDIDATE | NO_TRADE | IRREGULAR | 14.530204246917044 | [3.66, 7.31, 14.53] | [7.6, 5.44, 2.95] | 1.3421468304075173 | 2 | WATCH_2_OF_3 | [20, 12, 9] | [8, 10, 19] | [18, 4, 15] | [28, 6, 26] | 0.8884615384615384 | STABLE_OR_MIXED | False | 14.530204246917044 | 7.317661165296027 | WATCH | NO_TRADE | FALLING | FALLING | 54 | 15.167223318689327 | MEDIUM |
-| STRZ | 57.453 | CANDIDATE | NO_TRADE | INSUFFICIENT | 9.868419607920643 | [7.46, 21.38, 9.87] | [11.7, 7.03, 23.4] | 0.8434828543681092 | 3 | STABLE_3_OF_3 | [6, 10, 5] | [13, 5, 16] | [16, 5, 8] | [16, 7, 5] | 0.8021978021978022 | STABLE_OR_MIXED | False | 9.868419607920643 | 14.24961893825109 | CYCLE_TIMING | NO_TRADE | INSUFFICIENT | FALLING | 55 | 27.400937576802434 | MEDIUM |
-| CLSK | 57.414 | CANDIDATE | NO_TRADE | IRREGULAR | 5.175032981235916 | [13.99, 21.65, 5.18] | [19.97, 4.17, 10.42] | 1.3416207754739036 | 3 | STABLE_3_OF_3 | [4, 4, 2] | [7, 21, 5] | [5, 3, 3] | [3, 23, 6] | 0.5357142857142857 | STABLE_OR_MIXED | False | 5.175032981235916 | 12.664851776902733 | TOO_SMALL | NO_TRADE | MIXED | FALLING | 27 | 29.073334378324457 | MEDIUM |
-| NYAX | 57.270 | CANDIDATE | NO_TRADE | STABLE_RANGE | 7.679244707215505 | [3.19, 14.84, 4.03] | [5.29, 16.75, 18.54] | 0.24038559858269248 | 1 | UNSTABLE | [6, 5, 5] | [5, 22, 16] | [13, 4, 8] | [4, 17, 14] | 0.4419642857142857 | DISSIPATING | False | 4.026162289834967 | 9.923594238894578 | TOO_SMALL_UPSIDE | NO_TRADE | MIXED | RISING | 28.0 | 16.922769870358156 | MEDIUM |
-| CD | 57.100 | CANDIDATE | NO_TRADE | STABLE_RANGE | 9.836062476870634 | [17.83, 5.83, 9.84] | [84.29, 29.71, 32.16] | 0.3058556342515651 | 3 | STABLE_3_OF_3 | [6, 3, 7] | [8, 8, 5] | [9, 3, 7] | [4, 11, 5] | 1.075 | DISSIPATING | False | 9.836062476870634 | 19.776690643202627 | CYCLE_TIMING | NO_TRADE | FALLING | MIXED | 15.0 | 34.267245653870674 | MEDIUM |
-| BFAM | 56.791 | CANDIDATE | NO_TRADE | INSUFFICIENT | 10.05678951147475 | [11.66, 10.06, 5.6] | [6.43, 6.86, 5.1] | 1.5639209490413801 | 3 | STABLE_3_OF_3 | [17, 6, 7] | [22, 12, 5] | [7, 15, 9] | [18, 17, 7] | 0.5563725490196079 | STABLE_OR_MIXED | False | 5.597294230442529 | 9.778588055234788 | CYCLE_TIMING | NO_TRADE | INSUFFICIENT | INSUFFICIENT | 65.5 | 18.3680156066923 | MEDIUM |
+| MWH | 67.934 | CANDIDATE | NO_TRADE | INSUFFICIENT | 15.212715679159539 | [13.52, 15.21, 17.93] | [5.95, 9.76, 11.38] | 1.5594628841902478 | 3 | STABLE_3_OF_3 | [17, 3, 9] | [17, 9, 11] | [19, 5, 4] | [19, 5, 12] | 0.6174242424242424 | STABLE_OR_MIXED | False | 17.926114661922043 | 11.575993832825626 | CYCLE_TIMING | NO_TRADE | INSUFFICIENT | INSUFFICIENT | 47.5 | 35.23344052246027 | HIGH |
+| CACC | 67.013 | CANDIDATE | NO_TRADE | IRREGULAR | 15.289628474476945 | [5.0, 7.15, 15.29] | [7.2, 6.53, 7.07] | 1.0114146772919794 | 2 | WATCH_2_OF_3 | [8, 5, 7] | [13, 20, 27] | [9, 8, 4] | [8, 16, 31] | 0.425 | STABLE_OR_MIXED | False | 15.289628474476945 | 7.98313696866579 | WATCH | NO_TRADE | FALLING | FALLING | 41.0 | 15.528029835742508 | HIGH |
+| JBS | 63.624 | CANDIDATE | NO_TRADE | INSUFFICIENT | 5.128208067290285 | [9.27, 5.13, 3.19] | [4.56, 7.91, 19.98] | 0.6482455212975712 | 2 | UNSTABLE | [13, 3, 5] | [6, 12, 37] | [19, 7, 4] | [18, 5, 36] | 0.4027777777777778 | DISSIPATING | False | 3.193278374977382 | 10.400954459348334 | TOO_SMALL_UPSIDE | NO_TRADE | INSUFFICIENT | INSUFFICIENT | 57.5 | 22.97762566772592 | HIGH |
+| WRBY | 63.254 | CANDIDATE | NO_TRADE | IRREGULAR | 14.200592976461513 | [11.01, 41.9, 8.87] | [18.71, 12.65, 6.29] | 0.8703031911300206 | 3 | STABLE_3_OF_3 | [8, 11, 7] | [9, 3, 9] | [6, 13, 9] | [10, 6, 8] | 1.0069444444444444 | STABLE_OR_MIXED | False | 8.873453820565746 | 13.602505290606286 | CYCLE_TIMING | NO_TRADE | MIXED | FALLING | 33.0 | 27.91928135796663 | HIGH |
+| HLIT | 62.289 | CANDIDATE | SELL | DOWNTREND | 13.79629393336872 | [10.69, 7.46, 15.36] | [21.57, 3.58, 6.82] | 1.566279906172395 | 3 | STABLE_3_OF_3 | [9, 7, 14] | [8, 8, 29] | [11, 7, 9] | [9, 9, 25] | 1.0625 | STABLE_OR_MIXED | False | 15.359820483878561 | 11.599491465226908 | CYCLE_TIMING | NO_TRADE | FALLING | FALLING | 45.5 | 17.93938839074336 | HIGH |
+| CLSK | 61.622 | CANDIDATE | SELL | IRREGULAR | 5.175032981235916 | [13.99, 21.65, 5.18] | [19.97, 4.17, 10.42] | 1.3416207754739036 | 3 | STABLE_3_OF_3 | [4, 4, 2] | [7, 21, 5] | [5, 3, 3] | [3, 23, 6] | 0.5357142857142857 | STABLE_OR_MIXED | False | 5.175032981235916 | 12.757443827047748 | TOO_SMALL | NO_TRADE | MIXED | FALLING | 30.0 | 28.9776092510905 | MEDIUM |
+| EEFT | 61.602 | CANDIDATE | NO_TRADE | STABLE_RANGE | 12.004174664675238 | [8.32, 7.26, 20.57] | [7.81, 5.34, 3.77] | 1.5595416603754826 | 3 | STABLE_3_OF_3 | [8, 33, 10] | [4, 7, 8] | [9, 25, 14] | [6, 7, 6] | 1.880952380952381 | DISSIPATING | False | 20.572790289193634 | 8.10235939732078 | CYCLE_TIMING | NO_TRADE | MIXED | FALLING | 28 | 13.308085891713855 | HIGH |
+| TLN | 61.511 | CANDIDATE | SELL | STABLE_RANGE | 11.490985450081748 | [6.39, 7.29, 22.28] | [10.91, 34.08, 6.38] | 0.6687327628073135 | 3 | STABLE_3_OF_3 | [12, 3, 7] | [18, 21, 4] | [11, 6, 3] | [19, 9, 17] | 0.3709150326797386 | DISSIPATING | False | 22.280017459847024 | 11.686034556152578 | CYCLE_TIMING | NO_TRADE | RISING | MIXED | 32.0 | 23.460024521868796 | HIGH |
+| PWR | 61.354 | CANDIDATE | NO_TRADE | IRREGULAR | 20.23498138943196 | [17.32, 20.23, 19.42] | [23.5, 9.3, 7.94] | 2.0889449301000873 | 3 | STABLE_3_OF_3 | [17, 20, 6] | [8, 9, 18] | [11, 28, 9] | [8, 8, 14] | 1.6319444444444444 | DISSIPATING | False | 19.424037511694525 | 11.535072502193337 | CYCLE_TIMING | NO_TRADE | FALLING | FALLING | 35 | 19.81219643427886 | HIGH |
+| OBE | 60.588 | CANDIDATE | NO_TRADE | STABLE_RANGE | 4.994571511853363 | [4.06, 4.99, 7.38] | [7.27, 13.97, 18.18] | 0.357473074980304 | 1 | UNSTABLE | [4, 10, 5] | [5, 10, 26] | [17, 9, 4] | [14, 3, 21] | 0.5714285714285714 | DISSIPATING | False | 7.383282327462348 | 12.916508941597959 | TOO_SMALL | NO_TRADE | MIXED | MIXED | 25 | 19.84161399857889 | MEDIUM |
+| SPGI | 60.317 | CANDIDATE | NO_TRADE | INSUFFICIENT | 14.272715050622754 | [7.88, 4.37, 24.7] | [6.24, 4.72, 4.3] | 1.6695164333270074 | 2 | WATCH_2_OF_3 | [11, 4, 43] | [8, 7, 13] | [7, 12, 21] | [10, 9, 10] | 1.2875 | STABLE_OR_MIXED | False | 24.70293218258719 | 7.606401588235964 | WATCH | NO_TRADE | MIXED | INSUFFICIENT | 35 | 12.362397606590037 | MEDIUM |
+| TT | 60.015 | CANDIDATE | SELL | DOWNTREND | 8.258798834697112 | [3.07, 3.63, 8.26] | [9.92, 2.73, 13.36] | 0.3663484686261195 | 1 | UNSTABLE | [6, 4, 11] | [11, 11, 33] | [21, 6, 9] | [8, 15, 18] | 0.5727272727272728 | DISSIPATING | False | 8.258798834697112 | 6.997958907642477 | TOO_SMALL_UPSIDE | NO_TRADE | FALLING | FALLING | 44 | 13.113653636542994 | HIGH |
+| TRNS | 59.502 | CANDIDATE | NO_TRADE | STABLE_RANGE | 9.145248611633328 | [9.97, 25.28, 9.15] | [13.37, 5.38, 7.42] | 1.3442016749303707 | 3 | STABLE_3_OF_3 | [6, 4, 3] | [17, 9, 12] | [4, 6, 4] | [15, 9, 14] | 0.30952380952380953 | STABLE_OR_MIXED | False | 9.145248611633328 | 8.536640204051357 | CYCLE_TIMING | NO_TRADE | MIXED | FALLING | 34 | 17.870775968554845 | MEDIUM |
+| ESNT | 59.409 | CANDIDATE | NO_TRADE | INSUFFICIENT | 8.309903114311389 | [6.74, 8.31, 3.71] | [6.23, 3.06, 9.81] | 1.082920604364391 | 2 | UNSTABLE | [8, 11, 3] | [20, 6, 24] | [8, 7, 12] | [10, 17, 21] | 0.43529411764705883 | STABLE_OR_MIXED | False | 3.7060436752457626 | 7.429954445529278 | TOO_SMALL_UPSIDE | NO_TRADE | INSUFFICIENT | INSUFFICIENT | 53 | 12.641914967787642 | HIGH |
+| MESO | 58.890 | CANDIDATE | NO_TRADE | STABLE_RANGE | 7.364017811603918 | [5.0, 7.36, 27.61] | [9.25, 4.97, 10.48] | 0.795695967807193 | 2 | WATCH_2_OF_3 | [13, 8, 6] | [5, 6, 11] | [14, 9, 4] | [6, 6, 10] | 1.4166666666666665 | DISSIPATING | False | 27.60586658826034 | 11.712845461470458 | WATCH | NO_TRADE | FALLING | MIXED | 16.0 | 19.704195329980422 | MEDIUM |
+| LI | 58.463 | CANDIDATE | NO_TRADE | STABLE_RANGE | 7.544011309154186 | [9.92, 5.95, 13.6] | [4.71, 4.46, 3.23] | 2.221521569027974 | 3 | STABLE_3_OF_3 | [17, 5, 13] | [11, 4, 4] | [13, 8, 12] | [10, 6, 3] | 2.625 | DISSIPATING | False | 13.599275034578252 | 7.72053949442203 | CYCLE_TIMING | NO_TRADE | MIXED | MIXED | 27.5 | 13.731341432933164 | MEDIUM |
+| DXC | 58.013 | CANDIDATE | NO_TRADE | STABLE_RANGE | 15.46012038061787 | [12.68, 46.85, 11.1] | [4.81, 10.62, 10.68] | 1.1945535015094293 | 3 | STABLE_3_OF_3 | [13, 17, 11] | [8, 7, 6] | [14, 3, 22] | [3, 7, 9] | 1.9285714285714286 | DISSIPATING | False | 11.10305309356936 | 9.849532708585711 | CYCLE_TIMING | NO_TRADE | MIXED | MIXED | 29 | 15.278696465763314 | MEDIUM |
+| ECG | 57.778 | CANDIDATE | NO_TRADE | DOWNTREND | 23.012144681288472 | [13.86, 9.84, 23.01] | [6.42, 3.64, 21.53] | 2.156937540949749 | 3 | STABLE_3_OF_3 | [17, 3, 6] | [15, 3, 17] | [28, 5, 4] | [17, 5, 3] | 0.7 | STABLE_OR_MIXED | False | 23.012144681288472 | 10.676349017257728 | CYCLE_TIMING | NO_TRADE | FALLING | FALLING | 33 | 25.592558307926748 | MEDIUM |
+| PLAB | 57.671 | CANDIDATE | SELL | DOWNTREND | 13.087935012328856 | [5.12, 5.27, 13.45] | [20.26, 7.43, 15.94] | 0.3308430566166697 | 3 | STABLE_3_OF_3 | [13, 5, 10] | [19, 15, 18] | [24, 6, 8] | [12, 24, 8] | 0.6111111111111112 | DISSIPATING | False | 13.450981588924638 | 12.998387035976561 | TOO_SMALL_UPSIDE | NO_TRADE | FALLING | FALLING | 35.0 | 19.166663449907915 | MEDIUM |
+| SMP | 57.652 | CANDIDATE | NO_TRADE | INSUFFICIENT | 5.241409028719824 | [2.91, 26.84, 2.73] | [7.53, 3.64, 12.21] | 0.38627950173654124 | 1 | UNSTABLE | [15, 27, 10] | [4, 3, 20] | [14, 18, 24] | [9, 4, 16] | 2.875 | DISSIPATING | True | 2.7312339569521393 | 7.621679573407872 | TOO_SMALL_UPSIDE | NO_TRADE | INSUFFICIENT | FALLING | 34.5 | 12.212917219004149 | MEDIUM |
+| NYAX | 57.540 | CANDIDATE | SELL | STABLE_UPTREND | 7.679244707215505 | [18.54, 14.84, 4.03] | [16.98, 5.29, 16.75] | 0.8862085258938412 | 2 | UNSTABLE | [16, 11, 5] | [5, 5, 22] | [14, 17, 8] | [4, 4, 17] | 2.85 | DISSIPATING | False | 4.026162289834967 | 10.429110638430732 | TOO_SMALL_UPSIDE | NO_TRADE | RISING | RISING | 27 | 16.835768245937125 | LOW |
+| KRUS | 57.489 | CANDIDATE | NO_TRADE | DOWNTREND | 22.456254595313286 | [20.31, 22.46, 11.47] | [26.43, 8.67, 15.35] | 1.323262287697805 | 3 | STABLE_3_OF_3 | [35, 23, 3] | [8, 20, 12] | [33, 27, 9] | [13, 22, 5] | 1.9967948717948718 | DISSIPATING | False | 11.468230070278619 | 14.371299038664649 | CYCLE_TIMING | NO_TRADE | FALLING | FALLING | 32 | 27.619397282714765 | HIGH |
+| STRZ | 57.385 | CANDIDATE | NO_TRADE | INSUFFICIENT | 9.868419607920643 | [7.46, 21.38, 9.87] | [11.7, 7.03, 23.4] | 0.8434828543681092 | 3 | STABLE_3_OF_3 | [6, 10, 5] | [13, 5, 16] | [16, 5, 8] | [16, 7, 5] | 0.8021978021978022 | STABLE_OR_MIXED | False | 9.868419607920643 | 14.24961893825109 | CYCLE_TIMING | NO_TRADE | INSUFFICIENT | FALLING | 55 | 27.400937576802434 | MEDIUM |
+| BBY | 57.365 | CANDIDATE | NO_TRADE | STABLE_RANGE | 6.4946674795365205 | [9.59, 3.54, 13.22] | [11.48, 18.32, 11.33] | 0.835089937173392 | 2 | WATCH_2_OF_3 | [6, 4, 7] | [15, 17, 23] | [8, 7, 4] | [10, 17, 26] | 0.38235294117647056 | STABLE_OR_MIXED | False | 13.220406593805833 | 8.99643927494022 | WATCH | NO_TRADE | MIXED | RISING | 30.5 | 11.484632375578263 | MEDIUM |
+| CD | 57.097 | CANDIDATE | NO_TRADE | STABLE_RANGE | 9.836062476870634 | [17.83, 5.83, 9.84] | [84.29, 29.71, 32.16] | 0.3058556342515651 | 3 | STABLE_3_OF_3 | [6, 3, 7] | [8, 8, 5] | [9, 3, 7] | [4, 11, 5] | 1.075 | DISSIPATING | False | 9.836062476870634 | 19.774288242641784 | CYCLE_TIMING | NO_TRADE | FALLING | MIXED | 15.0 | 34.267245653870674 | MEDIUM |
 
 ## Experimental recent-swing review shortlist (NOT BUY signals)
-Count: 0 of 96 scored CANDIDATE names
+Count: 0 of 92 scored CANDIDATE names
 | Symbol | Quality score | Last 3 swings % | Last 3 UP % | Prior 3 UP % | UP ratio | >=5% count | Peak gaps | Prior peak gaps | Trough gaps | Prior trough gaps | Cadence ratio | Historical avg % |
 |---|---:|---:|---|---|---:|---:|---|---|---|---|---:|---:|
 
@@ -173,120 +173,159 @@ Count: 0 of 96 scored CANDIDATE names
     "worst_adverse_excursion_pct": -30.48245601804731
   },
   {
+    "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
+    "horizon": 30,
+    "score_band": "0-40",
+    "observations": 9,
+    "positive_net_pct": 33.333333333333336,
+    "average_net_pct": -10.218361391121903,
+    "average_positive_pct": 2.0275411297380272,
+    "average_nonpositive_pct": -16.341312651551867,
+    "benchmark_pairs": 9,
+    "average_excess_pct": 1.4059212549814195,
+    "worst_adverse_excursion_pct": -35.39192389633718
+  },
+  {
+    "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
+    "horizon": 30,
+    "score_band": "40-60",
+    "observations": 75,
+    "positive_net_pct": 21.333333333333332,
+    "average_net_pct": -15.482170784277884,
+    "average_positive_pct": 12.852476577733565,
+    "average_nonpositive_pct": -23.1661429502471,
+    "benchmark_pairs": 75,
+    "average_excess_pct": -3.8578881381745616,
+    "worst_adverse_excursion_pct": -74.2160265141408
+  },
+  {
+    "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
+    "horizon": 30,
+    "score_band": "60-80",
+    "observations": 11,
+    "positive_net_pct": 18.181818181818183,
+    "average_net_pct": -18.6451848104542,
+    "average_positive_pct": 15.295519477028343,
+    "average_nonpositive_pct": -26.187563541005876,
+    "benchmark_pairs": 11,
+    "average_excess_pct": -7.0209021643508756,
+    "worst_adverse_excursion_pct": -48.88093107299715
+  },
+  {
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 5,
     "score_band": "0-40",
-    "observations": 295,
-    "positive_net_pct": 39.32203389830509,
-    "average_net_pct": -2.068931292322535,
-    "average_positive_pct": 3.8310007344306656,
-    "average_nonpositive_pct": -5.89235092977154,
-    "benchmark_pairs": 295,
-    "average_excess_pct": -0.7294345189351559,
+    "observations": 309,
+    "positive_net_pct": 37.86407766990291,
+    "average_net_pct": -2.219334333931323,
+    "average_positive_pct": 3.799932687224502,
+    "average_nonpositive_pct": -5.887325174948156,
+    "benchmark_pairs": 309,
+    "average_excess_pct": -0.5697480040613411,
     "worst_adverse_excursion_pct": -81.83229896445631
   },
   {
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 5,
     "score_band": "40-60",
-    "observations": 1797,
-    "positive_net_pct": 45.85420144685587,
-    "average_net_pct": -0.7253428450116326,
-    "average_positive_pct": 6.321322700012056,
-    "average_nonpositive_pct": -6.692919832780905,
-    "benchmark_pairs": 1797,
-    "average_excess_pct": 0.5018387751656246,
+    "observations": 1867,
+    "positive_net_pct": 44.29566148901982,
+    "average_net_pct": -1.042317240560729,
+    "average_positive_pct": 6.3014623664275495,
+    "average_nonpositive_pct": -6.88203429342543,
+    "benchmark_pairs": 1867,
+    "average_excess_pct": 0.4456841040355577,
     "worst_adverse_excursion_pct": -86.84210490198016
   },
   {
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 5,
     "score_band": "60-80",
-    "observations": 197,
-    "positive_net_pct": 43.14720812182741,
-    "average_net_pct": -1.8339338674326704,
+    "observations": 208,
+    "positive_net_pct": 40.86538461538461,
+    "average_net_pct": -2.3480171781999832,
     "average_positive_pct": 5.1010112288521805,
-    "average_nonpositive_pct": -7.097061842291711,
-    "benchmark_pairs": 197,
-    "average_excess_pct": -0.6480456252328936,
+    "average_nonpositive_pct": -7.495719735918961,
+    "benchmark_pairs": 208,
+    "average_excess_pct": -0.7920567806817812,
     "worst_adverse_excursion_pct": -40.22770195885972
   },
   {
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 10,
     "score_band": "0-40",
-    "observations": 222,
-    "positive_net_pct": 45.04504504504504,
-    "average_net_pct": -2.5458112921742853,
-    "average_positive_pct": 6.049840909240611,
-    "average_nonpositive_pct": -9.591427850711083,
-    "benchmark_pairs": 222,
-    "average_excess_pct": -0.6945360694739956,
+    "observations": 232,
+    "positive_net_pct": 43.96551724137931,
+    "average_net_pct": -2.624358991208217,
+    "average_positive_pct": 5.963281721917654,
+    "average_nonpositive_pct": -9.362354012276205,
+    "benchmark_pairs": 232,
+    "average_excess_pct": -0.5413529771184377,
     "worst_adverse_excursion_pct": -95.51242232978043
   },
   {
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 10,
     "score_band": "40-60",
-    "observations": 1406,
-    "positive_net_pct": 45.59032716927454,
-    "average_net_pct": -0.6033120631126253,
-    "average_positive_pct": 10.427883805298194,
-    "average_nonpositive_pct": -9.846444810369261,
-    "benchmark_pairs": 1406,
-    "average_excess_pct": 1.4387605164825445,
+    "observations": 1489,
+    "positive_net_pct": 43.38482202820685,
+    "average_net_pct": -1.2014801340694197,
+    "average_positive_pct": 10.374942007479323,
+    "average_nonpositive_pct": -10.072617386074734,
+    "benchmark_pairs": 1489,
+    "average_excess_pct": 1.1296351797616986,
     "worst_adverse_excursion_pct": -88.15789411768027
   },
   {
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 10,
     "score_band": "60-80",
-    "observations": 159,
-    "positive_net_pct": 51.57232704402516,
-    "average_net_pct": 0.31351481757247224,
-    "average_positive_pct": 8.216657240285944,
-    "average_nonpositive_pct": -8.102818671550969,
-    "benchmark_pairs": 159,
-    "average_excess_pct": 2.09030614338135,
+    "observations": 166,
+    "positive_net_pct": 50.602409638554214,
+    "average_net_pct": 0.12181893596911617,
+    "average_positive_pct": 8.287462024906155,
+    "average_nonpositive_pct": -8.242986179527366,
+    "benchmark_pairs": 166,
+    "average_excess_pct": 2.128456453343614,
     "worst_adverse_excursion_pct": -32.33082603432881
   },
   {
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 20,
     "score_band": "0-40",
-    "observations": 115,
-    "positive_net_pct": 50.43478260869565,
-    "average_net_pct": -4.647972992182633,
-    "average_positive_pct": 6.57211934945574,
-    "average_nonpositive_pct": -16.064909059112907,
-    "benchmark_pairs": 115,
-    "average_excess_pct": -1.0835461513856302,
+    "observations": 125,
+    "positive_net_pct": 48.8,
+    "average_net_pct": -4.968662866665674,
+    "average_positive_pct": 6.401250751829763,
+    "average_nonpositive_pct": -15.805611784294134,
+    "benchmark_pairs": 125,
+    "average_excess_pct": -0.9131146473452867,
     "worst_adverse_excursion_pct": -98.15217388688697
   },
   {
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 20,
     "score_band": "40-60",
-    "observations": 656,
-    "positive_net_pct": 44.207317073170735,
-    "average_net_pct": -1.1223129763551098,
-    "average_positive_pct": 15.24797933758678,
-    "average_nonpositive_pct": -14.093309618549489,
-    "benchmark_pairs": 656,
-    "average_excess_pct": 2.4106267015529506,
+    "observations": 727,
+    "positive_net_pct": 42.64099037138927,
+    "average_net_pct": -2.1271477435789032,
+    "average_positive_pct": 14.964132034026587,
+    "average_nonpositive_pct": -14.832895300072183,
+    "benchmark_pairs": 727,
+    "average_excess_pct": 2.008413408888467,
     "worst_adverse_excursion_pct": -93.04037981042042
   },
   {
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
     "horizon": 20,
     "score_band": "60-80",
-    "observations": 86,
-    "positive_net_pct": 45.348837209302324,
-    "average_net_pct": -2.076666246592022,
-    "average_positive_pct": 11.378728587888043,
-    "average_nonpositive_pct": -13.241781109245697,
-    "benchmark_pairs": 86,
-    "average_excess_pct": 1.1910386795571124,
+    "observations": 94,
+    "positive_net_pct": 43.61702127659574,
+    "average_net_pct": -2.7087138883837936,
+    "average_positive_pct": 11.24270980667965,
+    "average_nonpositive_pct": -13.501324671357404,
+    "benchmark_pairs": 94,
+    "average_excess_pct": 1.1067135182921624,
     "worst_adverse_excursion_pct": -47.09677302750536
   }
 ]
@@ -295,6 +334,7 @@ Count: 0 of 96 scored CANDIDATE names
 ## Identity-boundary exclusions (current processing; prior snapshots immutable)
 
 ## Refresh failures
+- BWMN: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - SB.PRD: ValueError: EMPTY_PROVIDER_RESPONSE
 - MET.PRA: ValueError: EMPTY_PROVIDER_RESPONSE
 - WKEY: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
@@ -336,3 +376,38 @@ Count: 0 of 96 scored CANDIDATE names
 - KNRX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - LXFR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - SSTI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- AACP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- ACAA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- ACGC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- ARI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- ARTC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- BREZ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- BRKH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- CLBR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- CLGN: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- FJDI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- FRMEP: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- GIX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- GNS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SPLIT_REQUIRES_DAILY_ACTION_AUDIT
+- GPAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- INM: ValueError: EMPTY_PROVIDER_RESPONSE
+- IRHO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- KOYN: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- KPTI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- KTWO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- LAFA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- LICN: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- NHIV: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- NMI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- PALO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- PTLE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SAGU: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SCNI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SOS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- TCBI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- TDWD: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- UCFI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- UTZ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- UYSC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- VABK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
