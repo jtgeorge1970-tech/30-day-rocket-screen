@@ -1,16 +1,16 @@
 {
-  "recorded_at": "2026-11-21T08:55:15.946704+00:00",
+  "recorded_at": "2026-11-21T11:47:34.683988+00:00",
   "market_asof": "2026-11-20",
   "qualified_cohorts": 31,
   "all_prediction_files": 41,
-  "attempts": 168,
+  "attempts": 169,
   "cohort_rows": 4312,
   "outcome_counts": {
     "MATURE": 6880,
     "PENDING": 11360,
-    "MISSING_SESSIONS": 13,
-    "INELIGIBLE_DATA": 3265,
-    "CORPORATE_ACTION_REVIEW": 42
+    "CORPORATE_ACTION_REVIEW": 43,
+    "MISSING_SESSIONS": 12,
+    "INELIGIBLE_DATA": 3265
   },
   "outcome_recompute_matches_saved": true,
   "immutable_evidence_sha256": {
@@ -285,7 +285,8 @@
     "attempts/20261120T090615527957Z.json": "cfe7437f72e4a594a7a040a7a35aaa9e32b8f106dad9347a3b03bc237f235662",
     "attempts/20261120T120619080304Z.json": "61e3b1a5779b647c523218de3681eb45c45ea5f129bd565ea2c153184f0eb4ae",
     "attempts/20261121T032657333129Z.json": "cb841515504d0cf15ec4a9698c794379b5ffd09747b1bfa22a1271ca03b9ed0c",
-    "attempts/20261121T084321607936Z.json": "8297851c77cc4048655fd00cbf976433e2de8ac8cffece48a6a3f297b2d9f9c4"
+    "attempts/20261121T084321607936Z.json": "8297851c77cc4048655fd00cbf976433e2de8ac8cffece48a6a3f297b2d9f9c4",
+    "attempts/20261121T114059263086Z.json": "f682427b9169699bdd3acbb09edb52598cd7a1db4172104d630002d5718346a9"
   },
   "control_unchanged": {
     "cursor": 3100,
@@ -334,12 +335,7 @@
       "SSTI",
       "ARI",
       "CLGN",
-      "GNS",
-      "INM",
-      "LICN",
       "PTLE",
-      "SCNI",
-      "SOS",
       "UTZ",
       "VABK"
     ],
@@ -706,7 +702,7 @@
       "observations": 28,
       "statuses": {
         "MATURE": 23,
-        "MISSING_SESSIONS": 1,
+        "CORPORATE_ACTION_REVIEW": 1,
         "INELIGIBLE_DATA": 4
       },
       "mature": 23,
@@ -1092,13 +1088,13 @@
         "PENDING": 459
       },
       "mature": 207,
-      "positive": 39,
-      "nonpositive": 168,
-      "average_net_pct": -7.849816603066288,
-      "average_positive_pct": 84.93963261159101,
-      "average_nonpositive_pct": -29.39022445646887,
+      "positive": 38,
+      "nonpositive": 169,
+      "average_net_pct": -11.000265363488595,
+      "average_positive_pct": 70.75157681834241,
+      "average_nonpositive_pct": -29.38233638662219,
       "benchmark_pairs": 207,
-      "average_excess_gross_pct": -3.61451907655446,
+      "average_excess_gross_pct": -6.764967836976768,
       "worst_adverse_excursion_pct": -98.1693363244544
     },
     {

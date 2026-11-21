@@ -1,9 +1,9 @@
 # OFTS daily research
 
 Market session: 2026-11-20
-Selected: 166; refreshed: 124; refresh errors: 52
+Selected: 166; refreshed: 124; refresh errors: 47
 Qualified prediction cohorts saved: 31; current coverage: 124/166
-Outcome counts: {'CORPORATE_ACTION_REVIEW': 42, 'INELIGIBLE_DATA': 3265, 'MATURE': 6880, 'MISSING_SESSIONS': 13, 'PENDING': 11360}
+Outcome counts: {'CORPORATE_ACTION_REVIEW': 43, 'INELIGIBLE_DATA': 3265, 'MATURE': 6880, 'MISSING_SESSIONS': 12, 'PENDING': 11360}
 Cycle fingerprints saved: 112/193
 Signal states: BUY=0, SELL=13, NO_TRADE=180
 Cycle ledger: pending entries=0; open positions=27; closed trades=38; SPY pairs=38
@@ -378,11 +378,6 @@ Count: 0 of 92 scored CANDIDATE names
 - SSTI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - ARI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CLGN: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- GNS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SPLIT_REQUIRES_DAILY_ACTION_AUDIT
-- INM: ValueError: EMPTY_PROVIDER_RESPONSE
-- LICN: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - PTLE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- SCNI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SOS: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - UTZ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - VABK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE

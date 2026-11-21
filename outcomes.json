@@ -2679,7 +2679,7 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "2efb29d640e0ca751d9f8d30781f9021b2e38310114999e253e7b21b7283c3c6",
-    "status": "MISSING_SESSIONS",
+    "status": "CORPORATE_ACTION_REVIEW",
     "entry_date": "2026-10-12",
     "end_date": "2026-11-20"
   },
@@ -60631,11 +60631,11 @@
     "status": "MATURE",
     "entry_date": "2026-10-20",
     "end_date": "2026-11-16",
-    "gross_price_return_pct": 624.2857527550384,
-    "net_assumed_return_pct": 624.0857527550384,
+    "gross_price_return_pct": -27.85714065237922,
+    "net_assumed_return_pct": -28.057140652379218,
     "adverse_excursion_pct": -37.85714490985382,
     "benchmark_price_return_pct": -3.383121411237777,
-    "excess_gross_pct": 627.6688741662762
+    "excess_gross_pct": -24.47401924114144
   },
   {
     "symbol": "GNS",
