@@ -102063,7 +102063,7 @@
     "score": null,
     "classification": "REJECT_PRICE",
     "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-    "status": "MISSING_SESSIONS",
+    "status": "CORPORATE_ACTION_REVIEW",
     "entry_date": "2026-10-27",
     "end_date": "2026-11-23"
   },
