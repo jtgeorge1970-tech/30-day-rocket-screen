@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-11-24T06:31:48.891506+00:00",
+  "recorded_at": "2026-11-24T11:46:21.393080+00:00",
   "market_asof": "2026-11-23",
   "qualified_cohorts": 32,
   "all_prediction_files": 42,
-  "attempts": 170,
+  "attempts": 171,
   "cohort_rows": 4484,
   "outcome_counts": {
     "MATURE": 7343,
@@ -290,7 +290,8 @@
     "attempts/20261121T032657333129Z.json": "cb841515504d0cf15ec4a9698c794379b5ffd09747b1bfa22a1271ca03b9ed0c",
     "attempts/20261121T084321607936Z.json": "8297851c77cc4048655fd00cbf976433e2de8ac8cffece48a6a3f297b2d9f9c4",
     "attempts/20261121T114059263086Z.json": "f682427b9169699bdd3acbb09edb52598cd7a1db4172104d630002d5718346a9",
-    "attempts/20261124T062129220098Z.json": "63ab9c95da81d719c7d536758ca31fa43d4dedc6cfee6b78a7a053e3bb6ec595"
+    "attempts/20261124T062129220098Z.json": "63ab9c95da81d719c7d536758ca31fa43d4dedc6cfee6b78a7a053e3bb6ec595",
+    "attempts/20261124T113401049141Z.json": "80abf4a3f4fff7a03d21758db9b90270768b910def65273237f9c8b23cc85553"
   },
   "control_unchanged": {
     "cursor": 3200,
@@ -347,7 +348,6 @@
       "INM",
       "ISPC",
       "PARA",
-      "RDIB",
       "SCNI",
       "SOS"
     ],
