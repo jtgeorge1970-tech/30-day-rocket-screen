@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T11:47:39.077943+00:00",
+  "generated_at": "2026-11-24T06:31:54.173521+00:00",
   "methodology": "Frozen close-confirmed BUY/SELL; hypothetical next-session open; 0.20% round-trip cost",
   "production_approved": false,
   "positions": [
@@ -61,27 +61,6 @@
       "entry_open": 7.349999904632568
     },
     {
-      "symbol": "ATGL",
-      "status": "OPEN_PENDING_EXIT",
-      "entry_signal_date": "2026-11-10",
-      "planned_entry_date": "2026-11-11",
-      "entry_score": 59.092283337677,
-      "cycle": {
-        "cycle_sessions": 21,
-        "median_swing_pct": 32.06849916938487,
-        "completed_cycle_intervals": 43,
-        "confirmed_turns": 45,
-        "timing_consistency": 42.83121951219512,
-        "amplitude_consistency": 55.33639746553385,
-        "confidence": "MEDIUM"
-      },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-      "entry_date": "2026-11-11",
-      "entry_open": 9.6899995803833,
-      "exit_signal_date": "2026-11-20",
-      "planned_exit_date": "2026-11-23"
-    },
-    {
       "symbol": "AVNT",
       "status": "OPEN",
       "entry_signal_date": "2026-10-21",
@@ -101,25 +80,38 @@
       "entry_open": 40.2400016784668
     },
     {
-      "symbol": "BB",
-      "status": "OPEN_PENDING_EXIT",
-      "entry_signal_date": "2026-11-09",
-      "planned_entry_date": "2026-11-10",
-      "entry_score": 40.80590681860568,
+      "symbol": "AVR",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-11-23",
+      "planned_entry_date": "2026-11-24",
+      "entry_score": 38.46732936971936,
       "cycle": {
-        "cycle_sessions": 37,
-        "median_swing_pct": 32.027850320688806,
-        "completed_cycle_intervals": 15,
-        "confirmed_turns": 17,
-        "timing_consistency": 13.685842237586439,
-        "amplitude_consistency": 26.152651499504607,
+        "cycle_sessions": 35,
+        "median_swing_pct": 46.16072549925833,
+        "completed_cycle_intervals": 21,
+        "confirmed_turns": 23,
+        "timing_consistency": 46.30326923076923,
+        "amplitude_consistency": 35.07936921070246,
         "confidence": "LOW"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-      "entry_date": "2026-11-10",
-      "entry_open": 9.029999732971191,
-      "exit_signal_date": "2026-11-20",
-      "planned_exit_date": "2026-11-23"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
+      "symbol": "CD",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-11-23",
+      "planned_entry_date": "2026-11-24",
+      "entry_score": 58.07180733917124,
+      "cycle": {
+        "cycle_sessions": 15,
+        "median_swing_pct": 33.4228210858649,
+        "completed_cycle_intervals": 55,
+        "confirmed_turns": 57,
+        "timing_consistency": 53.757000000000005,
+        "amplitude_consistency": 49.83987247982813,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
     },
     {
       "symbol": "CV",
@@ -236,25 +228,21 @@
       "entry_open": 3.2799999713897705
     },
     {
-      "symbol": "HLIT",
-      "status": "OPEN_PENDING_EXIT",
-      "entry_signal_date": "2026-11-09",
-      "planned_entry_date": "2026-11-10",
-      "entry_score": 58.61003707191593,
+      "symbol": "IREN",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-11-23",
+      "planned_entry_date": "2026-11-24",
+      "entry_score": 50.38227293564324,
       "cycle": {
-        "cycle_sessions": 46,
-        "median_swing_pct": 18.52179327708091,
-        "completed_cycle_intervals": 21,
-        "confirmed_turns": 23,
-        "timing_consistency": 65.49150572831424,
-        "amplitude_consistency": 63.57414169681945,
-        "confidence": "HIGH"
+        "cycle_sessions": 24,
+        "median_swing_pct": 35.916942529539924,
+        "completed_cycle_intervals": 33,
+        "confirmed_turns": 35,
+        "timing_consistency": 48.33363636363637,
+        "amplitude_consistency": 45.16602878872178,
+        "confidence": "MEDIUM"
       },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-      "entry_date": "2026-11-10",
-      "entry_open": 10.140000343322754,
-      "exit_signal_date": "2026-11-20",
-      "planned_exit_date": "2026-11-23"
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
     },
     {
       "symbol": "KIM",
@@ -352,48 +340,6 @@
       "entry_open": 331.95001220703125
     },
     {
-      "symbol": "NYAX",
-      "status": "OPEN_PENDING_EXIT",
-      "entry_signal_date": "2026-10-20",
-      "planned_entry_date": "2026-10-21",
-      "entry_score": 60.47626748430303,
-      "cycle": {
-        "cycle_sessions": 24,
-        "median_swing_pct": 16.312324542859397,
-        "completed_cycle_intervals": 29,
-        "confirmed_turns": 31,
-        "timing_consistency": 50.80463636363637,
-        "amplitude_consistency": 59.74082708065431,
-        "confidence": "MEDIUM"
-      },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-      "entry_date": "2026-10-21",
-      "entry_open": 49.75,
-      "exit_signal_date": "2026-11-20",
-      "planned_exit_date": "2026-11-23"
-    },
-    {
-      "symbol": "POWI",
-      "status": "OPEN_PENDING_EXIT",
-      "entry_signal_date": "2026-11-11",
-      "planned_entry_date": "2026-11-12",
-      "entry_score": 45.06513376022349,
-      "cycle": {
-        "cycle_sessions": 81.5,
-        "median_swing_pct": 40.066453419088724,
-        "completed_cycle_intervals": 8,
-        "confirmed_turns": 10,
-        "timing_consistency": 33.2391731418919,
-        "amplitude_consistency": 87.46254106561832,
-        "confidence": "LOW"
-      },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-      "entry_date": "2026-11-12",
-      "entry_open": 45.5,
-      "exit_signal_date": "2026-11-20",
-      "planned_exit_date": "2026-11-23"
-    },
-    {
       "symbol": "PTLE",
       "status": "OPEN",
       "entry_signal_date": "2026-10-15",
@@ -451,6 +397,23 @@
       "entry_open": 33.099998474121094
     },
     {
+      "symbol": "SITM",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-11-23",
+      "planned_entry_date": "2026-11-24",
+      "entry_score": 58.24574844782786,
+      "cycle": {
+        "cycle_sessions": 32,
+        "median_swing_pct": 27.82944861320112,
+        "completed_cycle_intervals": 27,
+        "confirmed_turns": 29,
+        "timing_consistency": 43.0445150862069,
+        "amplitude_consistency": 59.140952048413475,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
+    },
+    {
       "symbol": "STRR",
       "status": "OPEN",
       "entry_signal_date": "2026-11-12",
@@ -468,27 +431,6 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-11-13",
       "entry_open": 10.100000381469727
-    },
-    {
-      "symbol": "SXC",
-      "status": "OPEN_PENDING_EXIT",
-      "entry_signal_date": "2026-11-12",
-      "planned_entry_date": "2026-11-13",
-      "entry_score": 55.4377994135181,
-      "cycle": {
-        "cycle_sessions": 63.5,
-        "median_swing_pct": 20.918368886084092,
-        "completed_cycle_intervals": 14,
-        "confirmed_turns": 16,
-        "timing_consistency": 68.03754202635166,
-        "amplitude_consistency": 53.7056533686816,
-        "confidence": "MEDIUM"
-      },
-      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
-      "entry_date": "2026-11-13",
-      "entry_open": 10.770000457763672,
-      "exit_signal_date": "2026-11-20",
-      "planned_exit_date": "2026-11-23"
     },
     {
       "symbol": "TARS",
@@ -527,6 +469,23 @@
       "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
       "entry_date": "2026-10-23",
       "entry_open": 50.790000915527344
+    },
+    {
+      "symbol": "ZS",
+      "status": "PENDING_ENTRY",
+      "entry_signal_date": "2026-11-23",
+      "planned_entry_date": "2026-11-24",
+      "entry_score": 47.97113313258137,
+      "cycle": {
+        "cycle_sessions": 56.0,
+        "median_swing_pct": 25.623878591840832,
+        "completed_cycle_intervals": 16,
+        "confirmed_turns": 18,
+        "timing_consistency": 52.05581283934845,
+        "amplitude_consistency": 48.981147320693296,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b"
     }
   ],
   "trades": [
@@ -1745,6 +1704,198 @@
       "missed_observed_swing_pct": 10.926029385292813,
       "benchmark_price_return_pct": -5.2037229719166795,
       "excess_gross_pct": 2.981834913671288
+    },
+    {
+      "symbol": "ATGL",
+      "status": "CLOSED",
+      "entry_signal_date": "2026-11-10",
+      "entry_date": "2026-11-11",
+      "entry_open": 9.6899995803833,
+      "exit_signal_date": "2026-11-20",
+      "exit_date": "2026-11-23",
+      "exit_open": 7.809999942779541,
+      "holding_sessions": 8,
+      "gross_return_pct": -19.40144188870433,
+      "net_assumed_return_pct": -19.60144188870433,
+      "roundtrip_cost_pct": 0.2,
+      "entry_score": 59.092283337677,
+      "entry_cycle": {
+        "cycle_sessions": 21,
+        "median_swing_pct": 32.06849916938487,
+        "completed_cycle_intervals": 43,
+        "confirmed_turns": 45,
+        "timing_consistency": 42.83121951219512,
+        "amplitude_consistency": 55.33639746553385,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "adverse_excursion_pct": -20.536634234193095,
+      "best_high_return_pct": 0.0,
+      "observed_ordered_swing_pct": 12.987013308711193,
+      "captured_observed_swing_pct": -149.391098842492,
+      "missed_observed_swing_pct": 12.987013308711193,
+      "benchmark_price_return_pct": -4.290429601857704,
+      "excess_gross_pct": -15.111012286846627
+    },
+    {
+      "symbol": "BB",
+      "status": "CLOSED",
+      "entry_signal_date": "2026-11-09",
+      "entry_date": "2026-11-10",
+      "entry_open": 9.029999732971191,
+      "exit_signal_date": "2026-11-20",
+      "exit_date": "2026-11-23",
+      "exit_open": 8.300000190734863,
+      "holding_sessions": 9,
+      "gross_return_pct": -8.084159067811314,
+      "net_assumed_return_pct": -8.284159067811313,
+      "roundtrip_cost_pct": 0.2,
+      "entry_score": 40.80590681860568,
+      "entry_cycle": {
+        "cycle_sessions": 37,
+        "median_swing_pct": 32.027850320688806,
+        "completed_cycle_intervals": 15,
+        "confirmed_turns": 17,
+        "timing_consistency": 13.685842237586439,
+        "amplitude_consistency": 26.152651499504607,
+        "confidence": "LOW"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "adverse_excursion_pct": -14.617937252030144,
+      "best_high_return_pct": 9.191583037101104,
+      "observed_ordered_swing_pct": 12.557070765462974,
+      "captured_observed_swing_pct": -64.37933829317919,
+      "missed_observed_swing_pct": 12.557070765462974,
+      "benchmark_price_return_pct": -3.156668352340486,
+      "excess_gross_pct": -4.927490715470828
+    },
+    {
+      "symbol": "HLIT",
+      "status": "CLOSED",
+      "entry_signal_date": "2026-11-09",
+      "entry_date": "2026-11-10",
+      "entry_open": 10.140000343322754,
+      "exit_signal_date": "2026-11-20",
+      "exit_date": "2026-11-23",
+      "exit_open": 10.25,
+      "holding_sessions": 9,
+      "gross_return_pct": 1.0848092007184285,
+      "net_assumed_return_pct": 0.8848092007184285,
+      "roundtrip_cost_pct": 0.2,
+      "entry_score": 58.61003707191593,
+      "entry_cycle": {
+        "cycle_sessions": 46,
+        "median_swing_pct": 18.52179327708091,
+        "completed_cycle_intervals": 21,
+        "confirmed_turns": 23,
+        "timing_consistency": 65.49150572831424,
+        "amplitude_consistency": 63.57414169681945,
+        "confidence": "HIGH"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "adverse_excursion_pct": -7.692314203511275,
+      "best_high_return_pct": 7.5936832151727085,
+      "observed_ordered_swing_pct": 10.149581172919596,
+      "captured_observed_swing_pct": 10.688216412445083,
+      "missed_observed_swing_pct": 9.064771972201168,
+      "benchmark_price_return_pct": -3.156668352340486,
+      "excess_gross_pct": 4.241477553058914
+    },
+    {
+      "symbol": "NYAX",
+      "status": "CLOSED",
+      "entry_signal_date": "2026-10-20",
+      "entry_date": "2026-10-21",
+      "entry_open": 49.75,
+      "exit_signal_date": "2026-11-20",
+      "exit_date": "2026-11-23",
+      "exit_open": 49.43000030517578,
+      "holding_sessions": 23,
+      "gross_return_pct": -0.643215466983349,
+      "net_assumed_return_pct": -0.8432154669833489,
+      "roundtrip_cost_pct": 0.2,
+      "entry_score": 60.47626748430303,
+      "entry_cycle": {
+        "cycle_sessions": 24,
+        "median_swing_pct": 16.312324542859397,
+        "completed_cycle_intervals": 29,
+        "confirmed_turns": 31,
+        "timing_consistency": 50.80463636363637,
+        "amplitude_consistency": 59.74082708065431,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "adverse_excursion_pct": -7.618092292517275,
+      "best_high_return_pct": 8.904523226483985,
+      "observed_ordered_swing_pct": 17.88512050575781,
+      "captured_observed_swing_pct": -3.5963720053005885,
+      "missed_observed_swing_pct": 17.88512050575781,
+      "benchmark_price_return_pct": -6.073883431452165,
+      "excess_gross_pct": 5.430667964468816
+    },
+    {
+      "symbol": "POWI",
+      "status": "CLOSED",
+      "entry_signal_date": "2026-11-11",
+      "entry_date": "2026-11-12",
+      "entry_open": 45.5,
+      "exit_signal_date": "2026-11-20",
+      "exit_date": "2026-11-23",
+      "exit_open": 43.91999816894531,
+      "holding_sessions": 7,
+      "gross_return_pct": -3.4725314968234944,
+      "net_assumed_return_pct": -3.6725314968234946,
+      "roundtrip_cost_pct": 0.2,
+      "entry_score": 45.06513376022349,
+      "entry_cycle": {
+        "cycle_sessions": 81.5,
+        "median_swing_pct": 40.066453419088724,
+        "completed_cycle_intervals": 8,
+        "confirmed_turns": 10,
+        "timing_consistency": 33.2391731418919,
+        "amplitude_consistency": 87.46254106561832,
+        "confidence": "LOW"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "adverse_excursion_pct": -14.747250735104744,
+      "best_high_return_pct": 2.6153815971626138,
+      "observed_ordered_swing_pct": 13.225050611856194,
+      "captured_observed_swing_pct": -26.257226522145682,
+      "missed_observed_swing_pct": 13.225050611856194,
+      "benchmark_price_return_pct": -3.932460296952822,
+      "excess_gross_pct": 0.4599288001293278
+    },
+    {
+      "symbol": "SXC",
+      "status": "CLOSED",
+      "entry_signal_date": "2026-11-12",
+      "entry_date": "2026-11-13",
+      "entry_open": 10.770000457763672,
+      "exit_signal_date": "2026-11-20",
+      "exit_date": "2026-11-23",
+      "exit_open": 9.75,
+      "holding_sessions": 6,
+      "gross_return_pct": -9.470755936954422,
+      "net_assumed_return_pct": -9.670755936954421,
+      "roundtrip_cost_pct": 0.2,
+      "entry_score": 55.4377994135181,
+      "entry_cycle": {
+        "cycle_sessions": 63.5,
+        "median_swing_pct": 20.918368886084092,
+        "completed_cycle_intervals": 14,
+        "confirmed_turns": 16,
+        "timing_consistency": 68.03754202635166,
+        "amplitude_consistency": 53.7056533686816,
+        "confidence": "MEDIUM"
+      },
+      "model_hash": "a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b",
+      "adverse_excursion_pct": -12.720527214516675,
+      "best_high_return_pct": 0.0,
+      "observed_ordered_swing_pct": 4.489791549180633,
+      "captured_observed_swing_pct": -210.9397693236514,
+      "missed_observed_swing_pct": 4.489791549180633,
+      "benchmark_price_return_pct": -4.7021971515749605,
+      "excess_gross_pct": -4.7685587853794615
     }
   ],
   "exceptions": [
@@ -2221,14 +2372,20 @@
       "signal_date": "2026-11-20",
       "signal": "SELL",
       "reason": "NO_OPEN_POSITION"
+    },
+    {
+      "symbol": "SMPL",
+      "signal_date": "2026-11-23",
+      "signal": "SELL",
+      "reason": "NO_OPEN_POSITION"
     }
   ],
   "summary": {
-    "complete_signal_cohorts": 31,
-    "pending_entries": 0,
-    "open_positions": 27,
-    "closed_trades": 38,
-    "benchmark_pairs": 38,
+    "complete_signal_cohorts": 32,
+    "pending_entries": 5,
+    "open_positions": 21,
+    "closed_trades": 44,
+    "benchmark_pairs": 44,
     "review_trades": 0
   }
 }

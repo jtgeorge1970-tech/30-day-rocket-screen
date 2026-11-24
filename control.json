@@ -1,6 +1,7 @@
 {
-  "cursor": 3100,
+  "cursor": 3200,
   "retry": [
+    "GSL.PRB",
     "BWMN",
     "SB.PRD",
     "MET.PRA",
@@ -47,7 +48,14 @@
     "CLGN",
     "PTLE",
     "UTZ",
-    "VABK"
+    "VABK",
+    "CODX",
+    "INM",
+    "ISPC",
+    "PARA",
+    "RDIB",
+    "SCNI",
+    "SOS"
   ],
-  "last_session": "2026-11-20"
+  "last_session": "2026-11-23"
 }
