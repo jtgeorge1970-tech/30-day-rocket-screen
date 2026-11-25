@@ -1,6 +1,6 @@
 {
   "asof": "2026-11-24",
-  "recorded_at": "2026-11-25T10:22:41.800244+00:00",
+  "recorded_at": "2026-11-25T13:25:12.141308+00:00",
   "symbols": {
     "MWH": {
       "status": "FRESH",
@@ -1434,11 +1434,11 @@
       "latest_date": "2026-11-23",
       "bars": 522
     },
-    "RDIB": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "RDIB",
+    "INM": {
+      "status": "ERROR",
+      "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
+      "source": "UNVERIFIED",
+      "provider_ticker": "INM",
       "latest_date": "2026-11-24",
       "bars": 519
     },
@@ -12986,14 +12986,6 @@
       "latest_date": "2026-11-24",
       "bars": 476
     },
-    "INM": {
-      "status": "ERROR",
-      "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
-      "source": "UNVERIFIED",
-      "provider_ticker": "INM",
-      "latest_date": "2026-11-24",
-      "bars": 519
-    },
     "INMB": {
       "status": "FRESH",
       "error": "",
@@ -20217,6 +20209,14 @@
       "provider_ticker": "RDI",
       "latest_date": "2026-11-24",
       "bars": 526
+    },
+    "RDIB": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "RDIB",
+      "latest_date": "2026-11-24",
+      "bars": 519
     },
     "RDNT": {
       "status": "FRESH",
