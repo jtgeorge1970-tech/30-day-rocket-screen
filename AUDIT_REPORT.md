@@ -1,56 +1,58 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-24T14:27:02.687386+00:00
-Market as-of: 2026-11-23; qualified cohorts: 32; cohort rows: 4484; attempts retained: 172.
-Outcome counts: {'MATURE': 7343, 'PENDING': 11479, 'CORPORATE_ACTION_REVIEW': 49, 'MISSING_SESSIONS': 14, 'INELIGIBLE_DATA': 3535}.
-Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 124, 'selected': 172}.
-Cycle ledger: {'complete_signal_cohorts': 32, 'pending_entries': 5, 'open_positions': 21, 'closed_trades': 44, 'benchmark_pairs': 44, 'review_trades': 0}.
+Audit UTC: 2026-11-25T05:08:51.817491+00:00
+Market as-of: 2026-11-24; qualified cohorts: 33; cohort rows: 4660; attempts retained: 173.
+Outcome counts: {'MATURE': 7826, 'PENDING': 11599, 'CORPORATE_ACTION_REVIEW': 56, 'MISSING_SESSIONS': 14, 'INELIGIBLE_DATA': 3805}.
+Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 126, 'selected': 176}.
+Cycle ledger: {'complete_signal_cohorts': 33, 'pending_entries': 4, 'open_positions': 26, 'closed_trades': 44, 'benchmark_pairs': 44, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
 Hypothetical next-open entry, price returns excluding dividends, 0.20% round-trip costs.
 Rejected candidates are controls. Overlapping horizons are not independent trades.
 
 | Horizon (sessions) | Mature | Pending | Data-ineligible | Other errors | First exit date |
 |---|---:|---:|---:|---:|---|
-| 5 | 3168 | 597 | 707 | 12 | 2026-10-16 |
-| 10 | 2561 | 1195 | 707 | 21 | 2026-10-23 |
-| 20 | 1387 | 2367 | 707 | 23 | 2026-11-06 |
-| 30 | 227 | 3543 | 707 | 7 | 2026-11-20 |
-| 60 | 0 | 3777 | 707 | 0 | 2027-01-06 |
+| 5 | 3291 | 596 | 761 | 12 | 2026-10-16 |
+| 10 | 2682 | 1195 | 761 | 22 | 2026-10-23 |
+| 20 | 1497 | 2375 | 761 | 27 | 2026-11-06 |
+| 30 | 356 | 3534 | 761 | 9 | 2026-11-20 |
+| 60 | 0 | 3899 | 761 | 0 | 2027-01-06 |
 
 By model, horizon and score band: see latest_audit.json. Unavailable average gains/losses, net returns, adverse excursions and SPY comparisons are null, not zero.
 
 ## Frozen v2.3 baseline quality leaders (not current keepers or BUY recommendations)
-Cohort recorded: 2026-11-24T06:31:43.450785+00:00; model: a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b.
-Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, 'observed_min': 12.124295853709103, 'observed_max': 68.11134170759169, 'scored_rows': 98, 'distribution': {'BELOW_40': 17, '40_TO_49_999': 38, '50_TO_59_999': 32, '60_TO_69_999': 11, '70_TO_79_999': 0, '80_TO_89_999': 0, '90_TO_100': 0}, 'validated_buy_threshold': None, 'system_actionability_gate': 'RESEARCH_ONLY_NO_GO', 'gate_reason': 'OUT_OF_SAMPLE_PREDICTIVE_VALIDATION_NOT_VERIFIED'}.
+Cohort recorded: 2026-11-25T05:08:47.172393+00:00; model: a6ecf528ef92f072a3b6060380e01465574677be19e3fa4c75e4bcc7ae79519b.
+Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, 'observed_min': 12.253230691540354, 'observed_max': 67.861463950846, 'scored_rows': 95, 'distribution': {'BELOW_40': 19, '40_TO_49_999': 32, '50_TO_59_999': 33, '60_TO_69_999': 11, '70_TO_79_999': 0, '80_TO_89_999': 0, '90_TO_100': 0}, 'validated_buy_threshold': None, 'system_actionability_gate': 'RESEARCH_ONLY_NO_GO', 'gate_reason': 'OUT_OF_SAMPLE_PREDICTIVE_VALIDATION_NOT_VERIFIED'}.
 | Symbol | Frozen score | Frozen classification |
 |---|---:|---|
-| MWH | 68.111 | CANDIDATE |
-| CACC | 66.834 | CANDIDATE |
-| WRBY | 63.352 | CANDIDATE |
-| JBS | 63.326 | CANDIDATE |
-| CLSK | 61.659 | CANDIDATE |
-| HLIT | 61.576 | CANDIDATE |
-| TLN | 61.536 | CANDIDATE |
-| PWR | 61.257 | CANDIDATE |
-| TT | 60.178 | CANDIDATE |
-| SPGI | 60.089 | CANDIDATE |
-| OBE | 59.684 | CANDIDATE |
-| ESNT | 59.556 | CANDIDATE |
-| TRNS | 59.375 | CANDIDATE |
-| GLXY | 58.650 | CANDIDATE |
-| SITM | 58.246 | CANDIDATE |
-| SMPL | 58.171 | CANDIDATE |
-| CD | 58.072 | CANDIDATE |
-| ATGL | 58.050 | CANDIDATE |
-| PLAB | 57.705 | CANDIDATE |
-| ECG | 57.571 | CANDIDATE |
-| KRUS | 57.565 | CANDIDATE |
-| SMP | 57.492 | CANDIDATE |
-| STRZ | 57.349 | CANDIDATE |
-| SGML | 57.153 | CANDIDATE |
-| BFAM | 56.939 | CANDIDATE |
+| MWH | 67.861 | CANDIDATE |
+| CACC | 66.813 | CANDIDATE |
+| WRBY | 63.359 | CANDIDATE |
+| JBS | 63.316 | CANDIDATE |
+| CLSK | 61.542 | CANDIDATE |
+| SMPL | 61.484 | CANDIDATE |
+| PWR | 61.208 | CANDIDATE |
+| YARW | 61.041 | CANDIDATE |
+| TLN | 60.766 | CANDIDATE |
+| GAP | 60.299 | CANDIDATE |
+| TT | 60.116 | CANDIDATE |
+| ESNT | 59.589 | CANDIDATE |
+| TRNS | 59.411 | CANDIDATE |
+| SPGI | 59.162 | CANDIDATE |
+| GLXY | 58.511 | CANDIDATE |
+| SITM | 58.129 | CANDIDATE |
+| CD | 57.916 | CANDIDATE |
+| ATGL | 57.818 | CANDIDATE |
+| SMP | 57.633 | CANDIDATE |
+| ECG | 57.482 | CANDIDATE |
+| STRZ | 57.362 | CANDIDATE |
+| BFAM | 57.116 | CANDIDATE |
+| SGML | 57.079 | CANDIDATE |
+| FN | 56.485 | CANDIDATE |
+| KVHI | 56.392 | CANDIDATE |
 
 ## Source failures
+- BKH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- BIPC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - GSL.PRB: ValueError: EMPTY_PROVIDER_RESPONSE
 - BWMN: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - SB.PRD: ValueError: EMPTY_PROVIDER_RESPONSE
@@ -89,18 +91,19 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - MGPI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - ITGR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - VSME: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
-- IBO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- IBO: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - KAZR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - KNRX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - LXFR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- SSTI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- SSTI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - ARI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - CLGN: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - PTLE: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - UTZ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - VABK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- CODX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- ISPC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- PARA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SPLIT_REQUIRES_DAILY_ACTION_AUDIT
+- ACH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- IPFX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- PASG: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

@@ -1,6 +1,8 @@
 {
-  "cursor": 3200,
+  "cursor": 3300,
   "retry": [
+    "BKH",
+    "BIPC",
     "GSL.PRB",
     "BWMN",
     "SB.PRD",
@@ -49,9 +51,10 @@
     "PTLE",
     "UTZ",
     "VABK",
-    "CODX",
-    "ISPC",
-    "PARA"
+    "ACH",
+    "IPFX",
+    "PASG",
+    "RDIB"
   ],
-  "last_session": "2026-11-23"
+  "last_session": "2026-11-24"
 }
