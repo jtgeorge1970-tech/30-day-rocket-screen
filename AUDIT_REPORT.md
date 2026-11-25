@@ -1,7 +1,7 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-25T05:08:51.817491+00:00
-Market as-of: 2026-11-24; qualified cohorts: 33; cohort rows: 4660; attempts retained: 173.
+Audit UTC: 2026-11-25T10:31:20.246867+00:00
+Market as-of: 2026-11-24; qualified cohorts: 33; cohort rows: 4660; attempts retained: 174.
 Outcome counts: {'MATURE': 7826, 'PENDING': 11599, 'CORPORATE_ACTION_REVIEW': 56, 'MISSING_SESSIONS': 14, 'INELIGIBLE_DATA': 3805}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 126, 'selected': 176}.
 Cycle ledger: {'complete_signal_cohorts': 33, 'pending_entries': 4, 'open_positions': 26, 'closed_trades': 44, 'benchmark_pairs': 44, 'review_trades': 0}.
@@ -104,6 +104,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - ACH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - IPFX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - PASG: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- INM: ValueError: EMPTY_PROVIDER_RESPONSE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.
