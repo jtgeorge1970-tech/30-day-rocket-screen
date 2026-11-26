@@ -1,7 +1,7 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-26T04:28:59.492146+00:00
-Market as-of: 2026-11-25; qualified cohorts: 34; cohort rows: 4839; attempts retained: 176.
+Audit UTC: 2026-11-26T10:09:34.946934+00:00
+Market as-of: 2026-11-25; qualified cohorts: 34; cohort rows: 4839; attempts retained: 177.
 Outcome counts: {'MATURE': 8286, 'PENDING': 11741, 'CORPORATE_ACTION_REVIEW': 59, 'MISSING_SESSIONS': 19, 'INELIGIBLE_DATA': 4090}.
 Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 126, 'selected': 179}.
 Cycle ledger: {'complete_signal_cohorts': 34, 'pending_entries': 0, 'open_positions': 30, 'closed_trades': 44, 'benchmark_pairs': 44, 'review_trades': 0}.
@@ -51,7 +51,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 | SGML | 57.122 | CANDIDATE |
 
 ## Source failures
-- KTN: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - BKH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - BIPC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - GSL.PRB: ValueError: EMPTY_PROVIDER_RESPONSE
@@ -104,11 +103,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - VABK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - ACH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - IPFX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- AAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- CLBR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- LAFA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- NMI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- PNAQ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- INM: ValueError: EMPTY_PROVIDER_RESPONSE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

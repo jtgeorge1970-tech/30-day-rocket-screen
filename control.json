@@ -1,7 +1,6 @@
 {
   "cursor": 3400,
   "retry": [
-    "KTN",
     "BKH",
     "BIPC",
     "GSL.PRB",
@@ -54,12 +53,7 @@
     "VABK",
     "ACH",
     "IPFX",
-    "AAC",
-    "CLBR",
-    "LAFA",
-    "NMI",
-    "PNAQ",
-    "RDIB"
+    "INM"
   ],
   "last_session": "2026-11-25"
 }

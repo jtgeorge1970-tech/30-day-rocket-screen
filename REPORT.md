@@ -1,7 +1,7 @@
 # OFTS daily research
 
 Market session: 2026-11-25
-Selected: 179; refreshed: 126; refresh errors: 59
+Selected: 179; refreshed: 126; refresh errors: 53
 Qualified prediction cohorts saved: 34; current coverage: 126/179
 Outcome counts: {'CORPORATE_ACTION_REVIEW': 59, 'INELIGIBLE_DATA': 4090, 'MATURE': 8286, 'MISSING_SESSIONS': 19, 'PENDING': 11741}
 Cycle fingerprints saved: 117/205
@@ -373,7 +373,6 @@ Count: 0 of 98 scored CANDIDATE names
 ## Identity-boundary exclusions (current processing; prior snapshots immutable)
 
 ## Refresh failures
-- KTN: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - BKH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - BIPC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - GSL.PRB: ValueError: EMPTY_PROVIDER_RESPONSE
@@ -426,9 +425,4 @@ Count: 0 of 98 scored CANDIDATE names
 - VABK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - ACH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - IPFX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- AAC: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- CLBR: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- LAFA: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- NMI: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- PNAQ: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- RDIB: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
+- INM: ValueError: EMPTY_PROVIDER_RESPONSE
