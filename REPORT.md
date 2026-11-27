@@ -1,8 +1,8 @@
 # OFTS daily research
 
 Market session: 2026-11-25
-Selected: 179; refreshed: 126; refresh errors: 53
-Qualified prediction cohorts saved: 34; current coverage: 126/179
+Selected: 179; refreshed: 127; refresh errors: 52
+Qualified prediction cohorts saved: 34; current coverage: 127/179
 Outcome counts: {'CORPORATE_ACTION_REVIEW': 59, 'INELIGIBLE_DATA': 4090, 'MATURE': 8286, 'MISSING_SESSIONS': 19, 'PENDING': 11741}
 Cycle fingerprints saved: 117/205
 Signal states: BUY=0, SELL=2, NO_TRADE=203
@@ -425,4 +425,3 @@ Count: 0 of 98 scored CANDIDATE names
 - VABK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - ACH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - IPFX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
-- INM: ValueError: EMPTY_PROVIDER_RESPONSE
