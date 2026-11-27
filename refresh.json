@@ -1,6 +1,6 @@
 {
   "asof": "2026-11-25",
-  "recorded_at": "2026-11-27T04:30:12.877867+00:00",
+  "recorded_at": "2026-11-27T10:04:35.371051+00:00",
   "symbols": {
     "MWH": {
       "status": "FRESH",
@@ -1427,9 +1427,9 @@
       "bars": 524
     },
     "INM": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
+      "status": "ERROR",
+      "error": "ValueError: EMPTY_PROVIDER_RESPONSE",
+      "source": "UNVERIFIED",
       "provider_ticker": "INM",
       "latest_date": "2026-11-25",
       "bars": 520

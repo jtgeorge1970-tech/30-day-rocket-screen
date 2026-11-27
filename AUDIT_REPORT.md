@@ -1,9 +1,9 @@
 # OFTS saved-evidence report card
 
-Audit UTC: 2026-11-27T04:38:44.393116+00:00
-Market as-of: 2026-11-25; qualified cohorts: 34; cohort rows: 4839; attempts retained: 179.
+Audit UTC: 2026-11-27T10:12:49.894146+00:00
+Market as-of: 2026-11-25; qualified cohorts: 34; cohort rows: 4839; attempts retained: 180.
 Outcome counts: {'MATURE': 8286, 'PENDING': 11741, 'CORPORATE_ACTION_REVIEW': 59, 'MISSING_SESSIONS': 19, 'INELIGIBLE_DATA': 4090}.
-Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 127, 'selected': 179}.
+Saved-data freshness gate: {'passed': True, 'required_stale': [], 'fresh': 126, 'selected': 179}.
 Cycle ledger: {'complete_signal_cohorts': 34, 'pending_entries': 0, 'open_positions': 30, 'closed_trades': 44, 'benchmark_pairs': 44, 'review_trades': 0}.
 Validated BUY threshold: NONE. Production gate: RESEARCH_ONLY_NO_GO.
 Hypothetical next-open entry, price returns excluding dividends, 0.20% round-trip costs.
@@ -103,5 +103,6 @@ Score distribution: {'theoretical_scale_min': 0, 'theoretical_scale_max': 100, '
 - VABK: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
 - ACH: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_EMPTY
 - IPFX: ValueError: LATEST_SESSION_MISSING | 15m: ValueError: INTRADAY_SESSION_INCOMPLETE
+- INM: ValueError: EMPTY_PROVIDER_RESPONSE
 
 Immutable predictions, signals, fingerprints and attempts verified unchanged; rotation cursor unchanged.

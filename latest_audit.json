@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-11-27T04:38:44.393116+00:00",
+  "recorded_at": "2026-11-27T10:12:49.894146+00:00",
   "market_asof": "2026-11-25",
   "qualified_cohorts": 34,
   "all_prediction_files": 44,
-  "attempts": 179,
+  "attempts": 180,
   "cohort_rows": 4839,
   "outcome_counts": {
     "MATURE": 8286,
@@ -305,7 +305,8 @@
     "attempts/20261126T042122683709Z.json": "5b72c67249b3defa965926ab3dac67d7154cfc6dd81ff94ccc90c8039bf24fd0",
     "attempts/20261126T095943370212Z.json": "576abf62a6b6f18ff4e3a644cbb26d15b589bf140413b5337f13b52b3f76a05c",
     "attempts/20261126T130408067016Z.json": "97953a148180a7bb67ed3e035645977778c7c23ae965b0db739522270e6d4e11",
-    "attempts/20261127T043012877867Z.json": "e964676b654ea769966597d13093a6096db2faed0a5336b03a837e8620c0776f"
+    "attempts/20261127T043012877867Z.json": "e964676b654ea769966597d13093a6096db2faed0a5336b03a837e8620c0776f",
+    "attempts/20261127T100435371051Z.json": "e0913fb42b41ecafe3ce2e04331956a37362d99c34190a17aeae5e28b9f823d9"
   },
   "control_unchanged": {
     "cursor": 3400,
@@ -361,14 +362,15 @@
       "UTZ",
       "VABK",
       "ACH",
-      "IPFX"
+      "IPFX",
+      "INM"
     ],
     "last_session": "2026-11-25"
   },
   "freshness_gate": {
     "passed": true,
     "required_stale": [],
-    "fresh": 127,
+    "fresh": 126,
     "selected": 179
   },
   "cycle_summary": {
