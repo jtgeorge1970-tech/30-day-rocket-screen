@@ -1,6 +1,8 @@
 {
-  "cursor": 3400,
+  "cursor": 3500,
   "retry": [
+    "WPRT",
+    "DYNC",
     "BKH",
     "BIPC",
     "GSL.PRB",
@@ -52,7 +54,13 @@
     "UTZ",
     "VABK",
     "ACH",
-    "IPFX"
+    "IPFX",
+    "ASA",
+    "CLBR",
+    "FTRA",
+    "KTN",
+    "MPV",
+    "RDIB"
   ],
-  "last_session": "2026-11-25"
+  "last_session": "2026-11-27"
 }
