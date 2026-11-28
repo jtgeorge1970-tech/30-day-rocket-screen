@@ -1,6 +1,6 @@
 {
   "asof": "2026-11-27",
-  "recorded_at": "2026-11-28T09:23:03.416275+00:00",
+  "recorded_at": "2026-11-28T12:14:45.853496+00:00",
   "symbols": {
     "MWH": {
       "status": "FRESH",
@@ -1417,54 +1417,6 @@
       "provider_ticker": "IPFX",
       "latest_date": "2026-11-23",
       "bars": 132
-    },
-    "ASA": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "ASA",
-      "latest_date": "2026-11-27",
-      "bars": 505
-    },
-    "CLBR": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "CLBR",
-      "latest_date": "2026-11-27",
-      "bars": 170
-    },
-    "FTRA": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "FTRA",
-      "latest_date": "2026-11-27",
-      "bars": 88
-    },
-    "KTN": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "KTN",
-      "latest_date": "2026-11-27",
-      "bars": 502
-    },
-    "MPV": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "MPV",
-      "latest_date": "2026-11-27",
-      "bars": 503
-    },
-    "RDIB": {
-      "status": "FRESH",
-      "error": "",
-      "source": "DAILY_PROVIDER",
-      "provider_ticker": "RDIB",
-      "latest_date": "2026-11-27",
-      "bars": 521
     },
     "A": {
       "status": "FRESH",
@@ -3369,6 +3321,14 @@
       "provider_ticker": "ARXS",
       "latest_date": "2026-11-27",
       "bars": 157
+    },
+    "ASA": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "ASA",
+      "latest_date": "2026-11-27",
+      "bars": 505
     },
     "ASB": {
       "status": "FRESH",
@@ -6689,6 +6649,14 @@
       "provider_ticker": "CLB",
       "latest_date": "2026-11-27",
       "bars": 505
+    },
+    "CLBR": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "CLBR",
+      "latest_date": "2026-11-27",
+      "bars": 170
     },
     "CLBT": {
       "status": "FRESH",
@@ -10986,6 +10954,14 @@
       "latest_date": "2026-11-27",
       "bars": 533
     },
+    "FTRA": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "FTRA",
+      "latest_date": "2026-11-27",
+      "bars": 88
+    },
     "FTRE": {
       "status": "FRESH",
       "error": "",
@@ -14986,6 +14962,14 @@
       "latest_date": "2026-11-27",
       "bars": 503
     },
+    "KTN": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "KTN",
+      "latest_date": "2026-11-27",
+      "bars": 502
+    },
     "KTTA": {
       "status": "FRESH",
       "error": "",
@@ -17105,6 +17089,14 @@
       "provider_ticker": "MPTI",
       "latest_date": "2026-11-27",
       "bars": 528
+    },
+    "MPV": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "MPV",
+      "latest_date": "2026-11-27",
+      "bars": 503
     },
     "MPWR": {
       "status": "FRESH",
@@ -21433,6 +21425,14 @@
       "provider_ticker": "RDI",
       "latest_date": "2026-11-27",
       "bars": 528
+    },
+    "RDIB": {
+      "status": "FRESH",
+      "error": "",
+      "source": "DAILY_PROVIDER",
+      "provider_ticker": "RDIB",
+      "latest_date": "2026-11-27",
+      "bars": 521
     },
     "RDNT": {
       "status": "FRESH",
