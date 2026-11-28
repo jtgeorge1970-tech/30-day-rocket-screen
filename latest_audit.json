@@ -1,9 +1,9 @@
 {
-  "recorded_at": "2026-11-28T04:28:07.354234+00:00",
+  "recorded_at": "2026-11-28T09:30:19.044459+00:00",
   "market_asof": "2026-11-27",
   "qualified_cohorts": 35,
   "all_prediction_files": 45,
-  "attempts": 182,
+  "attempts": 183,
   "cohort_rows": 5016,
   "outcome_counts": {
     "MATURE": 8738,
@@ -311,7 +311,8 @@
     "attempts/20261127T043012877867Z.json": "e964676b654ea769966597d13093a6096db2faed0a5336b03a837e8620c0776f",
     "attempts/20261127T100435371051Z.json": "e0913fb42b41ecafe3ce2e04331956a37362d99c34190a17aeae5e28b9f823d9",
     "attempts/20261127T130149609610Z.json": "2b74b624b49f8bcab72a13329c2b65e4f944fa62409dd389f1a8c427d734f771",
-    "attempts/20261128T041218588237Z.json": "55d6f2a395cf93ebafc843479bb8698a6fa9ae5beea626e546fddc0847a9671f"
+    "attempts/20261128T041218588237Z.json": "55d6f2a395cf93ebafc843479bb8698a6fa9ae5beea626e546fddc0847a9671f",
+    "attempts/20261128T092303416275Z.json": "bc27b9ad2c3c2f3778eed8bfd42688d26eec0fc153e29c8de9fdbfa94bb1c016"
   },
   "control_unchanged": {
     "cursor": 3500,
@@ -369,13 +370,7 @@
       "UTZ",
       "VABK",
       "ACH",
-      "IPFX",
-      "ASA",
-      "CLBR",
-      "FTRA",
-      "KTN",
-      "MPV",
-      "RDIB"
+      "IPFX"
     ],
     "last_session": "2026-11-27"
   },
